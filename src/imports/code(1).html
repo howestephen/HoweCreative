@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CASE_FILE: BADGER_CLUB | FORENSIC_ARCHITECT</title>
+<script type='text/javascript' nonce='TgfUSREjdGjpzlYVCfikqA==' src='https://contribution.usercontent.google.com/tEU9mER5jmhn5jJeRh7juXhaRlmMprA_Kv-kowMM658uWO9xMdFwTHf1oK_cv5RszgAaCepWOBRfIjbvdCMy05G9bc_0qFpB6HLNhQqWEhl3nocFfxP2UuDVfuD4xQNlWMqD7CMs13y7zUnSc0R_3Yd0oQBfxuPeHMlE35MAuGttFk9wsJgrqsi_Ds1sfC6qbkBU2wRr-Ax522O4XcnXKytVLIi7R6EpbpLqj8DUzsqMP57z5L46LV1qPe_uQ3bkMwIceRQ59nQihPVdGW18DIwVo1JbnB86MPcidXsIYOyKdSMjp_-i9Lf6PeLruOdVIKJOKqacZEbnAJHztSV-mvlbUGMsO7iIj1v_zcj-nR3yg72oYtKzzALuB-DS4ozVjtCqbC94LUSKCvgZ65Ulk4gcqcvTAzzZhfuZYtroLu7cP9Zak8vWvFtlvULeGa6wBNRKhjC4uhfYzWtmuHYIkqWmyK4MX7926jUqEeEzl2ORyu5JOXwa4koinwwO7sBnZs7rzW2ObizEjjqsl2R9g-hyLXxwm_iot4Bz6XGY3IXFL7llF32yAsvTC-2WLjP4wE10k0583K3jHySDk-5KeYNY6Z0046BRujKs1Q0b-X2UCIeSyeq8teooINfoUdyw9icVhj6e_lu4eazKFuCSAfF8i_OphJKVa29OBncyr1BIUy_gaoBnVRttOyOVFClrtCUtAzaMPZyv3hRicu5bB9iCycpfqnN0NNnOammH2QMZinkPsLF3B9gEc_fWtz5G1f0PFZOaRTatOtyL1y4SCkMipjg_abkTVR-aVX8C'></script><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-surface-variant": "#e8bdb6",
+              "on-error-container": "#ffdad6",
+              "on-secondary-fixed": "#410000",
+              "primary-fixed": "#ffdad4",
+              "on-tertiary": "#690000",
+              "inverse-primary": "#c00000",
+              "on-error": "#690005",
+              "surface-container-high": "#2a2a2a",
+              "on-tertiary-fixed-variant": "#920703",
+              "error-container": "#93000a",
+              "surface-variant": "#353535",
+              "on-tertiary-fixed": "#410000",
+              "on-secondary-fixed-variant": "#81281d",
+              "tertiary-fixed": "#ffdad4",
+              "secondary": "#ffb4a8",
+              "surface-tint": "#ffb4a8",
+              "secondary-fixed-dim": "#ffb4a8",
+              "surface-container-low": "#1b1b1b",
+              "inverse-on-surface": "#303030",
+              "primary-container": "#d00000",
+              "error": "#ffb4ab",
+              "on-secondary-container": "#ff9f90",
+              "inverse-surface": "#e2e2e2",
+              "surface": "#131313",
+              "surface-bright": "#393939",
+              "tertiary": "#ffb4a8",
+              "on-tertiary-container": "#ffded9",
+              "on-primary-container": "#ffded9",
+              "on-primary": "#690000",
+              "primary": "#ffb4a8",
+              "outline": "#ae8881",
+              "surface-container": "#1f1f1f",
+              "tertiary-container": "#c02f20",
+              "primary-fixed-dim": "#ffb4a8",
+              "on-primary-fixed": "#410000",
+              "secondary-container": "#842a1f",
+              "surface-dim": "#131313",
+              "on-background": "#e2e2e2",
+              "on-primary-fixed-variant": "#930000",
+              "on-secondary": "#621109",
+              "outline-variant": "#5e3f3a",
+              "on-surface": "#e2e2e2",
+              "surface-container-lowest": "#0e0e0e",
+              "secondary-fixed": "#ffdad4",
+              "background": "#131313",
+              "surface-container-highest": "#353535",
+              "tertiary-fixed-dim": "#ffb4a8"
+            },
+            fontFamily: {
+              "headline": ["Space Grotesk"],
+              "body": ["Space Grotesk"],
+              "label": ["Space Grotesk"]
+            },
+            borderRadius: {"DEFAULT": "0rem", "lg": "0rem", "xl": "0rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .graph-paper {
+            background-image: radial-gradient(#d0000022 0.5px, transparent 0.5px);
+            background-size: 20px 20px;
+        }
+        .scanline {
+            background: linear-gradient(to bottom, transparent 50%, rgba(208, 0, 0, 0.05) 50%);
+            background-size: 100% 4px;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 flex justify-between items-center px-6 h-16 bg-[#131313]/90 backdrop-blur-md">
+<div class="font-[&#39;Space_Grotesk&#39;] font-bold text-[#D00000] tracking-widest text-xl">FORENSIC_ARCHITECT</div>
+<div class="hidden md:flex items-center space-x-8">
+<a class="font-[&#39;Space_Grotesk&#39;] uppercase tracking-tighter text-sm text-gray-500 hover:text-[#D00000] transition-colors" href="#">INDEX</a>
+<a class="font-[&#39;Space_Grotesk&#39;] uppercase tracking-tighter text-sm text-[#D00000] border-b-2 border-[#D00000] pb-1" href="#">PROJECTS</a>
+<a class="font-[&#39;Space_Grotesk&#39;] uppercase tracking-tighter text-sm text-gray-500 hover:text-[#D00000] transition-colors" href="#">LABS</a>
+<a class="font-[&#39;Space_Grotesk&#39;] uppercase tracking-tighter text-sm text-gray-500 hover:text-[#D00000] transition-colors" href="#">INFO</a>
+</div>
+<button class="bg-primary-container text-on-primary-container px-4 py-1 font-[&#39;Space_Grotesk&#39;] uppercase text-xs tracking-widest active:scale-95 transition-transform duration-100">
+            TERMINAL
+        </button>
+<div class="bg-[#1B1B1B] h-[1px] w-full absolute bottom-0 left-0"></div>
+</nav>
+<!-- SideNavBar (Desktop Only) -->
+<aside class="hidden md:flex fixed left-0 top-16 h-[calc(100vh-64px)] w-20 flex-col items-center py-8 z-40 bg-[#131313]">
+<div class="mb-8 flex flex-col items-center">
+<span class="font-[&#39;Space_Grotesk&#39;] font-medium text-[10px] tracking-tight text-primary-container">CASE_FILE_001</span>
+<span class="font-[&#39;Space_Grotesk&#39;] font-medium text-[8px] tracking-tight text-gray-600">SYSTEM_ACTIVE</span>
+</div>
+<div class="flex flex-col w-full space-y-2">
+<button class="flex flex-col items-center justify-center text-gray-600 w-full py-4 hover:bg-[#1B1B1B] hover:text-[#D00000]">
+<span class="material-symbols-outlined mb-1" data-icon="location_on">location_on</span>
+<span class="font-[&#39;Space_Grotesk&#39;] font-medium text-[10px]">COORD</span>
+</button>
+<button class="flex flex-col items-center justify-center text-[#D00000] bg-[#2A2A2A] w-full py-4">
+<span class="material-symbols-outlined mb-1" data-icon="monitor_heart">monitor_heart</span>
+<span class="font-[&#39;Space_Grotesk&#39;] font-medium text-[10px]">VITALS</span>
+</button>
+<button class="flex flex-col items-center justify-center text-gray-600 w-full py-4 hover:bg-[#1B1B1B] hover:text-[#D00000]">
+<span class="material-symbols-outlined mb-1" data-icon="database">database</span>
+<span class="font-[&#39;Space_Grotesk&#39;] font-medium text-[10px]">DATA</span>
+</button>
+<button class="flex flex-col items-center justify-center text-gray-600 w-full py-4 hover:bg-[#1B1B1B] hover:text-[#D00000]">
+<span class="material-symbols-outlined mb-1" data-icon="terminal">terminal</span>
+<span class="font-[&#39;Space_Grotesk&#39;] font-medium text-[10px]">LOG</span>
+</button>
+</div>
+<div class="bg-[#1B1B1B] w-[1px] h-full absolute right-0 top-0"></div>
+</aside>
+<!-- Main Content Shell -->
+<main class="md:ml-20 mt-16 min-h-screen relative overflow-hidden">
+<!-- Hero Section -->
+<section class="relative h-[716px] flex items-end p-8 md:p-16 border-b border-outline-variant/20">
+<div class="absolute inset-0 z-0 opacity-20">
+<img alt="Abstract digital wireframe" class="w-full h-full object-cover grayscale contrast-125" data-alt="Monochrome digital matrix and architectural wireframe pattern" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDstS3KIq6wx_Xb4oTV6yGjzMaB2zxpMJ08ClNu0TQZn4K27iPPri7vvc-pz_gMprgtwZl7AnaR7RWUs7-mMdG56Varwcj0e7NzRoCoxOHXj5pqNSEE6Udon8J4b2CqoH8sW_fszPj4n0KeVFHDhNn2KMQTlTYlVnFyDMziIMnvM72Z6nEf60h_OuBClwFv-bReC3cP3K_WM1VvzsBQe5uIL6UkQ9K-o1MQwZGTPcecnjfNoOkBjyPNRfa0XYbr0_yNXtg2upXf6VA6"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface to-transparent"></div>
+<div class="absolute inset-0 scanline opacity-30"></div>
+</div>
+<div class="relative z-10 max-w-5xl">
+<div class="flex items-center gap-4 mb-6">
+<span class="bg-primary-container text-on-primary-container px-3 py-1 text-xs font-bold uppercase tracking-[0.2em]">PROJECT_RECONSTRUCTION</span>
+<span class="text-secondary font-mono text-xs">REF_ID: BC-2024-SYS</span>
+</div>
+<h1 class="font-headline font-extrabold text-5xl md:text-8xl uppercase tracking-tighter leading-none mb-4">
+                    BADGER_<span class="text-primary-container">CLUB</span>
+</h1>
+<p class="max-w-2xl text-on-surface-variant text-lg md:text-xl font-light leading-relaxed">
+                    A multi-layered system architecture for a high-security autonomous asset management protocol. Investigating the failures of legacy distributed ledgers to rebuild a more resilient infrastructure.
+                </p>
+</div>
+</section>
+<!-- Executive Summary -->
+<section class="p-8 md:p-16 grid grid-cols-1 md:grid-cols-12 gap-12 bg-surface-container-low/50 graph-paper">
+<div class="md:col-span-4">
+<div class="sticky top-24">
+<span class="label-sm text-primary-container font-bold tracking-widest block mb-2 uppercase">01 // EXECUTIVE_SUMMARY</span>
+<h2 class="headline-md uppercase font-extrabold text-3xl mb-6">THE MISSION_PARAMETERS</h2>
+<div class="space-y-4">
+<div class="p-4 bg-surface-container-high border-l-4 border-primary-container">
+<p class="text-[10px] text-gray-500 mb-1">STATUS:</p>
+<p class="text-xs font-bold text-on-surface">RECONSTRUCTION_COMPLETE</p>
+</div>
+<div class="p-4 bg-surface-container border-l-4 border-secondary-container">
+<p class="text-[10px] text-gray-500 mb-1">DURATION:</p>
+<p class="text-xs font-bold text-on-surface">184_CYCLES</p>
+</div>
+</div>
+</div>
+</div>
+<div class="md:col-span-8 space-y-8">
+<p class="body-md text-on-surface-variant leading-relaxed text-lg">
+                    Badger Club represents a radical shift in how autonomous digital entities interact within closed-loop ecosystems. The core directive was to synthesize a systems-level design that could handle over 50,000 concurrent state mutations per second without sacrificing cryptographic integrity.
+                </p>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div class="p-6 bg-surface-container-highest border border-outline-variant/10">
+<span class="material-symbols-outlined text-primary-container mb-4" data-icon="grid_view">grid_view</span>
+<h4 class="font-bold uppercase text-sm mb-2">Architectural Integrity</h4>
+<p class="text-xs text-on-surface-variant leading-normal">Modular service orchestration designed for zero-downtime hot-swapping of core logic modules.</p>
+</div>
+<div class="p-6 bg-surface-container-highest border border-outline-variant/10">
+<span class="material-symbols-outlined text-primary-container mb-4" data-icon="shield">shield</span>
+<h4 class="font-bold uppercase text-sm mb-2">Forensic Security</h4>
+<p class="text-xs text-on-surface-variant leading-normal">Every mutation is hashed and appended to a tamper-evident audit trail readable in real-time.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- The Challenge -->
+<section class="p-8 md:p-16 grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
+<div class="md:col-span-6 space-y-6 order-2 md:order-1">
+<span class="label-sm text-primary-container font-bold tracking-widest block mb-2 uppercase">02 // THE_CHALLENGE</span>
+<h2 class="headline-md uppercase font-extrabold text-3xl">SYSTEMATIC_COLLAPSE</h2>
+<p class="body-md text-on-surface-variant leading-relaxed">
+                    The predecessor to Badger Club suffered from "State Bloat"—a condition where the overhead of maintaining consistency across distributed nodes began to outpace the actual execution of business logic.
+                </p>
+<ul class="space-y-4">
+<li class="flex items-start gap-4">
+<span class="text-primary-container font-bold">_01</span>
+<p class="text-sm">Latency spikes exceeding 1200ms during peak load events.</p>
+</li>
+<li class="flex items-start gap-4">
+<span class="text-primary-container font-bold">_02</span>
+<p class="text-sm">Inconsistent data states across regional availability zones.</p>
+</li>
+<li class="flex items-start gap-4">
+<span class="text-primary-container font-bold">_03</span>
+<p class="text-sm">Manual intervention required for 4% of all state conflict resolutions.</p>
+</li>
+</ul>
+</div>
+<div class="md:col-span-6 order-1 md:order-2">
+<div class="relative bg-surface-container-high p-4 border border-outline-variant/30">
+<div class="absolute -top-2 -left-2 bg-primary-container text-[8px] px-2 py-1 uppercase font-bold tracking-widest">EVIDENCE_001</div>
+<img alt="Complex server wiring and hardware" class="w-full grayscale filter contrast-150" data-alt="High contrast close up of data center wiring and hardware infrastructure" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2TTwagzZ6bkaU9TMscnjONckeKPohX5P2rbQBCzPpnd17BLm3_9JIx3Y6SwhXZAv2ETovh5vykR8IYDY8-ePtD6A15Y6xRwvXvMicLVDKkGl7U44a2MKTC02b8jgO5ObLOkVWbnJAXDVJzXKkOT7DWrNq2ncRQB6lm18Mkcj0jmdj-y8ionjgGmnrzexcla3LPf-j7xx3Nl3m5qPqHAFymGwCj8FI_I1aRFXezG3Tremb2guKmBeNPT1RM1zENrueDsKZmDRv_GYC"/>
+<div class="mt-4 flex justify-between items-center text-[10px] text-gray-500 uppercase tracking-widest">
+<span>IMG_PATH: /HARDWARE/LEGACY_RACK</span>
+<span>DEPTH: 0.15mm</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Strategy & Architecture Diagram -->
+<section class="p-8 md:p-16 bg-surface-container-lowest border-y border-outline-variant/10">
+<div class="mb-12 text-center">
+<span class="label-sm text-primary-container font-bold tracking-widest block mb-2 uppercase">03 // THE_STRATEGY</span>
+<h2 class="headline-md uppercase font-extrabold text-3xl">RE-ARCHITECTING_THE_BONE_STRUCTURE</h2>
+</div>
+<!-- System Architecture Visualization (Mocked as UI) -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="md:col-span-2 bg-black/40 p-8 border border-primary-container/20 relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-6xl text-primary-container" data-icon="hub">hub</span>
+</div>
+<div class="flex justify-between items-start mb-12">
+<div>
+<h3 class="text-xl font-bold uppercase tracking-tight text-on-surface">Core_Engine_V2</h3>
+<span class="text-[10px] text-primary-container font-mono">ENCRYPTED_SIGNAL_STREAM</span>
+</div>
+<div class="text-right">
+<span class="block text-xs text-gray-500 uppercase">Throughput</span>
+<span class="block text-lg font-bold text-secondary">500k_OPS</span>
+</div>
+</div>
+<!-- SVG Architecture Flow -->
+<div class="relative h-64 border-t border-b border-outline-variant/20 flex items-center justify-center">
+<div class="flex items-center gap-4 w-full justify-around px-8">
+<div class="w-24 h-24 border border-outline flex flex-col items-center justify-center bg-surface-container">
+<span class="material-symbols-outlined text-gray-400" data-icon="input">input</span>
+<span class="text-[8px] mt-2 font-mono uppercase">Ingest</span>
+</div>
+<div class="h-[1px] flex-1 bg-primary-container relative">
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-primary-container rotate-45"></div>
+</div>
+<div class="w-32 h-32 border-2 border-primary-container flex flex-col items-center justify-center bg-surface-container-high shadow-[0_0_30px_rgba(208,0,0,0.1)]">
+<span class="material-symbols-outlined text-primary-container" data-icon="memory">memory</span>
+<span class="text-[10px] mt-2 font-bold uppercase">Logic_Pivot</span>
+</div>
+<div class="h-[1px] flex-1 bg-outline-variant relative">
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-outline-variant rotate-45"></div>
+</div>
+<div class="w-24 h-24 border border-outline flex flex-col items-center justify-center bg-surface-container">
+<span class="material-symbols-outlined text-gray-400" data-icon="database">database</span>
+<span class="text-[8px] mt-2 font-mono uppercase">Vault</span>
+</div>
+</div>
+</div>
+<div class="mt-8 flex gap-6 text-[10px] font-mono text-on-surface-variant">
+<span>LATENCY_STABILIZED: 0.04ms</span>
+<span>JITTER_FACTOR: &lt; 1%</span>
+<span>ENCRYPTION: AES-GCM-256</span>
+</div>
+</div>
+<div class="space-y-4">
+<div class="p-6 bg-surface-container border border-outline-variant/20">
+<h4 class="text-xs font-bold uppercase text-primary-container mb-2">Protocol_A: GHOST_SYNC</h4>
+<p class="text-[11px] leading-relaxed text-gray-400 italic">
+                            Implementing an optimistic replication strategy that allows nodes to proceed with execution while resolving state conflicts in an asynchronous background thread.
+                        </p>
+</div>
+<div class="p-6 bg-surface-container border border-outline-variant/20">
+<h4 class="text-xs font-bold uppercase text-primary-container mb-2">Protocol_B: REDACT_LOG</h4>
+<p class="text-[11px] leading-relaxed text-gray-400 italic">
+                            A specialized hashing algorithm that allows for GDPR-compliant data erasure without breaking the cryptographic chain of custody.
+                        </p>
+</div>
+<div class="p-6 bg-primary-container">
+<h4 class="text-xs font-bold uppercase text-on-primary-container mb-2">Technical_Code_Snippet</h4>
+<div class="bg-black/40 p-3 rounded font-mono text-[9px] text-secondary overflow-hidden">
+<pre>class BadgerSync {
+  async commit(mutation) {
+    const hash = await crypto.sign(mutation);
+    this.buffer.push({hash, mutation});
+    if (this.buffer.length &gt; THRESHOLD) {
+      return this.flush_to_vault();
+    }
+  }
+}
+</pre>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Technical Deviations -->
+<section class="p-8 md:p-16 space-y-12">
+<div class="flex items-center gap-8">
+<span class="h-[1px] flex-1 bg-outline-variant/30"></span>
+<span class="label-sm text-primary-container font-bold tracking-widest uppercase">04 // TECHNICAL_DEVIATIONS</span>
+<span class="h-[1px] flex-1 bg-outline-variant/30"></span>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+<div>
+<h3 class="headline-md uppercase font-extrabold text-2xl mb-4">THE_PIVOT: RELATIONAL_TO_KV</h3>
+<p class="body-md text-on-surface-variant mb-6 leading-relaxed">
+                        Mid-way through the reconstruction, we discovered that the relational database model was creating a significant bottleneck in recursive asset lookups. We made the tactical decision to migrate to a strictly Key-Value store using a prefix-based indexing system.
+                    </p>
+<div class="flex items-center gap-4 text-xs font-mono">
+<span class="text-red-500 line-through decoration-2">SQL_JOIN_COMPLEXITY</span>
+<span class="material-symbols-outlined text-primary-container" data-icon="trending_flat">trending_flat</span>
+<span class="text-green-500 font-bold">O(1)_RECURSIVE_LOOKUP</span>
+</div>
+</div>
+<div class="relative group">
+<div class="absolute -inset-1 bg-gradient-to-r from-primary-container to-secondary-container opacity-20 group-hover:opacity-40 transition-opacity"></div>
+<div class="relative bg-surface p-8 border border-outline-variant/50">
+<h4 class="text-sm font-bold uppercase mb-4 text-primary-container">_TRADE_OFF_ANALYSIS</h4>
+<div class="space-y-4">
+<div class="flex justify-between items-end">
+<span class="text-[10px] text-gray-500 uppercase">Flexibility</span>
+<div class="flex-1 border-b border-dotted border-gray-700 mx-2 mb-1"></div>
+<span class="text-xs font-bold">LOW</span>
+</div>
+<div class="flex justify-between items-end">
+<span class="text-[10px] text-gray-500 uppercase">Velocity</span>
+<div class="flex-1 border-b border-dotted border-gray-700 mx-2 mb-1"></div>
+<span class="text-xs font-bold">CRITICAL</span>
+</div>
+<div class="flex justify-between items-end">
+<span class="text-[10px] text-gray-500 uppercase">Maintenance</span>
+<div class="flex-1 border-b border-dotted border-gray-700 mx-2 mb-1"></div>
+<span class="text-xs font-bold">NOMINAL</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Final Outcome -->
+<section class="p-8 md:p-16 bg-surface-container-high relative overflow-hidden">
+<div class="absolute inset-0 bg-[url(&#39;https://www.transparenttextures.com/patterns/graph-paper.png&#39;)] opacity-10"></div>
+<div class="relative z-10 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+<div class="md:col-span-8">
+<span class="label-sm text-primary-container font-bold tracking-widest block mb-2 uppercase">05 // FINAL_OUTCOME</span>
+<h2 class="headline-md uppercase font-extrabold text-4xl md:text-6xl tracking-tighter mb-8">SYSTEM_RECONSTRUCTED_SUCCESSFULLY</h2>
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-8">
+<div>
+<span class="block text-4xl font-extrabold text-on-surface">99.99<span class="text-primary-container text-2xl">%</span></span>
+<span class="text-[10px] text-gray-500 uppercase tracking-widest">Uptime_Reliability</span>
+</div>
+<div>
+<span class="block text-4xl font-extrabold text-on-surface">14<span class="text-primary-container text-2xl">ms</span></span>
+<span class="text-[10px] text-gray-500 uppercase tracking-widest">Global_Latency</span>
+</div>
+<div>
+<span class="block text-4xl font-extrabold text-on-surface">0.0<span class="text-primary-container text-2xl">X</span></span>
+<span class="text-[10px] text-gray-500 uppercase tracking-widest">Data_Loss_Events</span>
+</div>
+</div>
+</div>
+<div class="md:col-span-4 flex justify-end">
+<div class="w-48 h-48 bg-primary-container flex flex-col items-center justify-center p-6 text-center rotate-3 shadow-2xl">
+<span class="material-symbols-outlined text-5xl mb-2 text-on-primary-container" data-icon="verified">verified</span>
+<p class="text-xs font-bold text-on-primary-container uppercase tracking-tighter">CASE_CLOSED: PROJECT_VALIDATED_FOR_PRODUCTION</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-4 px-8 flex justify-between items-center bg-[#131313] relative z-30 bg-[url(&#39;https://www.transparenttextures.com/patterns/graph-paper.png&#39;)] bg-opacity-5 border-t border-[#842A1F]/20">
+<p class="font-[&#39;Space_Grotesk&#39;] text-[10px] tracking-widest text-gray-500">©2024_FORENSIC_ARCHITECT_RECONSTRUCTION</p>
+<div class="flex gap-6">
+<a class="font-[&#39;Space_Grotesk&#39;] text-[10px] tracking-widest text-gray-600 hover:text-[#D00000] hover:line-through transition-colors" href="#">GITHUB</a>
+<a class="font-[&#39;Space_Grotesk&#39;] text-[10px] tracking-widest text-gray-600 hover:text-[#D00000] hover:line-through transition-colors" href="#">SIGNAL</a>
+</div>
+</footer>
+</body></html>
