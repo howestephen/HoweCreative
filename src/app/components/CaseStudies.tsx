@@ -1,33 +1,74 @@
 import { AnimatePresence, motion } from "motion/react";
-import { X, ScanLine, FolderOpenDot } from "lucide-react";
-import { useMemo, useState } from "react";
+import { X, ScanLine, FolderOpenDot, ChevronLeft, ChevronRight } from "lucide-react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 
 import { ImageWithFallback } from "./figma/ImageWithFallback";
-import { portfolioProjects } from "../data/portfolio";
+import { MediaGallery } from "./MediaGallery";
+import { caseStudiesContent, portfolioProjects, type ProjectMediaItem } from "../data/portfolio";
 
 function CaseStudyFile({
   project,
   onClose,
+  onPrev,
+  onNext,
+  hasPrev,
+  hasNext,
 }: {
   project: (typeof portfolioProjects)[number];
   onClose: () => void;
+  onPrev: () => void;
+  onNext: () => void;
+  hasPrev: boolean;
+  hasNext: boolean;
 }) {
-  return (
+  // Close on Escape
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+      if (e.key === "ArrowLeft" && hasPrev) onPrev();
+      if (e.key === "ArrowRight" && hasNext) onNext();
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [onClose, onPrev, onNext, hasPrev, hasNext]);
+
+  return createPortal(
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-[90] bg-black/86 backdrop-blur-md p-4 md:p-8"
+      className="fixed inset-0 z-[200] flex items-stretch bg-black/86 backdrop-blur-md"
       onClick={onClose}
     >
+      {/* ── Prev button ────────────────────────────────────────────── */}
+      <div className="flex w-14 shrink-0 items-center justify-center md:w-20">
+        <AnimatePresence>
+          {hasPrev && (
+            <motion.button
+              initial={{ opacity: 0, x: -8 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -8 }}
+              onClick={(e) => { e.stopPropagation(); onPrev(); }}
+              className="group flex h-12 w-12 items-center justify-center border border-[#ff003c]/30 bg-black/70 text-zinc-400 transition-colors hover:border-[#ff003c] hover:text-white"
+              aria-label="Previous case study"
+            >
+              <ChevronLeft className="h-5 w-5 transition-transform group-hover:-translate-x-0.5" />
+            </motion.button>
+          )}
+        </AnimatePresence>
+      </div>
+
+      {/* ── Main panel ─────────────────────────────────────────────── */}
       <motion.div
-        initial={{ opacity: 0, y: 30, scale: 0.98 }}
+        initial={{ opacity: 0, y: 28, scale: 0.98 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={{ opacity: 0, y: 20, scale: 0.98 }}
-        transition={{ duration: 0.28 }}
-        onClick={(event) => event.stopPropagation()}
-        className="relative mx-auto flex h-full max-w-7xl flex-col overflow-hidden border border-[#ff003c]/35 bg-[#050505] shadow-[0_0_0_1px_rgba(255,0,60,0.16),0_30px_120px_rgba(0,0,0,0.55)]"
+        transition={{ duration: 0.26 }}
+        onClick={(e) => e.stopPropagation()}
+        className="relative my-4 flex min-w-0 flex-1 flex-col overflow-hidden border border-[#ff003c]/35 bg-[#050505] shadow-[0_0_0_1px_rgba(255,0,60,0.16),0_30px_120px_rgba(0,0,0,0.55)]"
       >
+        {/* scan-line overlays */}
         <div
           className="pointer-events-none absolute inset-0 opacity-[0.08]"
           style={{
@@ -44,10 +85,11 @@ function CaseStudyFile({
           }}
         />
 
+        {/* header */}
         <div className="relative z-10 flex items-center justify-between border-b border-[#ff003c]/25 px-4 py-3 font-mono text-[11px] uppercase tracking-[0.22em] text-zinc-400 md:px-6">
           <div className="flex items-center gap-3">
             <FolderOpenDot className="h-4 w-4 text-[#ff003c]" />
-            <span>Open File</span>
+            <span>{caseStudiesContent.openFileLabel}</span>
             <span className="text-zinc-600">{project.slug}</span>
           </div>
           <button
@@ -55,12 +97,13 @@ function CaseStudyFile({
             className="flex items-center gap-2 border border-[#ff003c]/25 px-3 py-1 text-zinc-300 transition-colors hover:border-[#ff003c] hover:text-white"
           >
             <X className="h-4 w-4" />
-            Close
+            {caseStudiesContent.closeLabel}
           </button>
         </div>
 
+        {/* body */}
         <div className="relative z-10 grid min-h-0 flex-1 gap-0 overflow-hidden lg:grid-cols-[1.05fr_0.95fr]">
-          <div className="border-b border-[#ff003c]/15 p-5 lg:border-b-0 lg:border-r lg:p-8">
+          <div className="border-b border-[#ff003c]/15 p-5 lg:border-b-0 lg:border-r lg:p-8 overflow-y-auto">
             <div className="mb-4 flex flex-wrap items-center gap-3 font-mono text-[10px] uppercase tracking-[0.18em] text-zinc-500">
               <span className="border border-[#ff003c]/20 bg-[#ff003c]/8 px-2 py-1 text-[#ff003c]">
                 {project.category}
@@ -78,9 +121,9 @@ function CaseStudyFile({
 
             <div className="mt-6 grid gap-4 md:grid-cols-3">
               {[
-                ["Role", project.role],
-                ["Client", project.client],
-                ["Status", project.status],
+                [caseStudiesContent.metaLabels.role, project.role],
+                [caseStudiesContent.metaLabels.client, project.client],
+                [caseStudiesContent.metaLabels.status, project.status],
               ].map(([label, value]) => (
                 <div key={label} className="border border-[#ff003c]/18 bg-black/40 p-4">
                   <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-zinc-500">
@@ -91,20 +134,38 @@ function CaseStudyFile({
               ))}
             </div>
 
-            <div className="relative mt-8 overflow-hidden border border-[#ff003c]/25 bg-black/60">
-              <ImageWithFallback
-                src={project.image}
-                alt={project.title}
-                className="h-[280px] w-full object-cover md:h-[380px]"
-              />
-              <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-30 mix-blend-screen`} />
+            {/* Media gallery */}
+            {(() => {
+              const mediaItems: ProjectMediaItem[] =
+                project.media && project.media.length > 0
+                  ? project.media
+                  : [{ type: "image", src: project.image, alt: project.title }];
+              return <MediaGallery items={mediaItems} gradient={project.gradient} />;
+            })()}
+
+            {/* Tool badges */}
+            <div className="mt-6">
+              <div className="mb-3 font-mono text-[10px] uppercase tracking-[0.2em] text-zinc-500">
+                Tools Used
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {project.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="border border-[#ff003c]/35 bg-[#ff003c]/10 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.14em] text-[#ff003c]"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
             </div>
+
           </div>
 
           <div className="min-h-0 overflow-y-auto p-5 lg:p-8">
             <div className="mb-4 flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.22em] text-[#ff003c]">
               <ScanLine className="h-4 w-4" />
-              Case File Sections
+              {caseStudiesContent.sectionsLabel}
             </div>
             <div className="grid gap-4">
               {project.overlaySections.map((section) => (
@@ -117,32 +178,72 @@ function CaseStudyFile({
               ))}
             </div>
 
-            <div className="mt-5 flex flex-wrap gap-2">
-              {project.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="border border-[#ff003c]/20 bg-[#ff003c]/8 px-2 py-1 font-mono text-[10px] uppercase tracking-[0.14em] text-zinc-200"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
           </div>
         </div>
       </motion.div>
-    </motion.div>
+
+      {/* ── Next button ────────────────────────────────────────────── */}
+      <div className="flex w-14 shrink-0 items-center justify-center md:w-20">
+        <AnimatePresence>
+          {hasNext && (
+            <motion.button
+              initial={{ opacity: 0, x: 8 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 8 }}
+              onClick={(e) => { e.stopPropagation(); onNext(); }}
+              className="group flex h-12 w-12 items-center justify-center border border-[#ff003c]/30 bg-black/70 text-zinc-400 transition-colors hover:border-[#ff003c] hover:text-white"
+              aria-label="Next case study"
+            >
+              <ChevronRight className="h-5 w-5 transition-transform group-hover:translate-x-0.5" />
+            </motion.button>
+          )}
+        </AnimatePresence>
+      </div>
+    </motion.div>,
+    document.body,
   );
 }
 
 export function CaseStudies() {
   const [activeSlug, setActiveSlug] = useState<string | null>(null);
-  const activeProject = useMemo(
-    () => portfolioProjects.find((project) => project.slug === activeSlug) ?? null,
+  const sectionRef = useRef<HTMLElement>(null);
+
+  const activeIndex = useMemo(
+    () => portfolioProjects.findIndex((p) => p.slug === activeSlug),
     [activeSlug],
   );
+  const activeProject = activeIndex >= 0 ? portfolioProjects[activeIndex] : null;
+
+  const scrollToSection = useCallback(() => {
+    sectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, []);
+
+  const handleOpen = useCallback(
+    (slug: string) => {
+      setActiveSlug(slug);
+      // Scroll to case studies section so the overlay sits at the right position
+      setTimeout(scrollToSection, 0);
+    },
+    [scrollToSection],
+  );
+
+  const handleClose = useCallback(() => {
+    setActiveSlug(null);
+    // Return viewport to the case studies section after the close animation
+    setTimeout(scrollToSection, 280);
+  }, [scrollToSection]);
+
+  const handlePrev = useCallback(() => {
+    if (activeIndex > 0) setActiveSlug(portfolioProjects[activeIndex - 1].slug);
+  }, [activeIndex]);
+
+  const handleNext = useCallback(() => {
+    if (activeIndex < portfolioProjects.length - 1)
+      setActiveSlug(portfolioProjects[activeIndex + 1].slug);
+  }, [activeIndex]);
 
   return (
-    <section id="case-studies" className="relative border-t border-[#ff003c]/15 px-6 py-20">
+    <section ref={sectionRef} id="case-studies" className="relative border-t border-[#ff003c]/15 px-6 py-24 md:py-28">
       <div className="mx-auto max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -152,15 +253,13 @@ export function CaseStudies() {
           className="mx-auto mb-12 max-w-3xl text-center"
         >
           <div className="mb-4 font-mono text-[10px] uppercase tracking-[0.25em] text-[#ff003c]">
-            Selected Case Files
+            {caseStudiesContent.eyebrow}
           </div>
           <h2 className="text-4xl font-semibold tracking-tight text-white md:text-5xl">
-            Six technical dossiers arranged in a central grid.
+            {caseStudiesContent.title}
           </h2>
           <p className="mt-4 text-sm leading-relaxed text-zinc-400 md:text-base">
-            Click a project tile to open the full file. The current pass uses standard
-            systems-design sections inside a retro-future file viewer while the real authored
-            content is rebuilt.
+            {caseStudiesContent.description}
           </p>
         </motion.div>
 
@@ -174,16 +273,17 @@ export function CaseStudies() {
               viewport={{ once: true }}
               transition={{ duration: 0.45, delay: index * 0.05 }}
               whileHover={{ y: -6 }}
-              onClick={() => setActiveSlug(project.slug)}
+              onClick={() => handleOpen(project.slug)}
               className="group relative flex min-h-[360px] flex-col overflow-hidden border border-[#ff003c]/20 bg-black/55 text-left backdrop-blur-sm transition-colors hover:border-[#ff003c]/60"
             >
               <div className="relative h-44 overflow-hidden border-b border-[#ff003c]/15">
                 <ImageWithFallback
                   src={project.image}
                   alt={project.title}
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                  className="h-full w-full object-cover grayscale transition-transform duration-500 group-hover:scale-[1.03]"
                 />
-                <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-30 mix-blend-screen`} />
+                {/* Red colorise — multiply on greyscale = black-to-red duotone */}
+                <div className="absolute inset-0 bg-[#ff003c] mix-blend-multiply opacity-85" />
               </div>
 
               <div className="flex flex-1 flex-col p-5">
@@ -215,7 +315,15 @@ export function CaseStudies() {
 
       <AnimatePresence>
         {activeProject ? (
-          <CaseStudyFile project={activeProject} onClose={() => setActiveSlug(null)} />
+          <CaseStudyFile
+            key={activeProject.slug}
+            project={activeProject}
+            onClose={handleClose}
+            onPrev={handlePrev}
+            onNext={handleNext}
+            hasPrev={activeIndex > 0}
+            hasNext={activeIndex < portfolioProjects.length - 1}
+          />
         ) : null}
       </AnimatePresence>
     </section>

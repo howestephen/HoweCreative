@@ -1,17 +1,24 @@
 import { Outlet } from "react-router";
 import { Link } from "react-router";
 
+import { siteProfile } from "../data/portfolio";
 import { Footer } from "./Footer";
+import { MatrixRainBackdrop } from "./MatrixRainBackdrop";
 import { SideNav } from "./SideNav";
 import { TechnicalDecorations } from "./TechnicalDecorations";
 
 export function Layout() {
   return (
-    <div className="min-h-screen overflow-x-hidden bg-[#050505] font-mono text-zinc-300 selection:bg-[#ff003c] selection:text-white">
+    <div className="relative min-h-screen overflow-x-hidden bg-[#050505] text-zinc-300 selection:bg-[#ff003c] selection:text-white">
       <TechnicalDecorations />
+      <MatrixRainBackdrop className="pointer-events-none fixed inset-0 z-[1] opacity-48" />
+      <MatrixRainBackdrop
+        mode="content"
+        className="pointer-events-none fixed inset-0 z-[2] opacity-72 mix-blend-screen"
+      />
 
       <div
-        className="fixed inset-0 z-0 pointer-events-none opacity-20"
+        className="fixed inset-0 z-0 pointer-events-none opacity-16"
         style={{
           backgroundImage:
             "linear-gradient(rgba(255, 0, 60, 0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 0, 60, 0.2) 1px, transparent 1px)",
@@ -19,22 +26,18 @@ export function Layout() {
         }}
       />
 
-      <SideNav />
+      <div className="absolute inset-x-0 top-0 z-[70] flex items-start justify-between px-4 py-4 md:px-6">
+        <Link
+          to="/"
+          className="headline-font pointer-events-auto inline-flex items-center border border-[#ff003c]/25 bg-black/70 px-4 py-3 text-sm uppercase tracking-[0.24em] text-white shadow-[0_12px_30px_rgba(0,0,0,0.24)] backdrop-blur-md"
+        >
+          {siteProfile.brandPrefix}
+          <span className="ml-2 text-[#ff003c]">{siteProfile.brandSuffix}</span>
+        </Link>
+        <SideNav />
+      </div>
 
-      <header className="fixed top-0 z-50 w-full border-b border-[#ff003c]/10 bg-[#050505]/80 backdrop-blur-md">
-        <div className="flex items-center justify-between px-6 py-4">
-          <Link to="/" className="group text-xl font-bold tracking-tighter text-white">
-            STEPHEN<span className="text-[#ff003c]">_HOWE</span>
-            <span className="ml-2 text-sm text-zinc-600">V0.2</span>
-          </Link>
-          <div className="pr-28 font-mono text-[10px] uppercase tracking-[0.2em] text-zinc-600 md:pr-32">
-            one_page_system
-          </div>
-        </div>
-        <div className="absolute bottom-0 left-0 h-px w-full bg-gradient-to-r from-transparent via-[#ff003c]/50 to-transparent" />
-      </header>
-
-      <main className="relative z-10 w-full pt-20">
+      <main className="relative z-10 w-full">
         <Outlet />
       </main>
 

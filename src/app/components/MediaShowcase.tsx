@@ -1,10 +1,10 @@
 import { motion } from "motion/react";
 
-import { portfolioTools } from "../data/portfolio";
+import { portfolioTools, toolsSkillsContent } from "../data/portfolio";
 
 export function MediaShowcase() {
   return (
-    <section id="tools-skills" className="relative border-t border-[#ff003c]/20 px-6 py-18 md:py-20">
+    <section id="tools-skills" className="relative border-t border-[#ff003c]/20 px-6 py-24 md:py-28">
       <div className="mx-auto max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -14,14 +14,13 @@ export function MediaShowcase() {
           className="mb-12 max-w-3xl"
         >
           <div className="mb-4 font-mono text-[10px] uppercase tracking-[0.22em] text-[#ff003c]">
-            Tools and Skills
+            {toolsSkillsContent.eyebrow}
           </div>
           <h2 className="text-4xl font-semibold tracking-tight text-white md:text-5xl">
-            The working stack becomes a denser tool index.
+            {toolsSkillsContent.title}
           </h2>
           <p className="mt-4 text-sm leading-relaxed text-zinc-400 md:text-base">
-            Smaller icons, tighter cards, and more entries on screen. This section is now a compact
-            index of the tools and skills that feed the case files and archive below.
+            {toolsSkillsContent.description}
           </p>
         </motion.div>
 
