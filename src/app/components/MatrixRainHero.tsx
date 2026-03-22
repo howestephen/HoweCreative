@@ -12,7 +12,9 @@ const COUNT_BG = 8200;
 const SPREAD_BG = 13.5;
 const HOLD_HEAD = 6;
 const HOLD_SKILL = 4.4;
-const MORPH_DUR = 1.8;
+const MORPH_DUR = 2.4;
+const MORPH_SEGMENTS = 1800;
+const TARGET_MODEL_HEIGHT = 2.55;
 const WIRE_COLOR = new THREE.Color("#fff4f7");
 const WIRE_MORPH_COLOR = new THREE.Color("#ff365e");
 const HERO_MODEL_SEQUENCE = [
@@ -24,13 +26,6 @@ const HERO_MODEL_SEQUENCE = [
   { label: "3D Modelling", src: "/models/hero-wire/light-cube.glb" },
 ] as const;
 
-type WireAsset = {
-  group: THREE.Group;
-  materials: THREE.LineBasicMaterial[];
-  geometries: THREE.BufferGeometry[];
-  baseScale: number;
-};
-
 function buildCharAtlas(): THREE.CanvasTexture {
   const grid = 8;
   const cell = 64;
@@ -39,8 +34,9 @@ function buildCharAtlas(): THREE.CanvasTexture {
   canvas.width = size;
   canvas.height = size;
   const ctx = canvas.getContext("2d");
+
   if (!ctx) {
-    throw new Error("Failed to create 2D context for matrix atlas.");
+    throw new Error("Failed to create matrix atlas context.");
   }
 
   ctx.fillStyle = "#000";
@@ -210,7 +206,6 @@ const BackgroundRain = React.memo(function BackgroundRain({
     const charIndex = new Float32Array(COUNT_BG);
     const phaseOffset = new Float32Array(COUNT_BG);
     const depthDrift = new Float32Array(COUNT_BG);
-
     const gridCols = Math.ceil(Math.sqrt(COUNT_BG));
     const spacing = (SPREAD_BG * 2) / gridCols;
 
@@ -270,32 +265,64 @@ const BackgroundRain = React.memo(function BackgroundRain({
   );
 });
 
-function applyRandomLineColors(geometry: THREE.BufferGeometry) {
-  const position = geometry.getAttribute("position");
-  const colors = new Float32Array(position.count * 3);
+function normalizeLinePositions(source: Float32Array, targetHeight: number) {
+  let minX = Number.POSITIVE_INFINITY;
+  let minY = Number.POSITIVE_INFINITY;
+  let minZ = Number.POSITIVE_INFINITY;
+  let maxX = Number.NEGATIVE_INFINITY;
+  let maxY = Number.NEGATIVE_INFINITY;
+  let maxZ = Number.NEGATIVE_INFINITY;
 
-  for (let index = 0; index < position.count; index += 2) {
-    const chosen = Math.random() > 0.45 ? WIRE_COLOR : WIRE_MORPH_COLOR;
-
-    colors[index * 3] = chosen.r;
-    colors[index * 3 + 1] = chosen.g;
-    colors[index * 3 + 2] = chosen.b;
-
-    if (index + 1 < position.count) {
-      colors[(index + 1) * 3] = chosen.r;
-      colors[(index + 1) * 3 + 1] = chosen.g;
-      colors[(index + 1) * 3 + 2] = chosen.b;
-    }
+  for (let index = 0; index < source.length; index += 3) {
+    const x = source[index];
+    const y = source[index + 1];
+    const z = source[index + 2];
+    minX = Math.min(minX, x);
+    minY = Math.min(minY, y);
+    minZ = Math.min(minZ, z);
+    maxX = Math.max(maxX, x);
+    maxY = Math.max(maxY, y);
+    maxZ = Math.max(maxZ, z);
   }
 
-  geometry.setAttribute("color", new THREE.BufferAttribute(colors, 3));
+  const centerX = (minX + maxX) * 0.5;
+  const centerY = (minY + maxY) * 0.5;
+  const centerZ = (minZ + maxZ) * 0.5;
+  const maxDimension = Math.max(maxX - minX, maxY - minY, maxZ - minZ) || 1;
+  const scale = targetHeight / maxDimension;
+  const normalized = new Float32Array(source.length);
+
+  for (let index = 0; index < source.length; index += 3) {
+    normalized[index] = (source[index] - centerX) * scale;
+    normalized[index + 1] = (source[index + 1] - centerY) * scale;
+    normalized[index + 2] = (source[index + 2] - centerZ) * scale;
+  }
+
+  return normalized;
 }
 
-function buildWireAsset(scene: THREE.Object3D): WireAsset {
-  const root = new THREE.Group();
-  const materials: THREE.LineBasicMaterial[] = [];
-  const geometries: THREE.BufferGeometry[] = [];
+function resampleLineSegments(source: Float32Array, segmentCount: number) {
+  const sourceSegments = Math.max(1, Math.floor(source.length / 6));
+  const output = new Float32Array(segmentCount * 6);
 
+  for (let index = 0; index < segmentCount; index += 1) {
+    const sourceIndex = Math.floor((index / segmentCount) * sourceSegments);
+    const sourceOffset = sourceIndex * 6;
+    const outputOffset = index * 6;
+
+    output[outputOffset] = source[sourceOffset];
+    output[outputOffset + 1] = source[sourceOffset + 1];
+    output[outputOffset + 2] = source[sourceOffset + 2];
+    output[outputOffset + 3] = source[sourceOffset + 3];
+    output[outputOffset + 4] = source[sourceOffset + 4];
+    output[outputOffset + 5] = source[sourceOffset + 5];
+  }
+
+  return output;
+}
+
+function buildMorphTarget(scene: THREE.Object3D) {
+  const positions: number[] = [];
   scene.updateWorldMatrix(true, true);
 
   scene.traverse((child) => {
@@ -312,50 +339,49 @@ function buildWireAsset(scene: THREE.Object3D): WireAsset {
     const edgeGeometry = new THREE.EdgesGeometry(sourceGeometry, 22);
     sourceGeometry.dispose();
 
-    if (edgeGeometry.getAttribute("position").count === 0) {
-      edgeGeometry.dispose();
-      return;
+    const edgePositions = edgeGeometry.getAttribute("position");
+    for (let index = 0; index < edgePositions.count; index += 1) {
+      positions.push(
+        edgePositions.getX(index),
+        edgePositions.getY(index),
+        edgePositions.getZ(index),
+      );
     }
 
-    applyRandomLineColors(edgeGeometry);
-
-    const material = new THREE.LineBasicMaterial({
-      vertexColors: true,
-      transparent: true,
-      opacity: 0,
-      depthWrite: false,
-      blending: THREE.AdditiveBlending,
-      toneMapped: false,
-    });
-
-    const lineSegments = new THREE.LineSegments(edgeGeometry, material);
-    root.add(lineSegments);
-    materials.push(material);
-    geometries.push(edgeGeometry);
+    edgeGeometry.dispose();
   });
 
-  const bounds = new THREE.Box3().setFromObject(root);
-  const center = bounds.getCenter(new THREE.Vector3());
-  const size = bounds.getSize(new THREE.Vector3());
-  const maxDimension = Math.max(size.x, size.y, size.z) || 1;
-  const targetHeight = 3.1;
-
-  root.children.forEach((child) => {
-    const lineSegments = child as THREE.LineSegments;
-    lineSegments.geometry.translate(-center.x, -center.y, -center.z);
-  });
-
-  const baseScale = targetHeight / maxDimension;
-  root.scale.setScalar(baseScale);
-  return { group: root, materials, geometries, baseScale };
+  const normalized = normalizeLinePositions(new Float32Array(positions), TARGET_MODEL_HEIGHT);
+  return resampleLineSegments(normalized, MORPH_SEGMENTS);
 }
 
-const ModelWireHero = React.memo(function ModelWireHero({
+function buildLineColors(vertexCount: number) {
+  const colors = new Float32Array(vertexCount * 3);
+
+  for (let index = 0; index < vertexCount; index += 2) {
+    const color = Math.random() > 0.45 ? WIRE_COLOR : WIRE_MORPH_COLOR;
+
+    colors[index * 3] = color.r;
+    colors[index * 3 + 1] = color.g;
+    colors[index * 3 + 2] = color.b;
+
+    if (index + 1 < vertexCount) {
+      colors[(index + 1) * 3] = color.r;
+      colors[(index + 1) * 3 + 1] = color.g;
+      colors[(index + 1) * 3 + 2] = color.b;
+    }
+  }
+
+  return colors;
+}
+
+const MorphingWireHero = React.memo(function MorphingWireHero({
   onSkillChange,
 }: {
   onSkillChange: (label: string) => void;
 }) {
-  const groupRef = useRef<THREE.Group>(null);
+  const rootRef = useRef<THREE.Group>(null);
+  const lineRef = useRef<THREE.LineSegments>(null);
   const sequenceRef = useRef(0);
   const phaseRef = useRef<"hold" | "morph">("hold");
   const phaseTimerRef = useRef(0);
@@ -365,10 +391,21 @@ const ModelWireHero = React.memo(function ModelWireHero({
     HERO_MODEL_SEQUENCE.map((model) => model.src),
   ) as Array<{ scene: THREE.Group }>;
 
-  const assets = useMemo(
-    () => gltfs.map((gltf) => buildWireAsset(gltf.scene.clone(true))),
+  const targets = useMemo(
+    () => gltfs.map((gltf) => buildMorphTarget(gltf.scene.clone(true))),
     [gltfs],
   );
+
+  const geometry = useMemo(() => {
+    const initialPositions = targets[0] ? targets[0].slice() : new Float32Array(MORPH_SEGMENTS * 6);
+    const bufferGeometry = new THREE.BufferGeometry();
+    bufferGeometry.setAttribute("position", new THREE.BufferAttribute(initialPositions, 3));
+    bufferGeometry.setAttribute(
+      "color",
+      new THREE.BufferAttribute(buildLineColors(MORPH_SEGMENTS * 2), 3),
+    );
+    return bufferGeometry;
+  }, [targets]);
 
   useEffect(() => {
     onSkillChange(HERO_MODEL_SEQUENCE[0].label);
@@ -376,22 +413,24 @@ const ModelWireHero = React.memo(function ModelWireHero({
 
   useEffect(() => {
     return () => {
-      assets.forEach((asset) => {
-        asset.geometries.forEach((geometry) => geometry.dispose());
-        asset.materials.forEach((material) => material.dispose());
-      });
+      geometry.dispose();
     };
-  }, [assets]);
+  }, [geometry]);
 
   useFrame(({ clock }, delta) => {
-    const root = groupRef.current;
-    if (!root) {
+    const root = rootRef.current;
+    const geometryObject = lineRef.current?.geometry;
+    const positionAttribute = geometryObject?.getAttribute("position") as
+      | THREE.BufferAttribute
+      | undefined;
+
+    if (!root || !positionAttribute || targets.length === 0) {
       return;
     }
 
     const elapsed = clock.getElapsedTime();
     const currentIndex = sequenceRef.current;
-    const nextIndex = (currentIndex + 1) % assets.length;
+    const nextIndex = (currentIndex + 1) % targets.length;
 
     phaseTimerRef.current += delta;
 
@@ -414,52 +453,34 @@ const ModelWireHero = React.memo(function ModelWireHero({
 
     const eased =
       morphT < 0.5 ? 4 * morphT * morphT * morphT : 1 - Math.pow(-2 * morphT + 2, 3) / 2;
-    const displayCurrentIndex = phaseRef.current === "hold" ? sequenceRef.current : currentIndex;
-    const displayNextIndex =
-      phaseRef.current === "hold" ? sequenceRef.current : (displayCurrentIndex + 1) % assets.length;
+    const sourcePositions = targets[currentIndex];
+    const targetPositions = phaseRef.current === "hold" ? targets[currentIndex] : targets[nextIndex];
+    const destination = positionAttribute.array as Float32Array;
+
+    for (let index = 0; index < destination.length; index += 1) {
+      destination[index] = THREE.MathUtils.lerp(sourcePositions[index], targetPositions[index], eased);
+    }
+
+    positionAttribute.needsUpdate = true;
 
     root.rotation.y = Math.sin(elapsed * 0.32) * 0.35;
-    root.rotation.x = -0.12 + Math.cos(elapsed * 0.24) * 0.06;
-    root.rotation.z = Math.sin(elapsed * 0.18) * 0.04;
-    root.position.y = Math.sin(elapsed * 0.74) * 0.1;
-
-    assets.forEach((asset, index) => {
-      let opacity = 0;
-      let scale = 0.9;
-
-      if (phaseRef.current === "hold") {
-        if (index === displayCurrentIndex) {
-          opacity = 0.96;
-          scale = 1;
-        }
-      } else {
-        if (index === displayCurrentIndex) {
-          opacity = 1 - eased;
-          scale = 1 + (1 - eased) * 0.08;
-        }
-
-        if (index === displayNextIndex) {
-          opacity = Math.max(opacity, eased);
-          scale = Math.max(scale, 0.88 + eased * 0.12);
-        }
-      }
-
-      const flicker = 0.92 + Math.sin(elapsed * 12 + index * 1.1) * 0.05;
-      asset.group.visible = opacity > 0.01;
-      asset.group.scale.setScalar(asset.baseScale * scale);
-      asset.group.children.forEach((child) => {
-        const lineSegments = child as THREE.LineSegments;
-        const material = lineSegments.material as THREE.LineBasicMaterial;
-        material.opacity = opacity * flicker;
-      });
-    });
+    root.rotation.x = -0.1 + Math.cos(elapsed * 0.24) * 0.05;
+    root.rotation.z = Math.sin(elapsed * 0.18) * 0.035;
+    root.position.y = Math.sin(elapsed * 0.74) * 0.06;
   });
 
   return (
-    <group ref={groupRef} renderOrder={2}>
-      {assets.map((asset, index) => (
-        <primitive key={HERO_MODEL_SEQUENCE[index].src} object={asset.group} />
-      ))}
+    <group ref={rootRef} renderOrder={2}>
+      <lineSegments geometry={geometry} ref={lineRef}>
+        <lineBasicMaterial
+          vertexColors
+          transparent
+          opacity={0.95}
+          depthWrite={false}
+          blending={THREE.AdditiveBlending}
+          toneMapped={false}
+        />
+      </lineSegments>
     </group>
   );
 });
@@ -475,12 +496,15 @@ export function MatrixRainHero() {
   }, [atlas]);
 
   return (
-    <div id="hero" className="relative flex h-screen w-full items-center justify-center overflow-hidden bg-black">
+    <div
+      id="hero"
+      className="relative flex min-h-[100svh] w-full items-center justify-center overflow-hidden bg-black"
+    >
       <div className="absolute inset-0 z-0">
-        <Canvas camera={{ position: [0, 0, 6.4], fov: 48 }}>
+        <Canvas camera={{ position: [0, 0, 7.2], fov: 46 }}>
           <BackgroundRain atlas={atlas} />
-          <group position={[0, 1.85, 0]}>
-            <ModelWireHero onSkillChange={setActiveSkill} />
+          <group position={[0, 1.38, 0]}>
+            <MorphingWireHero onSkillChange={setActiveSkill} />
           </group>
         </Canvas>
       </div>
@@ -493,17 +517,17 @@ export function MatrixRainHero() {
         }}
       />
 
-      <div className="pointer-events-none relative z-20 flex w-full justify-center px-6 pt-[58vh] md:pt-[60vh] lg:pt-[62vh]">
+      <div className="pointer-events-none relative z-20 flex w-full justify-center px-6 pt-[48vh] md:pt-[50vh] lg:pt-[52vh]">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.5 }}
           className="max-w-5xl text-center"
         >
-          <div className="mb-4 font-mono uppercase tracking-[0.3em] text-[#ff003c] opacity-70">
+          <div className="mb-3 font-mono uppercase tracking-[0.3em] text-[#ff003c] opacity-70">
             {siteProfile.role}
           </div>
-          <h1 className="mb-6 tracking-tight">
+          <h1 className="mb-4 tracking-tight">
             <span className="mb-2 block text-5xl font-bold text-white md:text-7xl lg:text-8xl">
               {siteProfile.name.toUpperCase()}
             </span>
@@ -511,7 +535,7 @@ export function MatrixRainHero() {
               PORTFOLIO
             </span>
           </h1>
-          <p className="mx-auto mb-12 max-w-2xl font-mono text-lg text-zinc-400 md:text-xl">
+          <p className="mx-auto mb-8 max-w-2xl font-mono text-base text-zinc-400 md:text-lg lg:text-xl">
             {siteProfile.headline}
           </p>
         </motion.div>
@@ -525,7 +549,7 @@ export function MatrixRainHero() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.45 }}
-            className="pointer-events-none absolute bottom-32 left-1/2 z-20 -translate-x-1/2 font-mono text-xs uppercase tracking-[0.4em] text-[#ff003c] opacity-75"
+            className="pointer-events-none absolute bottom-28 left-1/2 z-20 -translate-x-1/2 font-mono text-xs uppercase tracking-[0.4em] text-[#ff003c] opacity-75"
           >
             {activeSkill}
           </motion.div>
@@ -536,7 +560,7 @@ export function MatrixRainHero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 2, repeat: Infinity, repeatType: "reverse" }}
-        className="pointer-events-none absolute bottom-10 left-1/2 z-20 -translate-x-1/2"
+        className="pointer-events-none absolute bottom-8 left-1/2 z-20 -translate-x-1/2"
       >
         <div className="mb-2 font-mono text-xs uppercase tracking-widest text-[#ff003c]">Scroll</div>
         <div className="mx-auto h-12 w-px bg-gradient-to-b from-[#ff003c] to-transparent" />
