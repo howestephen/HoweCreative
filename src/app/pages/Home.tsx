@@ -1,4 +1,4 @@
-import { CyberHero } from "../components/CyberHero";
+import { MatrixRainHero } from "../components/MatrixRainHero";
 import { CaseStudies } from "../components/CaseStudies";
 import { MediaShowcase } from "../components/MediaShowcase";
 import { motion } from "motion/react";
@@ -7,7 +7,7 @@ export function Home() {
   return (
     <div className="w-full">
       <div id="hero">
-        <CyberHero />
+        <MatrixRainHero />
       </div>
       <motion.div 
         initial={{ opacity: 0 }}
