@@ -86,17 +86,91 @@ const vertexShader = /* glsl */`
   varying float vBrightness;
   varying float vAlpha;
 
+  // ── SDF primitives ─────────────────────────────────────────────
+
+  float opSmoothUnion(float d1, float d2, float k) {
+    float h = clamp(0.5 + 0.5 * (d2 - d1) / k, 0.0, 1.0);
+    return mix(d2, d1, h) - k * h * (1.0 - h);
+  }
+
+  float sdCapsule(vec3 p, vec3 a, vec3 b, float r) {
+    vec3 pa = p - a, ba = b - a;
+    float h = clamp(dot(pa, ba) / dot(ba, ba), 0.0, 1.0);
+    return length(pa - ba * h) - r;
+  }
+
+  float sdBox(vec3 p, vec3 b) {
+    vec3 q = abs(p) - b;
+    return length(max(q, 0.0)) + min(max(q.x, max(q.y, q.z)), 0.0);
+  }
+
+  float sdSphere(vec3 p, float r) {
+    return length(p) - r;
+  }
+
+  float sdTorus(vec3 p, float R, float r) {
+    vec2 q = vec2(length(p.xz) - R, p.y);
+    return length(q) - r;
+  }
+
+  float sdCylinder(vec3 p, float r, float h) {
+    vec2 d = abs(vec2(length(p.xz), p.y)) - vec2(r, h);
+    return min(max(d.x, d.y), 0.0) + length(max(d, 0.0));
+  }
+
+  float sdEllipsoid(vec3 p, vec3 r) {
+    float k0 = length(p / r);
+    float k1 = length(p / (r * r));
+    return k0 * (k0 - 1.0) / k1;
+  }
+
+  // ── Shape: Head ─────────────────────────────────────────────────
+  float sdHead(vec3 p) {
+    float s = 1.3;
+    vec3 q = p / s;
+
+    vec3 qC = q - vec3(0.0, 0.25, 0.0);
+    float cranium = sdEllipsoid(qC, vec3(0.92, 1.05, 0.88));
+
+    vec3 qJ = q - vec3(0.0, -0.58, 0.06);
+    float jaw = sdEllipsoid(qJ, vec3(0.72, 0.58, 0.68));
+
+    float neck = sdCylinder(q - vec3(0.0, -1.32, 0.0), 0.26, 0.32);
+
+    float head = opSmoothUnion(cranium, jaw, 0.18);
+    return opSmoothUnion(head, neck, 0.1) * s;
+  }
+
   void main() {
     float speed = uBaseSpeed * (0.6 + aSpeedJitter * 0.8);
     float yRaw = mod(aPhaseOffset - uTime * speed, uLoopH) - uLoopH * 0.5;
 
     vec3 worldPos = vec3(aColX, yRaw, aColZ);
 
+    // ── SDF surface projection ───────────────────────────────────
+    float eps = 0.04;
+    float d   = sdHead(worldPos);
+
+    vec3 grad = normalize(vec3(
+      sdHead(worldPos + vec3(eps, 0.0, 0.0)) - sdHead(worldPos - vec3(eps, 0.0, 0.0)),
+      sdHead(worldPos + vec3(0.0, eps, 0.0)) - sdHead(worldPos - vec3(0.0, eps, 0.0)),
+      sdHead(worldPos + vec3(0.0, 0.0, eps)) - sdHead(worldPos - vec3(0.0, 0.0, eps))
+    ));
+
     float topFade = smoothstep(uLoopH * 0.5,  5.5, yRaw);
     float botFade = smoothstep(-uLoopH * 0.5, -5.5, yRaw);
 
     vCharIndex  = aCharIndex;
+
+    // Default brightness for free-falling particles
     vBrightness = 0.35;
+
+    float surfaceThreshold = 0.25;
+    if (d < surfaceThreshold) {
+      worldPos    = worldPos - grad * (d - 0.05);
+      vBrightness = mix(0.35, 1.0, smoothstep(surfaceThreshold, 0.0, d));
+    }
+
     vAlpha      = topFade * botFade;
 
     gl_Position  = projectionMatrix * modelViewMatrix * vec4(worldPos, 1.0);
