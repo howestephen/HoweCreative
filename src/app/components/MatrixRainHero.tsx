@@ -78,27 +78,30 @@ const vertexShader = /* glsl */`
   attribute float aPhaseOffset;
 
   uniform float uTime;
+  uniform float uBaseSpeed;
+  uniform float uLoopH;
+  uniform float uPixelRatio;
 
   varying float vCharIndex;
   varying float vBrightness;
   varying float vAlpha;
 
   void main() {
-    float speed = 1.4 * (0.6 + aSpeedJitter * 0.8);
-    float yRaw = mod(aPhaseOffset - uTime * speed, 14.0) - 7.0;
+    float speed = uBaseSpeed * (0.6 + aSpeedJitter * 0.8);
+    float yRaw = mod(aPhaseOffset - uTime * speed, uLoopH) - uLoopH * 0.5;
 
     vec3 worldPos = vec3(aColX, yRaw, aColZ);
 
-    float fadeEdge = 1.5;
-    float topFade = smoothstep(7.0,  5.5, yRaw);
-    float botFade = smoothstep(-7.0, -5.5, yRaw);
+    float topFade = smoothstep(uLoopH * 0.5,  5.5, yRaw);
+    float botFade = smoothstep(-uLoopH * 0.5, -5.5, yRaw);
 
     vCharIndex  = aCharIndex;
     vBrightness = 0.35;
     vAlpha      = topFade * botFade;
 
     gl_Position  = projectionMatrix * modelViewMatrix * vec4(worldPos, 1.0);
-    gl_PointSize = 10.0;
+    float dist = length((modelViewMatrix * vec4(worldPos, 1.0)).xyz);
+    gl_PointSize = (380.0 / dist) * uPixelRatio;
   }
 `
 
@@ -149,8 +152,11 @@ function RainParticles() {
   }, [])
 
   const uniforms = useMemo(() => ({
-    uTime:      { value: 0 },
-    uCharAtlas: { value: atlas },
+    uTime:       { value: 0 },
+    uCharAtlas:  { value: atlas },
+    uBaseSpeed:  { value: BASE_SPEED },
+    uLoopH:      { value: LOOP_H },
+    uPixelRatio: { value: window.devicePixelRatio },
   }), [atlas])
 
   useFrame((state) => {
