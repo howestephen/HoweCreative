@@ -1,7 +1,7 @@
-import { useRef, useMemo } from 'react'
+import { useRef, useMemo, useState } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
-import { motion } from 'motion/react'
+import { AnimatePresence, motion } from 'motion/react'
 import { siteProfile } from '../data/portfolio'
 import { Figma, Palette, Film, Box, Code, Zap } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
@@ -69,6 +69,12 @@ const PARTICLE_COUNT = 4000
 const SPREAD        = 4.5    // X/Z extent of the rain field
 const LOOP_H        = 14.0   // fall loop height
 const BASE_SPEED    = 1.4    // units/second baseline
+
+const HOLD_HEAD  = 8    // seconds to hold on head
+const HOLD_SKILL = 5    // seconds to hold on each skill shape
+const MORPH_DUR  = 3    // seconds per transition
+// Shape sequence: head(0) → gizmo(1) → figma(2) → brush(3) → note(4) → brain(5) → brackets(6) → head(0) ...
+const SEQUENCE   = [0, 1, 2, 3, 4, 5, 6]
 
 const vertexShader = /* glsl */`
   attribute float aColX;
@@ -322,7 +328,7 @@ const fragmentShader = /* glsl */`
   }
 `
 
-function RainParticles() {
+function RainParticles({ onSkillChange }: { onSkillChange: (label: string) => void }) {
   const materialRef = useRef<THREE.ShaderMaterial>(null)
   const atlas       = useMemo(() => buildCharAtlas(), [])
 
@@ -356,9 +362,48 @@ function RainParticles() {
     uMorphT:     { value: 0.0 },
   }), [atlas])
 
-  useFrame((state) => {
-    if (materialRef.current) {
-      materialRef.current.uniforms.uTime.value = state.clock.getElapsedTime()
+  const seqIndexRef    = useRef(0)
+  const phaseRef       = useRef<'hold' | 'morph'>('hold')
+  const phaseTimerRef  = useRef(0)
+
+  useFrame((state, delta) => {
+    const mat = materialRef.current
+    if (!mat) return
+
+    mat.uniforms.uTime.value = state.clock.getElapsedTime()
+
+    phaseTimerRef.current += delta
+
+    if (phaseRef.current === 'hold') {
+      const holdTime = seqIndexRef.current === 0 ? HOLD_HEAD : HOLD_SKILL
+      if (phaseTimerRef.current >= holdTime) {
+        // Begin morphing to next shape
+        const nextIdx = (seqIndexRef.current + 1) % SEQUENCE.length
+        mat.uniforms.uShapeA.value = SEQUENCE[seqIndexRef.current]
+        mat.uniforms.uShapeB.value = SEQUENCE[nextIdx]
+        mat.uniforms.uMorphT.value = 0
+        phaseRef.current   = 'morph'
+        phaseTimerRef.current = 0
+      }
+    } else {
+      const t = Math.min(phaseTimerRef.current / MORPH_DUR, 1)
+      // Ease in-out cubic
+      const eased = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2
+      mat.uniforms.uMorphT.value = eased
+
+      if (phaseTimerRef.current >= MORPH_DUR) {
+        // Settle on new shape
+        seqIndexRef.current = (seqIndexRef.current + 1) % SEQUENCE.length
+        const currentId = SEQUENCE[seqIndexRef.current]
+        mat.uniforms.uShapeA.value = currentId
+        mat.uniforms.uShapeB.value = currentId
+        mat.uniforms.uMorphT.value = 0
+        phaseRef.current  = 'hold'
+        phaseTimerRef.current = 0
+        // Notify parent of current skill label
+        const skill = SKILLS[currentId]
+        if (skill) onSkillChange(skill.label)
+      }
     }
   })
 
@@ -387,12 +432,14 @@ function RainParticles() {
 
 // ── Main export ──────────────────────────────────────────────────
 export function MatrixRainHero() {
+  const [activeSkill, setActiveSkill] = useState<string>('')
+
   return (
     <div className="relative w-full h-screen flex items-center justify-center overflow-hidden bg-black">
       {/* Three.js layer */}
       <div className="absolute inset-0 z-0">
         <Canvas camera={{ position: [0, 0, 6], fov: 50 }}>
-          <RainParticles />
+          <RainParticles onSkillChange={setActiveSkill} />
         </Canvas>
       </div>
 
@@ -419,6 +466,22 @@ export function MatrixRainHero() {
           </p>
         </motion.div>
       </div>
+
+      {/* Skill label — appears below text during skill shape phases */}
+      <AnimatePresence>
+        {activeSkill && activeSkill !== 'Head' && (
+          <motion.div
+            key={activeSkill}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.6 }}
+            className="absolute bottom-32 left-1/2 -translate-x-1/2 z-20 pointer-events-none font-mono text-xs uppercase tracking-[0.4em] text-[#ff003c] opacity-70"
+          >
+            {activeSkill}
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Scroll indicator */}
       <motion.div
