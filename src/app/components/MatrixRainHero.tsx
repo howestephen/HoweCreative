@@ -27,6 +27,12 @@ interface SkillEntry {
   shapeId: number
 }
 
+interface MorphState {
+  shapeA: number
+  shapeB: number
+  morphT: number
+}
+
 const SKILLS: SkillEntry[] = [
   { label: 'Head', shapeId: 0 },
   { label: '3D Design', shapeId: 1 },
@@ -36,6 +42,9 @@ const SKILLS: SkillEntry[] = [
   { label: 'AI Workflows', shapeId: 5 },
   { label: 'Frontend Dev', shapeId: 6 },
 ]
+
+const WIRE_COLOR = new THREE.Color('#fff4f7')
+const WIRE_MORPH_COLOR = new THREE.Color('#ff335c')
 
 // ── Character atlas ──────────────────────────────────────────────
 // 512×512 canvas, 8×8 grid of 64 cells (64px each)
@@ -477,12 +486,267 @@ const BackgroundRain = React.memo(function BackgroundRain({
   )
 })
 
+function createWireMaterial(color: THREE.Color, opacity = 0): THREE.MeshBasicMaterial {
+  return new THREE.MeshBasicMaterial({
+    color,
+    wireframe: true,
+    transparent: true,
+    opacity,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending,
+    toneMapped: false,
+  })
+}
+
+function addWireMesh(
+  group: THREE.Group,
+  geometry: THREE.BufferGeometry,
+  material: THREE.MeshBasicMaterial,
+  options?: {
+    position?: [number, number, number]
+    rotation?: [number, number, number]
+    scale?: [number, number, number]
+  },
+) {
+  const mesh = new THREE.Mesh(geometry, material)
+  if (options?.position) mesh.position.set(...options.position)
+  if (options?.rotation) mesh.rotation.set(...options.rotation)
+  if (options?.scale) mesh.scale.set(...options.scale)
+  group.add(mesh)
+}
+
+function createWireShape(id: number, material: THREE.MeshBasicMaterial): THREE.Group {
+  const group = new THREE.Group()
+
+  if (id === 0) {
+    addWireMesh(group, new THREE.SphereGeometry(1, 18, 16), material, {
+      position: [0, 0.34, 0],
+      scale: [0.92, 1.05, 0.88],
+    })
+    addWireMesh(group, new THREE.SphereGeometry(1, 16, 14), material, {
+      position: [0, -0.58, 0.06],
+      scale: [0.72, 0.58, 0.68],
+    })
+    addWireMesh(group, new THREE.CylinderGeometry(0.26, 0.26, 0.64, 14, 1, true), material, {
+      position: [0, -1.32, 0],
+    })
+    group.scale.setScalar(1.3)
+    return group
+  }
+
+  if (id === 1) {
+    group.rotation.y = 0.44
+    addWireMesh(group, new THREE.CylinderGeometry(0.07, 0.07, 1.0, 12, 1, true), material, {
+      position: [0.5, 0, 0],
+      rotation: [0, 0, Math.PI / 2],
+    })
+    addWireMesh(group, new THREE.CylinderGeometry(0.07, 0.07, 1.0, 12, 1, true), material, {
+      position: [0, 0.5, 0],
+    })
+    addWireMesh(group, new THREE.CylinderGeometry(0.07, 0.07, 1.0, 12, 1, true), material, {
+      position: [0, 0, 0.5],
+      rotation: [Math.PI / 2, 0, 0],
+    })
+    addWireMesh(group, new THREE.ConeGeometry(0.16, 0.28, 12, 1, true), material, {
+      position: [1.14, 0, 0],
+      rotation: [0, 0, -Math.PI / 2],
+    })
+    addWireMesh(group, new THREE.ConeGeometry(0.16, 0.28, 12, 1, true), material, {
+      position: [0, 1.14, 0],
+    })
+    addWireMesh(group, new THREE.ConeGeometry(0.16, 0.28, 12, 1, true), material, {
+      position: [0, 0, 1.14],
+      rotation: [Math.PI / 2, 0, 0],
+    })
+    addWireMesh(group, new THREE.SphereGeometry(0.13, 10, 10), material)
+    group.scale.setScalar(1.1)
+    return group
+  }
+
+  if (id === 2) {
+    ;[
+      [-0.5, 0.85, 0],
+      [-0.5, 0, 0],
+      [-0.5, -0.85, 0],
+      [0.5, 0, 0],
+    ].forEach((position) => {
+      addWireMesh(group, new THREE.CylinderGeometry(0.5, 0.5, 0.3, 18, 1, true), material, {
+        position: position as [number, number, number],
+      })
+    })
+    addWireMesh(group, new THREE.BoxGeometry(1, 0.84, 0.3), material, {
+      position: [0, -0.85, 0],
+    })
+    group.scale.setScalar(0.9)
+    return group
+  }
+
+  if (id === 3) {
+    addWireMesh(group, new THREE.CylinderGeometry(0.12, 0.12, 2.2, 14, 1, true), material, {
+      position: [0, 0.7, 0],
+    })
+    addWireMesh(group, new THREE.CylinderGeometry(0.18, 0.18, 0.4, 14, 1, true), material, {
+      position: [0, -0.55, 0],
+    })
+    addWireMesh(group, new THREE.ConeGeometry(0.2, 0.85, 14, 1, true), material, {
+      position: [0, -1.16, 0],
+      rotation: [Math.PI, 0, 0],
+      scale: [0.75, 1, 0.75],
+    })
+    group.scale.setScalar(0.85)
+    return group
+  }
+
+  if (id === 4) {
+    addWireMesh(group, new THREE.SphereGeometry(0.34, 16, 12), material, {
+      position: [-0.3, -1.0, 0],
+      scale: [1.2, 0.8, 0.7],
+      rotation: [0, 0, 0.35],
+    })
+    addWireMesh(group, new THREE.CylinderGeometry(0.07, 0.07, 2.08, 12, 1, true), material, {
+      position: [0.12, 0.16, 0],
+    })
+    addWireMesh(group, new THREE.CylinderGeometry(0.05, 0.05, 0.82, 12, 1, true), material, {
+      position: [0.42, 0.96, 0],
+      rotation: [0, 0, -0.95],
+    })
+    addWireMesh(group, new THREE.CylinderGeometry(0.04, 0.04, 0.55, 12, 1, true), material, {
+      position: [0.7, 0.5, 0],
+      rotation: [0, 0, -0.25],
+    })
+    group.scale.setScalar(0.9)
+    return group
+  }
+
+  if (id === 5) {
+    addWireMesh(group, new THREE.IcosahedronGeometry(1, 3), material, {
+      scale: [1, 0.85, 0.92],
+    })
+    addWireMesh(group, new THREE.SphereGeometry(0.4, 14, 12), material, {
+      position: [0, -0.72, -0.58],
+      scale: [1.1, 0.8, 0.95],
+    })
+    group.scale.setScalar(1.18)
+    return group
+  }
+
+  addWireMesh(group, new THREE.BoxGeometry(0.76, 0.1, 0.15), material, {
+    position: [-1.0, 0.5, 0],
+    rotation: [0, 0, -0.54],
+  })
+  addWireMesh(group, new THREE.BoxGeometry(0.76, 0.1, 0.15), material, {
+    position: [-1.0, -0.5, 0],
+    rotation: [0, 0, 0.54],
+  })
+  addWireMesh(group, new THREE.BoxGeometry(0.12, 1.7, 0.15), material, {
+    rotation: [0, 0, -0.35],
+  })
+  addWireMesh(group, new THREE.BoxGeometry(0.76, 0.1, 0.15), material, {
+    position: [1.0, 0.5, 0],
+    rotation: [0, 0, 0.54],
+  })
+  addWireMesh(group, new THREE.BoxGeometry(0.76, 0.1, 0.15), material, {
+    position: [1.0, -0.5, 0],
+    rotation: [0, 0, -0.54],
+  })
+  group.scale.setScalar(0.9)
+  return group
+}
+
+const WireframeShape = React.memo(function WireframeShape({
+  morphStateRef,
+}: {
+  morphStateRef: React.MutableRefObject<MorphState>
+}) {
+  const rootRef = useRef<THREE.Group>(null)
+  const shapeGroups = useMemo(() => {
+    return SEQUENCE.map((shapeId) => {
+      const group = new THREE.Group()
+      const primary = createWireMaterial(WIRE_COLOR, 0)
+      const morph = createWireMaterial(WIRE_MORPH_COLOR, 0)
+
+      const primaryShape = createWireShape(shapeId, primary)
+      const morphShape = createWireShape(shapeId, morph)
+      morphShape.scale.multiplyScalar(1.015)
+
+      group.add(primaryShape)
+      group.add(morphShape)
+      group.userData.materials = [primary, morph]
+      group.visible = false
+      return group
+    })
+  }, [])
+
+  useEffect(() => {
+    return () => {
+      shapeGroups.forEach((group) => {
+        group.traverse((child) => {
+          const mesh = child as THREE.Mesh
+          if (mesh.geometry) mesh.geometry.dispose()
+          if (Array.isArray(mesh.material)) {
+            mesh.material.forEach((material) => material.dispose())
+          } else if (mesh.material) {
+            mesh.material.dispose()
+          }
+        })
+      })
+    }
+  }, [shapeGroups])
+
+  useFrame(({ clock }) => {
+    const root = rootRef.current
+    if (!root) return
+
+    const { shapeA, shapeB, morphT } = morphStateRef.current
+    const wobble = Math.sin(clock.getElapsedTime() * 0.55) * 0.06
+    root.rotation.y = clock.getElapsedTime() * 0.16
+    root.rotation.x = wobble
+    root.position.y = Math.sin(clock.getElapsedTime() * 0.8) * 0.08
+
+    shapeGroups.forEach((group, index) => {
+      const [primary, morph] = group.userData.materials as THREE.MeshBasicMaterial[]
+      group.visible = false
+      primary.opacity = 0
+      morph.opacity = 0
+
+      if (shapeA === shapeB && index === shapeA) {
+        group.visible = true
+        primary.opacity = 0.62
+        morph.opacity = 0.16
+        return
+      }
+
+      if (index === shapeA) {
+        group.visible = true
+        primary.opacity = (1 - morphT) * 0.62
+        morph.opacity = (1 - morphT) * 0.14
+      }
+
+      if (index === shapeB) {
+        group.visible = true
+        primary.opacity = Math.max(primary.opacity, morphT * 0.36)
+        morph.opacity = Math.max(morph.opacity, morphT * 0.34)
+      }
+    })
+  })
+
+  return (
+    <group ref={rootRef} renderOrder={2}>
+      {shapeGroups.map((group, index) => (
+        <primitive key={index} object={group} />
+      ))}
+    </group>
+  )
+})
+
 const ForegroundShape = React.memo(function ForegroundShape({
   atlas,
   onSkillChange,
+  morphStateRef,
 }: {
   atlas: THREE.CanvasTexture
   onSkillChange: (label: string) => void
+  morphStateRef: React.MutableRefObject<MorphState>
 }) {
   const matRef = useRef<THREE.ShaderMaterial>(null)
   const seqIndexRef = useRef(0)
@@ -561,6 +825,10 @@ const ForegroundShape = React.memo(function ForegroundShape({
         if (skill) onSkillChange(skill.label)
       }
     }
+
+    morphStateRef.current.shapeA = mat.uniforms.uShapeA.value
+    morphStateRef.current.shapeB = mat.uniforms.uShapeB.value
+    morphStateRef.current.morphT = mat.uniforms.uMorphT.value
   })
 
   return (
@@ -589,6 +857,7 @@ const ForegroundShape = React.memo(function ForegroundShape({
 export function MatrixRainHero() {
   const [activeSkill, setActiveSkill] = useState<string>('')
   const atlas = useMemo(() => buildCharAtlas(), [])
+  const morphStateRef = useRef<MorphState>({ shapeA: 0, shapeB: 0, morphT: 0 })
 
   useEffect(() => {
     return () => {
@@ -601,7 +870,10 @@ export function MatrixRainHero() {
       <div className="absolute inset-0 z-0">
         <Canvas camera={{ position: [0, 0, 6], fov: 50 }}>
           <BackgroundRain atlas={atlas} />
-          <ForegroundShape atlas={atlas} onSkillChange={setActiveSkill} />
+          <group position={[0, 1.65, 0]}>
+            <WireframeShape morphStateRef={morphStateRef} />
+            <ForegroundShape atlas={atlas} onSkillChange={setActiveSkill} morphStateRef={morphStateRef} />
+          </group>
         </Canvas>
       </div>
 
@@ -613,11 +885,12 @@ export function MatrixRainHero() {
         }}
       />
 
-      <div className="pointer-events-none relative z-20 max-w-5xl px-6 text-center">
+      <div className="pointer-events-none relative z-20 flex w-full justify-center px-6 pt-[52vh] md:pt-[56vh] lg:pt-[58vh]">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.5 }}
+          className="max-w-5xl text-center"
         >
           <div className="mb-4 font-mono uppercase tracking-[0.3em] text-[#ff003c] opacity-70">
             {siteProfile.role}
