@@ -65,7 +65,7 @@ const SKILLS: SkillEntry[] = [
   { label: 'Frontend Dev',     shapeId: 6, icon: Code },
 ]
 
-const PARTICLE_COUNT = 4000
+const PARTICLE_COUNT = 5000
 const SPREAD        = 4.5    // X/Z extent of the rain field
 const LOOP_H        = 14.0   // fall loop height
 const BASE_SPEED    = 1.4    // units/second baseline
@@ -154,16 +154,18 @@ const vertexShader = /* glsl */`
   float sdGizmo(vec3 p) {
     float s    = 1.1;
     vec3  q    = p / s;
+    float r0 = 0.44;  // ~25 degrees
+    vec3 qr  = vec3(q.x * cos(r0) - q.z * sin(r0), q.y, q.x * sin(r0) + q.z * cos(r0));
     float shaft = 0.07;
     float tipR  = 0.16;
     float tipH  = 0.28;
-    float ax   = sdCapsule(q, vec3(0.0, 0.0, 0.0), vec3(1.0, 0.0, 0.0), shaft);
-    float ay   = sdCapsule(q, vec3(0.0, 0.0, 0.0), vec3(0.0, 1.0, 0.0), shaft);
-    float az   = sdCapsule(q, vec3(0.0, 0.0, 0.0), vec3(0.0, 0.0, 1.0), shaft);
-    float tx   = sdCapsule(q, vec3(1.0, 0.0, 0.0), vec3(1.0 + tipH, 0.0, 0.0), tipR);
-    float ty   = sdCapsule(q, vec3(0.0, 1.0, 0.0), vec3(0.0, 1.0 + tipH, 0.0), tipR);
-    float tz   = sdCapsule(q, vec3(0.0, 0.0, 1.0), vec3(0.0, 0.0, 1.0 + tipH), tipR);
-    float orig = sdSphere(q, 0.13);
+    float ax   = sdCapsule(qr, vec3(0.0, 0.0, 0.0), vec3(1.0, 0.0, 0.0), shaft);
+    float ay   = sdCapsule(qr, vec3(0.0, 0.0, 0.0), vec3(0.0, 1.0, 0.0), shaft);
+    float az   = sdCapsule(qr, vec3(0.0, 0.0, 0.0), vec3(0.0, 0.0, 1.0), shaft);
+    float tx   = sdCapsule(qr, vec3(1.0, 0.0, 0.0), vec3(1.0 + tipH, 0.0, 0.0), tipR);
+    float ty   = sdCapsule(qr, vec3(0.0, 1.0, 0.0), vec3(0.0, 1.0 + tipH, 0.0), tipR);
+    float tz   = sdCapsule(qr, vec3(0.0, 0.0, 1.0), vec3(0.0, 0.0, 1.0 + tipH), tipR);
+    float orig = sdSphere(qr, 0.13);
     float shafts = min(min(ax, ay), az);
     float tips   = min(min(tx, ty), tz);
     return min(min(shafts, tips), orig) * s;
@@ -342,8 +344,12 @@ function RainParticles({ onSkillChange }: { onSkillChange: (label: string) => vo
     const phaseOffset  = new Float32Array(N)
 
     for (let i = 0; i < N; i++) {
-      colX[i]        = (Math.random() - 0.5) * SPREAD * 2
-      colZ[i]        = (Math.random() - 0.5) * SPREAD * 2
+      const gridCols  = Math.ceil(Math.sqrt(PARTICLE_COUNT))
+      const gridSpacing = (SPREAD * 2) / gridCols
+      const gx = i % gridCols
+      const gz = Math.floor(i / gridCols) % gridCols
+      colX[i] = -SPREAD + gx * gridSpacing + (Math.random() - 0.5) * gridSpacing * 0.7
+      colZ[i] = -SPREAD + gz * gridSpacing + (Math.random() - 0.5) * gridSpacing * 0.7
       speedJitter[i] = Math.random()
       charIndex[i]   = Math.floor(Math.random() * 64)
       phaseOffset[i] = Math.random() * LOOP_H
@@ -442,6 +448,14 @@ export function MatrixRainHero() {
           <RainParticles onSkillChange={setActiveSkill} />
         </Canvas>
       </div>
+
+      {/* Scan lines — subtle, matches site aesthetic */}
+      <div
+        className="absolute inset-0 pointer-events-none z-10 opacity-[0.04]"
+        style={{
+          backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #ff003c 2px, #ff003c 4px)',
+        }}
+      />
 
       {/* Text overlay — copied verbatim from CyberHero */}
       <div className="relative z-20 text-center px-6 max-w-5xl pointer-events-none">
