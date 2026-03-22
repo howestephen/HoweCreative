@@ -141,6 +141,101 @@ const vertexShader = /* glsl */`
     return opSmoothUnion(head, neck, 0.1) * s;
   }
 
+  // ── Shape: Gizmo (C4D-style 3-axis transform handle) ───────────
+  float sdGizmo(vec3 p) {
+    float s    = 1.1;
+    vec3  q    = p / s;
+    float shaft = 0.07;
+    float tipR  = 0.16;
+    float tipH  = 0.28;
+    float ax   = sdCapsule(q, vec3(0.0, 0.0, 0.0), vec3(1.0, 0.0, 0.0), shaft);
+    float ay   = sdCapsule(q, vec3(0.0, 0.0, 0.0), vec3(0.0, 1.0, 0.0), shaft);
+    float az   = sdCapsule(q, vec3(0.0, 0.0, 0.0), vec3(0.0, 0.0, 1.0), shaft);
+    float tx   = sdCapsule(q, vec3(1.0, 0.0, 0.0), vec3(1.0 + tipH, 0.0, 0.0), tipR);
+    float ty   = sdCapsule(q, vec3(0.0, 1.0, 0.0), vec3(0.0, 1.0 + tipH, 0.0), tipR);
+    float tz   = sdCapsule(q, vec3(0.0, 0.0, 1.0), vec3(0.0, 0.0, 1.0 + tipH), tipR);
+    float orig = sdSphere(q, 0.13);
+    float shafts = min(min(ax, ay), az);
+    float tips   = min(min(tx, ty), tz);
+    return min(min(shafts, tips), orig) * s;
+  }
+
+  // ── Shape: Figma logo (extruded circles + square) ──────────────
+  float sdFigma(vec3 p) {
+    float s = 0.9;
+    vec3  q = p / s;
+    float h = 0.15;
+    float r = 0.5;
+    float c1 = sdCylinder(q - vec3(-0.5,  0.85, 0.0), r, h);
+    float c2 = sdCylinder(q - vec3(-0.5,  0.0,  0.0), r, h);
+    float c3 = sdCylinder(q - vec3(-0.5, -0.85, 0.0), r, h);
+    float c4 = sdCylinder(q - vec3( 0.5,  0.0,  0.0), r, h);
+    float sq = sdBox(q - vec3(0.0, -0.85, 0.0), vec3(0.5, 0.42, h));
+    return min(min(min(c1, c2), min(c3, c4)), sq) * s;
+  }
+
+  // ── Shape: Paintbrush ──────────────────────────────────────────
+  float sdPaintbrush(vec3 p) {
+    float s       = 0.85;
+    vec3  q       = p / s;
+    float shaft   = sdCapsule(q, vec3(0.0,  1.8, 0.0), vec3(0.0, -0.4, 0.0), 0.12);
+    float ferrule = sdCylinder(q - vec3(0.0, -0.55, 0.0), 0.18, 0.2);
+    float tip1    = sdCapsule(q, vec3(0.0, -0.75, 0.0), vec3(0.0, -1.5, 0.0), 0.13);
+    float tip2    = sdCapsule(q, vec3(0.0, -1.3,  0.0), vec3(0.0, -1.6, 0.0), 0.04);
+    return min(min(shaft, ferrule), min(tip1, tip2)) * s;
+  }
+
+  // ── Shape: Musical quaver note ─────────────────────────────────
+  float sdNote(vec3 p) {
+    float s  = 0.9;
+    vec3  q  = p / s;
+    float a  = 0.35;
+    vec3  qH = q - vec3(-0.3, -1.0, 0.0);
+    vec3  qHr = vec3(
+      qH.x * cos(a) + qH.y * sin(a),
+     -qH.x * sin(a) + qH.y * cos(a),
+      qH.z
+    );
+    float head  = sdEllipsoid(qHr, vec3(0.42, 0.28, 0.22));
+    float stem  = sdCapsule(q, vec3(0.12, -0.88, 0.0), vec3(0.12,  1.2, 0.0), 0.07);
+    float flag1 = sdCapsule(q, vec3(0.12,  1.2,  0.0), vec3(0.72,  0.7, 0.0), 0.07);
+    float flag2 = sdCapsule(q, vec3(0.72,  0.7,  0.0), vec3(0.82,  0.3, 0.0), 0.06);
+    return min(min(head, stem), min(flag1, flag2)) * s;
+  }
+
+  // ── Shape: Brain (displaced hemisphere) ───────────────────────
+  float sdBrain(vec3 p) {
+    float s    = 1.25;
+    vec3  q    = p / s;
+    float base = sdEllipsoid(q, vec3(1.0, 0.85, 0.92));
+    float cut  = sdBox(q - vec3(0.0, -0.55, 0.0), vec3(1.5, 0.4, 1.5));
+    float hemi = max(base, -cut);
+    float freq = 5.5;
+    float amp  = 0.12;
+    float gyri = sin(freq * q.x) * sin(freq * q.y * 1.2) * sin(freq * q.z * 0.9) * amp;
+    float cere = sdEllipsoid(q - vec3(0.0, -0.7, -0.6), vec3(0.45, 0.32, 0.38));
+    return min(hemi + gyri, cere) * s;
+  }
+
+  // ── Shape: </> code brackets ───────────────────────────────────
+  float sdBrackets(vec3 p) {
+    float s   = 0.9;
+    vec3  q   = p / s;
+    float dep = 0.15;
+    float w   = 0.08;
+    // Left bracket '<' — two angled bars
+    float la1 = sdBox(vec3(q.x + 1.0 - q.y * 0.6, q.y - 0.5, q.z), vec3(0.38, w, dep));
+    float la2 = sdBox(vec3(q.x + 1.0 + q.y * 0.6, q.y + 0.5, q.z), vec3(0.38, w, dep));
+    float lbr = min(la1, la2);
+    // Slash '/'
+    float slash = sdBox(vec3(q.x - q.y * 0.35, q.y, q.z), vec3(w * 1.2, 0.85, dep));
+    // Right bracket '>' — mirror of left
+    float ra1 = sdBox(vec3(q.x - 1.0 + q.y * 0.6, q.y - 0.5, q.z), vec3(0.38, w, dep));
+    float ra2 = sdBox(vec3(q.x - 1.0 - q.y * 0.6, q.y + 0.5, q.z), vec3(0.38, w, dep));
+    float rbr = min(ra1, ra2);
+    return min(min(lbr, slash), rbr) * s;
+  }
+
   void main() {
     float speed = uBaseSpeed * (0.6 + aSpeedJitter * 0.8);
     float yRaw = mod(aPhaseOffset - uTime * speed, uLoopH) - uLoopH * 0.5;
