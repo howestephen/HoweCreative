@@ -1,4 +1,5 @@
-import { Canvas } from '@react-three/fiber'
+import { useRef, useMemo } from 'react'
+import { Canvas, useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 import { motion } from 'motion/react'
 import { siteProfile } from '../data/portfolio'
@@ -64,9 +65,121 @@ const SKILLS: SkillEntry[] = [
   { label: 'Frontend Dev',     shapeId: 6, icon: Code },
 ]
 
-// Placeholder — filled in Task 2
+const PARTICLE_COUNT = 4000
+const SPREAD        = 4.5    // X/Z extent of the rain field
+const LOOP_H        = 14.0   // fall loop height
+const BASE_SPEED    = 1.4    // units/second baseline
+
+const vertexShader = /* glsl */`
+  attribute float aColX;
+  attribute float aColZ;
+  attribute float aSpeedJitter;
+  attribute float aCharIndex;
+  attribute float aPhaseOffset;
+
+  uniform float uTime;
+
+  varying float vCharIndex;
+  varying float vBrightness;
+  varying float vAlpha;
+
+  void main() {
+    float speed = 1.4 * (0.6 + aSpeedJitter * 0.8);
+    float yRaw = mod(aPhaseOffset - uTime * speed, 14.0) - 7.0;
+
+    vec3 worldPos = vec3(aColX, yRaw, aColZ);
+
+    float fadeEdge = 1.5;
+    float topFade = smoothstep(7.0,  5.5, yRaw);
+    float botFade = smoothstep(-7.0, -5.5, yRaw);
+
+    vCharIndex  = aCharIndex;
+    vBrightness = 0.35;
+    vAlpha      = topFade * botFade;
+
+    gl_Position  = projectionMatrix * modelViewMatrix * vec4(worldPos, 1.0);
+    gl_PointSize = 10.0;
+  }
+`
+
+const fragmentShader = /* glsl */`
+  uniform sampler2D uCharAtlas;
+  uniform float     uTime;
+
+  varying float vCharIndex;
+  varying float vBrightness;
+  varying float vAlpha;
+
+  void main() {
+    float idx = mod(vCharIndex + floor(uTime * 1.5), 64.0);
+    float col = mod(idx, 8.0);
+    float row = floor(idx / 8.0);
+
+    vec2  uv    = (gl_PointCoord + vec2(col, row)) / 8.0;
+    float glyph = texture2D(uCharAtlas, uv).r;
+
+    if (glyph < 0.1) discard;
+
+    vec3 color = vec3(1.0, 0.0, 0.235) * vBrightness;
+    gl_FragColor = vec4(color, glyph * vAlpha);
+  }
+`
+
 function RainParticles() {
-  return null
+  const materialRef = useRef<THREE.ShaderMaterial>(null)
+  const atlas       = useMemo(() => buildCharAtlas(), [])
+
+  const attrs = useMemo(() => {
+    const N            = PARTICLE_COUNT
+    const posArr       = new Float32Array(N * 3)  // all zero — shader drives position
+    const colX         = new Float32Array(N)
+    const colZ         = new Float32Array(N)
+    const speedJitter  = new Float32Array(N)
+    const charIndex    = new Float32Array(N)
+    const phaseOffset  = new Float32Array(N)
+
+    for (let i = 0; i < N; i++) {
+      colX[i]        = (Math.random() - 0.5) * SPREAD * 2
+      colZ[i]        = (Math.random() - 0.5) * SPREAD * 2
+      speedJitter[i] = Math.random()
+      charIndex[i]   = Math.floor(Math.random() * 64)
+      phaseOffset[i] = Math.random() * LOOP_H
+    }
+    return { posArr, colX, colZ, speedJitter, charIndex, phaseOffset }
+  }, [])
+
+  const uniforms = useMemo(() => ({
+    uTime:      { value: 0 },
+    uCharAtlas: { value: atlas },
+  }), [atlas])
+
+  useFrame((state) => {
+    if (materialRef.current) {
+      materialRef.current.uniforms.uTime.value = state.clock.getElapsedTime()
+    }
+  })
+
+  return (
+    <points>
+      <bufferGeometry>
+        <bufferAttribute attach="attributes-position"     args={[attrs.posArr,      3]} />
+        <bufferAttribute attach="attributes-aColX"        args={[attrs.colX,        1]} />
+        <bufferAttribute attach="attributes-aColZ"        args={[attrs.colZ,        1]} />
+        <bufferAttribute attach="attributes-aSpeedJitter" args={[attrs.speedJitter, 1]} />
+        <bufferAttribute attach="attributes-aCharIndex"   args={[attrs.charIndex,   1]} />
+        <bufferAttribute attach="attributes-aPhaseOffset" args={[attrs.phaseOffset, 1]} />
+      </bufferGeometry>
+      <shaderMaterial
+        ref={materialRef}
+        vertexShader={vertexShader}
+        fragmentShader={fragmentShader}
+        uniforms={uniforms}
+        transparent
+        depthWrite={false}
+        blending={THREE.AdditiveBlending}
+      />
+    </points>
+  )
 }
 
 // ── Main export ──────────────────────────────────────────────────
