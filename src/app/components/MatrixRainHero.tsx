@@ -81,6 +81,9 @@ const vertexShader = /* glsl */`
   uniform float uBaseSpeed;
   uniform float uLoopH;
   uniform float uPixelRatio;
+  uniform int   uShapeA;
+  uniform int   uShapeB;
+  uniform float uMorphT;
 
   varying float vCharIndex;
   varying float vBrightness;
@@ -236,6 +239,34 @@ const vertexShader = /* glsl */`
     return min(min(lbr, slash), rbr) * s;
   }
 
+  // ── SDF dispatcher + morph blend ───────────────────────────────
+
+  float evalShape(vec3 p, int id) {
+    if (id == 0) return sdHead(p);
+    if (id == 1) return sdGizmo(p);
+    if (id == 2) return sdFigma(p);
+    if (id == 3) return sdPaintbrush(p);
+    if (id == 4) return sdNote(p);
+    if (id == 5) return sdBrain(p);
+    if (id == 6) return sdBrackets(p);
+    return 1000.0;
+  }
+
+  float blendedSDF(vec3 p) {
+    float a = evalShape(p, uShapeA);
+    float b = evalShape(p, uShapeB);
+    return mix(a, b, uMorphT);
+  }
+
+  vec3 blendedGrad(vec3 p) {
+    float e = 0.04;
+    return normalize(vec3(
+      blendedSDF(p + vec3(e, 0.0, 0.0)) - blendedSDF(p - vec3(e, 0.0, 0.0)),
+      blendedSDF(p + vec3(0.0, e, 0.0)) - blendedSDF(p - vec3(0.0, e, 0.0)),
+      blendedSDF(p + vec3(0.0, 0.0, e)) - blendedSDF(p - vec3(0.0, 0.0, e))
+    ));
+  }
+
   void main() {
     float speed = uBaseSpeed * (0.6 + aSpeedJitter * 0.8);
     float yRaw = mod(aPhaseOffset - uTime * speed, uLoopH) - uLoopH * 0.5;
@@ -243,14 +274,8 @@ const vertexShader = /* glsl */`
     vec3 worldPos = vec3(aColX, yRaw, aColZ);
 
     // ── SDF surface projection ───────────────────────────────────
-    float eps = 0.04;
-    float d   = sdHead(worldPos);
-
-    vec3 grad = normalize(vec3(
-      sdHead(worldPos + vec3(eps, 0.0, 0.0)) - sdHead(worldPos - vec3(eps, 0.0, 0.0)),
-      sdHead(worldPos + vec3(0.0, eps, 0.0)) - sdHead(worldPos - vec3(0.0, eps, 0.0)),
-      sdHead(worldPos + vec3(0.0, 0.0, eps)) - sdHead(worldPos - vec3(0.0, 0.0, eps))
-    ));
+    float d    = blendedSDF(worldPos);
+    vec3  grad = blendedGrad(worldPos);
 
     float topFade = smoothstep(uLoopH * 0.5,  5.5, yRaw);
     float botFade = smoothstep(-uLoopH * 0.5, -5.5, yRaw);
@@ -326,6 +351,9 @@ function RainParticles() {
     uBaseSpeed:  { value: BASE_SPEED },
     uLoopH:      { value: LOOP_H },
     uPixelRatio: { value: window.devicePixelRatio },
+    uShapeA:     { value: 0 },
+    uShapeB:     { value: 0 },
+    uMorphT:     { value: 0.0 },
   }), [atlas])
 
   useFrame((state) => {
