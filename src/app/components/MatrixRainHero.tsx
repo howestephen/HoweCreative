@@ -295,7 +295,7 @@ const vertexShader = /* glsl */`
 
     gl_Position  = projectionMatrix * modelViewMatrix * vec4(worldPos, 1.0);
     float dist = length((modelViewMatrix * vec4(worldPos, 1.0)).xyz);
-    gl_PointSize = (380.0 / dist) * uPixelRatio;
+    gl_PointSize = (80.0 / dist) * uPixelRatio;
   }
 `
 
