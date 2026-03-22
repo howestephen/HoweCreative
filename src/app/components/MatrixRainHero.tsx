@@ -1,10 +1,8 @@
-import { useRef, useMemo, useState } from 'react'
+import React, { useState, useRef, useMemo, useEffect } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 import { AnimatePresence, motion } from 'motion/react'
 import { siteProfile } from '../data/portfolio'
-import { Figma, Palette, Film, Box, Code, Zap } from 'lucide-react'
-import type { LucideIcon } from 'lucide-react'
 
 // ── Character atlas ──────────────────────────────────────────────
 // 512×512 canvas, 8×8 grid of 64 cells (64px each)
@@ -52,17 +50,16 @@ function buildCharAtlas(): THREE.CanvasTexture {
 interface SkillEntry {
   label: string
   shapeId: number
-  icon: LucideIcon | null
 }
 
 const SKILLS: SkillEntry[] = [
-  { label: 'Head',             shapeId: 0, icon: null },
-  { label: '3D Design',        shapeId: 1, icon: Box },
-  { label: 'Figma',            shapeId: 2, icon: Figma },
-  { label: 'Graphic Design',   shapeId: 3, icon: Palette },
-  { label: 'Motion Graphics',  shapeId: 4, icon: Film },
-  { label: 'AI Workflows',     shapeId: 5, icon: Zap },
-  { label: 'Frontend Dev',     shapeId: 6, icon: Code },
+  { label: 'Head',             shapeId: 0 },
+  { label: '3D Design',        shapeId: 1 },
+  { label: 'Figma',            shapeId: 2 },
+  { label: 'Graphic Design',   shapeId: 3 },
+  { label: 'Motion Graphics',  shapeId: 4 },
+  { label: 'AI Workflows',     shapeId: 5 },
+  { label: 'Frontend Dev',     shapeId: 6 },
 ]
 
 const PARTICLE_COUNT = 5000
@@ -115,11 +112,6 @@ const vertexShader = /* glsl */`
 
   float sdSphere(vec3 p, float r) {
     return length(p) - r;
-  }
-
-  float sdTorus(vec3 p, float R, float r) {
-    vec2 q = vec2(length(p.xz) - R, p.y);
-    return length(q) - r;
   }
 
   float sdCylinder(vec3 p, float r, float h) {
@@ -282,8 +274,7 @@ const vertexShader = /* glsl */`
     vec3 worldPos = vec3(aColX, yRaw, aColZ);
 
     // ── SDF surface projection ───────────────────────────────────
-    float d    = blendedSDF(worldPos);
-    vec3  grad = blendedGrad(worldPos);
+    float d = blendedSDF(worldPos);
 
     float topFade = smoothstep(uLoopH * 0.5,  5.5, yRaw);
     float botFade = smoothstep(-uLoopH * 0.5, -5.5, yRaw);
@@ -295,6 +286,7 @@ const vertexShader = /* glsl */`
 
     float surfaceThreshold = 0.25;
     if (d < surfaceThreshold) {
+      vec3 grad   = blendedGrad(worldPos);
       worldPos    = worldPos - grad * (d - 0.05);
       vBrightness = mix(0.35, 1.0, smoothstep(surfaceThreshold, 0.0, d));
     }
@@ -330,7 +322,7 @@ const fragmentShader = /* glsl */`
   }
 `
 
-function RainParticles({ onSkillChange }: { onSkillChange: (label: string) => void }) {
+const RainParticles = React.memo(function RainParticles({ onSkillChange }: { onSkillChange: (label: string) => void }) {
   const materialRef = useRef<THREE.ShaderMaterial>(null)
   const atlas       = useMemo(() => buildCharAtlas(), [])
 
@@ -343,9 +335,9 @@ function RainParticles({ onSkillChange }: { onSkillChange: (label: string) => vo
     const charIndex    = new Float32Array(N)
     const phaseOffset  = new Float32Array(N)
 
+    const gridCols    = Math.ceil(Math.sqrt(PARTICLE_COUNT))
+    const gridSpacing = (SPREAD * 2) / gridCols
     for (let i = 0; i < N; i++) {
-      const gridCols  = Math.ceil(Math.sqrt(PARTICLE_COUNT))
-      const gridSpacing = (SPREAD * 2) / gridCols
       const gx = i % gridCols
       const gz = Math.floor(i / gridCols) % gridCols
       colX[i] = -SPREAD + gx * gridSpacing + (Math.random() - 0.5) * gridSpacing * 0.7
@@ -367,6 +359,12 @@ function RainParticles({ onSkillChange }: { onSkillChange: (label: string) => vo
     uShapeB:     { value: 0 },
     uMorphT:     { value: 0.0 },
   }), [atlas])
+
+  useEffect(() => {
+    return () => {
+      atlas.dispose()
+    }
+  }, [atlas])
 
   const seqIndexRef    = useRef(0)
   const phaseRef       = useRef<'hold' | 'morph'>('hold')
@@ -434,7 +432,7 @@ function RainParticles({ onSkillChange }: { onSkillChange: (label: string) => vo
       />
     </points>
   )
-}
+})
 
 // ── Main export ──────────────────────────────────────────────────
 export function MatrixRainHero() {
