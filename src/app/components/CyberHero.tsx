@@ -8,6 +8,7 @@ import {
   Code,
   Zap,
 } from "lucide-react";
+import { siteProfile } from "../data/portfolio";
 
 // Skill icons data
 const skills = [
@@ -302,19 +303,18 @@ export function CyberHero() {
           transition={{ duration: 1, delay: 0.5 }}
         >
           <div className="mb-4 text-[#ff003c] uppercase tracking-[0.3em] opacity-70 font-mono">
-            Systems / Product Designer
+            {siteProfile.role}
           </div>
           <h1 className="mb-6 tracking-tight">
             <span className="block text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-2">
-              STEPHEN HOWE
+              {siteProfile.name.toUpperCase()}
             </span>
             <span className="block text-4xl md:text-6xl lg:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#ff003c] via-[#ff4466] to-[#8b0020]">
               PORTFOLIO
             </span>
           </h1>
           <p className="text-lg md:text-xl text-zinc-400 max-w-2xl mx-auto mb-12 font-mono">
-            Crafting engaging experiences in 3D, motion
-            graphics, and AI-assisted development.
+            {siteProfile.headline}
           </p>
         </motion.div>
 

@@ -1,0 +1,57 @@
+<svg width="1600" height="1000" viewBox="0 0 1600 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="1000" fill="#05070A"/>
+  <rect x="52" y="52" width="1496" height="896" rx="40" fill="url(#shell)" stroke="#FFFFFF" stroke-opacity="0.12"/>
+  <rect x="108" y="108" width="286" height="784" rx="32" fill="#101621" stroke="#FFFFFF" stroke-opacity="0.08"/>
+  <rect x="430" y="108" width="1010" height="148" rx="32" fill="#101621" stroke="#FFFFFF" stroke-opacity="0.08"/>
+  <rect x="430" y="294" width="482" height="252" rx="30" fill="#101621" stroke="#FFFFFF" stroke-opacity="0.08"/>
+  <rect x="958" y="294" width="482" height="252" rx="30" fill="#101621" stroke="#FFFFFF" stroke-opacity="0.08"/>
+  <rect x="430" y="582" width="1010" height="310" rx="32" fill="#0D131C" stroke="#FFFFFF" stroke-opacity="0.08"/>
+
+  <rect x="150" y="150" width="146" height="18" rx="9" fill="#FF5A3D"/>
+  <rect x="150" y="198" width="176" height="14" rx="7" fill="#F4F5F7" fill-opacity="0.88"/>
+  <rect x="150" y="246" width="130" height="10" rx="5" fill="#96A0AE" fill-opacity="0.62"/>
+  <rect x="150" y="322" width="202" height="54" rx="20" fill="#151E2B"/>
+  <rect x="150" y="390" width="202" height="54" rx="20" fill="#151E2B"/>
+  <rect x="150" y="458" width="202" height="54" rx="20" fill="#FF5A3D" fill-opacity="0.18" stroke="#FF5A3D" stroke-opacity="0.42"/>
+  <rect x="150" y="526" width="202" height="54" rx="20" fill="#151E2B"/>
+
+  <text x="462" y="166" fill="#FFB4A5" font-family="Avenir Next, Helvetica Neue, Arial, sans-serif" font-size="18" letter-spacing="0.22em">LEADER DASHBOARD</text>
+  <rect x="462" y="196" width="264" height="14" rx="7" fill="#F4F5F7" fill-opacity="0.88"/>
+  <rect x="1232" y="148" width="162" height="48" rx="24" fill="#151E2B"/>
+  <text x="1268" y="178" fill="#F4F5F7" font-family="Avenir Next, Helvetica Neue, Arial, sans-serif" font-size="16" letter-spacing="0.12em">SPRING TERM</text>
+
+  <rect x="462" y="332" width="184" height="82" rx="22" fill="#121A26"/>
+  <rect x="664" y="332" width="184" height="82" rx="22" fill="#121A26"/>
+  <text x="490" y="364" fill="#FFB4A5" font-family="Avenir Next, Helvetica Neue, Arial, sans-serif" font-size="12" letter-spacing="0.14em">ACTIVE BADGES</text>
+  <text x="490" y="402" fill="#F4F5F7" font-family="Avenir Next, Helvetica Neue, Arial, sans-serif" font-size="32" font-weight="600">48</text>
+  <text x="692" y="364" fill="#FFB4A5" font-family="Avenir Next, Helvetica Neue, Arial, sans-serif" font-size="12" letter-spacing="0.14em">UNITS COVERED</text>
+  <text x="692" y="402" fill="#F4F5F7" font-family="Avenir Next, Helvetica Neue, Arial, sans-serif" font-size="32" font-weight="600">12</text>
+
+  <text x="990" y="338" fill="#FFB4A5" font-family="Avenir Next, Helvetica Neue, Arial, sans-serif" font-size="14" letter-spacing="0.16em">GROUP HEALTH</text>
+  <rect x="990" y="374" width="410" height="104" rx="24" fill="#121A26"/>
+  <path d="M1018 446C1074 412 1124 390 1176 390C1232 390 1280 416 1318 442C1344 460 1368 468 1392 462" stroke="#FF5A3D" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="1182" cy="392" r="16" fill="#F4F5F7"/>
+  <circle cx="1318" cy="442" r="16" fill="#FF5A3D"/>
+
+  <text x="462" y="626" fill="#FFB4A5" font-family="Avenir Next, Helvetica Neue, Arial, sans-serif" font-size="16" letter-spacing="0.18em">BADGE PROGRESS</text>
+  <rect x="462" y="660" width="946" height="64" rx="20" fill="#121A26"/>
+  <rect x="462" y="742" width="946" height="64" rx="20" fill="#121A26"/>
+  <text x="494" y="700" fill="#F4F5F7" font-family="Avenir Next, Helvetica Neue, Arial, sans-serif" font-size="22" font-weight="600">Outdoor Skills</text>
+  <text x="494" y="782" fill="#F4F5F7" font-family="Avenir Next, Helvetica Neue, Arial, sans-serif" font-size="22" font-weight="600">Community Action</text>
+  <rect x="1064" y="682" width="238" height="10" rx="5" fill="#273140"/>
+  <rect x="1064" y="682" width="188" height="10" rx="5" fill="#FF5A3D"/>
+  <rect x="1064" y="764" width="238" height="10" rx="5" fill="#273140"/>
+  <rect x="1064" y="764" width="146" height="10" rx="5" fill="#FF5A3D"/>
+  <text x="1328" y="700" fill="#F4F5F7" font-family="Avenir Next, Helvetica Neue, Arial, sans-serif" font-size="18">79%</text>
+  <text x="1328" y="782" fill="#F4F5F7" font-family="Avenir Next, Helvetica Neue, Arial, sans-serif" font-size="18">61%</text>
+
+  <text x="108" y="930" fill="#F4F5F7" fill-opacity="0.9" font-family="Avenir Next, Helvetica Neue, Arial, sans-serif" font-size="34" letter-spacing="0.26em">LEADER DASHBOARD</text>
+  <text x="108" y="966" fill="#98A2B3" font-family="Avenir Next, Helvetica Neue, Arial, sans-serif" font-size="18" letter-spacing="0.12em">BADGER CLUB / INTERNAL COORDINATION BUILT TO LOWER ADMIN LOAD AND KEEP GROUPS ON TRACK</text>
+
+  <defs>
+    <linearGradient id="shell" x1="98" y1="82" x2="1518" y2="930" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#121722"/>
+      <stop offset="1" stop-color="#070A10"/>
+    </linearGradient>
+  </defs>
+</svg>
