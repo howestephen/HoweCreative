@@ -21,7 +21,7 @@ function buildCharAtlas(): THREE.CanvasTexture {
   ctx.fillStyle = '#000'
   ctx.fillRect(0, 0, SIZE, SIZE)
 
-  // 40 katakana + 24 ASCII
+  // 40 katakana + 24 ASCII = 64 glyphs (8×8 atlas grid)
   const chars = [
     'ア','イ','ウ','エ','オ','カ','キ','ク','ケ','コ',
     'サ','シ','ス','セ','ソ','タ','チ','ツ','テ','ト',
@@ -29,7 +29,7 @@ function buildCharAtlas(): THREE.CanvasTexture {
     'マ','ミ','ム','メ','モ','ヤ','ユ','ヨ','ラ','ル',
     '0','1','2','3','4','5','6','7',
     '!','@','#','$','%','<','>','{','}','|',
-    '/','\\','+','-','*','&','^','~',
+    '/','\\','+','-','*','&',
   ]
 
   ctx.fillStyle = '#fff'
@@ -37,7 +37,7 @@ function buildCharAtlas(): THREE.CanvasTexture {
   ctx.textAlign = 'center'
   ctx.textBaseline = 'middle'
 
-  chars.slice(0, 64).forEach((ch, i) => {
+  chars.forEach((ch, i) => {
     const col = i % GRID
     const row = Math.floor(i / GRID)
     ctx.fillText(ch, col * CELL + CELL / 2, row * CELL + CELL / 2)
