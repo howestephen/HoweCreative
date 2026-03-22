@@ -27,14 +27,14 @@ export function Layout() {
             STEPHEN<span className="text-[#ff003c]">_HOWE</span>
             <span className="ml-2 text-sm text-zinc-600">V0.2</span>
           </Link>
-          <div className="pr-14 font-mono text-[10px] uppercase tracking-[0.2em] text-zinc-600 lg:pr-0">
+          <div className="pr-28 font-mono text-[10px] uppercase tracking-[0.2em] text-zinc-600 md:pr-32">
             one_page_system
           </div>
         </div>
         <div className="absolute bottom-0 left-0 h-px w-full bg-gradient-to-r from-transparent via-[#ff003c]/50 to-transparent" />
       </header>
 
-      <main className="relative z-10 w-full pt-20 lg:pr-20">
+      <main className="relative z-10 w-full pt-20">
         <Outlet />
       </main>
 

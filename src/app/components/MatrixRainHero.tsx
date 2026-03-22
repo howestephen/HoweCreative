@@ -25,6 +25,14 @@ const HERO_MODEL_SEQUENCE = [
   { label: "Audio Production", src: "/models/hero-wire/headphones.glb" },
   { label: "3D Modelling", src: "/models/hero-wire/light-cube.glb" },
 ] as const;
+const HERO_MODEL_TRANSFORMS = [
+  { rotation: [-0.12, 0, 0] as [number, number, number] },
+  { rotation: [0, Math.PI, 0] as [number, number, number] },
+  { rotation: [0, Math.PI / 2, 0] as [number, number, number] },
+  { rotation: [0, Math.PI / 2, 0] as [number, number, number] },
+  { rotation: [0, Math.PI / 2, 0] as [number, number, number] },
+  { rotation: [0, 0, 0] as [number, number, number] },
+] as const;
 
 function buildCharAtlas(): THREE.CanvasTexture {
   const grid = 8;
@@ -355,6 +363,16 @@ function buildMorphTarget(scene: THREE.Object3D) {
   return resampleLineSegments(normalized, MORPH_SEGMENTS);
 }
 
+function buildOrientedMorphTarget(scene: THREE.Group, modelIndex: number) {
+  const wrapper = new THREE.Group();
+  const orientedScene = scene.clone(true);
+  const transform = HERO_MODEL_TRANSFORMS[modelIndex];
+
+  wrapper.rotation.set(...transform.rotation);
+  wrapper.add(orientedScene);
+  return buildMorphTarget(wrapper);
+}
+
 function buildLineColors(vertexCount: number) {
   const colors = new Float32Array(vertexCount * 3);
 
@@ -392,7 +410,7 @@ const MorphingWireHero = React.memo(function MorphingWireHero({
   ) as Array<{ scene: THREE.Group }>;
 
   const targets = useMemo(
-    () => gltfs.map((gltf) => buildMorphTarget(gltf.scene.clone(true))),
+    () => gltfs.map((gltf, index) => buildOrientedMorphTarget(gltf.scene, index)),
     [gltfs],
   );
 
