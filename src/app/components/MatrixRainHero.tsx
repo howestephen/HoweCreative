@@ -1,9 +1,9 @@
-import { useRef, useMemo } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
+import { Canvas } from '@react-three/fiber'
 import * as THREE from 'three'
 import { motion } from 'motion/react'
 import { siteProfile } from '../data/portfolio'
 import { Figma, Palette, Film, Box, Code, Zap } from 'lucide-react'
+import type { LucideIcon } from 'lucide-react'
 
 // ── Character atlas ──────────────────────────────────────────────
 // 512×512 canvas, 8×8 grid of 64 cells (64px each)
@@ -21,7 +21,7 @@ function buildCharAtlas(): THREE.CanvasTexture {
   ctx.fillStyle = '#000'
   ctx.fillRect(0, 0, SIZE, SIZE)
 
-  // 40 katakana + 24 ASCII = 64 glyphs (8×8 atlas grid)
+  // 40 katakana + 8 digits + 16 symbols = 64 glyphs (8×8 atlas grid)
   const chars = [
     'ア','イ','ウ','エ','オ','カ','キ','ク','ケ','コ',
     'サ','シ','ス','セ','ソ','タ','チ','ツ','テ','ト',
@@ -44,12 +44,17 @@ function buildCharAtlas(): THREE.CanvasTexture {
   })
 
   const tex = new THREE.CanvasTexture(canvas)
-  tex.needsUpdate = true
   return tex
 }
 
 // ── Skill metadata ───────────────────────────────────────────────
-const SKILLS = [
+interface SkillEntry {
+  label: string
+  shapeId: number
+  icon: LucideIcon | null
+}
+
+const SKILLS: SkillEntry[] = [
   { label: 'Head',             shapeId: 0, icon: null },
   { label: '3D Design',        shapeId: 1, icon: Box },
   { label: 'Figma',            shapeId: 2, icon: Figma },
