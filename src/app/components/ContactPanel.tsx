@@ -1,9 +1,11 @@
 import { motion } from "motion/react";
 import { Send, TerminalSquare } from "lucide-react";
 
+import { contactContent } from "../data/portfolio";
+
 export function ContactPanel() {
   return (
-    <section id="contact" className="relative border-t border-[#ff003c]/20 px-6 py-18 md:py-20">
+    <section id="contact" className="relative border-t border-[#ff003c]/20 px-6 py-24 md:py-28">
       <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.8fr_1.2fr]">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -13,16 +15,12 @@ export function ContactPanel() {
           className="max-w-xl"
         >
           <div className="mb-4 font-mono text-[10px] uppercase tracking-[0.22em] text-[#ff003c]">
-            Contact Form
+            {contactContent.eyebrow}
           </div>
           <h2 className="text-4xl font-semibold tracking-tight text-white md:text-5xl">
-            Start a new file.
+            {contactContent.title}
           </h2>
-          <p className="mt-4 text-sm leading-relaxed text-zinc-400 md:text-base">
-            A placeholder front-end form for now. The visual treatment is the important part in
-            this pass: it should feel like filing a request into the same operating system as the
-            rest of the page.
-          </p>
+          <p className="mt-4 text-sm leading-relaxed text-zinc-400 md:text-base">{contactContent.description}</p>
         </motion.div>
 
         <motion.form
@@ -42,25 +40,25 @@ export function ContactPanel() {
           <div className="relative z-10 grid gap-4 md:grid-cols-2">
             <label className="block">
               <span className="mb-2 block font-mono text-[10px] uppercase tracking-[0.16em] text-zinc-500">
-                Name
+                {contactContent.fields.name}
               </span>
               <input className="w-full border border-[#ff003c]/18 bg-black/55 px-4 py-3 text-sm text-white outline-none transition-colors focus:border-[#ff003c]" />
             </label>
             <label className="block">
               <span className="mb-2 block font-mono text-[10px] uppercase tracking-[0.16em] text-zinc-500">
-                Email
+                {contactContent.fields.email}
               </span>
               <input className="w-full border border-[#ff003c]/18 bg-black/55 px-4 py-3 text-sm text-white outline-none transition-colors focus:border-[#ff003c]" />
             </label>
             <label className="block md:col-span-2">
               <span className="mb-2 block font-mono text-[10px] uppercase tracking-[0.16em] text-zinc-500">
-                Project Type
+                {contactContent.fields.projectType}
               </span>
               <input className="w-full border border-[#ff003c]/18 bg-black/55 px-4 py-3 text-sm text-white outline-none transition-colors focus:border-[#ff003c]" />
             </label>
             <label className="block md:col-span-2">
               <span className="mb-2 block font-mono text-[10px] uppercase tracking-[0.16em] text-zinc-500">
-                Brief
+                {contactContent.fields.brief}
               </span>
               <textarea
                 rows={6}
@@ -72,14 +70,14 @@ export function ContactPanel() {
           <div className="relative z-10 mt-5 flex flex-col gap-4 border-t border-[#ff003c]/15 pt-5 md:flex-row md:items-center md:justify-between">
             <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.18em] text-zinc-500">
               <TerminalSquare className="h-4 w-4 text-[#ff003c]" />
-              Form is visual only in this draft
+              {contactContent.visualOnlyLabel}
             </div>
             <button
               type="button"
               className="inline-flex items-center gap-2 border border-[#ff003c] bg-[#ff003c] px-4 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-black transition-colors hover:bg-[#ff4466]"
             >
               <Send className="h-4 w-4" />
-              Submit
+              {contactContent.submitLabel}
             </button>
           </div>
         </motion.form>

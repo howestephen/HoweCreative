@@ -1,14 +1,8 @@
-import { Activity, Database, FolderArchive, Mail, MapPin, Menu } from "lucide-react";
+import { Menu } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState } from "react";
 
-const navItems = [
-  { id: "hero", icon: MapPin, label: "Intro" },
-  { id: "case-studies", icon: Activity, label: "Case Files" },
-  { id: "tools-skills", icon: Database, label: "Tools" },
-  { id: "contact", icon: Mail, label: "Contact" },
-  { id: "archive", icon: FolderArchive, label: "Archive" },
-];
+import { navItems, navigationContent } from "../data/portfolio";
 
 function jumpToSection(sectionId: string) {
   document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -51,7 +45,7 @@ export function SideNav() {
   }, []);
 
   return (
-    <div className="fixed right-4 top-4 z-[70]">
+    <div className="relative z-[70]">
       <motion.button
         type="button"
         onClick={() => setOpen((value) => !value)}
@@ -59,7 +53,9 @@ export function SideNav() {
         whileTap={{ scale: 0.98 }}
         className="inline-flex items-center gap-3 border border-[#ff003c]/35 bg-black/82 px-4 py-3 text-[#ff003c] shadow-[0_12px_30px_rgba(0,0,0,0.28)] backdrop-blur-md"
       >
-        <span className="font-mono text-[11px] uppercase tracking-[0.3em]">Menu</span>
+        <span className="headline-font text-[11px] uppercase tracking-[0.3em]">
+          {navigationContent.menuButtonLabel}
+        </span>
         <span className="flex h-7 items-center border-l border-[#ff003c]/25 pl-3">
           <Menu className="h-4 w-4" />
         </span>
@@ -84,7 +80,7 @@ export function SideNav() {
             />
 
             <div className="relative border-b border-[#ff003c]/18 px-4 py-3 font-mono text-[10px] uppercase tracking-[0.24em] text-zinc-500">
-              Navigation Box
+              {navigationContent.panelTitle}
             </div>
 
             <div className="relative grid gap-2 p-3">
@@ -114,7 +110,7 @@ export function SideNav() {
                       </span>
                     </span>
                     <span className={`font-mono text-[10px] ${isActive ? "text-[#ff003c]" : "text-zinc-600"}`}>
-                      0{navItems.indexOf(item) + 1}
+                      {item.indexLabel}
                     </span>
                   </button>
                 );

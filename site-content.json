@@ -1,0 +1,450 @@
+{
+  "meta": {
+    "documentTitle": "HOWE_CREATIVE"
+  },
+  "profile": {
+    "displayName": "Stephen Howe",
+    "brandPrefix": "HOWE",
+    "brandSuffix": "_CREATIVE",
+    "role": "Creative Systems Designer",
+    "headline": "Designing product systems, media pipelines, and AI-assisted workflows with a UX-first approach.",
+    "summary": "A portfolio structured as an operating system rather than a gallery. Case files expose the underlying systems: product logic, media pipelines, and technical constraints that produce repeatable outputs.",
+    "navVersion": "portfolio_system_v1.2",
+    "githubUrl": "https://github.com/howestephen",
+    "repoUrl": "https://github.com/howestephen/Figmaportfolio2026"
+  },
+  "navigation": {
+    "menuButtonLabel": "Menu",
+    "panelTitle": "Navigation Box",
+    "items": [
+      { "id": "hero", "icon": "MapPin", "label": "Intro" },
+      { "id": "case-studies", "icon": "Activity", "label": "Case Files" },
+      { "id": "tools-skills", "icon": "Database", "label": "Tools" },
+      { "id": "contact", "icon": "Mail", "label": "Contact" },
+      { "id": "archive", "icon": "FolderArchive", "label": "Archive" }
+    ]
+  },
+  "hero": {
+    "scrollLabel": "Scroll",
+    "skillLabels": [
+      "Creative Systems",
+      "Design",
+      "Prototyping",
+      "Motion Graphics",
+      "3D Generalist",
+      "Development",
+      "Audio Production"
+    ]
+  },
+  "operatorProfile": {
+    "eyebrow": "Operator Profile",
+    "title": "Stephen Howe",
+    "description": "This section gives an overview of the system operator and his personal quirks.",
+    "primaryFileLabel": "File 01",
+    "primaryFileStatus": "Open",
+    "portraitFooterLeft": "Operator Self Portrait",
+    "portraitFooterRight": "GLTF Shader Imported",
+    "quickFacts": [
+      { "label": "Base", "value": "United Kingdom" },
+      { "label": "Mode", "value": "Design + Deliver" },
+      { "label": "Bias", "value": "Systems over surfaces" },
+      { "label": "Output", "value": "Products, motion, media, content, deliverables." }
+    ],
+    "notesTitle": "Notes",
+    "notesBody": "Work sits at the boundary between design and implementation. The focus is not artefacts, but the systems that generate them — interface logic, motion frameworks, and production pipelines that can scale without losing intent.",
+    "files": [
+      {
+        "fileLabel": "File 02",
+        "title": "Operator Summary",
+        "body": "Systems-focused designer working across product architecture, media pipelines, and technical prototyping. Builds repeatable frameworks for UI, motion, and AI-assisted production."
+      },
+      {
+        "fileLabel": "File 03",
+        "title": "Working Style",
+        "body": "Structured system design with iterative prototyping. Problems are reduced to inputs, constraints, and outputs, then rebuilt into reusable templates, rather than one-off solutions."
+      },
+      {
+        "fileLabel": "File 04",
+        "title": "Current Focus",
+        "body": "Media systems, AI-assisted production pipelines, interface architecture, and tools that compress the distance between idea and deployed output."
+      }
+    ]
+  },
+  "caseStudies": {
+    "eyebrow": "Selected demonstrative artefacts",
+    "title": "Recent Case Studies",
+    "description": "Each case exposes the system behind the output: inputs, constraints, pipelines, and repeatable structures.",
+    "openFileLabel": "Open File",
+    "closeLabel": "Close",
+    "sectionsLabel": "Case File Sections",
+    "metaLabels": {
+      "role": "Role",
+      "client": "Client",
+      "status": "Status"
+    },
+    "projects": [
+      {
+        "id": 1,
+        "slug": "uncx-video-system",
+        "title": "UNCX Video & 3D System",
+        "category": "Media System / Motion Pipeline",
+        "year": "2024",
+        "status": "Live",
+        "shortDescription": "A scalable video and 3D system for token launches, education, and partner content.",
+        "fullDescription": "A production system designed to generate consistent, high-frequency output across video, 3D, and motion graphics using modular assets and reusable structures.",
+        "tags": ["Cinema 4D", "After Effects", "Motion Systems", "3D"],
+        "image": "/case-studies/uncx-video-system/frame-library-2.png",
+        "media": [
+          { "type": "image", "src": "/case-studies/uncx-video-system/frame-library-2.png", "alt": "Frame library overview" }
+        ],
+        "gradient": "from-[#8b0020] to-[#ff003c]",
+        "role": "Media Systems Designer / Motion Engineer",
+        "client": "UNCX",
+        "overlaySections": [
+          {
+            "title": "Brief",
+            "body": "UNCX required a repeatable video system capable of supporting launches, explainers, and partner content without rebuilding from scratch."
+          },
+          {
+            "title": "Problem Frame",
+            "body": "Production was fragmented: inconsistent style, duplicated effort, and no shared system for assets or timelines."
+          },
+          {
+            "title": "System Design",
+            "body": "Built a modular pipeline: reusable 3D scenes, templated compositions, structured timeline blocks, and interchangeable content layers."
+          },
+          {
+            "title": "Prototype Notes",
+            "body": "Isolated repeatable patterns in camera, lighting, and transitions, then abstracted them into reusable templates."
+          },
+          {
+            "title": "Delivery",
+            "body": "Delivered as a production system including template libraries, asset structure, and defined motion language."
+          },
+          {
+            "title": "Outcome",
+            "body": "Reduced production time and enabled consistent, scalable output across campaigns."
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "slug": "badger-club",
+        "title": "Badger Club App",
+        "category": "Product System / Operational Platform",
+        "year": "2025",
+        "status": "Late Stage",
+        "shortDescription": "Badge tracking platform designed to reduce admin load and unify leader, parent, and child interactions.",
+        "fullDescription": "A multi-layer product system managing progress tracking, communication, and monetisation across distinct user roles.",
+        "tags": ["Systems Design", "React", "Supabase", "Product"],
+        "image": "/case-studies/badger-club/leader-dashboard.png",
+        "media": [
+          { "type": "image", "src": "/case-studies/badger-club/leader-dashboard.png", "alt": "Leader dashboard" }
+        ],
+        "gradient": "from-[#ff4466] to-[#4f0012]",
+        "role": "Product / Systems Designer",
+        "client": "Badger Club",
+        "overlaySections": [
+          {
+            "title": "Brief",
+            "body": "Build a badge tracking system that reduces admin overhead while supporting multiple user types."
+          },
+          {
+            "title": "Problem Frame",
+            "body": "Workflows were manual, fragmented, and unclear, placing full burden on leaders."
+          },
+          {
+            "title": "System Design",
+            "body": "Separated system into operational layers: leader management, parent engagement, and child-facing progress."
+          },
+          {
+            "title": "Prototype Notes",
+            "body": "Focused on simplifying progress visualisation and reducing cognitive load per role."
+          },
+          {
+            "title": "Delivery",
+            "body": "Implemented using Supabase backend and React-based frontend with subscription structure."
+          },
+          {
+            "title": "Outcome",
+            "body": "Reduced admin friction and created a scalable product foundation."
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "slug": "uncx-rebrand",
+        "title": "UNCX Company Rebrand",
+        "category": "Brand System / Visual Infrastructure",
+        "year": "2024",
+        "status": "Complete",
+        "shortDescription": "A structured brand system designed for consistency across product, marketing, and motion.",
+        "fullDescription": "Rebuilt UNCX branding as a system of rules and components rather than a static identity.",
+        "tags": ["Brand Systems", "Visual Design", "Direction"],
+        "image": "/case-studies/uncx-video-system/launch-system-poster.jpg",
+        "media": [
+          { "type": "image", "src": "/case-studies/uncx-video-system/launch-system-poster.jpg", "alt": "Launch system poster" }
+        ],
+        "gradient": "from-[#ffffff] to-[#780015]",
+        "role": "Brand Systems Designer",
+        "client": "UNCX",
+        "overlaySections": [
+          {
+            "title": "Brief",
+            "body": "Create a scalable brand identity to unify all outputs."
+          },
+          {
+            "title": "Problem Frame",
+            "body": "Inconsistent visuals and lack of systemised brand logic."
+          },
+          {
+            "title": "System Design",
+            "body": "Defined typography, colour logic, layout rules, and motion alignment."
+          },
+          {
+            "title": "Prototype Notes",
+            "body": "Tested across UI, motion, and marketing outputs."
+          },
+          {
+            "title": "Delivery",
+            "body": "Delivered guidelines, components, and motion references."
+          },
+          {
+            "title": "Outcome",
+            "body": "Achieved consistent output across all platforms."
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "slug": "noticia-lingo",
+        "title": "Noticia Lingo App",
+        "category": "AI Product / Content System",
+        "year": "2026",
+        "status": "Active Build",
+        "shortDescription": "Language learning system built around real-world content instead of static lessons.",
+        "fullDescription": "Transforms live content into structured learning through a repeatable ingestion and transformation pipeline.",
+        "tags": ["AI", "Product Design", "Systems"],
+        "image": "/case-studies/noticia-lingo/onboarding-screen.png",
+        "media": [
+          { "type": "image", "src": "/case-studies/noticia-lingo/onboarding-screen.png", "alt": "Onboarding screen" }
+        ],
+        "gradient": "from-[#ff003c] to-[#7a001c]",
+        "role": "Product / Systems Designer",
+        "client": "Self-initiated",
+        "overlaySections": [
+          {
+            "title": "Brief",
+            "body": "Build a learning system using real-world content."
+          },
+          {
+            "title": "Problem Frame",
+            "body": "Traditional systems are static and disengaging."
+          },
+          {
+            "title": "System Design",
+            "body": "Pipeline: ingest → transform → structure → deliver."
+          },
+          {
+            "title": "Prototype Notes",
+            "body": "Tested readability scaling and interaction models."
+          },
+          {
+            "title": "Delivery",
+            "body": "Prototype with structured reading flow and transformation logic."
+          },
+          {
+            "title": "Outcome",
+            "body": "Demonstrated scalable learning system from live content."
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "slug": "uncx-academy",
+        "title": "UNCX Academy Brand and Platform",
+        "category": "Platform System / Education Product",
+        "year": "2025",
+        "status": "Complete",
+        "shortDescription": "A structured learning platform combining content, branding, and delivery systems.",
+        "fullDescription": "Unified platform and content system for scalable education delivery.",
+        "tags": ["Platform Design", "Content Systems"],
+        "image": "/case-studies/uncx-video-system/tutorial-system-poster.jpg",
+        "media": [
+          { "type": "image", "src": "/case-studies/uncx-video-system/tutorial-system-poster.jpg", "alt": "Tutorial system poster" }
+        ],
+        "gradient": "from-[#ffa2b5] to-[#520012]",
+        "role": "Product / Media Systems Designer",
+        "client": "UNCX",
+        "overlaySections": [
+          {
+            "title": "Brief",
+            "body": "Create an education platform for DeFi users."
+          },
+          {
+            "title": "Problem Frame",
+            "body": "Content was fragmented and inconsistent."
+          },
+          {
+            "title": "System Design",
+            "body": "Built modular lessons, consistent media language, and structured progression."
+          },
+          {
+            "title": "Prototype Notes",
+            "body": "Tested pacing, navigation, and content chunking."
+          },
+          {
+            "title": "Delivery",
+            "body": "Platform structure, video system, and UI framework."
+          },
+          {
+            "title": "Outcome",
+            "body": "Enabled scalable education aligned with product and brand."
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "slug": "uncx-menu",
+        "title": "UNCX Unified Menu",
+        "category": "Interface System / Design System",
+        "year": "2025",
+        "status": "Complete",
+        "shortDescription": "A unified navigation system designed to scale across products.",
+        "fullDescription": "System-level navigation solution focusing on consistency and scalability.",
+        "tags": ["Design Systems", "Figma", "Frontend"],
+        "image": "/case-studies/badger-club/public-progress.png",
+        "media": [
+          { "type": "image", "src": "/case-studies/badger-club/public-progress.png", "alt": "Public progress view" }
+        ],
+        "gradient": "from-[#f6f3f4] to-[#ff003c]",
+        "role": "Systems Designer / Design Engineer",
+        "client": "UNCX",
+        "overlaySections": [
+          {
+            "title": "Brief",
+            "body": "Unify navigation across multiple products."
+          },
+          {
+            "title": "Problem Frame",
+            "body": "Inconsistent navigation patterns and poor scalability."
+          },
+          {
+            "title": "System Design",
+            "body": "Component-based navigation with scalable hierarchy and state logic."
+          },
+          {
+            "title": "Prototype Notes",
+            "body": "Built variable-driven Figma system and interaction states."
+          },
+          {
+            "title": "Delivery",
+            "body": "Design system and implementation-ready components."
+          },
+          {
+            "title": "Outcome",
+            "body": "Consistent navigation across products."
+          }
+        ]
+      }
+    ]
+  },
+  "toolsSkills": {
+    "eyebrow": "Tools & Skills",
+    "title": "The stack behind the systems.",
+    "description": "A working set of tools used across product design, motion, development, and AI-assisted pipelines.",
+    "items": [
+      { "name": "Figma", "icon": "Figma", "color": "#ff7262", "category": "Design" },
+      { "name": "React", "icon": "FileCode2", "color": "#61dafb", "category": "Frontend" },
+      { "name": "Cinema 4D", "icon": "Box", "color": "#011a6a", "category": "3D" },
+      { "name": "After Effects", "icon": "Film", "color": "#9999ff", "category": "Motion" },
+      { "name": "Premiere Pro", "icon": "Video", "color": "#9999ff", "category": "Video" },
+      { "name": "Supabase", "icon": "Gauge", "color": "#3ecf8e", "category": "Backend" },
+      { "name": "AI Workflows", "icon": "WandSparkles", "color": "#ff003c", "category": "AI" },
+      { "name": "Motion Systems", "icon": "Layers3", "color": "#ff7c5c", "category": "Motion" },
+      { "name": "Brand Systems", "icon": "PencilRuler", "color": "#e879f9", "category": "Brand" },
+      { "name": "Music / Audio", "icon": "Music", "color": "#38bdf8", "category": "Audio" },
+      { "name": "Product Design", "icon": "FolderKanban", "color": "#fbbf24", "category": "Product" },
+      { "name": "Production", "icon": "Clapperboard", "color": "#94a3b8", "category": "Production" }
+    ]
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "title": "Start a conversation.",
+    "description": "Available for product design, media systems, and technical prototyping engagements.",
+    "fields": {
+      "name": "Name",
+      "email": "Email",
+      "projectType": "Project Type",
+      "brief": "Brief"
+    },
+    "visualOnlyLabel": "Visual reference only — form is not wired",
+    "submitLabel": "Send"
+  },
+  "archive": {
+    "eyebrow": "Archive",
+    "title": "Prior work and experiments.",
+    "description": "A log of older projects, explorations, and experiments outside the primary case files.",
+    "openButtonLabel": "Open Archive",
+    "browserTitle": "Archive Browser",
+    "closeLabel": "Close",
+    "filterLabel": "Filter by tool",
+    "timelineLabel": "Timeline",
+    "tools": ["All", "Cinema 4D", "After Effects", "Figma", "React", "Premiere Pro"],
+    "entries": [
+      {
+        "id": 1,
+        "title": "Motion Brand Package",
+        "date": "2023-09-01",
+        "year": "2023",
+        "kind": "Motion",
+        "tools": ["After Effects", "Cinema 4D"],
+        "description": "A full motion brand package for a DeFi product launch.",
+        "preview": ""
+      },
+      {
+        "id": 2,
+        "title": "UI Component Library",
+        "date": "2023-06-01",
+        "year": "2023",
+        "kind": "Design System",
+        "tools": ["Figma"],
+        "description": "A reusable component library built for a multi-product design system.",
+        "preview": ""
+      },
+      {
+        "id": 3,
+        "title": "Product Explainer Series",
+        "date": "2023-03-01",
+        "year": "2023",
+        "kind": "Video",
+        "tools": ["After Effects", "Premiere Pro"],
+        "description": "A series of short-form explainer videos for a blockchain product.",
+        "preview": ""
+      }
+    ]
+  },
+  "footer": {
+    "quickAccessTitle": "Quick Access",
+    "quickAccessItems": [
+      { "label": "Intro", "targetId": "hero" },
+      { "label": "Case Files", "targetId": "case-studies" },
+      { "label": "Tools", "targetId": "tools-skills" },
+      { "label": "Contact", "targetId": "contact" },
+      { "label": "Archive", "targetId": "archive" }
+    ],
+    "currentStateTitle": "Current State",
+    "currentStateLines": [
+      "Available for engagements",
+      "Based in United Kingdom",
+      "Design + build focus"
+    ],
+    "copyright": "© 2026 Stephen Howe",
+    "statusLabel": "Online",
+    "iconTitles": {
+      "github": "GitHub",
+      "repo": "Repository",
+      "archive": "Archive"
+    }
+  }
+}

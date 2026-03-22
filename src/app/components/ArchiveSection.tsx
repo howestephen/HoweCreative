@@ -1,13 +1,29 @@
 import { AnimatePresence, motion } from "motion/react";
 import { FolderArchive, ScanSearch, X } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 
 import { ImageWithFallback } from "./figma/ImageWithFallback";
-import { archiveEntries, archiveTools } from "../data/portfolio";
+import { archiveContent, archiveEntries, archiveTools } from "../data/portfolio";
 
 export function ArchiveSection() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeTool, setActiveTool] = useState<(typeof archiveTools)[number]>("All");
+  const sectionRef = useRef<HTMLElement>(null);
+
+  const scrollToSection = useCallback(() => {
+    sectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, []);
+
+  const handleOpen = useCallback(() => {
+    setIsOpen(true);
+    setTimeout(scrollToSection, 0);
+  }, [scrollToSection]);
+
+  const handleClose = useCallback(() => {
+    setIsOpen(false);
+    setTimeout(scrollToSection, 280);
+  }, [scrollToSection]);
 
   const filteredEntries = useMemo(() => {
     return archiveEntries.filter((entry) =>
@@ -16,7 +32,7 @@ export function ArchiveSection() {
   }, [activeTool]);
 
   return (
-    <section id="archive" className="relative border-t border-[#ff003c]/20 px-6 py-18 md:py-20">
+    <section ref={sectionRef} id="archive" className="relative border-t border-[#ff003c]/20 px-6 py-24 md:py-28">
       <div className="mx-auto max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -27,38 +43,36 @@ export function ArchiveSection() {
         >
           <div className="max-w-3xl">
             <div className="mb-4 font-mono text-[10px] uppercase tracking-[0.22em] text-[#ff003c]">
-              The Archive
+              {archiveContent.eyebrow}
             </div>
             <h2 className="text-4xl font-semibold tracking-tight text-white md:text-5xl">
-              A filtered timeline of older assets and tools.
+              {archiveContent.title}
             </h2>
-            <p className="mt-4 text-sm leading-relaxed text-zinc-400 md:text-base">
-              Open the archive to filter by tool and browse dated output in a vertical timeline.
-              This is treated as its own self-contained interface rather than another block on the
-              homepage.
-            </p>
+            <p className="mt-4 text-sm leading-relaxed text-zinc-400 md:text-base">{archiveContent.description}</p>
           </div>
           <div className="flex items-end">
             <button
               type="button"
-              onClick={() => setIsOpen(true)}
+              onClick={handleOpen}
               className="inline-flex items-center gap-2 border border-[#ff003c] bg-[#ff003c] px-5 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-black transition-colors hover:bg-[#ff4466]"
             >
               <FolderArchive className="h-4 w-4" />
-              Open Archive
+              {archiveContent.openButtonLabel}
             </button>
           </div>
         </motion.div>
       </div>
 
       <AnimatePresence>
-        {isOpen ? (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[95] bg-black/88 p-4 backdrop-blur-md md:p-8"
-          >
+        {isOpen
+          ? createPortal(
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="fixed inset-0 z-[200] bg-black/88 p-4 backdrop-blur-md md:p-8"
+                onClick={handleClose}
+              >
             <motion.div
               initial={{ opacity: 0, y: 26, scale: 0.985 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -77,20 +91,21 @@ export function ArchiveSection() {
               <div className="relative z-10 flex items-center justify-between border-b border-[#ff003c]/20 px-4 py-3 font-mono text-[11px] uppercase tracking-[0.2em] text-zinc-400 md:px-6">
                 <div className="flex items-center gap-3">
                   <ScanSearch className="h-4 w-4 text-[#ff003c]" />
-                  Archive Browser
+                  {archiveContent.browserTitle}
                 </div>
                 <button
-                  onClick={() => setIsOpen(false)}
+                  onClick={handleClose}
                   className="flex items-center gap-2 border border-[#ff003c]/20 px-3 py-1 text-zinc-200 transition-colors hover:border-[#ff003c] hover:text-white"
                 >
                   <X className="h-4 w-4" />
-                  Close
+                  {archiveContent.closeLabel}
                 </button>
               </div>
 
+
               <div className="relative z-10 border-b border-[#ff003c]/15 px-4 py-4 md:px-6">
                 <div className="mb-2 font-mono text-[10px] uppercase tracking-[0.18em] text-zinc-500">
-                  Filter by Tool
+                  {archiveContent.filterLabel}
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {archiveTools.map((tool) => (
@@ -115,7 +130,7 @@ export function ArchiveSection() {
                   <div className="hidden lg:block">
                     <div className="sticky top-0">
                       <div className="mb-3 font-mono text-[10px] uppercase tracking-[0.18em] text-zinc-500">
-                        Timeline
+                        {archiveContent.timelineLabel}
                       </div>
                       <div className="relative ml-4 border-l border-[#ff003c]/20 pl-4">
                         {filteredEntries.map((entry) => (
@@ -164,8 +179,10 @@ export function ArchiveSection() {
                 </div>
               </div>
             </motion.div>
-          </motion.div>
-        ) : null}
+          </motion.div>,
+              document.body,
+            )
+          : null}
       </AnimatePresence>
     </section>
   );
