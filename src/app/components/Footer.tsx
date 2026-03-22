@@ -1,11 +1,11 @@
-import { Github, Layers3 } from "lucide-react";
+import { FolderArchive, Github, Layers3 } from "lucide-react";
 import { motion } from "motion/react";
 
 import { siteProfile } from "../data/portfolio";
 
 export function Footer() {
   return (
-    <footer id="contact" className="w-full py-12 px-8 bg-[#050505] border-t border-[#ff003c]/20 relative overflow-hidden">
+    <footer className="w-full py-12 px-8 bg-[#050505] border-t border-[#ff003c]/20 relative overflow-hidden">
       <div
         className="absolute inset-0 pointer-events-none opacity-5"
         style={{
@@ -40,10 +40,16 @@ export function Footer() {
                 &gt; Case Studies
               </button>
               <button
-                onClick={() => document.getElementById("software-skills")?.scrollIntoView({ behavior: "smooth" })}
+                onClick={() => document.getElementById("tools-skills")?.scrollIntoView({ behavior: "smooth" })}
                 className="block text-zinc-600 hover:text-[#ff003c] transition-colors hover:translate-x-1 transform duration-200"
               >
-                &gt; Working Stack
+                &gt; Tools and Skills
+              </button>
+              <button
+                onClick={() => document.getElementById("archive")?.scrollIntoView({ behavior: "smooth" })}
+                className="block text-zinc-600 hover:text-[#ff003c] transition-colors hover:translate-x-1 transform duration-200"
+              >
+                &gt; The Archive
               </button>
               <a
                 href={siteProfile.repoUrl}
@@ -62,8 +68,8 @@ export function Footer() {
               Current_State
             </h3>
             <div className="space-y-3 text-zinc-500 text-xs font-mono leading-relaxed">
-              <p>This repo was pulled from a generic Figma export.</p>
-              <p>The current task is to turn it into a cleaner portfolio with real content and real assets.</p>
+              <p>The portfolio is now structured as a one-page retro-future interface.</p>
+              <p>Case files, tool indexing, contact, and archive browsing all live inside the same system shell.</p>
             </div>
           </div>
         </div>
@@ -101,6 +107,18 @@ export function Footer() {
                 <Layers3 className="w-4 h-4 text-zinc-600 group-hover:text-[#ff003c] transition-colors" />
               </div>
             </motion.a>
+
+            <motion.button
+              onClick={() => document.getElementById("archive")?.scrollIntoView({ behavior: "smooth" })}
+              whileHover={{ scale: 1.1, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+              className="group relative"
+              title="Archive"
+            >
+              <div className="w-10 h-10 bg-black/60 border border-[#ff003c]/20 flex items-center justify-center hover:border-[#ff003c]/60 transition-all">
+                <FolderArchive className="w-4 h-4 text-zinc-600 group-hover:text-[#ff003c] transition-colors" />
+              </div>
+            </motion.button>
           </div>
 
           <div className="flex items-center gap-2">

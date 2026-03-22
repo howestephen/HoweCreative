@@ -1,229 +1,223 @@
-import { motion, AnimatePresence } from "motion/react";
-import { useState } from "react";
-import { ChevronDown, Github } from "lucide-react";
+import { AnimatePresence, motion } from "motion/react";
+import { X, ScanLine, FolderOpenDot } from "lucide-react";
+import { useMemo, useState } from "react";
 
 import { ImageWithFallback } from "./figma/ImageWithFallback";
-import { portfolioProjects, siteProfile } from "../data/portfolio";
+import { portfolioProjects } from "../data/portfolio";
 
-function CaseStudyCard({
-  study,
-  isExpanded,
-  onClick,
+function CaseStudyFile({
+  project,
+  onClose,
 }: {
-  study: (typeof portfolioProjects)[number];
-  isExpanded: boolean;
-  onClick: () => void;
+  project: (typeof portfolioProjects)[number];
+  onClose: () => void;
 }) {
-  const [isHovered, setIsHovered] = useState(false);
-
   return (
     <motion.div
-      className="flex-shrink-0 w-80 cursor-pointer"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      onClick={onClick}
-      whileHover={{ scale: 1.02 }}
-      transition={{ duration: 0.2 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-[90] bg-black/86 backdrop-blur-md p-4 md:p-8"
+      onClick={onClose}
     >
-      <div
-        className={`relative overflow-hidden border ${isExpanded ? "border-[#ff003c]" : "border-[#ff003c]/20"} bg-black/60 backdrop-blur-sm transition-all duration-300 hover:border-[#ff003c]/60`}
+      <motion.div
+        initial={{ opacity: 0, y: 30, scale: 0.98 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        exit={{ opacity: 0, y: 20, scale: 0.98 }}
+        transition={{ duration: 0.28 }}
+        onClick={(event) => event.stopPropagation()}
+        className="relative mx-auto flex h-full max-w-7xl flex-col overflow-hidden border border-[#ff003c]/35 bg-[#050505] shadow-[0_0_0_1px_rgba(255,0,60,0.16),0_30px_120px_rgba(0,0,0,0.55)]"
       >
-        <div className="relative h-48 overflow-hidden">
-          <ImageWithFallback
-            src={study.image}
-            alt={study.title}
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-          />
-          <div className={`absolute inset-0 bg-gradient-to-br ${study.gradient} opacity-35 mix-blend-multiply`} />
-          <div
-            className="absolute inset-0 pointer-events-none opacity-10"
-            style={{
-              backgroundImage:
-                "linear-gradient(rgba(255, 0, 60, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 0, 60, 0.5) 1px, transparent 1px)",
-              backgroundSize: "20px 20px",
-            }}
-          />
+        <div
+          className="pointer-events-none absolute inset-0 opacity-[0.08]"
+          style={{
+            backgroundImage:
+              "repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(255,255,255,0.18) 3px, rgba(255,255,255,0.18) 4px)",
+          }}
+        />
+        <div
+          className="pointer-events-none absolute inset-0 opacity-[0.07]"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(255,0,60,0.28) 1px, transparent 1px), linear-gradient(90deg, rgba(255,0,60,0.2) 1px, transparent 1px)",
+            backgroundSize: "28px 28px",
+          }}
+        />
+
+        <div className="relative z-10 flex items-center justify-between border-b border-[#ff003c]/25 px-4 py-3 font-mono text-[11px] uppercase tracking-[0.22em] text-zinc-400 md:px-6">
+          <div className="flex items-center gap-3">
+            <FolderOpenDot className="h-4 w-4 text-[#ff003c]" />
+            <span>Open File</span>
+            <span className="text-zinc-600">{project.slug}</span>
+          </div>
+          <button
+            onClick={onClose}
+            className="flex items-center gap-2 border border-[#ff003c]/25 px-3 py-1 text-zinc-300 transition-colors hover:border-[#ff003c] hover:text-white"
+          >
+            <X className="h-4 w-4" />
+            Close
+          </button>
         </div>
 
-        <div className="p-5">
-          <div className="mb-2 flex items-center justify-between gap-3">
-            <div className="text-[#ff003c] text-[10px] uppercase tracking-[0.2em] font-mono">
-              {study.category}
-            </div>
-            <div className="text-[10px] uppercase tracking-[0.18em] text-zinc-500 font-mono">
-              {study.status}
-            </div>
-          </div>
-
-          <h3 className="text-lg text-white font-medium">{study.title}</h3>
-          <p className="mt-2 text-zinc-400 text-sm leading-relaxed">{study.shortDescription}</p>
-
-          <div className="mt-4 flex flex-wrap gap-1.5">
-            {study.tags.slice(0, 3).map((tag) => (
-              <span
-                key={tag}
-                className="px-2 py-0.5 bg-[#ff003c]/10 border border-[#ff003c]/30 text-[10px] text-zinc-300 font-mono"
-              >
-                {tag}
+        <div className="relative z-10 grid min-h-0 flex-1 gap-0 overflow-hidden lg:grid-cols-[1.05fr_0.95fr]">
+          <div className="border-b border-[#ff003c]/15 p-5 lg:border-b-0 lg:border-r lg:p-8">
+            <div className="mb-4 flex flex-wrap items-center gap-3 font-mono text-[10px] uppercase tracking-[0.18em] text-zinc-500">
+              <span className="border border-[#ff003c]/20 bg-[#ff003c]/8 px-2 py-1 text-[#ff003c]">
+                {project.category}
               </span>
-            ))}
+              <span>{project.year}</span>
+              <span>{project.status}</span>
+            </div>
+
+            <h3 className="max-w-xl text-3xl font-semibold tracking-tight text-white md:text-5xl">
+              {project.title}
+            </h3>
+            <p className="mt-4 max-w-2xl text-sm leading-relaxed text-zinc-300 md:text-base">
+              {project.fullDescription}
+            </p>
+
+            <div className="mt-6 grid gap-4 md:grid-cols-3">
+              {[
+                ["Role", project.role],
+                ["Client", project.client],
+                ["Status", project.status],
+              ].map(([label, value]) => (
+                <div key={label} className="border border-[#ff003c]/18 bg-black/40 p-4">
+                  <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-zinc-500">
+                    {label}
+                  </div>
+                  <div className="mt-2 text-sm text-white">{value}</div>
+                </div>
+              ))}
+            </div>
+
+            <div className="relative mt-8 overflow-hidden border border-[#ff003c]/25 bg-black/60">
+              <ImageWithFallback
+                src={project.image}
+                alt={project.title}
+                className="h-[280px] w-full object-cover md:h-[380px]"
+              />
+              <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-30 mix-blend-screen`} />
+            </div>
           </div>
 
-          <div className="flex items-center gap-2 text-xs text-[#ff003c] font-mono pt-4 mt-4 border-t border-[#ff003c]/20">
-            <span>{isExpanded ? "Close Notes" : "Open Notes"}</span>
-            <ChevronDown className={`w-3 h-3 transition-transform ${isExpanded ? "rotate-180" : ""}`} />
+          <div className="min-h-0 overflow-y-auto p-5 lg:p-8">
+            <div className="mb-4 flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.22em] text-[#ff003c]">
+              <ScanLine className="h-4 w-4" />
+              Case File Sections
+            </div>
+            <div className="grid gap-4">
+              {project.overlaySections.map((section) => (
+                <div key={section.title} className="border border-[#ff003c]/18 bg-black/45 p-4 md:p-5">
+                  <div className="mb-3 font-mono text-[10px] uppercase tracking-[0.2em] text-zinc-500">
+                    {section.title}
+                  </div>
+                  <p className="text-sm leading-relaxed text-zinc-300">{section.body}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-5 flex flex-wrap gap-2">
+              {project.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="border border-[#ff003c]/20 bg-[#ff003c]/8 px-2 py-1 font-mono text-[10px] uppercase tracking-[0.14em] text-zinc-200"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
-
-        {isHovered && (
-          <>
-            <div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-[#ff003c]" />
-            <div className="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-[#ff003c]" />
-            <div className="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-[#ff003c]" />
-            <div className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-[#ff003c]" />
-          </>
-        )}
-      </div>
+      </motion.div>
     </motion.div>
   );
 }
 
 export function CaseStudies() {
-  const [expandedId, setExpandedId] = useState<number | null>(portfolioProjects[0]?.id ?? null);
-  const expandedStudy = portfolioProjects.find((study) => study.id === expandedId);
+  const [activeSlug, setActiveSlug] = useState<string | null>(null);
+  const activeProject = useMemo(
+    () => portfolioProjects.find((project) => project.slug === activeSlug) ?? null,
+    [activeSlug],
+  );
 
   return (
-    <section className="relative py-16 px-6 border-t border-[#ff003c]/10">
-      <div className="max-w-[1600px] mx-auto">
+    <section id="case-studies" className="relative border-t border-[#ff003c]/15 px-6 py-20">
+      <div className="mx-auto max-w-7xl">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="mb-12 flex justify-between items-end gap-8"
+          transition={{ duration: 0.65 }}
+          className="mx-auto mb-12 max-w-3xl text-center"
         >
-          <div>
-            <div className="flex items-center gap-3 mb-2">
-              <span className="bg-[#8b0020]/20 text-[#ff003c] px-2 py-0.5 font-mono text-[10px] uppercase border border-[#ff003c]/20">
-                archive_type: selected_work
-              </span>
-              <span className="text-[#ff003c] font-mono text-[10px] uppercase tracking-tighter">
-                portfolio_rebuild_v0.1
-              </span>
-            </div>
-            <div className="inline-block relative mb-4">
-              <h2 className="text-4xl md:text-5xl text-white font-mono uppercase tracking-tighter">
-                Case_<span className="text-[#ff003c]">Studies</span>
-              </h2>
-              <div className="absolute -bottom-2 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#ff003c] to-transparent" />
-            </div>
-            <p className="text-zinc-400 max-w-3xl font-mono text-sm leading-relaxed">
-              Real work, not placeholders. This first pass focuses on projects that show product
-              thinking, system design, and media direction more honestly than the original export.
-            </p>
+          <div className="mb-4 font-mono text-[10px] uppercase tracking-[0.25em] text-[#ff003c]">
+            Selected Case Files
           </div>
-
-          <div className="hidden lg:block text-right">
-            <p className="font-mono text-[10px] text-zinc-600 uppercase tracking-widest">
-              Operator: {siteProfile.name}
-            </p>
-            <p className="font-mono text-[10px] text-zinc-600 uppercase tracking-widest">
-              Current focus: portfolio cleanup
-            </p>
-          </div>
+          <h2 className="text-4xl font-semibold tracking-tight text-white md:text-5xl">
+            Six technical dossiers arranged in a central grid.
+          </h2>
+          <p className="mt-4 text-sm leading-relaxed text-zinc-400 md:text-base">
+            Click a project tile to open the full file. The current pass uses standard
+            systems-design sections inside a retro-future file viewer while the real authored
+            content is rebuilt.
+          </p>
         </motion.div>
 
-        <div className="relative mb-8">
-          <div className="overflow-x-auto pb-4 scrollbar-thin scrollbar-thumb-[#ff003c]/50 scrollbar-track-[#ff003c]/10">
-            <div className="flex gap-6 min-w-max px-1">
-              {portfolioProjects.map((study, index) => (
-                <motion.div
-                  key={study.id}
-                  initial={{ opacity: 0, x: 50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.08 }}
-                >
-                  <CaseStudyCard
-                    study={study}
-                    isExpanded={expandedId === study.id}
-                    onClick={() => setExpandedId(expandedId === study.id ? null : study.id)}
-                  />
-                </motion.div>
-              ))}
-            </div>
-          </div>
-
-          <div className="absolute top-0 left-0 h-full w-20 bg-gradient-to-r from-[#050505] to-transparent pointer-events-none" />
-          <div className="absolute top-0 right-0 h-full w-20 bg-gradient-to-l from-[#050505] to-transparent pointer-events-none" />
-        </div>
-
-        <AnimatePresence>
-          {expandedStudy && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
-              className="overflow-hidden"
+        <div className="grid justify-center gap-6 sm:grid-cols-2 xl:grid-cols-3">
+          {portfolioProjects.map((project, index) => (
+            <motion.button
+              key={project.slug}
+              type="button"
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.45, delay: index * 0.05 }}
+              whileHover={{ y: -6 }}
+              onClick={() => setActiveSlug(project.slug)}
+              className="group relative flex min-h-[360px] flex-col overflow-hidden border border-[#ff003c]/20 bg-black/55 text-left backdrop-blur-sm transition-colors hover:border-[#ff003c]/60"
             >
-              <div className="bg-black/80 border border-[#ff003c]/40 p-8 backdrop-blur-md">
-                <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
-                  <div>
-                    <div className="text-[#ff003c] uppercase tracking-widest text-xs mb-3 font-mono">
-                      overview
-                    </div>
-                    <h3 className="text-2xl text-white mb-4">{expandedStudy.title}</h3>
-                    <p className="text-zinc-300 text-sm leading-relaxed max-w-3xl">
-                      {expandedStudy.fullDescription}
-                    </p>
-                    <div className="mt-6 flex flex-wrap gap-2">
-                      {expandedStudy.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="px-3 py-1 bg-[#ff003c]/10 border border-[#ff003c]/30 text-xs text-zinc-300 font-mono"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
+              <div className="relative h-44 overflow-hidden border-b border-[#ff003c]/15">
+                <ImageWithFallback
+                  src={project.image}
+                  alt={project.title}
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                />
+                <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-30 mix-blend-screen`} />
+              </div>
 
-                  <div className="grid gap-4">
-                    {[
-                      ["challenge", expandedStudy.technicalDetails.challenge],
-                      ["solution", expandedStudy.technicalDetails.solution],
-                      ["impact", expandedStudy.technicalDetails.impact],
-                    ].map(([label, body]) => (
-                      <div key={label} className="border border-[#ff003c]/20 bg-black/40 p-4">
-                        <h4 className="text-[#ff003c] uppercase tracking-widest text-xs mb-3 font-mono">
-                          {label}
-                        </h4>
-                        <p className="text-zinc-300 text-sm leading-relaxed">{body}</p>
-                      </div>
+              <div className="flex flex-1 flex-col p-5">
+                <div className="mb-3 flex items-center justify-between gap-3 font-mono text-[10px] uppercase tracking-[0.16em]">
+                  <span className="text-[#ff003c]">{project.category}</span>
+                  <span className="text-zinc-500">{project.year}</span>
+                </div>
+                <h3 className="text-xl font-medium text-white">{project.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-zinc-400">
+                  {project.shortDescription}
+                </p>
+                <div className="mt-auto pt-5">
+                  <div className="flex flex-wrap gap-2">
+                    {project.tags.slice(0, 3).map((tag) => (
+                      <span
+                        key={tag}
+                        className="border border-[#ff003c]/18 px-2 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-zinc-300"
+                      >
+                        {tag}
+                      </span>
                     ))}
                   </div>
                 </div>
-
-                <div className="mt-6 pt-6 border-t border-[#ff003c]/20 flex flex-wrap items-center justify-between gap-4">
-                  <p className="text-zinc-500 text-xs font-mono uppercase tracking-[0.18em]">
-                    More structure and dedicated case-study pages still to come
-                  </p>
-                  <a
-                    href={siteProfile.githubUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="flex items-center gap-2 text-sm text-zinc-400 hover:text-[#ff003c] transition-colors font-mono"
-                  >
-                    <Github className="w-4 h-4" />
-                    <span>GitHub</span>
-                  </a>
-                </div>
               </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+            </motion.button>
+          ))}
+        </div>
       </div>
+
+      <AnimatePresence>
+        {activeProject ? (
+          <CaseStudyFile project={activeProject} onClose={() => setActiveSlug(null)} />
+        ) : null}
+      </AnimatePresence>
     </section>
   );
 }
