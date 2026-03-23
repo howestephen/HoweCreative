@@ -9,7 +9,7 @@
     "role": "Creative Systems Designer",
     "headline": "Designing product systems, media pipelines, and AI-assisted workflows with a UX-first approach.",
     "summary": "This portfolio has been designed using Figma Make and A.I. tooling. All built from a custom project template designed to cover all facets of QA and development. The template produces agent driven projects that can run autonmously without drift or inefficient compute usage.",
-    "navVersion": "portfolio_system_v1.2",
+    "navVersion": "v2.0",
     "githubUrl": "https://github.com/howestephen",
     "linkedinUrl": "https://www.linkedin.com/in/howestephen/",
     "dribbbleUrl": "https://dribbble.com/howestephen",
@@ -54,6 +54,7 @@
       { "label": "Output", "value": "Products, motion, media, content, deliverables." }
     ],
     "notesTitle": "Notes",
+    "notesFileLabel": "File 5",
     "notesBody": "Work sits at the boundary between design and implementation. The focus is not artefacts, but the systems that generate them — interface logic, motion frameworks, and production pipelines that can scale without losing intent.",
     "files": [
       {
@@ -395,7 +396,7 @@
       "projectType": "Project Type",
       "brief": "Brief"
     },
-    "visualOnlyLabel": "Transmission routed. Response incoming.",
+    "visualOnlyLabel": "Operator interface relay active: Awaiting input",
     "submitLabel": "Send"
   },
   "archive": {
