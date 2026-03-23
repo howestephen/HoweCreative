@@ -5,6 +5,7 @@ import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 
 import { heroContent, siteProfile } from "../data/portfolio";
+import { isIOSLike } from "../lib/device";
 import { useWebGLAvailability } from "../lib/webgl";
 
 const LOOP_H = 18.0;
@@ -681,6 +682,7 @@ export function MatrixRainHero() {
   const hasWebGL = useWebGLAvailability();
   const atlas = useMemo(() => buildCharAtlas(), []);
   const rainGrid = useHeroRainGridConfig();
+  const iosLike = typeof document !== "undefined" && isIOSLike();
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 767px)");
@@ -705,7 +707,8 @@ export function MatrixRainHero() {
         {hasWebGL ? (
           <Canvas
             camera={{ position: [0, isMobile ? 0.15 : 0.18, isMobile ? 6.5 : 5.5], fov: isMobile ? 52 : 50 }}
-            dpr={isMobile ? [1, 1.2] : [1, 1.5]}
+            dpr={iosLike ? 1 : isMobile ? [1, 1.2] : [1, 1.5]}
+            gl={{ antialias: false, powerPreference: iosLike ? "low-power" : "default" }}
             performance={{ min: 0.5 }}
           >
             <BackgroundRain
