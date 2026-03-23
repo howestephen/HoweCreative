@@ -16,7 +16,7 @@
 ## Setup
 
 - Install with:
-  - `npm install --legacy-peer-deps`
+  - `npm install` (uses root `.npmrc` → `legacy-peer-deps` for React 19 + Radix)
 - Frontend dev:
   - `npm run dev`
 - End-to-end local API testing:
