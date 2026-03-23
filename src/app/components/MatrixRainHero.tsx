@@ -790,11 +790,11 @@ export function MatrixRainHero() {
       className="relative z-[5] flex min-h-[100svh] w-full items-end justify-center md:items-center overflow-hidden bg-black"
     >
       <div className="absolute inset-0 z-0">
-        {hasWebGL ? (
+        {hasWebGL && !iosLike ? (
           <Canvas
             camera={{ position: [0, isMobile ? 0.15 : 0.18, isMobile ? 6.5 : 5.5], fov: isMobile ? 52 : 50 }}
-            dpr={iosLike ? 1 : isMobile ? [1, 1.2] : [1, 1.5]}
-            gl={{ antialias: false, powerPreference: iosLike ? "low-power" : "default" }}
+            dpr={isMobile ? [1, 1.2] : [1, 1.5]}
+            gl={{ antialias: false, powerPreference: "default" }}
             performance={{ min: 0.5 }}
           >
             <BackgroundRain
