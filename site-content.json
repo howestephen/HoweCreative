@@ -395,7 +395,7 @@
       "projectType": "Project Type",
       "brief": "Brief"
     },
-    "visualOnlyLabel": "Visual reference only — form is not wired",
+    "visualOnlyLabel": "Transmission routed. Response incoming.",
     "submitLabel": "Send"
   },
   "archive": {
