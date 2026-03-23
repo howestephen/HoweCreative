@@ -19,17 +19,18 @@ The project is content-driven through a single JSON source, with animated UI sec
 - `site-content.json`: primary content model for site copy and structured data
 - `src/app/routes`: route-level pages
 - `public`: static assets (images, media, icons)
-- `docs/plans`: implementation notes and design plans
+- `api/`: Vercel serverless routes (e.g. contact form)
+- `guidelines/`: design reference notes
 
 ## Quick Start
 
 1. Install dependencies:
 
 ```bash
-npm install
+npm install --legacy-peer-deps
 ```
 
-2. Start the dev server:
+2. Start the frontend dev server:
 
 ```bash
 npm run dev
@@ -37,12 +38,27 @@ npm run dev
 
 3. Open the local URL shown in terminal (typically `http://localhost:5173`).
 
+4. For end-to-end local contact form testing (`/api/contact`), run via Vercel:
+
+```bash
+vercel dev
+```
+
 ## Scripts
 
 - `npm run dev`: start local development
 - `npm run build`: production build
 - `npm run preview`: preview production build locally
-- `npm run lint`: run ESLint checks
+
+## Environment Variables
+
+- `EMAIL_ACCESS_KEY`: Web3Forms access key used by the Vercel serverless function at `api/contact.ts`.
+
+Copy `.env.example` to `.env` and set:
+
+```bash
+EMAIL_ACCESS_KEY=your_web3forms_access_key
+```
 
 ## Content Editing Workflow
 

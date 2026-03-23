@@ -2,31 +2,37 @@
 
 ## Project
 
-- Name: `Figmaportfolio2026`
-- Type: Vite + React single-page portfolio
-- Origin: pulled from a generic Figma export repo and now being adapted into Stephen Howe's real portfolio
+- Name: `HoweCreative`
+- Type: Vite + React single-page portfolio with Vercel serverless contact endpoint
+- Origin: initially pulled from a generic Figma export, then progressively refactored into a real production portfolio
 
-## Current Direction
+## Current State
 
-- Keep the exported visual language as a starting point, not as a fixed design
-- Remove generic demo content and replace it with real projects, real media, and clearer structure
-- Tidy the shell before attempting deeper visual invention
+- Loading screen implemented and mounted in layout (`LoadingScreen.tsx` + `Layout.tsx`)
+- Site copy centralized in `site-content.json` and typed via `src/app/data/portfolio.ts`
+- Contact form now posts to `api/contact.ts` and reads `EMAIL_ACCESS_KEY` server-side
+- Build passes with `npm run build`
 
-## Current Real Content
+## Setup
+
+- Install with:
+  - `npm install --legacy-peer-deps`
+- Frontend dev:
+  - `npm run dev`
+- End-to-end local API testing:
+  - `vercel dev`
+
+## Active Content Areas
 
 - Noticia Lingo
 - Badger Club
-- UNCX Video System
-
-## Current Cleanup Priorities
-
-1. Replace placeholder content with real portfolio content
-2. Reduce generated/demo UI clutter
-3. Make the homepage sections read more clearly
-4. Decide what to keep from the current cyberpunk shell and what to simplify
+- UNCX Video & 3D System
+- UNCX Rebrand
+- UNCX Academy
+- UNCX Unified Menu
 
 ## Notes
 
-- Local media is currently sourced from `/public/case-studies/*`, copied from the earlier `portfolio-2026` repo
-- This repo currently builds with `npm run build`
-- Install currently relies on `npm install --legacy-peer-deps` because the Figma export brought in a broad dependency set with peer-version conflicts
+- Primary content source: `site-content.json`
+- Local media source: `/public/case-studies/*`
+- Deployment target: Vercel (`vercel.json` with `dist` output)

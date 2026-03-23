@@ -5,8 +5,7 @@ import * as RechartsPrimitive from "recharts";
 
 import { cn } from "./utils";
 
-// Format: { THEME_NAME: CSS_SELECTOR }
-const THEMES = { light: "", dark: ".dark" } as const;
+const THEMES = { light: "light", dark: "dark" } as const;
 
 export type ChartConfig = {
   [k in string]: {
@@ -39,6 +38,7 @@ function ChartContainer({
   className,
   children,
   config,
+  style,
   ...props
 }: React.ComponentProps<"div"> & {
   config: ChartConfig;
@@ -48,6 +48,40 @@ function ChartContainer({
 }) {
   const uniqueId = React.useId();
   const chartId = `chart-${id || uniqueId.replace(/:/g, "")}`;
+  const [activeTheme, setActiveTheme] = React.useState<keyof typeof THEMES>("light");
+
+  React.useEffect(() => {
+    if (typeof document === "undefined") return;
+
+    const root = document.documentElement;
+    const readTheme = () =>
+      root.classList.contains("dark") ? ("dark" as const) : ("light" as const);
+
+    setActiveTheme(readTheme());
+
+    const observer = new MutationObserver(() => {
+      setActiveTheme(readTheme());
+    });
+
+    observer.observe(root, { attributes: true, attributeFilter: ["class"] });
+
+    return () => observer.disconnect();
+  }, []);
+
+  const chartVars = React.useMemo(() => {
+    const vars: Record<string, string> = {};
+
+    Object.entries(config).forEach(([key, itemConfig]) => {
+      const token = key.replace(/[^a-zA-Z0-9_-]/g, "-");
+      const color = itemConfig.theme?.[activeTheme] ?? itemConfig.color;
+
+      if (color) {
+        vars[`--color-${token}`] = color;
+      }
+    });
+
+    return vars;
+  }, [activeTheme, config]);
 
   return (
     <ChartContext.Provider value={{ config }}>
@@ -58,9 +92,9 @@ function ChartContainer({
           "[&_.recharts-cartesian-axis-tick_text]:fill-muted-foreground [&_.recharts-cartesian-grid_line[stroke='#ccc']]:stroke-border/50 [&_.recharts-curve.recharts-tooltip-cursor]:stroke-border [&_.recharts-polar-grid_[stroke='#ccc']]:stroke-border [&_.recharts-radial-bar-background-sector]:fill-muted [&_.recharts-rectangle.recharts-tooltip-cursor]:fill-muted [&_.recharts-reference-line_[stroke='#ccc']]:stroke-border flex aspect-video justify-center text-xs [&_.recharts-dot[stroke='#fff']]:stroke-transparent [&_.recharts-layer]:outline-hidden [&_.recharts-sector]:outline-hidden [&_.recharts-sector[stroke='#fff']]:stroke-transparent [&_.recharts-surface]:outline-hidden",
           className,
         )}
+        style={{ ...chartVars, ...style }}
         {...props}
       >
-        <ChartStyle id={chartId} config={config} />
         <RechartsPrimitive.ResponsiveContainer>
           {children}
         </RechartsPrimitive.ResponsiveContainer>
@@ -68,39 +102,6 @@ function ChartContainer({
     </ChartContext.Provider>
   );
 }
-
-const ChartStyle = ({ id, config }: { id: string; config: ChartConfig }) => {
-  const colorConfig = Object.entries(config).filter(
-    ([, config]) => config.theme || config.color,
-  );
-
-  if (!colorConfig.length) {
-    return null;
-  }
-
-  return (
-    <style
-      dangerouslySetInnerHTML={{
-        __html: Object.entries(THEMES)
-          .map(
-            ([theme, prefix]) => `
-${prefix} [data-chart=${id}] {
-${colorConfig
-  .map(([key, itemConfig]) => {
-    const color =
-      itemConfig.theme?.[theme as keyof typeof itemConfig.theme] ||
-      itemConfig.color;
-    return color ? `  --color-${key}: ${color};` : null;
-  })
-  .join("\n")}
-}
-`,
-          )
-          .join("\n"),
-      }}
-    />
-  );
-};
 
 const ChartTooltip = RechartsPrimitive.Tooltip;
 
@@ -349,5 +350,4 @@ export {
   ChartTooltipContent,
   ChartLegend,
   ChartLegendContent,
-  ChartStyle,
 };
