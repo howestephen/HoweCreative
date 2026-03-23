@@ -216,9 +216,18 @@ export function MatrixRainBackdrop({
   /** iOS: avoid extra WebGL contexts — hero 3D keeps one context only. */
   const allowWebGLBackdrop =
     hasWebGL && typeof document !== "undefined" && !isIOSLike();
-  const atlas = useMemo(() => buildCharAtlas(), []);
+  const atlas = useMemo(
+    () => (allowWebGLBackdrop ? buildCharAtlas() : null),
+    [allowWebGLBackdrop],
+  );
   const [isMobile, setIsMobile] = useState(false);
   const [lowPower, setLowPower] = useState(false);
+
+  useEffect(() => {
+    return () => {
+      atlas?.dispose();
+    };
+  }, [atlas]);
 
   useEffect(() => {
     const media = window.matchMedia("(max-width: 767px)");
@@ -276,7 +285,7 @@ export function MatrixRainBackdrop({
 
   return (
     <div className={className}>
-      {allowWebGLBackdrop ? (
+      {allowWebGLBackdrop && atlas ? (
         <>
           <Canvas camera={{ position: [0, 0, config.cameraZ], fov: 48 }} dpr={isMobile ? [1, 1.2] : [1, 1.5]}>
             <RainLayer atlas={atlas} {...config.outer} />

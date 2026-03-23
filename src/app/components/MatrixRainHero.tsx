@@ -244,7 +244,7 @@ type HeroRainGridConfig = {
   rainRows: number;
 };
 
-function useHeroRainGridConfig(): HeroRainGridConfig {
+function useHeroRainGridConfig(useLiteHero: boolean): HeroRainGridConfig {
   const [config, setConfig] = useState<HeroRainGridConfig>({
     gridColsX: 14,
     gridDepthLayers: 13,
@@ -268,6 +268,13 @@ function useHeroRainGridConfig(): HeroRainGridConfig {
       const saveData = readSaveData();
       const cores = typeof navigator.hardwareConcurrency === "number" ? navigator.hardwareConcurrency : 8;
       const light = saveData || cores <= 4;
+      const iosLike = isIOSLike();
+
+      if (useLiteHero || iosLike) {
+        return narrow || coarse
+          ? { gridColsX: 7, gridDepthLayers: 6, rainRows: 9 }
+          : { gridColsX: 9, gridDepthLayers: 7, rainRows: 10 };
+      }
 
       if (narrow || coarse) {
         return light
@@ -290,7 +297,7 @@ function useHeroRainGridConfig(): HeroRainGridConfig {
       mqNarrow.removeEventListener("change", apply);
       mqCoarse.removeEventListener("change", apply);
     };
-  }, []);
+  }, [useLiteHero]);
 
   return config;
 }
@@ -676,13 +683,92 @@ const MorphingWireHero = React.memo(function MorphingWireHero({
   );
 });
 
+const LiteWireHero = React.memo(function LiteWireHero({
+  onSkillChange,
+}: {
+  onSkillChange: (label: string) => void;
+}) {
+  const rootRef = useRef<THREE.Group>(null);
+  const ringsRef = useRef<THREE.Group>(null);
+  const pulseRef = useRef<THREE.Mesh>(null);
+  const [skillIndex, setSkillIndex] = useState(0);
+
+  useEffect(() => {
+    onSkillChange(heroContent.skillLabels[skillIndex] ?? heroContent.skillLabels[0] ?? "");
+  }, [onSkillChange, skillIndex]);
+
+  useEffect(() => {
+    if (heroContent.skillLabels.length <= 1) {
+      return;
+    }
+
+    const interval = window.setInterval(() => {
+      setSkillIndex((current) => (current + 1) % heroContent.skillLabels.length);
+    }, 2600);
+
+    return () => window.clearInterval(interval);
+  }, []);
+
+  useFrame(({ clock }) => {
+    const elapsed = clock.getElapsedTime();
+    const root = rootRef.current;
+    const rings = ringsRef.current;
+    const pulse = pulseRef.current;
+
+    if (root) {
+      root.rotation.y = Math.sin(elapsed * 0.45) * 0.3;
+      root.rotation.x = -0.08 + Math.cos(elapsed * 0.28) * 0.05;
+      root.position.y = Math.sin(elapsed * 0.8) * 0.05;
+    }
+
+    if (rings) {
+      rings.rotation.z = elapsed * 0.18;
+      rings.rotation.x = Math.sin(elapsed * 0.2) * 0.18;
+    }
+
+    if (pulse) {
+      const scale = 1 + Math.sin(elapsed * 1.5) * 0.04;
+      pulse.scale.setScalar(scale);
+    }
+  });
+
+  return (
+    <group ref={rootRef} renderOrder={2}>
+      <mesh ref={pulseRef}>
+        <icosahedronGeometry args={[1.1, 1]} />
+        <meshBasicMaterial
+          color="#ffe8ee"
+          wireframe
+          transparent
+          opacity={0.92}
+        />
+      </mesh>
+      <group ref={ringsRef}>
+        <mesh rotation={[Math.PI / 2, 0, 0]}>
+          <torusGeometry args={[1.45, 0.018, 8, 90]} />
+          <meshBasicMaterial color="#ff365e" wireframe />
+        </mesh>
+        <mesh rotation={[0.4, 0.9, 0]}>
+          <torusGeometry args={[1.72, 0.014, 8, 72]} />
+          <meshBasicMaterial color="#ffffff" wireframe transparent opacity={0.65} />
+        </mesh>
+      </group>
+      <lineSegments rotation={[0.15, 0, 0]}>
+        <edgesGeometry args={[new THREE.BoxGeometry(0.48, 1.7, 0.48)]} />
+        <lineBasicMaterial color="#8f1731" transparent opacity={0.75} />
+      </lineSegments>
+    </group>
+  );
+});
+
 export function MatrixRainHero() {
   const [activeSkill, setActiveSkill] = useState("");
   const [isMobile, setIsMobile] = useState(false);
   const hasWebGL = useWebGLAvailability();
   const atlas = useMemo(() => buildCharAtlas(), []);
-  const rainGrid = useHeroRainGridConfig();
   const iosLike = typeof document !== "undefined" && isIOSLike();
+  const useLiteHero = iosLike;
+  const rainGrid = useHeroRainGridConfig(useLiteHero);
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 767px)");
@@ -718,7 +804,11 @@ export function MatrixRainHero() {
               rainRows={rainGrid.rainRows}
             />
             <group position={[0, isMobile ? 0.65 : 0.82, 0]}>
-              <MorphingWireHero onSkillChange={setActiveSkill} />
+              {useLiteHero ? (
+                <LiteWireHero onSkillChange={setActiveSkill} />
+              ) : (
+                <MorphingWireHero onSkillChange={setActiveSkill} />
+              )}
             </group>
           </Canvas>
         ) : (
