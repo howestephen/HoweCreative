@@ -4,6 +4,17 @@ import * as THREE from "three";
 
 import { useWebGLAvailability } from "../lib/webgl";
 
+const BACKDROP_CHAR_SET = [
+  "A", "B", "C", "D", "E", "F", "G", "H",
+  "I", "J", "K", "L", "M", "N", "O", "P",
+  "Q", "R", "S", "T", "U", "V", "W", "X",
+  "Y", "Z", "0", "1", "2", "3", "4", "5",
+  "6", "7", "8", "9", "£", "%", "&", "@",
+  "?", "!", "+", "-", "=", "/", "\\", "<",
+  ">", "[", "]", "{", "}", "*", "ア", "イ",
+  "ウ", "エ", "オ", "カ", "キ", "ク", "ケ", "コ",
+] as const;
+
 function buildCharAtlas(): THREE.CanvasTexture {
   const grid = 8;
   const cell = 64;
@@ -20,23 +31,12 @@ function buildCharAtlas(): THREE.CanvasTexture {
   ctx.fillStyle = "#000";
   ctx.fillRect(0, 0, size, size);
 
-  const chars = [
-    "ア","イ","ウ","エ","オ","カ","キ","ク",
-    "ケ","コ","サ","シ","ス","セ","ソ","タ",
-    "チ","ツ","テ","ト","ナ","ニ","ヌ","ネ",
-    "ノ","ハ","ヒ","フ","ヘ","ホ","マ","ミ",
-    "ム","メ","モ","ヤ","ユ","ヨ","ラ","ル",
-    "0","1","2","3","4","5","6","7",
-    "!","@","#","$","%","<",">","{",
-    "}","|","/","\\","+","-","*","&",
-  ];
-
   ctx.fillStyle = "#fff";
   ctx.font = `bold ${cell * 0.72}px monospace`;
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
 
-  chars.forEach((char, index) => {
+  BACKDROP_CHAR_SET.forEach((char, index) => {
     const col = index % grid;
     const row = Math.floor(index / grid);
     ctx.fillText(char, col * cell + cell / 2, row * cell + cell / 2);
@@ -204,6 +204,61 @@ function RainLayer({
   );
 }
 
+function OverflowRainStreams() {
+  const streams = useMemo(() => {
+    const streamCount = 40;
+    const overflowCount = Math.max(1, Math.round(streamCount * 0.05));
+    const pickChar = () => BACKDROP_CHAR_SET[Math.floor(Math.random() * BACKDROP_CHAR_SET.length)];
+
+    return Array.from({ length: streamCount }, (_, index) => {
+      const isOverflowStream = index < overflowCount;
+      const glyphCount = isOverflowStream
+        ? 120 + Math.floor(Math.random() * 56)
+        : 28 + Math.floor(Math.random() * 28);
+
+      return {
+        id: `overflow-stream-${index}`,
+        left: `${2 + Math.random() * 96}%`,
+        delay: `${Math.random() * 18}s`,
+        duration: `${isOverflowStream ? 24 + Math.random() * 10 : 16 + Math.random() * 7}s`,
+        opacity: isOverflowStream ? 0.3 + Math.random() * 0.16 : 0.12 + Math.random() * 0.1,
+        glyphs: Array.from({ length: glyphCount }, pickChar).join("\n"),
+      };
+    });
+  }, []);
+
+  return (
+    <>
+      <style>{`
+        @keyframes matrix-overflow-fall {
+          0% { transform: translate3d(0, -14rem, 0); }
+          100% { transform: translate3d(0, calc(100% + 18rem), 0); }
+        }
+      `}</style>
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        {streams.map((stream) => (
+          <div
+            key={stream.id}
+            className="absolute top-0 font-mono text-[10px] leading-[0.88] text-[#ff7f97] mix-blend-screen"
+            style={{
+              left: stream.left,
+              opacity: stream.opacity,
+              whiteSpace: "pre",
+              animationName: "matrix-overflow-fall",
+              animationTimingFunction: "linear",
+              animationIterationCount: "infinite",
+              animationDelay: stream.delay,
+              animationDuration: stream.duration,
+            }}
+          >
+            {stream.glyphs}
+          </div>
+        ))}
+      </div>
+    </>
+  );
+}
+
 export function MatrixRainBackdrop({
   className = "pointer-events-none fixed inset-0 z-[1] opacity-55",
   mode = "shell",
@@ -247,10 +302,13 @@ export function MatrixRainBackdrop({
   return (
     <div className={className}>
       {hasWebGL ? (
-        <Canvas camera={{ position: [0, 0, config.cameraZ], fov: 48 }}>
-          <RainLayer atlas={atlas} {...config.outer} />
-          <RainLayer atlas={atlas} {...config.inner} />
-        </Canvas>
+        <>
+          <Canvas camera={{ position: [0, 0, config.cameraZ], fov: 48 }}>
+            <RainLayer atlas={atlas} {...config.outer} />
+            <RainLayer atlas={atlas} {...config.inner} />
+          </Canvas>
+          {null}
+        </>
       ) : (
         <div
           className="absolute inset-0 opacity-60"

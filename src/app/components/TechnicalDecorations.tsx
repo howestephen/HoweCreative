@@ -5,7 +5,7 @@ export function TechnicalDecorations() {
     <>
       {/* Scanline effect */}
       <motion.div
-        className="fixed top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#ff003c]/30 to-transparent pointer-events-none z-[100]"
+        className="fixed top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#ff003c]/30 to-transparent pointer-events-none z-[15]"
         animate={{ top: ['0%', '100%'] }}
         transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
       />

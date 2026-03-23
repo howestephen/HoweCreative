@@ -4,7 +4,7 @@ import { portfolioTools, toolsSkillsContent } from "../data/portfolio";
 
 export function MediaShowcase() {
   return (
-    <section id="tools-skills" className="relative border-t border-[#ff003c]/20 px-6 py-24 md:py-28">
+    <section id="tools-skills" className="relative z-[20] border-t border-[#ff003c]/20 px-6 py-24 md:py-28">
       <div className="mx-auto max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 24 }}

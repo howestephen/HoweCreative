@@ -1,4 +1,4 @@
-import { FolderArchive, Github, Layers3, X } from "lucide-react";
+import { ArrowUpRight, Dribbble, Github, Linkedin, X } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
 import { createPortal } from "react-dom";
@@ -13,6 +13,27 @@ const MODEL_ATTRIBUTIONS = [
   { label: "3D Generalist", title: "Robot", author: "Poly by Google", url: "https://poly.pizza/m/9A6cuitiB_4" },
   { label: "Audio Production", title: "Headphones", author: "J-Toastie", url: "https://poly.pizza/m/EwlPidEswV" },
 ];
+
+const SOCIAL_LINKS = [
+  {
+    label: "LinkedIn",
+    handle: "/en/howestephen",
+    href: siteProfile.linkedinUrl,
+    icon: Linkedin,
+  },
+  {
+    label: "GitHub",
+    handle: "howestephen",
+    href: siteProfile.githubUrl,
+    icon: Github,
+  },
+  {
+    label: "Dribbble",
+    handle: "howestephen",
+    href: siteProfile.dribbbleUrl,
+    icon: Dribbble,
+  },
+] as const;
 
 function AttributionsPopup({ onClose }: { onClose: () => void }) {
   return createPortal(
@@ -45,7 +66,7 @@ function AttributionsPopup({ onClose }: { onClose: () => void }) {
 
         <div className="space-y-3">
           {MODEL_ATTRIBUTIONS.map((item) => (
-            <div key={item.label} className="border border-[#ff003c]/12 bg-black/40 px-4 py-3">
+            <div key={item.label} className="border border-[#ff003c]/12 bg-black/95 px-4 py-3">
               <div className="mb-1 font-mono text-[10px] uppercase tracking-[0.18em] text-zinc-500">
                 {item.label}
               </div>
@@ -120,7 +141,7 @@ export function Footer() {
                 ) : (
                   <a
                     key={item.label}
-                    href={siteProfile.repoUrl}
+                    href={item.href ?? siteProfile.repoUrl}
                     target="_blank"
                     rel="noreferrer"
                     className="block text-zinc-600 hover:text-[#ff003c] transition-colors hover:translate-x-1 transform duration-200"
@@ -158,53 +179,61 @@ export function Footer() {
             </button>
           </div>
 
-          <div className="flex gap-4">
-            <motion.a
-              href={siteProfile.githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.1, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-              className="group relative"
-              title={footerContent.iconTitles.github}
-            >
-              <div className="w-10 h-10 bg-black/60 border border-[#ff003c]/20 flex items-center justify-center hover:border-[#ff003c]/60 transition-all">
-                <Github className="w-4 h-4 text-zinc-600 group-hover:text-[#ff003c] transition-colors" />
-              </div>
-            </motion.a>
+          <div className="grid w-full gap-3 md:w-auto md:grid-cols-3">
+            {SOCIAL_LINKS.map((item) => {
+              const Icon = item.icon;
+              const title =
+                item.label === "LinkedIn"
+                  ? footerContent.iconTitles.linkedin
+                  : item.label === "GitHub"
+                    ? footerContent.iconTitles.github
+                    : footerContent.iconTitles.dribbble;
 
-            <motion.a
-              href={siteProfile.repoUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.1, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-              className="group relative"
-              title={footerContent.iconTitles.repo}
-            >
-              <div className="w-10 h-10 bg-black/60 border border-[#ff003c]/20 flex items-center justify-center hover:border-[#ff003c]/60 transition-all">
-                <Layers3 className="w-4 h-4 text-zinc-600 group-hover:text-[#ff003c] transition-colors" />
-              </div>
-            </motion.a>
-
-            <motion.button
-              onClick={() => document.getElementById("archive")?.scrollIntoView({ behavior: "smooth" })}
-              whileHover={{ scale: 1.1, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-              className="group relative"
-              title={footerContent.iconTitles.archive}
-            >
-              <div className="w-10 h-10 bg-black/60 border border-[#ff003c]/20 flex items-center justify-center hover:border-[#ff003c]/60 transition-all">
-                <FolderArchive className="w-4 h-4 text-zinc-600 group-hover:text-[#ff003c] transition-colors" />
-              </div>
-            </motion.button>
+              return (
+                <motion.a
+                  key={item.label}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ y: -2 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="group flex min-w-[180px] items-center justify-between border border-[#ff003c]/18 bg-black/95 px-4 py-3 transition-all hover:border-[#ff003c]/60"
+                  title={title}
+                >
+                  <span className="flex items-center gap-3">
+                    <span className="flex h-10 w-10 items-center justify-center border border-[#ff003c]/16 bg-[#120008]/97">
+                      <Icon className="h-4 w-4 text-[#ff003c]" />
+                    </span>
+                    <span>
+                      <span className="block font-mono text-[11px] uppercase tracking-[0.18em] text-white">
+                        {item.label}
+                      </span>
+                      <span className="block font-mono text-[10px] text-zinc-500">{item.handle}</span>
+                    </span>
+                  </span>
+                  <ArrowUpRight className="h-4 w-4 text-zinc-600 transition-colors group-hover:text-white" />
+                </motion.a>
+              );
+            })}
           </div>
 
           <div className="flex items-center gap-2">
-            <div className="w-2 h-2 bg-[#ff003c] animate-pulse rounded-full shadow-[0_0_8px_#ff003c]" />
-            <span className="font-mono text-[10px] tracking-widest text-[#ff003c] uppercase">
-              {footerContent.statusLabel}
-            </span>
+            <div className="text-right">
+              <div className="flex items-center justify-end gap-2">
+                <div className="w-2 h-2 bg-[#ff003c] animate-pulse rounded-full shadow-[0_0_8px_#ff003c]" />
+                <span className="font-mono text-[10px] tracking-widest text-[#ff003c] uppercase">
+                  {footerContent.statusLabel}
+                </span>
+              </div>
+              <a
+                href={siteProfile.repoUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-2 inline-block font-mono text-[10px] uppercase tracking-[0.18em] text-zinc-600 transition-colors hover:text-[#ff003c]"
+              >
+                Source Repo
+              </a>
+            </div>
           </div>
         </div>
       </div>

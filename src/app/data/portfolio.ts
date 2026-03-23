@@ -1,22 +1,27 @@
 import type { ElementType } from "react";
 import {
-  Activity,
+  Archive,
   Bot,
+  BriefcaseBusiness,
   Box,
   Clapperboard,
+  Cpu,
   Database,
   FileCode2,
   Figma,
   Film,
+  Fingerprint,
   FolderArchive,
   FolderKanban,
   Gauge,
+  House,
   Layers3,
   Mail,
   MapPin,
   Menu,
   Music,
   PencilRuler,
+  Send,
   Video,
   WandSparkles,
   Wrench,
@@ -93,6 +98,8 @@ const content = rawContent as {
     summary: string;
     navVersion: string;
     githubUrl: string;
+    linkedinUrl: string;
+    dribbbleUrl: string;
     repoUrl: string;
   };
   navigation: {
@@ -157,7 +164,7 @@ const content = rawContent as {
     currentStateLines: string[];
     copyright: string;
     statusLabel: string;
-    iconTitles: { github: string; repo: string; archive: string };
+    iconTitles: { linkedin: string; github: string; dribbble: string };
   };
 };
 
@@ -179,12 +186,15 @@ const toolIconMap: Record<string, ElementType> = {
 };
 
 const navIconMap: Record<string, ElementType> = {
-  Activity,
-  Database,
-  FolderArchive,
+  Archive,
+  BriefcaseBusiness,
+  Cpu,
+  Fingerprint,
+  House,
   Mail,
   MapPin,
   Menu,
+  Send,
 };
 
 export const siteContent = content;
@@ -199,6 +209,8 @@ export const siteProfile = {
   summary: content.profile.summary,
   navVersion: content.profile.navVersion,
   githubUrl: content.profile.githubUrl,
+  linkedinUrl: content.profile.linkedinUrl,
+  dribbbleUrl: content.profile.dribbbleUrl,
   repoUrl: content.profile.repoUrl,
 };
 

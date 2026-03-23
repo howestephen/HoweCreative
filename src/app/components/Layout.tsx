@@ -2,6 +2,7 @@ import { Outlet } from "react-router";
 import { Link } from "react-router";
 
 import { siteProfile } from "../data/portfolio";
+import { EscapeGlyphs } from "./EscapeGlyphs";
 import { Footer } from "./Footer";
 import { MatrixRainBackdrop } from "./MatrixRainBackdrop";
 import { SideNav } from "./SideNav";
@@ -11,14 +12,14 @@ export function Layout() {
   return (
     <div className="relative min-h-screen overflow-x-hidden bg-[#050505] text-zinc-300 selection:bg-[#ff003c] selection:text-white">
       <TechnicalDecorations />
-      <MatrixRainBackdrop className="pointer-events-none fixed inset-0 z-[1] opacity-48" />
+      <MatrixRainBackdrop className="pointer-events-none absolute inset-0 z-[1] opacity-48" />
       <MatrixRainBackdrop
         mode="content"
-        className="pointer-events-none fixed inset-0 z-[2] opacity-72 mix-blend-screen"
+        className="pointer-events-none absolute inset-0 z-[2] opacity-72 mix-blend-screen"
       />
 
       <div
-        className="fixed inset-0 z-0 pointer-events-none opacity-16"
+        className="absolute inset-0 z-0 pointer-events-none opacity-16"
         style={{
           backgroundImage:
             "linear-gradient(rgba(255, 0, 60, 0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 0, 60, 0.2) 1px, transparent 1px)",
@@ -26,10 +27,10 @@ export function Layout() {
         }}
       />
 
-      <div className="absolute inset-x-0 top-0 z-[70] flex items-start justify-between px-4 py-4 md:px-6">
+      <div className="fixed inset-x-0 top-0 z-[90] flex items-start justify-between px-4 py-4 md:px-6">
         <Link
           to="/"
-          className="headline-font pointer-events-auto inline-flex items-center border border-[#ff003c]/25 bg-black/70 px-4 py-3 text-sm uppercase tracking-[0.24em] text-white shadow-[0_12px_30px_rgba(0,0,0,0.24)] backdrop-blur-md"
+          className="headline-font pointer-events-auto inline-flex h-[58px] items-center border border-[#ff003c]/35 bg-black/84 px-5 text-sm uppercase tracking-[0.24em] text-white shadow-[0_18px_45px_rgba(0,0,0,0.34)] backdrop-blur-md"
         >
           {siteProfile.brandPrefix}
           <span className="ml-2 text-[#ff003c]">{siteProfile.brandSuffix}</span>
@@ -37,7 +38,8 @@ export function Layout() {
         <SideNav />
       </div>
 
-      <main className="relative z-10 w-full">
+      <EscapeGlyphs />
+      <main className="relative w-full">
         <Outlet />
       </main>
 

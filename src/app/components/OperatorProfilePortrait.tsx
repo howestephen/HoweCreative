@@ -65,6 +65,35 @@ function createPortraitMaterial() {
   });
 }
 
+function createWhiteMaterial() {
+  return new THREE.ShaderMaterial({
+    uniforms: {
+      uTime: { value: 0 },
+      uBase: { value: new THREE.Color("#c8c8c8") },
+      uAccent: { value: new THREE.Color("#ffffff") },
+      uGlow: { value: new THREE.Color("#ffffff") },
+    },
+    vertexShader,
+    fragmentShader,
+  });
+}
+
+function createBlackMaterial() {
+  return new THREE.ShaderMaterial({
+    uniforms: {
+      uTime: { value: 0 },
+      uBase: { value: new THREE.Color("#080808") },
+      uAccent: { value: new THREE.Color("#1a1a1a") },
+      uGlow: { value: new THREE.Color("#333333") },
+    },
+    vertexShader,
+    fragmentShader,
+  });
+}
+
+const WHITE_MESH_RE = /White_Plastic/i;
+const BLACK_MESH_RE = /Tech.Glass|Camera.Paint/i;
+
 type PortraitCameraConfig = {
   position: [number, number, number];
   target: [number, number, number];
@@ -98,8 +127,17 @@ function buildPortraitBundle(gltfScene: THREE.Group): PortraitBundle {
       return;
     }
 
-    child.material = createPortraitMaterial();
-    shaderMaterials.push(child.material as THREE.ShaderMaterial);
+    let ancestor: THREE.Object3D | null = child;
+    let isWhitePart = false;
+    let isBlackPart = false;
+    while (ancestor) {
+      if (WHITE_MESH_RE.test(ancestor.name)) { isWhitePart = true; break; }
+      if (BLACK_MESH_RE.test(ancestor.name)) { isBlackPart = true; break; }
+      ancestor = ancestor.parent;
+    }
+    const mat = isWhitePart ? createWhiteMaterial() : isBlackPart ? createBlackMaterial() : createPortraitMaterial();
+    child.material = mat;
+    shaderMaterials.push(mat);
     child.castShadow = false;
     child.receiveShadow = false;
   });
@@ -113,7 +151,7 @@ function buildPortraitBundle(gltfScene: THREE.Group): PortraitBundle {
   const size = bounds.getSize(new THREE.Vector3());
   // Scale: model normalised to 2.8 units tall.
   // Camera pulls back enough to show head + full shoulders, with torso cropping at bottom.
-  const scale = 2.8 / (size.y || 1);
+  const scale = 3.4 / (size.y || 1);
   const normalizedSize = size.clone().multiplyScalar(scale);
   const portraitFov = 48;
 
@@ -122,17 +160,17 @@ function buildPortraitBundle(gltfScene: THREE.Group): PortraitBundle {
   subjectClone.rotation.y = -0.2;
   wrapper.add(subjectClone);
 
-  // Model centred at 0 → top of head ≈ +1.4, waist ≈ 0, feet ≈ -1.4
-  // Camera at stomach level looking up to face/chest — shows crown→chest in frame
-  const targetY = normalizedSize.y * 0.22;  // look at upper chest / neck
-  const camY    = normalizedSize.y * -0.05; // camera slightly below chest
-  const camZ    = normalizedSize.y * 0.88;  // far enough back to see shoulders
+  // Model centred at 0 → top of head ≈ +1.7, waist ≈ 0, feet ≈ -1.7
+  // Camera near waist aiming at chin — pushes head/cap into upper half of frame
+  const targetY = normalizedSize.y * 0.08;  // aim at neck/upper chest
+  const camY    = normalizedSize.y * 0.03;  // camera just below neck
+  const camZ    = normalizedSize.y * 0.92;  // pulled back to show chest text
 
   return {
     scene: wrapper,
     shaderMaterials,
     camera: {
-      position: [0.28, camY, camZ],
+      position: [0.14, camY, camZ],
       target: [0.04, targetY, 0.0],
       fov: portraitFov,
       near: 0.1,
@@ -199,7 +237,7 @@ export function OperatorProfilePortrait() {
   const hasWebGL = useWebGLAvailability();
 
   return (
-    <div className="relative overflow-hidden border border-[#ff003c]/22 bg-black/70">
+    <div className="relative overflow-hidden border border-[#ff003c]/22 bg-black/95">
       <div
         className="pointer-events-none absolute inset-0 z-10 opacity-[0.08]"
         style={{
@@ -223,7 +261,7 @@ export function OperatorProfilePortrait() {
           />
         )}
       </div>
-      <div className="relative z-20 border-t border-[#ff003c]/18 bg-black/78 px-4 py-3">
+      <div className="relative z-20 border-t border-[#ff003c]/18 bg-black/95 px-4 py-3">
         <div className="flex items-center justify-between gap-3 font-mono text-[10px] uppercase tracking-[0.2em] text-zinc-500">
           <span>{operatorProfileContent.portraitFooterLeft}</span>
           <span className="text-[#ff003c]">{operatorProfileContent.portraitFooterRight}</span>

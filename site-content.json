@@ -8,20 +8,23 @@
     "brandSuffix": "_CREATIVE",
     "role": "Creative Systems Designer",
     "headline": "Designing product systems, media pipelines, and AI-assisted workflows with a UX-first approach.",
-    "summary": "A portfolio structured as an operating system rather than a gallery. Case files expose the underlying systems: product logic, media pipelines, and technical constraints that produce repeatable outputs.",
+    "summary": "This portfolio has been designed using Figma Make and A.I. tooling. All built from a custom project template designed to cover all facets of QA and development. The template produces agent driven projects that can run autonmously without drift or inefficient compute usage.",
     "navVersion": "portfolio_system_v1.2",
     "githubUrl": "https://github.com/howestephen",
+    "linkedinUrl": "https://www.linkedin.com/in/howestephen/",
+    "dribbbleUrl": "https://dribbble.com/howestephen",
     "repoUrl": "https://github.com/howestephen/Figmaportfolio2026"
   },
   "navigation": {
     "menuButtonLabel": "Menu",
-    "panelTitle": "Navigation Box",
+    "panelTitle": "Site Navigation Matrix",
     "items": [
-      { "id": "hero", "icon": "MapPin", "label": "Intro" },
-      { "id": "case-studies", "icon": "Activity", "label": "Case Files" },
-      { "id": "tools-skills", "icon": "Database", "label": "Tools" },
-      { "id": "contact", "icon": "Mail", "label": "Contact" },
-      { "id": "archive", "icon": "FolderArchive", "label": "Archive" }
+      { "id": "hero", "icon": "House", "label": "Landing" },
+      { "id": "operator-profile", "icon": "Fingerprint", "label": "Profile" },
+      { "id": "case-studies", "icon": "BriefcaseBusiness", "label": "Case Studies" },
+      { "id": "tools-skills", "icon": "Cpu", "label": "Tools + Skills" },
+      { "id": "contact", "icon": "Send", "label": "Contact" },
+      { "id": "archive", "icon": "Archive", "label": "Archive" }
     ]
   },
   "hero": {
@@ -90,9 +93,9 @@
         "category": "Media System / Motion Pipeline",
         "year": "2024",
         "status": "Live",
-        "shortDescription": "A scalable video and 3D system for token launches, education, and partner content.",
-        "fullDescription": "A production system designed to generate consistent, high-frequency output across video, 3D, and motion graphics using modular assets and reusable structures.",
-        "tags": ["Cinema 4D", "After Effects", "Motion Systems", "3D"],
+        "shortDescription": "A scalable video and 3D system for product launches, educational content, and corporate announcements.",
+        "fullDescription": "A production system designed to generate consistent, high-frequency output across video, 3D, and motion graphics using modular assets and reusable tooling.",
+        "tags": ["Cinema 4D", "Redshift", "After Effects", "Adobe Illustrator", "Adobe Photoshop"],
         "image": "/case-studies/uncx-video-system/frame-library-2.png",
         "media": [
           { "type": "image", "src": "/case-studies/uncx-video-system/frame-library-2.png", "alt": "Frame library overview" }
@@ -427,9 +430,10 @@
   "footer": {
     "quickAccessTitle": "Quick Access",
     "quickAccessItems": [
-      { "label": "Intro", "targetId": "hero" },
-      { "label": "Case Files", "targetId": "case-studies" },
-      { "label": "Tools", "targetId": "tools-skills" },
+      { "label": "Landing", "targetId": "hero" },
+      { "label": "Profile", "targetId": "operator-profile" },
+      { "label": "Case Studies", "targetId": "case-studies" },
+      { "label": "Tools + Skills", "targetId": "tools-skills" },
       { "label": "Contact", "targetId": "contact" },
       { "label": "Archive", "targetId": "archive" }
     ],
@@ -439,12 +443,12 @@
       "Based in United Kingdom",
       "Design + build focus"
     ],
-    "copyright": "© 2026 Stephen Howe",
+    "copyright": "© 1984 Stephen Howe",
     "statusLabel": "Online",
     "iconTitles": {
+      "linkedin": "LinkedIn",
       "github": "GitHub",
-      "repo": "Repository",
-      "archive": "Archive"
+      "dribbble": "Dribbble"
     }
   }
 }
