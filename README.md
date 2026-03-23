@@ -27,8 +27,10 @@ The project is content-driven through a single JSON source, with animated UI sec
 1. Install dependencies:
 
 ```bash
-npm install --legacy-peer-deps
+npm install
 ```
+
+(The repo includes `.npmrc` with `legacy-peer-deps=true` so installs match Vercel and tolerate React 19 peer ranges.)
 
 2. Start the frontend dev server:
 
