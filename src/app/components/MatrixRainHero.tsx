@@ -18,7 +18,7 @@ const HOLD_HEAD = 6;
 const HOLD_SKILL = 4.4;
 const MORPH_DUR = 2.4;
 const MORPH_SEGMENTS = 1200;
-const TARGET_MODEL_HEIGHT = 3.2;
+const TARGET_MODEL_HEIGHT = 2.56;
 const WIRE_COLOR = new THREE.Color("#fff4f7");
 const WIRE_MORPH_COLOR = new THREE.Color("#ff365e");
 const HERO_MODEL_SEQUENCE = [
@@ -32,12 +32,12 @@ const HERO_MODEL_SEQUENCE = [
 ] as const;
 const HERO_MODEL_TRANSFORMS = [
   { rotation: [-0.12, 0, 0] as [number, number, number] },             // head — faces forward
-  { rotation: [0, 0, 0] as [number, number, number] },                 // design — straight on
-  { rotation: [0, 0, 0] as [number, number, number] },                 // prototyping — straight on
-  { rotation: [0, 0, 0] as [number, number, number] },                 // motion — straight on
-  { rotation: [0, 0, 0] as [number, number, number] },                 // 3D generalist — straight on
+  { rotation: [0, Math.PI * 1.5, 0] as [number, number, number] },     // design — additional quarter turn toward camera
+  { rotation: [0, Math.PI * 0.5, 0] as [number, number, number] },     // prototyping — front toward camera
+  { rotation: [Math.PI * 0.5, 0, 0] as [number, number, number] },     // motion — VHS front faces camera
+  { rotation: [0, -Math.PI * 0.5, 0] as [number, number, number] },    // 3D generalist — quarter turn toward camera
   { rotation: [0.22, Math.PI * 0.78, 0] as [number, number, number] }, // laptop — open lid angle
-  { rotation: [0, 0, 0] as [number, number, number] },                 // headphones — straight on
+  { rotation: [0, -Math.PI * 0.5, 0] as [number, number, number] },    // headphones — turn toward camera
 ] as const;
 
 function buildCharAtlas(): THREE.CanvasTexture {
@@ -57,6 +57,60 @@ function buildCharAtlas(): THREE.CanvasTexture {
   ctx.fillRect(0, 0, size, size);
 
   const chars = [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H",
+    "I",
+    "J",
+    "K",
+    "L",
+    "M",
+    "N",
+    "O",
+    "P",
+    "Q",
+    "R",
+    "S",
+    "T",
+    "U",
+    "V",
+    "W",
+    "X",
+    "Y",
+    "Z",
+    "0",
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "£",
+    "%",
+    "&",
+    "@",
+    "?",
+    "!",
+    "+",
+    "-",
+    "=",
+    "/",
+    "\\",
+    "<",
+    ">",
+    "[",
+    "]",
+    "{",
+    "}",
+    "*",
     "ア",
     "イ",
     "ウ",
@@ -67,60 +121,6 @@ function buildCharAtlas(): THREE.CanvasTexture {
     "ク",
     "ケ",
     "コ",
-    "サ",
-    "シ",
-    "ス",
-    "セ",
-    "ソ",
-    "タ",
-    "チ",
-    "ツ",
-    "テ",
-    "ト",
-    "ナ",
-    "ニ",
-    "ヌ",
-    "ネ",
-    "ノ",
-    "ハ",
-    "ヒ",
-    "フ",
-    "ヘ",
-    "ホ",
-    "マ",
-    "ミ",
-    "ム",
-    "メ",
-    "モ",
-    "ヤ",
-    "ユ",
-    "ヨ",
-    "ラ",
-    "ル",
-    "0",
-    "1",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "!",
-    "@",
-    "#",
-    "$",
-    "%",
-    "<",
-    ">",
-    "{",
-    "}",
-    "|",
-    "/",
-    "\\",
-    "+",
-    "-",
-    "*",
-    "&",
   ];
 
   ctx.fillStyle = "#fff";
@@ -149,6 +149,7 @@ const fragmentShader = /* glsl */ `
   varying float vAlpha;
   varying float vTrailT;
   varying float vStick;
+  varying float vWhiteFlash;
 
   void main() {
     float decodeSpeed = mix(8.5, 0.3, vTrailT);
@@ -162,12 +163,15 @@ const fragmentShader = /* glsl */ `
 
     if (glyph < 0.1) discard;
 
-    // Deep saturated red at head, dark red fading in tail, amber-red when settled/decoded
+    // Deep saturated red at head, dark red fading in tail, amber-red when settled/decoded.
+    // A small fraction of decoded glyphs lock to white as their final resolved character.
     vec3 headColor   = vec3(1.0,  0.06, 0.18);
     vec3 tailColor   = vec3(0.45, 0.01, 0.06);
     vec3 settleColor = vec3(0.88, 0.26, 0.04);
+    vec3 whiteColor  = vec3(1.0, 1.0, 1.0);
     vec3 color = mix(tailColor, headColor, pow(1.0 - vTrailT, 2.5));
     color = mix(color, settleColor, vStick * 0.75);
+    color = mix(color, whiteColor, vWhiteFlash);
     color *= vBrightness;
     gl_FragColor = vec4(color, glyph * vAlpha);
   }
@@ -194,6 +198,7 @@ const bgVertexShader = /* glsl */ `
   varying float vAlpha;
   varying float vTrailT;
   varying float vStick;
+  varying float vWhiteFlash;
 
   void main() {
     float speed = uBaseSpeed * (0.78 + aSpeedJitter * 0.44);
@@ -212,6 +217,7 @@ const bgVertexShader = /* glsl */ `
     // ~45% of mid-tail positions settle (decode) — lock onto a character
     float settleBand = smoothstep(0.08, 0.5, trailT) * (1.0 - smoothstep(0.82, 1.0, trailT));
     float settle = step(0.55, fract(sin(aGlowSeed * 31.7 + floor(uTime * 0.32 + aColX * 0.65)) * 43758.5453)) * settleBand;
+    float whiteFlash = step(0.90, fract(sin(aGlowSeed * 71.3 + aCharIndex * 1.7 + floor(uTime * 0.22)) * 24634.6345)) * settle;
 
     // Exponential decay from head (bright) to tail (near-invisible)
     float decay = exp(-trailT * 4.5);
@@ -226,6 +232,7 @@ const bgVertexShader = /* glsl */ `
     vCharIndex = aCharIndex;
     vTrailT = trailT;
     vStick = settle;
+    vWhiteFlash = whiteFlash;
     gl_Position = projectionMatrix * modelViewMatrix * vec4(worldPos, 1.0);
 
     float dist = length((modelViewMatrix * vec4(worldPos, 1.0)).xyz);
@@ -441,11 +448,15 @@ function buildOrientedMorphTarget(scene: THREE.Group, modelIndex: number) {
   return buildMorphTarget(wrapper);
 }
 
-function buildLineColors(vertexCount: number) {
+function buildLineColors(vertexCount: number, accentRatio = 0.4) {
   const colors = new Float32Array(vertexCount * 3);
+  const accentModulo = 10;
+  const accentThreshold = Math.max(1, Math.min(accentModulo - 1, Math.round(accentRatio * accentModulo)));
 
   for (let index = 0; index < vertexCount; index += 2) {
-    const color = Math.random() > 0.30 ? WIRE_COLOR : WIRE_MORPH_COLOR;
+    const pairIndex = index / 2;
+    const accentBand = pairIndex % accentModulo < accentThreshold;
+    const color = accentBand ? WIRE_MORPH_COLOR : WIRE_COLOR;
 
     colors[index * 3] = color.r;
     colors[index * 3 + 1] = color.g;
@@ -489,17 +500,24 @@ const MorphingWireHero = React.memo(function MorphingWireHero({
     () => gltfs.map((gltf, index) => buildOrientedMorphTarget(gltf.scene, index)),
     [gltfs],
   );
+  const colorTargets = useMemo(
+    () =>
+      HERO_MODEL_SEQUENCE.map((_, index) =>
+        buildLineColors(MORPH_SEGMENTS * 2, index === 1 ? 0.6 : 0.4),
+      ),
+    [],
+  );
 
   const geometry = useMemo(() => {
     const initialPositions = targets[0] ? targets[0].slice() : new Float32Array(MORPH_SEGMENTS * 6);
+    const initialColors = colorTargets[0]
+      ? colorTargets[0].slice()
+      : new Float32Array(MORPH_SEGMENTS * 2 * 3);
     const bufferGeometry = new THREE.BufferGeometry();
     bufferGeometry.setAttribute("position", new THREE.BufferAttribute(initialPositions, 3));
-    bufferGeometry.setAttribute(
-      "color",
-      new THREE.BufferAttribute(buildLineColors(MORPH_SEGMENTS * 2), 3),
-    );
+    bufferGeometry.setAttribute("color", new THREE.BufferAttribute(initialColors, 3));
     return bufferGeometry;
-  }, [targets]);
+  }, [colorTargets, targets]);
 
   useEffect(() => {
     onSkillChange(HERO_MODEL_SEQUENCE[0].label);
@@ -517,8 +535,11 @@ const MorphingWireHero = React.memo(function MorphingWireHero({
     const positionAttribute = geometryObject?.getAttribute("position") as
       | THREE.BufferAttribute
       | undefined;
+    const colorAttribute = geometryObject?.getAttribute("color") as
+      | THREE.BufferAttribute
+      | undefined;
 
-    if (!root || !positionAttribute || targets.length === 0) {
+    if (!root || !positionAttribute || !colorAttribute || targets.length === 0) {
       return;
     }
 
@@ -548,12 +569,21 @@ const MorphingWireHero = React.memo(function MorphingWireHero({
     const sourcePositions = targets[currentIndex];
     const targetPositions = phaseRef.current === "hold" ? targets[currentIndex] : targets[nextIndex];
     const destination = positionAttribute.array as Float32Array;
+    const sourceColors = colorTargets[currentIndex];
+    const targetColors = phaseRef.current === "hold" ? colorTargets[currentIndex] : colorTargets[nextIndex];
+    const colorDestination = colorAttribute.array as Float32Array;
 
     for (let index = 0; index < destination.length; index += 1) {
       destination[index] = THREE.MathUtils.lerp(sourcePositions[index], targetPositions[index], eased);
     }
 
     positionAttribute.needsUpdate = true;
+
+    for (let index = 0; index < colorDestination.length; index += 1) {
+      colorDestination[index] = THREE.MathUtils.lerp(sourceColors[index], targetColors[index], eased);
+    }
+
+    colorAttribute.needsUpdate = true;
 
     if (completedMorph) {
       sequenceRef.current = nextIndex;
@@ -588,6 +618,7 @@ export function MatrixRainHero() {
   const [activeSkill, setActiveSkill] = useState("");
   const hasWebGL = useWebGLAvailability();
   const atlas = useMemo(() => buildCharAtlas(), []);
+  const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
 
   useEffect(() => {
     return () => {
@@ -598,13 +629,17 @@ export function MatrixRainHero() {
   return (
     <div
       id="hero"
-      className="relative flex min-h-[100svh] w-full items-center justify-center overflow-hidden bg-black"
+      className="relative z-[5] flex min-h-[100svh] w-full items-end justify-center md:items-center overflow-hidden bg-black"
     >
       <div className="absolute inset-0 z-0">
         {hasWebGL ? (
-          <Canvas camera={{ position: [0, 0.3, 5.5], fov: 50 }} dpr={[1, 1.5]} performance={{ min: 0.5 }}>
+          <Canvas
+            camera={{ position: [0, isMobile ? 0.15 : 0.18, isMobile ? 6.5 : 5.5], fov: isMobile ? 52 : 50 }}
+            dpr={[1, 1.5]}
+            performance={{ min: 0.5 }}
+          >
             <BackgroundRain atlas={atlas} />
-            <group position={[0, 0.75, 0]}>
+            <group position={[0, isMobile ? 0.65 : 0.82, 0]}>
               <MorphingWireHero onSkillChange={setActiveSkill} />
             </group>
           </Canvas>
@@ -627,14 +662,14 @@ export function MatrixRainHero() {
         }}
       />
 
-      <div className="pointer-events-none relative z-20 flex w-full justify-center px-6 pt-[41vh] md:pt-[43vh] lg:pt-[45vh]">
+      <div className="pointer-events-none relative z-20 flex w-full justify-center px-6 pb-10 md:pb-0 md:pt-[45vh] lg:pt-[47vh]">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.5 }}
           className="max-w-5xl text-center"
         >
-          <div className="mb-3 font-mono uppercase tracking-[0.3em] text-[#ff003c] opacity-70">
+          <div className="mb-3 font-mono uppercase tracking-[0.3em] text-white">
             {siteProfile.role}
           </div>
           <h1 className="mb-4">
@@ -643,9 +678,24 @@ export function MatrixRainHero() {
               <span className="text-[#ff003c]">{siteProfile.brandSuffix}</span>
             </span>
           </h1>
-          <p className="mx-auto mb-8 max-w-2xl font-mono text-base text-zinc-400 md:text-lg lg:text-xl">
-            {siteProfile.headline}
-          </p>
+          <div className="mx-auto mb-6 max-w-2xl border border-[#ff003c]/30 bg-black/95 px-5 py-4 md:mb-8">
+            <p className="font-mono text-base text-zinc-400 md:text-lg lg:text-xl">
+              {siteProfile.headline}
+            </p>
+          </div>
+
+          {/* Mobile-only scroll indicator — flows below text so spacing is even */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 2, repeat: Infinity, repeatType: "reverse" }}
+            className="flex flex-col items-center md:hidden"
+          >
+            <div className="mb-2 font-mono text-xs uppercase tracking-widest text-[#ff003c]">
+              {heroContent.scrollLabel}
+            </div>
+            <div className="h-8 w-px bg-gradient-to-b from-[#ff003c] to-transparent" />
+          </motion.div>
         </motion.div>
       </div>
 
@@ -657,18 +707,19 @@ export function MatrixRainHero() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.45 }}
-            className="pointer-events-none absolute left-1/2 top-4 z-[75] -translate-x-1/2 border border-white/15 bg-black/55 px-3 py-3 font-mono text-[11px] uppercase tracking-[0.3em] text-white shadow-[0_12px_30px_rgba(0,0,0,0.2)] backdrop-blur-md"
+            className="pointer-events-none absolute left-1/2 top-4 z-[75] hidden -translate-x-1/2 border border-white/15 bg-black/55 px-3 py-3 font-mono text-[11px] uppercase tracking-[0.3em] text-white shadow-[0_12px_30px_rgba(0,0,0,0.2)] backdrop-blur-md md:block"
           >
             {activeSkill}
           </motion.div>
         ) : null}
       </AnimatePresence>
 
+      {/* Desktop-only scroll indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 2, repeat: Infinity, repeatType: "reverse" }}
-        className="pointer-events-none absolute bottom-8 left-1/2 z-20 -translate-x-1/2"
+        className="pointer-events-none absolute bottom-8 left-1/2 z-20 hidden -translate-x-1/2 md:block"
       >
         <div className="mb-2 font-mono text-xs uppercase tracking-widest text-[#ff003c]">
           {heroContent.scrollLabel}

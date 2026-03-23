@@ -5,7 +5,7 @@ import { OperatorProfilePortrait } from "./OperatorProfilePortrait";
 
 export function OperatorProfile() {
   return (
-    <section id="operator-profile" className="relative border-t border-[#ff003c]/15 px-6 py-24 md:py-28">
+    <section id="operator-profile" className="relative z-[20] border-t border-[#ff003c]/15 px-6 py-24 md:py-28">
       <div className="mx-auto max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -31,7 +31,7 @@ export function OperatorProfile() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.55 }}
-            className="relative overflow-hidden border border-[#ff003c]/22 bg-black/55 p-5 md:p-6"
+            className="relative overflow-hidden border border-[#ff003c]/22 bg-black/92 p-5 md:p-6"
           >
             <div
               className="pointer-events-none absolute inset-0 opacity-[0.07]"
@@ -50,7 +50,7 @@ export function OperatorProfile() {
 
               <div className="mt-5 grid gap-3 sm:grid-cols-2">
                 {operatorProfileContent.quickFacts.map((fact) => (
-                  <div key={fact.label} className="border border-[#ff003c]/16 bg-black/40 px-4 py-4">
+                  <div key={fact.label} className="border border-[#ff003c]/16 bg-black/92 px-4 py-4">
                     <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-zinc-500">
                       {fact.label}
                     </div>
@@ -59,7 +59,7 @@ export function OperatorProfile() {
                 ))}
               </div>
 
-              <div className="mt-5 border border-[#ff003c]/16 bg-[#120008]/60 p-4">
+              <div className="mt-5 border border-[#ff003c]/16 bg-[#120008]/95 p-4">
                 <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-zinc-500">
                   {operatorProfileContent.notesTitle}
                 </div>
@@ -78,7 +78,7 @@ export function OperatorProfile() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.06 }}
-                className="relative overflow-hidden border border-[#ff003c]/20 bg-black/52 p-5 md:p-6"
+                className="relative overflow-hidden border border-[#ff003c]/20 bg-black/92 p-5 md:p-6"
               >
                 <div
                   className="pointer-events-none absolute inset-0 opacity-[0.05]"

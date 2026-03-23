@@ -15,32 +15,30 @@ function randomGlyph() {
 
 interface EscapeFragment {
   id: number;
-  /** % of viewport width */
   x: number;
-  /** % of viewport height — where the fragment starts */
-  startY: number;
-  /** settled tail chars rendered above the live head */
   tailChars: string[];
-  /** px to travel downward before fading out */
   fallPx: number;
   durationMs: number;
+  fontSize: number;   // px — varies like depth layers in the main rain
+  opacity: number;    // base opacity — dimmer = further "back"
 }
 
 let _nextId = 0;
 
 function spawnFragment(): EscapeFragment {
-  const isColumn = Math.random() > 0.38;
-  const tailLen = isColumn ? 1 + Math.floor(Math.random() * 5) : 0;
-  const tailChars = Array.from({ length: tailLen }, randomGlyph);
-  const startY = 5 + Math.random() * 58;
-  const fallPx = window.innerHeight * (1.15 - startY / 100) + 80;
+  const tailLen = 2 + Math.floor(Math.random() * 14);
+  // Size range mirrors the WebGL rain's depth variation: small/distant to large/close
+  const fontSize = 8 + Math.random() * 12; // 8–20px
+  const opacity  = 0.35 + Math.random() * 0.5; // 0.35–0.85
   return {
     id: _nextId++,
-    x: 6 + Math.random() * 88,
-    startY,
-    tailChars,
-    fallPx,
-    durationMs: 3200 + Math.random() * 4000,
+    x: 2 + Math.random() * 96,
+    tailChars: Array.from({ length: tailLen }, randomGlyph),
+    fallPx: window.innerHeight * 1.3 + 120,
+    // Slower columns feel more distant; faster ones feel close — vary widely
+    durationMs: 4000 + Math.random() * 8000,
+    fontSize,
+    opacity,
   };
 }
 
@@ -53,9 +51,8 @@ function FallingFragment({
 }) {
   const [headChar, setHeadChar] = useState(randomGlyph);
 
-  // Head char cycles while falling — still "decoding"
   useEffect(() => {
-    const ms = 280 + Math.random() * 200;
+    const ms = 150 + Math.random() * 250;
     const interval = setInterval(() => setHeadChar(randomGlyph()), ms);
     return () => clearInterval(interval);
   }, []);
@@ -65,40 +62,34 @@ function FallingFragment({
       style={{
         position: "absolute",
         left: `${fragment.x}%`,
-        top: `${fragment.startY}vh`,
+        top: "-12vh",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         fontFamily: "monospace",
-        fontSize: "13px",
+        fontSize: `${fragment.fontSize}px`,
         lineHeight: "1.45",
         pointerEvents: "none",
         userSelect: "none",
+        opacity: fragment.opacity,
       }}
-      initial={{ y: 0, opacity: 1 }}
-      animate={{ y: fragment.fallPx, opacity: 0 }}
+      initial={{ y: 0 }}
+      animate={{ y: fragment.fallPx }}
       transition={{ duration: fragment.durationMs / 1000, ease: "linear" }}
       onAnimationComplete={() => onDone(fragment.id)}
     >
-      {/* Settled tail chars — highest = most faded */}
       {fragment.tailChars.map((char, i) => {
         const t = i / Math.max(fragment.tailChars.length, 1);
         return (
-          <span
-            key={i}
-            style={{
-              color: `rgba(140, 4, 14, ${0.8 - t * 0.6})`,
-            }}
-          >
+          <span key={i} style={{ color: `rgba(180, 4, 16, ${0.95 - t * 0.7})` }}>
             {char}
           </span>
         );
       })}
-      {/* Head — brightest, still cycling */}
       <span
         style={{
-          color: "#e2001a",
-          textShadow: "0 0 7px #e2001a, 0 0 14px rgba(226,0,26,0.35)",
+          color: "#ff1a2e",
+          textShadow: `0 0 ${fragment.fontSize * 0.6}px #ff1a2e`,
           fontWeight: "bold",
         }}
       >
@@ -108,7 +99,8 @@ function FallingFragment({
   );
 }
 
-const MAX_ACTIVE = 8;
+// Max 14 active — roughly 10% of the main rain's 280 column density
+const MAX_ACTIVE = 14;
 
 export function EscapeGlyphs() {
   const [fragments, setFragments] = useState<EscapeFragment[]>([]);
@@ -119,7 +111,8 @@ export function EscapeGlyphs() {
   }, []);
 
   const scheduleNext = useCallback(() => {
-    const delay = 700 + Math.random() * 2000;
+    // Slow spawn: 1.5–4s between new columns, keeping density low
+    const delay = 1500 + Math.random() * 2500;
     timerRef.current = setTimeout(() => {
       setFragments((prev) => {
         if (prev.length >= MAX_ACTIVE) return prev;
@@ -130,6 +123,8 @@ export function EscapeGlyphs() {
   }, []);
 
   useEffect(() => {
+    // Seed with just 3 so the page isn't bare on load
+    setFragments(Array.from({ length: 6 }, spawnFragment));
     scheduleNext();
     return () => {
       if (timerRef.current) clearTimeout(timerRef.current);
@@ -138,7 +133,8 @@ export function EscapeGlyphs() {
 
   return (
     <div
-      className="pointer-events-none fixed inset-0 z-[2] overflow-visible"
+      className="pointer-events-none fixed inset-0 z-[15] overflow-visible"
+      style={{ mixBlendMode: "screen" }}
       aria-hidden="true"
     >
       {fragments.map((f) => (

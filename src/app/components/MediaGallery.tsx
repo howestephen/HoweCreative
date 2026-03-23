@@ -90,7 +90,7 @@ function Thumbnail({
             alt=""
             className="h-full w-full object-cover"
           />
-          <div className="absolute inset-0 flex items-center justify-center bg-black/50">
+          <div className="absolute inset-0 flex items-center justify-center bg-black/95">
             <Youtube className="h-3.5 w-3.5 text-red-500" />
           </div>
         </>
@@ -105,7 +105,7 @@ function Thumbnail({
               <ImageIcon className="h-3 w-3 text-zinc-600" />
             </div>
           )}
-          <div className="absolute inset-0 flex items-center justify-center bg-black/40">
+          <div className="absolute inset-0 flex items-center justify-center bg-black/95">
             <Play className="h-3.5 w-3.5 fill-white text-white" />
           </div>
         </>
@@ -173,7 +173,7 @@ export function MediaGallery({
         {multi && index > 0 && (
           <button
             onClick={() => go(index - 1)}
-            className="absolute left-2 top-1/2 z-10 flex h-8 w-8 -translate-y-1/2 items-center justify-center border border-white/20 bg-black/65 text-white/70 transition-colors hover:border-white/50 hover:text-white"
+            className="absolute left-2 top-1/2 z-10 flex h-8 w-8 -translate-y-1/2 items-center justify-center border border-white/20 bg-black/95 text-white/70 transition-colors hover:border-white/50 hover:text-white"
             aria-label="Previous"
           >
             <ChevronLeft className="h-4 w-4" />
@@ -184,7 +184,7 @@ export function MediaGallery({
         {multi && index < items.length - 1 && (
           <button
             onClick={() => go(index + 1)}
-            className="absolute right-2 top-1/2 z-10 flex h-8 w-8 -translate-y-1/2 items-center justify-center border border-white/20 bg-black/65 text-white/70 transition-colors hover:border-white/50 hover:text-white"
+            className="absolute right-2 top-1/2 z-10 flex h-8 w-8 -translate-y-1/2 items-center justify-center border border-white/20 bg-black/95 text-white/70 transition-colors hover:border-white/50 hover:text-white"
             aria-label="Next"
           >
             <ChevronRight className="h-4 w-4" />
@@ -193,7 +193,7 @@ export function MediaGallery({
 
         {/* Counter badge */}
         {multi && (
-          <div className="absolute bottom-2 right-2 z-10 bg-black/65 px-2 py-0.5 font-mono text-[10px] text-zinc-400">
+          <div className="absolute bottom-2 right-2 z-10 bg-black/95 px-2 py-0.5 font-mono text-[10px] text-zinc-400">
             {index + 1} / {items.length}
           </div>
         )}

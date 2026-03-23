@@ -50,7 +50,7 @@ function CaseStudyFile({
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -8 }}
               onClick={(e) => { e.stopPropagation(); onPrev(); }}
-              className="group flex h-12 w-12 items-center justify-center border border-[#ff003c]/30 bg-black/70 text-zinc-400 transition-colors hover:border-[#ff003c] hover:text-white"
+              className="group flex h-12 w-12 items-center justify-center border border-[#ff003c]/30 bg-black/95 text-zinc-400 transition-colors hover:border-[#ff003c] hover:text-white"
               aria-label="Previous case study"
             >
               <ChevronLeft className="h-5 w-5 transition-transform group-hover:-translate-x-0.5" />
@@ -125,7 +125,7 @@ function CaseStudyFile({
                 [caseStudiesContent.metaLabels.client, project.client],
                 [caseStudiesContent.metaLabels.status, project.status],
               ].map(([label, value]) => (
-                <div key={label} className="border border-[#ff003c]/18 bg-black/40 p-4">
+                <div key={label} className="border border-[#ff003c]/18 bg-black/92 p-4">
                   <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-zinc-500">
                     {label}
                   </div>
@@ -169,7 +169,7 @@ function CaseStudyFile({
             </div>
             <div className="grid gap-4">
               {project.overlaySections.map((section) => (
-                <div key={section.title} className="border border-[#ff003c]/18 bg-black/45 p-4 md:p-5">
+                <div key={section.title} className="border border-[#ff003c]/18 bg-black/92 p-4 md:p-5">
                   <div className="mb-3 font-mono text-[10px] uppercase tracking-[0.2em] text-zinc-500">
                     {section.title}
                   </div>
@@ -191,7 +191,7 @@ function CaseStudyFile({
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 8 }}
               onClick={(e) => { e.stopPropagation(); onNext(); }}
-              className="group flex h-12 w-12 items-center justify-center border border-[#ff003c]/30 bg-black/70 text-zinc-400 transition-colors hover:border-[#ff003c] hover:text-white"
+              className="group flex h-12 w-12 items-center justify-center border border-[#ff003c]/30 bg-black/95 text-zinc-400 transition-colors hover:border-[#ff003c] hover:text-white"
               aria-label="Next case study"
             >
               <ChevronRight className="h-5 w-5 transition-transform group-hover:translate-x-0.5" />
@@ -243,7 +243,7 @@ export function CaseStudies() {
   }, [activeIndex]);
 
   return (
-    <section ref={sectionRef} id="case-studies" className="relative border-t border-[#ff003c]/15 px-6 py-24 md:py-28">
+    <section ref={sectionRef} id="case-studies" className="relative z-[20] border-t border-[#ff003c]/15 px-6 py-24 md:py-28">
       <div className="mx-auto max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -274,7 +274,7 @@ export function CaseStudies() {
               transition={{ duration: 0.45, delay: index * 0.05 }}
               whileHover={{ y: -6 }}
               onClick={() => handleOpen(project.slug)}
-              className="group relative flex min-h-[360px] flex-col overflow-hidden border border-[#ff003c]/20 bg-black/55 text-left backdrop-blur-sm transition-colors hover:border-[#ff003c]/60"
+              className="group relative flex min-h-[360px] flex-col overflow-hidden border border-[#ff003c]/20 bg-black/92 text-left backdrop-blur-sm transition-colors hover:border-[#ff003c]/60"
             >
               <div className="relative h-44 overflow-hidden border-b border-[#ff003c]/15">
                 <ImageWithFallback

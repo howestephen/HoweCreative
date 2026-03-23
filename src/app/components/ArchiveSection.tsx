@@ -32,7 +32,7 @@ export function ArchiveSection() {
   }, [activeTool]);
 
   return (
-    <section ref={sectionRef} id="archive" className="relative border-t border-[#ff003c]/20 px-6 py-24 md:py-28">
+    <section ref={sectionRef} id="archive" className="relative z-[20] border-t border-[#ff003c]/20 px-6 py-24 md:py-28">
       <div className="mx-auto max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -116,7 +116,7 @@ export function ArchiveSection() {
                       className={`border px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.16em] transition-colors ${
                         activeTool === tool
                           ? "border-[#ff003c] bg-[#ff003c] text-black"
-                          : "border-[#ff003c]/18 bg-black/45 text-zinc-300 hover:border-[#ff003c]/50"
+                          : "border-[#ff003c]/18 bg-black/92 text-zinc-300 hover:border-[#ff003c]/50"
                       }`}
                     >
                       {tool}
@@ -145,7 +145,7 @@ export function ArchiveSection() {
 
                   <div className="grid gap-4">
                     {filteredEntries.map((entry) => (
-                      <div key={entry.id} className="grid gap-4 border border-[#ff003c]/18 bg-black/45 p-4 md:grid-cols-[220px_1fr]">
+                      <div key={entry.id} className="grid gap-4 border border-[#ff003c]/18 bg-black/92 p-4 md:grid-cols-[220px_1fr]">
                         <div className="overflow-hidden border border-[#ff003c]/15">
                           <ImageWithFallback
                             src={entry.preview}
