@@ -1,3 +1,5 @@
+import { checkRateLimit } from "./_lib/rate-limit";
+
 type ContactPayload = {
   name?: string;
   email?: string;
@@ -12,9 +14,29 @@ function isValidEmail(value: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 }
 
-export default async function handler(req: any, res: any) {
+interface Request {
+  method?: string;
+  body?: Record<string, unknown>;
+  headers: Record<string, string | string[] | undefined>;
+}
+interface Response {
+  status(code: number): this;
+  json(body: unknown): this;
+  setHeader(name: string, value: string): this;
+}
+
+export default async function handler(req: Request, res: Response) {
   if (req.method !== "POST") {
     return res.status(405).json({ success: false, message: "Method not allowed." });
+  }
+
+  const ip =
+    ((req.headers["x-forwarded-for"] as string) ?? "").split(",")[0].trim() ||
+    "unknown";
+  const limit = checkRateLimit(ip);
+  if (!limit.allowed) {
+    res.setHeader("Retry-After", String(limit.retryAfter));
+    return res.status(429).json({ success: false, message: "Too many requests. Please try again later." });
   }
 
   const accessKey = process.env.EMAIL_ACCESS_KEY;
