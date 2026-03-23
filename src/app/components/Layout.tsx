@@ -1,16 +1,21 @@
+import { useState } from "react";
 import { Outlet } from "react-router";
 import { Link } from "react-router";
 
 import { siteProfile } from "../data/portfolio";
 import { EscapeGlyphs } from "./EscapeGlyphs";
 import { Footer } from "./Footer";
+import { LoadingScreen } from "./LoadingScreen";
 import { MatrixRainBackdrop } from "./MatrixRainBackdrop";
 import { SideNav } from "./SideNav";
 import { TechnicalDecorations } from "./TechnicalDecorations";
 
 export function Layout() {
+  const [showLoader, setShowLoader] = useState(true);
+
   return (
     <div className="relative min-h-screen overflow-x-hidden bg-[#050505] text-zinc-300 selection:bg-[#ff003c] selection:text-white">
+      {showLoader && <LoadingScreen onComplete={() => setShowLoader(false)} />}
       <TechnicalDecorations />
       <MatrixRainBackdrop className="pointer-events-none absolute inset-0 z-[1] opacity-48" />
       <MatrixRainBackdrop
