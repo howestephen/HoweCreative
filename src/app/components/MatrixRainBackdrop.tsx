@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
+import { isIOSLike } from "../lib/device";
 import { useWebGLAvailability } from "../lib/webgl";
 
 const BACKDROP_CHAR_SET = [
@@ -212,6 +213,9 @@ export function MatrixRainBackdrop({
   mode?: "shell" | "content";
 }) {
   const hasWebGL = useWebGLAvailability();
+  /** iOS: avoid extra WebGL contexts — hero 3D keeps one context only. */
+  const allowWebGLBackdrop =
+    hasWebGL && typeof document !== "undefined" && !isIOSLike();
   const atlas = useMemo(() => buildCharAtlas(), []);
   const [isMobile, setIsMobile] = useState(false);
   const [lowPower, setLowPower] = useState(false);
@@ -272,7 +276,7 @@ export function MatrixRainBackdrop({
 
   return (
     <div className={className}>
-      {hasWebGL ? (
+      {allowWebGLBackdrop ? (
         <>
           <Canvas camera={{ position: [0, 0, config.cameraZ], fov: 48 }} dpr={isMobile ? [1, 1.2] : [1, 1.5]}>
             <RainLayer atlas={atlas} {...config.outer} />

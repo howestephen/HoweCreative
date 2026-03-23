@@ -4,6 +4,7 @@ import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 
 import { operatorProfileContent } from "../data/portfolio";
+import { isIOSLike } from "../lib/device";
 import { useWebGLAvailability } from "../lib/webgl";
 
 const vertexShader = /* glsl */ `
@@ -235,6 +236,8 @@ function ModelPortrait() {
 
 export function OperatorProfilePortrait() {
   const hasWebGL = useWebGLAvailability();
+  const usePortraitWebGL =
+    hasWebGL && typeof document !== "undefined" && !isIOSLike();
 
   return (
     <div className="relative overflow-hidden border border-[#ff003c]/22 bg-black/95">
@@ -247,7 +250,7 @@ export function OperatorProfilePortrait() {
         }}
       />
       <div className="relative aspect-[10/8] w-full">
-        {hasWebGL ? (
+        {usePortraitWebGL ? (
           <Canvas camera={{ position: [0, 0.2, 4.6], fov: 28 }} dpr={[1, 1.5]}>
             <color attach="background" args={["#050505"]} />
             <ambientLight intensity={0.2} />
