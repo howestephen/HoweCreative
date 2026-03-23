@@ -9,11 +9,8 @@ import { useWebGLAvailability } from "../lib/webgl";
 
 const LOOP_H = 18.0;
 const BASE_SPEED = 1.5;
-const HERO_RAIN_COLUMNS = 182;
-const HERO_RAIN_ROWS = 16;
+/** Horizontal spread of rain columns — unchanged so composition stays the same. */
 const HERO_RAIN_SPREAD = 16.5;
-const GRID_COLS_X = 14;
-const GRID_DEPTH_LAYERS = 13; // 14 × 13 = 182
 const HOLD_HEAD = 6;
 const HOLD_SKILL = 4.4;
 const MORPH_DUR = 2.4;
@@ -240,15 +237,79 @@ const bgVertexShader = /* glsl */ `
   }
 `;
 
+type HeroRainGridConfig = {
+  gridColsX: number;
+  gridDepthLayers: number;
+  rainRows: number;
+};
+
+function useHeroRainGridConfig(): HeroRainGridConfig {
+  const [config, setConfig] = useState<HeroRainGridConfig>({
+    gridColsX: 14,
+    gridDepthLayers: 13,
+    rainRows: 16,
+  });
+
+  useEffect(() => {
+    const readSaveData = () => {
+      const nav = navigator as Navigator & {
+        connection?: { saveData?: boolean };
+        mozConnection?: { saveData?: boolean };
+        webkitConnection?: { saveData?: boolean };
+      };
+      const c = nav.connection ?? nav.mozConnection ?? nav.webkitConnection;
+      return Boolean(c?.saveData);
+    };
+
+    const compute = (): HeroRainGridConfig => {
+      const narrow = window.matchMedia("(max-width: 767px)").matches;
+      const coarse = window.matchMedia("(pointer: coarse)").matches;
+      const saveData = readSaveData();
+      const cores = typeof navigator.hardwareConcurrency === "number" ? navigator.hardwareConcurrency : 8;
+      const light = saveData || cores <= 4;
+
+      if (narrow || coarse) {
+        return light
+          ? { gridColsX: 9, gridDepthLayers: 8, rainRows: 12 }
+          : { gridColsX: 11, gridDepthLayers: 10, rainRows: 14 };
+      }
+      if (light) {
+        return { gridColsX: 12, gridDepthLayers: 11, rainRows: 15 };
+      }
+      return { gridColsX: 14, gridDepthLayers: 13, rainRows: 16 };
+    };
+
+    const apply = () => setConfig(compute());
+    apply();
+    const mqNarrow = window.matchMedia("(max-width: 767px)");
+    const mqCoarse = window.matchMedia("(pointer: coarse)");
+    mqNarrow.addEventListener("change", apply);
+    mqCoarse.addEventListener("change", apply);
+    return () => {
+      mqNarrow.removeEventListener("change", apply);
+      mqCoarse.removeEventListener("change", apply);
+    };
+  }, []);
+
+  return config;
+}
+
 const BackgroundRain = React.memo(function BackgroundRain({
   atlas,
+  gridColsX,
+  gridDepthLayers,
+  rainRows,
 }: {
   atlas: THREE.CanvasTexture;
+  gridColsX: number;
+  gridDepthLayers: number;
+  rainRows: number;
 }) {
   const materialRef = useRef<THREE.ShaderMaterial>(null);
 
   const attrs = useMemo(() => {
-    const pointCount = HERO_RAIN_COLUMNS * HERO_RAIN_ROWS;
+    const heroRainColumns = gridColsX * gridDepthLayers;
+    const pointCount = heroRainColumns * rainRows;
     const position = new Float32Array(pointCount * 3);
     const colX = new Float32Array(pointCount);
     const colZ = new Float32Array(pointCount);
@@ -260,13 +321,13 @@ const BackgroundRain = React.memo(function BackgroundRain({
     const trailLength = new Float32Array(pointCount);
     const glowSeed = new Float32Array(pointCount);
 
-    for (let column = 0; column < HERO_RAIN_COLUMNS; column += 1) {
-      const columnOffset = column * HERO_RAIN_ROWS;
+    for (let column = 0; column < heroRainColumns; column += 1) {
+      const columnOffset = column * rainRows;
       // Regular 3D grid: evenly spaced X columns, layered Z depths
-      const gx = column % GRID_COLS_X;
-      const gz = Math.floor(column / GRID_COLS_X);
-      const xNorm = GRID_COLS_X > 1 ? gx / (GRID_COLS_X - 1) : 0.5;
-      const zNorm = GRID_DEPTH_LAYERS > 1 ? gz / (GRID_DEPTH_LAYERS - 1) : 0.5;
+      const gx = column % gridColsX;
+      const gz = Math.floor(column / gridColsX);
+      const xNorm = gridColsX > 1 ? gx / (gridColsX - 1) : 0.5;
+      const zNorm = gridDepthLayers > 1 ? gz / (gridDepthLayers - 1) : 0.5;
       const baseX = -HERO_RAIN_SPREAD * 0.5 + xNorm * HERO_RAIN_SPREAD + (Math.random() - 0.5) * 0.55;
       const columnDepth = -7.5 + zNorm * 10.5 + (Math.random() - 0.5) * 0.4;
       const columnSpeed = Math.random();
@@ -275,7 +336,7 @@ const BackgroundRain = React.memo(function BackgroundRain({
       const columnTrail = 8 + Math.floor(Math.random() * 12);
       const columnGlow = Math.random() * 10.0;
 
-      for (let row = 0; row < HERO_RAIN_ROWS; row += 1) {
+      for (let row = 0; row < rainRows; row += 1) {
         const index = columnOffset + row;
         colX[index] = baseX;
         colZ[index] = 0;
@@ -301,7 +362,7 @@ const BackgroundRain = React.memo(function BackgroundRain({
       trailLength,
       glowSeed,
     };
-  }, []);
+  }, [gridColsX, gridDepthLayers, rainRows]);
 
   const uniforms = useMemo(
     () => ({
@@ -616,9 +677,18 @@ const MorphingWireHero = React.memo(function MorphingWireHero({
 
 export function MatrixRainHero() {
   const [activeSkill, setActiveSkill] = useState("");
+  const [isMobile, setIsMobile] = useState(false);
   const hasWebGL = useWebGLAvailability();
   const atlas = useMemo(() => buildCharAtlas(), []);
-  const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+  const rainGrid = useHeroRainGridConfig();
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 767px)");
+    const sync = () => setIsMobile(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
 
   useEffect(() => {
     return () => {
@@ -635,10 +705,15 @@ export function MatrixRainHero() {
         {hasWebGL ? (
           <Canvas
             camera={{ position: [0, isMobile ? 0.15 : 0.18, isMobile ? 6.5 : 5.5], fov: isMobile ? 52 : 50 }}
-            dpr={[1, 1.5]}
+            dpr={isMobile ? [1, 1.2] : [1, 1.5]}
             performance={{ min: 0.5 }}
           >
-            <BackgroundRain atlas={atlas} />
+            <BackgroundRain
+              atlas={atlas}
+              gridColsX={rainGrid.gridColsX}
+              gridDepthLayers={rainGrid.gridDepthLayers}
+              rainRows={rainGrid.rainRows}
+            />
             <group position={[0, isMobile ? 0.65 : 0.82, 0]}>
               <MorphingWireHero onSkillChange={setActiveSkill} />
             </group>

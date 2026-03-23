@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { type FormEvent, useState } from "react";
 import { motion } from "motion/react";
 import { Send, TerminalSquare } from "lucide-react";
 
@@ -11,24 +11,25 @@ export function ContactPanel() {
   const [email, setEmail] = useState("");
   const [projectType, setProjectType] = useState("");
   const [brief, setBrief] = useState("");
+  const [website, setWebsite] = useState("");
   const [status, setStatus] = useState<Status>("idle");
   const [errorMsg, setErrorMsg] = useState("");
 
-  async function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: FormEvent) {
     e.preventDefault();
     setStatus("sending");
     setErrorMsg("");
 
     try {
-      const res = await fetch("https://api.web3forms.com/submit", {
+      const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          access_key: "f5ddad97-dce5-4c83-8882-64d14fadb0ee",
           name,
           email,
-          subject: `Portfolio enquiry from ${name}${projectType ? ` — ${projectType}` : ""}`,
-          message: `Project type: ${projectType || "—"}\n\n${brief}`,
+          projectType,
+          brief,
+          website,
         }),
       });
 
@@ -40,6 +41,7 @@ export function ContactPanel() {
         setEmail("");
         setProjectType("");
         setBrief("");
+        setWebsite("");
       } else {
         setErrorMsg(data.message ?? "Something went wrong.");
         setStatus("error");
@@ -51,7 +53,10 @@ export function ContactPanel() {
   }
 
   return (
-    <section id="contact" className="relative z-[20] border-t border-[#ff003c]/20 px-6 py-24 md:py-28">
+    <section
+      id="contact"
+      className="relative z-[20] border-t border-[#ff003c]/20 px-6 py-24 md:py-28"
+    >
       <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.8fr_1.2fr]">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -66,7 +71,9 @@ export function ContactPanel() {
           <h2 className="text-4xl font-semibold tracking-tight text-white md:text-5xl">
             {contactContent.title}
           </h2>
-          <p className="mt-4 text-sm leading-relaxed text-zinc-400 md:text-base">{contactContent.description}</p>
+          <p className="mt-4 text-sm leading-relaxed text-zinc-400 md:text-base">
+            {contactContent.description}
+          </p>
         </motion.div>
 
         <motion.form
@@ -87,8 +94,12 @@ export function ContactPanel() {
 
           {status === "success" ? (
             <div className="relative z-10 flex flex-col items-center justify-center gap-4 py-16 text-center">
-              <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#ff003c]">Transmission received</div>
-              <p className="text-sm text-zinc-400">Message sent. I'll be in touch soon.</p>
+              <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#ff003c]">
+                Transmission received
+              </div>
+              <p className="text-sm text-zinc-400">
+                Message sent. I'll be in touch soon.
+              </p>
               <button
                 type="button"
                 onClick={() => setStatus("idle")}
@@ -152,6 +163,16 @@ export function ContactPanel() {
                   className="w-full resize-none border border-[#ff003c]/18 bg-black/92 px-4 py-3 text-sm text-white outline-none transition-colors focus:border-[#ff003c]"
                 />
               </label>
+              <input
+                type="text"
+                name="website"
+                tabIndex={-1}
+                autoComplete="off"
+                value={website}
+                onChange={(e) => setWebsite(e.target.value)}
+                className="hidden"
+                aria-hidden="true"
+              />
 
               <div className="mt-1 flex flex-col gap-4 border-t border-[#ff003c]/15 pt-5 md:col-span-2 md:flex-row md:items-center md:justify-between">
                 <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.18em] text-zinc-500">
@@ -168,7 +189,9 @@ export function ContactPanel() {
                   className="inline-flex items-center gap-2 border border-[#ff003c] bg-[#ff003c] px-4 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-black transition-colors hover:bg-[#ff4466] disabled:opacity-50"
                 >
                   <Send className="h-4 w-4" />
-                  {status === "sending" ? "Sending…" : contactContent.submitLabel}
+                  {status === "sending"
+                    ? "Sending…"
+                    : contactContent.submitLabel}
                 </button>
               </div>
             </div>

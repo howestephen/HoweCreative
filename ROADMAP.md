@@ -2,29 +2,29 @@
 
 ## Current Milestone
 
-`1.1 Figma export cleanup and content replacement`
+`2.0 Stabilize portfolio system`
 
 ## Milestones
 
-- `1.1` Figma export cleanup and content replacement
-  - centralize real portfolio data
-  - replace stock/demo imagery with real assets
-  - remove obviously fake metrics, newsletter patterns, and placeholder case studies
+- `2.1` Security and reliability hardening
+  - keep contact secrets server-side only
+  - add explicit rate limiting and anti-spam controls on `/api/contact`
+  - maintain dependency audit hygiene
+- `2.2` Dependency and bundle optimization
+  - remove unused generated UI primitives/dependencies
+  - split heavy visuals where possible
+  - reduce initial bundle size and warning surface
 
-- `1.2` Homepage structure and hierarchy cleanup
-  - make the hero read more clearly
-  - reduce duplicated chrome and UI clutter
-  - tune scroll-to-section behavior and first viewport hierarchy
+- `2.3` UX and architecture refinement
+  - continue simplifying shell/chrome where it does not add value
+  - tune loading sequence timing and accessibility behavior
+  - improve section readability and content hierarchy
 
-- `1.3` Portfolio-specific refinement
-  - sharpen project narratives
-  - customize tool/capability section
-  - improve contact and external link treatment
-
-- `1.4` Design pass
-  - adjust visual logic after the structure is clean
-  - simplify or replace weak export-era effects
+- `2.4` Developer workflow
+  - add lint/typecheck scripts
+  - wire CI checks on PRs
+  - document local API testing (`vercel dev`) and env handling
 
 ## Current Next Step
 
-- Review the live homepage after the real-content pass and decide what to simplify in the hero and section transitions
+- Finish a second-pass dependency trim by deleting unused `src/app/components/ui/*` modules and removing their related packages.

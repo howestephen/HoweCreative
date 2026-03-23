@@ -204,61 +204,6 @@ function RainLayer({
   );
 }
 
-function OverflowRainStreams() {
-  const streams = useMemo(() => {
-    const streamCount = 40;
-    const overflowCount = Math.max(1, Math.round(streamCount * 0.05));
-    const pickChar = () => BACKDROP_CHAR_SET[Math.floor(Math.random() * BACKDROP_CHAR_SET.length)];
-
-    return Array.from({ length: streamCount }, (_, index) => {
-      const isOverflowStream = index < overflowCount;
-      const glyphCount = isOverflowStream
-        ? 120 + Math.floor(Math.random() * 56)
-        : 28 + Math.floor(Math.random() * 28);
-
-      return {
-        id: `overflow-stream-${index}`,
-        left: `${2 + Math.random() * 96}%`,
-        delay: `${Math.random() * 18}s`,
-        duration: `${isOverflowStream ? 24 + Math.random() * 10 : 16 + Math.random() * 7}s`,
-        opacity: isOverflowStream ? 0.3 + Math.random() * 0.16 : 0.12 + Math.random() * 0.1,
-        glyphs: Array.from({ length: glyphCount }, pickChar).join("\n"),
-      };
-    });
-  }, []);
-
-  return (
-    <>
-      <style>{`
-        @keyframes matrix-overflow-fall {
-          0% { transform: translate3d(0, -14rem, 0); }
-          100% { transform: translate3d(0, calc(100% + 18rem), 0); }
-        }
-      `}</style>
-      <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        {streams.map((stream) => (
-          <div
-            key={stream.id}
-            className="absolute top-0 font-mono text-[10px] leading-[0.88] text-[#ff7f97] mix-blend-screen"
-            style={{
-              left: stream.left,
-              opacity: stream.opacity,
-              whiteSpace: "pre",
-              animationName: "matrix-overflow-fall",
-              animationTimingFunction: "linear",
-              animationIterationCount: "infinite",
-              animationDelay: stream.delay,
-              animationDuration: stream.duration,
-            }}
-          >
-            {stream.glyphs}
-          </div>
-        ))}
-      </div>
-    </>
-  );
-}
-
 export function MatrixRainBackdrop({
   className = "pointer-events-none fixed inset-0 z-[1] opacity-55",
   mode = "shell",
@@ -269,6 +214,7 @@ export function MatrixRainBackdrop({
   const hasWebGL = useWebGLAvailability();
   const atlas = useMemo(() => buildCharAtlas(), []);
   const [isMobile, setIsMobile] = useState(false);
+  const [lowPower, setLowPower] = useState(false);
 
   useEffect(() => {
     const media = window.matchMedia("(max-width: 767px)");
@@ -278,24 +224,49 @@ export function MatrixRainBackdrop({
     return () => media.removeEventListener("change", update);
   }, []);
 
+  useEffect(() => {
+    const readSaveData = () => {
+      const nav = navigator as Navigator & {
+        connection?: { saveData?: boolean };
+        mozConnection?: { saveData?: boolean };
+        webkitConnection?: { saveData?: boolean };
+      };
+      const c = nav.connection ?? nav.mozConnection ?? nav.webkitConnection;
+      return Boolean(c?.saveData);
+    };
+    const sync = () => {
+      const cores = typeof navigator.hardwareConcurrency === "number" ? navigator.hardwareConcurrency : 8;
+      setLowPower(readSaveData() || cores <= 4);
+    };
+    sync();
+    const nav = navigator as Navigator & { connection?: EventTarget };
+    nav.connection?.addEventListener?.("change", sync);
+    return () => nav.connection?.removeEventListener?.("change", sync);
+  }, []);
+
+  /** Scale particle counts down on constrained devices; motion + layering unchanged. */
+  const density = lowPower ? 0.78 : 1;
+
+  const roundCount = (n: number) => Math.max(32, Math.round(n * density));
+
   const config =
     mode === "content"
       ? {
           outer: isMobile
-            ? { count: 420, spread: 13, loopHeight: 24, baseSpeed: 0.64, pointScale: 94, swirl: 0.12, tint: new THREE.Color("#8f1731") }
-            : { count: 1120, spread: 15, loopHeight: 26, baseSpeed: 0.7, pointScale: 104, swirl: 0.14, tint: new THREE.Color("#8f1731") },
+            ? { count: roundCount(420), spread: 13, loopHeight: 24, baseSpeed: 0.64, pointScale: 94, swirl: 0.12, tint: new THREE.Color("#8f1731") }
+            : { count: roundCount(1120), spread: 15, loopHeight: 26, baseSpeed: 0.7, pointScale: 104, swirl: 0.14, tint: new THREE.Color("#8f1731") },
           inner: isMobile
-            ? { count: 260, spread: 11.5, loopHeight: 21, baseSpeed: 0.86, pointScale: 108, swirl: 0.16, tint: new THREE.Color("#ffe6ec") }
-            : { count: 720, spread: 13.5, loopHeight: 23, baseSpeed: 0.92, pointScale: 116, swirl: 0.18, tint: new THREE.Color("#ffe6ec") },
+            ? { count: roundCount(260), spread: 11.5, loopHeight: 21, baseSpeed: 0.86, pointScale: 108, swirl: 0.16, tint: new THREE.Color("#ffe6ec") }
+            : { count: roundCount(720), spread: 13.5, loopHeight: 23, baseSpeed: 0.92, pointScale: 116, swirl: 0.18, tint: new THREE.Color("#ffe6ec") },
           cameraZ: 10.5,
         }
       : {
           outer: isMobile
-            ? { count: 2200, spread: 15, loopHeight: 26, baseSpeed: 0.74, pointScale: 92, swirl: 0.14, tint: new THREE.Color("#6f001a") }
-            : { count: 5200, spread: 17, loopHeight: 28, baseSpeed: 0.74, pointScale: 98, swirl: 0.16, tint: new THREE.Color("#6f001a") },
+            ? { count: roundCount(2200), spread: 15, loopHeight: 26, baseSpeed: 0.74, pointScale: 92, swirl: 0.14, tint: new THREE.Color("#6f001a") }
+            : { count: roundCount(5200), spread: 17, loopHeight: 28, baseSpeed: 0.74, pointScale: 98, swirl: 0.16, tint: new THREE.Color("#6f001a") },
           inner: isMobile
-            ? { count: 1340, spread: 13.5, loopHeight: 22, baseSpeed: 0.94, pointScale: 106, swirl: 0.18, tint: new THREE.Color("#ffcad5") }
-            : { count: 3600, spread: 15, loopHeight: 24, baseSpeed: 0.98, pointScale: 114, swirl: 0.22, tint: new THREE.Color("#ffcad5") },
+            ? { count: roundCount(1340), spread: 13.5, loopHeight: 22, baseSpeed: 0.94, pointScale: 106, swirl: 0.18, tint: new THREE.Color("#ffcad5") }
+            : { count: roundCount(3600), spread: 15, loopHeight: 24, baseSpeed: 0.98, pointScale: 114, swirl: 0.22, tint: new THREE.Color("#ffcad5") },
           cameraZ: 12,
         };
 
@@ -303,11 +274,10 @@ export function MatrixRainBackdrop({
     <div className={className}>
       {hasWebGL ? (
         <>
-          <Canvas camera={{ position: [0, 0, config.cameraZ], fov: 48 }}>
+          <Canvas camera={{ position: [0, 0, config.cameraZ], fov: 48 }} dpr={isMobile ? [1, 1.2] : [1, 1.5]}>
             <RainLayer atlas={atlas} {...config.outer} />
             <RainLayer atlas={atlas} {...config.inner} />
           </Canvas>
-          {null}
         </>
       ) : (
         <div
