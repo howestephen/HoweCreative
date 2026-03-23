@@ -133,6 +133,7 @@ const content = rawContent as {
     portraitFooterRight: string;
     quickFacts: Array<{ label: string; value: string }>;
     notesTitle: string;
+    notesFileLabel: string;
     notesBody: string;
     files: Array<{ fileLabel: string; title: string; body: string }>;
   };

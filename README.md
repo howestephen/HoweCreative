@@ -1,11 +1,78 @@
 
-  # Design cyberpunk portfolio website
+# HOWE_CREATIVE Portfolio Site
 
-  This is a code bundle for Design cyberpunk portfolio website. The original project is available at https://www.figma.com/design/SgFPOLAG4wRsB52MPdHOtQ/Design-cyberpunk-portfolio-website.
+Cyberpunk-inspired portfolio site for Stephen Howe, built with React, TypeScript, and Vite.  
+The project is content-driven through a single JSON source, with animated UI sections for profile, case studies, tools, contact, and archive.
 
-  ## Running the code
+## Tech Stack
 
-  Run `npm i` to install the dependencies.
+- React 19 + TypeScript
+- Vite
+- Tailwind CSS
+- Framer Motion (`motion/react`)
+- Lucide + React Icons
 
-  Run `npm run dev` to start the development server.
+## Project Structure
+
+- `src/app/components`: UI components and section layouts
+- `src/app/data/portfolio.ts`: typed content adapter layer
+- `site-content.json`: primary content model for site copy and structured data
+- `src/app/routes`: route-level pages
+- `public`: static assets (images, media, icons)
+- `docs/plans`: implementation notes and design plans
+
+## Quick Start
+
+1. Install dependencies:
+
+```bash
+npm install
+```
+
+2. Start the dev server:
+
+```bash
+npm run dev
+```
+
+3. Open the local URL shown in terminal (typically `http://localhost:5173`).
+
+## Scripts
+
+- `npm run dev`: start local development
+- `npm run build`: production build
+- `npm run preview`: preview production build locally
+- `npm run lint`: run ESLint checks
+
+## Content Editing Workflow
+
+Most site copy and structured content are managed in `site-content.json`.
+
+### Common updates
+
+- **Brand/profile metadata**: `profile`
+- **Navigation labels**: `navigation`
+- **Hero labels**: `hero`
+- **Operator profile cards + notes**: `operatorProfile`
+- **Case studies/projects**: `caseStudies.projects`
+- **Contact form labels/status text**: `contact`
+- **Archive entries**: `archive.entries`
+- **Footer links/state**: `footer`
+
+After editing `site-content.json`, content is consumed through typed exports in `src/app/data/portfolio.ts`.
+
+## Loading Screen
+
+The loading experience is implemented in:
+
+- `src/app/components/LoadingScreen.tsx`
+- mounted from `src/app/components/Layout.tsx`
+
+It runs once per page load and then fades out automatically.
+
+## Deployment Notes
+
+- Ensure media assets referenced in `site-content.json` exist in `public`.
+- Run `npm run build` before deployment.
+- Validate responsive behavior on desktop and mobile, especially for animated sections and modal/overlay content.
   

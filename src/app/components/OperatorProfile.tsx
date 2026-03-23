@@ -70,24 +70,6 @@ export function OperatorProfile() {
 
           {/* 2×2 info grid */}
           <div className="grid grid-cols-2 gap-4 content-start">
-            {/* Notes */}
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.0 }}
-              className="relative overflow-hidden border border-[#ff003c]/20 bg-[#120008]/95 p-5"
-            >
-              <div className="relative z-10">
-                <div className="mb-3 font-mono text-[10px] uppercase tracking-[0.2em] text-zinc-500">
-                  {operatorProfileContent.notesTitle}
-                </div>
-                <p className="text-sm leading-relaxed text-zinc-300">
-                  {operatorProfileContent.notesBody}
-                </p>
-              </div>
-            </motion.div>
-
             {/* Summary, Style, Focus */}
             {operatorProfileContent.files.map((file, index) => (
               <motion.div
@@ -95,7 +77,7 @@ export function OperatorProfile() {
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: (index + 1) * 0.06 }}
+                transition={{ duration: 0.5, delay: index * 0.06 }}
                 className="relative overflow-hidden border border-[#ff003c]/20 bg-black/92 p-5"
               >
                 <div
@@ -117,6 +99,25 @@ export function OperatorProfile() {
                 </div>
               </motion.div>
             ))}
+
+            {/* Notes — File 05, last */}
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: operatorProfileContent.files.length * 0.06 }}
+              className="relative overflow-hidden border border-[#ff003c]/20 bg-[#120008]/95 p-5"
+            >
+              <div className="relative z-10">
+                <div className="mb-3 flex items-center justify-between gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-zinc-500">
+                  <span>{operatorProfileContent.notesTitle}</span>
+                  <span className="text-[#ff003c]/60">{operatorProfileContent.notesFileLabel}</span>
+                </div>
+                <p className="text-sm leading-relaxed text-zinc-300">
+                  {operatorProfileContent.notesBody}
+                </p>
+              </div>
+            </motion.div>
           </div>
         </div>
       </div>
