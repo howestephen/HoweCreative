@@ -1,96 +1,128 @@
+# HOWE_CREATIVE — Portfolio v2.0
 
-# HOWE_CREATIVE Portfolio Site
+Personal portfolio for **Stephen Howe**, Creative Systems Designer.
+Operator/terminal aesthetic. Systems-first approach. Built to ship.
 
-Cyberpunk-inspired portfolio site for Stephen Howe, built with React, TypeScript, and Vite.  
-The project is content-driven through a single JSON source, with animated UI sections for profile, case studies, tools, contact, and archive.
+---
 
-## Tech Stack
+## Stack
 
-- React 19 + TypeScript
-- Vite
-- Tailwind CSS
-- Framer Motion (`motion/react`)
-- Lucide + React Icons
+| Layer | Technology |
+|---|---|
+| Framework | React 19 + TypeScript |
+| Build | Vite 6 |
+| Styling | Tailwind CSS 4 |
+| Animation | Framer Motion (`motion/react`) |
+| 3D / WebGL | Three.js, `@react-three/fiber`, `@react-three/drei` |
+| Icons | Lucide React, React Icons (`react-icons/si`) |
+| Routing | React Router 7 |
+| Forms | Web3Forms via Vercel serverless function |
+| Deployment | Vercel |
 
-## Project Structure
+---
 
-- `src/app/components`: UI components and section layouts
-- `src/app/data/portfolio.ts`: typed content adapter layer
-- `site-content.json`: primary content model for site copy and structured data
-- `src/app/routes`: route-level pages
-- `public`: static assets (images, media, icons)
-- `api/`: Vercel serverless routes (e.g. contact form)
-- `guidelines/`: design reference notes
+## Sections
+
+| Section | Component | Description |
+|---|---|---|
+| Hero | `MatrixRainHero` | Canvas matrix rain + rotating wireframe shape. CSS fallback on iOS. |
+| Operator Profile | `OperatorProfile` | Dossier-style about section with 3D GLTF portrait (WebGL), quick facts, and file cards. |
+| Case Studies | `CaseStudies` | 6 projects with detail overlay panels (Brief, Problem, System Design, Outcome). |
+| Tools & Skills | `MediaShowcase` | 26-item tool grid across Design, 3D, Motion, Audio, Frontend, Dev, and AI. |
+| Contact | `ContactPanel` | Name / Email / Project Type / Brief — sends via Web3Forms relay. |
+| Archive | `ArchiveSection` | Filterable timeline of prior work by tool. |
+
+---
 
 ## Quick Start
 
-1. Install dependencies:
-
 ```bash
 npm install
-```
-
-(The repo includes `.npmrc` with `legacy-peer-deps=true` so installs match Vercel and tolerate React 19 peer ranges.)
-
-2. Start the frontend dev server:
-
-```bash
 npm run dev
 ```
 
-3. Open the local URL shown in terminal (typically `http://localhost:5173`).
+Opens at `http://localhost:5173`.
 
-4. For end-to-end local contact form testing (`/api/contact`), run via Vercel:
+For local contact form testing (Vercel serverless):
 
 ```bash
 vercel dev
 ```
 
+---
+
 ## Scripts
 
-- `npm run dev`: start local development
-- `npm run build`: production build
-- `npm run preview`: preview production build locally
+```bash
+npm run dev       # start dev server
+npm run build     # production build
+npm run preview   # preview production build
+```
+
+---
 
 ## Environment Variables
 
-- `EMAIL_ACCESS_KEY`: Web3Forms access key used by the Vercel serverless function at `api/contact.ts`.
-
-Copy `.env.example` to `.env` and set:
-
 ```bash
+# .env
 EMAIL_ACCESS_KEY=your_web3forms_access_key
 ```
 
-## Content Editing Workflow
+Copy `.env.example` to `.env` and set your key. The Vercel serverless function at `api/contact.ts` reads this at runtime.
 
-Most site copy and structured content are managed in `site-content.json`.
+---
 
-### Common updates
+## Content
 
-- **Brand/profile metadata**: `profile`
-- **Navigation labels**: `navigation`
-- **Hero labels**: `hero`
-- **Operator profile cards + notes**: `operatorProfile`
-- **Case studies/projects**: `caseStudies.projects`
-- **Contact form labels/status text**: `contact`
-- **Archive entries**: `archive.entries`
-- **Footer links/state**: `footer`
+All copy and structured data lives in `site-content.json`. It is consumed via typed exports in `src/app/data/portfolio.ts`.
 
-After editing `site-content.json`, content is consumed through typed exports in `src/app/data/portfolio.ts`.
+| Key | What it controls |
+|---|---|
+| `profile` | Brand, name, role, headline, social links |
+| `navigation` | Nav labels and anchor targets |
+| `hero` | Skill labels, scroll indicator copy |
+| `operatorProfile` | Quick facts, file cards, portrait labels, notes |
+| `caseStudies.projects` | Project data, tags, media, outcomes |
+| `toolsSkills` | Tools grid (name, icon, color, category) |
+| `contact` | Form field labels, status messages |
+| `archive.entries` | Timeline entries with tool tags |
+| `footer` | Links, availability status, location |
 
-## Loading Screen
+---
 
-The loading experience is implemented in:
+## Project Structure
 
-- `src/app/components/LoadingScreen.tsx`
-- mounted from `src/app/components/Layout.tsx`
+```
+src/
+  app/
+    components/       # All UI components and section layouts
+    data/portfolio.ts # Typed content adapter (consumes site-content.json)
+    lib/              # device.ts (iOS detection), webgl.ts (context detection)
+    pages/Home.tsx    # Top-level page composition
+    routes.ts         # React Router config
+site-content.json     # Primary content model
+public/               # Static assets (media, models, images)
+api/                  # Vercel serverless routes (contact form)
+docs/plans/           # Design and implementation docs
+```
 
-It runs once per page load and then fades out automatically.
+---
 
-## Deployment Notes
+## iOS / Mobile Notes
 
-- Ensure media assets referenced in `site-content.json` exist in `public`.
-- Run `npm run build` before deployment.
-- Validate responsive behavior on desktop and mobile, especially for animated sections and modal/overlay content.
-  
+iOS Safari has a hard limit of 8 simultaneous WebGL contexts. The site avoids crashes by:
+
+- Skipping the hero Canvas on iOS — uses a CSS gradient fallback instead
+- Switching matrix rain backdrops from WebGL to CSS on iOS
+- Rendering the 3D portrait as a static image on iOS
+- Disposing the WebGL detection test context immediately after use
+
+If you add new `<Canvas>` components, add an `isIOSLike()` guard from `src/app/lib/device.ts`.
+
+---
+
+## Deployment
+
+- Push to `main` — Vercel auto-deploys
+- Ensure all media referenced in `site-content.json` exists in `public/`
+- Run `npm run build` locally before merging to catch TypeScript or asset errors

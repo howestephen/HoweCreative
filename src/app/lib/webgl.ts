@@ -12,7 +12,14 @@ function detectWebGLSupport() {
       canvas.getContext("webgl", { failIfMajorPerformanceCaveat: true }) ||
       canvas.getContext("experimental-webgl");
 
-    return Boolean(context);
+    if (!context) return false;
+
+    // Immediately release the test context so it doesn't count against
+    // iOS Safari's 8-context limit.
+    const ext = (context as WebGLRenderingContext).getExtension("WEBGL_lose_context");
+    ext?.loseContext();
+
+    return true;
   } catch {
     return false;
   }
