@@ -1,31 +1,46 @@
 import type { ElementType } from "react";
 import {
   Archive,
+  AudioLines,
+  AudioWaveform,
   Bot,
-  BriefcaseBusiness,
   Box,
-  Clapperboard,
+  BriefcaseBusiness,
   Cpu,
   Database,
   FileCode2,
-  Figma,
   Film,
   Fingerprint,
   FolderArchive,
-  FolderKanban,
-  Gauge,
   House,
-  Layers3,
+  Image,
+  Layers,
   Mail,
   MapPin,
   Menu,
-  Music,
-  PencilRuler,
+  PenTool,
   Send,
+  Triangle,
   Video,
   WandSparkles,
   Wrench,
 } from "lucide-react";
+import {
+  SiCss,
+  SiFigma,
+  SiGithub,
+  SiGnubash,
+  SiHtml5,
+  SiJavascript,
+  SiNextdotjs,
+  SiOpenai,
+  SiReact,
+  SiSourcetree,
+  SiTailwindcss,
+  SiThreedotjs,
+  SiTypescript,
+  SiVite,
+} from "react-icons/si";
 
 import rawContent from "../../../site-content.json";
 
@@ -169,20 +184,34 @@ const content = rawContent as {
 };
 
 const toolIconMap: Record<string, ElementType> = {
+  // Lucide — used as brand fallbacks
+  AudioLines,     // Ableton Live
+  AudioWaveform,  // Serum
   Bot,
   Box,
-  Clapperboard,
-  FileCode2,
-  Figma,
-  Film,
-  FolderKanban,
-  Gauge,
-  Layers3,
-  Music,
-  PencilRuler,
-  Video,
+  Film,           // After Effects
+  Image,          // Photoshop
+  Layers,         // Adobe Animate
+  PenTool,        // Illustrator
+  Triangle,       // Redshift
+  Video,          // Premiere Pro
   WandSparkles,
   Wrench,
+  // Simple Icons
+  SiCss,
+  SiFigma,
+  SiGithub,
+  SiGnubash,
+  SiHtml5,
+  SiJavascript,
+  SiNextdotjs,
+  SiOpenai,
+  SiReact,
+  SiSourcetree,
+  SiTailwindcss,
+  SiThreedotjs,
+  SiTypescript,
+  SiVite,
 };
 
 const navIconMap: Record<string, ElementType> = {

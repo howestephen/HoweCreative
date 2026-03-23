@@ -25,7 +25,26 @@ export function OperatorProfile() {
           </p>
         </motion.div>
 
+        {/* Quick facts — four oblongs above the main grid */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mb-6 grid grid-cols-2 gap-3 md:grid-cols-4"
+        >
+          {operatorProfileContent.quickFacts.map((fact) => (
+            <div key={fact.label} className="border border-[#ff003c]/16 bg-black/92 px-5 py-4">
+              <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-zinc-500">
+                {fact.label}
+              </div>
+              <div className="mt-2 text-sm text-white">{fact.value}</div>
+            </div>
+          ))}
+        </motion.div>
+
         <div className="grid gap-6 xl:grid-cols-[0.9fr_1.1fr]">
+          {/* Portrait card */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -45,40 +64,39 @@ export function OperatorProfile() {
                 <span>{operatorProfileContent.primaryFileLabel}</span>
                 <span className="text-[#ff003c]">{operatorProfileContent.primaryFileStatus}</span>
               </div>
-
               <OperatorProfilePortrait />
-
-              <div className="mt-5 grid gap-3 sm:grid-cols-2">
-                {operatorProfileContent.quickFacts.map((fact) => (
-                  <div key={fact.label} className="border border-[#ff003c]/16 bg-black/92 px-4 py-4">
-                    <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-zinc-500">
-                      {fact.label}
-                    </div>
-                    <div className="mt-2 text-sm text-white">{fact.value}</div>
-                  </div>
-                ))}
-              </div>
-
-              <div className="mt-5 border border-[#ff003c]/16 bg-[#120008]/95 p-4">
-                <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-zinc-500">
-                  {operatorProfileContent.notesTitle}
-                </div>
-                <p className="mt-3 text-sm leading-relaxed text-zinc-300">
-                  {operatorProfileContent.notesBody}
-                </p>
-              </div>
             </div>
           </motion.div>
 
-          <div className="grid gap-5">
+          {/* 2×2 info grid */}
+          <div className="grid grid-cols-2 gap-4 content-start">
+            {/* Notes */}
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.0 }}
+              className="relative overflow-hidden border border-[#ff003c]/20 bg-[#120008]/95 p-5"
+            >
+              <div className="relative z-10">
+                <div className="mb-3 font-mono text-[10px] uppercase tracking-[0.2em] text-zinc-500">
+                  {operatorProfileContent.notesTitle}
+                </div>
+                <p className="text-sm leading-relaxed text-zinc-300">
+                  {operatorProfileContent.notesBody}
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Summary, Style, Focus */}
             {operatorProfileContent.files.map((file, index) => (
               <motion.div
                 key={file.title}
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.06 }}
-                className="relative overflow-hidden border border-[#ff003c]/20 bg-black/92 p-5 md:p-6"
+                transition={{ duration: 0.5, delay: (index + 1) * 0.06 }}
+                className="relative overflow-hidden border border-[#ff003c]/20 bg-black/92 p-5"
               >
                 <div
                   className="pointer-events-none absolute inset-0 opacity-[0.05]"
@@ -89,11 +107,11 @@ export function OperatorProfile() {
                   }}
                 />
                 <div className="relative z-10">
-                  <div className="mb-4 flex items-center justify-between gap-4 border-b border-[#ff003c]/14 pb-4 font-mono text-[10px] uppercase tracking-[0.2em] text-zinc-500">
+                  <div className="mb-3 flex items-center justify-between gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-zinc-500">
                     <span>{file.title}</span>
-                    <span>{file.fileLabel}</span>
+                    <span className="text-[#ff003c]/60">{file.fileLabel}</span>
                   </div>
-                  <p className="max-w-3xl text-sm leading-relaxed text-zinc-300 md:text-base">
+                  <p className="text-sm leading-relaxed text-zinc-300">
                     {file.body}
                   </p>
                 </div>
