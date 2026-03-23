@@ -8,7 +8,7 @@
 
 - `2.1` Security and reliability hardening
   - keep contact secrets server-side only
-  - add explicit rate limiting and anti-spam controls on `/api/contact`
+  - ✓ add explicit rate limiting and anti-spam controls on `/api/contact` (IP-based, 5 req/15 min, Vitest-tested)
   - maintain dependency audit hygiene
 - `2.2` Dependency and bundle optimization
   - remove unused generated UI primitives/dependencies
@@ -27,4 +27,5 @@
 
 ## Current Next Step
 
-- Finish a second-pass dependency trim by deleting unused `src/app/components/ui/*` modules and removing their related packages.
+- Complete 2.1: maintain dependency audit hygiene (unused UI primitives/packages trim).
+- Then move to 2.2: dependency and bundle optimization.
