@@ -17,11 +17,22 @@ interface LoadingScreenProps {
 }
 
 export function LoadingScreen({ onComplete }: LoadingScreenProps) {
+  const prefersReducedMotion =
+    typeof window !== "undefined" &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
   const [visibleLines, setVisibleLines] = useState(0);
   const [progress, setProgress] = useState(0);
   const [flickering, setFlickering] = useState(false);
   const [exiting, setExiting] = useState(false);
   const [cursorVisible, setCursorVisible] = useState(true);
+
+  // Reduced-motion shortcut — skip animation entirely
+  useEffect(() => {
+    if (!prefersReducedMotion) return;
+    const id = setTimeout(() => onComplete(), 100);
+    return () => clearTimeout(id);
+  }, [prefersReducedMotion, onComplete]);
 
   // Cursor blink
   useEffect(() => {
@@ -65,6 +76,8 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
       {!exiting ? (
         <motion.div
           key="loader"
+          role="status"
+          aria-label="Loading portfolio"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0, y: -8 }}
           transition={{ duration: 0.4, ease: "easeIn" }}
@@ -73,6 +86,23 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
           }}
           className="fixed inset-0 z-[200] flex flex-col bg-[#050505] px-8 py-8 font-mono md:px-16 md:py-12"
         >
+          {/* Visually-hidden label for screen readers */}
+          <span
+            style={{
+              position: "absolute",
+              width: 1,
+              height: 1,
+              padding: 0,
+              margin: -1,
+              overflow: "hidden",
+              clip: "rect(0,0,0,0)",
+              whiteSpace: "nowrap",
+              border: 0,
+            }}
+          >
+            Loading portfolio — please wait
+          </span>
+
           {/* Scan-line overlay */}
           <div
             className="pointer-events-none absolute inset-0 opacity-[0.06]"
@@ -99,39 +129,48 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
           <div className="relative z-10 flex flex-1 items-center justify-center">
             <div className="w-full max-w-3xl space-y-6">
               {/* Log lines — centered block */}
-              <div className="flex flex-col items-center gap-3">
-                {LOG_LINES.slice(0, visibleLines).map((line, i) => {
-                  const isLast = i === visibleLines - 1;
-                  const isReady = line === "SYSTEM READY";
-                  const dimmed = isReady && flickering;
-                  return (
-                    <motion.div
-                      key={line}
-                      initial={{ opacity: 0, x: -8 }}
-                      animate={{ opacity: dimmed ? 0.2 : 1, x: 0 }}
-                      transition={{ duration: 0.18 }}
-                      className="flex w-fit items-center gap-3 text-sm"
-                    >
-                      <span className="text-[#ff003c]">&gt;</span>
-                      <span className={isReady ? "text-[#ff003c]" : "text-zinc-400"}>
-                        {line}
-                      </span>
-                      {isLast && !isReady && (
-                        <span
-                          className={`text-[#ff003c] ${cursorVisible ? "opacity-100" : "opacity-0"}`}
-                        >
-                          _
+              <div aria-live="polite" aria-atomic="false">
+                <div className="flex flex-col items-center gap-3">
+                  {LOG_LINES.slice(0, visibleLines).map((line, i) => {
+                    const isLast = i === visibleLines - 1;
+                    const isReady = line === "SYSTEM READY";
+                    const dimmed = isReady && flickering;
+                    return (
+                      <motion.div
+                        key={line}
+                        initial={{ opacity: 0, x: -8 }}
+                        animate={{ opacity: dimmed ? 0.2 : 1, x: 0 }}
+                        transition={{ duration: 0.18 }}
+                        className="flex w-fit items-center gap-3 text-sm"
+                      >
+                        <span className="text-[#ff003c]">&gt;</span>
+                        <span className={isReady ? "text-[#ff003c]" : "text-zinc-400"}>
+                          {line}
                         </span>
-                      )}
-                    </motion.div>
-                  );
-                })}
+                        {isLast && !isReady && (
+                          <span
+                            className={`text-[#ff003c] ${cursorVisible ? "opacity-100" : "opacity-0"}`}
+                          >
+                            _
+                          </span>
+                        )}
+                      </motion.div>
+                    );
+                  })}
+                </div>
               </div>
 
               {/* Progress bar */}
               <div className="space-y-2">
                 <div className="flex items-center justify-center">
-                  <div className="flex gap-[3px]">
+                  <div
+                    role="progressbar"
+                    aria-valuemin={0}
+                    aria-valuemax={100}
+                    aria-valuenow={progress}
+                    aria-label="Loading progress"
+                    className="flex gap-[3px]"
+                  >
                     {Array.from({ length: TOTAL_SEGMENTS }).map((_, i) => (
                       <motion.div
                         key={i}

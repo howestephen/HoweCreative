@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { motion } from "motion/react";
 
 const GLYPHS = [
@@ -104,7 +104,7 @@ const MAX_ACTIVE = 14;
 
 export function EscapeGlyphs() {
   const [fragments, setFragments] = useState<EscapeFragment[]>([]);
-  const timerRef = useRef<ReturnType<typeof setTimeout>>();
+  const timerRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   const removeFragment = useCallback((id: number) => {
     setFragments((prev) => prev.filter((f) => f.id !== id));
@@ -124,7 +124,7 @@ export function EscapeGlyphs() {
 
   useEffect(() => {
     // Seed with just 3 so the page isn't bare on load
-    setFragments(Array.from({ length: 6 }, spawnFragment));
+    setFragments(Array.from({ length: 6 }, () => spawnFragment()));
     scheduleNext();
     return () => {
       if (timerRef.current) clearTimeout(timerRef.current);
