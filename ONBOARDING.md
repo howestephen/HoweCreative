@@ -15,12 +15,39 @@
 
 ## Setup
 
-- Install with:
-  - `npm install` (uses root `.npmrc` → `legacy-peer-deps` for React 19 + Radix)
-- Frontend dev:
-  - `npm run dev`
-- End-to-end local API testing:
-  - `vercel dev`
+### Install
+
+```bash
+npm install
+```
+
+The root `.npmrc` sets `legacy-peer-deps=true`, which is required for React 19 compatibility with some packages in the dependency tree.
+
+### Environment variables
+
+The contact form API requires an `EMAIL_ACCESS_KEY` to send mail via Web3Forms.
+
+1. Copy the key from the Vercel dashboard: **Project Settings → Environment Variables → `EMAIL_ACCESS_KEY`**
+2. Create `.env.local` in the project root:
+
+   ```
+   EMAIL_ACCESS_KEY=your_key_here
+   ```
+
+3. `.env.local` is gitignored — never commit it.
+
+The frontend Vite dev server (`npm run dev`) does **not** serve the API; `EMAIL_ACCESS_KEY` is only needed when running `vercel dev`.
+
+### Dev commands
+
+| Command | What it does |
+|---|---|
+| `npm run dev` | Frontend only — Vite dev server, no API routes |
+| `vercel dev` | Full stack — frontend + API routes, reads `.env.local` |
+| `npm run build` | Production build (output to `dist/`) |
+| `npm run typecheck` | TypeScript strict check (no emit) |
+| `npm run lint` | ESLint check across `src/` and `api/` |
+| `npm test` | Run Vitest tests |
 
 ## Active Content Areas
 

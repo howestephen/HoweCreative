@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect } from "react";
 import {
   Figma,
   Palette,
@@ -23,8 +23,7 @@ const skills = [
 // Canvas-based 3D morphing head
 function Canvas3DHead() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const animationRef = useRef<number>();
-  const [currentShape, setCurrentShape] = useState(0);
+  const animationRef = useRef<number | undefined>(undefined);
   const shapeIndexRef = useRef(0); // Track shape index with ref instead of state
 
   useEffect(() => {
@@ -53,13 +52,12 @@ function Canvas3DHead() {
     // Shape change interval - sequential transitions
     const shapeInterval = setInterval(() => {
       shapeIndexRef.current = (shapeIndexRef.current + 1) % 6;
-      setCurrentShape(shapeIndexRef.current);
       transitionProgress = 0; // Reset transition
     }, 6000); // Slower shape changes
 
     const shapes = [
       // Head/Circle - removed pulsing effect
-      (t: number, progress: number) => {
+      (_t: number, _progress: number) => {
         const points: [number, number][] = [];
         for (let i = 0; i < 32; i++) {
           const angle = (i / 32) * Math.PI * 2;
@@ -72,7 +70,7 @@ function Canvas3DHead() {
         return points;
       },
       // Cube
-      (t: number, progress: number) => {
+      (_t: number, _progress: number) => {
         const size = 140;
         return [
           [-size, -size],
@@ -88,7 +86,7 @@ function Canvas3DHead() {
         ];
       },
       // Diamond
-      (t: number, progress: number) => {
+      (_t: number, _progress: number) => {
         const size = 160;
         return [
           [0, -size],
@@ -104,7 +102,7 @@ function Canvas3DHead() {
         ];
       },
       // Star
-      (t: number, progress: number) => {
+      (_t: number, _progress: number) => {
         const points: [number, number][] = [];
         for (let i = 0; i < 10; i++) {
           const angle = (i / 10) * Math.PI * 2 - Math.PI / 2;
@@ -117,7 +115,7 @@ function Canvas3DHead() {
         return points;
       },
       // Hexagon
-      (t: number, progress: number) => {
+      (_t: number, _progress: number) => {
         const points: [number, number][] = [];
         for (let i = 0; i < 6; i++) {
           const angle = (i / 6) * Math.PI * 2;
@@ -130,7 +128,7 @@ function Canvas3DHead() {
         return [...points, points[0]];
       },
       // Triangle
-      (t: number, progress: number) => {
+      (_t: number, _progress: number) => {
         const size = 160;
         return [
           [0, -size],

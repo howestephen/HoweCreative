@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { OrbitControls, Text3D, Center } from '@react-three/drei';
+import { OrbitControls } from '@react-three/drei';
 import * as THREE from 'three';
 import { motion } from 'motion/react';
 
@@ -10,7 +10,7 @@ function MorphingHead() {
   const [morphStage, setMorphStage] = useState(0);
   const [time, setTime] = useState(0);
 
-  useFrame((state, delta) => {
+  useFrame((_state, delta) => {
     if (meshRef.current) {
       setTime((t) => t + delta);
       
@@ -62,34 +62,6 @@ function MorphingHead() {
         emissiveIntensity={0.3}
       />
     </mesh>
-  );
-}
-
-// Floating skill labels
-function SkillLabel({ position, text, delay }: { position: [number, number, number]; text: string; delay: number }) {
-  const textRef = useRef<THREE.Group>(null);
-  
-  useFrame((state) => {
-    if (textRef.current) {
-      const time = state.clock.getElapsedTime();
-      textRef.current.position.y = position[1] + Math.sin(time * 0.5 + delay) * 0.2;
-    }
-  });
-
-  return (
-    <group ref={textRef} position={position}>
-      <Center>
-        <Text3D
-          font="/fonts/helvetiker_regular.typeface.json"
-          size={0.2}
-          height={0.05}
-          curveSegments={12}
-        >
-          {text}
-          <meshStandardMaterial color="#ff1744" emissive="#ff1744" emissiveIntensity={0.5} />
-        </Text3D>
-      </Center>
-    </group>
   );
 }
 
