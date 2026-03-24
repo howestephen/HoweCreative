@@ -112,9 +112,9 @@ function CaseStudyFile({
               <span>{project.status}</span>
             </div>
 
-            <h3 className="max-w-xl text-3xl font-semibold tracking-tight text-white md:text-5xl">
+            <h2 className="max-w-xl text-3xl font-semibold tracking-tight text-white md:text-5xl">
               {project.title}
-            </h3>
+            </h2>
             <p className="mt-4 max-w-2xl text-sm leading-relaxed text-zinc-300 md:text-base">
               {project.fullDescription}
             </p>

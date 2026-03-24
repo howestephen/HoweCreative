@@ -18,7 +18,7 @@
 - `2.3` UX and architecture refinement
   - ✓ shell/chrome simplification — dead components removed (Navigation, CyberHero, Hero3D); remaining chrome is intentional
   - ✓ loading sequence accessibility — aria-live, progressbar role, reduced-motion skip added
-  - improve section readability and content hierarchy — opportunistic/ongoing
+  - ✓ section readability — heading hierarchy and anchor IDs corrected (modal h3→h2 in CaseStudies; archive modal header promoted to h2; all nav IDs verified)
 
 - `2.4` Developer workflow
   - ✓ add lint/typecheck scripts

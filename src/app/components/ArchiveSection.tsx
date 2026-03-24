@@ -89,10 +89,10 @@ export function ArchiveSection() {
               />
 
               <div className="relative z-10 flex items-center justify-between border-b border-[#ff003c]/20 px-4 py-3 font-mono text-[11px] uppercase tracking-[0.2em] text-zinc-400 md:px-6">
-                <div className="flex items-center gap-3">
+                <h2 className="flex items-center gap-3 text-[11px] font-normal">
                   <ScanSearch className="h-4 w-4 text-[#ff003c]" />
                   {archiveContent.browserTitle}
-                </div>
+                </h2>
                 <button
                   onClick={handleClose}
                   className="flex items-center gap-2 border border-[#ff003c]/20 px-3 py-1 text-zinc-200 transition-colors hover:border-[#ff003c] hover:text-white"
