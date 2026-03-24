@@ -865,7 +865,9 @@ export function MatrixRainHero() {
     };
   }, [atlas]);
 
-  const heroType = !hasWebGL || iosLike
+  // iOS with WebGL → LiteWireHero (single canvas is safe).
+  // Only fall back to CSS when WebGL is unavailable entirely.
+  const heroType = !hasWebGL
     ? "css-fallback"
     : useLiteHero
       ? "lite"
@@ -888,7 +890,7 @@ export function MatrixRainHero() {
       />
 
       <div className="absolute inset-0 z-0">
-        {hasWebGL && !iosLike ? (
+        {hasWebGL ? (
           <Canvas
             camera={{ position: [0, isMobile ? 0.15 : 0.18, isMobile ? 6.5 : 5.5], fov: isMobile ? 52 : 50 }}
             dpr={isMobile ? [1, 1.2] : [1, 1.5]}
