@@ -11,9 +11,9 @@
   - ✓ add explicit rate limiting and anti-spam controls on `/api/contact` (IP-based, 5 req/15 min, Vitest-tested)
   - maintain dependency audit hygiene
 - `2.2` Dependency and bundle optimization
-  - remove unused generated UI primitives/dependencies
+  - ✓ remove unused generated UI primitives/dependencies (47 shadcn/Radix files deleted, 33 packages removed)
   - split heavy visuals where possible
-  - reduce initial bundle size and warning surface
+  - ✓ reduce initial bundle size and warning surface (removed 115 transitive packages)
 
 - `2.3` UX and architecture refinement
   - continue simplifying shell/chrome where it does not add value
@@ -27,5 +27,5 @@
 
 ## Current Next Step
 
-- Complete 2.1: maintain dependency audit hygiene (unused UI primitives/packages trim).
-- Then move to 2.2: dependency and bundle optimization.
+- Complete 2.1: maintain dependency audit hygiene (ongoing).
+- Continue 2.2: split heavy visuals (Three.js hero) where possible.
