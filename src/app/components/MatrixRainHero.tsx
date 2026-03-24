@@ -7,7 +7,6 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { heroContent, siteProfile } from "../data/portfolio";
 import { isIOSLike } from "../lib/device";
 import { useWebGLAvailability } from "../lib/webgl";
-import { HeroDebugOverlay, type ModelStatus } from "./HeroDebugOverlay";
 
 // ─── Error boundary for MorphingWireHero ────────────────────────────────────
 // useLoader throws on GLTF failure; this catches it and surfaces the message.
@@ -34,7 +33,7 @@ class MorphingWireErrorBoundary extends React.Component<
   }
 
   render() {
-    if (this.state.error) return null; // error shown in debug overlay
+    if (this.state.error) return null;
     return this.props.children;
   }
 }
@@ -801,55 +800,6 @@ export function MatrixRainHero() {
   const useLiteHero = iosLike;
   const rainGrid = useHeroRainGridConfig(useLiteHero);
 
-  // ── Debug state ─────────────────────────────────────────────────────────
-  const [morphError, setMorphError] = useState<string | null>(null);
-  const [modelStatuses, setModelStatuses] = useState<ModelStatus[]>([]);
-  const [canvasCount, setCanvasCount] = useState(0);
-
-  // Probe each GLB via fetch to get HTTP-level status independently of Three.js
-  useEffect(() => {
-    const initial: ModelStatus[] = HERO_MODEL_SEQUENCE.map((m) => ({
-      src: m.src,
-      label: m.label,
-      state: "checking",
-      detail: "checking…",
-    }));
-    setModelStatuses(initial);
-
-    HERO_MODEL_SEQUENCE.forEach((model, i) => {
-      fetch(model.src, { method: "HEAD" })
-        .then((res) => {
-          setModelStatuses((prev) => {
-            const next = [...prev];
-            next[i] = {
-              ...next[i],
-              state: res.ok ? "ok" : "error",
-              detail: res.ok ? `${res.status} OK` : `${res.status} ${res.statusText}`,
-            };
-            return next;
-          });
-        })
-        .catch((err: unknown) => {
-          setModelStatuses((prev) => {
-            const next = [...prev];
-            next[i] = {
-              ...next[i],
-              state: "error",
-              detail: err instanceof Error ? err.message : String(err),
-            };
-            return next;
-          });
-        });
-    });
-  }, []);
-
-  // Count live <canvas> elements — poll every second as they mount/unmount
-  useEffect(() => {
-    const tick = () => setCanvasCount(document.querySelectorAll("canvas").length);
-    tick();
-    const id = setInterval(tick, 1000);
-    return () => clearInterval(id);
-  }, []);
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 767px)");
@@ -865,31 +815,12 @@ export function MatrixRainHero() {
     };
   }, [atlas]);
 
-  // iOS with WebGL → LiteWireHero (single canvas is safe).
-  // Only fall back to CSS when WebGL is unavailable entirely.
-  const heroType = !hasWebGL
-    ? "css-fallback"
-    : useLiteHero
-      ? "lite"
-      : "morphing";
-
   return (
     <div
       id="hero"
       className="relative z-[5] flex min-h-[100svh] w-full items-end justify-center md:items-center overflow-hidden bg-black"
     >
-      {/* Debug overlay — always visible so mobile users can report exact state */}
-      <HeroDebugOverlay
-        iosLike={iosLike}
-        hasWebGL={hasWebGL}
-        heroType={heroType}
-        modelStatuses={modelStatuses}
-        morphError={morphError}
-        canvasCount={canvasCount}
-        userAgent={typeof navigator !== "undefined" ? navigator.userAgent : "SSR"}
-      />
-
-      <div className="absolute inset-0 z-0">
+<div className="absolute inset-0 z-0">
         {hasWebGL ? (
           <Canvas
             camera={{ position: [0, isMobile ? 0.15 : 0.18, isMobile ? 6.5 : 5.5], fov: isMobile ? 52 : 50 }}
@@ -907,7 +838,7 @@ export function MatrixRainHero() {
               {useLiteHero ? (
                 <LiteWireHero onSkillChange={setActiveSkill} />
               ) : (
-                <MorphingWireErrorBoundary onError={(e) => setMorphError(e.message)}>
+                <MorphingWireErrorBoundary onError={console.error}>
                   <MorphingWireHero onSkillChange={setActiveSkill} />
                 </MorphingWireErrorBoundary>
               )}
