@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, Component, type ReactNode } from "react";
 const MatrixRainHero = lazy(() =>
   import("../components/MatrixRainHero").then((m) => ({ default: m.MatrixRainHero }))
 );
@@ -10,12 +10,46 @@ import { ContactPanel } from "../components/ContactPanel";
 import { ArchiveSection } from "../components/ArchiveSection";
 import { motion } from "motion/react";
 
+// Catches chunk-load failures (network error fetching the lazy bundle itself)
+class HeroChunkErrorBoundary extends Component<
+  { children: ReactNode },
+  { error: Error | null }
+> {
+  state = { error: null };
+  static getDerivedStateFromError(e: Error) { return { error: e }; }
+  render() {
+    if (this.state.error) {
+      return (
+        <div
+          style={{
+            minHeight: "100svh",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            background: "#050505",
+            fontFamily: "monospace",
+            fontSize: 12,
+            color: "#f87171",
+            padding: 24,
+            textAlign: "center",
+          }}
+        >
+          [DEBUG] Hero chunk failed to load: {(this.state.error as Error).message}
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
+
 export function Home() {
   return (
     <div className="w-full">
-      <Suspense fallback={null}>
-        <MatrixRainHero />
-      </Suspense>
+      <HeroChunkErrorBoundary>
+        <Suspense fallback={null}>
+          <MatrixRainHero />
+        </Suspense>
+      </HeroChunkErrorBoundary>
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
