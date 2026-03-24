@@ -7,6 +7,11 @@ describe("checkRateLimit", () => {
     _resetStore();
   });
 
+  // NOTE: vi.useRealTimers() is intentionally not called in afterEach here.
+  // Vitest isolates fake timers per test file by default, so there is no
+  // bleed into other test files. If more tests are added to this suite that
+  // mix real and fake timers, add afterEach(() => vi.useRealTimers()).
+
   it("allows requests under the limit", () => {
     const ip = "1.2.3.4";
     for (let i = 0; i < 5; i++) {
