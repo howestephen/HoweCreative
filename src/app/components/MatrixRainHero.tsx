@@ -763,7 +763,7 @@ const LiteWireHero = React.memo(function LiteWireHero({
   });
 
   return (
-    <group ref={rootRef} renderOrder={2}>
+    <group ref={rootRef} renderOrder={2} scale={0.85}>
       <mesh ref={pulseRef}>
         <icosahedronGeometry args={[1.1, 1]} />
         <meshBasicMaterial
@@ -863,7 +863,7 @@ export function MatrixRainHero() {
         }}
       />
 
-      <div className="pointer-events-none relative z-20 flex w-full justify-center px-6 pb-10 md:pb-0 md:pt-[45vh] lg:pt-[47vh]">
+      <div className="pointer-events-none relative z-20 flex w-full justify-center px-6 pb-10 md:pb-0 md:pt-[48vh] lg:pt-[50vh]">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
