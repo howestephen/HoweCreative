@@ -9,10 +9,10 @@ import { isIOSLike } from "../lib/device";
 import { useWebGLAvailability } from "../lib/webgl";
 
 // ─── Error boundary for MorphingWireHero ────────────────────────────────────
-// useLoader throws on GLTF failure; this catches it and surfaces the message.
+// useLoader throws on GLTF failure; this catches it and falls back to LiteWireHero.
 interface MorphingErrorBoundaryProps {
   children: React.ReactNode;
-  onError: (err: Error) => void;
+  onSkillChange: (label: string) => void;
 }
 interface MorphingErrorBoundaryState {
   error: Error | null;
@@ -28,12 +28,13 @@ class MorphingWireErrorBoundary extends React.Component<
   }
 
   componentDidCatch(error: Error): void {
-    this.props.onError(error);
-    console.error("[HeroDebug] MorphingWireHero error:", error);
+    console.error("[MorphingWireHero] error, falling back to LiteWireHero:", error);
   }
 
   render() {
-    if (this.state.error) return null;
+    if (this.state.error) {
+      return <LiteWireHero onSkillChange={this.props.onSkillChange} />;
+    }
     return this.props.children;
   }
 }
@@ -796,9 +797,7 @@ export function MatrixRainHero() {
   const [isMobile, setIsMobile] = useState(false);
   const hasWebGL = useWebGLAvailability();
   const atlas = useMemo(() => buildCharAtlas(), []);
-  const iosLike = typeof document !== "undefined" && isIOSLike();
-  const useLiteHero = iosLike;
-  const rainGrid = useHeroRainGridConfig(useLiteHero);
+  const rainGrid = useHeroRainGridConfig(false);
 
 
   useEffect(() => {
@@ -835,13 +834,9 @@ export function MatrixRainHero() {
               rainRows={rainGrid.rainRows}
             />
             <group position={[0, isMobile ? 0.65 : 0.82, 0]}>
-              {useLiteHero ? (
-                <LiteWireHero onSkillChange={setActiveSkill} />
-              ) : (
-                <MorphingWireErrorBoundary onError={console.error}>
-                  <MorphingWireHero onSkillChange={setActiveSkill} />
-                </MorphingWireErrorBoundary>
-              )}
+              <MorphingWireErrorBoundary onSkillChange={setActiveSkill}>
+                <MorphingWireHero onSkillChange={setActiveSkill} />
+              </MorphingWireErrorBoundary>
             </group>
           </Canvas>
         ) : (
