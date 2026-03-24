@@ -7,11 +7,15 @@ vi.mock("./_lib/rate-limit", () => ({
 import { checkRateLimit } from "./_lib/rate-limit";
 import handler from "./contact";
 
-function makeReq(body: object = {}, ip = "1.1.1.1") {
+function makeReq(body: Record<string, unknown> = {}, ip = "1.1.1.1") {
   return { method: "POST", body, headers: { "x-forwarded-for": ip } };
 }
-function makeRes() {
-  const res: any = {};
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type AnyFn = (...args: any[]) => any;
+type MockRes = { status: AnyFn; json: AnyFn; setHeader: AnyFn };
+
+function makeRes(): MockRes {
+  const res = {} as MockRes;
   res.status = vi.fn(() => res);
   res.json = vi.fn(() => res);
   res.setHeader = vi.fn(() => res);

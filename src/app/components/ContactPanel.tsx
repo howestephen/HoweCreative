@@ -1,4 +1,4 @@
-import React, { type FormEvent, useState } from "react";
+import { type FormEvent, useState } from "react";
 import { motion } from "motion/react";
 import { Send, TerminalSquare } from "lucide-react";
 
