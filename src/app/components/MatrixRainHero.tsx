@@ -8,6 +8,37 @@ import { heroContent, siteProfile } from "../data/portfolio";
 import { isIOSLike } from "../lib/device";
 import { useWebGLAvailability } from "../lib/webgl";
 
+// ─── Error boundary for MorphingWireHero ────────────────────────────────────
+// useLoader throws on GLTF failure; this catches it and falls back to LiteWireHero.
+interface MorphingErrorBoundaryProps {
+  children: React.ReactNode;
+  onSkillChange: (label: string) => void;
+}
+interface MorphingErrorBoundaryState {
+  error: Error | null;
+}
+class MorphingWireErrorBoundary extends React.Component<
+  MorphingErrorBoundaryProps,
+  MorphingErrorBoundaryState
+> {
+  state: MorphingErrorBoundaryState = { error: null };
+
+  static getDerivedStateFromError(error: Error): MorphingErrorBoundaryState {
+    return { error };
+  }
+
+  componentDidCatch(error: Error): void {
+    console.error("[MorphingWireHero] error, falling back to LiteWireHero:", error);
+  }
+
+  render() {
+    if (this.state.error) {
+      return <LiteWireHero onSkillChange={this.props.onSkillChange} />;
+    }
+    return this.props.children;
+  }
+}
+
 const LOOP_H = 18.0;
 const BASE_SPEED = 1.5;
 /** Horizontal spread of rain columns — unchanged so composition stays the same. */
@@ -733,7 +764,7 @@ const LiteWireHero = React.memo(function LiteWireHero({
   });
 
   return (
-    <group ref={rootRef} renderOrder={2}>
+    <group ref={rootRef} renderOrder={2} scale={0.85}>
       <mesh ref={pulseRef}>
         <icosahedronGeometry args={[1.1, 1]} />
         <meshBasicMaterial
@@ -766,9 +797,8 @@ export function MatrixRainHero() {
   const [isMobile, setIsMobile] = useState(false);
   const hasWebGL = useWebGLAvailability();
   const atlas = useMemo(() => buildCharAtlas(), []);
-  const iosLike = typeof document !== "undefined" && isIOSLike();
-  const useLiteHero = iosLike;
-  const rainGrid = useHeroRainGridConfig(useLiteHero);
+  const rainGrid = useHeroRainGridConfig(false);
+
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 767px)");
@@ -789,8 +819,8 @@ export function MatrixRainHero() {
       id="hero"
       className="relative z-[5] flex min-h-[100svh] w-full items-end justify-center md:items-center overflow-hidden bg-black"
     >
-      <div className="absolute inset-0 z-0">
-        {hasWebGL && !iosLike ? (
+<div className="absolute inset-0 z-0">
+        {hasWebGL ? (
           <Canvas
             camera={{ position: [0, isMobile ? 0.15 : 0.18, isMobile ? 6.5 : 5.5], fov: isMobile ? 52 : 50 }}
             dpr={isMobile ? [1, 1.2] : [1, 1.5]}
@@ -804,11 +834,9 @@ export function MatrixRainHero() {
               rainRows={rainGrid.rainRows}
             />
             <group position={[0, isMobile ? 0.65 : 0.82, 0]}>
-              {useLiteHero ? (
-                <LiteWireHero onSkillChange={setActiveSkill} />
-              ) : (
+              <MorphingWireErrorBoundary onSkillChange={setActiveSkill}>
                 <MorphingWireHero onSkillChange={setActiveSkill} />
-              )}
+              </MorphingWireErrorBoundary>
             </group>
           </Canvas>
         ) : (
@@ -830,7 +858,7 @@ export function MatrixRainHero() {
         }}
       />
 
-      <div className="pointer-events-none relative z-20 flex w-full justify-center px-6 pb-10 md:pb-0 md:pt-[45vh] lg:pt-[47vh]">
+      <div className="pointer-events-none relative z-20 flex w-full justify-center px-6 pb-10 md:pb-0 md:pt-[58vh] lg:pt-[60vh]">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
