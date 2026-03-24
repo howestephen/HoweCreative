@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { describe, it, expect, beforeEach, vi } from "vitest";
 
 vi.mock("./_lib/rate-limit", () => ({

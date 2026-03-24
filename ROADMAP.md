@@ -17,7 +17,7 @@
 
 - `2.3` UX and architecture refinement
   - ✓ shell/chrome simplification — dead components removed (Navigation, CyberHero, Hero3D); remaining chrome is intentional
-  - tune loading sequence timing and accessibility (aria-live, focus management, reduced-motion) — polish pass
+  - ✓ loading sequence accessibility — aria-live, progressbar role, reduced-motion skip added
   - improve section readability and content hierarchy — opportunistic/ongoing
 
 - `2.4` Developer workflow
