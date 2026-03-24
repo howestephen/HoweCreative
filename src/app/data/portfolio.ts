@@ -1,4 +1,6 @@
-import type { ElementType } from "react";
+import type { ComponentType, SVGProps } from "react";
+
+type IconComponent = ComponentType<SVGProps<SVGSVGElement>>;
 import {
   Archive,
   AudioLines,
@@ -7,11 +9,8 @@ import {
   Box,
   BriefcaseBusiness,
   Cpu,
-  Database,
-  FileCode2,
   Film,
   Fingerprint,
-  FolderArchive,
   House,
   Image,
   Layers,
@@ -79,7 +78,7 @@ export type PortfolioProject = {
 
 export type PortfolioTool = {
   name: string;
-  icon: ElementType;
+  icon: IconComponent;
   color: string;
   category: string;
 };
@@ -99,7 +98,7 @@ export type NavItem = {
   id: string;
   label: string;
   indexLabel: string;
-  icon: ElementType;
+  icon: IconComponent;
 };
 
 const content = rawContent as {
@@ -184,7 +183,7 @@ const content = rawContent as {
   };
 };
 
-const toolIconMap: Record<string, ElementType> = {
+const toolIconMap: Record<string, IconComponent> = {
   // Lucide — used as brand fallbacks
   AudioLines,     // Ableton Live
   AudioWaveform,  // Serum
@@ -215,7 +214,7 @@ const toolIconMap: Record<string, ElementType> = {
   SiVite,
 };
 
-const navIconMap: Record<string, ElementType> = {
+const navIconMap: Record<string, IconComponent> = {
   Archive,
   BriefcaseBusiness,
   Cpu,

@@ -1,4 +1,7 @@
-import { MatrixRainHero } from "../components/MatrixRainHero";
+import { lazy, Suspense } from "react";
+const MatrixRainHero = lazy(() =>
+  import("../components/MatrixRainHero").then((m) => ({ default: m.MatrixRainHero }))
+);
 import { MatrixRainBackdrop } from "../components/MatrixRainBackdrop";
 import { OperatorProfile } from "../components/OperatorProfile";
 import { CaseStudies } from "../components/CaseStudies";
@@ -10,7 +13,9 @@ import { motion } from "motion/react";
 export function Home() {
   return (
     <div className="w-full">
-      <MatrixRainHero />
+      <Suspense fallback={null}>
+        <MatrixRainHero />
+      </Suspense>
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
