@@ -4,7 +4,7 @@ import { portfolioTools, toolsSkillsContent } from "../data/portfolio";
 
 export function MediaShowcase() {
   return (
-    <section id="tools-skills" className="relative z-[20] border-t border-[#ff003c]/20 px-6 py-24 md:py-28">
+    <section id="tools-skills" className="relative z-[20] border-t border-[#ff003c]/32 px-6 py-24 md:py-28">
       <div className="mx-auto max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -35,7 +35,7 @@ export function MediaShowcase() {
               whileHover={{ y: -4 }}
               className="group"
             >
-              <div className="flex min-h-[112px] flex-col justify-between border border-[#ff003c]/18 bg-black/55 p-4 backdrop-blur-sm transition-colors hover:border-[#ff003c]/55">
+              <div className="flex min-h-[112px] flex-col justify-between border border-[#ff003c]/30 bg-black/55 p-4 backdrop-blur-sm transition-colors hover:border-[#ff003c]/55">
                 <tool.icon className="h-5 w-5" style={{ color: tool.color }} />
                 <div>
                   <div className="text-sm font-medium text-white">{tool.name}</div>

@@ -98,7 +98,7 @@ export function SideNav() {
         <span className="headline-font text-[12px] uppercase tracking-[0.32em]">
           {navigationContent.menuButtonLabel}
         </span>
-        <span className="flex h-8 items-center border-l border-[#ff003c]/25 pl-4 text-[#ff003c]">
+        <span className="flex h-8 items-center border-l border-[#ff003c]/38 pl-4 text-[#ff003c]">
           <Menu className="h-4.5 w-4.5" />
         </span>
       </motion.button>
@@ -136,7 +136,7 @@ export function SideNav() {
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.04, duration: 0.2 }}
-                className="relative border-b border-[#ff003c]/18 px-5 py-4"
+                className="relative border-b border-[#ff003c]/30 px-5 py-4"
               >
                 <div className="flex items-center justify-between gap-4">
                   <div className="headline-font text-lg uppercase tracking-[0.14em] text-white">
@@ -205,7 +205,7 @@ export function SideNav() {
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.16, duration: 0.24 }}
-                className="relative grid gap-2 border-t border-[#ff003c]/18 px-4 py-4"
+                className="relative grid gap-2 border-t border-[#ff003c]/30 px-4 py-4"
               >
                 <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-zinc-500">
                   External Links
@@ -345,7 +345,7 @@ export function SideNav() {
                   initial={{ opacity: 0, y: 22 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.22, duration: 0.26 }}
-                  className="mt-auto border border-[#ff003c]/18 bg-black/60 p-4"
+                  className="mt-auto border border-[#ff003c]/30 bg-black/60 p-4"
                 >
                   <div className="mb-3 font-mono text-[10px] uppercase tracking-[0.22em] text-zinc-500">
                     External Links

@@ -21,7 +21,7 @@ export function OperatorProfilePortrait() {
         {/* Subtle red tint overlay to match site aesthetic */}
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/60" />
       </div>
-      <div className="relative z-20 border-t border-[#ff003c]/18 bg-black/95 px-4 py-3">
+      <div className="relative z-20 border-t border-[#ff003c]/30 bg-black/95 px-4 py-3">
         <div className="flex items-center justify-between gap-3 font-mono text-[10px] uppercase tracking-[0.2em] text-zinc-500">
           <span>{operatorProfileContent.portraitFooterLeft}</span>
           <span className="text-[#ff003c]">{operatorProfileContent.portraitFooterRight}</span>

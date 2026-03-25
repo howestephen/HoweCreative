@@ -5,7 +5,7 @@ import { OperatorProfilePortrait } from "./OperatorProfilePortrait";
 
 export function OperatorProfile() {
   return (
-    <section id="operator-profile" className="relative z-[20] border-t border-[#ff003c]/15 px-6 py-24 md:py-28">
+    <section id="operator-profile" className="relative z-[20] border-t border-[#ff003c]/28 px-6 py-24 md:py-28">
       <div className="mx-auto max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -63,7 +63,7 @@ export function OperatorProfile() {
                 }}
               />
               <div className="relative z-10">
-                <div className="mb-4 flex items-center justify-between gap-4 border-b border-[#ff003c]/15 pb-4 font-mono text-[10px] uppercase tracking-[0.2em] text-zinc-500">
+                <div className="mb-4 flex items-center justify-between gap-4 border-b border-[#ff003c]/28 pb-4 font-mono text-[10px] uppercase tracking-[0.2em] text-zinc-500">
                   <span>{operatorProfileContent.primaryFileLabel}</span>
                   <span className="text-[#ff003c]">{operatorProfileContent.primaryFileStatus}</span>
                 </div>
@@ -93,7 +93,7 @@ export function OperatorProfile() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.06 }}
-                className="relative overflow-hidden border border-[#ff003c]/20 bg-black/92 p-5"
+                className="relative overflow-hidden border border-[#ff003c]/32 bg-black/92 p-5"
               >
                 <div
                   className="pointer-events-none absolute inset-0 opacity-[0.05]"
@@ -121,7 +121,7 @@ export function OperatorProfile() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: operatorProfileContent.files.length * 0.06 }}
-              className="relative overflow-hidden border border-[#ff003c]/20 bg-black/92 p-5"
+              className="relative overflow-hidden border border-[#ff003c]/32 bg-black/92 p-5"
             >
               <div className="relative z-10">
                 <div className="mb-3 flex items-center justify-between gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-zinc-500">

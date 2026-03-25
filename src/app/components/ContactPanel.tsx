@@ -55,7 +55,7 @@ export function ContactPanel() {
   return (
     <section
       id="contact"
-      className="relative z-[20] border-t border-[#ff003c]/20 px-6 py-24 md:py-28"
+      className="relative z-[20] border-t border-[#ff003c]/32 px-6 py-24 md:py-28"
     >
       <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.8fr_1.2fr]">
         <motion.div
@@ -82,7 +82,7 @@ export function ContactPanel() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.65, delay: 0.08 }}
-          className="relative overflow-hidden border border-[#ff003c]/25 bg-black/92 p-5 md:p-6"
+          className="relative overflow-hidden border border-[#ff003c]/38 bg-black/92 p-5 md:p-6"
         >
           <div
             className="pointer-events-none absolute inset-0 opacity-[0.06]"
@@ -121,7 +121,7 @@ export function ContactPanel() {
                   required
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full border border-[#ff003c]/18 bg-black/92 px-4 py-3 text-sm text-white outline-none transition-colors focus:border-[#ff003c]"
+                  className="w-full border border-[#ff003c]/30 bg-black/92 px-4 py-3 text-sm text-white outline-none transition-colors focus:border-[#ff003c]"
                 />
               </label>
               <label className="block">
@@ -135,7 +135,7 @@ export function ContactPanel() {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full border border-[#ff003c]/18 bg-black/92 px-4 py-3 text-sm text-white outline-none transition-colors focus:border-[#ff003c]"
+                  className="w-full border border-[#ff003c]/30 bg-black/92 px-4 py-3 text-sm text-white outline-none transition-colors focus:border-[#ff003c]"
                 />
               </label>
               <label className="block md:col-span-2">
@@ -147,7 +147,7 @@ export function ContactPanel() {
                   name="projectType"
                   value={projectType}
                   onChange={(e) => setProjectType(e.target.value)}
-                  className="w-full border border-[#ff003c]/18 bg-black/92 px-4 py-3 text-sm text-white outline-none transition-colors focus:border-[#ff003c]"
+                  className="w-full border border-[#ff003c]/30 bg-black/92 px-4 py-3 text-sm text-white outline-none transition-colors focus:border-[#ff003c]"
                 />
               </label>
               <label className="block md:col-span-2">
@@ -160,7 +160,7 @@ export function ContactPanel() {
                   required
                   value={brief}
                   onChange={(e) => setBrief(e.target.value)}
-                  className="w-full resize-none border border-[#ff003c]/18 bg-black/92 px-4 py-3 text-sm text-white outline-none transition-colors focus:border-[#ff003c]"
+                  className="w-full resize-none border border-[#ff003c]/30 bg-black/92 px-4 py-3 text-sm text-white outline-none transition-colors focus:border-[#ff003c]"
                 />
               </label>
               <input
@@ -174,7 +174,7 @@ export function ContactPanel() {
                 aria-hidden="true"
               />
 
-              <div className="mt-1 flex flex-col gap-4 border-t border-[#ff003c]/15 pt-5 md:col-span-2 md:flex-row md:items-center md:justify-between">
+              <div className="mt-1 flex flex-col gap-4 border-t border-[#ff003c]/28 pt-5 md:col-span-2 md:flex-row md:items-center md:justify-between">
                 <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.18em] text-zinc-500">
                   <TerminalSquare className="h-4 w-4 text-[#ff003c]" />
                   {status === "error" ? (

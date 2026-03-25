@@ -15,7 +15,7 @@ export function AppErrorBoundary() {
 
   return (
     <div className="min-h-screen bg-[#050505] px-6 py-16 text-zinc-200">
-      <div className="mx-auto max-w-3xl border border-[#ff003c]/25 bg-black/95 p-8">
+      <div className="mx-auto max-w-3xl border border-[#ff003c]/38 bg-black/95 p-8">
         <div className="mb-4 font-mono text-[10px] uppercase tracking-[0.22em] text-[#ff003c]">
           Interface Recovery
         </div>

@@ -21,12 +21,12 @@ export function TechnicalDecorations() {
 
       {/* Corner brackets - top left */}
       <div className="fixed top-20 left-20 z-[98] pointer-events-none hidden xl:block">
-        <div className="w-12 h-12 border-t-2 border-l-2 border-[#ff003c]/20" />
+        <div className="w-12 h-12 border-t-2 border-l-2 border-[#ff003c]/32" />
       </div>
 
       {/* Corner brackets - top right */}
       <div className="fixed top-20 right-6 z-[98] pointer-events-none hidden xl:block">
-        <div className="w-12 h-12 border-t-2 border-r-2 border-[#ff003c]/20" />
+        <div className="w-12 h-12 border-t-2 border-r-2 border-[#ff003c]/32" />
       </div>
 
       {/* Vertical technical text - left side */}
