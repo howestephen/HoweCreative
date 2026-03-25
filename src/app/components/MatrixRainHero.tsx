@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { Canvas, useFrame, useLoader } from "@react-three/fiber";
+import { Canvas, useFrame, useLoader, useThree } from "@react-three/fiber";
 import { AnimatePresence, motion } from "motion/react";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
@@ -7,6 +7,14 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { heroContent, siteProfile } from "../data/portfolio";
 import { isIOSLike } from "../lib/device";
 import { useWebGLAvailability } from "../lib/webgl";
+
+function HeroFrameInvalidator({ visibleRef }: { visibleRef: React.RefObject<boolean> }) {
+  const { invalidate } = useThree();
+  useFrame(() => {
+    if (visibleRef.current) invalidate();
+  });
+  return null;
+}
 
 // ─── Error boundary for MorphingWireHero ────────────────────────────────────
 // useLoader throws on GLTF failure; this catches it and falls back to LiteWireHero.
@@ -798,7 +806,20 @@ export function MatrixRainHero() {
   const hasWebGL = useWebGLAvailability();
   const atlas = useMemo(() => buildCharAtlas(), []);
   const rainGrid = useHeroRainGridConfig(false);
+  const heroRef = useRef<HTMLDivElement>(null);
+  const heroVisibleRef = useRef(true);
 
+  // Pause rendering when hero is scrolled off-screen
+  useEffect(() => {
+    const el = heroRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => { heroVisibleRef.current = entry.isIntersecting; },
+      { threshold: 0 },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 767px)");
@@ -816,6 +837,7 @@ export function MatrixRainHero() {
 
   return (
     <div
+      ref={heroRef}
       id="hero"
       className="relative z-[5] flex min-h-[100svh] w-full items-end justify-center md:items-center overflow-hidden bg-black"
     >
@@ -823,10 +845,11 @@ export function MatrixRainHero() {
         {hasWebGL ? (
           <Canvas
             camera={{ position: [0, isMobile ? 0.15 : 0.18, isMobile ? 6.5 : 5.5], fov: isMobile ? 52 : 50 }}
-            dpr={isMobile ? [1, 1.2] : [1, 1.5]}
-            gl={{ antialias: false, powerPreference: "default" }}
-            performance={{ min: 0.5 }}
+            dpr={isMobile ? [1, 1] : [1, 1.25]}
+            gl={{ antialias: false, powerPreference: "low-power" }}
+            frameloop="demand"
           >
+            <HeroFrameInvalidator visibleRef={heroVisibleRef} />
             <BackgroundRain
               atlas={atlas}
               gridColsX={rainGrid.gridColsX}

@@ -30,3 +30,9 @@
 - 2.2: Lazy-load `MatrixRainHero` via `React.lazy` + dynamic import (Vite code-split).
 - 2.3: Accessibility polish on loading sequence.
 - 2.3: Section readability pass (opportunistic).
+
+## Adjacent Planned Work
+
+- document the standalone `solana-diary-poster` Railway service as a future adjacent system
+- capture MVP design, implementation order, and Telegram setup before code begins
+- keep this work isolated from the Vercel portfolio runtime unless the repo structure is intentionally expanded later

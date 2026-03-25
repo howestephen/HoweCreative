@@ -19,12 +19,31 @@
     "menuButtonLabel": "Menu",
     "panelTitle": "Site Navigation Matrix",
     "items": [
-      { "id": "hero", "icon": "House", "label": "Landing" },
-      { "id": "operator-profile", "icon": "Fingerprint", "label": "Profile" },
-      { "id": "case-studies", "icon": "BriefcaseBusiness", "label": "Case Studies" },
-      { "id": "tools-skills", "icon": "Cpu", "label": "Tools + Skills" },
-      { "id": "contact", "icon": "Send", "label": "Contact" },
-      { "id": "archive", "icon": "Archive", "label": "Archive" }
+      {
+        "id": "hero",
+        "icon": "House",
+        "label": "Landing"
+      },
+      {
+        "id": "operator-profile",
+        "icon": "Fingerprint",
+        "label": "Profile"
+      },
+      {
+        "id": "case-studies",
+        "icon": "BriefcaseBusiness",
+        "label": "Case Studies"
+      },
+      {
+        "id": "tools-skills",
+        "icon": "Cpu",
+        "label": "Tools + Skills"
+      },
+      {
+        "id": "contact",
+        "icon": "Send",
+        "label": "Contact"
+      }
     ]
   },
   "hero": {
@@ -45,13 +64,25 @@
     "description": "This section gives an overview of the system operator and his personal quirks.",
     "primaryFileLabel": "File 01",
     "primaryFileStatus": "Open",
-    "portraitFooterLeft": "Operator Self Portrait",
-    "portraitFooterRight": "GLTF Shader Imported",
+    "portraitFooterLeft": "Operator Profile",
+    "portraitFooterRight": "Photo Reference",
     "quickFacts": [
-      { "label": "Base", "value": "United Kingdom" },
-      { "label": "Mode", "value": "Design + Deliver" },
-      { "label": "Bias", "value": "Systems over surfaces" },
-      { "label": "Output", "value": "Products, motion, media, content, deliverables." }
+      {
+        "label": "Base",
+        "value": "United Kingdom"
+      },
+      {
+        "label": "Mode",
+        "value": "Design + Deliver"
+      },
+      {
+        "label": "Bias",
+        "value": "Systems over surfaces"
+      },
+      {
+        "label": "Output",
+        "value": "Products, motion, media, content, deliverables."
+      }
     ],
     "notesTitle": "Notes",
     "notesFileLabel": "File 5",
@@ -94,40 +125,125 @@
         "category": "Media System / Motion Pipeline",
         "year": "2024",
         "status": "Live",
-        "shortDescription": "A scalable video and 3D system for product launches, educational content, and corporate announcements.",
-        "fullDescription": "A production system designed to generate consistent, high-frequency output across video, 3D, and motion graphics using modular assets and reusable tooling.",
-        "tags": ["Cinema 4D", "Redshift", "After Effects", "Adobe Illustrator", "Adobe Photoshop"],
-        "image": "/case-studies/uncx-video-system/frame-library-2.png",
+        "shortDescription": "End-to-end video production pipeline spanning Cinema 4D, After Effects, and Redshift — built for repeatable, high-frequency output.",
+        "fullDescription": "A modular production system covering 3D scene assembly in Cinema 4D, Redshift rendering, After Effects compositing, and templated timeline structures. Designed so that product launches, explainers, YouTube tutorials, and partner content could all ship from the same asset library without rebuilding from scratch each time.",
+        "tags": [
+          "Cinema 4D",
+          "Redshift",
+          "After Effects",
+          "Adobe Illustrator",
+          "Adobe Photoshop"
+        ],
+        "image": "/case-studies/uncx-video-system/cover.webp",
         "media": [
-          { "type": "image", "src": "/case-studies/uncx-video-system/frame-library-2.png", "alt": "Frame library overview" }
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-video-system/cover.webp",
+            "alt": "UNCX Video System overview"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-video-system/youtube-thumbnails.webp",
+            "alt": "YouTube thumbnail designs"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-video-system/after-effects-pipeline.webp",
+            "alt": "After Effects production pipeline"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-video-system/after-effects-ui.webp",
+            "alt": "After Effects UI and compositions"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-video-system/cinema4d-viewport.webp",
+            "alt": "Cinema 4D viewport and 3D scene"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-video-system/3d-asset.webp",
+            "alt": "3D asset render"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-video-system/c4d-ui-layers.webp",
+            "alt": "Cinema 4D layers panel"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-video-system/c4d-ui-rigging.webp",
+            "alt": "Cinema 4D rigging setup"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-video-system/c4d-ui-takes.webp",
+            "alt": "Cinema 4D takes system"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-video-system/ae-files-1.webp",
+            "alt": "After Effects project files"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-video-system/ae-files-2.webp",
+            "alt": "After Effects project files 2"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-video-system/video-files.webp",
+            "alt": "Video file management"
+          },
+          {
+            "type": "video",
+            "src": "/case-studies/uncx-video-system/hyperswap-integration.mp4",
+            "alt": "HyperSwap Integration video"
+          },
+          {
+            "type": "video",
+            "src": "/case-studies/uncx-video-system/lock-announcement-rise.mp4",
+            "alt": "Lock Announcement - RISE"
+          },
+          {
+            "type": "video",
+            "src": "/case-studies/uncx-video-system/token-minter-launch.mp4",
+            "alt": "Token Minter Launch Video"
+          },
+          {
+            "type": "video",
+            "src": "/case-studies/uncx-video-system/vesting-app-release.mp4",
+            "alt": "Vesting App Release Video"
+          }
         ],
         "gradient": "from-[#8b0020] to-[#ff003c]",
         "role": "Media Systems Designer / Motion Engineer",
-        "client": "UNCX",
+        "client": "UNCX Network",
         "overlaySections": [
           {
             "title": "Brief",
-            "body": "UNCX required a repeatable video system capable of supporting launches, explainers, and partner content without rebuilding from scratch."
+            "body": "UNCX needed a repeatable video system that could support product launches, explainer series, YouTube tutorials, and partner content — without rebuilding from scratch for every deliverable."
           },
           {
             "title": "Problem Frame",
-            "body": "Production was fragmented: inconsistent style, duplicated effort, and no shared system for assets or timelines."
+            "body": "Production was fragmented across freelancers and one-off files. No shared asset library, no consistent motion language, and no templated pipeline — every video started from zero."
           },
           {
             "title": "System Design",
-            "body": "Built a modular pipeline: reusable 3D scenes, templated compositions, structured timeline blocks, and interchangeable content layers."
+            "body": "Built a modular pipeline: reusable 3D scenes and camera rigs in Cinema 4D, Redshift lighting presets, templated After Effects compositions with interchangeable content layers, and structured timeline blocks for consistent pacing across formats."
           },
           {
             "title": "Prototype Notes",
-            "body": "Isolated repeatable patterns in camera, lighting, and transitions, then abstracted them into reusable templates."
+            "body": "Isolated repeatable patterns in camera movement, lighting setups, and transitions. Abstracted these into reusable templates so new videos could be assembled rather than authored from scratch."
           },
           {
             "title": "Delivery",
-            "body": "Delivered as a production system including template libraries, asset structure, and defined motion language."
+            "body": "Delivered as a production system: Cinema 4D scene templates, After Effects project structures, Redshift material libraries, YouTube thumbnail templates, and a defined motion language document."
           },
           {
             "title": "Outcome",
-            "body": "Reduced production time and enabled consistent, scalable output across campaigns."
+            "body": "Cut production time significantly across campaigns. Enabled consistent, brand-aligned output regardless of content type — from 60-second launch trailers to multi-part tutorial series."
           }
         ]
       },
@@ -138,40 +254,131 @@
         "category": "Product System / Operational Platform",
         "year": "2025",
         "status": "Late Stage",
-        "shortDescription": "Badge tracking platform designed to reduce admin load and unify leader, parent, and child interactions.",
-        "fullDescription": "A multi-layer product system managing progress tracking, communication, and monetisation across distinct user roles.",
-        "tags": ["Systems Design", "React", "Supabase", "Product"],
-        "image": "/case-studies/badger-club/leader-dashboard.png",
+        "shortDescription": "Full-stack badge tracking platform with dark/light themes, role-based dashboards, Supabase backend, and Resend email integration.",
+        "fullDescription": "A multi-role product system managing badge progress tracking, leader administration, parent communication, and public-facing group pages. Built with React, Supabase, Resend email integration, and Cloudflare security. Supports dark and light themes with a structured database schema designed for scalable group management.",
+        "tags": [
+          "React",
+          "Supabase",
+          "Resend",
+          "Cloudflare",
+          "Systems Design",
+          "Product"
+        ],
+        "image": "/case-studies/badger-club/cover.webp",
         "media": [
-          { "type": "image", "src": "/case-studies/badger-club/leader-dashboard.png", "alt": "Leader dashboard" }
+          {
+            "type": "image",
+            "src": "/case-studies/badger-club/cover.webp",
+            "alt": "Badger Club overview"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/badger-club/dark-public-homepage.webp",
+            "alt": "Public homepage (dark mode)"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/badger-club/dark-badger-management.webp",
+            "alt": "Badger management dashboard (dark)"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/badger-club/dark-progress-1.webp",
+            "alt": "Progress tracking view 1 (dark)"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/badger-club/dark-progress-2.webp",
+            "alt": "Progress tracking view 2 (dark)"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/badger-club/dark-progress-3.webp",
+            "alt": "Progress tracking view 3 (dark)"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/badger-club/dark-edit-progress.webp",
+            "alt": "Edit progress view (dark)"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/badger-club/dark-manage-settings.webp",
+            "alt": "Manage settings (dark)"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/badger-club/dark-settings.webp",
+            "alt": "Settings page (dark)"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/badger-club/dark-message-leader.webp",
+            "alt": "Message leader with Cloudflare security"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/badger-club/light-badger-management.webp",
+            "alt": "Badger management (light mode)"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/badger-club/light-progress.webp",
+            "alt": "Progress tracking (light)"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/badger-club/light-progress-2.webp",
+            "alt": "Progress tracking 2 (light)"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/badger-club/light-progress-3.webp",
+            "alt": "Progress tracking 3 (light)"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/badger-club/light-manage-settings.webp",
+            "alt": "Manage settings (light)"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/badger-club/database-schema.webp",
+            "alt": "Database schema design"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/badger-club/resend-email-setup.webp",
+            "alt": "Resend email integration setup"
+          }
         ],
         "gradient": "from-[#ff4466] to-[#4f0012]",
-        "role": "Product / Systems Designer",
+        "role": "Product Designer / Full-Stack Developer",
         "client": "Badger Club",
         "overlaySections": [
           {
             "title": "Brief",
-            "body": "Build a badge tracking system that reduces admin overhead while supporting multiple user types."
+            "body": "Build a badge tracking system that reduces admin overhead for group leaders while giving parents and children clear visibility into progress and achievements."
           },
           {
             "title": "Problem Frame",
-            "body": "Workflows were manual, fragmented, and unclear, placing full burden on leaders."
+            "body": "Badge tracking was manual — spreadsheets, paper records, and inconsistent communication between leaders and parents. Leaders carried the full admin burden with no structured tooling."
           },
           {
             "title": "System Design",
-            "body": "Separated system into operational layers: leader management, parent engagement, and child-facing progress."
+            "body": "Separated the system into operational layers: leader management dashboards for badge administration, parent-facing views for monitoring progress, child-friendly progress visualisation, and public group pages with Cloudflare security."
           },
           {
             "title": "Prototype Notes",
-            "body": "Focused on simplifying progress visualisation and reducing cognitive load per role."
+            "body": "Focused on reducing cognitive load per role. Dark and light themes tested for readability. Database schema designed in Supabase with row-level security for multi-tenant group isolation."
           },
           {
             "title": "Delivery",
-            "body": "Implemented using Supabase backend and React-based frontend with subscription structure."
+            "body": "Full-stack implementation: React frontend with role-based routing, Supabase backend with structured schema, Resend for transactional emails, and Cloudflare for security and performance."
           },
           {
             "title": "Outcome",
-            "body": "Reduced admin friction and created a scalable product foundation."
+            "body": "Eliminated manual tracking overhead. Created a scalable product foundation with subscription-based monetisation and clear paths for feature expansion."
           }
         ]
       },
@@ -182,40 +389,170 @@
         "category": "Brand System / Visual Infrastructure",
         "year": "2024",
         "status": "Complete",
-        "shortDescription": "A structured brand system designed for consistency across product, marketing, and motion.",
-        "fullDescription": "Rebuilt UNCX branding as a system of rules and components rather than a static identity.",
-        "tags": ["Brand Systems", "Visual Design", "Direction"],
-        "image": "/case-studies/uncx-video-system/launch-system-poster.jpg",
+        "shortDescription": "Comprehensive rebrand spanning identity, marketing visuals, and a full website redesign across 10+ product pages in Figma.",
+        "fullDescription": "Rebuilt the UNCX brand from the ground up as a system of rules and components rather than a static identity. Covered typography, colour logic, layout rules, chain-specific visual treatments, and a complete website redesign in Figma spanning Homepage, Launchpad, Token Vesting, Staking, Minting, and more.",
+        "tags": [
+          "Brand Systems",
+          "Figma",
+          "Visual Design",
+          "Web Design",
+          "Art Direction"
+        ],
+        "image": "/case-studies/uncx-rebrand/cover.webp",
         "media": [
-          { "type": "image", "src": "/case-studies/uncx-video-system/launch-system-poster.jpg", "alt": "Launch system poster" }
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-rebrand/cover.webp",
+            "alt": "UNCX Network Rebrand overview"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-rebrand/branding.webp",
+            "alt": "UNCX branding system"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-rebrand/brand-designs.webp",
+            "alt": "Brand design explorations"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-rebrand/rebrand-concepts.webp",
+            "alt": "Rebrand concept directions"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-rebrand/rebrand-designs.webp",
+            "alt": "Rebrand design variations"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-rebrand/chain-based-design.webp",
+            "alt": "Chain-based design system"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-rebrand/chains.webp",
+            "alt": "Multi-chain visual identity"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-rebrand/dat-design.webp",
+            "alt": "DAT design concept"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-rebrand/portfolio-scanners.webp",
+            "alt": "Portfolio scanner designs"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-rebrand/stablecoins.webp",
+            "alt": "Stablecoins design"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-rebrand/locking-solana.webp",
+            "alt": "Locking - Solana design"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-rebrand/minting-step-one.webp",
+            "alt": "Minting is step one"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-rebrand/zk-rollups.webp",
+            "alt": "ZK Rollups explained"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-rebrand/logo-square.webp",
+            "alt": "UNCX logo square mark"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-rebrand/website/homepage.webp",
+            "alt": "Website homepage design"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-rebrand/website/launchpad.webp",
+            "alt": "Website launchpad page"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-rebrand/website/token-vesting.webp",
+            "alt": "Website token vesting page"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-rebrand/website/token-minter.webp",
+            "alt": "Website token minter page"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-rebrand/website/network.webp",
+            "alt": "Website network page"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-rebrand/website/staking-farming.webp",
+            "alt": "Website staking & farming page"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-rebrand/website/team.webp",
+            "alt": "Website team page"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-rebrand/website/blog.webp",
+            "alt": "Website blog listing"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-rebrand/website/blog-page.webp",
+            "alt": "Website blog article page"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-rebrand/website/uncx-token.webp",
+            "alt": "Website UNCX token page"
+          },
+          {
+            "type": "video",
+            "src": "/case-studies/uncx-rebrand/brand-launch-video.mp4",
+            "alt": "Brand launch video"
+          }
         ],
         "gradient": "from-[#ffffff] to-[#780015]",
-        "role": "Brand Systems Designer",
-        "client": "UNCX",
+        "role": "Brand Systems Designer / Art Director",
+        "client": "UNCX Network",
         "overlaySections": [
           {
             "title": "Brief",
-            "body": "Create a scalable brand identity to unify all outputs."
+            "body": "Create a scalable brand identity that could unify product UI, marketing materials, motion graphics, and a full website redesign across UNCX's multi-chain DeFi ecosystem."
           },
           {
             "title": "Problem Frame",
-            "body": "Inconsistent visuals and lack of systemised brand logic."
+            "body": "The existing brand was inconsistent — different visual treatments per product, no systemised colour or typography logic, and marketing outputs that didn't align with the product UI."
           },
           {
             "title": "System Design",
-            "body": "Defined typography, colour logic, layout rules, and motion alignment."
+            "body": "Defined typography scales, colour logic with chain-specific treatments, layout grid rules, component patterns, and motion alignment. Designed a full website in Figma covering Homepage, Launchpad, Token Vesting, Staking & Farming, Token Minter, Blog, and Team pages."
           },
           {
             "title": "Prototype Notes",
-            "body": "Tested across UI, motion, and marketing outputs."
+            "body": "Tested brand coherence across UI mockups, motion graphics exports, marketing materials, and social media templates. Iterated on chain-based colour variations to maintain identity across Ethereum, BSC, and other networks."
           },
           {
             "title": "Delivery",
-            "body": "Delivered guidelines, components, and motion references."
+            "body": "Delivered brand guidelines, Figma component libraries, website page designs, marketing visual templates, and motion style references."
           },
           {
             "title": "Outcome",
-            "body": "Achieved consistent output across all platforms."
+            "body": "Achieved consistent visual output across all platforms and products. The brand system supported ongoing content production without design drift."
           }
         ]
       },
@@ -226,84 +563,229 @@
         "category": "AI Product / Content System",
         "year": "2026",
         "status": "Active Build",
-        "shortDescription": "Language learning system built around real-world content instead of static lessons.",
-        "fullDescription": "Transforms live content into structured learning through a repeatable ingestion and transformation pipeline.",
-        "tags": ["AI", "Product Design", "Systems"],
-        "image": "/case-studies/noticia-lingo/onboarding-screen.png",
+        "shortDescription": "AI-powered language learning app using real news articles, Google authentication, Supabase backend, and structured quiz flows.",
+        "fullDescription": "A language learning platform that transforms live news content into structured learning experiences. Built with React, Supabase, and Google OAuth — featuring article-based lessons, interactive quizzes, a learner dashboard, and a settings system. Designed to replace static flashcard approaches with contextual, real-world content.",
+        "tags": [
+          "AI",
+          "React",
+          "Supabase",
+          "Google Auth",
+          "Product Design"
+        ],
+        "image": "/case-studies/noticia-lingo/cover.webp",
         "media": [
-          { "type": "image", "src": "/case-studies/noticia-lingo/onboarding-screen.png", "alt": "Onboarding screen" }
+          {
+            "type": "image",
+            "src": "/case-studies/noticia-lingo/cover.webp",
+            "alt": "Noticia Lingo overview"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/noticia-lingo/signed-out-hero.webp",
+            "alt": "Signed out hero page"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/noticia-lingo/homepage-full.webp",
+            "alt": "Full homepage design"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/noticia-lingo/dashboard.webp",
+            "alt": "User dashboard"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/noticia-lingo/quiz-page.webp",
+            "alt": "Quiz page interface"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/noticia-lingo/settings-page.webp",
+            "alt": "Settings page"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/noticia-lingo/google-login.webp",
+            "alt": "Google login integration"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/noticia-lingo/database-schema.webp",
+            "alt": "Database schema"
+          }
         ],
         "gradient": "from-[#ff003c] to-[#7a001c]",
-        "role": "Product / Systems Designer",
+        "role": "Product Designer / Full-Stack Developer",
         "client": "Self-initiated",
         "overlaySections": [
           {
             "title": "Brief",
-            "body": "Build a learning system using real-world content."
+            "body": "Build a language learning system that uses real-world news content instead of static lessons — making vocabulary acquisition contextual and engaging."
           },
           {
             "title": "Problem Frame",
-            "body": "Traditional systems are static and disengaging."
+            "body": "Traditional language apps rely on decontextualised flashcards and repetitive drills. Learners lose motivation because the content feels disconnected from real usage."
           },
           {
             "title": "System Design",
-            "body": "Pipeline: ingest → transform → structure → deliver."
+            "body": "Content pipeline: ingest news articles, extract vocabulary, generate contextual quizzes, and structure progressive difficulty. User system: Google OAuth, learner profiles, progress tracking, and configurable settings."
           },
           {
             "title": "Prototype Notes",
-            "body": "Tested readability scaling and interaction models."
+            "body": "Tested readability scaling across article difficulty levels. Built interactive quiz flows with immediate feedback. Designed the dashboard to surface progress metrics without overwhelming new users."
           },
           {
             "title": "Delivery",
-            "body": "Prototype with structured reading flow and transformation logic."
+            "body": "Working prototype with React frontend, Supabase backend, Google authentication, structured article reading flow, quiz system, and learner dashboard."
           },
           {
             "title": "Outcome",
-            "body": "Demonstrated scalable learning system from live content."
+            "body": "Demonstrated a scalable learning system driven by live content. Active development with plans for AI-powered difficulty calibration and expanded language support."
           }
         ]
       },
       {
         "id": 5,
         "slug": "uncx-academy",
-        "title": "UNCX Academy Brand and Platform",
+        "title": "UNCX Academy Brand & Platform",
         "category": "Platform System / Education Product",
         "year": "2025",
         "status": "Complete",
-        "shortDescription": "A structured learning platform combining content, branding, and delivery systems.",
-        "fullDescription": "Unified platform and content system for scalable education delivery.",
-        "tags": ["Platform Design", "Content Systems"],
-        "image": "/case-studies/uncx-video-system/tutorial-system-poster.jpg",
+        "shortDescription": "Educational platform brand and design system — logotype, component library, article system, video pages, and glossary for DeFi learning.",
+        "fullDescription": "End-to-end brand and platform design for UNCX Academy: custom logotype, component library, article categorisation system, video learning pages, glossary, integrations hub, and about page. Designed in Figma as a complete design system with reusable components and consistent visual language.",
+        "tags": [
+          "Figma",
+          "Brand Design",
+          "Platform Design",
+          "Content Systems",
+          "UI/UX"
+        ],
+        "image": "/case-studies/uncx-academy/cover.webp",
         "media": [
-          { "type": "image", "src": "/case-studies/uncx-video-system/tutorial-system-poster.jpg", "alt": "Tutorial system poster" }
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-academy/cover.webp",
+            "alt": "UNCX Academy brand overview"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-academy/main-page.webp",
+            "alt": "Academy main page"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-academy/articles-overview.webp",
+            "alt": "Articles overview page"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-academy/articles-home.webp",
+            "alt": "Articles home page"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-academy/article-categories.webp",
+            "alt": "Article categories page"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-academy/article-page.webp",
+            "alt": "Individual article page"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-academy/about-page.webp",
+            "alt": "About page"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-academy/videos-home.webp",
+            "alt": "Videos home page"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-academy/video-page.webp",
+            "alt": "Individual video page"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-academy/glossary-home.webp",
+            "alt": "Glossary home page"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-academy/integrations.webp",
+            "alt": "Platform integrations"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-academy/components.webp",
+            "alt": "Component library"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-academy/logo-design.webp",
+            "alt": "Logo design process"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-academy/logotype.webp",
+            "alt": "Academy logotype"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-academy/internal-overview.webp",
+            "alt": "Internal project overview"
+          },
+          {
+            "type": "video",
+            "src": "/case-studies/uncx-academy/promo-video.mp4",
+            "alt": "Academy promo video"
+          },
+          {
+            "type": "video",
+            "src": "/case-studies/uncx-academy/tutorial-lp-locking.mp4",
+            "alt": "LP Locking tutorial"
+          },
+          {
+            "type": "video",
+            "src": "/case-studies/uncx-academy/chain-spotlight-sei.mp4",
+            "alt": "Chain Spotlight - SEI"
+          },
+          {
+            "type": "video",
+            "src": "/case-studies/uncx-academy/flash-loans-defi.mp4",
+            "alt": "Flash Loans in DeFi"
+          }
         ],
         "gradient": "from-[#ffa2b5] to-[#520012]",
-        "role": "Product / Media Systems Designer",
-        "client": "UNCX",
+        "role": "Brand & Product Designer",
+        "client": "UNCX Network",
         "overlaySections": [
           {
             "title": "Brief",
-            "body": "Create an education platform for DeFi users."
+            "body": "Design a complete educational platform brand and UI for UNCX Academy — covering identity, page designs, content structure, and a reusable component system."
           },
           {
             "title": "Problem Frame",
-            "body": "Content was fragmented and inconsistent."
+            "body": "DeFi education content was scattered across blog posts, YouTube videos, and documentation with no unified platform, no consistent visual language, and no structured learning progression."
           },
           {
             "title": "System Design",
-            "body": "Built modular lessons, consistent media language, and structured progression."
+            "body": "Created a custom logotype and brand identity. Designed a modular Figma component library. Structured content into articles, videos, glossary entries, and integrations — each with its own page template and navigation pattern."
           },
           {
             "title": "Prototype Notes",
-            "body": "Tested pacing, navigation, and content chunking."
+            "body": "Tested content hierarchy across article categories, video pages, and glossary. Ensured the component library supported both internal content authoring and public-facing learning experiences."
           },
           {
             "title": "Delivery",
-            "body": "Platform structure, video system, and UI framework."
+            "body": "Complete Figma design system: logotype, component library, page templates for Main, Articles, Videos, Glossary, Integrations, and About. Supporting brand guidelines for consistent content production."
           },
           {
             "title": "Outcome",
-            "body": "Enabled scalable education aligned with product and brand."
+            "body": "Enabled UNCX to launch a structured education platform aligned with the parent brand. The component system reduced design time for new content pages."
           }
         ]
       },
@@ -314,40 +796,259 @@
         "category": "Interface System / Design System",
         "year": "2025",
         "status": "Complete",
-        "shortDescription": "A unified navigation system designed to scale across products.",
-        "fullDescription": "System-level navigation solution focusing on consistency and scalability.",
-        "tags": ["Design Systems", "Figma", "Frontend"],
-        "image": "/case-studies/badger-club/public-progress.png",
+        "shortDescription": "Cross-product navigation component system with variable-driven Figma prototypes, research-backed hierarchy, and scalable state logic.",
+        "fullDescription": "A unified menu system designed to work across UNCX's entire product suite. Built as a variable-driven Figma component with researched navigation patterns, prototype states (open/closed), configurable content slots, and a scalable hierarchy that adapts to different product contexts.",
+        "tags": [
+          "Design Systems",
+          "Figma",
+          "UI/UX",
+          "Prototyping",
+          "Research"
+        ],
+        "image": "/case-studies/uncx-menu/cover.webp",
         "media": [
-          { "type": "image", "src": "/case-studies/badger-club/public-progress.png", "alt": "Public progress view" }
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-menu/cover.webp",
+            "alt": "UNCX Unified Menu overview"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-menu/menu-overview.webp",
+            "alt": "Menu system overview"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-menu/menu-components.webp",
+            "alt": "Menu component library"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-menu/prototypes-open.webp",
+            "alt": "Menu prototypes (open state)"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-menu/prototypes-closed.webp",
+            "alt": "Menu prototypes (closed state)"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-menu/research.webp",
+            "alt": "Menu research and analysis"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-menu/concepting.webp",
+            "alt": "Menu concepting phase"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-menu/contents-concept.webp",
+            "alt": "Menu contents concept"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-menu/variables-setup.webp",
+            "alt": "Figma variables setup"
+          }
         ],
         "gradient": "from-[#f6f3f4] to-[#ff003c]",
         "role": "Systems Designer / Design Engineer",
-        "client": "UNCX",
+        "client": "UNCX Network",
         "overlaySections": [
           {
             "title": "Brief",
-            "body": "Unify navigation across multiple products."
+            "body": "Design a unified navigation component that could work across all UNCX products — replacing inconsistent per-product menus with a single scalable system."
           },
           {
             "title": "Problem Frame",
-            "body": "Inconsistent navigation patterns and poor scalability."
+            "body": "Each UNCX product had its own navigation pattern. Users moving between Launchpad, Token Vesting, and Minting encountered different menu structures, creating cognitive overhead and inconsistent UX."
           },
           {
             "title": "System Design",
-            "body": "Component-based navigation with scalable hierarchy and state logic."
+            "body": "Researched navigation patterns and hierarchy models. Designed a component-based menu with configurable content slots, variable-driven Figma states, and a scalable hierarchy that adapts per product context."
           },
           {
             "title": "Prototype Notes",
-            "body": "Built variable-driven Figma system and interaction states."
+            "body": "Built variable-driven Figma prototypes for open and closed states. Tested content slot flexibility across different product navigation requirements. Validated the component against mobile and desktop breakpoints."
           },
           {
             "title": "Delivery",
-            "body": "Design system and implementation-ready components."
+            "body": "Delivered a Figma design system component with documented states, variables, content slot patterns, and implementation specifications for the development team."
           },
           {
             "title": "Outcome",
-            "body": "Consistent navigation across products."
+            "body": "Replaced fragmented navigation with a single, consistent system. Reduced design and development time for new product navigation and improved cross-product UX coherence."
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "slug": "uncx-app-concepts",
+        "title": "UNCX App Prototyping",
+        "category": "Product Concepting / UX Prototyping",
+        "year": "2024",
+        "status": "Complete",
+        "shortDescription": "Rapid prototyping across token minting, launchpad flows, Telegram bots, NFT minting, and ILO V7 — from wireframes to interactive concepts.",
+        "fullDescription": "A body of product concepting work spanning multiple UNCX features: token minter prototyping, launchpad UI components, Telegram chatbot and presale app flows, NFT minting interfaces, stealth launch concepts, and ILO V7 flow diagrams. Each concept was developed from wireframes through to interactive prototypes in Figma.",
+        "tags": [
+          "Figma",
+          "Prototyping",
+          "UX Design",
+          "Wireframing",
+          "Product"
+        ],
+        "image": "/case-studies/uncx-app-concepts/cover.webp",
+        "media": [
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-app-concepts/cover.webp",
+            "alt": "UNCX App Concepts overview"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-app-concepts/token-minter-prototyping.webp",
+            "alt": "Token minter prototyping"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-app-concepts/token-minter-slide.webp",
+            "alt": "Token minter concept slide"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-app-concepts/token-minting-concept-2.webp",
+            "alt": "Token minting concept iteration"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-app-concepts/launchpad-components.webp",
+            "alt": "Launchpad component designs"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-app-concepts/launchpad-prototypes.webp",
+            "alt": "Launchpad concept prototypes"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-app-concepts/blueprint-minter-concept.webp",
+            "alt": "Blueprint token minter concept"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-app-concepts/blueprint-minter.webp",
+            "alt": "Blueprint minter design"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-app-concepts/blueprint-minter-2.webp",
+            "alt": "Blueprint minter iteration"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-app-concepts/minting-app-frame.webp",
+            "alt": "Minting app frame design"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-app-concepts/stealth-launch-concepts.webp",
+            "alt": "Stealth launch concepts"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-app-concepts/stealth-launch-admin.webp",
+            "alt": "Stealth launch admin prototype"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-app-concepts/ilo-v7-flow-diagrams.webp",
+            "alt": "ILO V7 flow diagrams"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-app-concepts/v7-tailwind-designs.webp",
+            "alt": "V7 Tailwind design system"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-app-concepts/nft-minting-designs.webp",
+            "alt": "NFT minting app designs"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-app-concepts/nft-minting-wireframes.webp",
+            "alt": "NFT minting wireframes"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-app-concepts/wireframing-v3-lockers.webp",
+            "alt": "V3 lockers wireframing"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-app-concepts/telegram-chatbot-flows.webp",
+            "alt": "Telegram chatbot flow designs"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-app-concepts/telegram-app.webp",
+            "alt": "Telegram app design"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-app-concepts/tg-presale-flow-1.webp",
+            "alt": "Telegram presale flow 1"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-app-concepts/tg-presale-flow-2.webp",
+            "alt": "Telegram presale flow 2"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-app-concepts/tg-bot-flow.webp",
+            "alt": "Telegram bot flow"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-app-concepts/tg-bot-flow-2.webp",
+            "alt": "Telegram bot flow 2"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-app-concepts/tg-apebot-flow.webp",
+            "alt": "Telegram apebot flow"
+          }
+        ],
+        "gradient": "from-[#8b0020] to-[#ff003c]",
+        "role": "Product Designer / UX Prototyper",
+        "client": "UNCX Network",
+        "overlaySections": [
+          {
+            "title": "Brief",
+            "body": "Rapidly prototype and validate product concepts across UNCX's feature pipeline — covering token minting, launchpad flows, Telegram integrations, and NFT tooling."
+          },
+          {
+            "title": "Problem Frame",
+            "body": "New product features were being scoped without visual validation. Developers were building from text specs, leading to misalignment between design intent and implementation."
+          },
+          {
+            "title": "System Design",
+            "body": "Created a concepting workflow: wireframe → component mockup → interactive prototype → stakeholder review. Applied this across token minter flows, launchpad components, Telegram bot interactions, and ILO V7 user journeys."
+          },
+          {
+            "title": "Prototype Notes",
+            "body": "Token minter concepts explored multi-step creation flows. Telegram prototypes covered chatbot interactions, presale app flows, and ape-bot UIs. ILO V7 flow diagrams mapped the full initial liquidity offering user journey. Stealth launch concepts explored admin and user-facing interfaces."
+          },
+          {
+            "title": "Delivery",
+            "body": "Delivered Figma prototypes for each feature area: token minting (blueprint and standard), launchpad components, Telegram bot/app flows, NFT minting interfaces, stealth launch admin, and ILO V7 flow diagrams."
+          },
+          {
+            "title": "Outcome",
+            "body": "Closed the gap between product specs and development handoff. Stakeholders could validate features visually before committing development resources, reducing rework and accelerating shipping."
           }
         ]
       }
@@ -358,32 +1059,162 @@
     "title": "The preffered toolkit.",
     "description": "The operators preferred tools used across prototyping, design, motion, development, and AI-assisted pipelines.",
     "items": [
-      { "name": "Figma", "icon": "SiFigma", "color": "#ff7262", "category": "Design" },
-      { "name": "Illustrator", "icon": "PenTool", "color": "#FF9A00", "category": "Design" },
-      { "name": "Photoshop", "icon": "Image", "color": "#31A8FF", "category": "Design" },
-      { "name": "Cinema 4D", "icon": "Box", "color": "#5b8cff", "category": "3D" },
-      { "name": "Redshift", "icon": "Triangle", "color": "#e84040", "category": "3D" },
-      { "name": "After Effects", "icon": "Film", "color": "#9999ff", "category": "Motion" },
-      { "name": "Premiere Pro", "icon": "Video", "color": "#ea77ff", "category": "Video" },
-      { "name": "Adobe Animate", "icon": "Layers", "color": "#FF60C2", "category": "Motion" },
-      { "name": "Ableton Live", "icon": "AudioLines", "color": "#ffffff", "category": "Audio" },
-      { "name": "Serum", "icon": "AudioWaveform", "color": "#00d4ff", "category": "Audio" },
-      { "name": "HTML5", "icon": "SiHtml5", "color": "#E34F26", "category": "Frontend" },
-      { "name": "CSS3", "icon": "SiCss", "color": "#1572B6", "category": "Frontend" },
-      { "name": "JavaScript", "icon": "SiJavascript", "color": "#F7DF1E", "category": "Language" },
-      { "name": "TypeScript", "icon": "SiTypescript", "color": "#3178C6", "category": "Language" },
-      { "name": "React", "icon": "SiReact", "color": "#61dafb", "category": "Frontend" },
-      { "name": "Next.js", "icon": "SiNextdotjs", "color": "#ffffff", "category": "Frontend" },
-      { "name": "TailwindCSS", "icon": "SiTailwindcss", "color": "#06B6D4", "category": "Frontend" },
-      { "name": "Three.js", "icon": "SiThreedotjs", "color": "#ffffff", "category": "3D" },
-      { "name": "Vite", "icon": "SiVite", "color": "#646CFF", "category": "Frontend" },
-      { "name": "BASH", "icon": "SiGnubash", "color": "#4EAA25", "category": "Dev" },
-      { "name": "GitHub", "icon": "SiGithub", "color": "#e5e5e5", "category": "Dev" },
-      { "name": "SourceTree", "icon": "SiSourcetree", "color": "#0052CC", "category": "Dev" },
-      { "name": "ComfyUI", "icon": "WandSparkles", "color": "#a855f7", "category": "AI" },
-      { "name": "Codex", "icon": "SiOpenai", "color": "#74aa9c", "category": "AI" },
-      { "name": "Claude", "icon": "Bot", "color": "#ff7f3f", "category": "AI" },
-      { "name": "Ralph", "icon": "Cpu", "color": "#ff003c", "category": "AI" }
+      {
+        "name": "Figma",
+        "icon": "SiFigma",
+        "color": "#ff7262",
+        "category": "Design"
+      },
+      {
+        "name": "Illustrator",
+        "icon": "PenTool",
+        "color": "#FF9A00",
+        "category": "Design"
+      },
+      {
+        "name": "Photoshop",
+        "icon": "Image",
+        "color": "#31A8FF",
+        "category": "Design"
+      },
+      {
+        "name": "Cinema 4D",
+        "icon": "Box",
+        "color": "#5b8cff",
+        "category": "3D"
+      },
+      {
+        "name": "Redshift",
+        "icon": "Triangle",
+        "color": "#e84040",
+        "category": "3D"
+      },
+      {
+        "name": "After Effects",
+        "icon": "Film",
+        "color": "#9999ff",
+        "category": "Motion"
+      },
+      {
+        "name": "Premiere Pro",
+        "icon": "Video",
+        "color": "#ea77ff",
+        "category": "Video"
+      },
+      {
+        "name": "Adobe Animate",
+        "icon": "Layers",
+        "color": "#FF60C2",
+        "category": "Motion"
+      },
+      {
+        "name": "Ableton Live",
+        "icon": "AudioLines",
+        "color": "#ffffff",
+        "category": "Audio"
+      },
+      {
+        "name": "Serum",
+        "icon": "AudioWaveform",
+        "color": "#00d4ff",
+        "category": "Audio"
+      },
+      {
+        "name": "HTML5",
+        "icon": "SiHtml5",
+        "color": "#E34F26",
+        "category": "Frontend"
+      },
+      {
+        "name": "CSS3",
+        "icon": "SiCss",
+        "color": "#1572B6",
+        "category": "Frontend"
+      },
+      {
+        "name": "JavaScript",
+        "icon": "SiJavascript",
+        "color": "#F7DF1E",
+        "category": "Language"
+      },
+      {
+        "name": "TypeScript",
+        "icon": "SiTypescript",
+        "color": "#3178C6",
+        "category": "Language"
+      },
+      {
+        "name": "React",
+        "icon": "SiReact",
+        "color": "#61dafb",
+        "category": "Frontend"
+      },
+      {
+        "name": "Next.js",
+        "icon": "SiNextdotjs",
+        "color": "#ffffff",
+        "category": "Frontend"
+      },
+      {
+        "name": "TailwindCSS",
+        "icon": "SiTailwindcss",
+        "color": "#06B6D4",
+        "category": "Frontend"
+      },
+      {
+        "name": "Three.js",
+        "icon": "SiThreedotjs",
+        "color": "#ffffff",
+        "category": "3D"
+      },
+      {
+        "name": "Vite",
+        "icon": "SiVite",
+        "color": "#646CFF",
+        "category": "Frontend"
+      },
+      {
+        "name": "BASH",
+        "icon": "SiGnubash",
+        "color": "#4EAA25",
+        "category": "Dev"
+      },
+      {
+        "name": "GitHub",
+        "icon": "SiGithub",
+        "color": "#e5e5e5",
+        "category": "Dev"
+      },
+      {
+        "name": "SourceTree",
+        "icon": "SiSourcetree",
+        "color": "#0052CC",
+        "category": "Dev"
+      },
+      {
+        "name": "ComfyUI",
+        "icon": "WandSparkles",
+        "color": "#a855f7",
+        "category": "AI"
+      },
+      {
+        "name": "Codex",
+        "icon": "SiOpenai",
+        "color": "#74aa9c",
+        "category": "AI"
+      },
+      {
+        "name": "Claude",
+        "icon": "Bot",
+        "color": "#ff7f3f",
+        "category": "AI"
+      },
+      {
+        "name": "Ralph",
+        "icon": "Cpu",
+        "color": "#ff003c",
+        "category": "AI"
+      }
     ]
   },
   "contact": {
@@ -408,7 +1239,14 @@
     "closeLabel": "Close",
     "filterLabel": "Filter by tool",
     "timelineLabel": "Timeline",
-    "tools": ["All", "Cinema 4D", "After Effects", "Figma", "React", "Premiere Pro"],
+    "tools": [
+      "All",
+      "Cinema 4D",
+      "After Effects",
+      "Figma",
+      "React",
+      "Premiere Pro"
+    ],
     "entries": [
       {
         "id": 1,
@@ -416,7 +1254,10 @@
         "date": "2023-09-01",
         "year": "2023",
         "kind": "Motion",
-        "tools": ["After Effects", "Cinema 4D"],
+        "tools": [
+          "After Effects",
+          "Cinema 4D"
+        ],
         "description": "A full motion brand package for a DeFi product launch.",
         "preview": ""
       },
@@ -426,7 +1267,9 @@
         "date": "2023-06-01",
         "year": "2023",
         "kind": "Design System",
-        "tools": ["Figma"],
+        "tools": [
+          "Figma"
+        ],
         "description": "A reusable component library built for a multi-product design system.",
         "preview": ""
       },
@@ -436,7 +1279,10 @@
         "date": "2023-03-01",
         "year": "2023",
         "kind": "Video",
-        "tools": ["After Effects", "Premiere Pro"],
+        "tools": [
+          "After Effects",
+          "Premiere Pro"
+        ],
         "description": "A series of short-form explainer videos for a blockchain product.",
         "preview": ""
       }
@@ -445,12 +1291,26 @@
   "footer": {
     "quickAccessTitle": "Quick Access",
     "quickAccessItems": [
-      { "label": "Landing", "targetId": "hero" },
-      { "label": "Profile", "targetId": "operator-profile" },
-      { "label": "Case Studies", "targetId": "case-studies" },
-      { "label": "Tools + Skills", "targetId": "tools-skills" },
-      { "label": "Contact", "targetId": "contact" },
-      { "label": "Archive", "targetId": "archive" }
+      {
+        "label": "Landing",
+        "targetId": "hero"
+      },
+      {
+        "label": "Profile",
+        "targetId": "operator-profile"
+      },
+      {
+        "label": "Case Studies",
+        "targetId": "case-studies"
+      },
+      {
+        "label": "Tools + Skills",
+        "targetId": "tools-skills"
+      },
+      {
+        "label": "Contact",
+        "targetId": "contact"
+      }
     ],
     "currentStateTitle": "Current State",
     "currentStateLines": [

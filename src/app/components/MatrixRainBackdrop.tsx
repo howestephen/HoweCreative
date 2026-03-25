@@ -1,9 +1,18 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 
 import { isIOSLike } from "../lib/device";
 import { useWebGLAvailability } from "../lib/webgl";
+
+// Triggers re-render only when canvas container is in viewport
+function FrameInvalidator({ visibleRef }: { visibleRef: React.RefObject<boolean> }) {
+  const { invalidate } = useThree();
+  useFrame(() => {
+    if (visibleRef.current) invalidate();
+  });
+  return null;
+}
 
 const BACKDROP_CHAR_SET = [
   "A", "B", "C", "D", "E", "F", "G", "H",
@@ -222,6 +231,20 @@ export function MatrixRainBackdrop({
   );
   const [isMobile, setIsMobile] = useState(false);
   const [lowPower, setLowPower] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const visibleRef = useRef(true);
+
+  // Track viewport visibility to pause rendering when off-screen
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => { visibleRef.current = entry.isIntersecting; },
+      { threshold: 0 },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     return () => {
@@ -275,19 +298,25 @@ export function MatrixRainBackdrop({
         }
       : {
           outer: isMobile
-            ? { count: roundCount(2200), spread: 15, loopHeight: 26, baseSpeed: 0.74, pointScale: 92, swirl: 0.14, tint: new THREE.Color("#6f001a") }
-            : { count: roundCount(5200), spread: 17, loopHeight: 28, baseSpeed: 0.74, pointScale: 98, swirl: 0.16, tint: new THREE.Color("#6f001a") },
+            ? { count: roundCount(1200), spread: 15, loopHeight: 26, baseSpeed: 0.74, pointScale: 92, swirl: 0.14, tint: new THREE.Color("#6f001a") }
+            : { count: roundCount(2800), spread: 17, loopHeight: 28, baseSpeed: 0.74, pointScale: 98, swirl: 0.16, tint: new THREE.Color("#6f001a") },
           inner: isMobile
-            ? { count: roundCount(1340), spread: 13.5, loopHeight: 22, baseSpeed: 0.94, pointScale: 106, swirl: 0.18, tint: new THREE.Color("#ffcad5") }
-            : { count: roundCount(3600), spread: 15, loopHeight: 24, baseSpeed: 0.98, pointScale: 114, swirl: 0.22, tint: new THREE.Color("#ffcad5") },
+            ? { count: roundCount(700), spread: 13.5, loopHeight: 22, baseSpeed: 0.94, pointScale: 106, swirl: 0.18, tint: new THREE.Color("#ffcad5") }
+            : { count: roundCount(1800), spread: 15, loopHeight: 24, baseSpeed: 0.98, pointScale: 114, swirl: 0.22, tint: new THREE.Color("#ffcad5") },
           cameraZ: 12,
         };
 
   return (
-    <div className={className}>
+    <div ref={containerRef} className={className}>
       {allowWebGLBackdrop && atlas ? (
         <>
-          <Canvas camera={{ position: [0, 0, config.cameraZ], fov: 48 }} dpr={isMobile ? [1, 1.2] : [1, 1.5]}>
+          <Canvas
+            camera={{ position: [0, 0, config.cameraZ], fov: 48 }}
+            dpr={isMobile ? [1, 1] : [1, 1.25]}
+            frameloop="demand"
+            gl={{ antialias: false, powerPreference: "low-power" }}
+          >
+            <FrameInvalidator visibleRef={visibleRef} />
             <RainLayer atlas={atlas} {...config.outer} />
             <RainLayer atlas={atlas} {...config.inner} />
           </Canvas>

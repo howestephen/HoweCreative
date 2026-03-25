@@ -52,7 +52,7 @@ function FallingFragment({
   const [headChar, setHeadChar] = useState(randomGlyph);
 
   useEffect(() => {
-    const ms = 150 + Math.random() * 250;
+    const ms = 300 + Math.random() * 400;
     const interval = setInterval(() => setHeadChar(randomGlyph()), ms);
     return () => clearInterval(interval);
   }, []);
@@ -100,7 +100,7 @@ function FallingFragment({
 }
 
 // Max 14 active — roughly 10% of the main rain's 280 column density
-const MAX_ACTIVE = 14;
+const MAX_ACTIVE = 6;
 
 export function EscapeGlyphs() {
   const [fragments, setFragments] = useState<EscapeFragment[]>([]);
