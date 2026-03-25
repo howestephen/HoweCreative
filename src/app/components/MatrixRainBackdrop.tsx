@@ -323,10 +323,10 @@ export function MatrixRainBackdrop({
         </>
       ) : (
         <div
-          className="absolute inset-0 opacity-60"
+          className="absolute inset-0 opacity-40"
           style={{
             backgroundImage:
-              "radial-gradient(circle at 50% 20%, rgba(255,0,60,0.16), transparent 42%), repeating-linear-gradient(0deg, transparent, transparent 9px, rgba(255,0,60,0.08) 9px, rgba(255,0,60,0.08) 10px)",
+              "repeating-linear-gradient(0deg, transparent, transparent 9px, rgba(255,0,60,0.06) 9px, rgba(255,0,60,0.06) 10px)",
           }}
         />
       )}

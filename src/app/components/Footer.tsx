@@ -58,7 +58,7 @@ function AttributionsPopup({ onClose }: { onClose: () => void }) {
           </span>
           <button
             onClick={onClose}
-            className="flex h-7 w-7 items-center justify-center border border-[#ff003c]/25 text-zinc-400 transition-colors hover:border-[#ff003c] hover:text-white"
+            className="flex h-7 w-7 items-center justify-center border border-[#ff003c]/38 text-zinc-400 transition-colors hover:border-[#ff003c] hover:text-white"
           >
             <X className="h-3.5 w-3.5" />
           </button>
@@ -99,7 +99,7 @@ export function Footer() {
   const [showAttributions, setShowAttributions] = useState(false);
 
   return (
-    <footer className="w-full py-12 px-8 bg-[#050505] border-t border-[#ff003c]/20 relative overflow-hidden">
+    <footer className="w-full py-12 px-8 bg-[#050505] border-t border-[#ff003c]/32 relative overflow-hidden">
       <div
         className="absolute inset-0 pointer-events-none opacity-5"
         style={{
@@ -197,7 +197,7 @@ export function Footer() {
                   rel="noopener noreferrer"
                   whileHover={{ y: -2 }}
                   whileTap={{ scale: 0.98 }}
-                  className="group flex min-w-[180px] items-center justify-between border border-[#ff003c]/18 bg-black/95 px-4 py-3 transition-all hover:border-[#ff003c]/60"
+                  className="group flex min-w-[180px] items-center justify-between border border-[#ff003c]/30 bg-black/95 px-4 py-3 transition-all hover:border-[#ff003c]/60"
                   title={title}
                 >
                   <span className="flex items-center gap-3">

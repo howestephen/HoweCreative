@@ -23,8 +23,9 @@ export function Layout() {
         className="pointer-events-none absolute inset-0 z-[2] opacity-72 mix-blend-screen"
       />
 
+      {/* Grid overlay — only on large screens to avoid red wash on mobile */}
       <div
-        className="absolute inset-0 z-0 pointer-events-none opacity-16"
+        className="absolute inset-0 z-0 pointer-events-none opacity-16 hidden lg:block"
         style={{
           backgroundImage:
             "linear-gradient(rgba(255, 0, 60, 0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 0, 60, 0.2) 1px, transparent 1px)",

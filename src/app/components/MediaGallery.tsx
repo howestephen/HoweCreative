@@ -87,7 +87,7 @@ function Thumbnail({
       className={`relative h-11 w-16 shrink-0 overflow-hidden border transition-all ${
         active
           ? "border-[#ff003c] ring-1 ring-[#ff003c]/40"
-          : "border-[#ff003c]/20 opacity-60 hover:border-[#ff003c]/50 hover:opacity-100"
+          : "border-[#ff003c]/32 opacity-60 hover:border-[#ff003c]/50 hover:opacity-100"
       }`}
       aria-label={item.alt ?? item.type}
     >
@@ -237,7 +237,7 @@ function Lightbox({
     >
       {/* ── Top toolbar ── */}
       <div
-        className="relative z-20 flex items-center justify-between border-b border-[#ff003c]/20 px-4 py-2"
+        className="relative z-20 flex items-center justify-between border-b border-[#ff003c]/32 px-4 py-2"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-zinc-500">
@@ -256,18 +256,18 @@ function Lightbox({
               <button
                 onClick={zoomOut}
                 disabled={zoom <= ZOOM_LEVELS[0]}
-                className="flex h-8 w-8 items-center justify-center border border-[#ff003c]/20 bg-black/80 text-zinc-400 transition-colors hover:border-[#ff003c]/50 hover:text-white disabled:opacity-30 disabled:hover:border-[#ff003c]/20 disabled:hover:text-zinc-400"
+                className="flex h-8 w-8 items-center justify-center border border-[#ff003c]/32 bg-black/80 text-zinc-400 transition-colors hover:border-[#ff003c]/50 hover:text-white disabled:opacity-30 disabled:hover:border-[#ff003c]/32 disabled:hover:text-zinc-400"
                 aria-label="Zoom out"
               >
                 <Minus className="h-3.5 w-3.5" />
               </button>
-              <div className="flex h-8 min-w-[52px] items-center justify-center border border-[#ff003c]/20 bg-black/80 px-2 font-mono text-[10px] text-zinc-400">
+              <div className="flex h-8 min-w-[52px] items-center justify-center border border-[#ff003c]/32 bg-black/80 px-2 font-mono text-[10px] text-zinc-400">
                 {Math.round(zoom * 100)}%
               </div>
               <button
                 onClick={zoomIn}
                 disabled={zoom >= ZOOM_LEVELS[ZOOM_LEVELS.length - 1]}
-                className="flex h-8 w-8 items-center justify-center border border-[#ff003c]/20 bg-black/80 text-zinc-400 transition-colors hover:border-[#ff003c]/50 hover:text-white disabled:opacity-30 disabled:hover:border-[#ff003c]/20 disabled:hover:text-zinc-400"
+                className="flex h-8 w-8 items-center justify-center border border-[#ff003c]/32 bg-black/80 text-zinc-400 transition-colors hover:border-[#ff003c]/50 hover:text-white disabled:opacity-30 disabled:hover:border-[#ff003c]/32 disabled:hover:text-zinc-400"
                 aria-label="Zoom in"
               >
                 <Plus className="h-3.5 w-3.5" />
@@ -275,7 +275,7 @@ function Lightbox({
               {zoom > 1 && (
                 <button
                   onClick={resetZoom}
-                  className="ml-1 flex h-8 w-8 items-center justify-center border border-[#ff003c]/20 bg-black/80 text-zinc-400 transition-colors hover:border-[#ff003c]/50 hover:text-white"
+                  className="ml-1 flex h-8 w-8 items-center justify-center border border-[#ff003c]/32 bg-black/80 text-zinc-400 transition-colors hover:border-[#ff003c]/50 hover:text-white"
                   aria-label="Reset zoom"
                 >
                   <RotateCcw className="h-3.5 w-3.5" />
@@ -287,7 +287,7 @@ function Lightbox({
           {/* Close button */}
           <button
             onClick={onClose}
-            className="ml-2 flex h-8 w-8 items-center justify-center border border-[#ff003c]/25 bg-black/80 text-zinc-300 transition-colors hover:border-[#ff003c] hover:text-white"
+            className="ml-2 flex h-8 w-8 items-center justify-center border border-[#ff003c]/38 bg-black/80 text-zinc-300 transition-colors hover:border-[#ff003c] hover:text-white"
             aria-label="Close"
           >
             <X className="h-4 w-4" />
@@ -351,7 +351,7 @@ function Lightbox({
       {/* ── Bottom thumbnail strip ── */}
       {multi && (
         <div
-          className="relative z-20 border-t border-[#ff003c]/20 px-4 py-2"
+          className="relative z-20 border-t border-[#ff003c]/32 px-4 py-2"
           onClick={(e) => e.stopPropagation()}
         >
           <div className="flex justify-center gap-1.5 overflow-x-auto">
@@ -398,7 +398,7 @@ export function MediaGallery({
     <div className="flex flex-col gap-2">
       {/* ── Main viewer — 16:9 aspect ratio ── */}
       <div
-        className={`group relative overflow-hidden border border-[#ff003c]/25 bg-black ${isClickable ? "cursor-pointer" : ""}`}
+        className={`group relative overflow-hidden border border-[#ff003c]/38 bg-black ${isClickable ? "cursor-pointer" : ""}`}
         style={{ aspectRatio: "16 / 9" }}
         onClick={isClickable ? () => setLightboxOpen(true) : undefined}
       >

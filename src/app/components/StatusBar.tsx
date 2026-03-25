@@ -43,7 +43,7 @@ export function StatusBar() {
         </div>
       </div>
 
-      <div className="bg-black/80 border border-[#ff003c]/20 backdrop-blur-sm p-4">
+      <div className="bg-black/80 border border-[#ff003c]/32 backdrop-blur-sm p-4">
         <div className="flex items-center gap-2 mb-3">
           <Clock className="w-3 h-3 text-[#ff003c]" />
           <span className="text-[10px] font-mono font-bold text-zinc-400 uppercase tracking-wider">

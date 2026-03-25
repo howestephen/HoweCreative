@@ -32,7 +32,7 @@ export function ArchiveSection() {
   }, [activeTool]);
 
   return (
-    <section ref={sectionRef} id="archive" className="relative z-[20] border-t border-[#ff003c]/20 px-6 py-24 md:py-28">
+    <section ref={sectionRef} id="archive" className="relative z-[20] border-t border-[#ff003c]/32 px-6 py-24 md:py-28">
       <div className="mx-auto max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -88,14 +88,14 @@ export function ArchiveSection() {
                 }}
               />
 
-              <div className="relative z-10 flex items-center justify-between border-b border-[#ff003c]/20 px-4 py-3 font-mono text-[11px] uppercase tracking-[0.2em] text-zinc-400 md:px-6">
+              <div className="relative z-10 flex items-center justify-between border-b border-[#ff003c]/32 px-4 py-3 font-mono text-[11px] uppercase tracking-[0.2em] text-zinc-400 md:px-6">
                 <h2 className="flex items-center gap-3 text-[11px] font-normal">
                   <ScanSearch className="h-4 w-4 text-[#ff003c]" />
                   {archiveContent.browserTitle}
                 </h2>
                 <button
                   onClick={handleClose}
-                  className="flex items-center gap-2 border border-[#ff003c]/20 px-3 py-1 text-zinc-200 transition-colors hover:border-[#ff003c] hover:text-white"
+                  className="flex items-center gap-2 border border-[#ff003c]/32 px-3 py-1 text-zinc-200 transition-colors hover:border-[#ff003c] hover:text-white"
                 >
                   <X className="h-4 w-4" />
                   {archiveContent.closeLabel}
@@ -103,7 +103,7 @@ export function ArchiveSection() {
               </div>
 
 
-              <div className="relative z-10 border-b border-[#ff003c]/15 px-4 py-4 md:px-6">
+              <div className="relative z-10 border-b border-[#ff003c]/28 px-4 py-4 md:px-6">
                 <div className="mb-2 font-mono text-[10px] uppercase tracking-[0.18em] text-zinc-500">
                   {archiveContent.filterLabel}
                 </div>
@@ -116,7 +116,7 @@ export function ArchiveSection() {
                       className={`border px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.16em] transition-colors ${
                         activeTool === tool
                           ? "border-[#ff003c] bg-[#ff003c] text-black"
-                          : "border-[#ff003c]/18 bg-black/92 text-zinc-300 hover:border-[#ff003c]/50"
+                          : "border-[#ff003c]/30 bg-black/92 text-zinc-300 hover:border-[#ff003c]/50"
                       }`}
                     >
                       {tool}
@@ -132,7 +132,7 @@ export function ArchiveSection() {
                       <div className="mb-3 font-mono text-[10px] uppercase tracking-[0.18em] text-zinc-500">
                         {archiveContent.timelineLabel}
                       </div>
-                      <div className="relative ml-4 border-l border-[#ff003c]/20 pl-4">
+                      <div className="relative ml-4 border-l border-[#ff003c]/32 pl-4">
                         {filteredEntries.map((entry) => (
                           <div key={entry.id} className="relative pb-6 font-mono text-[11px] text-zinc-500">
                             <span className="absolute -left-[22px] top-1 h-2 w-2 rounded-full bg-[#ff003c]" />
@@ -145,8 +145,8 @@ export function ArchiveSection() {
 
                   <div className="grid gap-4">
                     {filteredEntries.map((entry) => (
-                      <div key={entry.id} className="grid gap-4 border border-[#ff003c]/18 bg-black/92 p-4 md:grid-cols-[220px_1fr]">
-                        <div className="overflow-hidden border border-[#ff003c]/15">
+                      <div key={entry.id} className="grid gap-4 border border-[#ff003c]/30 bg-black/92 p-4 md:grid-cols-[220px_1fr]">
+                        <div className="overflow-hidden border border-[#ff003c]/28">
                           <ImageWithFallback
                             src={entry.preview}
                             alt={entry.title}
@@ -166,7 +166,7 @@ export function ArchiveSection() {
                             {entry.tools.map((tool) => (
                               <span
                                 key={tool}
-                                className="border border-[#ff003c]/18 bg-[#ff003c]/8 px-2 py-1 font-mono text-[10px] uppercase tracking-[0.14em] text-zinc-200"
+                                className="border border-[#ff003c]/30 bg-[#ff003c]/8 px-2 py-1 font-mono text-[10px] uppercase tracking-[0.14em] text-zinc-200"
                               >
                                 {tool}
                               </span>

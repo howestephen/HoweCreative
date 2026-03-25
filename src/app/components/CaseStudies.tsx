@@ -86,7 +86,7 @@ function CaseStudyFile({
         />
 
         {/* header */}
-        <div className="relative z-10 flex items-center justify-between border-b border-[#ff003c]/25 px-4 py-3 font-mono text-[11px] uppercase tracking-[0.22em] text-zinc-400 md:px-6">
+        <div className="relative z-10 flex items-center justify-between border-b border-[#ff003c]/38 px-4 py-3 font-mono text-[11px] uppercase tracking-[0.22em] text-zinc-400 md:px-6">
           <div className="flex items-center gap-3">
             <FolderOpenDot className="h-4 w-4 text-[#ff003c]" />
             <span>{caseStudiesContent.openFileLabel}</span>
@@ -94,7 +94,7 @@ function CaseStudyFile({
           </div>
           <button
             onClick={onClose}
-            className="flex items-center gap-2 border border-[#ff003c]/25 px-3 py-1 text-zinc-300 transition-colors hover:border-[#ff003c] hover:text-white"
+            className="flex items-center gap-2 border border-[#ff003c]/38 px-3 py-1 text-zinc-300 transition-colors hover:border-[#ff003c] hover:text-white"
           >
             <X className="h-4 w-4" />
             {caseStudiesContent.closeLabel}
@@ -103,9 +103,9 @@ function CaseStudyFile({
 
         {/* body */}
         <div className="relative z-10 grid min-h-0 flex-1 gap-0 overflow-hidden lg:grid-cols-[1.05fr_0.95fr]">
-          <div className="border-b border-[#ff003c]/15 p-5 lg:border-b-0 lg:border-r lg:p-8 overflow-y-auto">
+          <div className="border-b border-[#ff003c]/28 p-5 lg:border-b-0 lg:border-r lg:p-8 overflow-y-auto">
             <div className="mb-4 flex flex-wrap items-center gap-3 font-mono text-[10px] uppercase tracking-[0.18em] text-zinc-500">
-              <span className="border border-[#ff003c]/20 bg-[#ff003c]/8 px-2 py-1 text-[#ff003c]">
+              <span className="border border-[#ff003c]/32 bg-[#ff003c]/8 px-2 py-1 text-[#ff003c]">
                 {project.category}
               </span>
               <span>{project.year}</span>
@@ -125,7 +125,7 @@ function CaseStudyFile({
                 [caseStudiesContent.metaLabels.client, project.client],
                 [caseStudiesContent.metaLabels.status, project.status],
               ].map(([label, value]) => (
-                <div key={label} className="border border-[#ff003c]/18 bg-black/92 p-4">
+                <div key={label} className="border border-[#ff003c]/30 bg-black/92 p-4">
                   <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-zinc-500">
                     {label}
                   </div>
@@ -169,7 +169,7 @@ function CaseStudyFile({
             </div>
             <div className="grid gap-4">
               {project.overlaySections.map((section) => (
-                <div key={section.title} className="border border-[#ff003c]/18 bg-black/92 p-4 md:p-5">
+                <div key={section.title} className="border border-[#ff003c]/30 bg-black/92 p-4 md:p-5">
                   <div className="mb-3 font-mono text-[10px] uppercase tracking-[0.2em] text-zinc-500">
                     {section.title}
                   </div>
@@ -243,7 +243,7 @@ export function CaseStudies() {
   }, [activeIndex]);
 
   return (
-    <section ref={sectionRef} id="case-studies" className="relative z-[20] border-t border-[#ff003c]/15 px-6 py-24 md:py-28">
+    <section ref={sectionRef} id="case-studies" className="relative z-[20] border-t border-[#ff003c]/28 px-6 py-24 md:py-28">
       <div className="mx-auto max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -274,9 +274,9 @@ export function CaseStudies() {
               transition={{ duration: 0.45, delay: index * 0.05 }}
               whileHover={{ y: -6 }}
               onClick={() => handleOpen(project.slug)}
-              className="group relative flex min-h-[360px] flex-col overflow-hidden border border-[#ff003c]/20 bg-black/92 text-left backdrop-blur-sm transition-colors hover:border-[#ff003c]/60"
+              className="group relative flex min-h-[360px] flex-col overflow-hidden border border-[#ff003c]/32 bg-black/92 text-left backdrop-blur-sm transition-colors hover:border-[#ff003c]/60"
             >
-              <div className="relative h-44 overflow-hidden border-b border-[#ff003c]/15">
+              <div className="relative h-44 overflow-hidden border-b border-[#ff003c]/28">
                 <ImageWithFallback
                   src={project.image}
                   alt={project.title}
@@ -298,7 +298,7 @@ export function CaseStudies() {
                     {project.tags.slice(0, 3).map((tag) => (
                       <span
                         key={tag}
-                        className="border border-[#ff003c]/18 px-2 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-zinc-300"
+                        className="border border-[#ff003c]/30 px-2 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-zinc-300"
                       >
                         {tag}
                       </span>
