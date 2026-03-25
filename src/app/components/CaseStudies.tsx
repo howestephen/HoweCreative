@@ -280,10 +280,8 @@ export function CaseStudies() {
                 <ImageWithFallback
                   src={project.image}
                   alt={project.title}
-                  className="h-full w-full object-cover grayscale transition-transform duration-500 group-hover:scale-[1.03]"
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                 />
-                {/* Red colorise — multiply on greyscale = black-to-red duotone */}
-                <div className="absolute inset-0 bg-[#ff003c] mix-blend-multiply opacity-85" />
               </div>
 
               <div className="flex flex-1 flex-col p-5">

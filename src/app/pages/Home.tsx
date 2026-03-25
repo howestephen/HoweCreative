@@ -7,7 +7,7 @@ import { OperatorProfile } from "../components/OperatorProfile";
 import { CaseStudies } from "../components/CaseStudies";
 import { MediaShowcase } from "../components/MediaShowcase";
 import { ContactPanel } from "../components/ContactPanel";
-import { ArchiveSection } from "../components/ArchiveSection";
+// import { ArchiveSection } from "../components/ArchiveSection"; // hidden until content is ready
 import { motion } from "motion/react";
 
 // Catches chunk-load failures (network error fetching the lazy bundle itself)
@@ -54,7 +54,7 @@ export function Home() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1, duration: 1 }}
-        className="relative z-20 w-full overflow-hidden border-t border-[#ff003c]/20 bg-transparent shadow-[0_-10px_30px_rgba(255,0,60,0.1)]"
+        className="relative z-20 w-full overflow-hidden border-t border-[#ff003c]/20 bg-transparent"
       >
         <MatrixRainBackdrop
           mode="content"
@@ -65,7 +65,7 @@ export function Home() {
           <CaseStudies />
           <MediaShowcase />
           <ContactPanel />
-          <ArchiveSection />
+          {/* <ArchiveSection /> — hidden until content is ready */}
         </div>
       </motion.div>
     </div>
