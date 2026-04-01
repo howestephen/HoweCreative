@@ -69,7 +69,7 @@
     "quickFacts": [
       {
         "label": "Base",
-        "value": "United Kingdom"
+        "value": "Norwich, England, United Kingdom"
       },
       {
         "label": "Mode",
@@ -86,7 +86,7 @@
     ],
     "notesTitle": "Notes",
     "notesFileLabel": "File 5",
-    "notesBody": "Work sits at the boundary between design and implementation. The focus is not artefacts, but the systems that generate them — interface logic, motion frameworks, and production pipelines that can scale without losing intent.",
+    "notesBody": "My work often sits at the meeting point of design and implementation. My focus is not the artefacts, but the systems that generate them - interface logic, motion templates, and production pipelines that scale while output remains consistent.",
     "files": [
       {
         "fileLabel": "File 02",
@@ -101,7 +101,7 @@
       {
         "fileLabel": "File 04",
         "title": "Current Focus",
-        "body": "Media systems, AI-assisted production pipelines, interface architecture, and tools that compress the distance between idea and deployed output."
+        "body": "Video generation systems, AI-assisted development pipelines, interface architecture, and tools that reduce the distance between ideations and deployed products."
       }
     ]
   },
