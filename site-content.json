@@ -61,7 +61,7 @@
   "operatorProfile": {
     "eyebrow": "Operator Profile",
     "title": "Stephen Howe",
-    "description": "This section gives an overview of the system operator and his personal quirks.",
+    "description": "A brief overview of the system operator — background, working methods, and current focus.",
     "primaryFileLabel": "File 01",
     "primaryFileStatus": "Open",
     "portraitFooterLeft": "Operator Profile",
@@ -81,7 +81,7 @@
       },
       {
         "label": "Output",
-        "value": "Products, motion, media, content, deliverables."
+        "value": "Products, prototypes, motion, media, and production systems."
       }
     ],
     "notesTitle": "Notes",
@@ -91,7 +91,7 @@
       {
         "fileLabel": "File 02",
         "title": "Operator Summary",
-        "body": "Systems-focused designer working across product architecture, media pipelines, and technical prototyping. Builds repeatable frameworks for UI, motion, and AI-assisted production."
+        "body": "Creative technologist working across product design, media pipelines, and technical prototyping. Builds repeatable frameworks for UI, motion, and AI-assisted production."
       },
       {
         "fileLabel": "File 03",
