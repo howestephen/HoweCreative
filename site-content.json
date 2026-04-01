@@ -7,7 +7,7 @@
     "brandPrefix": "HOWE",
     "brandSuffix": "_CREATIVE",
     "role": "Creative Technologist",
-    "headline": "Designing creative pipelines, prototypes and AI-assisted workflows with a focus on user-experience.",
+    "headline": "Designing products, creative pipelines, and AI-assisted workflows with a focus on user-experience.",
     "summary": "This portfolio was designed and built using Figma Make, Codex, and Claude Code. Powered by a custom prompt system that progresses through roadmap phases, executing build and QA tasks in an iterative loop.",
     "navVersion": "v2.0",
     "githubUrl": "https://github.com/howestephen",
@@ -49,13 +49,13 @@
   "hero": {
     "scrollLabel": "Scroll",
     "skillLabels": [
-      "Creative Systems",
+      "Product Design",
       "Design",
       "Prototyping",
       "Motion Graphics",
-      "3D Generalist",
+      "3D & Motion",
       "Development",
-      "Audio Production"
+      "AI Workflows"
     ]
   },
   "operatorProfile": {
@@ -73,7 +73,7 @@
       },
       {
         "label": "Mode",
-        "value": "Design + Deliver"
+        "value": "Brief to Deployment"
       },
       {
         "label": "Bias",
@@ -91,7 +91,7 @@
       {
         "fileLabel": "File 02",
         "title": "Operator Summary",
-        "body": "Creative technologist working across product design, media pipelines, and technical prototyping. Builds repeatable frameworks for UI, motion, and AI-assisted production."
+        "body": "Creative technologist working across product design, media pipelines, and technical prototyping. Leads briefs from specification through to delivery — coordinating external teams, building repeatable frameworks, and shipping across UI, motion, and AI-assisted production."
       },
       {
         "fileLabel": "File 03",
@@ -101,13 +101,13 @@
       {
         "fileLabel": "File 04",
         "title": "Current Focus",
-        "body": "Video generation systems, AI-assisted development pipelines, interface architecture, and tools that reduce the distance between ideations and deployed products."
+        "body": "Video generation systems, AI-assisted development pipelines, interface architecture, and tools that reduce the distance between ideas and deployed products."
       }
     ]
   },
   "caseStudies": {
     "eyebrow": "Selected demonstrative artefacts",
-    "title": "Recent Case Studies",
+    "title": "Case Studies",
     "description": "Each case exposes the system behind the output: inputs, constraints, pipelines, and repeatable structures.",
     "openFileLabel": "Open File",
     "closeLabel": "Close",
@@ -218,7 +218,7 @@
           }
         ],
         "gradient": "from-[#8b0020] to-[#ff003c]",
-        "role": "Media Systems Designer / Motion Engineer",
+        "role": "Creative Technologist / Motion Lead",
         "client": "UNCX Network",
         "overlaySections": [
           {
@@ -353,7 +353,7 @@
           }
         ],
         "gradient": "from-[#ff4466] to-[#4f0012]",
-        "role": "Product Designer / Full-Stack Developer",
+        "role": "Product Designer / Developer",
         "client": "Badger Club",
         "overlaySections": [
           {
@@ -616,7 +616,7 @@
           }
         ],
         "gradient": "from-[#ff003c] to-[#7a001c]",
-        "role": "Product Designer / Full-Stack Developer",
+        "role": "Product Designer / Developer",
         "client": "Self-initiated",
         "overlaySections": [
           {
@@ -1220,7 +1220,7 @@
   "contact": {
     "eyebrow": "Contact",
     "title": "Start a conversation.",
-    "description": "Available for product design, media systems, and technical prototyping engagements.",
+    "description": "Available for product design, design leadership, and creative technology engagements.",
     "fields": {
       "name": "Name",
       "email": "Email",
@@ -1233,7 +1233,7 @@
   "archive": {
     "eyebrow": "Archive",
     "title": "Prior work and experiments.",
-    "description": "A timeline of past assets made across industries and disciplines.",
+    "description": "A timeline of past work across industries and disciplines.",
     "openButtonLabel": "Open Archive",
     "browserTitle": "Archive Browser",
     "closeLabel": "Close",
@@ -1316,7 +1316,7 @@
     "currentStateLines": [
       "Available for engagements",
       "Based in Norwich, England",
-      "Design + build focus"
+      "Brief to deployment"
     ],
     "copyright": "© 1984 Stephen Howe",
     "statusLabel": "Online",
