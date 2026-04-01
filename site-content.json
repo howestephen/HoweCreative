@@ -1056,8 +1056,8 @@
   },
   "toolsSkills": {
     "eyebrow": "Tools & Skills",
-    "title": "The preffered toolkit.",
-    "description": "The operators preferred tools used across prototyping, design, motion, development, and AI-assisted pipelines.",
+    "title": "The preferred toolkit.",
+    "description": "The operator's preferred tools used across prototyping, design, motion, development, and AI-assisted pipelines.",
     "items": [
       {
         "name": "Figma",
@@ -1315,7 +1315,7 @@
     "currentStateTitle": "Current State",
     "currentStateLines": [
       "Available for engagements",
-      "Based in United Kingdom",
+      "Based in Norwich, England",
       "Design + build focus"
     ],
     "copyright": "© 1984 Stephen Howe",
