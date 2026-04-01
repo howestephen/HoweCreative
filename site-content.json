@@ -389,8 +389,8 @@
         "category": "Brand System / Visual Infrastructure",
         "year": "2024",
         "status": "Complete",
-        "shortDescription": "Comprehensive rebrand spanning identity, marketing visuals, and a full website redesign across 10+ product pages in Figma.",
-        "fullDescription": "Rebuilt the UNCX brand from the ground up as a system of rules and components rather than a static identity. Covered typography, colour logic, layout rules, chain-specific visual treatments, and a complete website redesign in Figma spanning Homepage, Launchpad, Token Vesting, Staking, Minting, and more.",
+        "shortDescription": "Two-phase rebrand: an initial name and logo overhaul in 2022, followed by a full brand system and website redesign in 2024 — briefed and spec'd by the operator, executed with an external team, then finished in-house.",
+        "fullDescription": "The UNCX rebrand happened in two stages. In 2022, the operator led a solo rebrand covering the company name change and primary logo. In 2024, a second phase brought in an external team who worked from the operator's brief and design specification to deliver a full brand system and website redesign in Figma. The operator then brought the work in-house, completing the content, layout, and graphics across 10+ pages.",
         "tags": [
           "Brand Systems",
           "Figma",
@@ -527,20 +527,20 @@
           }
         ],
         "gradient": "from-[#ffffff] to-[#780015]",
-        "role": "Brand Systems Designer / Art Director",
+        "role": "Creative Director / Brand Lead",
         "client": "UNCX Network",
         "overlaySections": [
           {
             "title": "Brief",
-            "body": "Create a scalable brand identity that could unify product UI, marketing materials, motion graphics, and a full website redesign across UNCX's multi-chain DeFi ecosystem."
+            "body": "Evolve the UNCX brand across two phases — an initial name and logo change, then a comprehensive brand system and website redesign across the multi-chain DeFi ecosystem."
           },
           {
             "title": "Problem Frame",
-            "body": "The existing brand was inconsistent — different visual treatments per product, no systemised colour or typography logic, and marketing outputs that didn't align with the product UI."
+            "body": "The existing brand was inconsistent — different visual treatments per product, no systemised colour or typography logic, and marketing outputs that didn't align with the product UI. The first rebrand addressed the name and mark; the second tackled the full system."
           },
           {
             "title": "System Design",
-            "body": "Defined typography scales, colour logic with chain-specific treatments, layout grid rules, component patterns, and motion alignment. Designed a full website in Figma covering Homepage, Launchpad, Token Vesting, Staking & Farming, Token Minter, Blog, and Team pages."
+            "body": "Wrote the brief and design specification for the 2024 rebrand. An external team delivered the brand system and website redesign in Figma. The operator then brought the project in-house, completing content, layout refinements, and graphic production across all product pages."
           },
           {
             "title": "Prototype Notes",
@@ -548,7 +548,7 @@
           },
           {
             "title": "Delivery",
-            "body": "Delivered brand guidelines, Figma component libraries, website page designs, marketing visual templates, and motion style references."
+            "body": "Delivered brand guidelines, Figma component libraries, website page designs across 10+ product pages, marketing visual templates, and motion style references."
           },
           {
             "title": "Outcome",
