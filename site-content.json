@@ -871,7 +871,7 @@
           },
           {
             "title": "Prototype Notes",
-            "body": "Built variable-driven Figma prototypes for open and closed states. Tested content slot flexibility across different product navigation requirements. Validated the component against mobile and desktop breakpoints."
+            "body": "Built variable-driven Figma prototypes for open and closed states across desktop and mobile. Tested content slot flexibility across different product navigation requirements."
           },
           {
             "title": "Delivery",
@@ -879,7 +879,7 @@
           },
           {
             "title": "Outcome",
-            "body": "Replaced fragmented navigation with a single, consistent system. Reduced design and development time for new product navigation and improved cross-product UX coherence."
+            "body": "Delivered a complete design system ready for implementation. The unified navigation replaces fragmented per-product menus with a single, consistent system — awaiting development integration."
           }
         ]
       },
