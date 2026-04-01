@@ -42,7 +42,7 @@ function CaseStudyFile({
       onClick={onClose}
     >
       {/* ── Prev button ────────────────────────────────────────────── */}
-      <div className="flex w-14 shrink-0 items-center justify-center md:w-20">
+      <div className="hidden items-center justify-center md:flex md:w-20">
         <AnimatePresence>
           {hasPrev && (
             <motion.button
@@ -66,7 +66,7 @@ function CaseStudyFile({
         exit={{ opacity: 0, y: 20, scale: 0.98 }}
         transition={{ duration: 0.26 }}
         onClick={(e) => e.stopPropagation()}
-        className="relative my-4 flex min-w-0 flex-1 flex-col overflow-hidden border border-[#ff003c]/35 bg-[#050505] shadow-[0_0_0_1px_rgba(255,0,60,0.16),0_30px_120px_rgba(0,0,0,0.55)]"
+        className="relative flex min-w-0 flex-1 flex-col overflow-hidden border-[#ff003c]/35 bg-[#050505] md:my-4 md:border md:shadow-[0_0_0_1px_rgba(255,0,60,0.16),0_30px_120px_rgba(0,0,0,0.55)]"
       >
         {/* scan-line overlays */}
         <div
@@ -87,10 +87,29 @@ function CaseStudyFile({
 
         {/* header */}
         <div className="relative z-10 flex items-center justify-between border-b border-[#ff003c]/38 px-4 py-3 font-mono text-[11px] uppercase tracking-[0.22em] text-zinc-400 md:px-6">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 md:gap-3">
+            {/* Mobile prev/next */}
+            <div className="flex items-center gap-1 md:hidden">
+              <button
+                onClick={(e) => { e.stopPropagation(); onPrev(); }}
+                disabled={!hasPrev}
+                className="flex h-7 w-7 items-center justify-center border border-[#ff003c]/30 bg-black/95 text-zinc-400 disabled:opacity-20"
+                aria-label="Previous case study"
+              >
+                <ChevronLeft className="h-3.5 w-3.5" />
+              </button>
+              <button
+                onClick={(e) => { e.stopPropagation(); onNext(); }}
+                disabled={!hasNext}
+                className="flex h-7 w-7 items-center justify-center border border-[#ff003c]/30 bg-black/95 text-zinc-400 disabled:opacity-20"
+                aria-label="Next case study"
+              >
+                <ChevronRight className="h-3.5 w-3.5" />
+              </button>
+            </div>
             <FolderOpenDot className="h-4 w-4 text-[#ff003c]" />
-            <span>{caseStudiesContent.openFileLabel}</span>
-            <span className="text-zinc-600">{project.slug}</span>
+            <span className="hidden sm:inline">{caseStudiesContent.openFileLabel}</span>
+            <span className="hidden text-zinc-600 sm:inline">{project.slug}</span>
           </div>
           <button
             onClick={onClose}
@@ -102,8 +121,8 @@ function CaseStudyFile({
         </div>
 
         {/* body */}
-        <div className="relative z-10 grid min-h-0 flex-1 gap-0 overflow-hidden lg:grid-cols-[1.05fr_0.95fr]">
-          <div className="border-b border-[#ff003c]/28 p-5 lg:border-b-0 lg:border-r lg:p-8 overflow-y-auto">
+        <div className="relative z-10 min-h-0 flex-1 overflow-y-auto lg:grid lg:grid-cols-[1.05fr_0.95fr] lg:overflow-hidden">
+          <div className="border-b border-[#ff003c]/28 p-5 lg:border-b-0 lg:border-r lg:p-8 lg:overflow-y-auto">
             <div className="mb-4 flex flex-wrap items-center gap-3 font-mono text-[10px] uppercase tracking-[0.18em] text-zinc-500">
               <span className="border border-[#ff003c]/32 bg-[#ff003c]/8 px-2 py-1 text-[#ff003c]">
                 {project.category}
@@ -162,7 +181,7 @@ function CaseStudyFile({
 
           </div>
 
-          <div className="min-h-0 overflow-y-auto p-5 lg:p-8">
+          <div className="min-h-0 p-5 lg:overflow-y-auto lg:p-8">
             <div className="mb-4 flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.22em] text-[#ff003c]">
               <ScanLine className="h-4 w-4" />
               {caseStudiesContent.sectionsLabel}
@@ -183,7 +202,7 @@ function CaseStudyFile({
       </motion.div>
 
       {/* ── Next button ────────────────────────────────────────────── */}
-      <div className="flex w-14 shrink-0 items-center justify-center md:w-20">
+      <div className="hidden items-center justify-center md:flex md:w-20">
         <AnimatePresence>
           {hasNext && (
             <motion.button
@@ -207,6 +226,7 @@ function CaseStudyFile({
 export function CaseStudies() {
   const [activeSlug, setActiveSlug] = useState<string | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
+  const savedScrollY = useRef<number>(0);
 
   const activeIndex = useMemo(
     () => portfolioProjects.findIndex((p) => p.slug === activeSlug),
@@ -214,24 +234,19 @@ export function CaseStudies() {
   );
   const activeProject = activeIndex >= 0 ? portfolioProjects[activeIndex] : null;
 
-  const scrollToSection = useCallback(() => {
-    sectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-  }, []);
-
   const handleOpen = useCallback(
     (slug: string) => {
+      savedScrollY.current = window.scrollY;
       setActiveSlug(slug);
-      // Scroll to case studies section so the overlay sits at the right position
-      setTimeout(scrollToSection, 0);
     },
-    [scrollToSection],
+    [],
   );
 
   const handleClose = useCallback(() => {
     setActiveSlug(null);
-    // Return viewport to the case studies section after the close animation
-    setTimeout(scrollToSection, 280);
-  }, [scrollToSection]);
+    // Restore the scroll position the user was at before opening
+    setTimeout(() => window.scrollTo(0, savedScrollY.current), 280);
+  }, []);
 
   const handlePrev = useCallback(() => {
     if (activeIndex > 0) setActiveSlug(portfolioProjects[activeIndex - 1].slug);
