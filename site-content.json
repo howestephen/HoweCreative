@@ -223,7 +223,7 @@
         "overlaySections": [
           {
             "title": "Brief",
-            "body": "UNCX needed a repeatable video system that could support product launches, explainer series, YouTube tutorials, and partner content — without rebuilding from scratch for every deliverable."
+            "body": "UNCX Network needed a repeatable video system that could support product launches, explainer series, YouTube tutorials, and partner content — without rebuilding from scratch for every deliverable."
           },
           {
             "title": "Problem Frame",
@@ -231,7 +231,7 @@
           },
           {
             "title": "System Design",
-            "body": "Built a modular pipeline: reusable 3D scenes and camera rigs in Cinema 4D, Redshift lighting presets, templated After Effects compositions with interchangeable content layers, and structured timeline blocks for consistent pacing across formats."
+            "body": "Built a modular pipeline: reusable 3D scenes and camera rigs in Cinema 4D, Redshift lighting presets, templated After Effects compositions with established layout and edit conventions for consistent tone and pacing across formats."
           },
           {
             "title": "Prototype Notes",
@@ -239,11 +239,11 @@
           },
           {
             "title": "Delivery",
-            "body": "Delivered as a production system: Cinema 4D scene templates, After Effects project structures, Redshift material libraries, YouTube thumbnail templates, and a defined motion language document."
+            "body": "Delivered as a production system: Cinema 4D scene templates, After Effects project structures, Redshift material libraries, YouTube thumbnail templates, and established motion conventions baked into the project files."
           },
           {
             "title": "Outcome",
-            "body": "Cut production time significantly across campaigns. Enabled consistent, brand-aligned output regardless of content type — from 60-second launch trailers to multi-part tutorial series."
+            "body": "Cut production time significantly across campaigns. Enabled consistent, brand-aligned output regardless of content type — from 60-second launch trailers to long-form educational content for the Academy."
           }
         ]
       },
