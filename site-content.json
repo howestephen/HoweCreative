@@ -6,9 +6,9 @@
     "displayName": "Stephen Howe",
     "brandPrefix": "HOWE",
     "brandSuffix": "_CREATIVE",
-    "role": "Creative Systems Designer",
-    "headline": "Designing product systems, media pipelines, and AI-assisted workflows with a UX-first approach.",
-    "summary": "This portfolio has been designed using Figma Make and A.I. tooling. All built from a custom project template designed to cover all facets of QA and development. The template produces agent driven projects that can run autonmously without drift or inefficient compute usage.",
+    "role": "Creative Technologist",
+    "headline": "Designing products, creative pipelines, and AI-assisted workflows with a focus on user-experience.",
+    "summary": "This portfolio was designed and built using Figma Make, Codex, and Claude Code. Powered by a custom prompt system that progresses through roadmap phases, executing build and QA tasks in an iterative loop.",
     "navVersion": "v2.0",
     "githubUrl": "https://github.com/howestephen",
     "linkedinUrl": "https://www.linkedin.com/in/howestephen/",
@@ -49,19 +49,19 @@
   "hero": {
     "scrollLabel": "Scroll",
     "skillLabels": [
-      "Creative Systems",
-      "Design",
+      "Product Design",
+      "UI/UX",
       "Prototyping",
       "Motion Graphics",
-      "3D Generalist",
+      "3D & Motion",
       "Development",
-      "Audio Production"
+      "AI Workflows"
     ]
   },
   "operatorProfile": {
     "eyebrow": "Operator Profile",
     "title": "Stephen Howe",
-    "description": "This section gives an overview of the system operator and his personal quirks.",
+    "description": "A brief overview of the system operator — background, working methods, and current focus.",
     "primaryFileLabel": "File 01",
     "primaryFileStatus": "Open",
     "portraitFooterLeft": "Operator Profile",
@@ -69,11 +69,11 @@
     "quickFacts": [
       {
         "label": "Base",
-        "value": "United Kingdom"
+        "value": "Norwich, England, United Kingdom"
       },
       {
         "label": "Mode",
-        "value": "Design + Deliver"
+        "value": "Brief to Deployment"
       },
       {
         "label": "Bias",
@@ -81,33 +81,33 @@
       },
       {
         "label": "Output",
-        "value": "Products, motion, media, content, deliverables."
+        "value": "Products, prototypes, motion, media, and production systems."
       }
     ],
     "notesTitle": "Notes",
     "notesFileLabel": "File 5",
-    "notesBody": "Work sits at the boundary between design and implementation. The focus is not artefacts, but the systems that generate them — interface logic, motion frameworks, and production pipelines that can scale without losing intent.",
+    "notesBody": "My work often sits at the meeting point of design and implementation. My focus is not the artefacts, but the systems that generate them - interface logic, motion templates, and production pipelines that scale while output remains consistent.",
     "files": [
       {
         "fileLabel": "File 02",
         "title": "Operator Summary",
-        "body": "Systems-focused designer working across product architecture, media pipelines, and technical prototyping. Builds repeatable frameworks for UI, motion, and AI-assisted production."
+        "body": "Creative technologist working across product design, media pipelines, and technical prototyping. Leads briefs from specification through to delivery — coordinating external teams, building repeatable frameworks, and shipping across UI, motion, and AI-assisted production."
       },
       {
         "fileLabel": "File 03",
         "title": "Working Style",
-        "body": "Structured system design with iterative prototyping. Problems are reduced to inputs, constraints, and outputs, then rebuilt into reusable templates, rather than one-off solutions."
+        "body": "Structured system design with iterative prototyping. Problems are reduced to inputs, constraints, and outputs, then rebuilt into reusable templates rather than one-off solutions. Design decisions are validated through stakeholder and colleague feedback loops, iterating until alignment is reached."
       },
       {
         "fileLabel": "File 04",
         "title": "Current Focus",
-        "body": "Media systems, AI-assisted production pipelines, interface architecture, and tools that compress the distance between idea and deployed output."
+        "body": "Video generation systems, AI-assisted development pipelines, interface architecture, and tools that reduce the distance between ideas and deployed products."
       }
     ]
   },
   "caseStudies": {
     "eyebrow": "Selected demonstrative artefacts",
-    "title": "Recent Case Studies",
+    "title": "Case Studies",
     "description": "Each case exposes the system behind the output: inputs, constraints, pipelines, and repeatable structures.",
     "openFileLabel": "Open File",
     "closeLabel": "Close",
@@ -123,7 +123,7 @@
         "slug": "uncx-video-system",
         "title": "UNCX Video & 3D System",
         "category": "Media System / Motion Pipeline",
-        "year": "2024",
+        "year": "2023",
         "status": "Live",
         "shortDescription": "End-to-end video production pipeline spanning Cinema 4D, After Effects, and Redshift — built for repeatable, high-frequency output.",
         "fullDescription": "A modular production system covering 3D scene assembly in Cinema 4D, Redshift rendering, After Effects compositing, and templated timeline structures. Designed so that product launches, explainers, YouTube tutorials, and partner content could all ship from the same asset library without rebuilding from scratch each time.",
@@ -218,12 +218,12 @@
           }
         ],
         "gradient": "from-[#8b0020] to-[#ff003c]",
-        "role": "Media Systems Designer / Motion Engineer",
+        "role": "Creative Technologist / Motion Lead",
         "client": "UNCX Network",
         "overlaySections": [
           {
             "title": "Brief",
-            "body": "UNCX needed a repeatable video system that could support product launches, explainer series, YouTube tutorials, and partner content — without rebuilding from scratch for every deliverable."
+            "body": "UNCX Network needed a repeatable video system that could support product launches, explainer series, YouTube tutorials, and partner content — without rebuilding from scratch for every deliverable."
           },
           {
             "title": "Problem Frame",
@@ -231,19 +231,19 @@
           },
           {
             "title": "System Design",
-            "body": "Built a modular pipeline: reusable 3D scenes and camera rigs in Cinema 4D, Redshift lighting presets, templated After Effects compositions with interchangeable content layers, and structured timeline blocks for consistent pacing across formats."
+            "body": "Built a modular pipeline: reusable 3D scenes and camera rigs in Cinema 4D, Redshift lighting presets, templated After Effects compositions with established layout and edit conventions for consistent tone and pacing across formats."
           },
           {
-            "title": "Prototype Notes",
-            "body": "Isolated repeatable patterns in camera movement, lighting setups, and transitions. Abstracted these into reusable templates so new videos could be assembled rather than authored from scratch."
+            "title": "Trade-offs",
+            "body": "Time was the primary constraint — the operator managed the full production pipeline solo alongside other responsibilities. Early videos were over-scoped: lengthy scripts from the marketing team, unique animations per scene, and tight delivery timelines. Key pivots included introducing script length restrictions, stripping back unnecessary scenes, and replacing per-scene custom animations with categorised animation templates that could be reused across projects. The system evolved from complex one-off productions into a streamlined pipeline optimised for volume without sacrificing brand consistency."
           },
           {
             "title": "Delivery",
-            "body": "Delivered as a production system: Cinema 4D scene templates, After Effects project structures, Redshift material libraries, YouTube thumbnail templates, and a defined motion language document."
+            "body": "Delivered as a production system: Cinema 4D scene templates, After Effects project structures, Redshift material libraries, YouTube thumbnail templates, and established motion conventions baked into the project files."
           },
           {
             "title": "Outcome",
-            "body": "Cut production time significantly across campaigns. Enabled consistent, brand-aligned output regardless of content type — from 60-second launch trailers to multi-part tutorial series."
+            "body": "Cut production time significantly across campaigns. Enabled consistent, brand-aligned output regardless of content type — from 60-second launch trailers to long-form educational content for the Academy. The constraint-driven simplification became the system's strength: fewer unique elements, faster turnaround, more consistent output."
           }
         ]
       },
@@ -252,7 +252,7 @@
         "slug": "badger-club",
         "title": "Badger Club App",
         "category": "Product System / Operational Platform",
-        "year": "2025",
+        "year": "2026",
         "status": "Late Stage",
         "shortDescription": "Full-stack badge tracking platform with dark/light themes, role-based dashboards, Supabase backend, and Resend email integration.",
         "fullDescription": "A multi-role product system managing badge progress tracking, leader administration, parent communication, and public-facing group pages. Built with React, Supabase, Resend email integration, and Cloudflare security. Supports dark and light themes with a structured database schema designed for scalable group management.",
@@ -353,7 +353,7 @@
           }
         ],
         "gradient": "from-[#ff4466] to-[#4f0012]",
-        "role": "Product Designer / Full-Stack Developer",
+        "role": "Product Designer / Developer",
         "client": "Badger Club",
         "overlaySections": [
           {
@@ -366,19 +366,19 @@
           },
           {
             "title": "System Design",
-            "body": "Separated the system into operational layers: leader management dashboards for badge administration, parent-facing views for monitoring progress, child-friendly progress visualisation, and public group pages with Cloudflare security."
+            "body": "Separated the system into operational layers: leader management dashboards for badge administration, parent-facing views for monitoring progress, child-friendly progress visualisation, and public group pages with Cloudflare messaging security."
           },
           {
-            "title": "Prototype Notes",
-            "body": "Focused on reducing cognitive load per role. Dark and light themes tested for readability. Database schema designed in Supabase with row-level security for multi-tenant group isolation."
+            "title": "Trade-offs",
+            "body": "Initially envisioned as a multi-user platform with accounts for leaders, parents, and children. Legal and complexity constraints forced a pivot: the app became leader-only, with parent and child interactions designed to work without any account or sign-up. A full inbox and messaging system was also scoped but simplified — mirroring messages across a leader inbox, leader email, and parent email added significant complexity through Resend. The compromise: leaders manage messages via an in-app inbox with email notifications, while parents receive messages directly by email. Development was managed solo using AI-assisted tooling, with phases scoped as atomised tasks to prevent drift during autonomous builds."
           },
           {
             "title": "Delivery",
-            "body": "Full-stack implementation: React frontend with role-based routing, Supabase backend with structured schema, Resend for transactional emails, and Cloudflare for security and performance."
+            "body": "Full-stack implementation: React frontend with role-based routing, Supabase backend with structured schema, Google OAuth for authentication, Resend for transactional emails, and Cloudflare for security and performance."
           },
           {
             "title": "Outcome",
-            "body": "Eliminated manual tracking overhead. Created a scalable product foundation with subscription-based monetisation and clear paths for feature expansion."
+            "body": "Eliminated manual tracking overhead. The constraint-driven simplification — leader-only accounts, no-signup parent access, streamlined messaging — produced a leaner product with fewer barriers to adoption. Created a scalable foundation with subscription-based monetisation and clear paths for feature expansion."
           }
         ]
       },
@@ -387,10 +387,10 @@
         "slug": "uncx-rebrand",
         "title": "UNCX Company Rebrand",
         "category": "Brand System / Visual Infrastructure",
-        "year": "2024",
+        "year": "2022-2024",
         "status": "Complete",
-        "shortDescription": "Comprehensive rebrand spanning identity, marketing visuals, and a full website redesign across 10+ product pages in Figma.",
-        "fullDescription": "Rebuilt the UNCX brand from the ground up as a system of rules and components rather than a static identity. Covered typography, colour logic, layout rules, chain-specific visual treatments, and a complete website redesign in Figma spanning Homepage, Launchpad, Token Vesting, Staking, Minting, and more.",
+        "shortDescription": "Two-phase rebrand: an initial name and logo overhaul in 2022, followed by a full brand system and website redesign in 2024 — briefed and spec'd by the operator, executed with an external team, then finished in-house.",
+        "fullDescription": "The UNCX Network rebrand happened in two stages. In 2022, the operator led a solo rebrand covering the company name change and primary logo. In 2024, a second phase brought in an external team who worked from the operator's brief and design specification to deliver a full brand system and website redesign in Figma. The operator then brought the work in-house, completing the content, layout, and graphics across 10+ pages.",
         "tags": [
           "Brand Systems",
           "Figma",
@@ -527,32 +527,32 @@
           }
         ],
         "gradient": "from-[#ffffff] to-[#780015]",
-        "role": "Brand Systems Designer / Art Director",
+        "role": "Creative Director / Brand Lead",
         "client": "UNCX Network",
         "overlaySections": [
           {
             "title": "Brief",
-            "body": "Create a scalable brand identity that could unify product UI, marketing materials, motion graphics, and a full website redesign across UNCX's multi-chain DeFi ecosystem."
+            "body": "Evolve the UNCX Network brand across two phases — an initial name and logo change, then a comprehensive brand system and website redesign across the multi-chain DeFi ecosystem."
           },
           {
             "title": "Problem Frame",
-            "body": "The existing brand was inconsistent — different visual treatments per product, no systemised colour or typography logic, and marketing outputs that didn't align with the product UI."
+            "body": "The existing brand was inconsistent — different visual treatments per product, no systemised colour or typography logic, and marketing outputs that didn't align with the product UI. The first rebrand addressed the name and mark; the second tackled the full system."
           },
           {
             "title": "System Design",
-            "body": "Defined typography scales, colour logic with chain-specific treatments, layout grid rules, component patterns, and motion alignment. Designed a full website in Figma covering Homepage, Launchpad, Token Vesting, Staking & Farming, Token Minter, Blog, and Team pages."
+            "body": "Wrote the brief and design specification for the 2024 rebrand. An external team delivered the brand system and website redesign in Figma. The operator then brought the project in-house, completing content, layout refinements, and graphic production across all product pages."
           },
           {
-            "title": "Prototype Notes",
-            "body": "Tested brand coherence across UI mockups, motion graphics exports, marketing materials, and social media templates. Iterated on chain-based colour variations to maintain identity across Ethereum, BSC, and other networks."
+            "title": "Trade-offs",
+            "body": "The first phase in 2022 was driven by urgency — a legal copyright issue required a swift name and identity change with minimal runway. The second phase in 2024 introduced a different constraint: the external team delivered strong initial concepts, colour direction, and brand foundations, but struggled to populate the website designs with accurate product content. They understood the design system but lacked domain knowledge of the products. Hand-holding the content population wasn't sustainable, so the operator brought the project in-house — completing the website designs, content, and graphics using the external team's guidelines as the foundation. The next phase of resistance came trying to implement the designs consistently across all the development subteams."
           },
           {
             "title": "Delivery",
-            "body": "Delivered brand guidelines, Figma component libraries, website page designs, marketing visual templates, and motion style references."
+            "body": "Delivered brand guidelines, Figma component libraries, website page designs across 10+ product pages, marketing visual templates, and motion style references."
           },
           {
             "title": "Outcome",
-            "body": "Achieved consistent visual output across all platforms and products. The brand system supported ongoing content production without design drift."
+            "body": "Achieved consistent visual output across all platforms and products. The split approach — external team for brand foundations, in-house for product-specific execution — became the working model. Brand alignment across product teams took longer than the design work itself, but the system now supports coherent output without design drift."
           }
         ]
       },
@@ -560,10 +560,10 @@
         "id": 4,
         "slug": "noticia-lingo",
         "title": "Noticia Lingo App",
-        "category": "AI Product / Content System",
+        "category": "Product System / Operational Platform",
         "year": "2026",
         "status": "Active Build",
-        "shortDescription": "AI-powered language learning app using real news articles, Google authentication, Supabase backend, and structured quiz flows.",
+        "shortDescription": "Language learning app with an AI-assisted classroom, real news articles, Google authentication, Supabase backend, and structured quiz flows.",
         "fullDescription": "A language learning platform that transforms live news content into structured learning experiences. Built with React, Supabase, and Google OAuth — featuring article-based lessons, interactive quizzes, a learner dashboard, and a settings system. Designed to replace static flashcard approaches with contextual, real-world content.",
         "tags": [
           "AI",
@@ -616,7 +616,7 @@
           }
         ],
         "gradient": "from-[#ff003c] to-[#7a001c]",
-        "role": "Product Designer / Full-Stack Developer",
+        "role": "Product Designer / Developer",
         "client": "Self-initiated",
         "overlaySections": [
           {
@@ -632,8 +632,8 @@
             "body": "Content pipeline: ingest news articles, extract vocabulary, generate contextual quizzes, and structure progressive difficulty. User system: Google OAuth, learner profiles, progress tracking, and configurable settings."
           },
           {
-            "title": "Prototype Notes",
-            "body": "Tested readability scaling across article difficulty levels. Built interactive quiz flows with immediate feedback. Designed the dashboard to surface progress metrics without overwhelming new users."
+            "title": "Trade-offs",
+            "body": "The primary constraint has been lesson complexity. Initial development using AI tooling produced oversimplified quiz questions rather than the pure-function puzzle systems the operator had specified — lessons that work contextually against any news article, not static question-and-answer pairs. The pivot: expanding the roadmap into granular build phases, constructing each of the 8–10 lesson types step by step with greater complexity control. Technical implementation — Google OAuth, Supabase integration — proved straightforward by comparison. The system is currently focused on Spanish to validate the lesson architecture before introducing multi-language complexity, where each lesson type will need to be adapted per language."
           },
           {
             "title": "Delivery",
@@ -641,7 +641,7 @@
           },
           {
             "title": "Outcome",
-            "body": "Demonstrated a scalable learning system driven by live content. Active development with plans for AI-powered difficulty calibration and expanded language support."
+            "body": "Demonstrated a scalable learning system driven by live content. The shift from AI-generated simple quizzes to operator-designed pure-function lesson types produced a more robust foundation. Active development with plans for multi-language expansion once the core 8–10 lesson types are validated in Spanish."
           }
         ]
       },
@@ -653,7 +653,7 @@
         "year": "2025",
         "status": "Complete",
         "shortDescription": "Educational platform brand and design system — logotype, component library, article system, video pages, and glossary for DeFi learning.",
-        "fullDescription": "End-to-end brand and platform design for UNCX Academy: custom logotype, component library, article categorisation system, video learning pages, glossary, integrations hub, and about page. Designed in Figma as a complete design system with reusable components and consistent visual language.",
+        "fullDescription": "Brand and platform design for UNCX Academy. The operator wrote the brief and design specification, then an external team delivered the initial design system — custom logotype, component library, and page templates. The operator brought the project in-house, completing the designs for article categorisation, video learning pages, glossary, integrations hub, and about page ready for in-house development. The operator's video production system was integrated to produce the platform's educational video library.",
         "tags": [
           "Figma",
           "Brand Design",
@@ -773,19 +773,19 @@
           },
           {
             "title": "System Design",
-            "body": "Created a custom logotype and brand identity. Designed a modular Figma component library. Structured content into articles, videos, glossary entries, and integrations — each with its own page template and navigation pattern."
+            "body": "Wrote the brief and design specification. An external team delivered the logotype, brand identity, and modular Figma component library. The operator then brought the project in-house, refining content structure across articles, videos, glossary entries, and integrations — each with its own page template and navigation pattern."
           },
           {
-            "title": "Prototype Notes",
-            "body": "Tested content hierarchy across article categories, video pages, and glossary. Ensured the component library supported both internal content authoring and public-facing learning experiences."
+            "title": "Trade-offs",
+            "body": "Having navigated similar external team constraints during the rebrand, the operator applied a more structured handoff process for the Academy. The external design team delivered strong foundational work — logotype, component library, and page templates — but lacked the product context to complete content-specific designs. The operator designed the hero graphics, page visuals, and layout specifics, then handed off finished designs to an in-house developer who built the site and backend CMS. The video production system integrated seamlessly as both the platform and video content were built from the same brand specification. Beyond the platform launch, the operator also produces all article header banners for the marketing team's ongoing content output."
           },
           {
             "title": "Delivery",
-            "body": "Complete Figma design system: logotype, component library, page templates for Main, Articles, Videos, Glossary, Integrations, and About. Supporting brand guidelines for consistent content production."
+            "body": "Complete Figma design system: logotype, component library, page templates for Main, Articles, Videos, Glossary, Integrations, and About. Finished in-house and prepared for development handoff with supporting brand guidelines."
           },
           {
             "title": "Outcome",
-            "body": "Enabled UNCX to launch a structured education platform aligned with the parent brand. The component system reduced design time for new content pages."
+            "body": "Enabled UNCX Network to launch a structured education platform aligned with the parent brand. The video production system fed directly into the Academy's content library, and the operator's ongoing production of article banners, page graphics, and video content created a single-source creative pipeline across the entire platform."
           }
         ]
       },
@@ -794,8 +794,8 @@
         "slug": "uncx-menu",
         "title": "UNCX Unified Menu",
         "category": "Interface System / Design System",
-        "year": "2025",
-        "status": "Complete",
+        "year": "2026",
+        "status": "On-Hold",
         "shortDescription": "Cross-product navigation component system with variable-driven Figma prototypes, research-backed hierarchy, and scalable state logic.",
         "fullDescription": "A unified menu system designed to work across UNCX's entire product suite. Built as a variable-driven Figma component with researched navigation patterns, prototype states (open/closed), configurable content slots, and a scalable hierarchy that adapts to different product contexts.",
         "tags": [
@@ -859,19 +859,19 @@
         "overlaySections": [
           {
             "title": "Brief",
-            "body": "Design a unified navigation component that could work across all UNCX products — replacing inconsistent per-product menus with a single scalable system."
+            "body": "Design a unified navigation component that could work across all UNCX Network products and platforms — replacing inconsistent platform menus with a single scalable system."
           },
           {
             "title": "Problem Frame",
-            "body": "Each UNCX product had its own navigation pattern. Users moving between Launchpad, Token Vesting, and Minting encountered different menu structures, creating cognitive overhead and inconsistent UX."
+            "body": "Each UNCX Network product had its own navigation pattern. Users moving between EVM tools, Solana products, Academy, and the homepage encountered different menu structures, creating cognitive overhead and inconsistent UX."
           },
           {
             "title": "System Design",
             "body": "Researched navigation patterns and hierarchy models. Designed a component-based menu with configurable content slots, variable-driven Figma states, and a scalable hierarchy that adapts per product context."
           },
           {
-            "title": "Prototype Notes",
-            "body": "Built variable-driven Figma prototypes for open and closed states. Tested content slot flexibility across different product navigation requirements. Validated the component against mobile and desktop breakpoints."
+            "title": "Trade-offs",
+            "body": "The project is on hold due to a shift in development priorities. The core design challenge was fitting multiple products and sub-brands into a single menu structure that remained efficient and navigable. An additional constraint was that the products are highly specialised — the menu needed to be mildly educational, helping users understand what each product does without slowing down experienced users. The main design compromise centred on hierarchy: several products generate significantly more revenue than others and needed visual priority, without devaluing the rest of the ecosystem."
           },
           {
             "title": "Delivery",
@@ -879,7 +879,7 @@
           },
           {
             "title": "Outcome",
-            "body": "Replaced fragmented navigation with a single, consistent system. Reduced design and development time for new product navigation and improved cross-product UX coherence."
+            "body": "Delivered a complete design system ready for implementation. The hierarchy problem — balancing revenue-generating products against the broader ecosystem — was resolved by establishing definitive levels of hierarchy and de-prioritising non-value generating menu options. Currently on hold pending a shift in development priorities."
           }
         ]
       },
@@ -888,10 +888,10 @@
         "slug": "uncx-app-concepts",
         "title": "UNCX App Prototyping",
         "category": "Product Concepting / UX Prototyping",
-        "year": "2024",
-        "status": "Complete",
-        "shortDescription": "Rapid prototyping across token minting, launchpad flows, Telegram bots, NFT minting, and ILO V7 — from wireframes to interactive concepts.",
-        "fullDescription": "A body of product concepting work spanning multiple UNCX features: token minter prototyping, launchpad UI components, Telegram chatbot and presale app flows, NFT minting interfaces, stealth launch concepts, and ILO V7 flow diagrams. Each concept was developed from wireframes through to interactive prototypes in Figma.",
+        "year": "2021-2026",
+        "status": "Various",
+        "shortDescription": "Rapid prototyping across token minting, launchpad flows, Telegram bots, NFT minting, and full launchpad concepts — from wireframes to interactive concepts.",
+        "fullDescription": "A body of product concepting work spanning multiple UNCX Network features: token minter prototyping, launchpad UI components, Telegram chatbot and presale app flows, NFT minting interfaces, stealth launch concepts, and full launchpad concepts.",
         "tags": [
           "Figma",
           "Prototyping",
@@ -964,12 +964,12 @@
           {
             "type": "image",
             "src": "/case-studies/uncx-app-concepts/ilo-v7-flow-diagrams.webp",
-            "alt": "ILO V7 flow diagrams"
+            "alt": "Launchpad flow diagrams"
           },
           {
             "type": "image",
             "src": "/case-studies/uncx-app-concepts/v7-tailwind-designs.webp",
-            "alt": "V7 Tailwind design system"
+            "alt": "Tailwind design system"
           },
           {
             "type": "image",
@@ -1023,12 +1023,12 @@
           }
         ],
         "gradient": "from-[#8b0020] to-[#ff003c]",
-        "role": "Product Designer / UX Prototyper",
+        "role": "Systems Designer / Product Prototyper",
         "client": "UNCX Network",
         "overlaySections": [
           {
             "title": "Brief",
-            "body": "Rapidly prototype and validate product concepts across UNCX's feature pipeline — covering token minting, launchpad flows, Telegram integrations, and NFT tooling."
+            "body": "Rapidly prototype and validate product concepts across UNCX Network's feature pipeline — covering token minting, launchpad flows, Telegram integrations, and NFT tooling."
           },
           {
             "title": "Problem Frame",
@@ -1036,19 +1036,19 @@
           },
           {
             "title": "System Design",
-            "body": "Created a concepting workflow: wireframe → component mockup → interactive prototype → stakeholder review. Applied this across token minter flows, launchpad components, Telegram bot interactions, and ILO V7 user journeys."
+            "body": "A broad range of product concepts and prototypes spanning different stages and purposes. Some were built and shipped — token minter flows, launchpad components, and Telegram bot interactions. Others remained as design explorations — stealth launch interfaces, NFT minting tools, and full launchpad concepts. Each served to validate direction, align stakeholders, or define scope before committing development resources."
           },
           {
-            "title": "Prototype Notes",
-            "body": "Token minter concepts explored multi-step creation flows. Telegram prototypes covered chatbot interactions, presale app flows, and ape-bot UIs. ILO V7 flow diagrams mapped the full initial liquidity offering user journey. Stealth launch concepts explored admin and user-facing interfaces."
+            "title": "Trade-offs",
+            "body": "A recurring constraint across all concepts was incomplete requirements — specifications arrived gradually as projects developed, often requiring rework of existing prototypes. This made component-based design systems essential: rebuilding from reusable parts reduced the cost of iteration. Figma's later introduction of the variables system further reduced component creation overhead. A foundational part of each project was creating FigJam flow diagrams for novel product processes. These weren't problems with established UX conventions to reference — they required working out how the interactions should function from first principles."
           },
           {
             "title": "Delivery",
-            "body": "Delivered Figma prototypes for each feature area: token minting (blueprint and standard), launchpad components, Telegram bot/app flows, NFT minting interfaces, stealth launch admin, and ILO V7 flow diagrams."
+            "body": "Delivered Figma prototypes for each feature area: token minting (blueprint and standard), launchpad components, Telegram bot/app flows, NFT minting interfaces, stealth launch admin, and full launchpad flow diagrams."
           },
           {
             "title": "Outcome",
-            "body": "Closed the gap between product specs and development handoff. Stakeholders could validate features visually before committing development resources, reducing rework and accelerating shipping."
+            "body": "Closed the gap between product specs and development handoff. The component-first approach meant that incomplete or shifting requirements — a constant across a five-year span of prototyping — could be absorbed without starting from scratch. Stakeholders could validate features visually before committing development resources, reducing rework and accelerating shipping."
           }
         ]
       }
@@ -1056,8 +1056,8 @@
   },
   "toolsSkills": {
     "eyebrow": "Tools & Skills",
-    "title": "The preffered toolkit.",
-    "description": "The operators preferred tools used across prototyping, design, motion, development, and AI-assisted pipelines.",
+    "title": "The preferred toolkit.",
+    "description": "The operator's preferred tools used across prototyping, design, motion, development, and AI-assisted pipelines.",
     "items": [
       {
         "name": "Figma",
@@ -1220,7 +1220,7 @@
   "contact": {
     "eyebrow": "Contact",
     "title": "Start a conversation.",
-    "description": "Available for product design, media systems, and technical prototyping engagements.",
+    "description": "Available for product design, design leadership, and creative technology engagements.",
     "fields": {
       "name": "Name",
       "email": "Email",
@@ -1233,7 +1233,7 @@
   "archive": {
     "eyebrow": "Archive",
     "title": "Prior work and experiments.",
-    "description": "A timeline of past assets made across industries and disciplines.",
+    "description": "A timeline of past work across industries and disciplines.",
     "openButtonLabel": "Open Archive",
     "browserTitle": "Archive Browser",
     "closeLabel": "Close",
@@ -1315,8 +1315,8 @@
     "currentStateTitle": "Current State",
     "currentStateLines": [
       "Available for engagements",
-      "Based in United Kingdom",
-      "Design + build focus"
+      "Based in Norwich, England",
+      "Brief to deployment"
     ],
     "copyright": "© 1984 Stephen Howe",
     "statusLabel": "Online",
