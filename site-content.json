@@ -576,7 +576,7 @@
         "fullDescription": "A language learning platform that transforms live news content into structured learning experiences. Built with React, Supabase, and Google OAuth — featuring article-based lessons, interactive quizzes, a learner dashboard, and a settings system. Designed to replace static flashcard approaches with contextual, real-world content.",
         "tags": [
           "React",
-          "Vite",
+          "Next.js",
           "Supabase",
           "Google Auth",
           "Product Design"
