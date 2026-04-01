@@ -80,6 +80,10 @@
         "value": "Systems over surfaces"
       },
       {
+        "label": "Education",
+        "value": "1st Class Honours, Entertainment Technology (IBM Award, Best Creative Technologies Project)"
+      },
+      {
         "label": "Output",
         "value": "Products, prototypes, motion, media, and production systems."
       }
@@ -132,7 +136,9 @@
           "Redshift",
           "After Effects",
           "Adobe Illustrator",
-          "Adobe Photoshop"
+          "Adobe Photoshop",
+          "Motion System",
+          "Brand Design"
         ],
         "image": "/case-studies/uncx-video-system/cover.webp",
         "media": [
@@ -258,9 +264,12 @@
         "fullDescription": "A multi-role product system managing badge progress tracking, leader administration, parent communication, and public-facing group pages. Built with React, Supabase, Resend email integration, and Cloudflare security. Supports dark and light themes with a structured database schema designed for scalable group management.",
         "tags": [
           "React",
+          "Next.js",
           "Supabase",
           "Resend",
           "Cloudflare",
+          "Vercel",
+          "Google Auth",
           "Systems Design",
           "Product"
         ],
@@ -392,8 +401,12 @@
         "shortDescription": "Two-phase rebrand: an initial name and logo overhaul in 2022, followed by a full brand system and website redesign in 2024 — briefed and spec'd by the operator, executed with an external team, then finished in-house.",
         "fullDescription": "The UNCX Network rebrand happened in two stages. In 2022, the operator led a solo rebrand covering the company name change and primary logo. In 2024, a second phase brought in an external team who worked from the operator's brief and design specification to deliver a full brand system and website redesign in Figma. The operator then brought the work in-house, completing the content, layout, and graphics across 10+ pages.",
         "tags": [
-          "Brand Systems",
           "Figma",
+          "Cinema 4D",
+          "Redshift",
+          "Adobe Illustrator",
+          "Adobe Photoshop",
+          "Brand Systems",
           "Visual Design",
           "Web Design",
           "Art Direction"
@@ -566,8 +579,8 @@
         "shortDescription": "Language learning app with an AI-assisted classroom, real news articles, Google authentication, Supabase backend, and structured quiz flows.",
         "fullDescription": "A language learning platform that transforms live news content into structured learning experiences. Built with React, Supabase, and Google OAuth — featuring article-based lessons, interactive quizzes, a learner dashboard, and a settings system. Designed to replace static flashcard approaches with contextual, real-world content.",
         "tags": [
-          "AI",
           "React",
+          "Next.js",
           "Supabase",
           "Google Auth",
           "Product Design"
@@ -656,6 +669,9 @@
         "fullDescription": "Brand and platform design for UNCX Academy. The operator wrote the brief and design specification, then an external team delivered the initial design system — custom logotype, component library, and page templates. The operator brought the project in-house, completing the designs for article categorisation, video learning pages, glossary, integrations hub, and about page ready for in-house development. The operator's video production system was integrated to produce the platform's educational video library.",
         "tags": [
           "Figma",
+          "Cinema 4D",
+          "Redshift",
+          "Adobe Photoshop",
           "Brand Design",
           "Platform Design",
           "Content Systems",
@@ -799,8 +815,8 @@
         "shortDescription": "Cross-product navigation component system with variable-driven Figma prototypes, research-backed hierarchy, and scalable state logic.",
         "fullDescription": "A unified menu system designed to work across UNCX's entire product suite. Built as a variable-driven Figma component with researched navigation patterns, prototype states (open/closed), configurable content slots, and a scalable hierarchy that adapts to different product contexts.",
         "tags": [
-          "Design Systems",
           "Figma",
+          "Design Systems",
           "UI/UX",
           "Prototyping",
           "Research"
@@ -894,6 +910,7 @@
         "fullDescription": "A body of product concepting work spanning multiple UNCX Network features: token minter prototyping, launchpad UI components, Telegram chatbot and presale app flows, NFT minting interfaces, stealth launch concepts, and full launchpad concepts.",
         "tags": [
           "Figma",
+          "FigJam",
           "Prototyping",
           "UX Design",
           "Wireframing",
@@ -1062,6 +1079,12 @@
       {
         "name": "Figma",
         "icon": "SiFigma",
+        "color": "#ff7262",
+        "category": "Design"
+      },
+      {
+        "name": "FigJam",
+        "icon": "Shapes",
         "color": "#ff7262",
         "category": "Design"
       },
