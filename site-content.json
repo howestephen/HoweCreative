@@ -888,10 +888,10 @@
         "slug": "uncx-app-concepts",
         "title": "UNCX App Prototyping",
         "category": "Product Concepting / UX Prototyping",
-        "year": "2024",
-        "status": "Complete",
-        "shortDescription": "Rapid prototyping across token minting, launchpad flows, Telegram bots, NFT minting, and ILO V7 — from wireframes to interactive concepts.",
-        "fullDescription": "A body of product concepting work spanning multiple UNCX features: token minter prototyping, launchpad UI components, Telegram chatbot and presale app flows, NFT minting interfaces, stealth launch concepts, and ILO V7 flow diagrams. Each concept was developed from wireframes through to interactive prototypes in Figma.",
+        "year": "2021-2026",
+        "status": "Various",
+        "shortDescription": "Rapid prototyping across token minting, launchpad flows, Telegram bots, NFT minting, and full launchpad concepts — from wireframes to interactive concepts.",
+        "fullDescription": "A body of product concepting work spanning multiple UNCX features: token minter prototyping, launchpad UI components, Telegram chatbot and presale app flows, NFT minting interfaces, stealth launch concepts, and full launchpad concepts.",
         "tags": [
           "Figma",
           "Prototyping",
@@ -1023,7 +1023,7 @@
           }
         ],
         "gradient": "from-[#8b0020] to-[#ff003c]",
-        "role": "Product Designer / UX Prototyper",
+        "role": "Systems Designer / Product Prototyper",
         "client": "UNCX Network",
         "overlaySections": [
           {
@@ -1036,7 +1036,7 @@
           },
           {
             "title": "System Design",
-            "body": "Created a concepting workflow: wireframe → component mockup → interactive prototype → stakeholder review. Applied this across token minter flows, launchpad components, Telegram bot interactions, and ILO V7 user journeys."
+            "body": "A broad range of product concepts and prototypes spanning different stages and purposes. Some were built and shipped — token minter flows, launchpad components, and Telegram bot interactions. Others remained as design explorations — stealth launch interfaces, NFT minting tools, and full launchpad concepts. Each served to validate direction, align stakeholders, or define scope before committing development resources."
           },
           {
             "title": "Prototype Notes",
