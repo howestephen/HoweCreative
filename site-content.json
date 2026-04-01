@@ -1039,8 +1039,8 @@
             "body": "A broad range of product concepts and prototypes spanning different stages and purposes. Some were built and shipped — token minter flows, launchpad components, and Telegram bot interactions. Others remained as design explorations — stealth launch interfaces, NFT minting tools, and full launchpad concepts. Each served to validate direction, align stakeholders, or define scope before committing development resources."
           },
           {
-            "title": "Prototype Notes",
-            "body": "Token minter concepts explored multi-step creation flows. Telegram prototypes covered chatbot interactions, presale app flows, and ape-bot UIs. Full launchpad flow diagrams mapped the complete initial liquidity offering user journey. Stealth launch concepts explored admin and user-facing interfaces."
+            "title": "Constraints & Pivots",
+            "body": "A recurring constraint across all concepts was incomplete requirements — specifications arrived gradually as projects developed, often requiring rework of existing prototypes. This made component-based design systems essential: rebuilding from reusable parts reduced the cost of iteration. Figma's later introduction of the variables system further reduced component creation overhead. A foundational part of each project was creating FigJam flow diagrams for novel product processes. These weren't problems with established UX conventions to reference — they required working out how the interactions should function from first principles."
           },
           {
             "title": "Delivery",
@@ -1048,7 +1048,7 @@
           },
           {
             "title": "Outcome",
-            "body": "Closed the gap between product specs and development handoff. Stakeholders could validate features visually before committing development resources, reducing rework and accelerating shipping."
+            "body": "Closed the gap between product specs and development handoff. The component-first approach meant that incomplete or shifting requirements — a constant across a five-year span of prototyping — could be absorbed without starting from scratch. Stakeholders could validate features visually before committing development resources, reducing rework and accelerating shipping."
           }
         ]
       }
