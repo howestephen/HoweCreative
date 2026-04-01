@@ -844,7 +844,7 @@ export function MatrixRainHero() {
 <div className="absolute inset-0 z-0">
         {hasWebGL ? (
           <Canvas
-            camera={{ position: [0, isMobile ? 0.15 : 0.18, isMobile ? 6.5 : 5.5], fov: isMobile ? 52 : 50 }}
+            camera={{ position: [0, isMobile ? 0.35 : 0.18, isMobile ? 6.5 : 5.5], fov: isMobile ? 52 : 50 }}
             dpr={isMobile ? [1, 1] : [1, 1.25]}
             gl={{ antialias: false, powerPreference: "low-power" }}
             frameloop="demand"
@@ -856,7 +856,7 @@ export function MatrixRainHero() {
               gridDepthLayers={rainGrid.gridDepthLayers}
               rainRows={rainGrid.rainRows}
             />
-            <group position={[0, isMobile ? 0.65 : 0.82, 0]}>
+            <group position={[0, isMobile ? 1.1 : 0.82, 0]}>
               <MorphingWireErrorBoundary onSkillChange={setActiveSkill}>
                 <MorphingWireHero onSkillChange={setActiveSkill} />
               </MorphingWireErrorBoundary>
