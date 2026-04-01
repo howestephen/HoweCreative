@@ -19,6 +19,7 @@ import {
   Menu,
   PenTool,
   Send,
+  Shapes,
   Triangle,
   Video,
   WandSparkles,
@@ -193,6 +194,7 @@ const toolIconMap: Record<string, IconComponent> = {
   Image,          // Photoshop
   Layers,         // Adobe Animate
   PenTool,        // Illustrator
+  Shapes,         // FigJam
   Triangle,       // Redshift
   Video,          // Premiere Pro
   WandSparkles,
@@ -270,3 +272,18 @@ export const portfolioTools: PortfolioTool[] = content.toolsSkills.items.map((to
 
 export const archiveEntries: ArchiveEntry[] = content.archive.entries;
 export const archiveTools = content.archive.tools as readonly string[];
+
+// Map tag names (including aliases) to toolkit icons & colours
+const tagAliases: Record<string, string> = {
+  "Adobe Illustrator": "Illustrator",
+  "Adobe Photoshop": "Photoshop",
+};
+
+export const tagToolLookup: Record<string, { icon: IconComponent; color: string }> = {};
+for (const tool of portfolioTools) {
+  tagToolLookup[tool.name] = { icon: tool.icon, color: tool.color };
+}
+for (const [alias, canonical] of Object.entries(tagAliases)) {
+  const tool = tagToolLookup[canonical];
+  if (tool) tagToolLookup[alias] = tool;
+}

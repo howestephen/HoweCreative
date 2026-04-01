@@ -5,7 +5,7 @@ import { createPortal } from "react-dom";
 
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { MediaGallery } from "./MediaGallery";
-import { caseStudiesContent, portfolioProjects, type ProjectMediaItem } from "../data/portfolio";
+import { caseStudiesContent, portfolioProjects, tagToolLookup, type ProjectMediaItem } from "../data/portfolio";
 
 function CaseStudyFile({
   project,
@@ -167,16 +167,43 @@ function CaseStudyFile({
               <div className="mb-3 font-mono text-[10px] uppercase tracking-[0.2em] text-zinc-500">
                 Tools Used
               </div>
-              <div className="flex flex-wrap gap-2">
-                {project.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="border border-[#ff003c]/35 bg-[#ff003c]/10 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.14em] text-[#ff003c]"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
+              {(() => {
+                const withIcon = project.tags.filter((t) => tagToolLookup[t]);
+                const withoutIcon = project.tags.filter((t) => !tagToolLookup[t]);
+                return (
+                  <div className="flex flex-col gap-2">
+                    {withIcon.length > 0 && (
+                      <div className="flex flex-wrap gap-2">
+                        {withIcon.map((tag) => {
+                          const tool = tagToolLookup[tag];
+                          const Icon = tool.icon;
+                          return (
+                            <span
+                              key={tag}
+                              className="inline-flex items-center gap-1.5 border border-[#ff003c]/35 bg-[#ff003c]/10 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.14em] text-[#ff003c]"
+                            >
+                              <Icon className="h-3 w-3 shrink-0" style={{ color: tool.color }} />
+                              {tag}
+                            </span>
+                          );
+                        })}
+                      </div>
+                    )}
+                    {withoutIcon.length > 0 && (
+                      <div className="flex flex-wrap gap-2">
+                        {withoutIcon.map((tag) => (
+                          <span
+                            key={tag}
+                            className="border border-[#ff003c]/35 bg-[#ff003c]/10 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.14em] text-[#ff003c]"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                );
+              })()}
             </div>
 
           </div>
@@ -310,14 +337,18 @@ export function CaseStudies() {
                 </p>
                 <div className="mt-auto pt-5">
                   <div className="flex flex-wrap gap-2">
-                    {project.tags.slice(0, 3).map((tag) => (
-                      <span
-                        key={tag}
-                        className="border border-[#ff003c]/30 px-2 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-zinc-300"
-                      >
-                        {tag}
-                      </span>
-                    ))}
+                    {project.tags.slice(0, 3).map((tag) => {
+                      const tool = tagToolLookup[tag];
+                      return (
+                        <span
+                          key={tag}
+                          className="inline-flex items-center gap-1.5 border border-[#ff003c]/30 px-2 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-zinc-300"
+                        >
+                          {tool && <tool.icon className="h-3 w-3 shrink-0" style={{ color: tool.color }} />}
+                          {tag}
+                        </span>
+                      );
+                    })}
                   </div>
                 </div>
               </div>
