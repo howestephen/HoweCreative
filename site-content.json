@@ -369,8 +369,8 @@
             "body": "Separated the system into operational layers: leader management dashboards for badge administration, parent-facing views for monitoring progress, child-friendly progress visualisation, and public group pages with Cloudflare messaging security."
           },
           {
-            "title": "Prototype Notes",
-            "body": "Focused on reducing cognitive load per role. Dark and light themes tested for readability. Database schema designed in Supabase with row-level security for multi-tenant group isolation."
+            "title": "Constraints & Pivots",
+            "body": "Initially envisioned as a multi-user platform with accounts for leaders, parents, and children. Legal and complexity constraints forced a pivot: the app became leader-only, with parent and child interactions designed to work without any account or sign-up. A full inbox and messaging system was also scoped but simplified — mirroring messages across a leader inbox, leader email, and parent email added significant complexity through Resend. The compromise: leaders manage messages via an in-app inbox with email notifications, while parents receive messages directly by email. Development was managed solo using AI-assisted tooling, with phases scoped as atomised tasks to prevent drift during autonomous builds."
           },
           {
             "title": "Delivery",
@@ -378,7 +378,7 @@
           },
           {
             "title": "Outcome",
-            "body": "Eliminated manual tracking overhead. Created a scalable product foundation with subscription-based monetisation and clear paths for feature expansion."
+            "body": "Eliminated manual tracking overhead. The constraint-driven simplification — leader-only accounts, no-signup parent access, streamlined messaging — produced a leaner product with fewer barriers to adoption. Created a scalable foundation with subscription-based monetisation and clear paths for feature expansion."
           }
         ]
       },
