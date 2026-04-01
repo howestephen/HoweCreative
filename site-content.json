@@ -234,8 +234,8 @@
             "body": "Built a modular pipeline: reusable 3D scenes and camera rigs in Cinema 4D, Redshift lighting presets, templated After Effects compositions with established layout and edit conventions for consistent tone and pacing across formats."
           },
           {
-            "title": "Prototype Notes",
-            "body": "Isolated repeatable patterns in camera movement, lighting setups, and transitions. Abstracted these into reusable templates so new videos could be assembled rather than authored from scratch."
+            "title": "Constraints & Pivots",
+            "body": "Time was the primary constraint — the operator managed the full production pipeline solo alongside other responsibilities. Early videos were over-scoped: lengthy scripts from the marketing team, unique animations per scene, and tight delivery timelines. Key pivots included introducing script length restrictions, stripping back unnecessary scenes, and replacing per-scene custom animations with categorised animation templates that could be reused across projects. The system evolved from complex one-off productions into a streamlined pipeline optimised for volume without sacrificing brand consistency."
           },
           {
             "title": "Delivery",
@@ -243,7 +243,7 @@
           },
           {
             "title": "Outcome",
-            "body": "Cut production time significantly across campaigns. Enabled consistent, brand-aligned output regardless of content type — from 60-second launch trailers to long-form educational content for the Academy."
+            "body": "Cut production time significantly across campaigns. Enabled consistent, brand-aligned output regardless of content type — from 60-second launch trailers to long-form educational content for the Academy. The constraint-driven simplification became the system's strength: fewer unique elements, faster turnaround, more consistent output."
           }
         ]
       },
