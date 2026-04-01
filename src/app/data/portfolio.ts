@@ -135,6 +135,9 @@ const content = rawContent as {
     notesTitle: string;
     notesFileLabel: string;
     notesBody: string;
+    educationTitle: string;
+    educationFileLabel: string;
+    educationBody: string;
     files: Array<{ fileLabel: string; title: string; body: string }>;
   };
   caseStudies: {

@@ -83,53 +83,74 @@ export function OperatorProfile() {
             </motion.div>
           </div>
 
-          {/* 2×2 info grid */}
-          <div className="grid grid-cols-2 gap-4 content-start">
-            {/* Summary, Style, Focus */}
-            {operatorProfileContent.files.map((file, index) => (
+          {/* 2×2 info grid + full-width education card */}
+          <div className="flex flex-col gap-4">
+            <div className="grid grid-cols-2 gap-4 content-start">
+              {/* Summary, Style, Focus */}
+              {operatorProfileContent.files.map((file, index) => (
+                <motion.div
+                  key={file.title}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.06 }}
+                  className="relative overflow-hidden border border-[#ff003c]/32 bg-black/92 p-5"
+                >
+                  <div
+                    className="pointer-events-none absolute inset-0 opacity-[0.05]"
+                    style={{
+                      backgroundImage:
+                        "linear-gradient(rgba(255,0,60,0.16) 1px, transparent 1px), linear-gradient(90deg, rgba(255,0,60,0.14) 1px, transparent 1px)",
+                      backgroundSize: "22px 22px",
+                    }}
+                  />
+                  <div className="relative z-10">
+                    <div className="mb-3 flex items-center justify-between gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-zinc-500">
+                      <span>{file.title}</span>
+                      <span className="text-[#ff003c]/60">{file.fileLabel}</span>
+                    </div>
+                    <p className="text-sm leading-relaxed text-zinc-300">
+                      {file.body}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
+
+              {/* Notes — File 05 */}
               <motion.div
-                key={file.title}
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.06 }}
+                transition={{ duration: 0.5, delay: operatorProfileContent.files.length * 0.06 }}
                 className="relative overflow-hidden border border-[#ff003c]/32 bg-black/92 p-5"
               >
-                <div
-                  className="pointer-events-none absolute inset-0 opacity-[0.05]"
-                  style={{
-                    backgroundImage:
-                      "linear-gradient(rgba(255,0,60,0.16) 1px, transparent 1px), linear-gradient(90deg, rgba(255,0,60,0.14) 1px, transparent 1px)",
-                    backgroundSize: "22px 22px",
-                  }}
-                />
                 <div className="relative z-10">
                   <div className="mb-3 flex items-center justify-between gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-zinc-500">
-                    <span>{file.title}</span>
-                    <span className="text-[#ff003c]/60">{file.fileLabel}</span>
+                    <span>{operatorProfileContent.notesTitle}</span>
+                    <span className="text-[#ff003c]/60">{operatorProfileContent.notesFileLabel}</span>
                   </div>
                   <p className="text-sm leading-relaxed text-zinc-300">
-                    {file.body}
+                    {operatorProfileContent.notesBody}
                   </p>
                 </div>
               </motion.div>
-            ))}
+            </div>
 
-            {/* Notes — File 05, last */}
+            {/* Education — full-width spanning below the 2×2 grid */}
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: operatorProfileContent.files.length * 0.06 }}
+              transition={{ duration: 0.5, delay: (operatorProfileContent.files.length + 1) * 0.06 }}
               className="relative overflow-hidden border border-[#ff003c]/32 bg-black/92 p-5"
             >
               <div className="relative z-10">
                 <div className="mb-3 flex items-center justify-between gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-zinc-500">
-                  <span>{operatorProfileContent.notesTitle}</span>
-                  <span className="text-[#ff003c]/60">{operatorProfileContent.notesFileLabel}</span>
+                  <span>{operatorProfileContent.educationTitle}</span>
+                  <span className="text-[#ff003c]/60">{operatorProfileContent.educationFileLabel}</span>
                 </div>
                 <p className="text-sm leading-relaxed text-zinc-300">
-                  {operatorProfileContent.notesBody}
+                  {operatorProfileContent.educationBody}
                 </p>
               </div>
             </motion.div>
