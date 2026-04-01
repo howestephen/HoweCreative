@@ -50,7 +50,7 @@
     "scrollLabel": "Scroll",
     "skillLabels": [
       "Product Design",
-      "Design",
+      "UI/UX",
       "Prototyping",
       "Motion Graphics",
       "3D & Motion",
@@ -387,7 +387,7 @@
         "slug": "uncx-rebrand",
         "title": "UNCX Company Rebrand",
         "category": "Brand System / Visual Infrastructure",
-        "year": "2024",
+        "year": "2022-2024",
         "status": "Complete",
         "shortDescription": "Two-phase rebrand: an initial name and logo overhaul in 2022, followed by a full brand system and website redesign in 2024 — briefed and spec'd by the operator, executed with an external team, then finished in-house.",
         "fullDescription": "The UNCX Network rebrand happened in two stages. In 2022, the operator led a solo rebrand covering the company name change and primary logo. In 2024, a second phase brought in an external team who worked from the operator's brief and design specification to deliver a full brand system and website redesign in Figma. The operator then brought the work in-house, completing the content, layout, and graphics across 10+ pages.",
@@ -777,7 +777,7 @@
           },
           {
             "title": "Trade-offs",
-            "body": "The external design team delivered strong foundational work — logotype, component library, and page templates — but lacked the product context to complete content-specific designs. The operator designed the hero graphics, page visuals, and layout specifics, then handed off finished designs to an in-house developer who built the site and backend CMS. The video production system integrated seamlessly as both the platform and video content were built from the same brand specification. Beyond the platform launch, the operator also produces all article header banners for the marketing team's ongoing content output."
+            "body": "Having navigated similar external team constraints during the rebrand, the operator applied a more structured handoff process for the Academy. The external design team delivered strong foundational work — logotype, component library, and page templates — but lacked the product context to complete content-specific designs. The operator designed the hero graphics, page visuals, and layout specifics, then handed off finished designs to an in-house developer who built the site and backend CMS. The video production system integrated seamlessly as both the platform and video content were built from the same brand specification. Beyond the platform launch, the operator also produces all article header banners for the marketing team's ongoing content output."
           },
           {
             "title": "Delivery",
@@ -1028,7 +1028,7 @@
         "overlaySections": [
           {
             "title": "Brief",
-            "body": "Rapidly prototype and validate product concepts across UNCX's feature pipeline — covering token minting, launchpad flows, Telegram integrations, and NFT tooling."
+            "body": "Rapidly prototype and validate product concepts across UNCX Network's feature pipeline — covering token minting, launchpad flows, Telegram integrations, and NFT tooling."
           },
           {
             "title": "Problem Frame",
