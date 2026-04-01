@@ -653,7 +653,7 @@
         "year": "2025",
         "status": "Complete",
         "shortDescription": "Educational platform brand and design system — logotype, component library, article system, video pages, and glossary for DeFi learning.",
-        "fullDescription": "End-to-end brand and platform design for UNCX Academy: custom logotype, component library, article categorisation system, video learning pages, glossary, integrations hub, and about page. Designed in Figma as a complete design system with reusable components and consistent visual language.",
+        "fullDescription": "Brand and platform design for UNCX Academy. The operator wrote the brief and design specification, then an external team delivered the initial design system — custom logotype, component library, and page templates. The operator brought the project in-house, completing the designs for article categorisation, video learning pages, glossary, integrations hub, and about page ready for in-house development. The operator's video production system was integrated to produce the platform's educational video library.",
         "tags": [
           "Figma",
           "Brand Design",
@@ -773,7 +773,7 @@
           },
           {
             "title": "System Design",
-            "body": "Created a custom logotype and brand identity. Designed a modular Figma component library. Structured content into articles, videos, glossary entries, and integrations — each with its own page template and navigation pattern."
+            "body": "Wrote the brief and design specification. An external team delivered the logotype, brand identity, and modular Figma component library. The operator then brought the project in-house, refining content structure across articles, videos, glossary entries, and integrations — each with its own page template and navigation pattern."
           },
           {
             "title": "Prototype Notes",
@@ -781,11 +781,11 @@
           },
           {
             "title": "Delivery",
-            "body": "Complete Figma design system: logotype, component library, page templates for Main, Articles, Videos, Glossary, Integrations, and About. Supporting brand guidelines for consistent content production."
+            "body": "Complete Figma design system: logotype, component library, page templates for Main, Articles, Videos, Glossary, Integrations, and About. Finished in-house and prepared for development handoff with supporting brand guidelines."
           },
           {
             "title": "Outcome",
-            "body": "Enabled UNCX to launch a structured education platform aligned with the parent brand. The component system reduced design time for new content pages."
+            "body": "Enabled UNCX to launch a structured education platform aligned with the parent brand. The video production system fed directly into the Academy's content library, connecting brand, platform, and media pipelines into a single workflow."
           }
         ]
       },
