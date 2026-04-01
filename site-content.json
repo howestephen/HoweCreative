@@ -96,7 +96,7 @@
       {
         "fileLabel": "File 03",
         "title": "Working Style",
-        "body": "Structured system design with iterative prototyping. Problems are reduced to inputs, constraints, and outputs, then rebuilt into reusable templates, rather than one-off solutions."
+        "body": "Structured system design with iterative prototyping. Problems are reduced to inputs, constraints, and outputs, then rebuilt into reusable templates rather than one-off solutions. Design decisions are validated through stakeholder and colleague feedback loops, iterating until alignment is reached."
       },
       {
         "fileLabel": "File 04",
