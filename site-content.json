@@ -794,8 +794,8 @@
         "slug": "uncx-menu",
         "title": "UNCX Unified Menu",
         "category": "Interface System / Design System",
-        "year": "2025",
-        "status": "Complete",
+        "year": "2026",
+        "status": "On-Hold",
         "shortDescription": "Cross-product navigation component system with variable-driven Figma prototypes, research-backed hierarchy, and scalable state logic.",
         "fullDescription": "A unified menu system designed to work across UNCX's entire product suite. Built as a variable-driven Figma component with researched navigation patterns, prototype states (open/closed), configurable content slots, and a scalable hierarchy that adapts to different product contexts.",
         "tags": [
@@ -859,11 +859,11 @@
         "overlaySections": [
           {
             "title": "Brief",
-            "body": "Design a unified navigation component that could work across all UNCX products — replacing inconsistent per-product menus with a single scalable system."
+            "body": "Design a unified navigation component that could work across all UNCX Network products and platforms — replacing inconsistent platform menus with a single scalable system."
           },
           {
             "title": "Problem Frame",
-            "body": "Each UNCX product had its own navigation pattern. Users moving between Launchpad, Token Vesting, and Minting encountered different menu structures, creating cognitive overhead and inconsistent UX."
+            "body": "Each UNCX product had its own navigation pattern. Users moving between EVM tools, Solana products, Academy, and the homepage encountered different menu structures, creating cognitive overhead and inconsistent UX."
           },
           {
             "title": "System Design",
