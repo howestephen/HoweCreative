@@ -964,12 +964,12 @@
           {
             "type": "image",
             "src": "/case-studies/uncx-app-concepts/ilo-v7-flow-diagrams.webp",
-            "alt": "ILO V7 flow diagrams"
+            "alt": "Launchpad flow diagrams"
           },
           {
             "type": "image",
             "src": "/case-studies/uncx-app-concepts/v7-tailwind-designs.webp",
-            "alt": "V7 Tailwind design system"
+            "alt": "Tailwind design system"
           },
           {
             "type": "image",
@@ -1040,11 +1040,11 @@
           },
           {
             "title": "Prototype Notes",
-            "body": "Token minter concepts explored multi-step creation flows. Telegram prototypes covered chatbot interactions, presale app flows, and ape-bot UIs. ILO V7 flow diagrams mapped the full initial liquidity offering user journey. Stealth launch concepts explored admin and user-facing interfaces."
+            "body": "Token minter concepts explored multi-step creation flows. Telegram prototypes covered chatbot interactions, presale app flows, and ape-bot UIs. Full launchpad flow diagrams mapped the complete initial liquidity offering user journey. Stealth launch concepts explored admin and user-facing interfaces."
           },
           {
             "title": "Delivery",
-            "body": "Delivered Figma prototypes for each feature area: token minting (blueprint and standard), launchpad components, Telegram bot/app flows, NFT minting interfaces, stealth launch admin, and ILO V7 flow diagrams."
+            "body": "Delivered Figma prototypes for each feature area: token minting (blueprint and standard), launchpad components, Telegram bot/app flows, NFT minting interfaces, stealth launch admin, and full launchpad flow diagrams."
           },
           {
             "title": "Outcome",
