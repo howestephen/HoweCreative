@@ -82,14 +82,15 @@
       {
         "label": "Output",
         "value": "Products, prototypes, motion, media, and production systems."
+      },
+      {
+        "label": "Education",
+        "value": "1st Class Honours, Entertainment Technology (IBM Award, Best Creative Technologies Project)"
       }
     ],
     "notesTitle": "Notes",
     "notesFileLabel": "File 5",
     "notesBody": "My work often sits at the meeting point of design and implementation. My focus is not the artefacts, but the systems that generate them - interface logic, motion templates, and production pipelines that scale while output remains consistent.",
-    "educationTitle": "Education",
-    "educationFileLabel": "File 06",
-    "educationBody": "1st Class Honours, Entertainment Technology (IBM Award, Best Creative Technologies Project)",
     "files": [
       {
         "fileLabel": "File 02",

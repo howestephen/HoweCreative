@@ -27,130 +27,130 @@ export function OperatorProfile() {
 
         <div className="grid gap-6 xl:grid-cols-2">
           {/* Left column: quick facts strip + portrait card */}
-          <div className="flex gap-3 md:gap-4">
-            {/* Quick facts — narrow vertical column outside the card */}
-            <motion.div
-              initial={{ opacity: 0, x: -16 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="hidden shrink-0 flex-col gap-2 md:flex"
-              style={{ width: 165 }}
-            >
-              {operatorProfileContent.quickFacts.map((fact) => (
-                <div key={fact.label} className="flex-1 border border-[#ff003c]/16 bg-black/92 px-3 py-3">
-                  <div className="font-mono text-[9px] uppercase tracking-[0.16em] text-zinc-500">
-                    {fact.label}
-                  </div>
-                  <div className="mt-1.5 text-xs text-white">{fact.value}</div>
-                </div>
-              ))}
-            </motion.div>
-
-            {/* Portrait card */}
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.55 }}
-              className="relative min-w-0 flex-1 overflow-hidden border border-[#ff003c]/22 bg-black/92 p-5 md:p-6"
-            >
-              <div
-                className="pointer-events-none absolute inset-0 opacity-[0.07]"
-                style={{
-                  backgroundImage:
-                    "repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(255,255,255,0.18) 3px, rgba(255,255,255,0.18) 4px)",
-                }}
-              />
-              <div className="relative z-10">
-                <div className="mb-4 flex items-center justify-between gap-4 border-b border-[#ff003c]/28 pb-4 font-mono text-[10px] uppercase tracking-[0.2em] text-zinc-500">
-                  <span>{operatorProfileContent.primaryFileLabel}</span>
-                  <span className="text-[#ff003c]">{operatorProfileContent.primaryFileStatus}</span>
-                </div>
-                <OperatorProfilePortrait />
-                {/* Quick facts — mobile: horizontal row below portrait */}
-                <div className="mt-4 grid grid-cols-2 gap-2 md:hidden">
-                  {operatorProfileContent.quickFacts.map((fact) => (
-                    <div key={fact.label} className="border border-[#ff003c]/16 bg-black/92 px-3 py-3">
-                      <div className="font-mono text-[9px] uppercase tracking-[0.16em] text-zinc-500">
-                        {fact.label}
-                      </div>
-                      <div className="mt-1.5 text-xs text-white">{fact.value}</div>
+          <div className="flex flex-col gap-3 md:gap-4">
+            <div className="flex gap-3 md:gap-4">
+              {/* Quick facts — narrow vertical column outside the card (excluding last item) */}
+              <motion.div
+                initial={{ opacity: 0, x: -16 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="hidden shrink-0 flex-col gap-2 md:flex"
+                style={{ width: 165 }}
+              >
+                {operatorProfileContent.quickFacts.slice(0, -1).map((fact) => (
+                  <div key={fact.label} className="flex-1 border border-[#ff003c]/16 bg-black/92 px-3 py-3">
+                    <div className="font-mono text-[9px] uppercase tracking-[0.16em] text-zinc-500">
+                      {fact.label}
                     </div>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          </div>
-
-          {/* 2×2 info grid + full-width education card */}
-          <div className="flex flex-col gap-4">
-            <div className="grid grid-cols-2 gap-4 content-start">
-              {/* Summary, Style, Focus */}
-              {operatorProfileContent.files.map((file, index) => (
-                <motion.div
-                  key={file.title}
-                  initial={{ opacity: 0, y: 24 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.06 }}
-                  className="relative overflow-hidden border border-[#ff003c]/32 bg-black/92 p-5"
-                >
-                  <div
-                    className="pointer-events-none absolute inset-0 opacity-[0.05]"
-                    style={{
-                      backgroundImage:
-                        "linear-gradient(rgba(255,0,60,0.16) 1px, transparent 1px), linear-gradient(90deg, rgba(255,0,60,0.14) 1px, transparent 1px)",
-                      backgroundSize: "22px 22px",
-                    }}
-                  />
-                  <div className="relative z-10">
-                    <div className="mb-3 flex items-center justify-between gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-zinc-500">
-                      <span>{file.title}</span>
-                      <span className="text-[#ff003c]/60">{file.fileLabel}</span>
-                    </div>
-                    <p className="text-sm leading-relaxed text-zinc-300">
-                      {file.body}
-                    </p>
+                    <div className="mt-1.5 text-xs text-white">{fact.value}</div>
                   </div>
-                </motion.div>
-              ))}
+                ))}
+              </motion.div>
 
-              {/* Notes — File 05 */}
+              {/* Portrait card */}
               <motion.div
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: operatorProfileContent.files.length * 0.06 }}
-                className="relative overflow-hidden border border-[#ff003c]/32 bg-black/92 p-5"
+                transition={{ duration: 0.55 }}
+                className="relative min-w-0 flex-1 overflow-hidden border border-[#ff003c]/22 bg-black/92 p-5 md:p-6"
               >
+                <div
+                  className="pointer-events-none absolute inset-0 opacity-[0.07]"
+                  style={{
+                    backgroundImage:
+                      "repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(255,255,255,0.18) 3px, rgba(255,255,255,0.18) 4px)",
+                  }}
+                />
                 <div className="relative z-10">
-                  <div className="mb-3 flex items-center justify-between gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-zinc-500">
-                    <span>{operatorProfileContent.notesTitle}</span>
-                    <span className="text-[#ff003c]/60">{operatorProfileContent.notesFileLabel}</span>
+                  <div className="mb-4 flex items-center justify-between gap-4 border-b border-[#ff003c]/28 pb-4 font-mono text-[10px] uppercase tracking-[0.2em] text-zinc-500">
+                    <span>{operatorProfileContent.primaryFileLabel}</span>
+                    <span className="text-[#ff003c]">{operatorProfileContent.primaryFileStatus}</span>
                   </div>
-                  <p className="text-sm leading-relaxed text-zinc-300">
-                    {operatorProfileContent.notesBody}
-                  </p>
+                  <OperatorProfilePortrait />
+                  {/* Quick facts — mobile: horizontal row below portrait (excluding last item) */}
+                  <div className="mt-4 grid grid-cols-2 gap-2 md:hidden">
+                    {operatorProfileContent.quickFacts.slice(0, -1).map((fact) => (
+                      <div key={fact.label} className="border border-[#ff003c]/16 bg-black/92 px-3 py-3">
+                        <div className="font-mono text-[9px] uppercase tracking-[0.16em] text-zinc-500">
+                          {fact.label}
+                        </div>
+                        <div className="mt-1.5 text-xs text-white">{fact.value}</div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </motion.div>
             </div>
 
-            {/* Education — full-width spanning below the 2×2 grid */}
+            {/* Education — spans full width below the quick facts + portrait row */}
+            {(() => {
+              const edu = operatorProfileContent.quickFacts[operatorProfileContent.quickFacts.length - 1];
+              return (
+                <motion.div
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5 }}
+                  className="border border-[#ff003c]/16 bg-black/92 px-4 py-3"
+                >
+                  <div className="font-mono text-[9px] uppercase tracking-[0.16em] text-zinc-500">
+                    {edu.label}
+                  </div>
+                  <div className="mt-1.5 text-xs text-white">{edu.value}</div>
+                </motion.div>
+              );
+            })()}
+          </div>
+
+          {/* 2×2 info grid */}
+          <div className="grid grid-cols-2 gap-4 content-start">
+            {/* Summary, Style, Focus */}
+            {operatorProfileContent.files.map((file, index) => (
+              <motion.div
+                key={file.title}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.06 }}
+                className="relative overflow-hidden border border-[#ff003c]/32 bg-black/92 p-5"
+              >
+                <div
+                  className="pointer-events-none absolute inset-0 opacity-[0.05]"
+                  style={{
+                    backgroundImage:
+                      "linear-gradient(rgba(255,0,60,0.16) 1px, transparent 1px), linear-gradient(90deg, rgba(255,0,60,0.14) 1px, transparent 1px)",
+                    backgroundSize: "22px 22px",
+                  }}
+                />
+                <div className="relative z-10">
+                  <div className="mb-3 flex items-center justify-between gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-zinc-500">
+                    <span>{file.title}</span>
+                    <span className="text-[#ff003c]/60">{file.fileLabel}</span>
+                  </div>
+                  <p className="text-sm leading-relaxed text-zinc-300">
+                    {file.body}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+
+            {/* Notes — File 05, last */}
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: (operatorProfileContent.files.length + 1) * 0.06 }}
+              transition={{ duration: 0.5, delay: operatorProfileContent.files.length * 0.06 }}
               className="relative overflow-hidden border border-[#ff003c]/32 bg-black/92 p-5"
             >
               <div className="relative z-10">
                 <div className="mb-3 flex items-center justify-between gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-zinc-500">
-                  <span>{operatorProfileContent.educationTitle}</span>
-                  <span className="text-[#ff003c]/60">{operatorProfileContent.educationFileLabel}</span>
+                  <span>{operatorProfileContent.notesTitle}</span>
+                  <span className="text-[#ff003c]/60">{operatorProfileContent.notesFileLabel}</span>
                 </div>
                 <p className="text-sm leading-relaxed text-zinc-300">
-                  {operatorProfileContent.educationBody}
+                  {operatorProfileContent.notesBody}
                 </p>
               </div>
             </motion.div>
