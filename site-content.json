@@ -234,7 +234,7 @@
             "body": "Built a modular pipeline: reusable 3D scenes and camera rigs in Cinema 4D, Redshift lighting presets, templated After Effects compositions with established layout and edit conventions for consistent tone and pacing across formats."
           },
           {
-            "title": "Constraints & Pivots",
+            "title": "Trade-offs",
             "body": "Time was the primary constraint — the operator managed the full production pipeline solo alongside other responsibilities. Early videos were over-scoped: lengthy scripts from the marketing team, unique animations per scene, and tight delivery timelines. Key pivots included introducing script length restrictions, stripping back unnecessary scenes, and replacing per-scene custom animations with categorised animation templates that could be reused across projects. The system evolved from complex one-off productions into a streamlined pipeline optimised for volume without sacrificing brand consistency."
           },
           {
@@ -369,7 +369,7 @@
             "body": "Separated the system into operational layers: leader management dashboards for badge administration, parent-facing views for monitoring progress, child-friendly progress visualisation, and public group pages with Cloudflare messaging security."
           },
           {
-            "title": "Constraints & Pivots",
+            "title": "Trade-offs",
             "body": "Initially envisioned as a multi-user platform with accounts for leaders, parents, and children. Legal and complexity constraints forced a pivot: the app became leader-only, with parent and child interactions designed to work without any account or sign-up. A full inbox and messaging system was also scoped but simplified — mirroring messages across a leader inbox, leader email, and parent email added significant complexity through Resend. The compromise: leaders manage messages via an in-app inbox with email notifications, while parents receive messages directly by email. Development was managed solo using AI-assisted tooling, with phases scoped as atomised tasks to prevent drift during autonomous builds."
           },
           {
@@ -543,7 +543,7 @@
             "body": "Wrote the brief and design specification for the 2024 rebrand. An external team delivered the brand system and website redesign in Figma. The operator then brought the project in-house, completing content, layout refinements, and graphic production across all product pages."
           },
           {
-            "title": "Constraints & Pivots",
+            "title": "Trade-offs",
             "body": "The first phase in 2022 was driven by urgency — a legal copyright issue required a swift name and identity change with minimal runway. The second phase in 2024 introduced a different constraint: the external team delivered strong initial concepts, colour direction, and brand foundations, but struggled to populate the website designs with accurate product content. They understood the design system but lacked domain knowledge of the products. Hand-holding the content population wasn't sustainable, so the operator brought the project in-house — completing the website designs, content, and graphics using the external team's guidelines as the foundation. The next phase of resistance came trying to implement the designs consistently across all the development subteams."
           },
           {
@@ -632,7 +632,7 @@
             "body": "Content pipeline: ingest news articles, extract vocabulary, generate contextual quizzes, and structure progressive difficulty. User system: Google OAuth, learner profiles, progress tracking, and configurable settings."
           },
           {
-            "title": "Constraints & Pivots",
+            "title": "Trade-offs",
             "body": "The primary constraint has been lesson complexity. Initial development using AI tooling produced oversimplified quiz questions rather than the pure-function puzzle systems the operator had specified — lessons that work contextually against any news article, not static question-and-answer pairs. The pivot: expanding the roadmap into granular build phases, constructing each of the 8–10 lesson types step by step with greater complexity control. Technical implementation — Google OAuth, Supabase integration — proved straightforward by comparison. The system is currently focused on Spanish to validate the lesson architecture before introducing multi-language complexity, where each lesson type will need to be adapted per language."
           },
           {
@@ -776,7 +776,7 @@
             "body": "Wrote the brief and design specification. An external team delivered the logotype, brand identity, and modular Figma component library. The operator then brought the project in-house, refining content structure across articles, videos, glossary entries, and integrations — each with its own page template and navigation pattern."
           },
           {
-            "title": "Constraints & Pivots",
+            "title": "Trade-offs",
             "body": "The external design team delivered strong foundational work — logotype, component library, and page templates — but lacked the product context to complete content-specific designs. The operator designed the hero graphics, page visuals, and layout specifics, then handed off finished designs to an in-house developer who built the site and backend CMS. The video production system integrated seamlessly as both the platform and video content were built from the same brand specification. Beyond the platform launch, the operator also produces all article header banners for the marketing team's ongoing content output."
           },
           {
@@ -870,7 +870,7 @@
             "body": "Researched navigation patterns and hierarchy models. Designed a component-based menu with configurable content slots, variable-driven Figma states, and a scalable hierarchy that adapts per product context."
           },
           {
-            "title": "Constraints & Pivots",
+            "title": "Trade-offs",
             "body": "The project is on hold due to a shift in development priorities. The core design challenge was fitting multiple products and sub-brands into a single menu structure that remained efficient and navigable. An additional constraint was that the products are highly specialised — the menu needed to be mildly educational, helping users understand what each product does without slowing down experienced users. The main design compromise centred on hierarchy: several products generate significantly more revenue than others and needed visual priority, without devaluing the rest of the ecosystem."
           },
           {
@@ -1039,7 +1039,7 @@
             "body": "A broad range of product concepts and prototypes spanning different stages and purposes. Some were built and shipped — token minter flows, launchpad components, and Telegram bot interactions. Others remained as design explorations — stealth launch interfaces, NFT minting tools, and full launchpad concepts. Each served to validate direction, align stakeholders, or define scope before committing development resources."
           },
           {
-            "title": "Constraints & Pivots",
+            "title": "Trade-offs",
             "body": "A recurring constraint across all concepts was incomplete requirements — specifications arrived gradually as projects developed, often requiring rework of existing prototypes. This made component-based design systems essential: rebuilding from reusable parts reduced the cost of iteration. Figma's later introduction of the variables system further reduced component creation overhead. A foundational part of each project was creating FigJam flow diagrams for novel product processes. These weren't problems with established UX conventions to reference — they required working out how the interactions should function from first principles."
           },
           {
