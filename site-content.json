@@ -870,8 +870,8 @@
             "body": "Researched navigation patterns and hierarchy models. Designed a component-based menu with configurable content slots, variable-driven Figma states, and a scalable hierarchy that adapts per product context."
           },
           {
-            "title": "Prototype Notes",
-            "body": "Built variable-driven Figma prototypes for open and closed states across desktop and mobile. Tested content slot flexibility across different product navigation requirements."
+            "title": "Constraints & Pivots",
+            "body": "The project is on hold due to a shift in development priorities. The core design challenge was fitting multiple products and sub-brands into a single menu structure that remained efficient and navigable. An additional constraint was that the products are highly specialised — the menu needed to be mildly educational, helping users understand what each product does without slowing down experienced users. The main design compromise centred on hierarchy: several products generate significantly more revenue than others and needed visual priority, without devaluing the rest of the ecosystem."
           },
           {
             "title": "Delivery",
@@ -879,7 +879,7 @@
           },
           {
             "title": "Outcome",
-            "body": "Delivered a complete design system ready for implementation. The unified navigation replaces fragmented per-product menus with a single, consistent system — awaiting development integration."
+            "body": "Delivered a complete design system ready for implementation. The hierarchy problem — balancing revenue-generating products against the broader ecosystem — was resolved by establishing definitive levels of hierarchy and de-prioritising non-value generating menu options. Currently on hold pending a shift in development priorities."
           }
         ]
       },
