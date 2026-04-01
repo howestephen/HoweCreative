@@ -632,8 +632,8 @@
             "body": "Content pipeline: ingest news articles, extract vocabulary, generate contextual quizzes, and structure progressive difficulty. User system: Google OAuth, learner profiles, progress tracking, and configurable settings."
           },
           {
-            "title": "Prototype Notes",
-            "body": "Tested readability scaling across article difficulty levels. Built interactive quiz flows with immediate feedback. Designed the dashboard to surface progress metrics without overwhelming new users."
+            "title": "Constraints & Pivots",
+            "body": "The primary constraint has been lesson complexity. Initial development using AI tooling produced oversimplified quiz questions rather than the pure-function puzzle systems the operator had specified — lessons that work contextually against any news article, not static question-and-answer pairs. The pivot: expanding the roadmap into granular build phases, constructing each of the 8–10 lesson types step by step with greater complexity control. Technical implementation — Google OAuth, Supabase integration — proved straightforward by comparison. The system is currently focused on Spanish to validate the lesson architecture before introducing multi-language complexity, where each lesson type will need to be adapted per language."
           },
           {
             "title": "Delivery",
@@ -641,7 +641,7 @@
           },
           {
             "title": "Outcome",
-            "body": "Demonstrated a scalable learning system driven by live content. Active development with plans for AI-powered difficulty calibration and expanded language support."
+            "body": "Demonstrated a scalable learning system driven by live content. The shift from AI-generated simple quizzes to operator-designed pure-function lesson types produced a more robust foundation. Active development with plans for multi-language expansion once the core 8–10 lesson types are validated in Spanish."
           }
         ]
       },
