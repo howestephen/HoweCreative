@@ -560,10 +560,10 @@
         "id": 4,
         "slug": "noticia-lingo",
         "title": "Noticia Lingo App",
-        "category": "AI Product / Content System",
+        "category": "Product System / Operational Platform",
         "year": "2026",
         "status": "Active Build",
-        "shortDescription": "AI-powered language learning app using real news articles, Google authentication, Supabase backend, and structured quiz flows.",
+        "shortDescription": "Language learning app with an AI-assisted classroom, real news articles, Google authentication, Supabase backend, and structured quiz flows.",
         "fullDescription": "A language learning platform that transforms live news content into structured learning experiences. Built with React, Supabase, and Google OAuth — featuring article-based lessons, interactive quizzes, a learner dashboard, and a settings system. Designed to replace static flashcard approaches with contextual, real-world content.",
         "tags": [
           "AI",
