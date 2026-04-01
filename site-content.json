@@ -123,7 +123,7 @@
         "slug": "uncx-video-system",
         "title": "UNCX Video & 3D System",
         "category": "Media System / Motion Pipeline",
-        "year": "2024",
+        "year": "2023",
         "status": "Live",
         "shortDescription": "End-to-end video production pipeline spanning Cinema 4D, After Effects, and Redshift — built for repeatable, high-frequency output.",
         "fullDescription": "A modular production system covering 3D scene assembly in Cinema 4D, Redshift rendering, After Effects compositing, and templated timeline structures. Designed so that product launches, explainers, YouTube tutorials, and partner content could all ship from the same asset library without rebuilding from scratch each time.",
@@ -252,7 +252,7 @@
         "slug": "badger-club",
         "title": "Badger Club App",
         "category": "Product System / Operational Platform",
-        "year": "2025",
+        "year": "2026",
         "status": "Late Stage",
         "shortDescription": "Full-stack badge tracking platform with dark/light themes, role-based dashboards, Supabase backend, and Resend email integration.",
         "fullDescription": "A multi-role product system managing badge progress tracking, leader administration, parent communication, and public-facing group pages. Built with React, Supabase, Resend email integration, and Cloudflare security. Supports dark and light themes with a structured database schema designed for scalable group management.",
@@ -366,7 +366,7 @@
           },
           {
             "title": "System Design",
-            "body": "Separated the system into operational layers: leader management dashboards for badge administration, parent-facing views for monitoring progress, child-friendly progress visualisation, and public group pages with Cloudflare security."
+            "body": "Separated the system into operational layers: leader management dashboards for badge administration, parent-facing views for monitoring progress, child-friendly progress visualisation, and public group pages with Cloudflare messaging security."
           },
           {
             "title": "Prototype Notes",
@@ -374,7 +374,7 @@
           },
           {
             "title": "Delivery",
-            "body": "Full-stack implementation: React frontend with role-based routing, Supabase backend with structured schema, Resend for transactional emails, and Cloudflare for security and performance."
+            "body": "Full-stack implementation: React frontend with role-based routing, Supabase backend with structured schema, Google OAuth for authentication, Resend for transactional emails, and Cloudflare for security and performance."
           },
           {
             "title": "Outcome",
