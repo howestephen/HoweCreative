@@ -346,11 +346,13 @@ const BackgroundRain = React.memo(function BackgroundRain({
   gridColsX,
   gridDepthLayers,
   rainRows,
+  mobile,
 }: {
   atlas: THREE.CanvasTexture;
   gridColsX: number;
   gridDepthLayers: number;
   rainRows: number;
+  mobile: boolean;
 }) {
   const materialRef = useRef<THREE.ShaderMaterial>(null);
 
@@ -375,8 +377,11 @@ const BackgroundRain = React.memo(function BackgroundRain({
       const gz = Math.floor(column / gridColsX);
       const xNorm = gridColsX > 1 ? gx / (gridColsX - 1) : 0.5;
       const zNorm = gridDepthLayers > 1 ? gz / (gridDepthLayers - 1) : 0.5;
-      const baseX = -HERO_RAIN_SPREAD * 0.5 + xNorm * HERO_RAIN_SPREAD + (Math.random() - 0.5) * 0.55;
-      const columnDepth = -7.5 + zNorm * 10.5 + (Math.random() - 0.5) * 0.4;
+      const spread = mobile ? 11.0 : HERO_RAIN_SPREAD;
+      const baseX = -spread * 0.5 + xNorm * spread + (Math.random() - 0.5) * 0.55;
+      const depthOrigin = mobile ? -4.5 : -7.5;
+      const depthRange = mobile ? 7.0 : 10.5;
+      const columnDepth = depthOrigin + zNorm * depthRange + (Math.random() - 0.5) * 0.4;
       const columnSpeed = Math.random();
       const columnChar = Math.floor(Math.random() * 64);
       const columnPhase = Math.random() * (LOOP_H + 8.0);
@@ -409,7 +414,7 @@ const BackgroundRain = React.memo(function BackgroundRain({
       trailLength,
       glowSeed,
     };
-  }, [gridColsX, gridDepthLayers, rainRows]);
+  }, [gridColsX, gridDepthLayers, rainRows, mobile]);
 
   const uniforms = useMemo(
     () => ({
@@ -855,6 +860,7 @@ export function MatrixRainHero() {
               gridColsX={rainGrid.gridColsX}
               gridDepthLayers={rainGrid.gridDepthLayers}
               rainRows={rainGrid.rainRows}
+              mobile={isMobile}
             />
             <group position={[0, isMobile ? 1.1 : 0.82, 0]}>
               <MorphingWireErrorBoundary onSkillChange={setActiveSkill}>
