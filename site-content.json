@@ -390,7 +390,7 @@
         "year": "2024",
         "status": "Complete",
         "shortDescription": "Two-phase rebrand: an initial name and logo overhaul in 2022, followed by a full brand system and website redesign in 2024 — briefed and spec'd by the operator, executed with an external team, then finished in-house.",
-        "fullDescription": "The UNCX rebrand happened in two stages. In 2022, the operator led a solo rebrand covering the company name change and primary logo. In 2024, a second phase brought in an external team who worked from the operator's brief and design specification to deliver a full brand system and website redesign in Figma. The operator then brought the work in-house, completing the content, layout, and graphics across 10+ pages.",
+        "fullDescription": "The UNCX Network rebrand happened in two stages. In 2022, the operator led a solo rebrand covering the company name change and primary logo. In 2024, a second phase brought in an external team who worked from the operator's brief and design specification to deliver a full brand system and website redesign in Figma. The operator then brought the work in-house, completing the content, layout, and graphics across 10+ pages.",
         "tags": [
           "Brand Systems",
           "Figma",
@@ -532,7 +532,7 @@
         "overlaySections": [
           {
             "title": "Brief",
-            "body": "Evolve the UNCX brand across two phases — an initial name and logo change, then a comprehensive brand system and website redesign across the multi-chain DeFi ecosystem."
+            "body": "Evolve the UNCX Network brand across two phases — an initial name and logo change, then a comprehensive brand system and website redesign across the multi-chain DeFi ecosystem."
           },
           {
             "title": "Problem Frame",
@@ -776,8 +776,8 @@
             "body": "Wrote the brief and design specification. An external team delivered the logotype, brand identity, and modular Figma component library. The operator then brought the project in-house, refining content structure across articles, videos, glossary entries, and integrations — each with its own page template and navigation pattern."
           },
           {
-            "title": "Prototype Notes",
-            "body": "Tested content hierarchy across article categories, video pages, and glossary. Ensured the component library supported both internal content authoring and public-facing learning experiences."
+            "title": "Constraints & Pivots",
+            "body": "The external design team delivered strong foundational work — logotype, component library, and page templates — but lacked the product context to complete content-specific designs. The operator designed the hero graphics, page visuals, and layout specifics, then handed off finished designs to an in-house developer who built the site and backend CMS. The video production system integrated seamlessly as both the platform and video content were built from the same brand specification. Beyond the platform launch, the operator also produces all article header banners for the marketing team's ongoing content output."
           },
           {
             "title": "Delivery",
@@ -785,7 +785,7 @@
           },
           {
             "title": "Outcome",
-            "body": "Enabled UNCX to launch a structured education platform aligned with the parent brand. The video production system fed directly into the Academy's content library, connecting brand, platform, and media pipelines into a single workflow."
+            "body": "Enabled UNCX Network to launch a structured education platform aligned with the parent brand. The video production system fed directly into the Academy's content library, and the operator's ongoing production of article banners, page graphics, and video content created a single-source creative pipeline across the entire platform."
           }
         ]
       },
@@ -863,7 +863,7 @@
           },
           {
             "title": "Problem Frame",
-            "body": "Each UNCX product had its own navigation pattern. Users moving between EVM tools, Solana products, Academy, and the homepage encountered different menu structures, creating cognitive overhead and inconsistent UX."
+            "body": "Each UNCX Network product had its own navigation pattern. Users moving between EVM tools, Solana products, Academy, and the homepage encountered different menu structures, creating cognitive overhead and inconsistent UX."
           },
           {
             "title": "System Design",
@@ -891,7 +891,7 @@
         "year": "2021-2026",
         "status": "Various",
         "shortDescription": "Rapid prototyping across token minting, launchpad flows, Telegram bots, NFT minting, and full launchpad concepts — from wireframes to interactive concepts.",
-        "fullDescription": "A body of product concepting work spanning multiple UNCX features: token minter prototyping, launchpad UI components, Telegram chatbot and presale app flows, NFT minting interfaces, stealth launch concepts, and full launchpad concepts.",
+        "fullDescription": "A body of product concepting work spanning multiple UNCX Network features: token minter prototyping, launchpad UI components, Telegram chatbot and presale app flows, NFT minting interfaces, stealth launch concepts, and full launchpad concepts.",
         "tags": [
           "Figma",
           "Prototyping",
