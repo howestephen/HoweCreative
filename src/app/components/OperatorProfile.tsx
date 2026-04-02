@@ -28,7 +28,7 @@ export function OperatorProfile() {
         <div className="grid gap-6 xl:grid-cols-2">
           {/* Left column: quick facts strip + portrait card */}
           <div className="flex gap-3 md:gap-4">
-            {/* Quick facts — narrow vertical column outside the card */}
+            {/* Quick facts — narrow vertical column outside the card (excluding education) */}
             <motion.div
               initial={{ opacity: 0, x: -16 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -37,7 +37,7 @@ export function OperatorProfile() {
               className="hidden shrink-0 flex-col gap-2 md:flex"
               style={{ width: 165 }}
             >
-              {operatorProfileContent.quickFacts.map((fact) => (
+              {operatorProfileContent.quickFacts.slice(0, -1).map((fact) => (
                 <div key={fact.label} className="flex-1 border border-[#ff003c]/16 bg-black/92 px-3 py-3">
                   <div className="font-mono text-[9px] uppercase tracking-[0.16em] text-zinc-500">
                     {fact.label}
@@ -68,9 +68,9 @@ export function OperatorProfile() {
                   <span className="text-[#ff003c]">{operatorProfileContent.primaryFileStatus}</span>
                 </div>
                 <OperatorProfilePortrait />
-                {/* Quick facts — mobile: horizontal row below portrait */}
+                {/* Quick facts — mobile: horizontal row below portrait (excluding education) */}
                 <div className="mt-4 grid grid-cols-2 gap-2 md:hidden">
-                  {operatorProfileContent.quickFacts.map((fact) => (
+                  {operatorProfileContent.quickFacts.slice(0, -1).map((fact) => (
                     <div key={fact.label} className="border border-[#ff003c]/16 bg-black/92 px-3 py-3">
                       <div className="font-mono text-[9px] uppercase tracking-[0.16em] text-zinc-500">
                         {fact.label}
@@ -79,6 +79,18 @@ export function OperatorProfile() {
                     </div>
                   ))}
                 </div>
+                {/* Education — full width below the other quick facts, inside the card */}
+                {(() => {
+                  const edu = operatorProfileContent.quickFacts[operatorProfileContent.quickFacts.length - 1];
+                  return (
+                    <div className="mt-2 border border-[#ff003c]/16 bg-black/92 px-3 py-3">
+                      <div className="font-mono text-[9px] uppercase tracking-[0.16em] text-zinc-500">
+                        {edu.label}
+                      </div>
+                      <div className="mt-1.5 text-xs text-white">{edu.value}</div>
+                    </div>
+                  );
+                })()}
               </div>
             </motion.div>
           </div>

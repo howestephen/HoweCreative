@@ -80,12 +80,12 @@
         "value": "Systems over surfaces"
       },
       {
-        "label": "Education",
-        "value": "1st Class Honours, Entertainment Technology (IBM Award, Best Creative Technologies Project)"
-      },
-      {
         "label": "Output",
         "value": "Products, prototypes, motion, media, and production systems."
+      },
+      {
+        "label": "Education",
+        "value": "1st Class Honours, Entertainment Technology (IBM Award, Best Creative Technologies Project)"
       }
     ],
     "notesTitle": "Notes",
@@ -1230,12 +1230,6 @@
         "name": "Claude",
         "icon": "Bot",
         "color": "#ff7f3f",
-        "category": "AI"
-      },
-      {
-        "name": "Ralph",
-        "icon": "Cpu",
-        "color": "#ff003c",
         "category": "AI"
       }
     ]
