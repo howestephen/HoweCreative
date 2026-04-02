@@ -218,8 +218,8 @@ export function Footer() {
           </div>
 
           <div className="flex items-center gap-2">
-            <div className="text-right">
-              <div className="flex items-center justify-end gap-2">
+            <div className="text-center md:text-right">
+              <div className="flex items-center justify-center md:justify-end gap-2">
                 <div className="w-2 h-2 bg-[#ff003c] animate-pulse rounded-full shadow-[0_0_8px_#ff003c]" />
                 <span className="font-mono text-[10px] tracking-widest text-[#ff003c] uppercase">
                   {footerContent.statusLabel}
