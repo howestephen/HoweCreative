@@ -32,8 +32,8 @@ export function TechnicalDecorations() {
       {/* Vertical technical text - left side */}
       <div className="fixed left-24 top-1/2 -translate-y-1/2 z-[98] pointer-events-none hidden xl:block">
         <div className="[writing-mode:vertical-rl] rotate-180 font-mono text-[9px] text-zinc-800 uppercase tracking-wider space-y-4">
-          <p>SEQ_NO: 2026-001 // PROTO_DESIGN_V4</p>
-          <p className="opacity-50">CORE_TEMP: 32.4°C // SYSTEM_LOAD: 14%</p>
+          <p>STEPHEN HOWE // CREATIVE TECHNOLOGIST</p>
+          <p className="opacity-50">NORWICH UK // REMOTE // 2026</p>
         </div>
       </div>
     </>

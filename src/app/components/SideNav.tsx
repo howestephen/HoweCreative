@@ -11,7 +11,7 @@ function jumpToSection(sectionId: string) {
 const socialLinks = [
   {
     label: "LinkedIn",
-    handle: "/en/howestephen",
+    handle: "in/howestephen",
     href: siteProfile.linkedinUrl,
     icon: Linkedin,
   },

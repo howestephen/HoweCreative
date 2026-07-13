@@ -14,8 +14,8 @@ export function StatusBar() {
 
   const statusItems = [
     { label: "Projects", value: String(portfolioProjects.length) },
-    { label: "Focus", value: "Portfolio rebuild" },
-    { label: "Mode", value: "Figma export cleanup" },
+    { label: "Focus", value: "AI pipelines & product systems" },
+    { label: "Status", value: "Open to roles & contracts" },
   ];
 
   return (
@@ -30,7 +30,7 @@ export function StatusBar() {
         <div className="flex items-center gap-2 mb-4">
           <Wrench className="w-3 h-3 text-[#ff003c]" />
           <span className="text-[10px] font-mono font-bold text-[#ff003c] uppercase tracking-wider">
-            rebuild_status
+            status
           </span>
         </div>
         <div className="space-y-3">

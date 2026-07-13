@@ -1,15 +1,7 @@
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap");
-
-@font-face {
-  font-family: "Bitwise";
-  src: url("/fonts/bitwise.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap");
 
 :root {
   --font-technical: "IBM Plex Mono", "SFMono-Regular", "Cascadia Code", "Roboto Mono", Consolas,
     "Liberation Mono", Menlo, monospace;
-  --font-headline: "Bitwise", "IBM Plex Mono", monospace;
+  --font-headline: "Space Grotesk", "IBM Plex Mono", ui-sans-serif, system-ui, sans-serif;
 }

@@ -1,4 +1,4 @@
-import { ArrowUpRight, Dribbble, Github, Linkedin, X } from "lucide-react";
+import { ArrowUpRight, Dribbble, Github, Linkedin, Mail, X } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
 import { createPortal } from "react-dom";
@@ -17,7 +17,7 @@ const MODEL_ATTRIBUTIONS = [
 const SOCIAL_LINKS = [
   {
     label: "LinkedIn",
-    handle: "/en/howestephen",
+    handle: "in/howestephen",
     href: siteProfile.linkedinUrl,
     icon: Linkedin,
   },
@@ -32,6 +32,12 @@ const SOCIAL_LINKS = [
     handle: "howestephen",
     href: siteProfile.dribbbleUrl,
     icon: Dribbble,
+  },
+  {
+    label: "Email",
+    handle: "howestephen@gmail.com",
+    href: "mailto:howestephen@gmail.com",
+    icon: Mail,
   },
 ] as const;
 

@@ -1,14 +1,14 @@
 {
   "meta": {
-    "documentTitle": "HOWE_CREATIVE"
+    "documentTitle": "Stephen Howe · Creative Technologist"
   },
   "profile": {
     "displayName": "Stephen Howe",
     "brandPrefix": "HOWE",
     "brandSuffix": "_CREATIVE",
     "role": "Creative Technologist",
-    "headline": "Designing products, creative pipelines, and AI-assisted workflows with a focus on user-experience.",
-    "summary": "This portfolio was designed and built using Figma Make, Codex, and Claude Code. Powered by a custom prompt system that progresses through roadmap phases, executing build and QA tasks in an iterative loop.",
+    "headline": "I design brand, product, and 3D systems — and build the AI pipelines that produce them at scale.",
+    "summary": "This portfolio was designed and built with Figma Make, Codex, and Claude Code — driven by a custom prompt system that walks a phased roadmap, executing build and QA tasks in an iterative loop.",
     "navVersion": "v2.0",
     "githubUrl": "https://github.com/howestephen",
     "linkedinUrl": "https://www.linkedin.com/in/howestephen/",
@@ -17,7 +17,7 @@
   },
   "navigation": {
     "menuButtonLabel": "Menu",
-    "panelTitle": "Site Navigation Matrix",
+    "panelTitle": "Navigation",
     "items": [
       {
         "id": "hero",
@@ -49,23 +49,23 @@
   "hero": {
     "scrollLabel": "Scroll",
     "skillLabels": [
+      "AI Workflows",
       "Product Design",
-      "UI/UX",
-      "Prototyping",
-      "Motion Graphics",
       "3D & Motion",
-      "Development",
-      "AI Workflows"
+      "Brand Systems",
+      "Prototyping",
+      "UI/UX",
+      "Development"
     ]
   },
   "operatorProfile": {
-    "eyebrow": "Operator Profile",
+    "eyebrow": "About",
     "title": "Stephen Howe",
-    "description": "A brief overview of the system operator — background, working methods, and current focus.",
+    "description": "Background, working methods, current focus — and what I'm looking for next.",
     "primaryFileLabel": "File 01",
     "primaryFileStatus": "Open",
-    "portraitFooterLeft": "Operator Profile",
-    "portraitFooterRight": "Photo Reference",
+    "portraitFooterLeft": "Stephen Howe",
+    "portraitFooterRight": "Norwich, UK",
     "quickFacts": [
       {
         "label": "Base",
@@ -89,28 +89,28 @@
       }
     ],
     "notesTitle": "Notes",
-    "notesFileLabel": "File 5",
+    "notesFileLabel": "File 05",
     "notesBody": "My work often sits at the meeting point of design and implementation. My focus is not the artefacts, but the systems that generate them - interface logic, motion templates, and production pipelines that scale while output remains consistent.",
     "files": [
       {
         "fileLabel": "File 02",
-        "title": "Operator Summary",
-        "body": "Creative technologist working across product design, media pipelines, and technical prototyping. Leads briefs from specification through to delivery — coordinating external teams, building repeatable frameworks, and shipping across UI, motion, and AI-assisted production."
+        "title": "Summary",
+        "body": "Creative technologist working across product design, media pipelines, and technical prototyping. I lead briefs from specification through to delivery — coordinating external teams, building repeatable frameworks, and shipping across UI, motion, and AI-assisted production."
       },
       {
         "fileLabel": "File 03",
-        "title": "Working Style",
-        "body": "Structured system design with iterative prototyping. Problems are reduced to inputs, constraints, and outputs, then rebuilt into reusable templates rather than one-off solutions. Design decisions are validated through stakeholder and colleague feedback loops, iterating until alignment is reached."
+        "title": "Working style",
+        "body": "Structured system design with iterative prototyping. I reduce problems to inputs, constraints, and outputs, then rebuild them as reusable templates rather than one-off solutions — validating design decisions through stakeholder feedback loops until alignment is reached."
       },
       {
         "fileLabel": "File 04",
-        "title": "Current Focus",
-        "body": "Video generation systems, AI-assisted development pipelines, interface architecture, and tools that reduce the distance between ideas and deployed products."
+        "title": "Current focus",
+        "body": "Video generation systems, AI-assisted development pipelines, interface architecture, and tools that reduce the distance between idea and deployed product. Open to permanent creative technologist / AI designer roles and contract engagements — remote, from the UK."
       }
     ]
   },
   "caseStudies": {
-    "eyebrow": "Selected demonstrative artefacts",
+    "eyebrow": "Selected work",
     "title": "Case Studies",
     "description": "Each case exposes the system behind the output: inputs, constraints, pipelines, and repeatable structures.",
     "openFileLabel": "Open File",
@@ -124,282 +124,85 @@
     "projects": [
       {
         "id": 1,
-        "slug": "uncx-video-system",
-        "title": "UNCX Video & 3D System",
-        "category": "Media System / Motion Pipeline",
-        "year": "2023",
+        "slug": "solana-content-pipeline",
+        "title": "Solana → X Autonomous Content Pipeline",
+        "category": "AI System / Autonomous Publishing",
+        "year": "2026",
         "status": "Live",
-        "shortDescription": "End-to-end video production pipeline spanning Cinema 4D, After Effects, and Redshift — built for repeatable, high-frequency output.",
-        "fullDescription": "A modular production system covering 3D scene assembly in Cinema 4D, Redshift rendering, After Effects compositing, and templated timeline structures. Designed so that product launches, explainers, YouTube tutorials, and partner content could all ship from the same asset library without rebuilding from scratch each time.",
+        "shortDescription": "An autonomous publishing system: a Solana on-chain monitor feeds a generative asset pipeline that writes, renders, and posts to X up to three times a day — with human approval reduced to a single tap in Telegram.",
+        "fullDescription": "An end-to-end autonomous content system. An on-chain monitor tracks Solana token activity into Postgres; a render pipeline turns dataset payloads into finished visual assets; and a poster service generates deterministic post copy for fixed daily slots, requests approval through Telegram, and publishes to X — with retries, failure surfacing, and operator overrides.",
         "tags": [
-          "Cinema 4D",
-          "Redshift",
-          "After Effects",
-          "Adobe Illustrator",
-          "Adobe Photoshop",
-          "Motion System",
-          "Brand Design"
+          "AI Pipeline",
+          "Automation",
+          "Solana",
+          "Node.js",
+          "PostgreSQL",
+          "Railway",
+          "Telegram Bot API",
+          "X API"
         ],
-        "image": "/case-studies/uncx-video-system/cover.webp",
+        "image": "/case-studies/solana-pipeline/cover.svg",
         "media": [
           {
             "type": "image",
-            "src": "/case-studies/uncx-video-system/cover.webp",
-            "alt": "UNCX Video System overview"
+            "src": "/case-studies/solana-pipeline/cover.svg",
+            "alt": "Solana to X pipeline overview"
           },
           {
             "type": "image",
-            "src": "/case-studies/uncx-video-system/youtube-thumbnails.webp",
-            "alt": "YouTube thumbnail designs"
+            "src": "/case-studies/solana-pipeline/architecture.svg",
+            "alt": "System architecture: monitor, Postgres, renderer, poster service, Telegram, X"
           },
           {
             "type": "image",
-            "src": "/case-studies/uncx-video-system/after-effects-pipeline.webp",
-            "alt": "After Effects production pipeline"
+            "src": "/case-studies/solana-pipeline/approval-flow.svg",
+            "alt": "Human-in-the-loop approval flow via Telegram"
           },
           {
             "type": "image",
-            "src": "/case-studies/uncx-video-system/after-effects-ui.webp",
-            "alt": "After Effects UI and compositions"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-video-system/cinema4d-viewport.webp",
-            "alt": "Cinema 4D viewport and 3D scene"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-video-system/3d-asset.webp",
-            "alt": "3D asset render"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-video-system/c4d-ui-layers.webp",
-            "alt": "Cinema 4D layers panel"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-video-system/c4d-ui-rigging.webp",
-            "alt": "Cinema 4D rigging setup"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-video-system/c4d-ui-takes.webp",
-            "alt": "Cinema 4D takes system"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-video-system/ae-files-1.webp",
-            "alt": "After Effects project files"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-video-system/ae-files-2.webp",
-            "alt": "After Effects project files 2"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-video-system/video-files.webp",
-            "alt": "Video file management"
-          },
-          {
-            "type": "video",
-            "src": "/case-studies/uncx-video-system/hyperswap-integration.mp4",
-            "alt": "HyperSwap Integration video"
-          },
-          {
-            "type": "video",
-            "src": "/case-studies/uncx-video-system/lock-announcement-rise.mp4",
-            "alt": "Lock Announcement - RISE"
-          },
-          {
-            "type": "video",
-            "src": "/case-studies/uncx-video-system/token-minter-launch.mp4",
-            "alt": "Token Minter Launch Video"
-          },
-          {
-            "type": "video",
-            "src": "/case-studies/uncx-video-system/vesting-app-release.mp4",
-            "alt": "Vesting App Release Video"
+            "src": "/case-studies/solana-pipeline/schedule.svg",
+            "alt": "Slot scheduling and retry logic"
           }
         ],
         "gradient": "from-[#8b0020] to-[#ff003c]",
-        "role": "Creative Technologist / Motion Lead",
-        "client": "UNCX Network",
+        "role": "System Designer & Builder",
+        "client": "Self-initiated",
         "overlaySections": [
           {
             "title": "Brief",
-            "body": "UNCX Network needed a repeatable video system that could support product launches, explainer series, YouTube tutorials, and partner content — without rebuilding from scratch for every deliverable."
+            "body": "Build a content channel that runs itself: turn live Solana market activity into designed, on-brand posts published to X on a fixed daily schedule — without a human doing production work."
           },
           {
             "title": "Problem Frame",
-            "body": "Production was fragmented across freelancers and one-off files. No shared asset library, no consistent motion language, and no templated pipeline — every video started from zero."
+            "body": "Consistent social output is a production-line problem. Doing it manually means daily design and copywriting, and skipping days kills a channel. The system needed to produce publishable quality autonomously while keeping a human accountable for what actually goes out."
           },
           {
             "title": "System Design",
-            "body": "Built a modular pipeline: reusable 3D scenes and camera rigs in Cinema 4D, Redshift lighting presets, templated After Effects compositions with established layout and edit conventions for consistent tone and pacing across formats."
+            "body": "Three cooperating services share a Postgres database: a monitor that ingests on-chain activity and keeps source tables fresh; a render pipeline that turns dataset payloads into finished visual assets; and a poster service that owns scheduling across fixed daily slots, deterministic copy generation per post family, Telegram approval messaging, publication to X, and retry and error surfacing."
           },
           {
             "title": "Trade-offs",
-            "body": "Time was the primary constraint — the operator managed the full production pipeline solo alongside other responsibilities. Early videos were over-scoped: lengthy scripts from the marketing team, unique animations per scene, and tight delivery timelines. Key pivots included introducing script length restrictions, stripping back unnecessary scenes, and replacing per-scene custom animations with categorised animation templates that could be reused across projects. The system evolved from complex one-off productions into a streamlined pipeline optimised for volume without sacrificing brand consistency."
+            "body": "Full autonomy was possible but wrong — one bad post costs more than the effort of approving each one. The compromise is human-in-the-loop by default: the pipeline does all of the production, and the human decision is reduced to a single tap in Telegram. Copy generation is deterministic rather than LLM-freeform for the same reason — outputs stay predictable, on-brand, and cheap to validate. The services are deliberately decoupled: the poster only reads shared database state, so a failure in one stage degrades the system instead of cascading through it."
           },
           {
             "title": "Delivery",
-            "body": "Delivered as a production system: Cinema 4D scene templates, After Effects project structures, Redshift material libraries, YouTube thumbnail templates, and established motion conventions baked into the project files."
+            "body": "Deployed as separate Railway services — monitor, renderer, and poster — sharing Postgres and environment conventions. A Telegram webhook handles approvals and operator controls; scheduled slots publish approved posts to X with automatic retries and clear failure messaging."
           },
           {
             "title": "Outcome",
-            "body": "Cut production time significantly across campaigns. Enabled consistent, brand-aligned output regardless of content type — from 60-second launch trailers to long-form educational content for the Academy. The constraint-driven simplification became the system's strength: fewer unique elements, faster turnaround, more consistent output."
+            "body": "A channel that publishes designed content up to three times daily for seconds of human effort per post. It demonstrates the pattern my current work is built on: creative direction encoded into a system, production automated, and human judgement kept exactly where it earns its cost."
           }
         ]
       },
       {
         "id": 2,
-        "slug": "badger-club",
-        "title": "Badger Club App",
-        "category": "Product System / Operational Platform",
-        "year": "2026",
-        "status": "Late Stage",
-        "shortDescription": "Full-stack badge tracking platform with dark/light themes, role-based dashboards, Supabase backend, and Resend email integration.",
-        "fullDescription": "A multi-role product system managing badge progress tracking, leader administration, parent communication, and public-facing group pages. Built with React, Supabase, Resend email integration, and Cloudflare security. Supports dark and light themes with a structured database schema designed for scalable group management.",
-        "tags": [
-          "React",
-          "Next.js",
-          "Supabase",
-          "Resend",
-          "Cloudflare",
-          "Vercel",
-          "Google Auth",
-          "Systems Design",
-          "Product"
-        ],
-        "image": "/case-studies/badger-club/cover.webp",
-        "media": [
-          {
-            "type": "image",
-            "src": "/case-studies/badger-club/cover.webp",
-            "alt": "Badger Club overview"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/badger-club/dark-public-homepage.webp",
-            "alt": "Public homepage (dark mode)"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/badger-club/dark-badger-management.webp",
-            "alt": "Badger management dashboard (dark)"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/badger-club/dark-progress-1.webp",
-            "alt": "Progress tracking view 1 (dark)"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/badger-club/dark-progress-2.webp",
-            "alt": "Progress tracking view 2 (dark)"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/badger-club/dark-progress-3.webp",
-            "alt": "Progress tracking view 3 (dark)"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/badger-club/dark-edit-progress.webp",
-            "alt": "Edit progress view (dark)"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/badger-club/dark-manage-settings.webp",
-            "alt": "Manage settings (dark)"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/badger-club/dark-settings.webp",
-            "alt": "Settings page (dark)"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/badger-club/dark-message-leader.webp",
-            "alt": "Message leader with Cloudflare security"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/badger-club/light-badger-management.webp",
-            "alt": "Badger management (light mode)"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/badger-club/light-progress.webp",
-            "alt": "Progress tracking (light)"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/badger-club/light-progress-2.webp",
-            "alt": "Progress tracking 2 (light)"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/badger-club/light-progress-3.webp",
-            "alt": "Progress tracking 3 (light)"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/badger-club/light-manage-settings.webp",
-            "alt": "Manage settings (light)"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/badger-club/database-schema.webp",
-            "alt": "Database schema design"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/badger-club/resend-email-setup.webp",
-            "alt": "Resend email integration setup"
-          }
-        ],
-        "gradient": "from-[#ff4466] to-[#4f0012]",
-        "role": "Product Designer / Developer",
-        "client": "Badger Club",
-        "overlaySections": [
-          {
-            "title": "Brief",
-            "body": "Build a badge tracking system that reduces admin overhead for group leaders while giving parents and children clear visibility into progress and achievements."
-          },
-          {
-            "title": "Problem Frame",
-            "body": "Badge tracking was manual — spreadsheets, paper records, and inconsistent communication between leaders and parents. Leaders carried the full admin burden with no structured tooling."
-          },
-          {
-            "title": "System Design",
-            "body": "Separated the system into operational layers: leader management dashboards for badge administration, parent-facing views for monitoring progress, child-friendly progress visualisation, and public group pages with Cloudflare messaging security."
-          },
-          {
-            "title": "Trade-offs",
-            "body": "Initially envisioned as a multi-user platform with accounts for leaders, parents, and children. Legal and complexity constraints forced a pivot: the app became leader-only, with parent and child interactions designed to work without any account or sign-up. A full inbox and messaging system was also scoped but simplified — mirroring messages across a leader inbox, leader email, and parent email added significant complexity through Resend. The compromise: leaders manage messages via an in-app inbox with email notifications, while parents receive messages directly by email. Development was managed solo using AI-assisted tooling, with phases scoped as atomised tasks to prevent drift during autonomous builds."
-          },
-          {
-            "title": "Delivery",
-            "body": "Full-stack implementation: React frontend with role-based routing, Supabase backend with structured schema, Google OAuth for authentication, Resend for transactional emails, and Cloudflare for security and performance."
-          },
-          {
-            "title": "Outcome",
-            "body": "Eliminated manual tracking overhead. The constraint-driven simplification — leader-only accounts, no-signup parent access, streamlined messaging — produced a leaner product with fewer barriers to adoption. Created a scalable foundation with subscription-based monetisation and clear paths for feature expansion."
-          }
-        ]
-      },
-      {
-        "id": 3,
         "slug": "uncx-rebrand",
         "title": "UNCX Company Rebrand",
         "category": "Brand System / Visual Infrastructure",
         "year": "2022-2024",
         "status": "Complete",
-        "shortDescription": "Two-phase rebrand: an initial name and logo overhaul in 2022, followed by a full brand system and website redesign in 2024 — briefed and spec'd by the operator, executed with an external team, then finished in-house.",
-        "fullDescription": "The UNCX Network rebrand happened in two stages. In 2022, the operator led a solo rebrand covering the company name change and primary logo. In 2024, a second phase brought in an external team who worked from the operator's brief and design specification to deliver a full brand system and website redesign in Figma. The operator then brought the work in-house, completing the content, layout, and graphics across 10+ pages.",
+        "shortDescription": "Two-phase rebrand: a name and logo overhaul in 2022, then a full brand system and website redesign in 2024 — I wrote the brief and spec, an external team delivered the foundations, and I finished the system in-house.",
+        "fullDescription": "The UNCX Network rebrand happened in two stages. In 2022 I led a solo rebrand covering the company name change and primary logo. In 2024 an external team worked from my brief and design specification to deliver a full brand system and website redesign in Figma. I then brought the work in-house, completing content, layout, and graphics across 10+ pages.",
         "tags": [
           "Figma",
           "Cinema 4D",
@@ -411,7 +214,7 @@
           "Web Design",
           "Art Direction"
         ],
-        "image": "/case-studies/uncx-rebrand/cover.webp",
+        "image": "/case-studies/uncx-rebrand/branding.webp",
         "media": [
           {
             "type": "image",
@@ -553,11 +356,11 @@
           },
           {
             "title": "System Design",
-            "body": "Wrote the brief and design specification for the 2024 rebrand. An external team delivered the brand system and website redesign in Figma. The operator then brought the project in-house, completing content, layout refinements, and graphic production across all product pages."
+            "body": "I wrote the brief and design specification for the 2024 rebrand. An external team delivered the brand system and website redesign in Figma. I then brought the project in-house, completing content, layout refinements, and graphic production across all product pages."
           },
           {
             "title": "Trade-offs",
-            "body": "The first phase in 2022 was driven by a short-notice rebrand requirement, demanding a swift name and identity change with minimal runway. The second phase in 2024 introduced a different constraint: the external team delivered strong initial concepts, colour direction, and brand foundations, but struggled to populate the website designs with accurate product content. They understood the design system but lacked domain knowledge of the products. Hand-holding the content population wasn't sustainable, so the operator brought the project in-house — completing the website designs, content, and graphics using the external team's guidelines as the foundation. The next phase of resistance came trying to implement the designs consistently across all the development subteams."
+            "body": "The first phase in 2022 was driven by a short-notice rebrand requirement, demanding a swift name and identity change with minimal runway. The second phase in 2024 introduced a different constraint: the external team delivered strong initial concepts, colour direction, and brand foundations, but struggled to populate the website designs with accurate product content — they understood the design system but lacked domain knowledge of the products. Hand-holding the content population wasn't sustainable, so I brought the project in-house, completing the website designs, content, and graphics on the foundations they'd set. The final resistance came in implementing the designs consistently across the development subteams."
           },
           {
             "title": "Delivery",
@@ -570,103 +373,438 @@
         ]
       },
       {
+        "id": 3,
+        "slug": "uncx-video-system",
+        "title": "UNCX Video & 3D System",
+        "category": "Media System / Motion Pipeline",
+        "year": "2023",
+        "status": "Live",
+        "shortDescription": "End-to-end video production pipeline spanning Cinema 4D, After Effects, and Redshift — built for repeatable, high-frequency output.",
+        "fullDescription": "A modular production system covering 3D scene assembly in Cinema 4D, Redshift rendering, After Effects compositing, and templated timeline structures. Designed so that product launches, explainers, YouTube tutorials, and partner content could all ship from the same asset library without rebuilding from scratch each time.",
+        "tags": [
+          "Cinema 4D",
+          "Redshift",
+          "After Effects",
+          "Adobe Illustrator",
+          "Adobe Photoshop",
+          "Motion System",
+          "Brand Design"
+        ],
+        "image": "/case-studies/uncx-video-system/youtube-thumbnails.webp",
+        "media": [
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-video-system/cover.webp",
+            "alt": "UNCX Video System overview"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-video-system/youtube-thumbnails.webp",
+            "alt": "YouTube thumbnail designs"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-video-system/after-effects-pipeline.webp",
+            "alt": "After Effects production pipeline"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-video-system/after-effects-ui.webp",
+            "alt": "After Effects UI and compositions"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-video-system/cinema4d-viewport.webp",
+            "alt": "Cinema 4D viewport and 3D scene"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-video-system/3d-asset.webp",
+            "alt": "3D asset render"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-video-system/c4d-ui-layers.webp",
+            "alt": "Cinema 4D layers panel"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-video-system/c4d-ui-rigging.webp",
+            "alt": "Cinema 4D rigging setup"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-video-system/c4d-ui-takes.webp",
+            "alt": "Cinema 4D takes system"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-video-system/ae-files-1.webp",
+            "alt": "After Effects project files"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-video-system/ae-files-2.webp",
+            "alt": "After Effects project files 2"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-video-system/video-files.webp",
+            "alt": "Video file management"
+          },
+          {
+            "type": "video",
+            "src": "/case-studies/uncx-video-system/hyperswap-integration.mp4",
+            "alt": "HyperSwap Integration video"
+          },
+          {
+            "type": "video",
+            "src": "/case-studies/uncx-video-system/lock-announcement-rise.mp4",
+            "alt": "Lock Announcement - RISE"
+          },
+          {
+            "type": "video",
+            "src": "/case-studies/uncx-video-system/token-minter-launch.mp4",
+            "alt": "Token Minter Launch Video"
+          },
+          {
+            "type": "video",
+            "src": "/case-studies/uncx-video-system/vesting-app-release.mp4",
+            "alt": "Vesting App Release Video"
+          }
+        ],
+        "gradient": "from-[#8b0020] to-[#ff003c]",
+        "role": "Creative Technologist / Motion Lead",
+        "client": "UNCX Network",
+        "overlaySections": [
+          {
+            "title": "Brief",
+            "body": "UNCX Network needed a repeatable video system that could support product launches, explainer series, YouTube tutorials, and partner content — without rebuilding from scratch for every deliverable."
+          },
+          {
+            "title": "Problem Frame",
+            "body": "Production was fragmented across freelancers and one-off files. No shared asset library, no consistent motion language, and no templated pipeline — every video started from zero."
+          },
+          {
+            "title": "System Design",
+            "body": "Built a modular pipeline: reusable 3D scenes and camera rigs in Cinema 4D, Redshift lighting presets, templated After Effects compositions with established layout and edit conventions for consistent tone and pacing across formats."
+          },
+          {
+            "title": "Trade-offs",
+            "body": "Time was the primary constraint — I ran the full production pipeline solo alongside other responsibilities. Early videos were over-scoped: lengthy scripts from the marketing team, unique animations per scene, and tight delivery timelines. The key pivots were introducing script length restrictions, stripping back unnecessary scenes, and replacing per-scene custom animation with categorised, reusable templates. The system evolved from complex one-off productions into a streamlined pipeline optimised for volume without sacrificing brand consistency."
+          },
+          {
+            "title": "Delivery",
+            "body": "Delivered as a production system: Cinema 4D scene templates, After Effects project structures, Redshift material libraries, YouTube thumbnail templates, and established motion conventions baked into the project files."
+          },
+          {
+            "title": "Outcome",
+            "body": "Cut production time significantly across campaigns. Enabled consistent, brand-aligned output regardless of content type — from 60-second launch trailers to long-form educational content for the Academy. The constraint-driven simplification became the system's strength: fewer unique elements, faster turnaround, more consistent output."
+          }
+        ]
+      },
+      {
         "id": 4,
-        "slug": "noticia-lingo",
-        "title": "Noticia Lingo App",
+        "slug": "badger-club",
+        "title": "Badger Club App",
         "category": "Product System / Operational Platform",
         "year": "2026",
-        "status": "Active Build",
-        "shortDescription": "Language learning app with an AI-assisted classroom, real news articles, Google authentication, Supabase backend, and structured quiz flows.",
-        "fullDescription": "A language learning platform that transforms live news content into structured learning experiences. Built with React, Supabase, and Google OAuth — featuring article-based lessons, interactive quizzes, a learner dashboard, and a settings system. Designed to replace static flashcard approaches with contextual, real-world content.",
+        "status": "In Beta",
+        "shortDescription": "Full-stack badge tracking platform with dark/light themes, role-based dashboards, Supabase backend, and Resend email integration.",
+        "fullDescription": "A multi-role product system managing badge progress tracking, leader administration, parent communication, and public-facing group pages. Built with React, Supabase, Resend email integration, and Cloudflare security. Supports dark and light themes with a structured database schema designed for scalable group management.",
         "tags": [
           "React",
           "Next.js",
           "Supabase",
+          "Resend",
+          "Cloudflare",
+          "Vercel",
           "Google Auth",
-          "Product Design"
+          "Systems Design",
+          "Product"
         ],
-        "image": "/case-studies/noticia-lingo/cover.webp",
+        "image": "/case-studies/badger-club/dark-public-homepage.webp",
         "media": [
           {
             "type": "image",
-            "src": "/case-studies/noticia-lingo/cover.webp",
-            "alt": "Noticia Lingo overview"
+            "src": "/case-studies/badger-club/cover.webp",
+            "alt": "Badger Club overview"
           },
           {
             "type": "image",
-            "src": "/case-studies/noticia-lingo/signed-out-hero.webp",
-            "alt": "Signed out hero page"
+            "src": "/case-studies/badger-club/dark-public-homepage.webp",
+            "alt": "Public homepage (dark mode)"
           },
           {
             "type": "image",
-            "src": "/case-studies/noticia-lingo/homepage-full.webp",
-            "alt": "Full homepage design"
+            "src": "/case-studies/badger-club/dark-badger-management.webp",
+            "alt": "Badger management dashboard (dark)"
           },
           {
             "type": "image",
-            "src": "/case-studies/noticia-lingo/dashboard.webp",
-            "alt": "User dashboard"
+            "src": "/case-studies/badger-club/dark-progress-1.webp",
+            "alt": "Progress tracking view 1 (dark)"
           },
           {
             "type": "image",
-            "src": "/case-studies/noticia-lingo/quiz-page.webp",
-            "alt": "Quiz page interface"
+            "src": "/case-studies/badger-club/dark-progress-2.webp",
+            "alt": "Progress tracking view 2 (dark)"
           },
           {
             "type": "image",
-            "src": "/case-studies/noticia-lingo/settings-page.webp",
-            "alt": "Settings page"
+            "src": "/case-studies/badger-club/dark-progress-3.webp",
+            "alt": "Progress tracking view 3 (dark)"
           },
           {
             "type": "image",
-            "src": "/case-studies/noticia-lingo/google-login.webp",
-            "alt": "Google login integration"
+            "src": "/case-studies/badger-club/dark-edit-progress.webp",
+            "alt": "Edit progress view (dark)"
           },
           {
             "type": "image",
-            "src": "/case-studies/noticia-lingo/database-schema.webp",
-            "alt": "Database schema"
+            "src": "/case-studies/badger-club/dark-manage-settings.webp",
+            "alt": "Manage settings (dark)"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/badger-club/dark-settings.webp",
+            "alt": "Settings page (dark)"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/badger-club/dark-message-leader.webp",
+            "alt": "Message leader with Cloudflare security"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/badger-club/light-badger-management.webp",
+            "alt": "Badger management (light mode)"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/badger-club/light-progress.webp",
+            "alt": "Progress tracking (light)"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/badger-club/light-progress-2.webp",
+            "alt": "Progress tracking 2 (light)"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/badger-club/light-progress-3.webp",
+            "alt": "Progress tracking 3 (light)"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/badger-club/light-manage-settings.webp",
+            "alt": "Manage settings (light)"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/badger-club/database-schema.webp",
+            "alt": "Database schema design"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/badger-club/resend-email-setup.webp",
+            "alt": "Resend email integration setup"
           }
         ],
-        "gradient": "from-[#ff003c] to-[#7a001c]",
+        "gradient": "from-[#ff4466] to-[#4f0012]",
         "role": "Product Designer / Developer",
-        "client": "Self-initiated",
+        "client": "Badger Club",
         "overlaySections": [
           {
             "title": "Brief",
-            "body": "Build a language learning system that uses real-world news content instead of static lessons — making vocabulary acquisition contextual and engaging."
+            "body": "Build a badge tracking system that reduces admin overhead for group leaders while giving parents and children clear visibility into progress and achievements."
           },
           {
             "title": "Problem Frame",
-            "body": "Traditional language apps rely on decontextualised flashcards and repetitive drills. Learners lose motivation because the content feels disconnected from real usage."
+            "body": "Badge tracking was manual — spreadsheets, paper records, and inconsistent communication between leaders and parents. Leaders carried the full admin burden with no structured tooling."
           },
           {
             "title": "System Design",
-            "body": "Content pipeline: ingest news articles, extract vocabulary, generate contextual quizzes, and structure progressive difficulty. User system: Google OAuth, learner profiles, progress tracking, and configurable settings."
+            "body": "Separated the system into operational layers: leader management dashboards for badge administration, parent-facing views for monitoring progress, child-friendly progress visualisation, and public group pages with Cloudflare messaging security."
           },
           {
             "title": "Trade-offs",
-            "body": "The primary constraint has been lesson complexity. Initial development using AI tooling produced oversimplified quiz questions rather than the pure-function puzzle systems the operator had specified — lessons that work contextually against any news article, not static question-and-answer pairs. The pivot: expanding the roadmap into granular build phases, constructing each of the 8–10 lesson types step by step with greater complexity control. Technical implementation — Google OAuth, Supabase integration — proved straightforward by comparison. The system is currently focused on Spanish to validate the lesson architecture before introducing multi-language complexity, where each lesson type will need to be adapted per language."
+            "body": "Initially envisioned as a multi-user platform with accounts for leaders, parents, and children. Legal and complexity constraints forced a pivot: the app became leader-only, with parent and child interactions designed to work without any account or sign-up. A full inbox and messaging system was also scoped but simplified — mirroring messages across a leader inbox, leader email, and parent email added significant complexity through Resend. The compromise: leaders manage messages via an in-app inbox with email notifications, while parents receive messages directly by email. Development was managed solo using AI-assisted tooling, with phases scoped as atomised tasks to prevent drift during autonomous builds."
           },
           {
             "title": "Delivery",
-            "body": "Working prototype with React frontend, Supabase backend, Google authentication, structured article reading flow, quiz system, and learner dashboard."
+            "body": "Full-stack implementation: React frontend with role-based routing, Supabase backend with structured schema, Google OAuth for authentication, Resend for transactional emails, and Cloudflare for security and performance."
           },
           {
             "title": "Outcome",
-            "body": "Demonstrated a scalable learning system driven by live content. The shift from AI-generated simple quizzes to operator-designed pure-function lesson types produced a more robust foundation. Active development with plans for multi-language expansion once the core 8–10 lesson types are validated in Spanish."
+            "body": "Eliminated manual tracking overhead. The constraint-driven simplification — leader-only accounts, no-signup parent access, streamlined messaging — produced a leaner product with fewer barriers to adoption. Created a scalable foundation with subscription-based monetisation and clear paths for feature expansion."
           }
         ]
       },
       {
         "id": 5,
+        "slug": "ai-portfolio-system",
+        "title": "This Site: An Agentic Build System",
+        "category": "AI Workflow / Development Pipeline",
+        "year": "2026",
+        "status": "Live",
+        "shortDescription": "This portfolio is itself a case study — designed with Figma Make and built by a prompt system that walks a phased roadmap, executing build and QA tasks in an iterative loop.",
+        "fullDescription": "The site you're reading was produced by a working AI development pipeline: a roadmap decomposed into atomised phases, a custom prompt system that executes each phase with Claude Code and Codex, automated build and QA gates between steps, and human review at phase boundaries. The same approach ships my product work.",
+        "tags": [
+          "Claude Code",
+          "Codex",
+          "Figma Make",
+          "Agentic Workflow",
+          "React",
+          "TypeScript",
+          "Three.js"
+        ],
+        "image": "/case-studies/ai-portfolio-system/cover.svg",
+        "media": [
+          {
+            "type": "image",
+            "src": "/case-studies/ai-portfolio-system/cover.svg",
+            "alt": "Agentic build system overview"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/ai-portfolio-system/build-loop.svg",
+            "alt": "The phase, build, QA loop that produced this site"
+          }
+        ],
+        "gradient": "from-[#ff4466] to-[#4f0012]",
+        "role": "Designer & Pipeline Builder",
+        "client": "Self-initiated",
+        "overlaySections": [
+          {
+            "title": "Brief",
+            "body": "Rebuild my portfolio — and treat the build itself as the demonstration: how much production software can an AI pipeline ship when the human supplies direction, taste, and review?"
+          },
+          {
+            "title": "Problem Frame",
+            "body": "AI-assisted development fails in two familiar ways: drift, where the agent wanders off-spec during long builds, and mush, where many small edits erode the architecture. Both are process problems, not model problems."
+          },
+          {
+            "title": "System Design",
+            "body": "A roadmap document decomposes the build into phases, and each phase into atomised tasks with acceptance criteria. A custom prompt system feeds one phase at a time to the coding agent, runs build and QA checks as gates between steps, and stops at phase boundaries for human review. Design direction comes from Figma Make; Claude Code and Codex execute; git history is the audit trail."
+          },
+          {
+            "title": "Trade-offs",
+            "body": "Atomised tasks cost planning time up front — but they are what prevents drift during autonomous stretches. Phase gates trade raw speed for reviewability: I would rather approve ten coherent checkpoints than untangle one five-thousand-line diff. Where the agent's output disagreed with the spec — and it happens — the roadmap won: the system treats the plan as the source of truth, and plan changes are explicit edits rather than silent divergence."
+          },
+          {
+            "title": "Delivery",
+            "body": "This site: React 19, TypeScript, Tailwind 4, and Three.js with iOS fallbacks, a JSON content model, a serverless contact relay with rate limiting, and a test suite — shipped through the loop described above."
+          },
+          {
+            "title": "Outcome",
+            "body": "A production site whose commit history doubles as evidence of the workflow. The same pattern — spec, phased roadmap, gated autonomous execution — is how I now approach product builds: AI provides the throughput, the system provides the discipline, and I provide the judgement."
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "slug": "uncx-menu",
+        "title": "UNCX Unified Menu",
+        "category": "Interface System / Design System",
+        "year": "2026",
+        "status": "Design Complete",
+        "shortDescription": "Cross-product navigation component system with variable-driven Figma prototypes, research-backed hierarchy, and scalable state logic.",
+        "fullDescription": "A unified menu system designed to work across UNCX's entire product suite. Built as a variable-driven Figma component with researched navigation patterns, prototype states (open/closed), configurable content slots, and a scalable hierarchy that adapts to different product contexts.",
+        "tags": [
+          "Figma",
+          "Design Systems",
+          "UI/UX",
+          "Prototyping",
+          "Research"
+        ],
+        "image": "/case-studies/uncx-menu/menu-overview.webp",
+        "media": [
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-menu/cover.webp",
+            "alt": "UNCX Unified Menu overview"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-menu/menu-overview.webp",
+            "alt": "Menu system overview"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-menu/menu-components.webp",
+            "alt": "Menu component library"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-menu/prototypes-open.webp",
+            "alt": "Menu prototypes (open state)"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-menu/prototypes-closed.webp",
+            "alt": "Menu prototypes (closed state)"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-menu/research.webp",
+            "alt": "Menu research and analysis"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-menu/concepting.webp",
+            "alt": "Menu concepting phase"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-menu/contents-concept.webp",
+            "alt": "Menu contents concept"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-menu/variables-setup.webp",
+            "alt": "Figma variables setup"
+          }
+        ],
+        "gradient": "from-[#f6f3f4] to-[#ff003c]",
+        "role": "Systems Designer / Design Engineer",
+        "client": "UNCX Network",
+        "overlaySections": [
+          {
+            "title": "Brief",
+            "body": "Design a unified navigation component that could work across all UNCX Network products and platforms — replacing inconsistent platform menus with a single scalable system."
+          },
+          {
+            "title": "Problem Frame",
+            "body": "Each UNCX Network product had its own navigation pattern. Users moving between EVM tools, Solana products, Academy, and the homepage encountered different menu structures, creating cognitive overhead and inconsistent UX."
+          },
+          {
+            "title": "System Design",
+            "body": "Researched navigation patterns and hierarchy models. Designed a component-based menu with configurable content slots, variable-driven Figma states, and a scalable hierarchy that adapts per product context."
+          },
+          {
+            "title": "Trade-offs",
+            "body": "The project is on hold due to a shift in development priorities. The core design challenge was fitting multiple products and sub-brands into a single menu structure that remained efficient and navigable. An additional constraint was that the products are highly specialised — the menu needed to be mildly educational, helping users understand what each product does without slowing down experienced users. The main design compromise centred on hierarchy: several products generate significantly more revenue than others and needed visual priority, without devaluing the rest of the ecosystem."
+          },
+          {
+            "title": "Delivery",
+            "body": "Delivered a Figma design system component with documented states, variables, content slot patterns, and implementation specifications for the development team."
+          },
+          {
+            "title": "Outcome",
+            "body": "Delivered a complete design system ready for implementation. The hierarchy problem — balancing revenue-generating products against the broader ecosystem — was resolved by establishing definitive levels of hierarchy and de-prioritising non-value generating menu options. Currently on hold pending a shift in development priorities."
+          }
+        ]
+      },
+      {
+        "id": 7,
         "slug": "uncx-academy",
         "title": "UNCX Academy Brand & Platform",
         "category": "Platform System / Education Product",
         "year": "2025",
         "status": "Complete",
         "shortDescription": "Educational platform brand and design system — logotype, component library, article system, video pages, and glossary for DeFi learning.",
-        "fullDescription": "Brand and platform design for UNCX Academy. The operator wrote the brief and design specification, then an external team delivered the initial design system — custom logotype, component library, and page templates. The operator brought the project in-house, completing the designs for article categorisation, video learning pages, glossary, integrations hub, and about page ready for in-house development. The operator's video production system was integrated to produce the platform's educational video library.",
+        "fullDescription": "Brand and platform design for UNCX Academy. I wrote the brief and design specification; an external team delivered the initial design system — custom logotype, component library, and page templates — and I brought the project in-house, completing designs for article categorisation, video learning pages, glossary, integrations hub, and about page, ready for development. My video production system was integrated to produce the platform's educational library.",
         "tags": [
           "Figma",
           "Cinema 4D",
@@ -677,7 +815,7 @@
           "Content Systems",
           "UI/UX"
         ],
-        "image": "/case-studies/uncx-academy/cover.webp",
+        "image": "/case-studies/uncx-academy/main-page.webp",
         "media": [
           {
             "type": "image",
@@ -789,11 +927,11 @@
           },
           {
             "title": "System Design",
-            "body": "Wrote the brief and design specification. An external team delivered the logotype, brand identity, and modular Figma component library. The operator then brought the project in-house, refining content structure across articles, videos, glossary entries, and integrations — each with its own page template and navigation pattern."
+            "body": "I wrote the brief and design specification. An external team delivered the logotype, brand identity, and modular Figma component library. I then brought the project in-house, refining content structure across articles, videos, glossary entries, and integrations — each with its own page template and navigation pattern."
           },
           {
             "title": "Trade-offs",
-            "body": "Having navigated similar external team constraints during the rebrand, the operator applied a more structured handoff process for the Academy. The external design team delivered strong foundational work — logotype, component library, and page templates — but lacked the product context to complete content-specific designs. The operator designed the hero graphics, page visuals, and layout specifics, then handed off finished designs to an in-house developer who built the site and backend CMS. The video production system integrated seamlessly as both the platform and video content were built from the same brand specification. Beyond the platform launch, the operator also produces all article header banners for the marketing team's ongoing content output."
+            "body": "Having navigated similar external-team constraints during the rebrand, I applied a more structured handoff process for the Academy. The external design team delivered strong foundational work — logotype, component library, and page templates — but lacked the product context to complete content-specific designs. I designed the hero graphics, page visuals, and layout specifics, then handed finished designs to an in-house developer who built the site and backend CMS. The video production system integrated seamlessly, as the platform and video content were built from the same brand specification. Beyond launch, I still produce all article header banners for the marketing team's ongoing output."
           },
           {
             "title": "Delivery",
@@ -801,111 +939,17 @@
           },
           {
             "title": "Outcome",
-            "body": "Enabled UNCX Network to launch a structured education platform aligned with the parent brand. The video production system fed directly into the Academy's content library, and the operator's ongoing production of article banners, page graphics, and video content created a single-source creative pipeline across the entire platform."
+            "body": "Enabled UNCX Network to launch a structured education platform aligned with the parent brand. The video production system fed directly into the Academy's content library, and my ongoing production of article banners, page graphics, and video content created a single-source creative pipeline across the entire platform."
           }
         ]
       },
       {
-        "id": 6,
-        "slug": "uncx-menu",
-        "title": "UNCX Unified Menu",
-        "category": "Interface System / Design System",
-        "year": "2026",
-        "status": "On-Hold",
-        "shortDescription": "Cross-product navigation component system with variable-driven Figma prototypes, research-backed hierarchy, and scalable state logic.",
-        "fullDescription": "A unified menu system designed to work across UNCX's entire product suite. Built as a variable-driven Figma component with researched navigation patterns, prototype states (open/closed), configurable content slots, and a scalable hierarchy that adapts to different product contexts.",
-        "tags": [
-          "Figma",
-          "Design Systems",
-          "UI/UX",
-          "Prototyping",
-          "Research"
-        ],
-        "image": "/case-studies/uncx-menu/cover.webp",
-        "media": [
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-menu/cover.webp",
-            "alt": "UNCX Unified Menu overview"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-menu/menu-overview.webp",
-            "alt": "Menu system overview"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-menu/menu-components.webp",
-            "alt": "Menu component library"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-menu/prototypes-open.webp",
-            "alt": "Menu prototypes (open state)"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-menu/prototypes-closed.webp",
-            "alt": "Menu prototypes (closed state)"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-menu/research.webp",
-            "alt": "Menu research and analysis"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-menu/concepting.webp",
-            "alt": "Menu concepting phase"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-menu/contents-concept.webp",
-            "alt": "Menu contents concept"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-menu/variables-setup.webp",
-            "alt": "Figma variables setup"
-          }
-        ],
-        "gradient": "from-[#f6f3f4] to-[#ff003c]",
-        "role": "Systems Designer / Design Engineer",
-        "client": "UNCX Network",
-        "overlaySections": [
-          {
-            "title": "Brief",
-            "body": "Design a unified navigation component that could work across all UNCX Network products and platforms — replacing inconsistent platform menus with a single scalable system."
-          },
-          {
-            "title": "Problem Frame",
-            "body": "Each UNCX Network product had its own navigation pattern. Users moving between EVM tools, Solana products, Academy, and the homepage encountered different menu structures, creating cognitive overhead and inconsistent UX."
-          },
-          {
-            "title": "System Design",
-            "body": "Researched navigation patterns and hierarchy models. Designed a component-based menu with configurable content slots, variable-driven Figma states, and a scalable hierarchy that adapts per product context."
-          },
-          {
-            "title": "Trade-offs",
-            "body": "The project is on hold due to a shift in development priorities. The core design challenge was fitting multiple products and sub-brands into a single menu structure that remained efficient and navigable. An additional constraint was that the products are highly specialised — the menu needed to be mildly educational, helping users understand what each product does without slowing down experienced users. The main design compromise centred on hierarchy: several products generate significantly more revenue than others and needed visual priority, without devaluing the rest of the ecosystem."
-          },
-          {
-            "title": "Delivery",
-            "body": "Delivered a Figma design system component with documented states, variables, content slot patterns, and implementation specifications for the development team."
-          },
-          {
-            "title": "Outcome",
-            "body": "Delivered a complete design system ready for implementation. The hierarchy problem — balancing revenue-generating products against the broader ecosystem — was resolved by establishing definitive levels of hierarchy and de-prioritising non-value generating menu options. Currently on hold pending a shift in development priorities."
-          }
-        ]
-      },
-      {
-        "id": 7,
+        "id": 8,
         "slug": "uncx-app-concepts",
         "title": "UNCX App Prototyping",
         "category": "Product Concepting / UX Prototyping",
         "year": "2021-2026",
-        "status": "Various",
+        "status": "2021–2026",
         "shortDescription": "Rapid prototyping across token minting, launchpad flows, Telegram bots, NFT minting, and full launchpad concepts — from wireframes to interactive concepts.",
         "fullDescription": "A body of product concepting work spanning multiple UNCX Network features: token minter prototyping, launchpad UI components, Telegram chatbot and presale app flows, NFT minting interfaces, stealth launch concepts, and full launchpad concepts.",
         "tags": [
@@ -916,7 +960,7 @@
           "Wireframing",
           "Product"
         ],
-        "image": "/case-studies/uncx-app-concepts/cover.webp",
+        "image": "/case-studies/uncx-app-concepts/launchpad-components.webp",
         "media": [
           {
             "type": "image",
@@ -1068,13 +1112,102 @@
             "body": "Closed the gap between product specs and development handoff. The component-first approach meant that incomplete or shifting requirements — a constant across a five-year span of prototyping — could be absorbed without starting from scratch. Stakeholders could validate features visually before committing development resources, reducing rework and accelerating shipping."
           }
         ]
+      },
+      {
+        "id": 9,
+        "slug": "noticia-lingo",
+        "title": "Noticia Lingo App",
+        "category": "Product System / Operational Platform",
+        "year": "2026",
+        "status": "In Development",
+        "shortDescription": "Language learning app with an AI-assisted classroom, real news articles, Google authentication, Supabase backend, and structured quiz flows.",
+        "fullDescription": "A language learning platform that transforms live news content into structured learning experiences. Built with React, Supabase, and Google OAuth — featuring article-based lessons, interactive quizzes, a learner dashboard, and a settings system. Designed to replace static flashcard approaches with contextual, real-world content.",
+        "tags": [
+          "React",
+          "Next.js",
+          "Supabase",
+          "Google Auth",
+          "Product Design"
+        ],
+        "image": "/case-studies/noticia-lingo/dashboard.webp",
+        "media": [
+          {
+            "type": "image",
+            "src": "/case-studies/noticia-lingo/cover.webp",
+            "alt": "Noticia Lingo overview"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/noticia-lingo/signed-out-hero.webp",
+            "alt": "Signed out hero page"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/noticia-lingo/homepage-full.webp",
+            "alt": "Full homepage design"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/noticia-lingo/dashboard.webp",
+            "alt": "User dashboard"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/noticia-lingo/quiz-page.webp",
+            "alt": "Quiz page interface"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/noticia-lingo/settings-page.webp",
+            "alt": "Settings page"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/noticia-lingo/google-login.webp",
+            "alt": "Google login integration"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/noticia-lingo/database-schema.webp",
+            "alt": "Database schema"
+          }
+        ],
+        "gradient": "from-[#ff003c] to-[#7a001c]",
+        "role": "Product Designer / Developer",
+        "client": "Self-initiated",
+        "overlaySections": [
+          {
+            "title": "Brief",
+            "body": "Build a language learning system that uses real-world news content instead of static lessons — making vocabulary acquisition contextual and engaging."
+          },
+          {
+            "title": "Problem Frame",
+            "body": "Traditional language apps rely on decontextualised flashcards and repetitive drills. Learners lose motivation because the content feels disconnected from real usage."
+          },
+          {
+            "title": "System Design",
+            "body": "Content pipeline: ingest news articles, extract vocabulary, generate contextual quizzes, and structure progressive difficulty. User system: Google OAuth, learner profiles, progress tracking, and configurable settings."
+          },
+          {
+            "title": "Trade-offs",
+            "body": "The primary constraint has been lesson complexity. Initial development using AI tooling produced oversimplified quiz questions rather than the pure-function puzzle systems I had specified — lessons that work contextually against any news article, not static question-and-answer pairs. The pivot: expanding the roadmap into granular build phases, constructing each of the 8–10 lesson types step by step with greater complexity control. Technical implementation — Google OAuth, Supabase integration — proved straightforward by comparison. The system is currently focused on Spanish to validate the lesson architecture before introducing multi-language complexity, where each lesson type will need adapting per language."
+          },
+          {
+            "title": "Delivery",
+            "body": "Working prototype with React frontend, Supabase backend, Google authentication, structured article reading flow, quiz system, and learner dashboard."
+          },
+          {
+            "title": "Outcome",
+            "body": "Demonstrated a scalable learning system driven by live content. The shift from AI-generated simple quizzes to the pure-function lesson types I designed produced a more robust foundation. Active development, with multi-language expansion planned once the core 8–10 lesson types are validated in Spanish."
+          }
+        ]
       }
     ]
   },
   "toolsSkills": {
     "eyebrow": "Tools & Skills",
     "title": "The preferred toolkit.",
-    "description": "The operator's preferred tools used across prototyping, design, motion, development, and AI-assisted pipelines.",
+    "description": "The tools I use across prototyping, design, motion, development, and AI-assisted pipelines.",
     "items": [
       {
         "name": "Figma",
@@ -1237,14 +1370,14 @@
   "contact": {
     "eyebrow": "Contact",
     "title": "Start a conversation.",
-    "description": "Available for product design, design leadership, and creative technology engagements.",
+    "description": "Open to creative technologist and design engineer roles — permanent or contract. Product design, brand and motion systems, and AI pipeline builds.",
     "fields": {
       "name": "Name",
       "email": "Email",
       "projectType": "Project Type",
       "brief": "Brief"
     },
-    "visualOnlyLabel": "Operator interface relay active: Awaiting input",
+    "visualOnlyLabel": "Prefer email? howestephen@gmail.com",
     "submitLabel": "Send"
   },
   "archive": {
@@ -1331,11 +1464,11 @@
     ],
     "currentStateTitle": "Current State",
     "currentStateLines": [
-      "Available for engagements",
-      "Based in Norwich, England",
+      "Open to roles and contracts",
+      "Norwich, UK — working remotely",
       "Brief to deployment"
     ],
-    "copyright": "© 1984 Stephen Howe",
+    "copyright": "© 2026 Stephen Howe",
     "statusLabel": "Online",
     "iconTitles": {
       "linkedin": "LinkedIn",

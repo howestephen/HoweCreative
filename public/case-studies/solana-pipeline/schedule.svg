@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" font-family="ui-monospace, Menlo, Consolas, monospace">
+  <defs>
+    <marker id="arr4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#ff003c"/>
+    </marker>
+  </defs>
+  <rect width="1600" height="1000" fill="#0a0c10"/>
+
+  <rect x="80" y="70" width="14" height="14" fill="#ff003c"/>
+  <text x="112" y="84" font-size="24" letter-spacing="6" fill="#9296a5">SCHEDULING &amp; RETRIES</text>
+  <text x="1520" y="84" text-anchor="end" font-size="22" fill="#5c6070">FIXED SLOTS · EASTERN TIME</text>
+
+  <!-- timeline -->
+  <line x1="120" y1="400" x2="1480" y2="400" stroke="#2a2e38" stroke-width="3"/>
+  <g fill="#3a3f4d">
+    <circle cx="200" cy="400" r="6"/>
+    <circle cx="1400" cy="400" r="6"/>
+  </g>
+  <text x="200" y="450" text-anchor="middle" font-size="19" fill="#5c6070">00:00</text>
+  <text x="1400" y="450" text-anchor="middle" font-size="19" fill="#5c6070">24:00</text>
+
+  <!-- slots -->
+  <g>
+    <circle cx="560" cy="400" r="14" fill="#ff003c"/>
+    <line x1="560" y1="386" x2="560" y2="270" stroke="#ff003c" stroke-width="2"/>
+    <rect x="460" y="190" width="200" height="80" rx="8" fill="#12151b" stroke="#ff003c" stroke-width="2"/>
+    <text x="560" y="225" text-anchor="middle" font-size="24" fill="#ffffff">08:10</text>
+    <text x="560" y="255" text-anchor="middle" font-size="17" fill="#9296a5">morning slot</text>
+  </g>
+  <g>
+    <circle cx="790" cy="400" r="14" fill="#ff003c"/>
+    <line x1="790" y1="386" x2="790" y2="270" stroke="#ff003c" stroke-width="2"/>
+    <rect x="690" y="190" width="200" height="80" rx="8" fill="#12151b" stroke="#ff003c" stroke-width="2"/>
+    <text x="790" y="225" text-anchor="middle" font-size="24" fill="#ffffff">12:10</text>
+    <text x="790" y="255" text-anchor="middle" font-size="17" fill="#9296a5">midday slot</text>
+  </g>
+  <g>
+    <circle cx="1080" cy="400" r="14" fill="#ff003c"/>
+    <line x1="1080" y1="386" x2="1080" y2="270" stroke="#ff003c" stroke-width="2"/>
+    <rect x="980" y="190" width="200" height="80" rx="8" fill="#12151b" stroke="#ff003c" stroke-width="2"/>
+    <text x="1080" y="225" text-anchor="middle" font-size="24" fill="#ffffff">17:10</text>
+    <text x="1080" y="255" text-anchor="middle" font-size="17" fill="#9296a5">evening slot</text>
+  </g>
+
+  <!-- event trigger -->
+  <g>
+    <path d="M905 400 l14 -20 l14 20 l-14 20 z" fill="none" stroke="#9296a5" stroke-width="2"/>
+    <line x1="919" y1="420" x2="919" y2="520" stroke="#3a3f4d" stroke-width="2" stroke-dasharray="6 6"/>
+    <text x="919" y="560" text-anchor="middle" font-size="18" fill="#9296a5">event trigger: new candidate</text>
+  </g>
+
+  <!-- retry loop -->
+  <g>
+    <rect x="330" y="640" width="940" height="180" rx="12" fill="#12151b" stroke="#2a2e38" stroke-width="2"/>
+    <text x="370" y="700" font-size="22" fill="#ffffff">RETRY POLICY</text>
+    <text x="370" y="740" font-size="18" fill="#9296a5">failed publish → backoff retry → operator message on repeat failure</text>
+    <text x="370" y="775" font-size="18" fill="#9296a5">missed approval → slot expires clean — no stale posts</text>
+    <path d="M1180 700 a34 34 0 1 1 -10 -24" fill="none" stroke="#ff003c" stroke-width="3" marker-end="url(#arr4)"/>
+  </g>
+
+  <text x="80" y="920" font-size="22" fill="#5c6070">CONSISTENCY IS THE PRODUCT — THE SCHEDULE NEVER DEPENDS ON A HUMAN REMEMBERING</text>
+</svg>

@@ -3,11 +3,11 @@ import { motion, AnimatePresence } from "motion/react";
 import { TerminalSquare } from "lucide-react";
 
 const LOG_LINES = [
-  "INITIALIZING OPERATOR PROFILE...",
-  "LOADING ASSET MANIFEST...",
-  "ESTABLISHING SECURE CHANNEL...",
-  "MOUNTING INTERFACE MODULES...",
-  "SYSTEM READY",
+  "LOADING PORTFOLIO...",
+  "FETCHING CASE STUDIES...",
+  "PREPARING 3D ASSETS...",
+  "STARTING RENDER PIPELINE...",
+  "READY",
 ];
 
 const TOTAL_SEGMENTS = 24;
@@ -49,13 +49,13 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
         setTimeout(() => {
           setVisibleLines(i + 1);
           setProgress(Math.round(((i + 1) / LOG_LINES.length) * 100));
-        }, 300 + i * 320),
+        }, 150 + i * 160),
       );
     });
 
-    // Flicker SYSTEM READY
-    const flickerStart = 300 + (LOG_LINES.length - 1) * 320 + 100;
-    [0, 120, 240, 360].forEach((offset, i) => {
+    // Flicker READY
+    const flickerStart = 150 + (LOG_LINES.length - 1) * 160 + 100;
+    [0, 80, 160, 240].forEach((offset, i) => {
       timers.push(
         setTimeout(() => setFlickering(i % 2 === 0), flickerStart + offset),
       );
@@ -63,7 +63,7 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
 
     // Exit
     timers.push(
-      setTimeout(() => setExiting(true), flickerStart + 500 + 300),
+      setTimeout(() => setExiting(true), flickerStart + 400),
     );
 
     return () => timers.forEach(clearTimeout);
@@ -133,7 +133,7 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
                 <div className="flex flex-col items-center gap-3">
                   {LOG_LINES.slice(0, visibleLines).map((line, i) => {
                     const isLast = i === visibleLines - 1;
-                    const isReady = line === "SYSTEM READY";
+                    const isReady = line === "READY";
                     const dimmed = isReady && flickering;
                     return (
                       <motion.div
@@ -191,7 +191,7 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
                 <div className="text-center text-[11px] tabular-nums text-[#ff003c]">{progress}%</div>
                 <div className="flex items-center justify-center gap-2 text-[10px] uppercase tracking-[0.18em] text-zinc-600">
                   <TerminalSquare className="h-3 w-3 text-[#ff003c]/50" />
-                  <span>BOOT SEQUENCE</span>
+                  <span>LOADING</span>
                 </div>
               </div>
             </div>
@@ -199,7 +199,7 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
 
           {/* Bottom label */}
           <div className="relative z-10 mt-4 text-right text-[10px] uppercase tracking-[0.18em] text-zinc-700">
-            EST. 2018 / SYD AU
+            NORWICH, UK / REMOTE
           </div>
         </motion.div>
       ) : null}

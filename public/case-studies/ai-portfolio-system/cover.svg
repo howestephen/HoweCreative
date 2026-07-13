@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" font-family="ui-monospace, Menlo, Consolas, monospace">
+  <defs>
+    <marker id="arr5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#ff003c"/>
+    </marker>
+    <marker id="arrg5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6f7482"/>
+    </marker>
+  </defs>
+  <rect width="1600" height="1000" fill="#0a0c10"/>
+  <g stroke="#ffffff" stroke-opacity="0.04" stroke-width="1">
+    <line x1="0" y1="250" x2="1600" y2="250"/>
+    <line x1="0" y1="500" x2="1600" y2="500"/>
+    <line x1="0" y1="750" x2="1600" y2="750"/>
+    <line x1="400" y1="0" x2="400" y2="1000"/>
+    <line x1="800" y1="0" x2="800" y2="1000"/>
+    <line x1="1200" y1="0" x2="1200" y2="1000"/>
+  </g>
+
+  <rect x="80" y="76" width="14" height="14" fill="#ff003c"/>
+  <text x="112" y="90" font-size="24" letter-spacing="6" fill="#9296a5">AGENTIC BUILD SYSTEM</text>
+  <text x="1520" y="90" text-anchor="end" font-size="24" fill="#5c6070">THIS SITE, BUILT BY IT</text>
+
+  <!-- loop nodes -->
+  <rect x="120" y="420" width="230" height="120" rx="10" fill="#12151b" stroke="#2a2e38" stroke-width="2"/>
+  <text x="235" y="472" text-anchor="middle" font-size="27" fill="#ffffff">SPEC</text>
+  <text x="235" y="508" text-anchor="middle" font-size="18" fill="#9296a5">design + roadmap</text>
+
+  <rect x="450" y="420" width="230" height="120" rx="10" fill="#12151b" stroke="#2a2e38" stroke-width="2"/>
+  <text x="565" y="472" text-anchor="middle" font-size="27" fill="#ffffff">PHASE n</text>
+  <text x="565" y="508" text-anchor="middle" font-size="18" fill="#9296a5">atomised tasks</text>
+
+  <rect x="780" y="420" width="230" height="120" rx="10" fill="#12151b" stroke="#2a2e38" stroke-width="2"/>
+  <text x="895" y="472" text-anchor="middle" font-size="27" fill="#ffffff">BUILD</text>
+  <text x="895" y="508" text-anchor="middle" font-size="18" fill="#9296a5">Claude Code · Codex</text>
+
+  <rect x="1110" y="420" width="230" height="120" rx="10" fill="#12151b" stroke="#ff003c" stroke-width="2"/>
+  <text x="1225" y="472" text-anchor="middle" font-size="27" fill="#ffffff">QA GATE</text>
+  <text x="1225" y="508" text-anchor="middle" font-size="18" fill="#ff3358">build · test · review</text>
+
+  <!-- arrows forward -->
+  <g stroke="#ff003c" stroke-width="3" fill="none">
+    <line x1="350" y1="480" x2="438" y2="480" marker-end="url(#arr5)"/>
+    <line x1="680" y1="480" x2="768" y2="480" marker-end="url(#arr5)"/>
+    <line x1="1010" y1="480" x2="1098" y2="480" marker-end="url(#arr5)"/>
+  </g>
+
+  <!-- pass loop back to next phase -->
+  <path d="M1225 420 V300 H565 V408" fill="none" stroke="#6f7482" stroke-width="2.5" marker-end="url(#arrg5)"/>
+  <text x="895" y="285" text-anchor="middle" font-size="19" fill="#9296a5">pass → next phase</text>
+
+  <!-- fail loop back to build -->
+  <path d="M1225 540 V660 H895 V552" fill="none" stroke="#6f7482" stroke-width="2.5" stroke-dasharray="8 6" marker-end="url(#arrg5)"/>
+  <text x="1060" y="645" text-anchor="middle" font-size="19" fill="#9296a5">fail → fix</text>
+
+  <!-- human review -->
+  <circle cx="1470" cy="480" r="52" fill="none" stroke="#ff003c" stroke-width="2"/>
+  <text x="1470" y="472" text-anchor="middle" font-size="18" fill="#ffffff">HUMAN</text>
+  <text x="1470" y="498" text-anchor="middle" font-size="18" fill="#ffffff">REVIEW</text>
+  <line x1="1340" y1="480" x2="1410" y2="480" stroke="#ff003c" stroke-width="3" marker-end="url(#arr5)"/>
+
+  <text x="80" y="920" font-size="22" fill="#5c6070">SPEC → PHASED ROADMAP → GATED AUTONOMOUS EXECUTION → HUMAN JUDGEMENT</text>
+</svg>

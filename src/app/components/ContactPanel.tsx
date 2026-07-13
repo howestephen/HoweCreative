@@ -95,10 +95,10 @@ export function ContactPanel() {
           {status === "success" ? (
             <div className="relative z-10 flex flex-col items-center justify-center gap-4 py-16 text-center">
               <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#ff003c]">
-                Transmission received
+                Message sent
               </div>
               <p className="text-sm text-zinc-400">
-                Message sent. I'll be in touch soon.
+                Thanks — I'll reply within 24 hours.
               </p>
               <button
                 type="button"
@@ -180,7 +180,12 @@ export function ContactPanel() {
                   {status === "error" ? (
                     <span className="text-[#ff003c]">{errorMsg}</span>
                   ) : (
-                    contactContent.visualOnlyLabel
+                    <a
+                      href="mailto:howestephen@gmail.com"
+                      className="pointer-events-auto transition-colors hover:text-white"
+                    >
+                      {contactContent.visualOnlyLabel}
+                    </a>
                   )}
                 </div>
                 <button

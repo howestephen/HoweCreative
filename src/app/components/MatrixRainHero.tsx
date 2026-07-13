@@ -887,26 +887,51 @@ export function MatrixRainHero() {
         }}
       />
 
-      <div className="pointer-events-none relative z-20 flex w-full justify-center px-6 pb-10 md:pb-0 md:pt-[58vh] lg:pt-[60vh]">
+      <div className="pointer-events-none relative z-20 flex w-full justify-center px-6 pb-10 md:pb-0 md:pt-[48vh] lg:pt-[50vh]">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.5 }}
           className="max-w-5xl text-center"
         >
-          <div className="mb-3 font-mono uppercase tracking-[0.3em] text-white">
-            {siteProfile.role}
+          <div className="mb-3 font-mono text-[10px] uppercase tracking-[0.25em] text-white sm:text-xs md:text-sm md:tracking-[0.3em]">
+            {siteProfile.displayName} — {siteProfile.role}
           </div>
           <h1 className="mb-4">
-            <span className="mb-3 block text-5xl font-normal md:text-7xl lg:text-8xl">
+            <span className="mb-3 block text-[clamp(2.5rem,10.5vw,6rem)] font-semibold leading-none tracking-tight">
               <span className="text-white">{siteProfile.brandPrefix}</span>
               <span className="text-[#ff003c]">{siteProfile.brandSuffix}</span>
             </span>
           </h1>
-          <div className="mx-auto mb-6 max-w-2xl border border-[#ff003c]/30 bg-black/95 px-5 py-4 md:mb-8">
+          <div className="mx-auto mb-4 max-w-2xl border border-[#ff003c]/30 bg-black/95 px-5 py-4 md:mb-5">
             <p className="font-mono text-base text-zinc-400 md:text-lg lg:text-xl">
               {siteProfile.headline}
             </p>
+          </div>
+          <div className="mx-auto mb-5 flex max-w-2xl flex-wrap items-center justify-center gap-x-3 gap-y-1 font-mono text-[10px] uppercase tracking-[0.18em] text-zinc-500 md:mb-6 md:text-xs">
+            <span>20+ yrs design &amp; code</span>
+            <span className="text-[#ff003c]">·</span>
+            <span>4 yrs DeFi product</span>
+            <span className="text-[#ff003c]">·</span>
+            <span>AI pipeline builder</span>
+          </div>
+          <div className="pointer-events-auto mb-2 flex flex-wrap items-center justify-center gap-3">
+            <a
+              href="#case-studies"
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById("case-studies")?.scrollIntoView({ behavior: "smooth" });
+              }}
+              className="border border-[#ff003c] bg-[#ff003c] px-6 py-3 font-mono text-xs uppercase tracking-[0.2em] text-white transition-colors hover:bg-[#d60032] md:text-sm"
+            >
+              View work
+            </a>
+            <a
+              href="/cv"
+              className="border border-white/25 bg-black/60 px-6 py-3 font-mono text-xs uppercase tracking-[0.2em] text-white transition-colors hover:border-white/60 md:text-sm"
+            >
+              View CV
+            </a>
           </div>
 
           {/* Mobile-only scroll indicator — flows below text so spacing is even */}
@@ -939,18 +964,6 @@ export function MatrixRainHero() {
         ) : null}
       </AnimatePresence>
 
-      {/* Desktop-only scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 2, repeat: Infinity, repeatType: "reverse" }}
-        className="pointer-events-none absolute bottom-8 left-1/2 z-20 hidden -translate-x-1/2 md:block"
-      >
-        <div className="mb-2 font-mono text-xs uppercase tracking-widest text-[#ff003c]">
-          {heroContent.scrollLabel}
-        </div>
-        <div className="mx-auto h-12 w-px bg-gradient-to-b from-[#ff003c] to-transparent" />
-      </motion.div>
     </div>
   );
 }
