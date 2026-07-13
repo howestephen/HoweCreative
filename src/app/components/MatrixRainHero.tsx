@@ -1,8 +1,8 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { Canvas, useFrame, useLoader, useThree } from "@react-three/fiber";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { RefreshCw } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import * as THREE from "three";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 
 import { heroContent, siteProfile } from "../data/portfolio";
 import { isIOSLike } from "../lib/device";
@@ -58,24 +58,6 @@ const MORPH_SEGMENTS = 1200;
 const TARGET_MODEL_HEIGHT = 2.56;
 const WIRE_COLOR = new THREE.Color("#fff4f7");
 const WIRE_MORPH_COLOR = new THREE.Color("#ff365e");
-const HERO_MODEL_SEQUENCE = [
-  { label: heroContent.skillLabels[0], src: "/models/hero-wire/headref.glb" },
-  { label: heroContent.skillLabels[1], src: "/models/hero-wire/design.glb" },
-  { label: heroContent.skillLabels[2], src: "/models/hero-wire/prototyping.glb" },
-  { label: heroContent.skillLabels[3], src: "/models/hero-wire/video.glb" },
-  { label: heroContent.skillLabels[4], src: "/models/hero-wire/generalist.glb" },
-  { label: heroContent.skillLabels[5], src: "/models/hero-wire/laptop.glb" },
-  { label: heroContent.skillLabels[6], src: "/models/hero-wire/headphones.glb" },
-] as const;
-const HERO_MODEL_TRANSFORMS = [
-  { rotation: [-0.12, 0, 0] as [number, number, number] },             // head — faces forward
-  { rotation: [0, Math.PI * 1.5, 0] as [number, number, number] },     // design — additional quarter turn toward camera
-  { rotation: [0, Math.PI * 0.5, 0] as [number, number, number] },     // prototyping — front toward camera
-  { rotation: [Math.PI * 0.5, 0, 0] as [number, number, number] },     // motion — VHS front faces camera
-  { rotation: [0, -Math.PI * 0.5, 0] as [number, number, number] },    // 3D generalist — quarter turn toward camera
-  { rotation: [0.22, Math.PI * 0.78, 0] as [number, number, number] }, // laptop — open lid angle
-  { rotation: [0, -Math.PI * 0.5, 0] as [number, number, number] },    // headphones — turn toward camera
-] as const;
 
 function buildCharAtlas(): THREE.CanvasTexture {
   const grid = 8;
@@ -148,16 +130,16 @@ function buildCharAtlas(): THREE.CanvasTexture {
     "{",
     "}",
     "*",
-    "ア",
-    "イ",
-    "ウ",
-    "エ",
-    "オ",
-    "カ",
-    "キ",
-    "ク",
-    "ケ",
-    "コ",
+    "·",
+    ":",
+    ";",
+    "_",
+    "|",
+    "#",
+    "$",
+    "^",
+    "~",
+    "°",
   ];
 
   ctx.fillStyle = "#fff";
@@ -551,14 +533,241 @@ function buildMorphTarget(scene: THREE.Object3D) {
   return resampleLineSegments(normalized, MORPH_SEGMENTS);
 }
 
-function buildOrientedMorphTarget(scene: THREE.Group, modelIndex: number) {
-  const wrapper = new THREE.Group();
-  const orientedScene = scene.clone(true);
-  const transform = HERO_MODEL_TRANSFORMS[modelIndex];
+// ─── Seeded procedural structure generators ──────────────────────────────────
+// Every visit gets a fresh seed, so the hero sculpture sequence is generated
+// per session rather than loaded from static models. buildMorphTarget extracts
+// THREE.EdgesGeometry from any Mesh, so low-poly primitives read as wireframes.
 
-  wrapper.rotation.set(...transform.rotation);
-  wrapper.add(orientedScene);
-  return buildMorphTarget(wrapper);
+function mulberry32(seed: number) {
+  let state = seed >>> 0;
+  return function next() {
+    state = (state + 0x6d2b79f5) >>> 0;
+    let t = state;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+type Rng = () => number;
+
+function strutBetween(a: THREE.Vector3, b: THREE.Vector3, radius: number) {
+  const direction = new THREE.Vector3().subVectors(b, a);
+  const length = direction.length();
+  const geometry = new THREE.CylinderGeometry(radius, radius, length, 4, 1, true);
+  const mesh = new THREE.Mesh(geometry);
+  mesh.position.copy(a).addScaledVector(direction, 0.5);
+  mesh.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), direction.normalize());
+  return mesh;
+}
+
+/** AI workflows — a node graph: seeded points, each linked to its nearest peers. */
+function buildNetwork(r: Rng) {
+  const group = new THREE.Group();
+  const nodeCount = 9 + Math.floor(r() * 6);
+  const nodes: THREE.Vector3[] = [];
+
+  for (let index = 0; index < nodeCount; index += 1) {
+    const theta = r() * Math.PI * 2;
+    const phi = Math.acos(2 * r() - 1);
+    const radius = 0.7 + r() * 0.75;
+    const point = new THREE.Vector3(
+      radius * Math.sin(phi) * Math.cos(theta),
+      radius * Math.cos(phi),
+      radius * Math.sin(phi) * Math.sin(theta),
+    );
+    nodes.push(point);
+    const node = new THREE.Mesh(new THREE.IcosahedronGeometry(0.11 + r() * 0.06, 0));
+    node.position.copy(point);
+    group.add(node);
+  }
+
+  const linked = new Set<string>();
+  nodes.forEach((from, fromIndex) => {
+    const distances = nodes
+      .map((to, toIndex) => ({ toIndex, d: from.distanceTo(to) }))
+      .filter((entry) => entry.toIndex !== fromIndex)
+      .sort((a, b) => a.d - b.d)
+      .slice(0, 2);
+    distances.forEach(({ toIndex }) => {
+      const key = fromIndex < toIndex ? `${fromIndex}-${toIndex}` : `${toIndex}-${fromIndex}`;
+      if (linked.has(key)) return;
+      linked.add(key);
+      group.add(strutBetween(from, nodes[toIndex], 0.018));
+    });
+  });
+
+  return group;
+}
+
+/** Product design — a fanned stack of interface panels. */
+function buildPanels(r: Rng) {
+  const group = new THREE.Group();
+  const panelCount = 4 + Math.floor(r() * 3);
+
+  for (let index = 0; index < panelCount; index += 1) {
+    const t = panelCount > 1 ? index / (panelCount - 1) : 0.5;
+    const panel = new THREE.Mesh(
+      new THREE.BoxGeometry(1.0 + r() * 0.9, 0.65 + r() * 0.6, 0.05),
+    );
+    panel.position.set((r() - 0.5) * 0.8, (r() - 0.5) * 0.6, -0.9 + t * 1.8);
+    panel.rotation.set((r() - 0.5) * 0.12, (r() - 0.5) * 0.7, (r() - 0.5) * 0.16);
+    group.add(panel);
+  }
+
+  return group;
+}
+
+/** 3D & motion — a low-poly torus knot; p/q re-rolled per seed. */
+function buildKnot(r: Rng) {
+  const group = new THREE.Group();
+  const pairs: Array<[number, number]> = [
+    [2, 3],
+    [2, 5],
+    [2, 7],
+    [3, 4],
+    [3, 5],
+    [3, 8],
+  ];
+  const [p, q] = pairs[Math.floor(r() * pairs.length)];
+  const knot = new THREE.Mesh(
+    new THREE.TorusKnotGeometry(0.78 + r() * 0.2, 0.2 + r() * 0.1, 56 + Math.floor(r() * 24), 4, p, q),
+  );
+  knot.rotation.set((r() - 0.5) * 0.6, r() * Math.PI, 0);
+  group.add(knot);
+  return group;
+}
+
+/** Brand systems — concentric orbits around a core mark. */
+function buildRings(r: Rng) {
+  const group = new THREE.Group();
+  const ringCount = 3 + Math.floor(r() * 3);
+
+  const core = new THREE.Mesh(new THREE.IcosahedronGeometry(0.24 + r() * 0.14, 0));
+  group.add(core);
+
+  for (let index = 0; index < ringCount; index += 1) {
+    const ring = new THREE.Mesh(
+      new THREE.TorusGeometry(0.55 + index * 0.3 + r() * 0.12, 0.028, 4, 20 + Math.floor(r() * 14)),
+    );
+    ring.rotation.set(r() * Math.PI, r() * Math.PI, r() * Math.PI);
+    group.add(ring);
+  }
+
+  return group;
+}
+
+/** Prototyping — a scaffold lattice with seeded dropout. */
+function buildScaffold(r: Rng) {
+  const group = new THREE.Group();
+  const span = 2;
+  const step = 0.8;
+
+  const gridPoint = (x: number, y: number, z: number) =>
+    new THREE.Vector3((x - span / 2) * step, (y - span / 2) * step, (z - span / 2) * step);
+
+  for (let x = 0; x <= span; x += 1) {
+    for (let y = 0; y <= span; y += 1) {
+      for (let z = 0; z <= span; z += 1) {
+        if (x < span && r() > 0.42) group.add(strutBetween(gridPoint(x, y, z), gridPoint(x + 1, y, z), 0.02));
+        if (y < span && r() > 0.42) group.add(strutBetween(gridPoint(x, y, z), gridPoint(x, y + 1, z), 0.02));
+        if (z < span && r() > 0.42) group.add(strutBetween(gridPoint(x, y, z), gridPoint(x, y, z + 1), 0.02));
+        if (r() < 0.3) {
+          const joint = new THREE.Mesh(new THREE.BoxGeometry(0.09, 0.09, 0.09));
+          joint.position.copy(gridPoint(x, y, z));
+          group.add(joint);
+        }
+      }
+    }
+  }
+
+  return group;
+}
+
+/** UI/UX — floating wireframe screens with header and control blocks. */
+function buildScreens(r: Rng) {
+  const group = new THREE.Group();
+  const screenCount = 3 + Math.floor(r() * 2);
+
+  for (let index = 0; index < screenCount; index += 1) {
+    const t = screenCount > 1 ? index / (screenCount - 1) : 0.5;
+    const screen = new THREE.Group();
+    const width = 1.3 + r() * 0.5;
+    const height = 0.85 + r() * 0.3;
+
+    const frame = new THREE.Mesh(new THREE.BoxGeometry(width, height, 0.05));
+    screen.add(frame);
+
+    const header = new THREE.Mesh(new THREE.BoxGeometry(width * 0.86, 0.1, 0.06));
+    header.position.set(0, height / 2 - 0.14, 0.02);
+    screen.add(header);
+
+    const buttonCount = 2 + Math.floor(r() * 3);
+    for (let button = 0; button < buttonCount; button += 1) {
+      const chip = new THREE.Mesh(new THREE.BoxGeometry(0.16, 0.09, 0.06));
+      chip.position.set(-width / 2 + 0.2 + button * 0.24, -height / 2 + 0.16, 0.02);
+      screen.add(chip);
+    }
+
+    screen.position.set((t - 0.5) * 1.6 + (r() - 0.5) * 0.3, (r() - 0.5) * 0.5, -0.6 + t * 1.2);
+    screen.rotation.y = (0.5 - t) * 0.8 + (r() - 0.5) * 0.2;
+    group.add(screen);
+  }
+
+  return group;
+}
+
+/** Development — stacked build blocks on a base grid. */
+function buildTowers(r: Rng) {
+  const group = new THREE.Group();
+  const cells = 3;
+  const step = 0.56;
+
+  for (let x = 0; x < cells; x += 1) {
+    for (let z = 0; z < cells; z += 1) {
+      if (r() < 0.32) continue;
+      const stack = 1 + Math.floor(r() * 4);
+      let currentY = -0.9;
+      for (let level = 0; level < stack; level += 1) {
+        const blockHeight = 0.22 + r() * 0.3;
+        const block = new THREE.Mesh(new THREE.BoxGeometry(0.36, blockHeight, 0.36));
+        block.position.set((x - 1) * step, currentY + blockHeight / 2, (z - 1) * step);
+        block.rotation.y = (r() - 0.5) * 0.2;
+        group.add(block);
+        currentY += blockHeight + 0.06;
+      }
+    }
+  }
+
+  return group;
+}
+
+const STRUCTURE_BUILDERS: Array<(r: Rng) => THREE.Group> = [
+  buildNetwork,
+  buildPanels,
+  buildKnot,
+  buildRings,
+  buildScaffold,
+  buildScreens,
+  buildTowers,
+];
+
+function buildProceduralTargets(seed: number) {
+  return STRUCTURE_BUILDERS.map((build, index) => {
+    const rng = mulberry32((seed ^ Math.imul(index + 1, 0x9e3779b9)) >>> 0);
+    const group = build(rng);
+    const target = buildMorphTarget(group);
+    group.traverse((child) => {
+      if (child instanceof THREE.Mesh) child.geometry.dispose();
+    });
+    return target;
+  });
+}
+
+function heroSkillLabel(index: number) {
+  const labels = heroContent.skillLabels;
+  if (labels.length === 0) return "";
+  return labels[index % labels.length];
 }
 
 function buildLineColors(vertexCount: number, accentRatio = 0.4) {
@@ -585,17 +794,11 @@ function buildLineColors(vertexCount: number, accentRatio = 0.4) {
   return colors;
 }
 
-// ─── Procedural wireframe scene builders ─────────────────────────────────────
-// These replace the GLB files for paintbrush, cinema camera, and gizmo.
-// buildMorphTarget extracts THREE.EdgesGeometry from any Mesh in the scene,
-// so standard Three.js geometry works identically to loaded GLBs.
-
-
-// ─────────────────────────────────────────────────────────────────────────────
-
 const MorphingWireHero = React.memo(function MorphingWireHero({
+  seed,
   onSkillChange,
 }: {
+  seed: number;
   onSkillChange: (label: string) => void;
 }) {
   const rootRef = useRef<THREE.Group>(null);
@@ -604,21 +807,13 @@ const MorphingWireHero = React.memo(function MorphingWireHero({
   const phaseRef = useRef<"hold" | "morph">("hold");
   const phaseTimerRef = useRef(0);
 
-  const gltfs = useLoader(
-    GLTFLoader,
-    HERO_MODEL_SEQUENCE.map((model) => model.src),
-  ) as Array<{ scene: THREE.Group }>;
-
-  const targets = useMemo(
-    () => gltfs.map((gltf, index) => buildOrientedMorphTarget(gltf.scene, index)),
-    [gltfs],
-  );
+  const targets = useMemo(() => buildProceduralTargets(seed), [seed]);
   const colorTargets = useMemo(
     () =>
-      HERO_MODEL_SEQUENCE.map((_, index) =>
-        buildLineColors(MORPH_SEGMENTS * 2, index === 1 ? 0.6 : 0.4),
+      targets.map((_, index) =>
+        buildLineColors(MORPH_SEGMENTS * 2, index % 2 === 1 ? 0.55 : 0.4),
       ),
-    [],
+    [targets],
   );
 
   const geometry = useMemo(() => {
@@ -633,8 +828,8 @@ const MorphingWireHero = React.memo(function MorphingWireHero({
   }, [colorTargets, targets]);
 
   useEffect(() => {
-    onSkillChange(HERO_MODEL_SEQUENCE[0].label);
-  }, [onSkillChange]);
+    onSkillChange(heroSkillLabel(sequenceRef.current));
+  }, [onSkillChange, seed]);
 
   useEffect(() => {
     return () => {
@@ -702,7 +897,7 @@ const MorphingWireHero = React.memo(function MorphingWireHero({
       sequenceRef.current = nextIndex;
       phaseRef.current = "hold";
       phaseTimerRef.current = 0;
-      onSkillChange(HERO_MODEL_SEQUENCE[nextIndex].label);
+      onSkillChange(heroSkillLabel(nextIndex));
     }
 
     root.rotation.y = Math.sin(elapsed * 0.32) * 0.28;
@@ -805,9 +1000,14 @@ const LiteWireHero = React.memo(function LiteWireHero({
   );
 });
 
+function randomSeed() {
+  return Math.floor(Math.random() * 0x1000000) >>> 0;
+}
+
 export function MatrixRainHero() {
   const [activeSkill, setActiveSkill] = useState("");
   const [isMobile, setIsMobile] = useState(false);
+  const [structureSeed, setStructureSeed] = useState(randomSeed);
   const hasWebGL = useWebGLAvailability();
   const atlas = useMemo(() => buildCharAtlas(), []);
   const rainGrid = useHeroRainGridConfig(false);
@@ -864,7 +1064,7 @@ export function MatrixRainHero() {
             />
             <group position={[0, isMobile ? 1.1 : 0.82, 0]}>
               <MorphingWireErrorBoundary onSkillChange={setActiveSkill}>
-                <MorphingWireHero onSkillChange={setActiveSkill} />
+                <MorphingWireHero seed={structureSeed} onSkillChange={setActiveSkill} />
               </MorphingWireErrorBoundary>
             </group>
           </Canvas>
@@ -948,6 +1148,18 @@ export function MatrixRainHero() {
           </motion.div>
         </motion.div>
       </div>
+
+      {hasWebGL && (
+        <button
+          type="button"
+          onClick={() => setStructureSeed(randomSeed())}
+          title="Generate a new hero structure"
+          className="absolute bottom-5 right-5 z-30 hidden items-center gap-2 border border-white/15 bg-black/55 px-3 py-2 font-mono text-[10px] uppercase tracking-[0.2em] text-zinc-400 backdrop-blur-md transition-colors hover:border-white/40 hover:text-white sm:inline-flex"
+        >
+          <RefreshCw className="h-3 w-3 text-[#ff003c]" />
+          Seed {structureSeed.toString(16).toUpperCase().padStart(6, "0")}
+        </button>
+      )}
 
       <AnimatePresence>
         {activeSkill && activeSkill !== heroContent.skillLabels[0] ? (

@@ -10,7 +10,21 @@
     />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href="https://howecreative.co.uk/" />
-    <meta name="theme-color" content="#050505" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0a0c10" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f4f4f1" />
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem("theme");
+          var dark = stored
+            ? stored === "dark"
+            : window.matchMedia("(prefers-color-scheme: dark)").matches;
+          document.documentElement.classList.toggle("dark", dark);
+        } catch (e) {
+          document.documentElement.classList.add("dark");
+        }
+      })();
+    </script>
 
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://howecreative.co.uk/" />

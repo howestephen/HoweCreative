@@ -19,4 +19,16 @@ export default defineConfig({
 
   // File types to support raw imports. Never add .css, .tsx, or .ts files to this.
   assetsInclude: ['**/*.svg', '**/*.csv'],
+
+  build: {
+    rollupOptions: {
+      output: {
+        // Keep heavyweight vendors cacheable and off the critical path
+        manualChunks: {
+          three: ['three', '@react-three/fiber', '@react-three/drei'],
+          icons: ['react-icons', 'lucide-react'],
+        },
+      },
+    },
+  },
 })
