@@ -10,6 +10,8 @@ import { ContactPanel } from "../components/ContactPanel";
 // import { ArchiveSection } from "../components/ArchiveSection"; // hidden until content is ready
 import { motion } from "motion/react";
 
+import { useIsDark } from "../lib/theme";
+
 // Catches chunk-load failures (network error fetching the lazy bundle itself)
 class HeroChunkErrorBoundary extends Component<
   { children: ReactNode },
@@ -43,6 +45,8 @@ class HeroChunkErrorBoundary extends Component<
 }
 
 export function Home() {
+  const isDark = useIsDark();
+
   return (
     <div className="w-full">
       <HeroChunkErrorBoundary>
@@ -54,12 +58,14 @@ export function Home() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1, duration: 1 }}
-        className="relative z-20 w-full overflow-hidden border-t border-[#ff003c]/20 bg-transparent"
+        className="relative z-20 w-full overflow-hidden border-t border-accent/20 bg-transparent"
       >
-        <MatrixRainBackdrop
-          mode="content"
-          className="pointer-events-none absolute inset-0 z-[1] opacity-100 mix-blend-screen"
-        />
+        {isDark && (
+          <MatrixRainBackdrop
+            mode="content"
+            className="pointer-events-none absolute inset-0 z-[1] opacity-100 mix-blend-screen"
+          />
+        )}
         <div className="relative z-10 backdrop-blur-[1px]">
           <OperatorProfile />
           <CaseStudies />

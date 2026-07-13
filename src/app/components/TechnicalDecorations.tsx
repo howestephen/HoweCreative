@@ -3,7 +3,7 @@ export function TechnicalDecorations() {
     <>
       {/* Scanline — CSS-only animation, very subtle */}
       <div
-        className="fixed top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#ff003c]/15 to-transparent pointer-events-none z-[15]"
+        className="fixed top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-accent/15 to-transparent pointer-events-none z-[15]"
         style={{
           animation: 'scanline 12s linear infinite',
         }}
@@ -21,17 +21,17 @@ export function TechnicalDecorations() {
 
       {/* Corner brackets - top left */}
       <div className="fixed top-20 left-20 z-[98] pointer-events-none hidden xl:block">
-        <div className="w-12 h-12 border-t-2 border-l-2 border-[#ff003c]/32" />
+        <div className="w-12 h-12 border-t-2 border-l-2 border-accent/32" />
       </div>
 
       {/* Corner brackets - top right */}
       <div className="fixed top-20 right-6 z-[98] pointer-events-none hidden xl:block">
-        <div className="w-12 h-12 border-t-2 border-r-2 border-[#ff003c]/32" />
+        <div className="w-12 h-12 border-t-2 border-r-2 border-accent/32" />
       </div>
 
       {/* Vertical technical text - left side */}
       <div className="fixed left-24 top-1/2 -translate-y-1/2 z-[98] pointer-events-none hidden xl:block">
-        <div className="[writing-mode:vertical-rl] rotate-180 font-mono text-[9px] text-zinc-800 uppercase tracking-wider space-y-4">
+        <div className="[writing-mode:vertical-rl] rotate-180 font-mono text-[9px] text-foreground/20 uppercase tracking-wider space-y-4">
           <p>STEPHEN HOWE // CREATIVE TECHNOLOGIST</p>
           <p className="opacity-50">NORWICH UK // REMOTE // 2026</p>
         </div>

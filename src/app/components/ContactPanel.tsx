@@ -55,7 +55,7 @@ export function ContactPanel() {
   return (
     <section
       id="contact"
-      className="relative z-[20] border-t border-[#ff003c]/32 px-6 py-24 md:py-28"
+      className="relative z-[20] border-t border-accent/32 px-6 py-24 md:py-28"
     >
       <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.8fr_1.2fr]">
         <motion.div
@@ -65,13 +65,13 @@ export function ContactPanel() {
           transition={{ duration: 0.65 }}
           className="max-w-xl"
         >
-          <div className="mb-4 font-mono text-[10px] uppercase tracking-[0.22em] text-[#ff003c]">
+          <div className="mb-4 font-mono text-[10px] uppercase tracking-[0.22em] text-accent">
             {contactContent.eyebrow}
           </div>
-          <h2 className="text-4xl font-semibold tracking-tight text-white md:text-5xl">
+          <h2 className="text-4xl font-semibold tracking-tight text-foreground md:text-5xl">
             {contactContent.title}
           </h2>
-          <p className="mt-4 text-sm leading-relaxed text-zinc-400 md:text-base">
+          <p className="mt-4 text-sm leading-relaxed text-muted-foreground md:text-base">
             {contactContent.description}
           </p>
         </motion.div>
@@ -82,28 +82,20 @@ export function ContactPanel() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.65, delay: 0.08 }}
-          className="relative overflow-hidden border border-[#ff003c]/38 bg-black/92 p-5 md:p-6"
+          className="relative overflow-hidden border border-accent/38 bg-card/95 p-5 md:p-6"
         >
-          <div
-            className="pointer-events-none absolute inset-0 opacity-[0.06]"
-            style={{
-              backgroundImage:
-                "repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(255,255,255,0.15) 3px, rgba(255,255,255,0.15) 4px)",
-            }}
-          />
-
           {status === "success" ? (
             <div className="relative z-10 flex flex-col items-center justify-center gap-4 py-16 text-center">
-              <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#ff003c]">
+              <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-accent">
                 Message sent
               </div>
-              <p className="text-sm text-zinc-400">
+              <p className="text-sm text-muted-foreground">
                 Thanks — I'll reply within 24 hours.
               </p>
               <button
                 type="button"
                 onClick={() => setStatus("idle")}
-                className="mt-2 font-mono text-[10px] uppercase tracking-[0.18em] text-zinc-500 underline underline-offset-4 hover:text-white"
+                className="mt-2 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground underline underline-offset-4 hover:text-foreground"
               >
                 Send another
               </button>
@@ -111,7 +103,7 @@ export function ContactPanel() {
           ) : (
             <div className="relative z-10 grid gap-4 md:grid-cols-2">
               <label className="block">
-                <span className="mb-2 block font-mono text-[10px] uppercase tracking-[0.16em] text-zinc-500">
+                <span className="mb-2 block font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
                   {contactContent.fields.name}
                 </span>
                 <input
@@ -121,11 +113,11 @@ export function ContactPanel() {
                   required
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full border border-[#ff003c]/30 bg-black/92 px-4 py-3 text-sm text-white outline-none transition-colors focus:border-[#ff003c]"
+                  className="w-full border border-border bg-input-background px-4 py-3 text-sm text-foreground outline-none transition-colors focus:border-accent"
                 />
               </label>
               <label className="block">
-                <span className="mb-2 block font-mono text-[10px] uppercase tracking-[0.16em] text-zinc-500">
+                <span className="mb-2 block font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
                   {contactContent.fields.email}
                 </span>
                 <input
@@ -135,11 +127,11 @@ export function ContactPanel() {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full border border-[#ff003c]/30 bg-black/92 px-4 py-3 text-sm text-white outline-none transition-colors focus:border-[#ff003c]"
+                  className="w-full border border-border bg-input-background px-4 py-3 text-sm text-foreground outline-none transition-colors focus:border-accent"
                 />
               </label>
               <label className="block md:col-span-2">
-                <span className="mb-2 block font-mono text-[10px] uppercase tracking-[0.16em] text-zinc-500">
+                <span className="mb-2 block font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
                   {contactContent.fields.projectType}
                 </span>
                 <input
@@ -147,11 +139,11 @@ export function ContactPanel() {
                   name="projectType"
                   value={projectType}
                   onChange={(e) => setProjectType(e.target.value)}
-                  className="w-full border border-[#ff003c]/30 bg-black/92 px-4 py-3 text-sm text-white outline-none transition-colors focus:border-[#ff003c]"
+                  className="w-full border border-border bg-input-background px-4 py-3 text-sm text-foreground outline-none transition-colors focus:border-accent"
                 />
               </label>
               <label className="block md:col-span-2">
-                <span className="mb-2 block font-mono text-[10px] uppercase tracking-[0.16em] text-zinc-500">
+                <span className="mb-2 block font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
                   {contactContent.fields.brief}
                 </span>
                 <textarea
@@ -160,7 +152,7 @@ export function ContactPanel() {
                   required
                   value={brief}
                   onChange={(e) => setBrief(e.target.value)}
-                  className="w-full resize-none border border-[#ff003c]/30 bg-black/92 px-4 py-3 text-sm text-white outline-none transition-colors focus:border-[#ff003c]"
+                  className="w-full resize-none border border-border bg-input-background px-4 py-3 text-sm text-foreground outline-none transition-colors focus:border-accent"
                 />
               </label>
               <input
@@ -174,15 +166,15 @@ export function ContactPanel() {
                 aria-hidden="true"
               />
 
-              <div className="mt-1 flex flex-col gap-4 border-t border-[#ff003c]/28 pt-5 md:col-span-2 md:flex-row md:items-center md:justify-between">
-                <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.18em] text-zinc-500">
-                  <TerminalSquare className="h-4 w-4 text-[#ff003c]" />
+              <div className="mt-1 flex flex-col gap-4 border-t border-accent/28 pt-5 md:col-span-2 md:flex-row md:items-center md:justify-between">
+                <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+                  <TerminalSquare className="h-4 w-4 text-accent" />
                   {status === "error" ? (
-                    <span className="text-[#ff003c]">{errorMsg}</span>
+                    <span className="text-accent">{errorMsg}</span>
                   ) : (
                     <a
                       href="mailto:howestephen@gmail.com"
-                      className="pointer-events-auto transition-colors hover:text-white"
+                      className="pointer-events-auto transition-colors hover:text-foreground"
                     >
                       {contactContent.visualOnlyLabel}
                     </a>
@@ -191,7 +183,7 @@ export function ContactPanel() {
                 <button
                   type="submit"
                   disabled={status === "sending"}
-                  className="inline-flex items-center gap-2 border border-[#ff003c] bg-[#ff003c] px-4 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-black transition-colors hover:bg-[#ff4466] disabled:opacity-50"
+                  className="inline-flex items-center gap-2 border border-accent bg-accent px-4 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-accent-foreground transition-colors hover:bg-accent-hover disabled:opacity-50"
                 >
                   <Send className="h-4 w-4" />
                   {status === "sending"
