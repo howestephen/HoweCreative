@@ -1,7 +1,7 @@
 # HOWE_CREATIVE — Portfolio v2.0
 
-Personal portfolio for **Stephen Howe**, Creative Systems Designer.
-Operator/terminal aesthetic. Systems-first approach. Built to ship.
+Personal portfolio for **Stephen Howe**, Creative Technologist.
+Technical, systems-first presentation. Built to ship.
 
 ---
 
@@ -25,12 +25,13 @@ Operator/terminal aesthetic. Systems-first approach. Built to ship.
 
 | Section | Component | Description |
 |---|---|---|
-| Hero | `MatrixRainHero` | Canvas matrix rain + rotating wireframe shape. CSS fallback on iOS. |
-| Operator Profile | `OperatorProfile` | Dossier-style about section with 3D GLTF portrait (WebGL), quick facts, and file cards. |
-| Case Studies | `CaseStudies` | 6 projects with detail overlay panels (Brief, Problem, System Design, Outcome). |
+| Hero | `MatrixRainHero` | Canvas matrix rain + rotating wireframe shape, name/proof strip/CTAs. CSS fallback on iOS. |
+| About | `OperatorProfile` | About section with 3D GLTF portrait (WebGL), quick facts, and file cards. |
+| Case Studies | `CaseStudies` | 9 projects with detail overlay panels (Brief, Problem, System Design, Trade-offs, Outcome). |
 | Tools & Skills | `MediaShowcase` | 26-item tool grid across Design, 3D, Motion, Audio, Frontend, Dev, and AI. |
 | Contact | `ContactPanel` | Name / Email / Project Type / Brief — sends via Web3Forms relay. |
-| Archive | `ArchiveSection` | Filterable timeline of prior work by tool. |
+| CV | `CV` page at `/cv` | ATS-friendly, printable CV (light theme, standalone route). |
+| Archive | `ArchiveSection` | Filterable timeline of prior work by tool. Currently disabled pending real content. |
 
 ---
 

@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" font-family="ui-monospace, Menlo, Consolas, monospace">
+  <defs>
+    <marker id="arr2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#ff003c"/>
+    </marker>
+    <marker id="arrg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6f7482"/>
+    </marker>
+  </defs>
+  <rect width="1600" height="1000" fill="#0a0c10"/>
+
+  <rect x="80" y="70" width="14" height="14" fill="#ff003c"/>
+  <text x="112" y="84" font-size="24" letter-spacing="6" fill="#9296a5">SYSTEM ARCHITECTURE</text>
+  <text x="1520" y="84" text-anchor="end" font-size="22" fill="#5c6070">RAILWAY · 3 SERVICES · SHARED STATE</text>
+
+  <!-- Railway boundary -->
+  <rect x="80" y="140" width="1000" height="700" rx="14" fill="none" stroke="#2a2e38" stroke-width="2" stroke-dasharray="10 8"/>
+  <text x="110" y="180" font-size="20" fill="#5c6070">RAILWAY</text>
+
+  <!-- monitor -->
+  <rect x="140" y="230" width="260" height="130" rx="10" fill="#12151b" stroke="#2a2e38" stroke-width="2"/>
+  <text x="270" y="285" text-anchor="middle" font-size="26" fill="#ffffff">MONITOR</text>
+  <text x="270" y="320" text-anchor="middle" font-size="18" fill="#9296a5">ingests on-chain events</text>
+
+  <!-- renderer -->
+  <rect x="140" y="560" width="260" height="130" rx="10" fill="#12151b" stroke="#2a2e38" stroke-width="2"/>
+  <text x="270" y="615" text-anchor="middle" font-size="26" fill="#ffffff">RENDERER</text>
+  <text x="270" y="650" text-anchor="middle" font-size="18" fill="#9296a5">payloads → visual assets</text>
+
+  <!-- postgres -->
+  <g>
+    <ellipse cx="620" cy="420" rx="130" ry="34" fill="#12151b" stroke="#ff003c" stroke-width="2"/>
+    <path d="M490 420 v150 a130 34 0 0 0 260 0 v-150" fill="#12151b" stroke="#ff003c" stroke-width="2"/>
+    <ellipse cx="620" cy="420" rx="130" ry="34" fill="#171a21" stroke="#ff003c" stroke-width="2"/>
+    <text x="620" y="510" text-anchor="middle" font-size="26" fill="#ffffff">POSTGRES</text>
+    <text x="620" y="545" text-anchor="middle" font-size="18" fill="#9296a5">shared source of truth</text>
+  </g>
+
+  <!-- poster -->
+  <rect x="820" y="380" width="220" height="180" rx="10" fill="#12151b" stroke="#ff003c" stroke-width="2"/>
+  <text x="930" y="435" text-anchor="middle" font-size="26" fill="#ffffff">POSTER</text>
+  <text x="930" y="478" text-anchor="middle" font-size="18" fill="#9296a5">slots · copy · retries</text>
+  <text x="930" y="508" text-anchor="middle" font-size="18" fill="#9296a5">webhook endpoint</text>
+
+  <!-- externals -->
+  <rect x="1220" y="230" width="300" height="120" rx="10" fill="#12151b" stroke="#2a2e38" stroke-width="2"/>
+  <text x="1370" y="280" text-anchor="middle" font-size="26" fill="#ffffff">SOLANA RPC</text>
+  <text x="1370" y="315" text-anchor="middle" font-size="18" fill="#9296a5">chain activity in</text>
+
+  <rect x="1220" y="440" width="300" height="120" rx="10" fill="#12151b" stroke="#2a2e38" stroke-width="2"/>
+  <text x="1370" y="490" text-anchor="middle" font-size="26" fill="#ffffff">TELEGRAM</text>
+  <text x="1370" y="525" text-anchor="middle" font-size="18" fill="#9296a5">approval + operator controls</text>
+
+  <rect x="1220" y="650" width="300" height="120" rx="10" fill="#ff003c"/>
+  <text x="1370" y="700" text-anchor="middle" font-size="26" font-weight="bold" fill="#ffffff">X / TWITTER</text>
+  <text x="1370" y="735" text-anchor="middle" font-size="18" fill="#ffd3dd">published posts out</text>
+
+  <!-- flows -->
+  <g stroke="#6f7482" stroke-width="2.5" fill="none">
+    <path d="M1220 290 H480 " marker-end="url(#arrg)" transform="translate(0,0)"/>
+    <line x1="270" y1="360" x2="270" y2="548" marker-end="url(#arrg)"/>
+    <path d="M400 625 H620 V612" marker-end="url(#arrg)"/>
+    <path d="M270 360 v0" />
+    <path d="M400 295 H560 V378" marker-end="url(#arrg)"/>
+  </g>
+  <g stroke="#ff003c" stroke-width="3" fill="none">
+    <line x1="750" y1="470" x2="808" y2="470" marker-end="url(#arr2)"/>
+    <line x1="1040" y1="470" x2="1208" y2="490" marker-end="url(#arr2)"/>
+    <path d="M1040 520 Q1150 620 1208 680" marker-end="url(#arr2)"/>
+  </g>
+
+  <!-- labels on key flows -->
+  <text x="782" y="512" text-anchor="middle" font-size="16" fill="#9296a5">reads</text>
+  <text x="782" y="534" text-anchor="middle" font-size="16" fill="#9296a5">state</text>
+  <text x="1085" y="462" font-size="17" fill="#ff3358">approve?</text>
+  <text x="1075" y="625" font-size="17" fill="#ff3358">publish</text>
+
+  <text x="80" y="920" font-size="22" fill="#5c6070">DECOUPLED SERVICES — A FAILED STAGE DEGRADES, NEVER CASCADES</text>
+</svg>

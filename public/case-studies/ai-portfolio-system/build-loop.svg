@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" font-family="ui-monospace, Menlo, Consolas, monospace">
+  <defs>
+    <marker id="arr6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#ff003c"/>
+    </marker>
+  </defs>
+  <rect width="1600" height="1000" fill="#0a0c10"/>
+
+  <rect x="80" y="70" width="14" height="14" fill="#ff003c"/>
+  <text x="112" y="84" font-size="24" letter-spacing="6" fill="#9296a5">WHO DOES WHAT</text>
+  <text x="1520" y="84" text-anchor="end" font-size="22" fill="#5c6070">DIVISION OF LABOUR IN THE LOOP</text>
+
+  <!-- lanes -->
+  <g>
+    <rect x="80" y="150" width="1440" height="200" rx="12" fill="#12151b" stroke="#ff003c" stroke-width="2"/>
+    <text x="120" y="215" font-size="24" fill="#ff3358">HUMAN</text>
+    <text x="120" y="255" font-size="19" fill="#c9ccd6">direction · taste · specification · review at phase boundaries</text>
+    <text x="120" y="290" font-size="19" fill="#9296a5">the plan is the source of truth — plan changes are explicit edits</text>
+  </g>
+
+  <g>
+    <rect x="80" y="390" width="1440" height="200" rx="12" fill="#12151b" stroke="#2a2e38" stroke-width="2"/>
+    <text x="120" y="455" font-size="24" fill="#ffffff">PROMPT SYSTEM</text>
+    <text x="120" y="495" font-size="19" fill="#c9ccd6">feeds one phase at a time · atomised tasks with acceptance criteria</text>
+    <text x="120" y="530" font-size="19" fill="#9296a5">prevents drift during autonomous stretches</text>
+  </g>
+
+  <g>
+    <rect x="80" y="630" width="1440" height="200" rx="12" fill="#12151b" stroke="#2a2e38" stroke-width="2"/>
+    <text x="120" y="695" font-size="24" fill="#ffffff">CODING AGENTS + GATES</text>
+    <text x="120" y="735" font-size="19" fill="#c9ccd6">Claude Code · Codex execute — build, typecheck, tests run as gates between steps</text>
+    <text x="120" y="770" font-size="19" fill="#9296a5">git history is the audit trail</text>
+  </g>
+
+  <!-- connecting arrows -->
+  <g stroke="#ff003c" stroke-width="3" fill="none">
+    <path d="M1400 350 v28" marker-end="url(#arr6)"/>
+    <path d="M1400 590 v28" marker-end="url(#arr6)"/>
+    <path d="M200 830 v40 H60 V240 h8" marker-end="url(#arr6)"/>
+  </g>
+  <text x="1418" y="374" font-size="17" fill="#9296a5">delegate</text>
+  <text x="1418" y="614" font-size="17" fill="#9296a5">execute</text>
+  <text x="90" y="895" font-size="17" fill="#9296a5">review returns to the human</text>
+
+  <text x="1520" y="920" text-anchor="end" font-size="22" fill="#5c6070">AI = THROUGHPUT · SYSTEM = DISCIPLINE · HUMAN = JUDGEMENT</text>
+</svg>
