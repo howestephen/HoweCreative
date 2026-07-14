@@ -25,7 +25,6 @@ export default defineConfig({
       output: {
         // Keep heavyweight vendors cacheable and off the critical path
         manualChunks: {
-          three: ['three', '@react-three/fiber', '@react-three/drei'],
           icons: ['react-icons', 'lucide-react'],
         },
       },
