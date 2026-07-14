@@ -1,79 +1,17 @@
-import { lazy, Suspense, Component, type ReactNode } from "react";
-const MatrixRainHero = lazy(() =>
-  import("../components/MatrixRainHero").then((m) => ({ default: m.MatrixRainHero }))
-);
-import { MatrixRainBackdrop } from "../components/MatrixRainBackdrop";
-import { OperatorProfile } from "../components/OperatorProfile";
-import { CaseStudies } from "../components/CaseStudies";
-import { MediaShowcase } from "../components/MediaShowcase";
-import { ContactPanel } from "../components/ContactPanel";
-// import { ArchiveSection } from "../components/ArchiveSection"; // hidden until content is ready
-import { motion } from "motion/react";
-
-import { useIsDark } from "../lib/theme";
-
-// Catches chunk-load failures (network error fetching the lazy bundle itself)
-class HeroChunkErrorBoundary extends Component<
-  { children: ReactNode },
-  { error: Error | null }
-> {
-  state = { error: null };
-  static getDerivedStateFromError(e: Error) { return { error: e }; }
-  render() {
-    if (this.state.error) {
-      return (
-        <div
-          style={{
-            minHeight: "100svh",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            background: "#050505",
-            fontFamily: "monospace",
-            fontSize: 12,
-            color: "#f87171",
-            padding: 24,
-            textAlign: "center",
-          }}
-        >
-          [DEBUG] Hero chunk failed to load: {(this.state.error as Error).message}
-        </div>
-      );
-    }
-    return this.props.children;
-  }
-}
+import { Masthead } from "../concept/Masthead";
+import { WorkIndex } from "../concept/WorkIndex";
+import { Capabilities } from "../concept/Capabilities";
+import { Method } from "../concept/Method";
+import { ContactFoot } from "../concept/ContactFoot";
 
 export function Home() {
-  const isDark = useIsDark();
-
   return (
     <div className="w-full">
-      <HeroChunkErrorBoundary>
-        <Suspense fallback={null}>
-          <MatrixRainHero />
-        </Suspense>
-      </HeroChunkErrorBoundary>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1, duration: 1 }}
-        className="relative z-20 w-full overflow-hidden border-t border-accent/20 bg-transparent"
-      >
-        {isDark && (
-          <MatrixRainBackdrop
-            mode="content"
-            className="pointer-events-none absolute inset-0 z-[1] opacity-100 mix-blend-screen"
-          />
-        )}
-        <div className="relative z-10 backdrop-blur-[1px]">
-          <OperatorProfile />
-          <CaseStudies />
-          <MediaShowcase />
-          <ContactPanel />
-          {/* <ArchiveSection /> — hidden until content is ready */}
-        </div>
-      </motion.div>
+      <Masthead />
+      <WorkIndex />
+      <Capabilities />
+      <Method />
+      <ContactFoot />
     </div>
   );
 }
