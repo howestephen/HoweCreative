@@ -48,8 +48,8 @@ export function Masthead() {
 
             <motion.p variants={item} className="max-w-xl text-lg leading-relaxed text-muted-foreground">
               Stephen Howe — creative technologist. Twenty years across brand, 3D, motion,
-              product, and code; lately, AI pipelines that design, render, and publish on
-              their own.
+              product, and code; lately, automated pipelines that render and publish live
+              data — built fast with AI.
             </motion.p>
 
             <motion.div variants={item} className="flex flex-wrap items-center gap-3">
