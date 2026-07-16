@@ -34,6 +34,41 @@ const EXPERIENCE = [
     role: "Designer & Animator, howecreative.co.uk",
     note: "Freelance video, animation, and web for international clients.",
   },
+  {
+    years: "2014 – 16",
+    role: "2nd Line Support Technician, Qtac Solutions",
+    note: "Senior support for HMRC payroll software; trained the team, redesigned the company site.",
+  },
+  {
+    years: "2012 – 16",
+    role: "Web & Social Media Manager, Burger Theory",
+    note: "Brand, web, and social for a street-food startup — from launch, alongside the above.",
+  },
+  {
+    years: "2011 – 12",
+    role: "Venue & Promotions Manager, Hot Biscuit",
+    note: "Design and promotion for three Brighton music venues.",
+  },
+  {
+    years: "2009 – 11",
+    role: "Brand Manager, 412 Promotions",
+    note: "Site, shop, events, and a ten-writer editorial team.",
+  },
+  {
+    years: "2008 – 09",
+    role: "Junior Helpdesk Technician, Right Click Computers",
+    note: "Remote support for campus TV servers in ~150 UK universities.",
+  },
+  {
+    years: "2007 – 08",
+    role: "Database Technician, BBC",
+    note: "Core-database migration and cleansing at Television Centre.",
+  },
+  {
+    years: "2005 – 06",
+    role: "Web Manager & Graphic Designer, Good Salon Guide",
+    note: "First web-and-design role, while at university.",
+  },
 ] as const;
 
 export function Method() {
@@ -66,8 +101,13 @@ export function Method() {
         </div>
 
         <div className="mt-16 border-t border-border pt-10">
-          <div className="mb-6 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-            Experience
+          <div className="mb-6 flex items-baseline justify-between gap-4">
+            <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+              Experience
+            </span>
+            <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-accent">
+              2005 → today · 21 years
+            </span>
           </div>
           <div className="space-y-0">
             {EXPERIENCE.map((entry) => (

@@ -5,3 +5,6 @@ dist
 .env
 .env.*
 !.env.example
+
+# Private source material — never publish
+docs/private/
