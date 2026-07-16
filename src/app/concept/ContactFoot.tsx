@@ -24,12 +24,30 @@ export function ContactFoot() {
     setStatus("sending");
     setErrorMsg("");
 
+    // Web3Forms free tier only accepts browser-side submissions, so we post
+    // directly when the (public-by-design) access key is available and fall
+    // back to the serverless relay otherwise.
+    const accessKey = import.meta.env.VITE_EMAIL_ACCESS_KEY as string | undefined;
+
     try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, projectType, brief, website }),
-      });
+      const res = accessKey
+        ? await fetch("https://api.web3forms.com/submit", {
+            method: "POST",
+            headers: { "Content-Type": "application/json", Accept: "application/json" },
+            body: JSON.stringify({
+              access_key: accessKey,
+              name,
+              email,
+              subject: `Portfolio enquiry from ${name}${projectType ? ` — ${projectType}` : ""}`,
+              message: `Role or project: ${projectType || "—"}\n\n${brief}`,
+              botcheck: website || undefined,
+            }),
+          })
+        : await fetch("/api/contact", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name, email, projectType, brief, website }),
+          });
 
       const data = await res.json();
 
