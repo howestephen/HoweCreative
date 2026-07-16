@@ -124,73 +124,114 @@
     "projects": [
       {
         "id": 1,
-        "slug": "solana-content-pipeline",
-        "title": "Solana → X Autonomous Content Pipeline",
-        "category": "AI System / Autonomous Publishing",
+        "slug": "solana-diary",
+        "title": "Solana Diary",
+        "category": "AI System / Autonomous Media",
         "year": "2026",
-        "status": "Live",
-        "shortDescription": "An autonomous publishing system: a Solana on-chain monitor feeds a generative asset pipeline that writes, renders, and posts to X up to three times a day — with human approval reduced to a single tap in Telegram.",
-        "fullDescription": "An end-to-end autonomous content system. An on-chain monitor tracks Solana token activity into Postgres; a render pipeline turns dataset payloads into finished visual assets; and a poster service generates deterministic post copy for fixed daily slots, requests approval through Telegram, and publishes to X — with retries, failure surfacing, and operator overrides.",
+        "status": "Archived",
+        "shortDescription": "An autonomous Solana-media system for X: seven services that turned live on-chain data and breaking news into designed, on-brand posts — each one approved by me from Telegram before it published.",
+        "fullDescription": "Solana Diary was an autonomous crypto-media channel on X. Seven services on Railway pulled live on-chain data and news, rendered it through a template system I designed, and drafted every post — but nothing published until I approved it from my phone. I designed the brand and the full set of post templates, and built the entire backend solo using AI coding tools.",
         "tags": [
           "AI Pipeline",
           "Automation",
           "Solana",
-          "Node.js",
-          "PostgreSQL",
           "Railway",
           "Telegram Bot API",
-          "X API"
+          "X API",
+          "Grok",
+          "Design System",
+          "Figma"
         ],
-        "image": "/case-studies/solana-pipeline/cover.svg",
+        "image": "/case-studies/solana-diary/twitter-header.png",
         "media": [
           {
             "type": "image",
-            "src": "/case-studies/solana-pipeline/cover.svg",
-            "alt": "Solana to X pipeline overview"
+            "src": "/case-studies/solana-diary/news_cards__2026-05-18__id5078__MORGAN-STANLEY-BOOSTS-SOLANA-ETF-STAKE-TO-29__POSTED.png",
+            "alt": "Posted news card — Morgan Stanley boosts its Solana ETF stake, rendered from my template"
           },
           {
             "type": "image",
-            "src": "/case-studies/solana-pipeline/architecture.svg",
-            "alt": "System architecture: monitor, Postgres, renderer, poster service, Telegram, X"
+            "src": "/case-studies/solana-diary/holder_growth_leaders_7d__2026-06-09__id6817__POSTED.png",
+            "alt": "Posted holder-growth leaderboard, generated from on-chain data with rugcheck scores"
           },
           {
             "type": "image",
-            "src": "/case-studies/solana-pipeline/approval-flow.svg",
-            "alt": "Human-in-the-loop approval flow via Telegram"
+            "src": "/case-studies/solana-diary/Single Token - 01.jpg",
+            "alt": "Single-token spotlight alert — a high-volume breakout, built from live market data"
           },
           {
             "type": "image",
-            "src": "/case-studies/solana-pipeline/schedule.svg",
-            "alt": "Slot scheduling and retry logic"
+            "src": "/case-studies/solana-diary/Token Warning - 01.jpg",
+            "alt": "Security alert template — a token flagged as a confirmed rug"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/solana-diary/x-page-screenshot.png",
+            "alt": "The live @solana_diary account on X the system published to"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/solana-diary/Example Telegram News Approval 01.png",
+            "alt": "Telegram approval — Grok-scored story suggestions with retweet, quote, full-post, and skip controls"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/solana-diary/Figma Project Screenshot.png",
+            "alt": "The Figma template system I designed — every post family on a shared type and colour system"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/solana-diary/diary weekly schedule.png",
+            "alt": "The automated weekly posting schedule across morning, midday, and evening slots"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/solana-diary/single_pool_spotlight__2026-06-15__id7115__render.png",
+            "alt": "Pool spotlight alert template"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/solana-diary/Week Ahead Watchlist - 01.jpg",
+            "alt": "Week-ahead watchlist — tokens to watch, posted every Monday"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/solana-diary/trending_memecoins_48h__2026-06-12__id6901__POSTED.png",
+            "alt": "Posted trending-memecoins data card"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/solana-diary/twitter-header.png",
+            "alt": "Solana Diary brand — the logo and banner I designed"
           }
         ],
         "gradient": "from-[#8b0020] to-[#ff003c]",
-        "role": "System Designer & Builder",
+        "role": "Solo build — brand, design system & engineering",
         "client": "Self-initiated",
         "overlaySections": [
           {
             "title": "Brief",
-            "body": "Build a content channel that runs itself: turn live Solana market activity into designed, on-brand posts published to X on a fixed daily schedule — without a human doing production work."
+            "body": "Run a Solana-focused media channel on X that publishes designed, on-brand posts every day — both breaking news and on-chain data — without a person doing the daily production, and without ever letting misleading or unsafe information reach the timeline."
           },
           {
             "title": "Problem Frame",
-            "body": "Consistent social output is a production-line problem. Doing it manually means daily design and copywriting, and skipping days kills a channel. The system needed to produce publishable quality autonomously while keeping a human accountable for what actually goes out."
+            "body": "Daily crypto content is a production line: fresh data every few hours, news breaking constantly, and a hard requirement that nothing dangerous goes out. Doing it by hand doesn't scale; fully automating it risks posting bad data or shilling a token that's about to rug. The system had to produce publishable, on-brand work autonomously while keeping me accountable for every single post."
           },
           {
             "title": "System Design",
-            "body": "Three cooperating services share a Postgres database: a monitor that ingests on-chain activity and keeps source tables fresh; a render pipeline that turns dataset payloads into finished visual assets; and a poster service that owns scheduling across fixed daily slots, deterministic copy generation per post family, Telegram approval messaging, publication to X, and retry and error surfacing."
+            "body": "Seven services on Railway, built solo with AI (Claude, Cursor, Codex). An hourly CRON scheduler drove everything: at set times it pulled live data from five providers — CoinGecko, Helius, Rugcheck, Birdeye, and Dexscreener — and rendered it through post templates I'd designed in Figma into finished graphics. In parallel it polled Grok for recent stories from a shortlist of trusted channels, scored them, and drafted news cards. Roughly three scheduled data posts went out per day — trending memecoins, new launches, holder-growth leaders, liquidity flows, biggest movers, weekly safety report and more — with event-driven alerts in between: Pool Spotlights, Single-Token Spotlights, and Security Alerts. Every asset and drafted story arrived in Telegram for sign-off. Grok wrote the body copy once I'd approved the asset; I checked it and used a set of Telegram reply-to commands to edit fields, rewrite the copy, or drop dangerous tokens the APIs had surfaced. Only on my approval did it post to X."
           },
           {
             "title": "Trade-offs",
-            "body": "Full autonomy was possible but wrong — one bad post costs more than the effort of approving each one. The compromise is human-in-the-loop by default: the pipeline does all of the production, and the human decision is reduced to a single tap in Telegram. Copy generation is deterministic rather than LLM-freeform for the same reason — outputs stay predictable, on-brand, and cheap to validate. The services are deliberately decoupled: the poster only reads shared database state, so a failure in one stage degrades the system instead of cascading through it."
+            "body": "Full autonomy was the wrong target — one misleading post about a rugging token is worse than any amount of manual effort. So approval stayed human: the system did all of the data-gathering, rendering, and drafting, and my decision came down to a tap, or a quick reply-to edit, per post. The reply-to layer existed specifically to kill bad data before it reached the timeline — low rugcheck scores, mislabelled fields, tokens that looked unsafe. It shipped with a magazine-style web front end that mirrored every posted asset and story, but that was never rebuilt after a later backend rewrite, so the channel became the product."
           },
           {
             "title": "Delivery",
-            "body": "Deployed as separate Railway services — monitor, renderer, and poster — sharing Postgres and environment conventions. A Telegram webhook handles approvals and operator controls; scheduled slots publish approved posts to X with automatic retries and clear failure messaging."
+            "body": "Seven cooperating Railway services; five market and on-chain APIs; Grok in two roles — news curation and copywriting; a Telegram bot for approvals and reply-to edits; the X API for publishing; and a Figma template system of roughly fifteen post families on a shared Space Grotesk / IBM Mono type system, a Solana purple-to-green identity, and per-family accent colours (green for momentum, red for risk, purple for news and data). I designed the logo, the banner, and every template."
           },
           {
             "title": "Outcome",
-            "body": "A channel that publishes designed content up to three times daily for seconds of human effort per post. It demonstrates the pattern my current work is built on: creative direction encoded into a system, production automated, and human judgement kept exactly where it earns its cost."
+            "body": "It ran daily and did exactly what it was built to do: a designed, on-brand post every few hours, with a human veto on every one. The project ended when X permanently suspended the account for \"impersonation\" — never specifying the cause, possibly the volume of generated imagery, and declining to reinstate it or explain further. Dead as a product, it's still the most complete thing I've built solo with AI: seven services, five data providers, an LLM doing two jobs, a full approval UX, and a designed template system — and a sharp lesson that platform risk is a first-class design constraint the moment you automate publishing."
           }
         ]
       },
@@ -653,25 +694,13 @@
         "tags": [
           "Claude Code",
           "Codex",
-          "Figma Make",
           "Agentic Workflow",
           "React",
           "TypeScript",
-          "Three.js"
+          "Tailwind"
         ],
-        "image": "/case-studies/ai-portfolio-system/cover.svg",
-        "media": [
-          {
-            "type": "image",
-            "src": "/case-studies/ai-portfolio-system/cover.svg",
-            "alt": "Agentic build system overview"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/ai-portfolio-system/build-loop.svg",
-            "alt": "The phase, build, QA loop that produced this site"
-          }
-        ],
+        "image": "",
+        "media": [],
         "gradient": "from-[#ff4466] to-[#4f0012]",
         "role": "Designer & Pipeline Builder",
         "client": "Self-initiated",
@@ -694,7 +723,7 @@
           },
           {
             "title": "Delivery",
-            "body": "This site: React 19, TypeScript, Tailwind 4, and Three.js with iOS fallbacks, a JSON content model, a serverless contact relay with rate limiting, and a test suite — shipped through the loop described above."
+            "body": "This site: React 19, TypeScript, and Tailwind 4, a JSON content model, a serverless contact relay with rate limiting, and a test suite — shipped through the loop described above."
           },
           {
             "title": "Outcome",

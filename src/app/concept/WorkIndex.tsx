@@ -7,15 +7,15 @@ import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 
 /** Outcome-first teasers — the one line a hiring manager reads. */
 const TEASERS: Record<string, string> = {
-  "solana-content-pipeline":
-    "A channel that publishes designed content three times a day — for seconds of human effort.",
+  "solana-diary":
+    "Seven services that turned live Solana data and news into designed posts — every one approved from my phone before it hit X.",
   "uncx-rebrand":
     "Two-phase rebrand of a multi-chain DeFi protocol — one visual system across 10+ product pages.",
   "uncx-video-system":
     "The pipeline behind 100+ videos — templated 3D and motion production at launch cadence.",
   "badger-club":
     "A full-stack badge-tracking platform — design to deployed product, solo, AI-assisted.",
-  "ai-portfolio-system": "The agentic build system whose output you're reading right now.",
+  "ai-portfolio-system": "The agentic build system whose output you're reading right now — spec to phased roadmap to gated build.",
   "uncx-menu":
     "One navigation system for an entire product suite — researched, variable-driven, ready to build.",
   "uncx-academy": "An education platform's brand and design system, fed by the video pipeline.",
