@@ -61,12 +61,13 @@ export function Layout() {
             >
               CV
             </a>
-            <a
-              href="mailto:howestephen@gmail.com"
+            <button
+              type="button"
+              onClick={() => jumpTo("contact")}
               className="bg-accent px-3.5 py-1.5 text-xs font-medium text-accent-foreground transition-colors hover:bg-accent-hover"
             >
-              Email
-            </a>
+              Contact
+            </button>
           </nav>
         </div>
       </header>

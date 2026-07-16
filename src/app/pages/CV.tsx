@@ -128,8 +128,8 @@ export function CV() {
           Creative technologist with 20+ years connecting brand, 3D, motion, product design, and front-end code. For
           the last four years I've been the sole designer at a multi-chain DeFi protocol, owning everything from
           company rebrands to shipped product UI. I design systems rather than one-off artefacts — and increasingly
-          I build the AI pipelines that produce them: agentic build loops for software, generative asset workflows
-          for 3D and video, and autonomous publishing systems. Systems thinker with natural strengths in pattern
+          I build the pipelines that produce them: AI-assisted build loops for software, generative asset workflows
+          for 3D and video, and automated publishing systems with human approval built in. Systems thinker with natural strengths in pattern
           recognition, deep-focus problem solving, and forward planning in cross-functional teams.
         </p>
 
@@ -141,7 +141,7 @@ export function CV() {
               <p className="mt-0.5 text-sm leading-snug text-neutral-700">
                 AI-assisted development (Claude Code, Codex), agentic build pipelines (spec → phased roadmap →
                 automated build and QA loops), generative asset workflows (ComfyUI), prompt system design,
-                autonomous publishing pipelines (Telegram approval → X API)
+                automated publishing pipelines (Telegram approval → X API)
               </p>
             </div>
             <div>
@@ -239,13 +239,42 @@ export function CV() {
             </ul>
           </article>
 
-          <p className="mt-4 text-xs text-neutral-500">
-            Full career history on{" "}
-            <a href="https://www.linkedin.com/in/howestephen" target="_blank" rel="noreferrer">
-              LinkedIn
-            </a>
-            .
-          </p>
+          <article className="mt-6 break-inside-avoid">
+            <div className="flex flex-wrap items-baseline justify-between gap-x-4">
+              <h3 className="text-base">Earlier career — design &amp; technology</h3>
+              <p className={ENTRY_META}>2005 – 2016</p>
+            </div>
+            <ul className={BULLET_LIST}>
+              <li>
+                <span className="font-medium">2nd Line Support Technician, Qtac Solutions</span> (2014–16) — senior
+                support for HMRC payroll software; trained the team and redesigned the company website
+              </li>
+              <li>
+                <span className="font-medium">Web &amp; Social Media Manager, Burger Theory UK</span> (2012–16,
+                concurrent) — brand, website, and social presence for a street-food startup, from launch
+              </li>
+              <li>
+                <span className="font-medium">Venue &amp; Promotions Manager, Hot Biscuit</span> (2011–12) — design
+                and promotion across three Brighton music venues
+              </li>
+              <li>
+                <span className="font-medium">Brand Manager, 412 Promotions</span> (2009–11) — website, shop, and
+                events; managed a 10+ freelance writing team
+              </li>
+              <li>
+                <span className="font-medium">Junior Helpdesk Technician, Right Click Computers</span> (2008–09) —
+                remote support for campus TV servers in ~150 UK universities
+              </li>
+              <li>
+                <span className="font-medium">Database Technician, BBC</span> (2007–08) — core-database migration and
+                cleansing at Television Centre
+              </li>
+              <li>
+                <span className="font-medium">Web Manager &amp; Graphic Designer, Good Salon Guide</span> (2005–06) —
+                websites, design, and office network, while at university
+              </li>
+            </ul>
+          </article>
         </section>
 
         <section className="mb-8">

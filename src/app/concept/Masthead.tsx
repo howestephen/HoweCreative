@@ -54,10 +54,14 @@ export function Masthead() {
 
             <motion.div variants={item} className="flex flex-wrap items-center gap-3">
               <a
-                href="mailto:howestephen@gmail.com"
+                href="#contact"
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+                }}
                 className="inline-flex items-center gap-2 bg-accent px-6 py-3.5 text-sm font-medium text-accent-foreground transition-colors hover:bg-accent-hover"
               >
-                Email me
+                Get in touch
               </a>
               <a
                 href="/cv"
