@@ -25,14 +25,14 @@ const PRACTICES = [
   },
   {
     index: "03",
-    title: "AI pipelines & automation",
+    title: "Automation & AI-assisted builds",
     points: [
-      "Agentic build loops: spec → phased roadmap → build/QA gates",
-      "Autonomous publishing: on-chain data → rendered assets → X",
-      "Human-in-the-loop approval flows that cost seconds, not days",
-      "This site ships itself through exactly that loop",
+      "Automated media pipelines: live data → templated render → human approval → X",
+      "Rate-limited data layers that run all day on free-tier APIs",
+      "Telegram approval flows that cut a post to one tap or a quick edit",
+      "AI-assisted build loops: spec → phased roadmap → build/QA gates",
     ],
-    tools: "Claude Code · Codex · ComfyUI · Node.js",
+    tools: "Claude Code · Codex · Railway · Node.js",
   },
 ] as const;
 
