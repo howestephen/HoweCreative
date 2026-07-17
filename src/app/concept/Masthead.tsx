@@ -47,7 +47,7 @@ export function Masthead() {
             </motion.h1>
 
             <motion.p variants={item} className="max-w-xl text-lg leading-relaxed text-muted-foreground">
-              Stephen Howe — creative technologist. Twenty years across brand, 3D, motion,
+              Stephen Howe — creative technologist. Two decades across brand, 3D, motion,
               product, and code; lately, automated pipelines that render and publish live
               data — built fast with AI.
             </motion.p>
@@ -92,8 +92,8 @@ export function Masthead() {
 
           <motion.dl variants={item} className="grid grid-cols-2 gap-x-8 gap-y-6 border-t border-border pt-6 sm:grid-cols-4">
             {METRICS.map((metric) => (
-              <div key={metric.label}>
-                <dt className="order-2 font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
+              <div key={metric.label} className="flex flex-col">
+                <dt className="flex-1 font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
                   {metric.label}
                 </dt>
                 <dd className="headline-font text-3xl text-foreground md:text-4xl">{metric.value}</dd>

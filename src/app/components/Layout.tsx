@@ -1,3 +1,4 @@
+import { MotionConfig } from "motion/react";
 import { Outlet } from "react-router";
 import { Link } from "react-router";
 
@@ -14,6 +15,10 @@ function jumpTo(target: string) {
 
 export function Layout() {
   return (
+    // reducedMotion="user" makes every motion/react animation respect the
+    // OS-level prefers-reduced-motion setting (the plotter mark handles it
+    // separately in canvas code).
+    <MotionConfig reducedMotion="user">
     <div className="relative min-h-screen bg-background text-foreground selection:bg-accent selection:text-accent-foreground">
       {/* paper grain */}
       <div
@@ -76,5 +81,6 @@ export function Layout() {
         <Outlet />
       </main>
     </div>
+    </MotionConfig>
   );
 }
