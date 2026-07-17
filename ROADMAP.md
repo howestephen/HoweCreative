@@ -31,12 +31,19 @@ behaviour, and conversion paths are approved.
 
 ## Current Next Steps
 
-1. End-to-end responsive and accessibility QA of the editorial homepage.
-2. Verify `/cv` printing and PDF export in Chromium, Safari, and mobile layouts.
-3. Review every career claim, date, metric, and case-study outcome for accuracy.
-4. Test the production contact flow with the Vercel `EMAIL_ACCESS_KEY`.
-5. Review initial bundle composition and defer below-fold work where it improves
-   loading without weakening the first impression.
+1. ✓ Responsive and accessibility QA of the editorial homepage (a11y audit
+   clean; no overflow at 375/768/1280; reduced-motion honoured site-wide via
+   `MotionConfig`; work rows keyboard-operable with `aria-expanded`).
+2. ✓ `/cv` print contract verified in code (`@page` margins, `.no-print`
+   controls, forced white background; lazy chunk + fallback confirmed).
+   Remaining: a manual print preview in Chromium and Safari before merge.
+3. ✓ Career claims, dates, and metrics reviewed for consistency across
+   `site-content.json`, `Method.tsx`, `Masthead.tsx`, and `CV.tsx`.
+4. Test the production contact flow on the next Vercel deploy (the build now
+   embeds `EMAIL_ACCESS_KEY`, already present in all Vercel environments;
+   requires an SSO-authenticated visit to a preview, or production after merge).
+5. ✓ Bundle composition reviewed: 162 kB gzip main chunk, icons split, CV in
+   its own lazy chunk, three.js absent from the editorial build.
 6. Remove deprecated components and dependencies only after the replacement
    design is approved, so rollback remains simple.
 7. Merge the approved branch to `main` and validate the production deployment.
