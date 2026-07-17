@@ -1,5 +1,8 @@
 # Hero Code-Split, Shell Cleanup, and Accessibility Polish
 
+> Historical plan for the previous portfolio. The replacement editorial
+> homepage does not mount `MatrixRainHero`; use `ROADMAP.md` for current work.
+
 > **For Claude:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task.
 
 **Goal:** Lazy-load the Three.js hero to reduce initial bundle, delete dead components, harden loading-screen accessibility, and do a readability pass.

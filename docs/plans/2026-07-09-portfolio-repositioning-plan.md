@@ -3,6 +3,13 @@
 **Date:** 2026-07-09
 **Goal:** Reposition howecreative.co.uk and the CV so a hiring manager at a large international firm (or a crypto company) reacts with "that's unique, book a call" instead of "dark and retro." Target roles: Creative Technologist / AI Designer / Design Engineer, permanent preferred, contract acceptable.
 
+**Status (2026-07-17):** Implemented as a replacement editorial design on
+`claude/concept-editorial`. The previous site remains on `main` until responsive,
+accessibility, content, CV-export, and contact-flow QA are complete. Where the
+implementation deliberately moved beyond an item below—such as replacing the
+dual-theme concept with a light-first editorial system—the current roadmap in
+`ROADMAP.md` is authoritative.
+
 ---
 
 ## 1. Diagnosis
@@ -193,29 +200,29 @@ This is entirely a personal decision and there are good reasons on both sides. T
 ## 7. Phased roadmap (loop-compatible)
 
 ### Phase 0 — Stop the bleeding (hours)
-- [ ] Replace Bitwise headline font (interim: IBM Plex Mono 600; final: new grotesk) — kills "Shills/toolhit/QUICH"
-- [ ] Fix mobile hero wordmark overflow (clamp/scale)
-- [ ] Footer: `© 2026`, LinkedIn label, remove or populate Archive
-- [ ] `index.html`: title, meta description, OG/Twitter card + image, favicon
-- [ ] Contact: add direct email link; relabel status line in plain English
+- [x] Replace Bitwise headline font (interim: IBM Plex Mono 600; final: new grotesk) — kills "Shills/toolhit/QUICH"
+- [x] Replace the overflowing wordmark hero with the responsive editorial masthead
+- [x] Footer: `© 2026`, LinkedIn label, remove or populate Archive
+- [x] `index.html`: title, meta description, OG/Twitter card + image, favicon
+- [x] Contact: use a plain-language contact form and response expectation (public email intentionally withheld)
 - Acceptance: no misrendered words anywhere; link unfurls with name+role+image; mobile hero intact at 375px.
 
 ### Phase 1 — Voice & conversion (days)
-- [ ] Site-wide copy pass: first person, plain labels, name in hero, spine sentence, proof strip
-- [ ] Quantified outcome line atop every case study; status renames
-- [ ] `Download CV` + `/cv` route; services/availability block
+- [x] Site-wide copy pass: first person, plain labels, name in hero, spine sentence, proof strip
+- [x] Outcome-first line for every case study; status renames
+- [x] Printable/exportable `/cv` route; services/availability block
 - Acceptance: a stranger can answer "who, what, for whom, hire how?" from the first viewport.
 
 ### Phase 2 — Proof of the AI claim (1–2 weeks)
-- [ ] Flagship case study: Solana → X pipeline (diagram, Telegram UI, asset grid, live embeds)
-- [ ] "How this site builds itself" page from the real prompt system docs
+- [x] Flagship case study: Solana → X pipeline with real production media
+- [x] "How this site builds itself" represented as the AI Portfolio System case study
 - [ ] Testimonials + logos (request this week)
-- [ ] ATS-clean CV shipped and tested through a parser; crypto + generic variants
+- [x] ATS-clean HTML CV shipped; final cross-browser PDF-export QA remains
 - Acceptance: an "AI Designer" JD's keywords all appear, truthfully, on site and CV.
 
 ### Phase 3 — The re-skin (2–4 weeks)
-- [ ] Dual theme (light/dark, system default + toggle), new palette and type ramp
-- [ ] Generative hero using own assets; per-project cover art
+- [x] Light-first editorial palette and type ramp (dual theme intentionally superseded)
+- [x] Generative plotter masthead and outcome-first project index (cover-art grid intentionally superseded)
 - [ ] Contrast/a11y pass (AA), performance pass (lazy-load galleries, cap WebGL)
 - Acceptance: 5-second test with 3 strangers returns "modern / technical / senior", not "dark / retro".
 
