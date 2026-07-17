@@ -1,33 +1,42 @@
-import { defineConfig } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
 import path from 'path'
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 
-export default defineConfig({
-  plugins: [
-    // The React and Tailwind plugins are both required for Make, even if
-    // Tailwind is not being actively used – do not remove them
-    react(),
-    tailwindcss(),
-  ],
-  resolve: {
-    alias: {
-      // Alias @ to the src directory
-      '@': path.resolve(__dirname, './src'),
+import { resolveContactBuildConfig } from './src/app/lib/contact-build-config'
+
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd(), '')
+  const { contactTransport, publicEmailAccessKey } = resolveContactBuildConfig({
+    ...env,
+    ...process.env,
+  })
+
+  return {
+    plugins: [
+      react(),
+      tailwindcss(),
+    ],
+    define: {
+      // Free-plan Web3Forms keys are public form identifiers. Server transport
+      // deliberately omits the key and uses WEB3FORMS_SERVER_ACCESS_KEY in API.
+      'import.meta.env.VITE_CONTACT_TRANSPORT': JSON.stringify(contactTransport),
+      'import.meta.env.VITE_EMAIL_ACCESS_KEY': JSON.stringify(publicEmailAccessKey),
     },
-  },
-
-  // File types to support raw imports. Never add .css, .tsx, or .ts files to this.
-  assetsInclude: ['**/*.svg', '**/*.csv'],
-
-  build: {
-    rollupOptions: {
-      output: {
-        // Keep heavyweight vendors cacheable and off the critical path
-        manualChunks: {
-          icons: ['react-icons', 'lucide-react'],
+    resolve: {
+      alias: {
+        '@': path.resolve(__dirname, './src'),
+      },
+    },
+    assetsInclude: ['**/*.svg', '**/*.csv'],
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            icons: ['react-icons', 'lucide-react'],
+          },
         },
       },
     },
-  },
+  }
 })
