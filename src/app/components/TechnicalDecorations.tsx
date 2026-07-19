@@ -1,7 +1,7 @@
 export function TechnicalDecorations() {
   return (
     <>
-      {/* Scanline — CSS-only animation, very subtle */}
+      {/* Scanline - CSS-only animation, very subtle */}
       <div
         className="fixed top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-accent/15 to-transparent pointer-events-none z-[15]"
         style={{
@@ -10,7 +10,7 @@ export function TechnicalDecorations() {
       />
       <style>{`@keyframes scanline { from { top: 0%; } to { top: 100%; } }`}</style>
 
-      {/* Grain overlay — static, no animation */}
+      {/* Grain overlay - static, no animation */}
       <div
         className="fixed inset-0 pointer-events-none z-[99] opacity-[0.015]"
         style={{

@@ -9,3 +9,6 @@ dist
 
 # Private source material — never publish
 docs/private/
+
+# Local asset archive - unused project media kept for future redesigns
+assets-archive/

@@ -185,7 +185,7 @@ const content = rawContent as {
 };
 
 const toolIconMap: Record<string, IconComponent> = {
-  // Lucide — used as brand fallbacks
+  // Lucide - used as brand fallbacks
   AudioLines,     // Ableton Live
   AudioWaveform,  // Serum
   Bot,

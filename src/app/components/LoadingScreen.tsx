@@ -27,7 +27,7 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
   const [exiting, setExiting] = useState(false);
   const [cursorVisible, setCursorVisible] = useState(true);
 
-  // Reduced-motion shortcut — skip animation entirely
+  // Reduced-motion shortcut - skip animation entirely
   useEffect(() => {
     if (!prefersReducedMotion) return;
     const id = setTimeout(() => onComplete(), 100);
@@ -100,7 +100,7 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
               border: 0,
             }}
           >
-            Loading portfolio — please wait
+            Loading portfolio - please wait
           </span>
 
           {/* Scan-line overlay */}
@@ -128,7 +128,7 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
 
           <div className="relative z-10 flex flex-1 items-center justify-center">
             <div className="w-full max-w-3xl space-y-6">
-              {/* Log lines — centered block */}
+              {/* Log lines - centered block */}
               <div aria-live="polite" aria-atomic="false">
                 <div className="flex flex-col items-center gap-3">
                   {LOG_LINES.slice(0, visibleLines).map((line, i) => {

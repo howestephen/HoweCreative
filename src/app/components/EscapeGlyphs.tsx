@@ -19,8 +19,8 @@ interface EscapeFragment {
   tailChars: string[];
   fallPx: number;
   durationMs: number;
-  fontSize: number;   // px — varies like depth layers in the main rain
-  opacity: number;    // base opacity — dimmer = further "back"
+  fontSize: number;   // px - varies like depth layers in the main rain
+  opacity: number;    // base opacity - dimmer = further "back"
 }
 
 let _nextId = 0;
@@ -28,14 +28,14 @@ let _nextId = 0;
 function spawnFragment(): EscapeFragment {
   const tailLen = 2 + Math.floor(Math.random() * 14);
   // Size range mirrors the WebGL rain's depth variation: small/distant to large/close
-  const fontSize = 8 + Math.random() * 12; // 8–20px
-  const opacity  = 0.35 + Math.random() * 0.5; // 0.35–0.85
+  const fontSize = 8 + Math.random() * 12; // 8-20px
+  const opacity  = 0.35 + Math.random() * 0.5; // 0.35-0.85
   return {
     id: _nextId++,
     x: 2 + Math.random() * 96,
     tailChars: Array.from({ length: tailLen }, randomGlyph),
     fallPx: window.innerHeight * 1.3 + 120,
-    // Slower columns feel more distant; faster ones feel close — vary widely
+    // Slower columns feel more distant; faster ones feel close - vary widely
     durationMs: 4000 + Math.random() * 8000,
     fontSize,
     opacity,
@@ -99,7 +99,7 @@ function FallingFragment({
   );
 }
 
-// Max 14 active — roughly 10% of the main rain's 280 column density
+// Max 14 active - roughly 10% of the main rain's 280 column density
 const MAX_ACTIVE = 6;
 
 export function EscapeGlyphs() {
@@ -111,7 +111,7 @@ export function EscapeGlyphs() {
   }, []);
 
   const scheduleNext = useCallback(() => {
-    // Slow spawn: 1.5–4s between new columns, keeping density low
+    // Slow spawn: 1.5-4s between new columns, keeping density low
     const delay = 1500 + Math.random() * 2500;
     timerRef.current = setTimeout(() => {
       setFragments((prev) => {

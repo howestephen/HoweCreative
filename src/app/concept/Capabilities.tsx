@@ -48,7 +48,7 @@ export function Capabilities() {
         </div>
         <p className="mb-12 max-w-xl text-sm leading-relaxed text-muted-foreground">
           Different outputs, same approach: reduce the problem to inputs, constraints, and
-          outputs — then build the repeatable machine.
+          outputs - then build the repeatable machine.
         </p>
 
         <div className="grid gap-px border border-border bg-border md:grid-cols-3">

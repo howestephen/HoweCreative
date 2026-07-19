@@ -90,7 +90,7 @@ export function ContactPanel() {
                 Message sent
               </div>
               <p className="text-sm text-muted-foreground">
-                Thanks — I'll reply within 24 hours.
+                Thanks - I'll reply within 24 hours.
               </p>
               <button
                 type="button"

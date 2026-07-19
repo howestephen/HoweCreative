@@ -7,8 +7,8 @@
     "brandPrefix": "HOWE",
     "brandSuffix": "_CREATIVE",
     "role": "Creative Technologist",
-    "headline": "I design brand, product, and 3D systems — and build the AI pipelines that produce them at scale.",
-    "summary": "This portfolio was designed and built with Figma Make, Codex, and Claude Code — driven by a custom prompt system that walks a phased roadmap, executing build and QA tasks in an iterative loop.",
+    "headline": "I design brand, product, and 3D systems - and build the AI pipelines that produce them at scale.",
+    "summary": "This portfolio was designed and built with Figma Make, Codex, and Claude Code - driven by a custom prompt system that walks a phased roadmap, executing build and QA tasks in an iterative loop.",
     "navVersion": "v2.0",
     "githubUrl": "https://github.com/howestephen",
     "linkedinUrl": "https://www.linkedin.com/in/howestephen/",
@@ -61,7 +61,7 @@
   "operatorProfile": {
     "eyebrow": "About",
     "title": "Stephen Howe",
-    "description": "Background, working methods, current focus — and what I'm looking for next.",
+    "description": "Background, working methods, current focus - and what I'm looking for next.",
     "primaryFileLabel": "File 01",
     "primaryFileStatus": "Open",
     "portraitFooterLeft": "Stephen Howe",
@@ -95,17 +95,17 @@
       {
         "fileLabel": "File 02",
         "title": "Summary",
-        "body": "Creative technologist working across product design, media pipelines, and technical prototyping. I lead briefs from specification through to delivery — coordinating external teams, building repeatable frameworks, and shipping across UI, motion, and AI-assisted production."
+        "body": "Creative technologist working across product design, media pipelines, and technical prototyping. I lead briefs from specification through to delivery - coordinating external teams, building repeatable frameworks, and shipping across UI, motion, and AI-assisted production."
       },
       {
         "fileLabel": "File 03",
         "title": "Working style",
-        "body": "Structured system design with iterative prototyping. I reduce problems to inputs, constraints, and outputs, then rebuild them as reusable templates rather than one-off solutions — validating design decisions through stakeholder feedback loops until alignment is reached."
+        "body": "Structured system design with iterative prototyping. I reduce problems to inputs, constraints, and outputs, then rebuild them as reusable templates rather than one-off solutions - validating design decisions through stakeholder feedback loops until alignment is reached."
       },
       {
         "fileLabel": "File 04",
         "title": "Current focus",
-        "body": "Video generation systems, AI-assisted development pipelines, interface architecture, and tools that reduce the distance between idea and deployed product. Open to permanent creative technologist / AI designer roles and contract engagements — remote, from the UK."
+        "body": "Video generation systems, AI-assisted development pipelines, interface architecture, and tools that reduce the distance between idea and deployed product. Open to permanent creative technologist / AI designer roles and contract engagements - remote, from the UK."
       }
     ]
   },
@@ -129,8 +129,8 @@
         "category": "Automated Publishing / Media Pipeline",
         "year": "2026",
         "status": "Archived",
-        "shortDescription": "An automated Solana-media pipeline for X: seven services that turned live on-chain data and news into designed, on-brand posts — each one approved by me from Telegram before it published, all running on free-tier APIs.",
-        "fullDescription": "Solana Diary was an automated media pipeline for X. Seven services on Railway pulled live on-chain data and news and rendered it through a template system I designed — but nothing published until I approved it from Telegram. The pipeline ran on its own code, not on AI: I used AI (Claude, Cursor, Codex) to build it, and Grok was an optional, button-triggered assist for news scoring and copy. I designed the brand and the full set of post templates, and engineered the backend — including the rate-limiting system that kept the whole thing running on free APIs.",
+        "shortDescription": "An automated Solana-media pipeline for X: seven services that turned live on-chain data and news into designed, on-brand posts - each one approved by me from Telegram before it published, all running on free-tier APIs.",
+        "fullDescription": "Solana Diary was an automated media pipeline for X. Seven services on Railway pulled live on-chain data and news and rendered it through a template system I designed - but nothing published until I approved it from Telegram. The pipeline ran on its own code, not on AI: I used AI (Claude, Cursor, Codex) to build it, and Grok was an optional, button-triggered assist for news scoring and copy. I designed the brand and the full set of post templates, and engineered the backend - including the rate-limiting system that kept the whole thing running on free APIs.",
         "tags": [
           "Automation",
           "Media Pipeline",
@@ -148,52 +148,57 @@
           {
             "type": "image",
             "src": "/case-studies/solana-diary/news_cards__2026-05-18__id5078__MORGAN-STANLEY-BOOSTS-SOLANA-ETF-STAKE-TO-29__POSTED.png",
-            "alt": "Posted news card — Morgan Stanley boosts its Solana ETF stake, rendered from my template"
+            "alt": "Posted news card - Morgan Stanley boosts its Solana ETF stake"
           },
           {
             "type": "image",
             "src": "/case-studies/solana-diary/holder_growth_leaders_7d__2026-06-09__id6817__POSTED.png",
-            "alt": "Posted holder-growth leaderboard, generated from on-chain data with rugcheck scores"
+            "alt": "Posted holder-growth leaderboard with rugcheck scores"
           },
           {
             "type": "image",
             "src": "/case-studies/solana-diary/Single Token - 01.jpg",
-            "alt": "Single-token spotlight alert — a high-volume breakout, built from live market data"
+            "alt": "Single-token spotlight - high-volume breakout alert"
           },
           {
             "type": "image",
             "src": "/case-studies/solana-diary/Token Warning - 01.jpg",
-            "alt": "Security alert template — a token flagged as a confirmed rug"
+            "alt": "Security alert - token flagged as a confirmed rug"
           },
           {
             "type": "image",
             "src": "/case-studies/solana-diary/x-page-screenshot.png",
-            "alt": "The live @solana_diary account on X the system published to"
+            "alt": "The live @solana_diary account on X"
           },
           {
             "type": "image",
             "src": "/case-studies/solana-diary/Example Telegram News Approval 01.png",
-            "alt": "Telegram approval — Grok-scored story suggestions with retweet, quote, full-post, and skip controls"
+            "alt": "Telegram approval - scored story suggestions with post controls"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/solana-diary/Example Telegram News Approval 02.png",
+            "alt": "Telegram approval - second example of the review flow"
           },
           {
             "type": "image",
             "src": "/case-studies/solana-diary/Figma Project Screenshot.png",
-            "alt": "The Figma template system I designed — every post family on a shared type and colour system"
+            "alt": "The Figma template system - every post family on one type and colour system"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/solana-diary/Figma Project Components.png",
+            "alt": "Figma component library behind the post templates"
           },
           {
             "type": "image",
             "src": "/case-studies/solana-diary/diary weekly schedule.png",
-            "alt": "The automated weekly posting schedule across morning, midday, and evening slots"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/solana-diary/single_pool_spotlight__2026-06-15__id7115__render.png",
-            "alt": "Pool spotlight alert template"
+            "alt": "Automated weekly posting schedule across three daily slots"
           },
           {
             "type": "image",
             "src": "/case-studies/solana-diary/Week Ahead Watchlist - 01.jpg",
-            "alt": "Week-ahead watchlist — tokens to watch, posted every Monday"
+            "alt": "Week-ahead watchlist - tokens to watch, posted Mondays"
           },
           {
             "type": "image",
@@ -202,17 +207,72 @@
           },
           {
             "type": "image",
+            "src": "/case-studies/solana-diary/biggest_movers_48h__2026-06-13__id6926__render.png",
+            "alt": "Biggest movers 48h - rendered data card"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/solana-diary/new_launches_48h__2026-06-17__id8695__render.png",
+            "alt": "New launches 48h - rendered data card"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/solana-diary/liquidity_flows_7d__2026-06-16__id7258__render.png",
+            "alt": "Liquidity flows 7d - rendered data card"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/solana-diary/diary_insights_7d__2026-06-11__id6884__render.png",
+            "alt": "Diary insights 7d - what the data tells us"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/solana-diary/single_pool_spotlight__2026-06-15__id7115__render.png",
+            "alt": "Pool spotlight alert"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/solana-diary/single_pool_spotlight__2026-06-16__id7452__render.png",
+            "alt": "Pool spotlight alert - second example"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/solana-diary/news_cards__2026-05-22__id5201__USDF-STABLECOIN-LAUNCHES-ON-SOLANA-WITH-COIN__POSTED.png",
+            "alt": "Posted news card - USDF stablecoin launches on Solana"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/solana-diary/news_cards__2026-06-04__id5665__X402-AI-ECONOMY-TOPS-50M-VOLUME-IN-UNDER-A-M__POSTED.png",
+            "alt": "Posted news card - x402 AI economy tops 50M volume"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/solana-diary/news_cards__2026-06-11__id6873__COLLECTOR-CRYPT-HITS-9.6M-DAILY-ATH-IN-PACK__POSTED.png",
+            "alt": "Posted news card - Collector Crypt daily ATH"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/solana-diary/top_trading_apps_fees_30d__2026-06-10__id6852__POSTED.png",
+            "alt": "Posted top-trading-apps fees leaderboard"
+          },
+          {
+            "type": "image",
             "src": "/case-studies/solana-diary/twitter-header.png",
-            "alt": "Solana Diary brand — the logo and banner I designed"
+            "alt": "Solana Diary brand - logo and banner"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/solana-diary/SOLANA_DIARY_LOGO.png",
+            "alt": "Solana Diary logo lockup"
           }
         ],
         "gradient": "from-[#8b0020] to-[#ff003c]",
-        "role": "Solo build — brand, design system & engineering",
+        "role": "Solo build - brand, design system & engineering",
         "client": "Self-initiated",
         "overlaySections": [
           {
             "title": "Brief",
-            "body": "Run a Solana-focused media channel on X that publishes designed, on-brand posts every day — both breaking news and on-chain data — without a person doing the daily production, and without ever letting misleading or unsafe information reach the timeline."
+            "body": "Run a Solana-focused media channel on X that publishes designed, on-brand posts every day - both breaking news and on-chain data - without a person doing the daily production, and without ever letting misleading or unsafe information reach the timeline."
           },
           {
             "title": "Problem Frame",
@@ -220,19 +280,19 @@
           },
           {
             "title": "System Design",
-            "body": "Seven services on Railway, which I architected and built solo — using AI (Claude, Cursor, Codex) as the build tool, not as part of the running system. An hourly CRON scheduler drove everything: at set times it pulled live market and on-chain data from a set of free-tier public APIs and rendered it, in code, through the post templates I'd designed in Figma — every graphic was populated dynamically from the data, not generated by AI. A rate-limiting layer was central to the whole thing: because it ran entirely on free APIs, I chose providers with per-second rather than monthly limits and paced every request, so it could poll all day and stay current without breaching a quota. Roughly three scheduled data posts went out per day — trending memecoins, new launches, holder-growth leaders, liquidity flows, biggest movers, weekly safety report and more — with event-driven alerts in between: Pool Spotlights, Single-Token Spotlights, and Security Alerts. Grok was an optional, built-in assist I triggered by button — it scored and drafted news stories from a shortlist of channels and suggested copy. Nothing ran end-to-end on its own: every asset and story arrived in Telegram for sign-off, and a set of reply-to commands let me edit fields, rewrite copy, or drop dangerous tokens the APIs had surfaced before anything reached X."
+            "body": "Seven services on Railway, which I architected and built solo - using AI (Claude, Cursor, Codex) as the build tool, not as part of the running system. An hourly CRON scheduler drove everything: at set times it pulled live market and on-chain data from a set of free-tier public APIs and rendered it, in code, through the post templates I'd designed in Figma - every graphic was populated dynamically from the data, not generated by AI. A rate-limiting layer was central to the whole thing: because it ran entirely on free APIs, I chose providers with per-second rather than monthly limits and paced every request, so it could poll all day and stay current without breaching a quota. Roughly three scheduled data posts went out per day - trending memecoins, new launches, holder-growth leaders, liquidity flows, biggest movers, weekly safety report and more - with event-driven alerts in between: Pool Spotlights, Single-Token Spotlights, and Security Alerts. Grok was an optional, built-in assist I triggered by button - it scored and drafted news stories from a shortlist of channels and suggested copy. Nothing ran end-to-end on its own: every asset and story arrived in Telegram for sign-off, and a set of reply-to commands let me edit fields, rewrite copy, or drop dangerous tokens the APIs had surfaced before anything reached X."
           },
           {
             "title": "Trade-offs",
-            "body": "Nothing ran fully unattended — one misleading post about a rugging token is worse than any amount of manual effort — so approval stayed human. The system did all of the gathering, rendering, and drafting; my decision came down to a tap, or a quick reply-to edit, per post. Two constraints shaped the engineering. Cost: the whole thing ran on free APIs, so the rate-limiter — favouring per-second-limited providers and pacing every call — was what made all-day data possible with no paid plan. Safety: the reply-to layer existed specifically to kill bad data before it hit the timeline — low rugcheck scores, mislabelled fields, unsafe tokens. Even the news automation was deliberately capped: most days it was allowed only a handful of automated calls, though it could technically have fired every second. It shipped with a magazine-style web front end that mirrored every post, but that wasn't rebuilt after a later backend rewrite, so the channel became the product."
+            "body": "Nothing ran fully unattended - one misleading post about a rugging token is worse than any amount of manual effort - so approval stayed human. The system did all of the gathering, rendering, and drafting; my decision came down to a tap, or a quick reply-to edit, per post. Two constraints shaped the engineering. Cost: the whole thing ran on free APIs, so the rate-limiter - favouring per-second-limited providers and pacing every call - was what made all-day data possible with no paid plan. Safety: the reply-to layer existed specifically to kill bad data before it hit the timeline - low rugcheck scores, mislabelled fields, unsafe tokens. Even the news automation was deliberately capped: most days it was allowed only a handful of automated calls, though it could technically have fired every second. It shipped with a magazine-style web front end that mirrored every post, but that wasn't rebuilt after a later backend rewrite, so the channel became the product."
           },
           {
             "title": "Delivery",
-            "body": "Seven cooperating Railway services; a rate-limited data layer over free-tier public APIs; a code-driven rendering engine that populated my Figma templates from live data; a Telegram bot for approvals and reply-to edits; the X API for publishing; and an optional Grok assist for news scoring and copy. On the design side: a template system of roughly fifteen post families on a shared Space Grotesk / IBM Mono type system, a Solana purple-to-green identity, and per-family accent colours (green for momentum, red for risk, purple for news and data) — logo, banner, and every template designed by me."
+            "body": "Seven cooperating Railway services; a rate-limited data layer over free-tier public APIs; a code-driven rendering engine that populated my Figma templates from live data; a Telegram bot for approvals and reply-to edits; the X API for publishing; and an optional Grok assist for news scoring and copy. On the design side: a template system of roughly fifteen post families on a shared Space Grotesk / IBM Mono type system, a Solana purple-to-green identity, and per-family accent colours (green for momentum, red for risk, purple for news and data) - logo, banner, and every template designed by me."
           },
           {
             "title": "Outcome",
-            "body": "It ran daily and did exactly what it was built to do: a designed, on-brand post every few hours, with a human veto on every one. The project ended when X permanently suspended the account for \"impersonation\" — never specifying the cause, possibly the volume of posted imagery, and declining to reinstate it or explain further. Dead as a product, it's still the most complete system I've shipped solo: seven services, a rate-limited free-API data layer, a code-driven rendering pipeline, a full Telegram approval UX, and a designed template system — proof I can take something from architecture to daily operation on my own, and a sharp lesson that platform risk is a first-class design constraint the moment you automate publishing."
+            "body": "It ran daily and did exactly what it was built to do: a designed, on-brand post every few hours, with a human veto on every one. The project ended when X permanently suspended the account for \"impersonation\" - never specifying the cause, possibly the volume of posted imagery, and declining to reinstate it or explain further. Dead as a product, it's still the most complete system I've shipped solo: seven services, a rate-limited free-API data layer, a code-driven rendering pipeline, a full Telegram approval UX, and a designed template system - proof I can take something from architecture to daily operation on my own, and a sharp lesson that platform risk is a first-class design constraint the moment you automate publishing."
           }
         ]
       },
@@ -243,7 +303,7 @@
         "category": "Brand System / Visual Infrastructure",
         "year": "2022-2024",
         "status": "Complete",
-        "shortDescription": "Two-phase rebrand: a name and logo overhaul in 2022, then a full brand system and website redesign in 2024 — I wrote the brief and spec, an external team delivered the foundations, and I finished the system in-house.",
+        "shortDescription": "Two-phase rebrand: a name and logo overhaul in 2022, then a full brand system and website redesign in 2024 - I wrote the brief and spec, an external team delivered the foundations, and I finished the system in-house.",
         "fullDescription": "The UNCX Network rebrand happened in two stages. In 2022 I led a solo rebrand covering the company name change and primary logo. In 2024 an external team worked from my brief and design specification to deliver a full brand system and website redesign in Figma. I then brought the work in-house, completing content, layout, and graphics across 10+ pages.",
         "tags": [
           "Figma",
@@ -258,11 +318,6 @@
         ],
         "image": "/case-studies/uncx-rebrand/branding.webp",
         "media": [
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-rebrand/cover.webp",
-            "alt": "UNCX Network Rebrand overview"
-          },
           {
             "type": "image",
             "src": "/case-studies/uncx-rebrand/branding.webp",
@@ -390,11 +445,11 @@
         "overlaySections": [
           {
             "title": "Brief",
-            "body": "Evolve the UNCX Network brand across two phases — an initial name and logo change, then a comprehensive brand system and website redesign across the multi-chain DeFi ecosystem."
+            "body": "Evolve the UNCX Network brand across two phases - an initial name and logo change, then a comprehensive brand system and website redesign across the multi-chain DeFi ecosystem."
           },
           {
             "title": "Problem Frame",
-            "body": "The existing brand was inconsistent — different visual treatments per product, no systemised colour or typography logic, and marketing outputs that didn't align with the product UI. The first rebrand addressed the name and mark; the second tackled the full system."
+            "body": "The existing brand was inconsistent - different visual treatments per product, no systemised colour or typography logic, and marketing outputs that didn't align with the product UI. The first rebrand addressed the name and mark; the second tackled the full system."
           },
           {
             "title": "System Design",
@@ -402,7 +457,7 @@
           },
           {
             "title": "Trade-offs",
-            "body": "The first phase in 2022 was driven by a short-notice rebrand requirement, demanding a swift name and identity change with minimal runway. The second phase in 2024 introduced a different constraint: the external team delivered strong initial concepts, colour direction, and brand foundations, but struggled to populate the website designs with accurate product content — they understood the design system but lacked domain knowledge of the products. Hand-holding the content population wasn't sustainable, so I brought the project in-house, completing the website designs, content, and graphics on the foundations they'd set. The final resistance came in implementing the designs consistently across the development subteams."
+            "body": "The first phase in 2022 was driven by a short-notice rebrand requirement, demanding a swift name and identity change with minimal runway. The second phase in 2024 introduced a different constraint: the external team delivered strong initial concepts, colour direction, and brand foundations, but struggled to populate the website designs with accurate product content - they understood the design system but lacked domain knowledge of the products. Hand-holding the content population wasn't sustainable, so I brought the project in-house, completing the website designs, content, and graphics on the foundations they'd set. The final resistance came in implementing the designs consistently across the development subteams."
           },
           {
             "title": "Delivery",
@@ -410,7 +465,7 @@
           },
           {
             "title": "Outcome",
-            "body": "Achieved consistent visual output across all platforms and products. The split approach — external team for brand foundations, in-house for product-specific execution — became the working model. Brand alignment across product teams took longer than the design work itself, but the system now supports coherent output without design drift."
+            "body": "Achieved consistent visual output across all platforms and products. The split approach - external team for brand foundations, in-house for product-specific execution - became the working model. Brand alignment across product teams took longer than the design work itself, but the system now supports coherent output without design drift."
           }
         ]
       },
@@ -421,7 +476,7 @@
         "category": "Media System / Motion Pipeline",
         "year": "2023",
         "status": "Live",
-        "shortDescription": "End-to-end video production pipeline spanning Cinema 4D, After Effects, and Redshift — built for repeatable, high-frequency output.",
+        "shortDescription": "End-to-end video production pipeline spanning Cinema 4D, After Effects, and Redshift - built for repeatable, high-frequency output.",
         "fullDescription": "A modular production system covering 3D scene assembly in Cinema 4D, Redshift rendering, After Effects compositing, and templated timeline structures. Designed so that product launches, explainers, YouTube tutorials, and partner content could all ship from the same asset library without rebuilding from scratch each time.",
         "tags": [
           "Cinema 4D",
@@ -434,11 +489,6 @@
         ],
         "image": "/case-studies/uncx-video-system/youtube-thumbnails.webp",
         "media": [
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-video-system/cover.webp",
-            "alt": "UNCX Video System overview"
-          },
           {
             "type": "image",
             "src": "/case-studies/uncx-video-system/youtube-thumbnails.webp",
@@ -521,11 +571,11 @@
         "overlaySections": [
           {
             "title": "Brief",
-            "body": "UNCX Network needed a repeatable video system that could support product launches, explainer series, YouTube tutorials, and partner content — without rebuilding from scratch for every deliverable."
+            "body": "UNCX Network needed a repeatable video system that could support product launches, explainer series, YouTube tutorials, and partner content - without rebuilding from scratch for every deliverable."
           },
           {
             "title": "Problem Frame",
-            "body": "Production was fragmented across freelancers and one-off files. No shared asset library, no consistent motion language, and no templated pipeline — every video started from zero."
+            "body": "Production was fragmented across freelancers and one-off files. No shared asset library, no consistent motion language, and no templated pipeline - every video started from zero."
           },
           {
             "title": "System Design",
@@ -533,7 +583,7 @@
           },
           {
             "title": "Trade-offs",
-            "body": "Time was the primary constraint — I ran the full production pipeline solo alongside other responsibilities. Early videos were over-scoped: lengthy scripts from the marketing team, unique animations per scene, and tight delivery timelines. The key pivots were introducing script length restrictions, stripping back unnecessary scenes, and replacing per-scene custom animation with categorised, reusable templates. The system evolved from complex one-off productions into a streamlined pipeline optimised for volume without sacrificing brand consistency."
+            "body": "Time was the primary constraint - I ran the full production pipeline solo alongside other responsibilities. Early videos were over-scoped: lengthy scripts from the marketing team, unique animations per scene, and tight delivery timelines. The key pivots were introducing script length restrictions, stripping back unnecessary scenes, and replacing per-scene custom animation with categorised, reusable templates. The system evolved from complex one-off productions into a streamlined pipeline optimised for volume without sacrificing brand consistency."
           },
           {
             "title": "Delivery",
@@ -541,7 +591,7 @@
           },
           {
             "title": "Outcome",
-            "body": "Cut production time significantly across campaigns. Enabled consistent, brand-aligned output regardless of content type — from 60-second launch trailers to long-form educational content for the Academy. The constraint-driven simplification became the system's strength: fewer unique elements, faster turnaround, more consistent output."
+            "body": "Cut production time significantly across campaigns. Enabled consistent, brand-aligned output regardless of content type - from 60-second launch trailers to long-form educational content for the Academy. The constraint-driven simplification became the system's strength: fewer unique elements, faster turnaround, more consistent output."
           }
         ]
       },
@@ -567,11 +617,6 @@
         ],
         "image": "/case-studies/badger-club/dark-public-homepage.webp",
         "media": [
-          {
-            "type": "image",
-            "src": "/case-studies/badger-club/cover.webp",
-            "alt": "Badger Club overview"
-          },
           {
             "type": "image",
             "src": "/case-studies/badger-club/dark-public-homepage.webp",
@@ -663,7 +708,7 @@
           },
           {
             "title": "Problem Frame",
-            "body": "Badge tracking was manual — spreadsheets, paper records, and inconsistent communication between leaders and parents. Leaders carried the full admin burden with no structured tooling."
+            "body": "Badge tracking was manual - spreadsheets, paper records, and inconsistent communication between leaders and parents. Leaders carried the full admin burden with no structured tooling."
           },
           {
             "title": "System Design",
@@ -671,7 +716,7 @@
           },
           {
             "title": "Trade-offs",
-            "body": "Initially envisioned as a multi-user platform with accounts for leaders, parents, and children. Legal and complexity constraints forced a pivot: the app became leader-only, with parent and child interactions designed to work without any account or sign-up. A full inbox and messaging system was also scoped but simplified — mirroring messages across a leader inbox, leader email, and parent email added significant complexity through Resend. The compromise: leaders manage messages via an in-app inbox with email notifications, while parents receive messages directly by email. Development was managed solo using AI-assisted tooling, with phases scoped as atomised tasks to prevent drift during autonomous builds."
+            "body": "Initially envisioned as a multi-user platform with accounts for leaders, parents, and children. Legal and complexity constraints forced a pivot: the app became leader-only, with parent and child interactions designed to work without any account or sign-up. A full inbox and messaging system was also scoped but simplified - mirroring messages across a leader inbox, leader email, and parent email added significant complexity through Resend. The compromise: leaders manage messages via an in-app inbox with email notifications, while parents receive messages directly by email. Development was managed solo using AI-assisted tooling, with phases scoped as atomised tasks to prevent drift during autonomous builds."
           },
           {
             "title": "Delivery",
@@ -679,7 +724,7 @@
           },
           {
             "title": "Outcome",
-            "body": "Eliminated manual tracking overhead. The constraint-driven simplification — leader-only accounts, no-signup parent access, streamlined messaging — produced a leaner product with fewer barriers to adoption. Created a scalable foundation with subscription-based monetisation and clear paths for feature expansion."
+            "body": "Eliminated manual tracking overhead. The constraint-driven simplification - leader-only accounts, no-signup parent access, streamlined messaging - produced a leaner product with fewer barriers to adoption. Created a scalable foundation with subscription-based monetisation and clear paths for feature expansion."
           }
         ]
       },
@@ -690,7 +735,7 @@
         "category": "AI Workflow / Development Pipeline",
         "year": "2026",
         "status": "Live",
-        "shortDescription": "This portfolio is itself a case study — designed with Figma Make and built by a prompt system that walks a phased roadmap, executing build and QA tasks in an iterative loop.",
+        "shortDescription": "This portfolio is itself a case study - designed with Figma Make and built by a prompt system that walks a phased roadmap, executing build and QA tasks in an iterative loop.",
         "fullDescription": "The site you're reading was produced by a working AI development pipeline: a roadmap decomposed into atomised phases, a custom prompt system that executes each phase with Claude Code and Codex, automated build and QA gates between steps, and human review at phase boundaries. The same approach ships my product work.",
         "tags": [
           "Claude Code",
@@ -708,7 +753,7 @@
         "overlaySections": [
           {
             "title": "Brief",
-            "body": "Rebuild my portfolio — and treat the build itself as the demonstration: how much production software can an AI pipeline ship when the human supplies direction, taste, and review?"
+            "body": "Rebuild my portfolio - and treat the build itself as the demonstration: how much production software can an AI pipeline ship when the human supplies direction, taste, and review?"
           },
           {
             "title": "Problem Frame",
@@ -720,15 +765,15 @@
           },
           {
             "title": "Trade-offs",
-            "body": "Atomised tasks cost planning time up front — but they are what prevents drift during autonomous stretches. Phase gates trade raw speed for reviewability: I would rather approve ten coherent checkpoints than untangle one five-thousand-line diff. Where the agent's output disagreed with the spec — and it happens — the roadmap won: the system treats the plan as the source of truth, and plan changes are explicit edits rather than silent divergence."
+            "body": "Atomised tasks cost planning time up front - but they are what prevents drift during autonomous stretches. Phase gates trade raw speed for reviewability: I would rather approve ten coherent checkpoints than untangle one five-thousand-line diff. Where the agent's output disagreed with the spec - and it happens - the roadmap won: the system treats the plan as the source of truth, and plan changes are explicit edits rather than silent divergence."
           },
           {
             "title": "Delivery",
-            "body": "This site: React 19, TypeScript, and Tailwind 4, a JSON content model, a serverless contact relay with rate limiting, and a test suite — shipped through the loop described above."
+            "body": "This site: React 19, TypeScript, and Tailwind 4, a JSON content model, a serverless contact relay with rate limiting, and a test suite - shipped through the loop described above."
           },
           {
             "title": "Outcome",
-            "body": "A production site whose commit history doubles as evidence of the workflow. The same pattern — spec, phased roadmap, gated autonomous execution — is how I now approach product builds: AI provides the throughput, the system provides the discipline, and I provide the judgement."
+            "body": "A production site whose commit history doubles as evidence of the workflow. The same pattern - spec, phased roadmap, gated autonomous execution - is how I now approach product builds: AI provides the throughput, the system provides the discipline, and I provide the judgement."
           }
         ]
       },
@@ -750,11 +795,6 @@
         ],
         "image": "/case-studies/uncx-menu/menu-overview.webp",
         "media": [
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-menu/cover.webp",
-            "alt": "UNCX Unified Menu overview"
-          },
           {
             "type": "image",
             "src": "/case-studies/uncx-menu/menu-overview.webp",
@@ -802,7 +842,7 @@
         "overlaySections": [
           {
             "title": "Brief",
-            "body": "Design a unified navigation component that could work across all UNCX Network products and platforms — replacing inconsistent platform menus with a single scalable system."
+            "body": "Design a unified navigation component that could work across all UNCX Network products and platforms - replacing inconsistent platform menus with a single scalable system."
           },
           {
             "title": "Problem Frame",
@@ -814,7 +854,7 @@
           },
           {
             "title": "Trade-offs",
-            "body": "The project is on hold due to a shift in development priorities. The core design challenge was fitting multiple products and sub-brands into a single menu structure that remained efficient and navigable. An additional constraint was that the products are highly specialised — the menu needed to be mildly educational, helping users understand what each product does without slowing down experienced users. The main design compromise centred on hierarchy: several products generate significantly more revenue than others and needed visual priority, without devaluing the rest of the ecosystem."
+            "body": "The project is on hold due to a shift in development priorities. The core design challenge was fitting multiple products and sub-brands into a single menu structure that remained efficient and navigable. An additional constraint was that the products are highly specialised - the menu needed to be mildly educational, helping users understand what each product does without slowing down experienced users. The main design compromise centred on hierarchy: several products generate significantly more revenue than others and needed visual priority, without devaluing the rest of the ecosystem."
           },
           {
             "title": "Delivery",
@@ -822,7 +862,7 @@
           },
           {
             "title": "Outcome",
-            "body": "Delivered a complete design system ready for implementation. The hierarchy problem — balancing revenue-generating products against the broader ecosystem — was resolved by establishing definitive levels of hierarchy and de-prioritising non-value generating menu options. Currently on hold pending a shift in development priorities."
+            "body": "Delivered a complete design system ready for implementation. The hierarchy problem - balancing revenue-generating products against the broader ecosystem - was resolved by establishing definitive levels of hierarchy and de-prioritising non-value generating menu options. Currently on hold pending a shift in development priorities."
           }
         ]
       },
@@ -833,8 +873,8 @@
         "category": "Platform System / Education Product",
         "year": "2025",
         "status": "Complete",
-        "shortDescription": "Educational platform brand and design system — logotype, component library, article system, video pages, and glossary for DeFi learning.",
-        "fullDescription": "Brand and platform design for UNCX Academy. I wrote the brief and design specification; an external team delivered the initial design system — custom logotype, component library, and page templates — and I brought the project in-house, completing designs for article categorisation, video learning pages, glossary, integrations hub, and about page, ready for development. My video production system was integrated to produce the platform's educational library.",
+        "shortDescription": "Educational platform brand and design system - logotype, component library, article system, video pages, and glossary for DeFi learning.",
+        "fullDescription": "Brand and platform design for UNCX Academy. I wrote the brief and design specification; an external team delivered the initial design system - custom logotype, component library, and page templates - and I brought the project in-house, completing designs for article categorisation, video learning pages, glossary, integrations hub, and about page, ready for development. My video production system was integrated to produce the platform's educational library.",
         "tags": [
           "Figma",
           "Cinema 4D",
@@ -847,11 +887,6 @@
         ],
         "image": "/case-studies/uncx-academy/main-page.webp",
         "media": [
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-academy/cover.webp",
-            "alt": "UNCX Academy brand overview"
-          },
           {
             "type": "image",
             "src": "/case-studies/uncx-academy/main-page.webp",
@@ -949,7 +984,7 @@
         "overlaySections": [
           {
             "title": "Brief",
-            "body": "Design a complete educational platform brand and UI for UNCX Academy — covering identity, page designs, content structure, and a reusable component system."
+            "body": "Design a complete educational platform brand and UI for UNCX Academy - covering identity, page designs, content structure, and a reusable component system."
           },
           {
             "title": "Problem Frame",
@@ -957,11 +992,11 @@
           },
           {
             "title": "System Design",
-            "body": "I wrote the brief and design specification. An external team delivered the logotype, brand identity, and modular Figma component library. I then brought the project in-house, refining content structure across articles, videos, glossary entries, and integrations — each with its own page template and navigation pattern."
+            "body": "I wrote the brief and design specification. An external team delivered the logotype, brand identity, and modular Figma component library. I then brought the project in-house, refining content structure across articles, videos, glossary entries, and integrations - each with its own page template and navigation pattern."
           },
           {
             "title": "Trade-offs",
-            "body": "Having navigated similar external-team constraints during the rebrand, I applied a more structured handoff process for the Academy. The external design team delivered strong foundational work — logotype, component library, and page templates — but lacked the product context to complete content-specific designs. I designed the hero graphics, page visuals, and layout specifics, then handed finished designs to an in-house developer who built the site and backend CMS. The video production system integrated seamlessly, as the platform and video content were built from the same brand specification. Beyond launch, I still produce all article header banners for the marketing team's ongoing output."
+            "body": "Having navigated similar external-team constraints during the rebrand, I applied a more structured handoff process for the Academy. The external design team delivered strong foundational work - logotype, component library, and page templates - but lacked the product context to complete content-specific designs. I designed the hero graphics, page visuals, and layout specifics, then handed finished designs to an in-house developer who built the site and backend CMS. The video production system integrated seamlessly, as the platform and video content were built from the same brand specification. Beyond launch, I still produce all article header banners for the marketing team's ongoing output."
           },
           {
             "title": "Delivery",
@@ -979,8 +1014,8 @@
         "title": "UNCX App Prototyping",
         "category": "Product Concepting / UX Prototyping",
         "year": "2021-2026",
-        "status": "2021–2026",
-        "shortDescription": "Rapid prototyping across token minting, launchpad flows, Telegram bots, NFT minting, and full launchpad concepts — from wireframes to interactive concepts.",
+        "status": "2021-2026",
+        "shortDescription": "Rapid prototyping across token minting, launchpad flows, Telegram bots, NFT minting, and full launchpad concepts - from wireframes to interactive concepts.",
         "fullDescription": "A body of product concepting work spanning multiple UNCX Network features: token minter prototyping, launchpad UI components, Telegram chatbot and presale app flows, NFT minting interfaces, stealth launch concepts, and full launchpad concepts.",
         "tags": [
           "Figma",
@@ -992,11 +1027,6 @@
         ],
         "image": "/case-studies/uncx-app-concepts/launchpad-components.webp",
         "media": [
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-app-concepts/cover.webp",
-            "alt": "UNCX App Concepts overview"
-          },
           {
             "type": "image",
             "src": "/case-studies/uncx-app-concepts/token-minter-prototyping.webp",
@@ -1119,7 +1149,7 @@
         "overlaySections": [
           {
             "title": "Brief",
-            "body": "Rapidly prototype and validate product concepts across UNCX Network's feature pipeline — covering token minting, launchpad flows, Telegram integrations, and NFT tooling."
+            "body": "Rapidly prototype and validate product concepts across UNCX Network's feature pipeline - covering token minting, launchpad flows, Telegram integrations, and NFT tooling."
           },
           {
             "title": "Problem Frame",
@@ -1127,11 +1157,11 @@
           },
           {
             "title": "System Design",
-            "body": "A broad range of product concepts and prototypes spanning different stages and purposes. Some were built and shipped — token minter flows, launchpad components, and Telegram bot interactions. Others remained as design explorations — stealth launch interfaces, NFT minting tools, and full launchpad concepts. Each served to validate direction, align stakeholders, or define scope before committing development resources."
+            "body": "A broad range of product concepts and prototypes spanning different stages and purposes. Some were built and shipped - token minter flows, launchpad components, and Telegram bot interactions. Others remained as design explorations - stealth launch interfaces, NFT minting tools, and full launchpad concepts. Each served to validate direction, align stakeholders, or define scope before committing development resources."
           },
           {
             "title": "Trade-offs",
-            "body": "A recurring constraint across all concepts was incomplete requirements — specifications arrived gradually as projects developed, often requiring rework of existing prototypes. This made component-based design systems essential: rebuilding from reusable parts reduced the cost of iteration. Figma's later introduction of the variables system further reduced component creation overhead. A foundational part of each project was creating FigJam flow diagrams for novel product processes. These weren't problems with established UX conventions to reference — they required working out how the interactions should function from first principles."
+            "body": "A recurring constraint across all concepts was incomplete requirements - specifications arrived gradually as projects developed, often requiring rework of existing prototypes. This made component-based design systems essential: rebuilding from reusable parts reduced the cost of iteration. Figma's later introduction of the variables system further reduced component creation overhead. A foundational part of each project was creating FigJam flow diagrams for novel product processes. These weren't problems with established UX conventions to reference - they required working out how the interactions should function from first principles."
           },
           {
             "title": "Delivery",
@@ -1139,7 +1169,7 @@
           },
           {
             "title": "Outcome",
-            "body": "Closed the gap between product specs and development handoff. The component-first approach meant that incomplete or shifting requirements — a constant across a five-year span of prototyping — could be absorbed without starting from scratch. Stakeholders could validate features visually before committing development resources, reducing rework and accelerating shipping."
+            "body": "Closed the gap between product specs and development handoff. The component-first approach meant that incomplete or shifting requirements - a constant across a five-year span of prototyping - could be absorbed without starting from scratch. Stakeholders could validate features visually before committing development resources, reducing rework and accelerating shipping."
           }
         ]
       },
@@ -1151,7 +1181,7 @@
         "year": "2026",
         "status": "In Development",
         "shortDescription": "Language learning app with an AI-assisted classroom, real news articles, Google authentication, Supabase backend, and structured quiz flows.",
-        "fullDescription": "A language learning platform that transforms live news content into structured learning experiences. Built with React, Supabase, and Google OAuth — featuring article-based lessons, interactive quizzes, a learner dashboard, and a settings system. Designed to replace static flashcard approaches with contextual, real-world content.",
+        "fullDescription": "A language learning platform that transforms live news content into structured learning experiences. Built with React, Supabase, and Google OAuth - featuring article-based lessons, interactive quizzes, a learner dashboard, and a settings system. Designed to replace static flashcard approaches with contextual, real-world content.",
         "tags": [
           "React",
           "Next.js",
@@ -1161,11 +1191,6 @@
         ],
         "image": "/case-studies/noticia-lingo/dashboard.webp",
         "media": [
-          {
-            "type": "image",
-            "src": "/case-studies/noticia-lingo/cover.webp",
-            "alt": "Noticia Lingo overview"
-          },
           {
             "type": "image",
             "src": "/case-studies/noticia-lingo/signed-out-hero.webp",
@@ -1208,7 +1233,7 @@
         "overlaySections": [
           {
             "title": "Brief",
-            "body": "Build a language learning system that uses real-world news content instead of static lessons — making vocabulary acquisition contextual and engaging."
+            "body": "Build a language learning system that uses real-world news content instead of static lessons - making vocabulary acquisition contextual and engaging."
           },
           {
             "title": "Problem Frame",
@@ -1220,7 +1245,7 @@
           },
           {
             "title": "Trade-offs",
-            "body": "The primary constraint has been lesson complexity. Initial development using AI tooling produced oversimplified quiz questions rather than the pure-function puzzle systems I had specified — lessons that work contextually against any news article, not static question-and-answer pairs. The pivot: expanding the roadmap into granular build phases, constructing each of the 8–10 lesson types step by step with greater complexity control. Technical implementation — Google OAuth, Supabase integration — proved straightforward by comparison. The system is currently focused on Spanish to validate the lesson architecture before introducing multi-language complexity, where each lesson type will need adapting per language."
+            "body": "The primary constraint has been lesson complexity. Initial development using AI tooling produced oversimplified quiz questions rather than the pure-function puzzle systems I had specified - lessons that work contextually against any news article, not static question-and-answer pairs. The pivot: expanding the roadmap into granular build phases, constructing each of the 8-10 lesson types step by step with greater complexity control. Technical implementation - Google OAuth, Supabase integration - proved straightforward by comparison. The system is currently focused on Spanish to validate the lesson architecture before introducing multi-language complexity, where each lesson type will need adapting per language."
           },
           {
             "title": "Delivery",
@@ -1228,7 +1253,7 @@
           },
           {
             "title": "Outcome",
-            "body": "Demonstrated a scalable learning system driven by live content. The shift from AI-generated simple quizzes to the pure-function lesson types I designed produced a more robust foundation. Active development, with multi-language expansion planned once the core 8–10 lesson types are validated in Spanish."
+            "body": "Demonstrated a scalable learning system driven by live content. The shift from AI-generated simple quizzes to the pure-function lesson types I designed produced a more robust foundation. Active development, with multi-language expansion planned once the core 8-10 lesson types are validated in Spanish."
           }
         ]
       }
@@ -1400,7 +1425,7 @@
   "contact": {
     "eyebrow": "Contact",
     "title": "Start a conversation.",
-    "description": "Open to creative technologist and design engineer roles — permanent or contract. Product design, brand and motion systems, and AI pipeline builds.",
+    "description": "Open to creative technologist and design engineer roles - permanent or contract. Product design, brand and motion systems, and AI pipeline builds.",
     "fields": {
       "name": "Name",
       "email": "Email",
@@ -1495,7 +1520,7 @@
     "currentStateTitle": "Current State",
     "currentStateLines": [
       "Open to roles and contracts",
-      "Norwich, UK — working remotely",
+      "Norwich, UK - working remotely",
       "Brief to deployment"
     ],
     "copyright": "© 2026 Stephen Howe",

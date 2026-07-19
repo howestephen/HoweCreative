@@ -44,7 +44,7 @@ export function Layout() {
             className="font-mono text-[11px] uppercase tracking-[0.2em] text-foreground"
           >
             Stephen Howe
-            <span className="hidden text-muted-foreground sm:inline"> — Creative Technologist</span>
+            <span className="hidden text-muted-foreground sm:inline"> - Creative Technologist</span>
           </Link>
 
           <nav className="flex items-center gap-5">
