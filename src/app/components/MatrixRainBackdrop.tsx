@@ -222,7 +222,7 @@ export function MatrixRainBackdrop({
   mode?: "shell" | "content";
 }) {
   const hasWebGL = useWebGLAvailability();
-  /** iOS: avoid extra WebGL contexts — hero 3D keeps one context only. */
+  /** iOS: avoid extra WebGL contexts - hero 3D keeps one context only. */
   const allowWebGLBackdrop =
     hasWebGL && typeof document !== "undefined" && !isIOSLike();
   const atlas = useMemo(

@@ -39,7 +39,7 @@ export default async function handler(req: Request, res: Response) {
     return res.status(429).json({ success: false, message: "Too many requests. Please try again later." });
   }
 
-  const accessKey = process.env.EMAIL_ACCESS_KEY;
+  const accessKey = process.env.WEB3FORMS_SERVER_ACCESS_KEY;
   if (!accessKey) {
     return res.status(500).json({ success: false, message: "Email service not configured." });
   }

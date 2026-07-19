@@ -1,5 +1,9 @@
 # Roadmap Tasks 2.1–2.4 Implementation Plan
 
+> Historical implementation record for the previous portfolio. These tasks are
+> complete; use `ROADMAP.md` for the replacement editorial design’s current
+> acceptance work.
+
 > **For Claude:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task.
 
 **Goal:** Complete roadmap milestones 2.1 (rate limiting), 2.2 (ui/* purge), and 2.4 (lint/typecheck/CI) in sequence.

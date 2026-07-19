@@ -2,70 +2,76 @@
 
 :root {
   --font-size: 16px;
-  --background: #050505;
-  --foreground: #e0e0e0;
-  --card: #0a0a0a;
-  --card-foreground: #e0e0e0;
-  --popover: #0a0a0a;
-  --popover-foreground: #e0e0e0;
-  --primary: #ff003c;
+  color-scheme: light;
+  --background: #f6f3ec;
+  --foreground: #191714;
+  --card: #fffdf8;
+  --card-foreground: #191714;
+  --popover: #fffdf8;
+  --popover-foreground: #191714;
+  --primary: #d5002f;
   --primary-foreground: #ffffff;
-  --secondary: #8b0020;
+  --secondary: #7a001c;
   --secondary-foreground: #ffffff;
-  --muted: #1a1a1a;
-  --muted-foreground: #717182;
-  --accent: #ff003c;
+  --muted: #eae6db;
+  --muted-foreground: #6b675e;
+  --accent: #d5002f;
   --accent-foreground: #ffffff;
+  --accent-hover: #a80025;
   --destructive: #d4183d;
   --destructive-foreground: #ffffff;
-  --border: rgba(255, 0, 60, 0.2);
-  --input: rgba(255, 0, 60, 0.1);
-  --input-background: #0a0a0a;
-  --switch-background: #1a1a1a;
+  --border: rgba(25, 23, 20, 0.16);
+  --input: rgba(25, 23, 20, 0.08);
+  --input-background: #fffdf8;
+  --switch-background: #ddd8cb;
   --font-weight-medium: 500;
   --font-weight-normal: 400;
-  --ring: #ff003c;
-  --chart-1: #ff003c;
+  --ring: #d5002f;
+  --chart-1: #d5002f;
   --chart-2: #ff4466;
-  --chart-3: #8b0020;
+  --chart-3: #7a001c;
   --chart-4: #ff6b88;
-  --chart-5: #660018;
+  --chart-5: #4a0011;
   --radius: 0.25rem;
-  --sidebar: #0a0a0a;
-  --sidebar-foreground: #e0e0e0;
-  --sidebar-primary: #ff003c;
+  --sidebar: #ffffff;
+  --sidebar-foreground: #16181d;
+  --sidebar-primary: #d5002f;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #1a1a1a;
-  --sidebar-accent-foreground: #e0e0e0;
-  --sidebar-border: rgba(255, 0, 60, 0.2);
-  --sidebar-ring: #ff003c;
-  
+  --sidebar-accent: #e7e7e2;
+  --sidebar-accent-foreground: #16181d;
+  --sidebar-border: rgba(22, 24, 29, 0.15);
+  --sidebar-ring: #d5002f;
+
   /* Cyberpunk specific colors */
-  --cyber-red: #ff003c;
-  --cyber-burgundy: #8b0020;
-  --cyber-dark: #050505;
-  --cyber-grid: rgba(255, 0, 60, 0.15);
+  --cyber-red: #d5002f;
+  --cyber-burgundy: #7a001c;
+  --cyber-dark: #f4f4f1;
+  --cyber-grid: rgba(213, 0, 47, 0.1);
 }
 
 .dark {
-  --background: #050505;
-  --foreground: #e0e0e0;
-  --card: #0a0a0a;
-  --card-foreground: #e0e0e0;
-  --popover: #0a0a0a;
-  --popover-foreground: #e0e0e0;
+  color-scheme: dark;
+  --background: #0a0c10;
+  --foreground: #e4e6ea;
+  --card: #10131a;
+  --card-foreground: #e4e6ea;
+  --popover: #10131a;
+  --popover-foreground: #e4e6ea;
   --primary: #ff003c;
   --primary-foreground: #ffffff;
   --secondary: #8b0020;
   --secondary-foreground: #ffffff;
-  --muted: #1a1a1a;
-  --muted-foreground: #717182;
+  --muted: #1a1e26;
+  --muted-foreground: #9296a5;
   --accent: #ff003c;
   --accent-foreground: #ffffff;
+  --accent-hover: #ff4466;
   --destructive: #d4183d;
   --destructive-foreground: #ffffff;
-  --border: rgba(255, 0, 60, 0.2);
+  --border: rgba(255, 0, 60, 0.22);
   --input: rgba(255, 0, 60, 0.1);
+  --input-background: #0d1015;
+  --switch-background: #1a1e26;
   --ring: #ff003c;
   --font-weight-medium: 500;
   --font-weight-normal: 400;
@@ -74,14 +80,20 @@
   --chart-3: #8b0020;
   --chart-4: #ff6b88;
   --chart-5: #660018;
-  --sidebar: #0a0a0a;
-  --sidebar-foreground: #e0e0e0;
+  --sidebar: #10131a;
+  --sidebar-foreground: #e4e6ea;
   --sidebar-primary: #ff003c;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #1a1a1a;
-  --sidebar-accent-foreground: #e0e0e0;
-  --sidebar-border: rgba(255, 0, 60, 0.2);
+  --sidebar-accent: #1a1e26;
+  --sidebar-accent-foreground: #e4e6ea;
+  --sidebar-border: rgba(255, 0, 60, 0.22);
   --sidebar-ring: #ff003c;
+
+  /* Cyberpunk specific colors */
+  --cyber-red: #ff003c;
+  --cyber-burgundy: #8b0020;
+  --cyber-dark: #0a0c10;
+  --cyber-grid: rgba(255, 0, 60, 0.15);
 }
 
 @theme inline {
@@ -99,6 +111,7 @@
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
+  --color-accent-hover: var(--accent-hover);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
   --color-border: var(--border);
@@ -132,10 +145,11 @@
 
   body {
     @apply bg-background text-foreground;
-    font-family: var(--font-technical);
-    letter-spacing: -0.01em;
+    font-family: var(--font-body);
+    letter-spacing: 0;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
-  
+
   .bg-gradient-radial {
     background: radial-gradient(circle, var(--tw-gradient-stops));
   }
@@ -160,81 +174,81 @@
 
   h1 {
     font-size: var(--text-2xl);
-    font-weight: var(--font-weight-normal) !important;
-    line-height: 1.5;
+    font-weight: 500 !important;
+    line-height: 1.15;
     font-family: var(--font-headline) !important;
     font-synthesis-weight: none;
-    letter-spacing: 0.04em;
+    letter-spacing: -0.01em;
   }
 
   h2 {
     font-size: var(--text-xl);
-    font-weight: var(--font-weight-normal) !important;
-    line-height: 1.5;
+    font-weight: 500 !important;
+    line-height: 1.2;
     font-family: var(--font-headline) !important;
     font-synthesis-weight: none;
-    letter-spacing: 0.03em;
+    letter-spacing: -0.01em;
   }
 
   h3 {
     font-size: var(--text-lg);
-    font-weight: var(--font-weight-normal) !important;
-    line-height: 1.5;
+    font-weight: 500 !important;
+    line-height: 1.3;
     font-family: var(--font-headline) !important;
     font-synthesis-weight: none;
-    letter-spacing: 0.025em;
+    letter-spacing: -0.005em;
   }
 
   h4 {
     font-size: var(--text-base);
-    font-weight: var(--font-weight-normal) !important;
-    line-height: 1.5;
+    font-weight: 500 !important;
+    line-height: 1.35;
     font-family: var(--font-headline) !important;
     font-synthesis-weight: none;
-    letter-spacing: 0.02em;
+    letter-spacing: -0.005em;
   }
 
   h5,
   h6 {
     font-family: var(--font-headline) !important;
-    font-weight: var(--font-weight-normal) !important;
+    font-weight: 500 !important;
     font-synthesis-weight: none;
-    letter-spacing: 0.02em;
+    letter-spacing: -0.005em;
   }
 
   label {
     font-size: var(--text-base);
     font-weight: var(--font-weight-medium);
     line-height: 1.5;
-    font-family: var(--font-technical);
+    font-family: var(--font-body);
   }
 
   button {
     font-size: var(--text-base);
     font-weight: var(--font-weight-medium);
     line-height: 1.5;
-    font-family: var(--font-technical);
+    font-family: var(--font-body);
   }
 
   input {
     font-size: var(--text-base);
     font-weight: var(--font-weight-normal);
     line-height: 1.5;
-    font-family: var(--font-technical);
+    font-family: var(--font-body);
   }
 
   textarea,
   p,
   a,
   li {
-    font-family: var(--font-technical);
+    font-family: var(--font-body);
   }
 
   .headline-font {
     font-family: var(--font-headline) !important;
-    font-weight: var(--font-weight-normal) !important;
+    font-weight: 500 !important;
     font-synthesis-weight: none;
-    letter-spacing: 0.04em;
+    letter-spacing: -0.01em;
   }
 
   .technical-font {

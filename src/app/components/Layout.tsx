@@ -1,55 +1,86 @@
-import { useState } from "react";
+import { MotionConfig } from "motion/react";
 import { Outlet } from "react-router";
 import { Link } from "react-router";
 
-import { siteProfile } from "../data/portfolio";
-import { EscapeGlyphs } from "./EscapeGlyphs";
-import { Footer } from "./Footer";
-import { LoadingScreen } from "./LoadingScreen";
-import { MatrixRainBackdrop } from "./MatrixRainBackdrop";
-import { SideNav } from "./SideNav";
-import { TechnicalDecorations } from "./TechnicalDecorations";
+const NAV = [
+  { label: "Work", target: "work" },
+  { label: "Capabilities", target: "capabilities" },
+  { label: "Method", target: "method" },
+  { label: "Contact", target: "contact" },
+] as const;
+
+function jumpTo(target: string) {
+  document.getElementById(target)?.scrollIntoView({ behavior: "smooth", block: "start" });
+}
 
 export function Layout() {
-  const [showLoader, setShowLoader] = useState(true);
-
   return (
-    <div className="relative min-h-screen overflow-x-hidden bg-[#050505] text-zinc-300 selection:bg-[#ff003c] selection:text-white">
-      {showLoader && <LoadingScreen onComplete={() => setShowLoader(false)} />}
-      <TechnicalDecorations />
-      <MatrixRainBackdrop className="pointer-events-none absolute inset-0 z-[1] opacity-48" />
-      <MatrixRainBackdrop
-        mode="content"
-        className="pointer-events-none absolute inset-0 z-[2] opacity-72 mix-blend-screen"
-      />
-
-      {/* Grid overlay — only on large screens to avoid red wash on mobile */}
+    // reducedMotion="user" makes every motion/react animation respect the
+    // OS-level prefers-reduced-motion setting (the plotter mark handles it
+    // separately in canvas code).
+    <MotionConfig reducedMotion="user">
+    <div className="relative min-h-screen bg-background text-foreground selection:bg-accent selection:text-accent-foreground">
+      {/* paper grain */}
       <div
-        className="absolute inset-0 z-0 pointer-events-none opacity-16 hidden lg:block"
+        className="pointer-events-none fixed inset-0 z-[5] opacity-[0.05] mix-blend-multiply"
+        aria-hidden
         style={{
           backgroundImage:
-            "linear-gradient(rgba(255, 0, 60, 0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 0, 60, 0.2) 1px, transparent 1px)",
-          backgroundSize: "40px 40px",
+            "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
+          backgroundRepeat: "repeat",
         }}
       />
 
-      <div className="fixed inset-x-0 top-0 z-[90] flex items-start justify-between px-4 py-4 md:px-6">
-        <Link
-          to="/"
-          className="headline-font pointer-events-auto inline-flex h-[58px] items-center border border-[#ff003c]/35 bg-black/84 px-5 text-sm uppercase tracking-[0.24em] text-white shadow-[0_18px_45px_rgba(0,0,0,0.34)] backdrop-blur-md"
-        >
-          {siteProfile.brandPrefix}
-          <span className="ml-2 text-[#ff003c]">{siteProfile.brandSuffix}</span>
-        </Link>
-        <SideNav />
-      </div>
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-border bg-background/85 backdrop-blur-md">
+        <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-4 px-6">
+          <Link
+            to="/"
+            onClick={(e) => {
+              if (window.location.pathname === "/") {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }
+            }}
+            className="font-mono text-[11px] uppercase tracking-[0.2em] text-foreground"
+          >
+            Stephen Howe
+            <span className="hidden text-muted-foreground sm:inline"> - Creative Technologist</span>
+          </Link>
 
-      <EscapeGlyphs />
-      <main className="relative w-full">
+          <nav className="flex items-center gap-5">
+            <div className="hidden items-center gap-5 md:flex">
+              {NAV.map((item) => (
+                <button
+                  key={item.target}
+                  type="button"
+                  onClick={() => jumpTo(item.target)}
+                  className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground transition-colors hover:text-accent"
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
+            <a
+              href="/cv"
+              className="hidden border border-foreground/25 px-3.5 py-1.5 text-xs font-medium text-foreground transition-colors hover:border-foreground sm:inline-block"
+            >
+              CV
+            </a>
+            <button
+              type="button"
+              onClick={() => jumpTo("contact")}
+              className="bg-accent px-3.5 py-1.5 text-xs font-medium text-accent-foreground transition-colors hover:bg-accent-hover"
+            >
+              Contact
+            </button>
+          </nav>
+        </div>
+      </header>
+
+      <main className="relative z-10 w-full">
         <Outlet />
       </main>
-
-      <Footer />
     </div>
+    </MotionConfig>
   );
 }
