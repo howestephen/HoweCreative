@@ -28,7 +28,7 @@ export function OperatorProfile() {
         <div className="grid gap-6 xl:grid-cols-2">
           {/* Left column: quick facts strip + portrait card */}
           <div className="flex gap-3 md:gap-4">
-            {/* Quick facts — narrow vertical column outside the card (excluding education) */}
+            {/* Quick facts - narrow vertical column outside the card (excluding education) */}
             <motion.div
               initial={{ opacity: 0, x: -16 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -68,7 +68,7 @@ export function OperatorProfile() {
                   <span className="text-accent">{operatorProfileContent.primaryFileStatus}</span>
                 </div>
                 <OperatorProfilePortrait />
-                {/* Quick facts — mobile: horizontal row below portrait (excluding education) */}
+                {/* Quick facts - mobile: horizontal row below portrait (excluding education) */}
                 <div className="mt-4 grid grid-cols-2 gap-2 md:hidden">
                   {operatorProfileContent.quickFacts.slice(0, -1).map((fact) => (
                     <div key={fact.label} className="border border-accent/16 bg-card/95 px-3 py-3">
@@ -79,7 +79,7 @@ export function OperatorProfile() {
                     </div>
                   ))}
                 </div>
-                {/* Education — full width below the other quick facts, inside the card */}
+                {/* Education - full width below the other quick facts, inside the card */}
                 {(() => {
                   const edu = operatorProfileContent.quickFacts[operatorProfileContent.quickFacts.length - 1];
                   return (
@@ -127,7 +127,7 @@ export function OperatorProfile() {
               </motion.div>
             ))}
 
-            {/* Notes — File 05, last */}
+            {/* Notes - File 05, last */}
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}

@@ -254,7 +254,7 @@ function Lightbox({
         </div>
 
         <div className="flex items-center gap-1">
-          {/* Zoom controls — only for images */}
+          {/* Zoom controls - only for images */}
           {isImage && (
             <>
               <button
@@ -402,7 +402,7 @@ export function MediaGallery({
 
   return (
     <div className="flex flex-col gap-2">
-      {/* ── Main viewer — 16:9 aspect ratio ── */}
+      {/* ── Main viewer - 16:9 aspect ratio ── */}
       <div
         className={`group relative overflow-hidden border border-accent/38 bg-black ${isClickable ? "cursor-pointer" : ""}`}
         style={{ aspectRatio: "16 / 9" }}

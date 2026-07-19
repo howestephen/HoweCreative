@@ -16,7 +16,7 @@ export function ContactFoot() {
   const [email, setEmail] = useState("");
   const [projectType, setProjectType] = useState("");
   const [brief, setBrief] = useState("");
-  const [website, setWebsite] = useState(""); // honeypot — must stay empty
+  const [website, setWebsite] = useState(""); // honeypot - must stay empty
   const [status, setStatus] = useState<Status>("idle");
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -72,7 +72,7 @@ export function ContactFoot() {
               Let&rsquo;s talk<span className="text-accent">.</span>
             </h2>
             <p className="mb-8 max-w-md text-base leading-relaxed text-muted-foreground">
-              Open to creative technologist, AI designer, and design engineer roles —
+              Open to creative technologist, AI designer, and design engineer roles -
               permanent or contract, remote from the UK with EU and US-East overlap.
             </p>
 
@@ -108,7 +108,7 @@ export function ContactFoot() {
                   Message sent
                 </div>
                 <p className="headline-font text-2xl text-foreground">
-                  Thanks — I&rsquo;ll reply within 24 hours.
+                  Thanks - I&rsquo;ll reply within 24 hours.
                 </p>
                 <button
                   type="button"
@@ -199,9 +199,9 @@ export function ContactFoot() {
         </div>
 
         <footer className="mt-20 flex flex-col justify-between gap-3 border-t border-border pt-6 pb-2 font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground md:flex-row">
-          <span>© 2026 Stephen Howe · Norwich, UK — remote worldwide</span>
+          <span>© 2026 Stephen Howe · Norwich, UK - remote worldwide</span>
           <a href="#work" className="transition-colors hover:text-accent">
-            This site was built by my agentic pipeline — the case study is above ↑
+            This site was built by my agentic pipeline - the case study is above ↑
           </a>
         </footer>
       </div>

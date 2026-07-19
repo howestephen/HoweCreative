@@ -8,7 +8,7 @@ export function applyTheme(dark: boolean) {
   try {
     localStorage.setItem("theme", dark ? "dark" : "light");
   } catch {
-    // private mode — theme still applies for this visit
+    // private mode - theme still applies for this visit
   }
 }
 

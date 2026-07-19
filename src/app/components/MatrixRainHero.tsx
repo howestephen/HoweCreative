@@ -49,7 +49,7 @@ class MorphingWireErrorBoundary extends React.Component<
 
 const LOOP_H = 18.0;
 const BASE_SPEED = 1.5;
-/** Horizontal spread of rain columns — unchanged so composition stays the same. */
+/** Horizontal spread of rain columns - unchanged so composition stays the same. */
 const HERO_RAIN_SPREAD = 16.5;
 const HOLD_HEAD = 6;
 const HOLD_SKILL = 4.4;
@@ -225,7 +225,7 @@ const bgVertexShader = /* glsl */ `
     float headY = mod(aPhaseOffset - uTime * speed, uLoopH + aTrailLength * rowSpacing) - aTrailLength * rowSpacing;
     float yRaw = mod(headY + aRowIndex * rowSpacing + uLoopH * 2.0, uLoopH) - uLoopH * 0.5;
 
-    // No lateral swirl — clean vertical streams
+    // No lateral swirl - clean vertical streams
     vec3 worldPos = vec3(aColX, yRaw, aDepthDrift);
 
     float trailMask = 1.0 - smoothstep(aTrailLength - 0.4, aTrailLength + 0.5, aRowIndex);
@@ -233,7 +233,7 @@ const bgVertexShader = /* glsl */ `
     float depthGlow = smoothstep(-7.0, 3.5, aDepthDrift);
     float liveFlicker = 0.88 + 0.12 * sin(uTime * 9.0 + aGlowSeed * 6.0 - aRowIndex * 0.42);
 
-    // ~45% of mid-tail positions settle (decode) — lock onto a character
+    // ~45% of mid-tail positions settle (decode) - lock onto a character
     float settleBand = smoothstep(0.08, 0.5, trailT) * (1.0 - smoothstep(0.82, 1.0, trailT));
     float settle = step(0.55, fract(sin(aGlowSeed * 31.7 + floor(uTime * 0.32 + aColX * 0.65)) * 43758.5453)) * settleBand;
     float whiteFlash = step(0.90, fract(sin(aGlowSeed * 71.3 + aCharIndex * 1.7 + floor(uTime * 0.22)) * 24634.6345)) * settle;
@@ -561,7 +561,7 @@ function strutBetween(a: THREE.Vector3, b: THREE.Vector3, radius: number) {
   return mesh;
 }
 
-/** AI workflows — a node graph: seeded points, each linked to its nearest peers. */
+/** AI workflows - a node graph: seeded points, each linked to its nearest peers. */
 function buildNetwork(r: Rng) {
   const group = new THREE.Group();
   const nodeCount = 9 + Math.floor(r() * 6);
@@ -600,7 +600,7 @@ function buildNetwork(r: Rng) {
   return group;
 }
 
-/** Product design — a fanned stack of interface panels. */
+/** Product design - a fanned stack of interface panels. */
 function buildPanels(r: Rng) {
   const group = new THREE.Group();
   const panelCount = 4 + Math.floor(r() * 3);
@@ -618,7 +618,7 @@ function buildPanels(r: Rng) {
   return group;
 }
 
-/** 3D & motion — a low-poly torus knot; p/q re-rolled per seed. */
+/** 3D & motion - a low-poly torus knot; p/q re-rolled per seed. */
 function buildKnot(r: Rng) {
   const group = new THREE.Group();
   const pairs: Array<[number, number]> = [
@@ -638,7 +638,7 @@ function buildKnot(r: Rng) {
   return group;
 }
 
-/** Brand systems — concentric orbits around a core mark. */
+/** Brand systems - concentric orbits around a core mark. */
 function buildRings(r: Rng) {
   const group = new THREE.Group();
   const ringCount = 3 + Math.floor(r() * 3);
@@ -657,7 +657,7 @@ function buildRings(r: Rng) {
   return group;
 }
 
-/** Prototyping — a scaffold lattice with seeded dropout. */
+/** Prototyping - a scaffold lattice with seeded dropout. */
 function buildScaffold(r: Rng) {
   const group = new THREE.Group();
   const span = 2;
@@ -684,7 +684,7 @@ function buildScaffold(r: Rng) {
   return group;
 }
 
-/** UI/UX — floating wireframe screens with header and control blocks. */
+/** UI/UX - floating wireframe screens with header and control blocks. */
 function buildScreens(r: Rng) {
   const group = new THREE.Group();
   const screenCount = 3 + Math.floor(r() * 2);
@@ -717,7 +717,7 @@ function buildScreens(r: Rng) {
   return group;
 }
 
-/** Development — stacked build blocks on a base grid. */
+/** Development - stacked build blocks on a base grid. */
 function buildTowers(r: Rng) {
   const group = new THREE.Group();
   const cells = 3;
@@ -1095,7 +1095,7 @@ export function MatrixRainHero() {
           className="max-w-5xl text-center"
         >
           <div className="mb-3 font-mono text-[10px] uppercase tracking-[0.25em] text-white sm:text-xs md:text-sm md:tracking-[0.3em]">
-            {siteProfile.displayName} — {siteProfile.role}
+            {siteProfile.displayName} - {siteProfile.role}
           </div>
           <h1 className="mb-4">
             <span className="mb-3 block text-[clamp(2.5rem,10.5vw,6rem)] font-semibold leading-none tracking-tight">
@@ -1134,7 +1134,7 @@ export function MatrixRainHero() {
             </a>
           </div>
 
-          {/* Mobile-only scroll indicator — flows below text so spacing is even */}
+          {/* Mobile-only scroll indicator - flows below text so spacing is even */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}

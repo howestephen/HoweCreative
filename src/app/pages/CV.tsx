@@ -13,7 +13,7 @@ const ENTRY_META = "whitespace-nowrap text-sm text-neutral-500";
 // modifier, which only reaches the `utilities` layer) cannot win that fight:
 // per the CSS cascade-layers spec, importance inverts layer priority, so an
 // earlier layer's `!important` beats a later layer's `!important`. Re-opening
-// the same `base` layer here — with a more specific `.cv-page h1` selector —
+// the same `base` layer here - with a more specific `.cv-page h1` selector -
 // lets this override win on specificity within that shared layer, without
 // editing the global CSS files.
 const CV_STYLES = `
@@ -84,7 +84,7 @@ const CV_STYLES = `
 export function CV() {
   useEffect(() => {
     const previousTitle = document.title;
-    document.title = "Stephen Howe — CV";
+    document.title = "Stephen Howe - CV";
     return () => {
       document.title = previousTitle;
     };
@@ -127,7 +127,7 @@ export function CV() {
         <p className="mb-8 text-[15px] leading-relaxed text-neutral-800">
           Creative technologist with 20+ years connecting brand, 3D, motion, product design, and front-end code. For
           the last four years I've been the sole designer at a multi-chain DeFi protocol, owning everything from
-          company rebrands to shipped product UI. I design systems rather than one-off artefacts — and increasingly
+          company rebrands to shipped product UI. I design systems rather than one-off artefacts - and increasingly
           I build the pipelines that produce them: AI-assisted build loops for software, generative asset workflows
           for 3D and video, and automated publishing systems with human approval built in. Systems thinker with natural strengths in pattern
           recognition, deep-focus problem solving, and forward planning in cross-functional teams.
@@ -161,7 +161,7 @@ export function CV() {
             <div>
               <h3 className="text-sm font-semibold">Audio &amp; Delivery</h3>
               <p className="mt-0.5 text-sm leading-snug text-neutral-700">
-                Ableton Live, Adobe Audition, Serum, Agile/Scrum (Certified ScrumMaster, 2019)
+                Ableton Live, Adobe Audition, Serum, Agile/Scrum working practice
               </p>
             </div>
           </div>
@@ -173,20 +173,20 @@ export function CV() {
           <article className="mt-5 break-inside-avoid">
             <div className="flex flex-wrap items-baseline justify-between gap-x-4">
               <h3 className="text-base">
-                Lead Designer — UNCX Network{" "}
+                Lead Designer - UNCX Network{" "}
                 <span className="font-normal text-neutral-600">(multi-chain DeFi protocol)</span>
               </h3>
-              <p className={ENTRY_META}>2021 – Present | Remote</p>
+              <p className={ENTRY_META}>2021 - Present | Remote</p>
             </div>
             <p className="mt-1 text-sm italic text-neutral-600">
               The only designer in the company, owning all creative output from brand to product.
             </p>
             <ul className={BULLET_LIST}>
               <li>
-                Led two full company rebrands — logo, homepage, 3D assets, and identity — and designed 5+ sub-brands
+                Led two full company rebrands - logo, homepage, 3D assets, and identity - and designed 5+ sub-brands
                 for new products
               </li>
-              <li>Designed wireframes and UI concepts for 10+ apps, with 3–4 shipped to production</li>
+              <li>Designed wireframes and UI concepts for 10+ apps, with 3-4 shipped to production</li>
               <li>Built UNCX Academy end-to-end: brand, site design, assets, and 30+ educational videos</li>
               <li>
                 Produced 100+ tutorials, explainers, and announcement videos, plus the 3D/motion pipeline that makes
@@ -202,9 +202,9 @@ export function CV() {
           <article className="mt-6 break-inside-avoid">
             <div className="flex flex-wrap items-baseline justify-between gap-x-4">
               <h3 className="text-base">
-                Designer — Switch Studios <span className="font-normal text-neutral-600">(HTML5 casino games)</span>
+                Designer - Switch Studios <span className="font-normal text-neutral-600">(HTML5 casino games)</span>
               </h3>
-              <p className={ENTRY_META}>2018 – 2021</p>
+              <p className={ENTRY_META}>2018-2021</p>
             </div>
             <p className="mt-1 text-sm italic text-neutral-600">
               Embedded designer in a development team shipping HTML5 casino games to market.
@@ -212,7 +212,7 @@ export function CV() {
             <ul className={BULLET_LIST}>
               <li>Shipped 30 games, 20+ currently live in market</li>
               <li>Created bespoke video and marketing packs for each game</li>
-              <li>Only designer in a dev team — committed work directly to the codebase</li>
+              <li>Only designer in a dev team - committed work directly to the codebase</li>
               <li>Localised games for accessibility and multiple languages</li>
             </ul>
           </article>
@@ -220,10 +220,10 @@ export function CV() {
           <article className="mt-6 break-inside-avoid">
             <div className="flex flex-wrap items-baseline justify-between gap-x-4">
               <h3 className="text-base">
-                Designer &amp; Animator — howecreative.co.uk{" "}
+                Designer &amp; Animator - howecreative.co.uk{" "}
                 <span className="font-normal text-neutral-600">(freelance)</span>
               </h3>
-              <p className={ENTRY_META}>2016 – 2018</p>
+              <p className={ENTRY_META}>2016-2018</p>
             </div>
             <p className="mt-1 text-sm italic text-neutral-600">
               Ran my own studio, delivering video, animation, and web projects for international clients.
@@ -231,7 +231,7 @@ export function CV() {
             <ul className={BULLET_LIST}>
               <li>Produced 140+ videos for the largest client across two years</li>
               <li>
-                Sole creator of a chef training course for a French Alps chalet company — filming, editing, motion
+                Sole creator of a chef training course for a French Alps chalet company - filming, editing, motion
                 graphics, and website
               </li>
               <li>Music videos, animated explainers, rotoscoping, and colour grading</li>
@@ -241,36 +241,36 @@ export function CV() {
 
           <article className="mt-6 break-inside-avoid">
             <div className="flex flex-wrap items-baseline justify-between gap-x-4">
-              <h3 className="text-base">Earlier career — design &amp; technology</h3>
-              <p className={ENTRY_META}>2005 – 2016</p>
+              <h3 className="text-base">Earlier career - design &amp; technology</h3>
+              <p className={ENTRY_META}>2005-2016</p>
             </div>
             <ul className={BULLET_LIST}>
               <li>
-                <span className="font-medium">2nd Line Support Technician, Qtac Solutions</span> (2014–16) — senior
+                <span className="font-medium">2nd Line Support Technician, Qtac Solutions</span> (2014-16) - senior
                 support for HMRC payroll software; trained the team and redesigned the company website
               </li>
               <li>
-                <span className="font-medium">Web &amp; Social Media Manager, Burger Theory UK</span> (2012–16,
-                concurrent) — brand, website, and social presence for a street-food startup, from launch
+                <span className="font-medium">Web &amp; Social Media Manager, Burger Theory UK</span> (2012-16,
+                concurrent) - brand, website, and social presence for a street-food startup, from launch
               </li>
               <li>
-                <span className="font-medium">Venue &amp; Promotions Manager, Hot Biscuit</span> (2011–12) — design
+                <span className="font-medium">Venue &amp; Promotions Manager, Hot Biscuit</span> (2011-12) - design
                 and promotion across three Brighton music venues
               </li>
               <li>
-                <span className="font-medium">Brand Manager, 412 Promotions</span> (2009–11) — website, shop, and
+                <span className="font-medium">Brand Manager, 412 Promotions</span> (2009-11) - website, shop, and
                 events; managed a 10+ freelance writing team
               </li>
               <li>
-                <span className="font-medium">Junior Helpdesk Technician, Right Click Computers</span> (2008–09) —
+                <span className="font-medium">Junior Helpdesk Technician, Right Click Computers</span> (2008-09) -
                 remote support for campus TV servers in ~150 UK universities
               </li>
               <li>
-                <span className="font-medium">Database Technician, BBC</span> (2007–08) — core-database migration and
+                <span className="font-medium">Database Technician, BBC</span> (2007-08) - core-database migration and
                 cleansing at Television Centre
               </li>
               <li>
-                <span className="font-medium">Web Manager &amp; Graphic Designer, Good Salon Guide</span> (2005–06) —
+                <span className="font-medium">Web Manager &amp; Graphic Designer, Good Salon Guide</span> (2005-06) -
                 websites, design, and office network, while at university
               </li>
             </ul>
@@ -315,17 +315,20 @@ export function CV() {
           <ul className="mt-4 list-disc space-y-3 pl-5 text-sm leading-snug text-neutral-700">
             <li>
               <span className="font-medium text-neutral-900">BSc (Hons) Entertainment Technology, First Class</span>
-              {" "}— University of Portsmouth, 2007.
+              {" "}- University of Portsmouth, 2007.
               <span className="mt-1 block text-neutral-600">
                 Only First Class Honours on the course; IBM Prize for Best Creative Technologies Project;
-                dissertation graded 90% — highest in the department that year.
+                dissertation graded 90% - highest in the department that year.
               </span>
             </li>
             <li>
-              Full Stack Coding Bootcamp — Tech Educators, 2024 (12 weeks: React, Next.js, Node.js, PostgreSQL,
+              Full Stack Coding Bootcamp - Tech Educators, 2024 (12 weeks: React, Next.js, Node.js, PostgreSQL,
               Supabase)
             </li>
-            <li>Certified ScrumMaster (CSM) — Scrum Alliance, 2019</li>
+            <li>
+              Certified ScrumMaster (CSM) - Scrum Alliance, 2019{" "}
+              <span className="text-neutral-500">(not renewed since 2021)</span>
+            </li>
           </ul>
         </section>
 

@@ -4,11 +4,13 @@ import { motion } from "motion/react";
 import { siteProfile } from "../data/portfolio";
 import { PlotterMark } from "./PlotterMark";
 
+// Every figure names where it came from: a stat with no employer attached
+// reads like current work, which is misleading across a 21-year career.
 const METRICS = [
-  { value: "30", label: "games shipped" },
-  { value: "240+", label: "videos produced" },
-  { value: "2", label: "company rebrands" },
-  { value: "4 yrs", label: "sole designer in DeFi" },
+  { value: "21 yrs", label: "in design & technology" },
+  { value: "4 yrs", label: "lead designer, UNCX Network" },
+  { value: "30", label: "games shipped, Switch Studios" },
+  { value: "240+", label: "videos, UNCX & freelance" },
 ] as const;
 
 const container = {
@@ -34,7 +36,7 @@ export function Masthead() {
             <motion.div variants={item}>
               <span className="inline-flex items-center gap-2 border border-border bg-card px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
                 <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-accent" />
-                Open to roles &amp; contracts — remote, UK
+                Open to roles &amp; contracts - remote, UK
               </span>
             </motion.div>
 
@@ -47,9 +49,9 @@ export function Masthead() {
             </motion.h1>
 
             <motion.p variants={item} className="max-w-xl text-lg leading-relaxed text-muted-foreground">
-              Stephen Howe — creative technologist. Two decades across brand, 3D, motion,
+              Stephen Howe - creative technologist. Two decades across brand, 3D, motion,
               product, and code; lately, automated pipelines that render and publish live
-              data — built fast with AI.
+              data - built fast with AI.
             </motion.p>
 
             <motion.div variants={item} className="flex flex-wrap items-center gap-3">
