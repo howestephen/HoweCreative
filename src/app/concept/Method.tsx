@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Minus, Plus } from "lucide-react";
 import { motion } from "motion/react";
 
+import { CAREER_START, yearsSince } from "../lib/tenure";
+
 const PRINCIPLES = [
   {
     index: "01",
@@ -99,7 +101,7 @@ export function Method() {
   return (
     <section id="method" className="scroll-mt-24 border-t border-border">
       <div className="mx-auto max-w-6xl px-6 py-20 md:py-24">
-        <div className="mb-12 flex items-baseline justify-between gap-4">
+        <div className="mb-12 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
           <h2 className="text-3xl md:text-4xl">How I work</h2>
           <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
             the short version
@@ -125,12 +127,12 @@ export function Method() {
         </div>
 
         <div className="mt-16 border-t border-border pt-10">
-          <div className="mb-6 flex items-baseline justify-between gap-4">
+          <div className="mb-6 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
             <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
               Experience
             </span>
             <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-accent">
-              2005 → today · 21 years
+              2005 → today · {yearsSince(CAREER_START)} years
             </span>
           </div>
           <div className="space-y-0">

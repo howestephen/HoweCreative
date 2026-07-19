@@ -17,7 +17,7 @@ const PRACTICES = [
     title: "3D, motion & media pipelines",
     points: [
       "Templated Cinema 4D, Redshift and After Effects production",
-      "240+ videos across launches, tutorials, and education",
+      "500+ videos across launches, tutorials, games, and education",
       "Reusable scene, camera, and material libraries",
       "Launch-cadence output without brand drift",
     ],
@@ -40,7 +40,7 @@ export function Capabilities() {
   return (
     <section id="capabilities" className="scroll-mt-24 border-t border-border bg-card/60">
       <div className="mx-auto max-w-6xl px-6 py-20 md:py-24">
-        <div className="mb-4 flex items-baseline justify-between gap-4">
+        <div className="mb-4 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
           <h2 className="text-3xl md:text-4xl">What I do</h2>
           <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
             three practices · one mindset

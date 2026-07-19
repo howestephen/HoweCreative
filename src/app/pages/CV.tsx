@@ -1,9 +1,13 @@
 import { useEffect } from "react";
 import { Link } from "react-router";
 
-const SECTION_HEADING = "text-xl border-b border-[#d90429]/70 pb-1.5 text-neutral-900";
-const BULLET_LIST = "mt-2 list-disc space-y-1 pl-5 text-sm leading-snug text-neutral-700";
-const ENTRY_META = "whitespace-nowrap text-sm text-neutral-500";
+// Section labels read as editorial rules rather than headings: small mono
+// caps, accent-coloured, with a hairline running to the right margin. Same
+// device as the site, so the CV and the portfolio look like one system.
+const SECTION_HEADING =
+  "flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.2em] text-[#d90429] after:h-px after:flex-1 after:bg-[#d90429]/25";
+const BULLET_LIST = "mt-1.5 space-y-1 text-[13px] leading-snug text-neutral-700 cv-bullets";
+const ENTRY_META = "whitespace-nowrap font-mono text-[11px] text-neutral-500";
 
 // Scoped, page-local style overrides.
 //
@@ -21,18 +25,18 @@ const CV_STYLES = `
     .cv-page h1,
     .cv-page h2,
     .cv-page h3 {
-      font-family: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif !important;
-      letter-spacing: normal !important;
+      font-family: 'Fraunces', Georgia, 'Times New Roman', serif !important;
+      letter-spacing: -0.01em !important;
       font-synthesis-weight: auto !important;
       text-transform: none !important;
     }
-    .cv-page h1 { font-weight: 700 !important; }
-    .cv-page h2 { font-weight: 600 !important; }
-    .cv-page h3 { font-weight: 600 !important; }
+    .cv-page h1 { font-weight: 600 !important; }
+    .cv-page h2 { font-weight: 500 !important; }
+    .cv-page h3 { font-weight: 500 !important; }
   }
 
   .cv-page {
-    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: 'Instrument Sans', ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     letter-spacing: normal;
   }
 
@@ -42,6 +46,22 @@ const CV_STYLES = `
   .cv-page textarea {
     font-family: inherit;
     letter-spacing: normal;
+  }
+
+  /* Custom bullet: a small accent square, cheaper on space than a disc
+     and consistent with the site's square-marker language. */
+  .cv-bullets li {
+    position: relative;
+    padding-left: 0.85rem;
+  }
+  .cv-bullets li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.52em;
+    width: 0.28rem;
+    height: 0.28rem;
+    background: #d90429;
   }
 
   .cv-page a {
@@ -110,64 +130,81 @@ export function CV() {
         </Link>
       </div>
 
-      <main className="mx-auto max-w-[760px] px-6 pb-16 pt-20 sm:pt-14 print:max-w-none print:px-0 print:pb-0 print:pt-0">
-        <header className="mb-8">
-          <h1 className="text-3xl sm:text-4xl">Stephen Howe</h1>
-          <p className="mt-1 text-lg text-neutral-700">Creative Technologist</p>
-          <p className="mt-3 text-sm leading-relaxed text-neutral-600">
-            Norwich, UK{" · "}Remote (UK / EU / US-East overlap){" · "}
+      <main className="mx-auto max-w-[780px] px-6 pb-16 pt-20 sm:pt-14 print:max-w-none print:px-0 print:pb-0 print:pt-0">
+        {/* Masthead: name set large in the site's display serif, with a heavy
+            accent rule beneath it. One strong graphic gesture, no ornament. */}
+        <header className="mb-6 break-inside-avoid">
+          <div className="flex flex-wrap items-end justify-between gap-x-6 gap-y-2">
+            <div>
+              <h1 className="text-[2.6rem] leading-[1.05] sm:text-5xl">Stephen Howe</h1>
+              <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.22em] text-[#d90429]">
+                Creative Technologist
+              </p>
+            </div>
+            <p className="font-mono text-[10px] uppercase leading-relaxed tracking-[0.14em] text-neutral-500">
+              Norwich, UK
+              <br />
+              Remote: UK / EU / US-East
+              <br />
+              Open to permanent &amp; contract
+            </p>
+          </div>
+
+          <div className="mt-3 h-[3px] w-full bg-[#d90429]" />
+
+          <p className="mt-2.5 text-[12.5px] leading-relaxed text-neutral-600">
             <a href="mailto:howestephen@gmail.com">howestephen@gmail.com</a>{" · "}
             <a href="https://howecreative.co.uk" target="_blank" rel="noreferrer">howecreative.co.uk</a>{" · "}
             <a href="https://www.linkedin.com/in/howestephen" target="_blank" rel="noreferrer">linkedin.com/in/howestephen</a>{" · "}
             <a href="https://github.com/howestephen" target="_blank" rel="noreferrer">github.com/howestephen</a>
           </p>
-          <p className="mt-2 text-sm text-neutral-600">Open to permanent and contract roles.</p>
         </header>
 
-        <p className="mb-8 text-[15px] leading-relaxed text-neutral-800">
+        <p className="mb-7 border-l-2 border-[#d90429] pl-4 text-[14px] leading-relaxed text-neutral-800">
           Creative technologist with 20+ years connecting brand, 3D, motion, product design, and front-end code. For
           the last four years I've been the sole designer at a multi-chain DeFi protocol, owning everything from
           company rebrands to shipped product UI. I design systems rather than one-off artefacts - and increasingly
           I build the pipelines that produce them: AI-assisted build loops for software, generative asset workflows
-          for 3D and video, and automated publishing systems with human approval built in. Systems thinker with natural strengths in pattern
-          recognition, deep-focus problem solving, and forward planning in cross-functional teams.
+          for 3D and video, and automated publishing systems with human approval built in. Systems thinker with
+          natural strengths in pattern recognition, deep-focus problem solving, and forward planning in
+          cross-functional teams.
         </p>
 
-        <section className="mb-8">
+        <section className="mb-6">
           <h2 className={SECTION_HEADING}>Core Skills</h2>
-          <div className="mt-4 space-y-3">
+          <div className="mt-3 grid gap-x-7 gap-y-2.5 sm:grid-cols-2">
             <div>
-              <h3 className="text-sm font-semibold">AI &amp; Automation</h3>
-              <p className="mt-0.5 text-sm leading-snug text-neutral-700">
+              <h3 className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-neutral-900">AI &amp; Automation</h3>
+              <p className="mt-0.5 text-[12.5px] leading-snug text-neutral-700">
                 AI-assisted development (Claude Code, Codex), agentic build pipelines (spec → phased roadmap →
                 automated build and QA loops), generative asset workflows (ComfyUI), prompt system design,
                 automated publishing pipelines (Telegram approval → X API)
               </p>
             </div>
             <div>
-              <h3 className="text-sm font-semibold">Design &amp; Motion</h3>
-              <p className="mt-0.5 text-sm leading-snug text-neutral-700">
+              <h3 className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-neutral-900">Design &amp; Motion</h3>
+              <p className="mt-0.5 text-[12.5px] leading-snug text-neutral-700">
                 Figma (components, variables, prototyping), UI/UX, brand systems, design systems, Photoshop,
                 Illustrator, After Effects, Premiere Pro, Adobe Animate, Cinema 4D, Redshift, X-Particles
               </p>
             </div>
             <div>
-              <h3 className="text-sm font-semibold">Development</h3>
-              <p className="mt-0.5 text-sm leading-snug text-neutral-700">
+              <h3 className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-neutral-900">Development</h3>
+              <p className="mt-0.5 text-[12.5px] leading-snug text-neutral-700">
                 React, Next.js, TypeScript, JavaScript, HTML5, CSS3, Tailwind CSS, Three.js / React Three Fiber,
                 GSAP, Node.js, Vite, Supabase, PostgreSQL, Vercel, Git
               </p>
             </div>
             <div>
-              <h3 className="text-sm font-semibold">Audio &amp; Delivery</h3>
-              <p className="mt-0.5 text-sm leading-snug text-neutral-700">
+              <h3 className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-neutral-900">Audio &amp; Delivery</h3>
+              <p className="mt-0.5 text-[12.5px] leading-snug text-neutral-700">
                 Ableton Live, Adobe Audition, Serum, Agile/Scrum working practice
               </p>
             </div>
           </div>
         </section>
 
-        <section className="mb-8">
+        <section className="mb-6">
           <h2 className={SECTION_HEADING}>Experience</h2>
 
           <article className="mt-5 break-inside-avoid">
@@ -189,7 +226,7 @@ export function CV() {
               <li>Designed wireframes and UI concepts for 10+ apps, with 3-4 shipped to production</li>
               <li>Built UNCX Academy end-to-end: brand, site design, assets, and 30+ educational videos</li>
               <li>
-                Produced 100+ tutorials, explainers, and announcement videos, plus the 3D/motion pipeline that makes
+                Produced 232 tutorials, explainers, and announcement videos, plus the 3D/motion pipeline that makes
                 high-frequency output sustainable
               </li>
               <li>
@@ -211,7 +248,7 @@ export function CV() {
             </p>
             <ul className={BULLET_LIST}>
               <li>Shipped 30 games, 20+ currently live in market</li>
-              <li>Created bespoke video and marketing packs for each game</li>
+              <li>Created bespoke video and marketing packs for each game, 50+ videos in total</li>
               <li>Only designer in a dev team - committed work directly to the codebase</li>
               <li>Localised games for accessibility and multiple languages</li>
             </ul>
@@ -229,10 +266,10 @@ export function CV() {
               Ran my own studio, delivering video, animation, and web projects for international clients.
             </p>
             <ul className={BULLET_LIST}>
-              <li>Produced 140+ videos for the largest client across two years</li>
+              <li>Produced 150+ videos for the largest client across two years</li>
               <li>
-                Sole creator of a chef training course for a French Alps chalet company - filming, editing, motion
-                graphics, and website
+                Sole creator of a 6.5-hour video training course for chefs at a French Alps chalet company -
+                filming, editing, motion graphics, and website
               </li>
               <li>Music videos, animated explainers, rotoscoping, and colour grading</li>
               <li>UI improvements, site management, and SEO for international clients</li>
@@ -277,7 +314,7 @@ export function CV() {
           </article>
         </section>
 
-        <section className="mb-8">
+        <section className="mb-6">
           <h2 className={SECTION_HEADING}>Selected Projects</h2>
           <div className="mt-4 space-y-4">
             <article className="break-inside-avoid">
@@ -310,7 +347,7 @@ export function CV() {
           </div>
         </section>
 
-        <section className="mb-8">
+        <section className="mb-6">
           <h2 className={SECTION_HEADING}>Education &amp; Certifications</h2>
           <ul className="mt-4 list-disc space-y-3 pl-5 text-sm leading-snug text-neutral-700">
             <li>
