@@ -12,7 +12,7 @@ const TEASERS: Record<string, string> = {
   "uncx-rebrand":
     "Two-phase rebrand of a multi-chain DeFi protocol - one visual system across 10+ product pages.",
   "uncx-video-system":
-    "The pipeline behind 100+ videos - templated 3D and motion production at launch cadence.",
+    "The pipeline behind 232 videos at UNCX - templated 3D and motion production at launch cadence.",
   "badger-club":
     "A full-stack badge-tracking platform - design to deployed product, solo, AI-assisted.",
   "ai-portfolio-system": "The agentic build system whose output you're reading right now - spec to phased roadmap to gated build.",
@@ -23,6 +23,17 @@ const TEASERS: Record<string, string> = {
     "Five years of product concepts - validated visually before a line of code was committed.",
   "noticia-lingo": "Language learning driven by live news - lesson types designed as pure functions.",
 };
+
+/** Gallery thumbnails are pre-generated at 480px into a sibling `thumbs/`
+ *  folder (see scripts/build-thumbs.mjs). Full-resolution originals are only
+ *  fetched when an image is opened in the lightbox, which keeps the expanded
+ *  row light on mobile connections. */
+function thumbSrc(src: string): string {
+  const slash = src.lastIndexOf("/");
+  const dot = src.lastIndexOf(".");
+  if (slash === -1 || dot < slash) return src;
+  return `${src.slice(0, slash)}/thumbs/${src.slice(slash + 1, dot)}.jpg`;
+}
 
 function sectionBody(project: PortfolioProject, title: string) {
   return project.overlaySections.find((section) => section.title === title)?.body ?? "";
@@ -65,6 +76,15 @@ function ExpandedRow({
           </div>
         )}
 
+        {outcome && (
+          <div className="border-l-2 border-accent pl-4">
+            <div className="mb-2 font-mono text-[10px] uppercase tracking-[0.18em] text-accent">
+              Outcome
+            </div>
+            <p className="max-w-2xl text-sm leading-relaxed text-foreground/90">{outcome}</p>
+          </div>
+        )}
+
         <div className="flex flex-wrap gap-2 pt-1">
           {[project.role, project.client, project.status].map((chip) => (
             <span
@@ -77,7 +97,7 @@ function ExpandedRow({
         </div>
       </div>
 
-      <div className="space-y-6 lg:col-span-2">
+      <div className="lg:col-span-2">
         {images.length > 0 && (
           <div>
             <div className="mb-2 flex items-baseline justify-between gap-3">
@@ -85,37 +105,33 @@ function ExpandedRow({
                 Gallery
               </span>
               <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
-                {images.length} {images.length === 1 ? "image" : "images"}
+                {images.length} {images.length === 1 ? "image" : "images"} / scroll
               </span>
             </div>
-            <div className="grid grid-cols-3 gap-1.5">
-              {images.map((media, index) => (
-                <button
-                  key={media.src}
-                  type="button"
-                  onClick={() => onOpenImage(index)}
-                  aria-label={`View larger: ${media.alt ?? project.title}`}
-                  className="group/thumb block border border-border bg-card transition-colors hover:border-accent"
-                >
-                  <ImageWithFallback
-                    src={media.src}
-                    alt={media.alt ?? project.title}
-                    loading="lazy"
-                    decoding="async"
-                    className="aspect-square w-full object-cover transition-opacity group-hover/thumb:opacity-85"
-                  />
-                </button>
-              ))}
+            {/* Two rows scrolling sideways: keeps the gallery the same height as
+                the text column instead of running far past it, and means only the
+                first few images are ever fetched on load. */}
+            <div className="-mx-1 overflow-x-auto px-1 pb-2">
+              <div className="grid w-max snap-x snap-mandatory grid-flow-col grid-rows-2 gap-1.5">
+                {images.map((media, index) => (
+                  <button
+                    key={media.src}
+                    type="button"
+                    onClick={() => onOpenImage(index)}
+                    aria-label={`View larger: ${media.alt ?? project.title}`}
+                    className="group/thumb block w-28 shrink-0 snap-start border border-border bg-card transition-colors hover:border-accent sm:w-32"
+                  >
+                    <ImageWithFallback
+                      src={thumbSrc(media.src)}
+                      alt={media.alt ?? project.title}
+                      loading="lazy"
+                      decoding="async"
+                      className="aspect-square w-full object-cover transition-opacity group-hover/thumb:opacity-85"
+                    />
+                  </button>
+                ))}
+              </div>
             </div>
-          </div>
-        )}
-
-        {outcome && (
-          <div className="border-l-2 border-accent pl-4">
-            <div className="mb-2 font-mono text-[10px] uppercase tracking-[0.18em] text-accent">
-              Outcome
-            </div>
-            <p className="text-sm leading-relaxed text-foreground/90">{outcome}</p>
           </div>
         )}
       </div>
@@ -168,16 +184,20 @@ function Lightbox({
       aria-modal="true"
       aria-label={`${project.title} gallery`}
     >
-      <div className="flex items-center justify-between gap-4 border-b border-border px-5 py-3">
-        <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
+      <div className="flex items-center justify-between gap-4 border-b border-border px-4 py-3 sm:px-5">
+        <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground sm:text-[11px]">
           {project.title} / {index + 1} of {images.length}
         </span>
+        {/* Deliberately a large, filled, labelled control: the previous
+            10px text link read as a caption, not a way out. */}
         <button
           type="button"
           onClick={onClose}
-          className="inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.16em] text-foreground transition-colors hover:text-accent"
+          autoFocus
+          className="inline-flex shrink-0 items-center gap-2 bg-accent px-4 py-2.5 text-sm font-medium text-accent-foreground transition-colors hover:bg-accent-hover"
         >
-          <X className="h-3.5 w-3.5" /> Close
+          <X className="h-4 w-4" />
+          Close
         </button>
       </div>
 
@@ -190,7 +210,13 @@ function Lightbox({
         >
           <ChevronLeft className="h-5 w-5" />
         </button>
-        <div className="flex min-h-0 flex-1 items-center justify-center">
+        <div
+          className="flex min-h-0 flex-1 items-center justify-center"
+          onClick={(e) => {
+            // clicking the empty space around the image also closes
+            if (e.target === e.currentTarget) onClose();
+          }}
+        >
           <ImageWithFallback
             src={current.src}
             alt={current.alt ?? project.title}
@@ -239,7 +265,7 @@ export function WorkIndex() {
   return (
     <section id="work" className="scroll-mt-24 border-t border-border">
       <div className="mx-auto max-w-6xl px-6 py-20 md:py-24">
-        <div className="mb-4 flex items-baseline justify-between gap-4">
+        <div className="mb-4 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
           <h2 className="text-3xl md:text-4xl">Selected work</h2>
           <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
             2021-2026 · {portfolioProjects.length} projects
@@ -256,11 +282,25 @@ export function WorkIndex() {
             const teaser = TEASERS[project.slug] ?? project.shortDescription;
 
             return (
-              <li key={project.slug} className="border-b border-border first:border-t">
+              <li
+                key={project.slug}
+                className="scroll-mt-20 border-b border-border first:border-t"
+              >
                 <button
                   type="button"
                   aria-expanded={open}
-                  onClick={() => setOpenSlug(open ? null : project.slug)}
+                  onClick={(e) => {
+                    const willOpen = !open;
+                    setOpenSlug(willOpen ? project.slug : null);
+                    // Opening a study collapses the others, which can leave the
+                    // reader mid-page; bring the chosen row back to the top.
+                    if (willOpen) {
+                      const row = e.currentTarget.closest("li");
+                      requestAnimationFrame(() =>
+                        row?.scrollIntoView({ behavior: "smooth", block: "start" }),
+                      );
+                    }
+                  }}
                   className="group grid w-full grid-cols-[2.6rem_1fr_auto] items-baseline gap-x-4 py-6 text-left transition-colors hover:bg-card md:grid-cols-[3rem_1fr_12rem_4rem_2rem]"
                 >
                   <span className="font-mono text-[11px] tracking-[0.14em] text-muted-foreground">
