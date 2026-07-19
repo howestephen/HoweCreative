@@ -26,7 +26,8 @@ function makeRes(): MockRes {
 describe("contact handler rate limiting", () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    process.env.EMAIL_ACCESS_KEY = "test-key";
+    delete process.env.EMAIL_ACCESS_KEY;
+    process.env.WEB3FORMS_SERVER_ACCESS_KEY = "test-key";
   });
 
   it("returns 429 when rate limit exceeded", async () => {
@@ -59,5 +60,22 @@ describe("contact handler rate limiting", () => {
     await handler(req, res);
     expect(checkRateLimit).not.toHaveBeenCalled();
     expect(res.status).toHaveBeenCalledWith(405);
+  });
+
+  it("does not accept the public client key as a server credential", async () => {
+    vi.mocked(checkRateLimit).mockReturnValue({ allowed: true });
+    delete process.env.WEB3FORMS_SERVER_ACCESS_KEY;
+    process.env.EMAIL_ACCESS_KEY = "public-form-key";
+    const res = makeRes();
+
+    await handler(
+      makeReq({ name: "Ada", email: "ada@example.com", brief: "Hello" }),
+      res,
+    );
+
+    expect(res.status).toHaveBeenCalledWith(500);
+    expect(res.json).toHaveBeenCalledWith(
+      expect.objectContaining({ message: "Email service not configured." }),
+    );
   });
 });

@@ -5,7 +5,7 @@ import { LoadingScreen } from "./LoadingScreen";
 describe("LoadingScreen accessibility", () => {
   beforeEach(() => {
     vi.useFakeTimers();
-    // Default matchMedia — no reduced motion
+    // Default matchMedia - no reduced motion
     Object.defineProperty(window, "matchMedia", {
       writable: true,
       value: vi.fn().mockImplementation((query: string) => ({

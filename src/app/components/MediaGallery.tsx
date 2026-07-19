@@ -65,6 +65,8 @@ function MediaItem({ item, contain }: { item: ProjectMediaItem; contain?: boolea
       alt={item.alt ?? ""}
       className={`h-full w-full ${contain ? "object-contain" : "object-contain"}`}
       draggable={false}
+      loading="eager"
+      decoding="async"
     />
   );
 }
@@ -86,13 +88,13 @@ function Thumbnail({
       onClick={onClick}
       className={`relative h-11 w-16 shrink-0 overflow-hidden border transition-all ${
         active
-          ? "border-[#ff003c] ring-1 ring-[#ff003c]/40"
-          : "border-[#ff003c]/32 opacity-60 hover:border-[#ff003c]/50 hover:opacity-100"
+          ? "border-accent ring-1 ring-ring/40"
+          : "border-accent/32 opacity-60 hover:border-accent/50 hover:opacity-100"
       }`}
       aria-label={item.alt ?? item.type}
     >
       {item.type === "image" && (
-        <img src={item.src} alt="" className="h-full w-full object-cover" />
+        <img src={item.src} alt="" className="h-full w-full object-cover" loading="lazy" decoding="async" />
       )}
 
       {item.type === "youtube" && (
@@ -101,6 +103,8 @@ function Thumbnail({
             src={youTubeThumbnail(item.src, "default")}
             alt=""
             className="h-full w-full object-cover"
+            loading="lazy"
+            decoding="async"
           />
           <div className="absolute inset-0 flex items-center justify-center bg-black/95">
             <Youtube className="h-3.5 w-3.5 text-red-500" />
@@ -111,10 +115,10 @@ function Thumbnail({
       {item.type === "video" && (
         <>
           {item.poster ? (
-            <img src={item.poster} alt="" className="h-full w-full object-cover" />
+            <img src={item.poster} alt="" className="h-full w-full object-cover" loading="lazy" decoding="async" />
           ) : (
-            <div className="flex h-full w-full items-center justify-center bg-zinc-900">
-              <ImageIcon className="h-3 w-3 text-zinc-600" />
+            <div className="flex h-full w-full items-center justify-center bg-muted">
+              <ImageIcon className="h-3 w-3 text-muted-foreground/80" />
             </div>
           )}
           <div className="absolute inset-0 flex items-center justify-center bg-black/95">
@@ -237,37 +241,37 @@ function Lightbox({
     >
       {/* ── Top toolbar ── */}
       <div
-        className="relative z-20 flex items-center justify-between border-b border-[#ff003c]/32 px-4 py-2"
+        className="relative z-20 flex items-center justify-between border-b border-accent/32 px-4 py-2"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-zinc-500">
-          <span className="text-zinc-300">{current.alt || `Image ${index + 1}`}</span>
+        <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+          <span className="text-foreground/85">{current.alt || `Image ${index + 1}`}</span>
           {multi && (
-            <span className="text-[#ff003c]">
+            <span className="text-accent">
               {index + 1} / {items.length}
             </span>
           )}
         </div>
 
         <div className="flex items-center gap-1">
-          {/* Zoom controls — only for images */}
+          {/* Zoom controls - only for images */}
           {isImage && (
             <>
               <button
                 onClick={zoomOut}
                 disabled={zoom <= ZOOM_LEVELS[0]}
-                className="flex h-8 w-8 items-center justify-center border border-[#ff003c]/32 bg-black/80 text-zinc-400 transition-colors hover:border-[#ff003c]/50 hover:text-white disabled:opacity-30 disabled:hover:border-[#ff003c]/32 disabled:hover:text-zinc-400"
+                className="flex h-8 w-8 items-center justify-center border border-accent/32 bg-card/80 text-muted-foreground transition-colors hover:border-accent/50 hover:text-foreground disabled:opacity-30 disabled:hover:border-accent/32 disabled:hover:text-muted-foreground"
                 aria-label="Zoom out"
               >
                 <Minus className="h-3.5 w-3.5" />
               </button>
-              <div className="flex h-8 min-w-[52px] items-center justify-center border border-[#ff003c]/32 bg-black/80 px-2 font-mono text-[10px] text-zinc-400">
+              <div className="flex h-8 min-w-[52px] items-center justify-center border border-accent/32 bg-card/80 px-2 font-mono text-[10px] text-muted-foreground">
                 {Math.round(zoom * 100)}%
               </div>
               <button
                 onClick={zoomIn}
                 disabled={zoom >= ZOOM_LEVELS[ZOOM_LEVELS.length - 1]}
-                className="flex h-8 w-8 items-center justify-center border border-[#ff003c]/32 bg-black/80 text-zinc-400 transition-colors hover:border-[#ff003c]/50 hover:text-white disabled:opacity-30 disabled:hover:border-[#ff003c]/32 disabled:hover:text-zinc-400"
+                className="flex h-8 w-8 items-center justify-center border border-accent/32 bg-card/80 text-muted-foreground transition-colors hover:border-accent/50 hover:text-foreground disabled:opacity-30 disabled:hover:border-accent/32 disabled:hover:text-muted-foreground"
                 aria-label="Zoom in"
               >
                 <Plus className="h-3.5 w-3.5" />
@@ -275,7 +279,7 @@ function Lightbox({
               {zoom > 1 && (
                 <button
                   onClick={resetZoom}
-                  className="ml-1 flex h-8 w-8 items-center justify-center border border-[#ff003c]/32 bg-black/80 text-zinc-400 transition-colors hover:border-[#ff003c]/50 hover:text-white"
+                  className="ml-1 flex h-8 w-8 items-center justify-center border border-accent/32 bg-card/80 text-muted-foreground transition-colors hover:border-accent/50 hover:text-foreground"
                   aria-label="Reset zoom"
                 >
                   <RotateCcw className="h-3.5 w-3.5" />
@@ -287,7 +291,7 @@ function Lightbox({
           {/* Close button */}
           <button
             onClick={onClose}
-            className="ml-2 flex h-8 w-8 items-center justify-center border border-[#ff003c]/38 bg-black/80 text-zinc-300 transition-colors hover:border-[#ff003c] hover:text-white"
+            className="ml-2 flex h-8 w-8 items-center justify-center border border-accent/38 bg-card/80 text-foreground/85 transition-colors hover:border-accent hover:text-foreground"
             aria-label="Close"
           >
             <X className="h-4 w-4" />
@@ -301,7 +305,7 @@ function Lightbox({
         {multi && index > 0 && (
           <button
             onClick={() => go(index - 1)}
-            className="absolute left-3 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center border border-[#ff003c]/30 bg-black/90 text-zinc-400 transition-colors hover:border-[#ff003c] hover:text-white"
+            className="absolute left-3 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center border border-accent/30 bg-card/90 text-muted-foreground transition-colors hover:border-accent hover:text-foreground"
             aria-label="Previous"
           >
             <ChevronLeft className="h-5 w-5" />
@@ -318,6 +322,8 @@ function Lightbox({
               src={current.src}
               alt={current.alt ?? ""}
               draggable={false}
+              loading="eager"
+              decoding="async"
               className="max-h-full max-w-full select-none transition-transform duration-200"
               style={{
                 transform: `scale(${zoom})`,
@@ -340,7 +346,7 @@ function Lightbox({
         {multi && index < items.length - 1 && (
           <button
             onClick={() => go(index + 1)}
-            className="absolute right-3 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center border border-[#ff003c]/30 bg-black/90 text-zinc-400 transition-colors hover:border-[#ff003c] hover:text-white"
+            className="absolute right-3 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center border border-accent/30 bg-card/90 text-muted-foreground transition-colors hover:border-accent hover:text-foreground"
             aria-label="Next"
           >
             <ChevronRight className="h-5 w-5" />
@@ -351,7 +357,7 @@ function Lightbox({
       {/* ── Bottom thumbnail strip ── */}
       {multi && (
         <div
-          className="relative z-20 border-t border-[#ff003c]/32 px-4 py-2"
+          className="relative z-20 border-t border-accent/32 px-4 py-2"
           onClick={(e) => e.stopPropagation()}
         >
           <div className="flex justify-center gap-1.5 overflow-x-auto">
@@ -396,9 +402,9 @@ export function MediaGallery({
 
   return (
     <div className="flex flex-col gap-2">
-      {/* ── Main viewer — 16:9 aspect ratio ── */}
+      {/* ── Main viewer - 16:9 aspect ratio ── */}
       <div
-        className={`group relative overflow-hidden border border-[#ff003c]/38 bg-black ${isClickable ? "cursor-pointer" : ""}`}
+        className={`group relative overflow-hidden border border-accent/38 bg-black ${isClickable ? "cursor-pointer" : ""}`}
         style={{ aspectRatio: "16 / 9" }}
         onClick={isClickable ? () => setLightboxOpen(true) : undefined}
       >
@@ -429,7 +435,7 @@ export function MediaGallery({
 
         {/* Fullscreen hint */}
         {isClickable && (
-          <div className="pointer-events-none absolute right-2 top-2 z-10 flex h-7 w-7 items-center justify-center border border-white/15 bg-black/80 text-zinc-500 opacity-0 transition-opacity group-hover:opacity-100">
+          <div className="pointer-events-none absolute right-2 top-2 z-10 flex h-7 w-7 items-center justify-center border border-foreground/15 bg-card/80 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100">
             <Maximize2 className="h-3.5 w-3.5" />
           </div>
         )}
@@ -441,7 +447,7 @@ export function MediaGallery({
               e.stopPropagation();
               go(index - 1);
             }}
-            className="absolute left-2 top-1/2 z-10 flex h-8 w-8 -translate-y-1/2 items-center justify-center border border-white/20 bg-black/95 text-white/70 transition-colors hover:border-white/50 hover:text-white"
+            className="absolute left-2 top-1/2 z-10 flex h-8 w-8 -translate-y-1/2 items-center justify-center border border-foreground/20 bg-card/95 text-foreground/70 transition-colors hover:border-foreground/50 hover:text-foreground"
             aria-label="Previous"
           >
             <ChevronLeft className="h-4 w-4" />
@@ -455,7 +461,7 @@ export function MediaGallery({
               e.stopPropagation();
               go(index + 1);
             }}
-            className="absolute right-2 top-1/2 z-10 flex h-8 w-8 -translate-y-1/2 items-center justify-center border border-white/20 bg-black/95 text-white/70 transition-colors hover:border-white/50 hover:text-white"
+            className="absolute right-2 top-1/2 z-10 flex h-8 w-8 -translate-y-1/2 items-center justify-center border border-foreground/20 bg-card/95 text-foreground/70 transition-colors hover:border-foreground/50 hover:text-foreground"
             aria-label="Next"
           >
             <ChevronRight className="h-4 w-4" />
@@ -464,7 +470,7 @@ export function MediaGallery({
 
         {/* Counter badge */}
         {multi && (
-          <div className="absolute bottom-2 right-2 z-10 bg-black/95 px-2 py-0.5 font-mono text-[10px] text-zinc-400">
+          <div className="absolute bottom-2 right-2 z-10 bg-card/95 px-2 py-0.5 font-mono text-[10px] text-muted-foreground">
             {index + 1} / {items.length}
           </div>
         )}

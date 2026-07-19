@@ -1,128 +1,86 @@
-# HOWE_CREATIVE — Portfolio v2.0
+# Howe Creative — Portfolio v2.0
 
-Personal portfolio for **Stephen Howe**, Creative Systems Designer.
-Operator/terminal aesthetic. Systems-first approach. Built to ship.
-
----
+Stephen Howe’s production portfolio for Creative Technologist, AI Designer, and Design Engineer roles. The active experience is a light-first editorial system that foregrounds shipped outcomes, career evidence, and automated creative pipelines.
 
 ## Stack
 
-| Layer | Technology |
-|---|---|
-| Framework | React 19 + TypeScript |
-| Build | Vite 6 |
-| Styling | Tailwind CSS 4 |
-| Animation | Framer Motion (`motion/react`) |
-| 3D / WebGL | Three.js, `@react-three/fiber`, `@react-three/drei` |
-| Icons | Lucide React, React Icons (`react-icons/si`) |
-| Routing | React Router 7 |
-| Forms | Web3Forms via Vercel serverless function |
-| Deployment | Vercel |
+- React 19 and TypeScript
+- Vite 6 and Tailwind CSS 4
+- React Router 7
+- Motion for interface animation
+- Canvas 2D for the seeded plotter mark
+- Three.js / React Three Fiber retained for the portfolio’s 3D experiments
+- Web3Forms contact delivery
+- Vercel deployment and serverless fallback
 
----
+## Active experience
 
-## Sections
+- `Masthead` — positioning, proof metrics, primary actions, and generative plotter mark
+- `WorkIndex` — nine expandable, outcome-first case studies
+- `Capabilities` — role and service fit
+- `Method` — working principles and full 2005–present career history
+- `ContactFoot` — contact form and conversion links
+- `/cv` — standalone printable CV, loaded as a separate route chunk
 
-| Section | Component | Description |
-|---|---|---|
-| Hero | `MatrixRainHero` | Canvas matrix rain + rotating wireframe shape. CSS fallback on iOS. |
-| Operator Profile | `OperatorProfile` | Dossier-style about section with 3D GLTF portrait (WebGL), quick facts, and file cards. |
-| Case Studies | `CaseStudies` | 6 projects with detail overlay panels (Brief, Problem, System Design, Outcome). |
-| Tools & Skills | `MediaShowcase` | 26-item tool grid across Design, 3D, Motion, Audio, Frontend, Dev, and AI. |
-| Contact | `ContactPanel` | Name / Email / Project Type / Brief — sends via Web3Forms relay. |
-| Archive | `ArchiveSection` | Filterable timeline of prior work by tool. |
+The earlier dossier/WebGL implementation remains under `src/app/components/` for reference, but `src/app/pages/Home.tsx` composes the active editorial design from `src/app/concept/`.
 
----
-
-## Quick Start
+## Setup
 
 ```bash
 npm install
+cp .env.example .env.local
 npm run dev
 ```
 
-Opens at `http://localhost:5173`.
+Vite runs at `http://localhost:5173`.
 
-For local contact form testing (Vercel serverless):
-
-```bash
-vercel dev
-```
-
----
-
-## Scripts
+Set the existing Web3Forms form identifier:
 
 ```bash
-npm run dev       # start dev server
-npm run build     # production build
-npm run preview   # preview production build
-```
-
----
-
-## Environment Variables
-
-```bash
-# .env
 EMAIL_ACCESS_KEY=your_web3forms_access_key
 ```
 
-Copy `.env.example` to `.env` and set your key. The Vercel serverless function at `api/contact.ts` reads this at runtime.
+The default `CONTACT_TRANSPORT=client` flow maps `EMAIL_ACCESS_KEY` into the browser build because Web3Forms’ free plan requires client-side submission and treats access keys as public form identifiers. `VITE_EMAIL_ACCESS_KEY` is also accepted for backwards compatibility.
 
----
+Paid-plan server submission is explicitly separate: set `CONTACT_TRANSPORT=server` and `WEB3FORMS_SERVER_ACCESS_KEY`, then configure Web3Forms server-IP allowlisting. The private server key is never embedded in the client.
 
-## Content
+## Commands
 
-All copy and structured data lives in `site-content.json`. It is consumed via typed exports in `src/app/data/portfolio.ts`.
-
-| Key | What it controls |
-|---|---|
-| `profile` | Brand, name, role, headline, social links |
-| `navigation` | Nav labels and anchor targets |
-| `hero` | Skill labels, scroll indicator copy |
-| `operatorProfile` | Quick facts, file cards, portrait labels, notes |
-| `caseStudies.projects` | Project data, tags, media, outcomes |
-| `toolsSkills` | Tools grid (name, icon, color, category) |
-| `contact` | Form field labels, status messages |
-| `archive.entries` | Timeline entries with tool tags |
-| `footer` | Links, availability status, location |
-
----
-
-## Project Structure
-
-```
-src/
-  app/
-    components/       # All UI components and section layouts
-    data/portfolio.ts # Typed content adapter (consumes site-content.json)
-    lib/              # device.ts (iOS detection), webgl.ts (context detection)
-    pages/Home.tsx    # Top-level page composition
-    routes.ts         # React Router config
-site-content.json     # Primary content model
-public/               # Static assets (media, models, images)
-api/                  # Vercel serverless routes (contact form)
-docs/plans/           # Design and implementation docs
+```bash
+npm run dev
+npm test
+npm run typecheck
+npm run lint
+npm run build
 ```
 
----
+Run all four verification commands before deployment. Use `vercel dev` only when testing the serverless fallback.
 
-## iOS / Mobile Notes
+## Content and structure
 
-iOS Safari has a hard limit of 8 simultaneous WebGL contexts. The site avoids crashes by:
+Content ownership is intentionally split:
 
-- Skipping the hero Canvas on iOS — uses a CSS gradient fallback instead
-- Switching matrix rain backdrops from WebGL to CSS on iOS
-- Rendering the 3D portrait as a static image on iOS
-- Disposing the WebGL detection test context immediately after use
+- `site-content.json` owns profile, project facts, project media, and detailed case-study copy.
+- `src/app/concept/WorkIndex.tsx` owns concise editorial teasers derived from those projects.
+- `src/app/concept/Method.tsx` owns the homepage career summary.
+- `src/app/pages/CV.tsx` owns the application-focused CV and complete export content.
 
-If you add new `<Canvas>` components, add an `isIOSLike()` guard from `src/app/lib/device.ts`.
+Career dates, titles, and metrics repeated across these files must be reviewed together. `src/app/data/portfolio.ts` exposes the structured JSON content to the UI.
 
----
+```text
+api/                         Vercel contact fallback and rate limiting
+public/                      Fonts, social assets, case-study media
+src/app/concept/             Active editorial homepage
+src/app/components/          Shared and legacy portfolio components
+src/app/data/portfolio.ts    Typed content adapter
+src/app/pages/               Home and standalone CV
+src/app/routes.ts            Route composition and code splitting
+site-content.json            Primary structured content
+docs/plans/                  Historical and current planning records
+```
 
 ## Deployment
 
-- Push to `main` — Vercel auto-deploys
-- Ensure all media referenced in `site-content.json` exists in `public/`
-- Run `npm run build` locally before merging to catch TypeScript or asset errors
+- Vercel must provide `EMAIL_ACCESS_KEY` at build time for the free Web3Forms flow.
+- Confirm every media path in `site-content.json` exists under `public/`.
+- Run tests, typecheck, lint, and production build before merging or deploying.

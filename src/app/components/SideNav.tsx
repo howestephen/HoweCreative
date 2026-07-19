@@ -11,7 +11,7 @@ function jumpToSection(sectionId: string) {
 const socialLinks = [
   {
     label: "LinkedIn",
-    handle: "/en/howestephen",
+    handle: "in/howestephen",
     href: siteProfile.linkedinUrl,
     icon: Linkedin,
   },
@@ -93,12 +93,12 @@ export function SideNav() {
         onClick={() => setOpen((value) => !value)}
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
-        className="inline-flex h-[58px] items-center gap-4 border border-[#ff003c]/35 bg-black/84 px-5 text-white shadow-[0_18px_45px_rgba(0,0,0,0.34)] backdrop-blur-md"
+        className="inline-flex h-[58px] items-center gap-4 border border-accent/35 bg-background/88 px-5 text-foreground shadow-[0_18px_45px_rgba(0,0,0,0.34)] backdrop-blur-md"
       >
         <span className="headline-font text-[12px] uppercase tracking-[0.32em]">
           {navigationContent.menuButtonLabel}
         </span>
-        <span className="flex h-8 items-center border-l border-[#ff003c]/38 pl-4 text-[#ff003c]">
+        <span className="flex h-8 items-center border-l border-accent/38 pl-4 text-accent">
           <Menu className="h-4.5 w-4.5" />
         </span>
       </motion.button>
@@ -113,7 +113,7 @@ export function SideNav() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setOpen(false)}
-              className="fixed inset-0 z-[84] bg-black/55 backdrop-blur-[3px]"
+              className="fixed inset-0 z-[84] bg-background/59 backdrop-blur-[3px]"
             />
 
             <motion.div
@@ -121,13 +121,13 @@ export function SideNav() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -10, scale: 0.98 }}
               transition={{ duration: 0.22 }}
-              className="fixed right-4 top-4 z-[85] hidden w-[372px] overflow-hidden border border-[#ff003c]/35 bg-[#050505]/96 shadow-[0_30px_90px_rgba(0,0,0,0.58)] backdrop-blur-md md:block md:right-6 md:top-6"
+              className="fixed right-4 top-4 z-[85] hidden w-[372px] overflow-hidden border border-accent/35 bg-card/96 shadow-[0_30px_90px_rgba(0,0,0,0.58)] backdrop-blur-md md:block md:right-6 md:top-6"
             >
               <div
                 className="pointer-events-none absolute inset-0 opacity-[0.08]"
                 style={{
                   backgroundImage:
-                    "linear-gradient(rgba(255,0,60,0.18) 1px, transparent 1px), linear-gradient(90deg, rgba(255,0,60,0.12) 1px, transparent 1px)",
+                    "linear-gradient(color-mix(in srgb, var(--accent) 18%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in srgb, var(--accent) 12%, transparent) 1px, transparent 1px)",
                   backgroundSize: "24px 24px",
                 }}
               />
@@ -136,23 +136,23 @@ export function SideNav() {
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.04, duration: 0.2 }}
-                className="relative border-b border-[#ff003c]/30 px-5 py-4"
+                className="relative border-b border-accent/30 px-5 py-4"
               >
                 <div className="flex items-center justify-between gap-4">
-                  <div className="headline-font text-lg uppercase tracking-[0.14em] text-white">
+                  <div className="headline-font text-lg uppercase tracking-[0.14em] text-foreground">
                     Menu
                   </div>
                   <button
                     type="button"
                     onClick={() => setOpen(false)}
-                    className="inline-flex h-11 items-center gap-3 border border-[#ff003c]/30 bg-black/75 px-3.5 text-[#ff003c] transition-colors hover:border-[#ff003c] hover:text-white"
+                    className="inline-flex h-11 items-center gap-3 border border-accent/30 bg-muted/75 px-3.5 text-accent transition-colors hover:border-accent hover:text-foreground"
                   >
                     <span className="flex h-6 items-center pl-1">
                       <X className="h-4 w-4" />
                     </span>
                   </button>
                 </div>
-                <div className="mt-2 font-mono text-[10px] uppercase tracking-[0.22em] text-[#ff003c]">
+                <div className="mt-2 font-mono text-[10px] uppercase tracking-[0.22em] text-accent">
                   {siteProfile.navVersion}
                 </div>
               </motion.div>
@@ -178,16 +178,16 @@ export function SideNav() {
                       }}
                       className={`group flex items-center justify-between gap-4 border px-4 py-4 text-left transition-all ${
                         isActive
-                          ? "border-[#ff003c]/55 bg-[#1a0007] text-white shadow-[0_0_0_1px_rgba(255,0,60,0.18)]"
-                          : "border-[#ff003c]/14 bg-black/55 text-zinc-300 hover:border-[#ff003c]/35 hover:bg-[#120008]/60"
+                          ? "border-accent/55 bg-accent/15 text-foreground shadow-[0_0_0_1px_color-mix(in_srgb,var(--accent)_18%,transparent)]"
+                          : "border-accent/14 bg-muted/55 text-foreground/85 hover:border-accent/35 hover:bg-accent/10"
                       }`}
                     >
                       <span className="flex items-center gap-4">
-                        <span className="flex h-11 w-11 items-center justify-center border border-current/15 bg-black/35">
-                          <Icon className={`h-5 w-5 ${isActive ? "text-[#ff003c]" : "text-zinc-500 group-hover:text-[#ff003c]"}`} />
+                        <span className="flex h-11 w-11 items-center justify-center border border-current/15 bg-muted/35">
+                          <Icon className={`h-5 w-5 ${isActive ? "text-accent" : "text-muted-foreground group-hover:text-accent"}`} />
                         </span>
                         <span>
-                          <span className="block font-mono text-[10px] uppercase tracking-[0.18em] text-zinc-500">
+                          <span className="block font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
                             Route {item.indexLabel}
                           </span>
                           <span className="mt-1 block headline-font text-sm uppercase tracking-[0.18em]">
@@ -195,7 +195,7 @@ export function SideNav() {
                           </span>
                         </span>
                       </span>
-                      <ArrowUpRight className={`h-4 w-4 ${isActive ? "text-[#ff003c]" : "text-zinc-600 group-hover:text-white"}`} />
+                      <ArrowUpRight className={`h-4 w-4 ${isActive ? "text-accent" : "text-muted-foreground/80 group-hover:text-foreground"}`} />
                     </button>
                   );
                 })}
@@ -205,9 +205,9 @@ export function SideNav() {
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.16, duration: 0.24 }}
-                className="relative grid gap-2 border-t border-[#ff003c]/30 px-4 py-4"
+                className="relative grid gap-2 border-t border-accent/30 px-4 py-4"
               >
-                <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-zinc-500">
+                <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
                   External Links
                 </div>
                 <div className="grid gap-2">
@@ -220,18 +220,18 @@ export function SideNav() {
                         target="_blank"
                         rel="noreferrer"
                         whileHover={{ x: 2 }}
-                        className="flex items-center justify-between border border-[#ff003c]/14 bg-black/55 px-4 py-3 text-zinc-300 transition-colors hover:border-[#ff003c]/35 hover:text-white"
+                        className="flex items-center justify-between border border-accent/14 bg-muted/55 px-4 py-3 text-foreground/85 transition-colors hover:border-accent/35 hover:text-foreground"
                       >
                         <span className="flex items-center gap-3">
-                          <Icon className="h-4 w-4 text-[#ff003c]" />
+                          <Icon className="h-4 w-4 text-accent" />
                           <span>
                             <span className="block font-mono text-[11px] uppercase tracking-[0.2em]">
                               {item.label}
                             </span>
-                            <span className="block font-mono text-[10px] text-zinc-500">{item.handle}</span>
+                            <span className="block font-mono text-[10px] text-muted-foreground">{item.handle}</span>
                           </span>
                         </span>
-                        <ArrowUpRight className="h-4 w-4 text-zinc-600" />
+                        <ArrowUpRight className="h-4 w-4 text-muted-foreground/80" />
                       </motion.a>
                     );
                   })}
@@ -245,12 +245,12 @@ export function SideNav() {
               exit={{ opacity: 0 }}
               className="fixed inset-0 z-[85] overflow-y-auto md:hidden"
             >
-              <div className="absolute inset-0 bg-[#030303]/98" />
+              <div className="absolute inset-0 bg-background/98" />
               <div
                 className="pointer-events-none absolute inset-0 opacity-[0.08]"
                 style={{
                   backgroundImage:
-                    "linear-gradient(rgba(255,0,60,0.18) 1px, transparent 1px), linear-gradient(90deg, rgba(255,0,60,0.12) 1px, transparent 1px)",
+                    "linear-gradient(color-mix(in srgb, var(--accent) 18%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in srgb, var(--accent) 12%, transparent) 1px, transparent 1px)",
                   backgroundSize: "22px 22px",
                 }}
               />
@@ -258,7 +258,7 @@ export function SideNav() {
                 className="pointer-events-none absolute inset-0 opacity-[0.06]"
                 style={{
                   backgroundImage:
-                    "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.18) 2px, rgba(255,255,255,0.18) 3px)",
+                    "repeating-linear-gradient(0deg, transparent, transparent 2px, color-mix(in srgb, var(--foreground) 18%, transparent) 2px, color-mix(in srgb, var(--foreground) 18%, transparent) 3px)",
                 }}
               />
 
@@ -267,29 +267,29 @@ export function SideNav() {
                 animate={{ opacity: 1, clipPath: "inset(0 0 0% 0)", y: 0 }}
                 exit={{ opacity: 0, clipPath: "inset(0 0 100% 0)", y: -24 }}
                 transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-                className="relative min-h-full border-b border-[#ff003c]/22 bg-black/72 px-4 pb-6 pt-0"
+                className="relative min-h-full border-b border-accent/22 bg-background/76 px-4 pb-6 pt-0"
               >
                 <motion.div
                   initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.06, duration: 0.2 }}
-                  className="border border-[#ff003c]/22 bg-black/58 px-4 py-4"
+                  className="border border-accent/22 bg-muted/58 px-4 py-4"
                 >
                   <div className="flex items-center justify-between gap-4">
-                    <div className="headline-font text-2xl uppercase tracking-[0.16em] text-white">
+                    <div className="headline-font text-2xl uppercase tracking-[0.16em] text-foreground">
                       Menu
                     </div>
                     <button
                       type="button"
                       onClick={() => setOpen(false)}
-                      className="inline-flex h-11 items-center gap-3 border border-[#ff003c]/30 bg-black/75 px-3.5 text-[#ff003c] transition-colors hover:border-[#ff003c] hover:text-white"
+                      className="inline-flex h-11 items-center gap-3 border border-accent/30 bg-muted/75 px-3.5 text-accent transition-colors hover:border-accent hover:text-foreground"
                     >
                       <span className="flex h-6 items-center pl-1">
                         <X className="h-4 w-4" />
                       </span>
                     </button>
                   </div>
-                  <div className="mt-2 font-mono text-[10px] uppercase tracking-[0.22em] text-[#ff003c]">
+                  <div className="mt-2 font-mono text-[10px] uppercase tracking-[0.22em] text-accent">
                     {siteProfile.navVersion}
                   </div>
                 </motion.div>
@@ -318,16 +318,16 @@ export function SideNav() {
                         }}
                         className={`flex items-center justify-between gap-4 border px-4 py-4 text-left transition-colors ${
                           isActive
-                            ? "border-[#ff003c]/55 bg-[#180007] text-white"
-                            : "border-[#ff003c]/16 bg-black/55 text-zinc-300"
+                            ? "border-accent/55 bg-accent/15 text-foreground"
+                            : "border-accent/16 bg-muted/55 text-foreground/85"
                         }`}
                       >
                         <span className="flex items-center gap-4">
-                          <span className="flex h-12 w-12 items-center justify-center border border-current/15 bg-black/40">
-                            <Icon className={`h-5 w-5 ${isActive ? "text-[#ff003c]" : "text-zinc-500"}`} />
+                          <span className="flex h-12 w-12 items-center justify-center border border-current/15 bg-muted/40">
+                            <Icon className={`h-5 w-5 ${isActive ? "text-accent" : "text-muted-foreground"}`} />
                           </span>
                           <span>
-                            <span className="block font-mono text-[10px] uppercase tracking-[0.18em] text-zinc-500">
+                            <span className="block font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
                               Route {item.indexLabel}
                             </span>
                             <span className="mt-1 block headline-font text-base uppercase tracking-[0.16em]">
@@ -335,7 +335,7 @@ export function SideNav() {
                             </span>
                           </span>
                         </span>
-                        <ArrowUpRight className={`h-4 w-4 ${isActive ? "text-[#ff003c]" : "text-zinc-600"}`} />
+                        <ArrowUpRight className={`h-4 w-4 ${isActive ? "text-accent" : "text-muted-foreground/80"}`} />
                       </motion.button>
                     );
                   })}
@@ -345,9 +345,9 @@ export function SideNav() {
                   initial={{ opacity: 0, y: 22 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.22, duration: 0.26 }}
-                  className="mt-auto border border-[#ff003c]/30 bg-black/60 p-4"
+                  className="mt-auto border border-accent/30 bg-muted/60 p-4"
                 >
-                  <div className="mb-3 font-mono text-[10px] uppercase tracking-[0.22em] text-zinc-500">
+                  <div className="mb-3 font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
                     External Links
                   </div>
                   <div className="grid gap-3">
@@ -359,18 +359,18 @@ export function SideNav() {
                           href={item.href}
                           target="_blank"
                           rel="noreferrer"
-                          className="flex items-center justify-between border border-[#ff003c]/14 bg-black/55 px-4 py-3 text-zinc-300"
+                          className="flex items-center justify-between border border-accent/14 bg-muted/55 px-4 py-3 text-foreground/85"
                         >
                           <span className="flex items-center gap-3">
-                            <Icon className="h-4 w-4 text-[#ff003c]" />
+                            <Icon className="h-4 w-4 text-accent" />
                             <span>
                               <span className="block font-mono text-[11px] uppercase tracking-[0.18em]">
                                 {item.label}
                               </span>
-                              <span className="block font-mono text-[10px] text-zinc-500">{item.handle}</span>
+                              <span className="block font-mono text-[10px] text-muted-foreground">{item.handle}</span>
                             </span>
                           </span>
-                          <ArrowUpRight className="h-4 w-4 text-zinc-600" />
+                          <ArrowUpRight className="h-4 w-4 text-muted-foreground/80" />
                         </a>
                       );
                     })}
