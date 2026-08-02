@@ -315,10 +315,6 @@ export function CV() {
               Full Stack Coding Bootcamp - Tech Educators, 2024 (12 weeks: React, Next.js, Node.js, PostgreSQL,
               Supabase)
             </li>
-            <li>
-              Certified ScrumMaster (CSM) - Scrum Alliance, 2019{" "}
-              <span className="text-neutral-500">(not renewed since 2021)</span>
-            </li>
           </ul>
         </section>
 
