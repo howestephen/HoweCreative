@@ -297,6 +297,90 @@
         ]
       },
       {
+        "id": 5,
+        "slug": "uncx-menu",
+        "title": "UNCX Unified Menu",
+        "category": "Interface System / Design System",
+        "year": "2026",
+        "status": "Design Complete",
+        "shortDescription": "Cross-product navigation component system with variable-driven Figma prototypes, research-backed hierarchy, and scalable state logic.",
+        "fullDescription": "A unified menu system designed to work across UNCX's entire product suite. Built as a variable-driven Figma component with researched navigation patterns, prototype states (open/closed), configurable content slots, and a scalable hierarchy that adapts to different product contexts.",
+        "tags": [
+          "Figma",
+          "Design Systems",
+          "UI/UX",
+          "Prototyping",
+          "Research"
+        ],
+        "image": "/case-studies/uncx-menu/menu-components.webp",
+        "media": [
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-menu/menu-components.webp",
+            "alt": "Menu component library"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-menu/prototypes-open.webp",
+            "alt": "Menu prototypes (open state)"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-menu/prototypes-closed.webp",
+            "alt": "Menu prototypes (closed state)"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-menu/research.webp",
+            "alt": "Menu research and analysis"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-menu/concepting.webp",
+            "alt": "Menu concepting phase"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-menu/contents-concept.webp",
+            "alt": "Menu contents concept"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-menu/variables-setup.webp",
+            "alt": "Figma variables setup"
+          }
+        ],
+        "gradient": "from-[#f6f3f4] to-[#ff003c]",
+        "role": "Systems Designer / Design Engineer",
+        "client": "UNCX Network",
+        "overlaySections": [
+          {
+            "title": "Brief",
+            "body": "Design a unified navigation component that could work across all UNCX Network products and platforms - replacing inconsistent platform menus with a single scalable system."
+          },
+          {
+            "title": "Problem Frame",
+            "body": "Each UNCX Network product had its own navigation pattern. Users moving between EVM tools, Solana products, Academy, and the homepage encountered different menu structures, creating cognitive overhead and inconsistent UX."
+          },
+          {
+            "title": "System Design",
+            "body": "Researched navigation patterns and hierarchy models. Designed a component-based menu with configurable content slots, variable-driven Figma states, and a scalable hierarchy that adapts per product context."
+          },
+          {
+            "title": "Trade-offs",
+            "body": "The project is on hold due to a shift in development priorities. The core design challenge was fitting multiple products and sub-brands into a single menu structure that remained efficient and navigable. An additional constraint was that the products are highly specialised - the menu needed to be mildly educational, helping users understand what each product does without slowing down experienced users. The main design compromise centred on hierarchy: several products generate significantly more revenue than others and needed visual priority, without devaluing the rest of the ecosystem."
+          },
+          {
+            "title": "Delivery",
+            "body": "Delivered a Figma design system component with documented states, variables, content slot patterns, and implementation specifications for the development team."
+          },
+          {
+            "title": "Outcome",
+            "body": "Delivered a complete design system ready for implementation. The hierarchy problem - balancing revenue-generating products against the broader ecosystem - was resolved by establishing definitive levels of hierarchy and de-prioritising non-value generating menu options. Currently on hold pending a shift in development priorities."
+          }
+        ]
+      },
+      {
         "id": 2,
         "slug": "uncx-rebrand",
         "title": "UNCX Company Rebrand",
@@ -461,6 +545,139 @@
           {
             "title": "Outcome",
             "body": "Achieved consistent visual output across all platforms and products. The split approach - external team for brand foundations, in-house for product-specific execution - became the working model. Brand alignment across product teams took longer than the design work itself, but the system now supports coherent output without design drift."
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "slug": "badger-club",
+        "title": "Badger Club App",
+        "category": "Product System / Operational Platform",
+        "year": "2026",
+        "status": "In Beta",
+        "shortDescription": "Full-stack badge tracking platform with dark/light themes, role-based dashboards, Supabase backend, and Resend email integration.",
+        "fullDescription": "A multi-role product system managing badge progress tracking, leader administration, parent communication, and public-facing group pages. Built with React, Supabase, Resend email integration, and Cloudflare security. Supports dark and light themes with a structured database schema designed for scalable group management.",
+        "tags": [
+          "React",
+          "Next.js",
+          "Supabase",
+          "Resend",
+          "Cloudflare",
+          "Vercel",
+          "Google Auth",
+          "Systems Design",
+          "Product"
+        ],
+        "image": "/case-studies/badger-club/dark-public-homepage.webp",
+        "media": [
+          {
+            "type": "image",
+            "src": "/case-studies/badger-club/dark-public-homepage.webp",
+            "alt": "Public homepage (dark mode)"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/badger-club/dark-badger-management.webp",
+            "alt": "Badger management dashboard (dark)"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/badger-club/dark-progress-1.webp",
+            "alt": "Progress tracking view 1 (dark)"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/badger-club/dark-progress-2.webp",
+            "alt": "Progress tracking view 2 (dark)"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/badger-club/dark-progress-3.webp",
+            "alt": "Progress tracking view 3 (dark)"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/badger-club/dark-edit-progress.webp",
+            "alt": "Edit progress view (dark)"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/badger-club/dark-manage-settings.webp",
+            "alt": "Manage settings (dark)"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/badger-club/dark-settings.webp",
+            "alt": "Settings page (dark)"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/badger-club/dark-message-leader.webp",
+            "alt": "Message leader with Cloudflare security"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/badger-club/light-badger-management.webp",
+            "alt": "Badger management (light mode)"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/badger-club/light-progress.webp",
+            "alt": "Progress tracking (light)"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/badger-club/light-progress-2.webp",
+            "alt": "Progress tracking 2 (light)"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/badger-club/light-progress-3.webp",
+            "alt": "Progress tracking 3 (light)"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/badger-club/light-manage-settings.webp",
+            "alt": "Manage settings (light)"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/badger-club/database-schema.webp",
+            "alt": "Database schema design"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/badger-club/resend-email-setup.webp",
+            "alt": "Resend email integration setup"
+          }
+        ],
+        "gradient": "from-[#ff4466] to-[#4f0012]",
+        "role": "Product Designer / Developer",
+        "client": "Personal Project",
+        "overlaySections": [
+          {
+            "title": "Brief",
+            "body": "Build a badge tracking system that reduces admin overhead for group leaders while giving parents and children clear visibility into progress and achievements."
+          },
+          {
+            "title": "Problem Frame",
+            "body": "Badge tracking was manual - spreadsheets, paper records, and inconsistent communication between leaders and parents. Leaders carried the full admin burden with no structured tooling."
+          },
+          {
+            "title": "System Design",
+            "body": "Separated the system into operational layers: leader management dashboards for badge administration, parent-facing views for monitoring progress, child-friendly progress visualisation, and public group pages with Cloudflare messaging security."
+          },
+          {
+            "title": "Trade-offs",
+            "body": "Initially envisioned as a multi-user platform with accounts for leaders, parents, and children. Legal and complexity constraints forced a pivot: the app became leader-only, with parent and child interactions designed to work without any account or sign-up. A full inbox and messaging system was also scoped but simplified - mirroring messages across a leader inbox, leader email, and parent email added significant complexity through Resend. The compromise: leaders manage messages via an in-app inbox with email notifications, while parents receive messages directly by email. Development was managed solo using AI-assisted tooling, with phases scoped as atomised tasks to prevent drift during autonomous builds."
+          },
+          {
+            "title": "Delivery",
+            "body": "Full-stack implementation: React frontend with role-based routing, Supabase backend with structured schema, Google OAuth for authentication, Resend for transactional emails, and Cloudflare for security and performance."
+          },
+          {
+            "title": "Outcome",
+            "body": "Eliminated manual tracking overhead. The constraint-driven simplification - leader-only accounts, no-signup parent access, streamlined messaging - produced a leaner product with fewer barriers to adoption. Created a scalable foundation with subscription-based monetisation and clear paths for feature expansion."
           }
         ]
       },
@@ -728,86 +945,86 @@
         ]
       },
       {
-        "id": 5,
-        "slug": "uncx-menu",
-        "title": "UNCX Unified Menu",
-        "category": "Interface System / Design System",
+        "id": 8,
+        "slug": "noticia-lingo",
+        "title": "Noticia Lingo App",
+        "category": "Product System / Operational Platform",
         "year": "2026",
-        "status": "Design Complete",
-        "shortDescription": "Cross-product navigation component system with variable-driven Figma prototypes, research-backed hierarchy, and scalable state logic.",
-        "fullDescription": "A unified menu system designed to work across UNCX's entire product suite. Built as a variable-driven Figma component with researched navigation patterns, prototype states (open/closed), configurable content slots, and a scalable hierarchy that adapts to different product contexts.",
+        "status": "In Development",
+        "shortDescription": "Language learning app with an AI-assisted classroom, real news articles, Google authentication, Supabase backend, and structured quiz flows.",
+        "fullDescription": "A language learning platform that transforms live news content into structured learning experiences. Built with React, Supabase, and Google OAuth - featuring article-based lessons, interactive quizzes, a learner dashboard, and a settings system. Designed to replace static flashcard approaches with contextual, real-world content.",
         "tags": [
-          "Figma",
-          "Design Systems",
-          "UI/UX",
-          "Prototyping",
-          "Research"
+          "React",
+          "Next.js",
+          "Supabase",
+          "Google Auth",
+          "Product Design"
         ],
-        "image": "/case-studies/uncx-menu/menu-components.webp",
+        "image": "/case-studies/noticia-lingo/dashboard.webp",
         "media": [
           {
             "type": "image",
-            "src": "/case-studies/uncx-menu/menu-components.webp",
-            "alt": "Menu component library"
+            "src": "/case-studies/noticia-lingo/signed-out-hero.webp",
+            "alt": "Signed out hero page"
           },
           {
             "type": "image",
-            "src": "/case-studies/uncx-menu/prototypes-open.webp",
-            "alt": "Menu prototypes (open state)"
+            "src": "/case-studies/noticia-lingo/homepage-full.webp",
+            "alt": "Full homepage design"
           },
           {
             "type": "image",
-            "src": "/case-studies/uncx-menu/prototypes-closed.webp",
-            "alt": "Menu prototypes (closed state)"
+            "src": "/case-studies/noticia-lingo/dashboard.webp",
+            "alt": "User dashboard"
           },
           {
             "type": "image",
-            "src": "/case-studies/uncx-menu/research.webp",
-            "alt": "Menu research and analysis"
+            "src": "/case-studies/noticia-lingo/quiz-page.webp",
+            "alt": "Quiz page interface"
           },
           {
             "type": "image",
-            "src": "/case-studies/uncx-menu/concepting.webp",
-            "alt": "Menu concepting phase"
+            "src": "/case-studies/noticia-lingo/settings-page.webp",
+            "alt": "Settings page"
           },
           {
             "type": "image",
-            "src": "/case-studies/uncx-menu/contents-concept.webp",
-            "alt": "Menu contents concept"
+            "src": "/case-studies/noticia-lingo/google-login.webp",
+            "alt": "Google login integration"
           },
           {
             "type": "image",
-            "src": "/case-studies/uncx-menu/variables-setup.webp",
-            "alt": "Figma variables setup"
+            "src": "/case-studies/noticia-lingo/database-schema.webp",
+            "alt": "Database schema"
           }
         ],
-        "gradient": "from-[#f6f3f4] to-[#ff003c]",
-        "role": "Systems Designer / Design Engineer",
-        "client": "UNCX Network",
+        "gradient": "from-[#ff003c] to-[#7a001c]",
+        "role": "Product Designer / Developer",
+        "client": "Personal Project",
         "overlaySections": [
           {
             "title": "Brief",
-            "body": "Design a unified navigation component that could work across all UNCX Network products and platforms - replacing inconsistent platform menus with a single scalable system."
+            "body": "Build a language learning system that uses real-world news content instead of static lessons - making vocabulary acquisition contextual and engaging."
           },
           {
             "title": "Problem Frame",
-            "body": "Each UNCX Network product had its own navigation pattern. Users moving between EVM tools, Solana products, Academy, and the homepage encountered different menu structures, creating cognitive overhead and inconsistent UX."
+            "body": "Traditional language apps rely on decontextualised flashcards and repetitive drills. Learners lose motivation because the content feels disconnected from real usage."
           },
           {
             "title": "System Design",
-            "body": "Researched navigation patterns and hierarchy models. Designed a component-based menu with configurable content slots, variable-driven Figma states, and a scalable hierarchy that adapts per product context."
+            "body": "Content pipeline: ingest news articles, extract vocabulary, generate contextual quizzes, and structure progressive difficulty. User system: Google OAuth, learner profiles, progress tracking, and configurable settings."
           },
           {
             "title": "Trade-offs",
-            "body": "The project is on hold due to a shift in development priorities. The core design challenge was fitting multiple products and sub-brands into a single menu structure that remained efficient and navigable. An additional constraint was that the products are highly specialised - the menu needed to be mildly educational, helping users understand what each product does without slowing down experienced users. The main design compromise centred on hierarchy: several products generate significantly more revenue than others and needed visual priority, without devaluing the rest of the ecosystem."
+            "body": "The primary constraint has been lesson complexity. Initial development using AI tooling produced oversimplified quiz questions rather than the pure-function puzzle systems I had specified - lessons that work contextually against any news article, not static question-and-answer pairs. The pivot: expanding the roadmap into granular build phases, constructing each of the 8-10 lesson types step by step with greater complexity control. Technical implementation - Google OAuth, Supabase integration - proved straightforward by comparison. The system is currently focused on Spanish to validate the lesson architecture before introducing multi-language complexity, where each lesson type will need adapting per language."
           },
           {
             "title": "Delivery",
-            "body": "Delivered a Figma design system component with documented states, variables, content slot patterns, and implementation specifications for the development team."
+            "body": "Working prototype with React frontend, Supabase backend, Google authentication, structured article reading flow, quiz system, and learner dashboard."
           },
           {
             "title": "Outcome",
-            "body": "Delivered a complete design system ready for implementation. The hierarchy problem - balancing revenue-generating products against the broader ecosystem - was resolved by establishing definitive levels of hierarchy and de-prioritising non-value generating menu options. Currently on hold pending a shift in development priorities."
+            "body": "Demonstrated a scalable learning system driven by live content. The shift from AI-generated simple quizzes to the pure-function lesson types I designed produced a more robust foundation. Active development, with multi-language expansion planned once the core 8-10 lesson types are validated in Spanish."
           }
         ]
       },
@@ -953,223 +1170,6 @@
           {
             "title": "Outcome",
             "body": "Closed the gap between product specs and development handoff. The component-first approach meant that incomplete or shifting requirements - a constant across a five-year span of prototyping - could be absorbed without starting from scratch. Stakeholders could validate features visually before committing development resources, reducing rework and accelerating shipping."
-          }
-        ]
-      },
-      {
-        "id": 7,
-        "slug": "badger-club",
-        "title": "Badger Club App",
-        "category": "Product System / Operational Platform",
-        "year": "2026",
-        "status": "In Beta",
-        "shortDescription": "Full-stack badge tracking platform with dark/light themes, role-based dashboards, Supabase backend, and Resend email integration.",
-        "fullDescription": "A multi-role product system managing badge progress tracking, leader administration, parent communication, and public-facing group pages. Built with React, Supabase, Resend email integration, and Cloudflare security. Supports dark and light themes with a structured database schema designed for scalable group management.",
-        "tags": [
-          "React",
-          "Next.js",
-          "Supabase",
-          "Resend",
-          "Cloudflare",
-          "Vercel",
-          "Google Auth",
-          "Systems Design",
-          "Product"
-        ],
-        "image": "/case-studies/badger-club/dark-public-homepage.webp",
-        "media": [
-          {
-            "type": "image",
-            "src": "/case-studies/badger-club/dark-public-homepage.webp",
-            "alt": "Public homepage (dark mode)"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/badger-club/dark-badger-management.webp",
-            "alt": "Badger management dashboard (dark)"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/badger-club/dark-progress-1.webp",
-            "alt": "Progress tracking view 1 (dark)"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/badger-club/dark-progress-2.webp",
-            "alt": "Progress tracking view 2 (dark)"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/badger-club/dark-progress-3.webp",
-            "alt": "Progress tracking view 3 (dark)"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/badger-club/dark-edit-progress.webp",
-            "alt": "Edit progress view (dark)"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/badger-club/dark-manage-settings.webp",
-            "alt": "Manage settings (dark)"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/badger-club/dark-settings.webp",
-            "alt": "Settings page (dark)"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/badger-club/dark-message-leader.webp",
-            "alt": "Message leader with Cloudflare security"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/badger-club/light-badger-management.webp",
-            "alt": "Badger management (light mode)"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/badger-club/light-progress.webp",
-            "alt": "Progress tracking (light)"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/badger-club/light-progress-2.webp",
-            "alt": "Progress tracking 2 (light)"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/badger-club/light-progress-3.webp",
-            "alt": "Progress tracking 3 (light)"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/badger-club/light-manage-settings.webp",
-            "alt": "Manage settings (light)"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/badger-club/database-schema.webp",
-            "alt": "Database schema design"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/badger-club/resend-email-setup.webp",
-            "alt": "Resend email integration setup"
-          }
-        ],
-        "gradient": "from-[#ff4466] to-[#4f0012]",
-        "role": "Product Designer / Developer",
-        "client": "Personal Project",
-        "overlaySections": [
-          {
-            "title": "Brief",
-            "body": "Build a badge tracking system that reduces admin overhead for group leaders while giving parents and children clear visibility into progress and achievements."
-          },
-          {
-            "title": "Problem Frame",
-            "body": "Badge tracking was manual - spreadsheets, paper records, and inconsistent communication between leaders and parents. Leaders carried the full admin burden with no structured tooling."
-          },
-          {
-            "title": "System Design",
-            "body": "Separated the system into operational layers: leader management dashboards for badge administration, parent-facing views for monitoring progress, child-friendly progress visualisation, and public group pages with Cloudflare messaging security."
-          },
-          {
-            "title": "Trade-offs",
-            "body": "Initially envisioned as a multi-user platform with accounts for leaders, parents, and children. Legal and complexity constraints forced a pivot: the app became leader-only, with parent and child interactions designed to work without any account or sign-up. A full inbox and messaging system was also scoped but simplified - mirroring messages across a leader inbox, leader email, and parent email added significant complexity through Resend. The compromise: leaders manage messages via an in-app inbox with email notifications, while parents receive messages directly by email. Development was managed solo using AI-assisted tooling, with phases scoped as atomised tasks to prevent drift during autonomous builds."
-          },
-          {
-            "title": "Delivery",
-            "body": "Full-stack implementation: React frontend with role-based routing, Supabase backend with structured schema, Google OAuth for authentication, Resend for transactional emails, and Cloudflare for security and performance."
-          },
-          {
-            "title": "Outcome",
-            "body": "Eliminated manual tracking overhead. The constraint-driven simplification - leader-only accounts, no-signup parent access, streamlined messaging - produced a leaner product with fewer barriers to adoption. Created a scalable foundation with subscription-based monetisation and clear paths for feature expansion."
-          }
-        ]
-      },
-      {
-        "id": 8,
-        "slug": "noticia-lingo",
-        "title": "Noticia Lingo App",
-        "category": "Product System / Operational Platform",
-        "year": "2026",
-        "status": "In Development",
-        "shortDescription": "Language learning app with an AI-assisted classroom, real news articles, Google authentication, Supabase backend, and structured quiz flows.",
-        "fullDescription": "A language learning platform that transforms live news content into structured learning experiences. Built with React, Supabase, and Google OAuth - featuring article-based lessons, interactive quizzes, a learner dashboard, and a settings system. Designed to replace static flashcard approaches with contextual, real-world content.",
-        "tags": [
-          "React",
-          "Next.js",
-          "Supabase",
-          "Google Auth",
-          "Product Design"
-        ],
-        "image": "/case-studies/noticia-lingo/dashboard.webp",
-        "media": [
-          {
-            "type": "image",
-            "src": "/case-studies/noticia-lingo/signed-out-hero.webp",
-            "alt": "Signed out hero page"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/noticia-lingo/homepage-full.webp",
-            "alt": "Full homepage design"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/noticia-lingo/dashboard.webp",
-            "alt": "User dashboard"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/noticia-lingo/quiz-page.webp",
-            "alt": "Quiz page interface"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/noticia-lingo/settings-page.webp",
-            "alt": "Settings page"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/noticia-lingo/google-login.webp",
-            "alt": "Google login integration"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/noticia-lingo/database-schema.webp",
-            "alt": "Database schema"
-          }
-        ],
-        "gradient": "from-[#ff003c] to-[#7a001c]",
-        "role": "Product Designer / Developer",
-        "client": "Personal Project",
-        "overlaySections": [
-          {
-            "title": "Brief",
-            "body": "Build a language learning system that uses real-world news content instead of static lessons - making vocabulary acquisition contextual and engaging."
-          },
-          {
-            "title": "Problem Frame",
-            "body": "Traditional language apps rely on decontextualised flashcards and repetitive drills. Learners lose motivation because the content feels disconnected from real usage."
-          },
-          {
-            "title": "System Design",
-            "body": "Content pipeline: ingest news articles, extract vocabulary, generate contextual quizzes, and structure progressive difficulty. User system: Google OAuth, learner profiles, progress tracking, and configurable settings."
-          },
-          {
-            "title": "Trade-offs",
-            "body": "The primary constraint has been lesson complexity. Initial development using AI tooling produced oversimplified quiz questions rather than the pure-function puzzle systems I had specified - lessons that work contextually against any news article, not static question-and-answer pairs. The pivot: expanding the roadmap into granular build phases, constructing each of the 8-10 lesson types step by step with greater complexity control. Technical implementation - Google OAuth, Supabase integration - proved straightforward by comparison. The system is currently focused on Spanish to validate the lesson architecture before introducing multi-language complexity, where each lesson type will need adapting per language."
-          },
-          {
-            "title": "Delivery",
-            "body": "Working prototype with React frontend, Supabase backend, Google authentication, structured article reading flow, quiz system, and learner dashboard."
-          },
-          {
-            "title": "Outcome",
-            "body": "Demonstrated a scalable learning system driven by live content. The shift from AI-generated simple quizzes to the pure-function lesson types I designed produced a more robust foundation. Active development, with multi-language expansion planned once the core 8-10 lesson types are validated in Spanish."
           }
         ]
       },
