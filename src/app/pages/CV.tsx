@@ -109,7 +109,7 @@ const CV_STYLES = `
   }
 
   @page {
-    margin: 14mm;
+    margin: 12mm;
   }
 `;
 
@@ -145,7 +145,7 @@ export function CV() {
       <main className="mx-auto max-w-[780px] px-6 pb-16 pt-20 sm:pt-14 print:max-w-none print:px-0 print:pb-0 print:pt-0">
         {/* Masthead: name set large in the site's display serif, with a heavy
             accent rule beneath it. One strong graphic gesture, no ornament. */}
-        <header className="mb-6 break-inside-avoid">
+        <header className="mb-5 break-inside-avoid">
           <div className="flex flex-wrap items-end justify-between gap-x-6 gap-y-2">
             <div>
               <h1 className="text-[2.6rem] leading-[1.05] sm:text-5xl">Stephen Howe</h1>
@@ -187,7 +187,7 @@ export function CV() {
           </div>
         </header>
 
-        <p className="mb-7 border-l-2 border-[#d90429] pl-4 text-[14px] leading-relaxed text-neutral-800">
+        <p className="mb-5 border-l-2 border-[#d90429] pl-4 text-[14px] leading-relaxed text-neutral-800">
           Creative technologist with 20+ years connecting brand, 3D, motion, product design, and front-end code. For
           the last four years I've been the sole designer at a multi-chain DeFi protocol, owning everything from
           company rebrands to shipped product UIs. I design and build systems rather than one-off artefacts:
@@ -196,7 +196,7 @@ export function CV() {
           recognition, deep-focus problem solving, and forward planning in cross-functional teams.
         </p>
 
-        <section className="mb-6">
+        <section className="mb-5">
           <h2 className={SECTION_HEADING}>Experience</h2>
 
           <article className="mt-5 break-inside-avoid">
@@ -228,7 +228,7 @@ export function CV() {
             </ul>
           </article>
 
-          <article className="mt-6 break-inside-avoid">
+          <article className="mt-5 break-inside-avoid">
             <div className="flex flex-wrap items-baseline justify-between gap-x-4">
               <h3 className="text-base">
                 Designer - Switch Studios <span className="font-normal text-neutral-600">(HTML5 casino games)</span>
@@ -246,7 +246,7 @@ export function CV() {
             </ul>
           </article>
 
-          <article className="mt-6 break-inside-avoid">
+          <article className="mt-5 break-inside-avoid">
             <div className="flex flex-wrap items-baseline justify-between gap-x-4">
               <h3 className="text-base">
                 Designer &amp; Animator - howecreative.co.uk{" "}
@@ -268,7 +268,7 @@ export function CV() {
             </ul>
           </article>
 
-          <p className="mt-5 text-[12.5px] leading-relaxed text-neutral-600">
+          <p className="mt-4 text-[12.5px] leading-relaxed text-neutral-600">
             Earlier roles from 2005 to 2016 span support and database work at the BBC and Qtac, plus
             brand, web, and events management across several companies.{" "}
             <a href="https://www.linkedin.com/in/howestephen" target="_blank" rel="noreferrer">
@@ -278,7 +278,7 @@ export function CV() {
           </p>
         </section>
 
-        <section className="mb-6">
+        <section className="mb-5">
           <h2 className={SECTION_HEADING}>Core Skills</h2>
           <div className="mt-3 space-y-1.5 text-[12.5px] leading-snug text-neutral-700">
             <p>
@@ -300,9 +300,9 @@ export function CV() {
           </div>
         </section>
 
-        <section className="mb-6">
+        <section className="mb-5">
           <h2 className={SECTION_HEADING}>Education &amp; Certifications</h2>
-          <ul className="mt-4 list-disc space-y-3 pl-5 text-sm leading-snug text-neutral-700">
+          <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-snug text-neutral-700">
             <li>
               <span className="font-medium text-neutral-900">BSc (Hons) Entertainment Technology, First Class</span>
               {" "}- University of Portsmouth, 2007.
@@ -320,7 +320,7 @@ export function CV() {
 
         <section className="break-inside-avoid">
           <h2 className={SECTION_HEADING}>Languages</h2>
-          <p className="mt-4 text-sm text-neutral-700">English (native) · Spanish (working proficiency)</p>
+          <p className="mt-3 text-sm text-neutral-700">English (native) · Spanish (working proficiency)</p>
         </section>
       </main>
     </div>

@@ -476,7 +476,7 @@ export function WorkIndex() {
                   onClick={() => setOpenSlug(open ? null : project.slug)}
                   className="group grid w-full grid-cols-[2.6rem_1fr_auto] items-baseline gap-x-4 py-6 text-left transition-colors hover:bg-card md:grid-cols-[3rem_1fr_12rem_4rem_2rem]"
                 >
-                  <span className="font-mono text-[11px] tracking-[0.14em] text-muted-foreground">
+                  <span className="font-mono text-[11px] tracking-[0.14em] text-accent">
                     {String(index + 1).padStart(2, "0")}
                   </span>
                   <span>
@@ -487,7 +487,7 @@ export function WorkIndex() {
                       {teaser}
                     </span>
                   </span>
-                  <span className="hidden font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground md:block">
+                  <span className="hidden font-mono text-[10px] uppercase tracking-[0.14em] text-accent md:block">
                     {project.category.split("/")[0].trim()}
                   </span>
                   <span className="hidden font-mono text-[11px] text-muted-foreground md:block">
