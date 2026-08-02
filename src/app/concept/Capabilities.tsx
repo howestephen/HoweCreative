@@ -66,7 +66,7 @@ export function Capabilities() {
               <h3 className="mb-5 flex min-h-[2.75em] items-start text-2xl leading-snug">
                 {practice.title}
               </h3>
-              <ul className="space-y-2.5">
+              <ul className="mb-6 space-y-2.5">
                 {practice.points.map((point) => (
                   <li key={point} className="flex gap-2.5 text-sm leading-relaxed text-muted-foreground">
                     <span className="mt-[0.55em] h-1 w-1 shrink-0 bg-accent" aria-hidden />
@@ -74,6 +74,9 @@ export function Capabilities() {
                   </li>
                 ))}
               </ul>
+              {/* mt-auto keeps the tools row bottom-aligned across cards; the
+                  ul's mb-6 guarantees the divider never crowds the last bullet
+                  even in the tallest card, where mt-auto collapses to zero. */}
               <div className="mt-auto whitespace-nowrap border-t border-border pt-4 font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
                 {practice.tools}
               </div>

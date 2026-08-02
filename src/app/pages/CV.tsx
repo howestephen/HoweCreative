@@ -149,7 +149,7 @@ export function CV() {
           <div className="flex flex-wrap items-end justify-between gap-x-6 gap-y-2">
             <div>
               <h1 className="text-[2.6rem] leading-[1.05] sm:text-5xl">Stephen Howe</h1>
-              <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.22em] text-[#d90429]">
+              <p className="mt-2.5 font-mono text-[11px] uppercase tracking-[0.22em] text-[#d90429]">
                 Creative Technologist
               </p>
             </div>
