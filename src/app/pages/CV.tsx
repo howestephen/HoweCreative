@@ -190,11 +190,10 @@ export function CV() {
         <p className="mb-7 border-l-2 border-[#d90429] pl-4 text-[14px] leading-relaxed text-neutral-800">
           Creative technologist with 20+ years connecting brand, 3D, motion, product design, and front-end code. For
           the last four years I've been the sole designer at a multi-chain DeFi protocol, owning everything from
-          company rebrands to shipped product UI. I design systems rather than one-off artefacts - and increasingly
-          I build the pipelines that produce them: AI-assisted build loops for software, generative asset workflows
-          for 3D and video, and automated publishing systems with human approval built in. Systems thinker with
-          natural strengths in pattern recognition, deep-focus problem solving, and forward planning in
-          cross-functional teams.
+          company rebrands to shipped product UIs. I design and build systems rather than one-off artefacts:
+          AI-assisted build loops for development, template and guidance systems for video and 3D, and automated
+          publishing systems with human approval gates. Systems thinker with natural strengths in pattern
+          recognition, deep-focus problem solving, and forward planning in cross-functional teams.
         </p>
 
         <section className="mb-6">
@@ -298,39 +297,6 @@ export function CV() {
               <span className="font-semibold text-neutral-900">Audio &amp; delivery:</span> Ableton Live, Audition,
               Serum, Agile / Scrum
             </p>
-          </div>
-        </section>
-
-        <section className="mb-6">
-          <h2 className={SECTION_HEADING}>Selected Projects</h2>
-          <div className="mt-4 space-y-4">
-            <article className="break-inside-avoid">
-              <h3 className="text-base">
-                Autonomous content pipeline <span className="font-normal text-neutral-500">(2026)</span>
-              </h3>
-              <p className="mt-1 text-sm leading-snug text-neutral-700">
-                Solana on-chain monitor feeding a generative asset pipeline that publishes to X on a schedule, with
-                human-in-the-loop approval via Telegram. Node.js, PostgreSQL, Railway, Telegram Bot API, X API.
-              </p>
-            </article>
-            <article className="break-inside-avoid">
-              <h3 className="text-base">
-                AI-built portfolio <span className="font-normal text-neutral-500">(2026)</span>
-              </h3>
-              <p className="mt-1 text-sm leading-snug text-neutral-700">
-                howecreative.co.uk is designed and built by a custom prompt system that executes a phased roadmap
-                with automated build and QA loops. React 19, TypeScript, Three.js.
-              </p>
-            </article>
-            <article className="break-inside-avoid">
-              <h3 className="text-base">
-                Badger Club <span className="font-normal text-neutral-500">(2026)</span>
-              </h3>
-              <p className="mt-1 text-sm leading-snug text-neutral-700">
-                Full-stack badge-tracking platform for group leaders: role-based dashboards, dark/light theming,
-                Supabase, Google OAuth, Resend email. Solo build using AI-assisted tooling.
-              </p>
-            </article>
           </div>
         </section>
 

@@ -59,10 +59,53 @@ function ScrollStrip({
 }) {
   const scrollerRef = useRef<HTMLDivElement>(null);
 
+  // Step the arrows by whole items rather than a fixed fraction of the width,
+  // so a video (or gallery column) always lands flush against the edge instead
+  // of sitting half off it. The stops are each item's left edge as a scrollLeft
+  // value relative to the first item; two-row galleries share a column edge, so
+  // we dedupe. Combined with scroll-snap on the container, both the arrows and a
+  // manual trackpad flick settle on a clean item boundary.
   const scrollByPage = (direction: 1 | -1) => {
     const el = scrollerRef.current;
     if (!el) return;
-    el.scrollBy({ left: direction * el.clientWidth * 0.8, behavior: "smooth" });
+    const wrapper = el.firstElementChild;
+    const items = wrapper ? Array.from(wrapper.children) : [];
+    if (items.length === 0) {
+      el.scrollBy({ left: direction * el.clientWidth * 0.8, behavior: "smooth" });
+      return;
+    }
+    const containerLeft = el.getBoundingClientRect().left;
+    const stops = Array.from(
+      new Set(
+        items.map((it) =>
+          Math.round(it.getBoundingClientRect().left - containerLeft + el.scrollLeft),
+        ),
+      ),
+    ).sort((a, b) => a - b);
+    const step = stops.length > 1 ? stops[1] - stops[0] : el.clientWidth;
+    const perPage = Math.max(1, Math.floor(el.clientWidth / step));
+    const currentIndex = stops.reduce(
+      (best, stop, i) => (stop <= el.scrollLeft + 1 ? i : best),
+      0,
+    );
+    const targetIndex = Math.max(
+      0,
+      Math.min(stops.length - 1, currentIndex + direction * perPage),
+    );
+
+    // scroll-snap-type: mandatory cancels programmatic smooth scrolls in
+    // Chromium, so lift snapping for the animation and restore it once the
+    // scroll settles. The target is itself a snap point, so restoring causes no
+    // visible jump. Restore is idempotent; the timeout is a fallback for when
+    // "scrollend" never fires (e.g. the target equals the current position).
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    el.style.scrollSnapType = "none";
+    el.scrollTo({ left: stops[targetIndex], behavior: reduce ? "auto" : "smooth" });
+    const restore = () => {
+      el.style.scrollSnapType = "";
+    };
+    if ("onscrollend" in el) el.addEventListener("scrollend", restore, { once: true });
+    window.setTimeout(restore, reduce ? 0 : 700);
   };
 
   return (
@@ -93,7 +136,10 @@ function ScrollStrip({
           </div>
         </div>
       </div>
-      <div ref={scrollerRef} className="gallery-scroll -mx-1 overflow-x-auto px-1 pb-2">
+      <div
+        ref={scrollerRef}
+        className="gallery-scroll -mx-1 snap-x snap-mandatory overflow-x-auto px-1 pb-2"
+      >
         {children}
       </div>
     </div>
@@ -113,7 +159,7 @@ function GalleryStrip({
     <ScrollStrip label="Gallery" count={images.length} unit="image">
       {/* Two rows scrolling sideways so the gallery stays the height of the
           text column. */}
-      <div className="grid w-max snap-x grid-flow-col grid-rows-2 gap-1.5">
+      <div className="grid w-max grid-flow-col grid-rows-2 gap-1.5">
         {images.map((media) => {
           const galleryIndex = (project.media ?? []).indexOf(media);
           return (
@@ -229,13 +275,13 @@ function ExpandedRow({
 
       <div className="space-y-6 lg:col-span-2">
         {logo && (
-          <div className="flex w-fit items-center border border-border bg-neutral-900 px-5 py-3">
+          <div className="flex w-full items-center justify-center border border-border bg-neutral-900 px-6 py-8">
             <ImageWithFallback
               src={logo.src}
               alt={logo.alt ?? `${project.title} logo`}
               loading="lazy"
               decoding="async"
-              className="h-9 w-auto object-contain sm:h-10"
+              className="h-14 w-auto max-w-full object-contain sm:h-16"
             />
           </div>
         )}
