@@ -41,37 +41,37 @@ const EXPERIENCE = [
   {
     years: "2014-16",
     role: "2nd Line Support Technician, Qtac Solutions",
-    note: "Senior support for HMRC payroll software; trained the team, redesigned the company site.",
+    note: "Senior support for HMRC payroll software; trained apprentices, rebuilt the company website.",
   },
   {
     years: "2012-16",
     role: "Web & Social Media Manager, Burger Theory",
-    note: "Brand, web, and social for a street-food startup - from launch, alongside the above.",
+    note: "Website, social media, and event staffing for a street-food startup, from day one.",
   },
   {
     years: "2011-12",
     role: "Venue & Promotions Manager, Hot Biscuit",
-    note: "Design and promotion for three Brighton music venues.",
+    note: "Events, marketing, design and venue management for three popular Brighton music venues.",
   },
   {
     years: "2009-11",
     role: "Brand Manager, 412 Promotions",
-    note: "Site, shop, events, and a ten-writer editorial team.",
+    note: "Website designer and contribution editor, retail and brand manager.",
   },
   {
     years: "2008-09",
     role: "Junior Helpdesk Technician, Right Click Computers",
-    note: "Remote support for campus TV servers in ~150 UK universities.",
+    note: "Remote support for media servers in ~150 UK universities.",
   },
   {
     years: "2007-08",
     role: "Database Technician, BBC",
-    note: "Core-database migration and cleansing at Television Centre.",
+    note: "Core-database migration and cleansing at BBC Television Centre.",
   },
   {
     years: "2005-06",
     role: "Web Manager & Graphic Designer, Good Salon Guide",
-    note: "First web-and-design role, while at university.",
+    note: "Office network admin, graphic design, and building websites for clients.",
   },
 ] as const;
 
@@ -83,14 +83,14 @@ const QUALIFICATIONS = [
     institution: "University of Portsmouth",
     year: "2007",
     detail:
-      "The only First Class on the course, and winner of the IBM Prize for Best Creative Technologies Project. Dissertation graded 90%, the highest in the department that year.",
+      "The only First Class Honours on the course, and winner of the IBM Prize for Best Creative Technologies Project. My final dissertation received a grade of 90%, the highest in the department that year.",
   },
   {
     title: "Full Stack Coding Bootcamp",
     institution: "Tech Educators, 12 weeks intensive",
     year: "2024",
     detail:
-      "React, Next.js, Node.js, PostgreSQL, and Supabase. Final average equivalent to a first-class result.",
+      "A twelve-week intensive covering modern full-stack development with React, Next.js, Node.js, PostgreSQL, and Supabase. I finished with an average score equivalent to a first-class degree, and now use these skills daily to ship production software alongside my design work.",
   },
 ] as const;
 
@@ -126,13 +126,11 @@ export function Method() {
           ))}
         </div>
 
-        <div className="mt-16 border-t border-border pt-10">
-          <div className="mb-6 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
-            <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-              Experience
-            </span>
+        <div id="experience" className="mt-20 scroll-mt-24 border-t border-border pt-14">
+          <div className="mb-8 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
+            <h2 className="text-3xl md:text-4xl">Experience</h2>
             <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-accent">
-              2005 → today · {yearsSince(CAREER_START)} years
+              2005 to today · {yearsSince(CAREER_START)} years
             </span>
           </div>
           <div className="space-y-0">
@@ -168,31 +166,36 @@ export function Method() {
             </button>
           )}
 
-          <div className="mt-12 border-t border-border pt-8">
-            <div className="mb-6 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-              Education &amp; recognition
-            </div>
+        </div>
 
-            <div className="grid gap-6 md:grid-cols-2">
-              {QUALIFICATIONS.map((item) => (
-                <div key={item.title} className="border-l-2 border-accent pl-4">
-                  <div className="flex items-baseline justify-between gap-3">
-                    <h3 className="text-lg leading-snug text-foreground">{item.title}</h3>
-                    <span className="shrink-0 font-mono text-[11px] text-muted-foreground">
-                      {item.year}
-                    </span>
-                  </div>
-                  <p className="mt-1 text-sm text-muted-foreground">{item.institution}</p>
-                  <p className="mt-2 text-sm leading-relaxed text-foreground/90">{item.detail}</p>
-                </div>
-              ))}
-            </div>
-
-            <p className="mt-6 text-sm text-muted-foreground">
-              Also: Certified ScrumMaster (Scrum Alliance, 2019), a credential I have not
-              renewed since 2021.
-            </p>
+        <div id="education" className="mt-20 scroll-mt-24 border-t border-border pt-14">
+          <div className="mb-8 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
+            <h2 className="text-3xl md:text-4xl">Education &amp; recognition</h2>
+            <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+              degree · bootcamp · certifications
+            </span>
           </div>
+
+          <div className="grid gap-6 md:grid-cols-2">
+            {QUALIFICATIONS.map((item) => (
+              <div key={item.title} className="border-l-2 border-accent pl-4">
+                <div className="flex items-baseline justify-between gap-3">
+                  <h3 className="text-lg leading-snug text-foreground">{item.title}</h3>
+                  <span className="shrink-0 font-mono text-[11px] text-muted-foreground">
+                    {item.year}
+                  </span>
+                </div>
+                <p className="mt-1 text-sm text-muted-foreground">{item.institution}</p>
+                <p className="mt-2 text-sm leading-relaxed text-foreground/90">{item.detail}</p>
+              </div>
+            ))}
+          </div>
+
+          <p className="mt-6 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+            I also hold a Certified ScrumMaster qualification (Scrum Alliance, 2019) and have
+            worked in Agile teams throughout my career. The formal certification has since
+            lapsed, but running work in structured, iterative sprints is still how I ship.
+          </p>
         </div>
       </div>
     </section>

@@ -147,6 +147,16 @@
         "media": [
           {
             "type": "image",
+            "src": "/case-studies/solana-diary/twitter-header.png",
+            "alt": "Solana Diary brand - logo and banner"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/solana-diary/SOLANA_DIARY_LOGO.png",
+            "alt": "Solana Diary logo lockup"
+          },
+          {
+            "type": "image",
             "src": "/case-studies/solana-diary/news_cards__2026-05-18__id5078__MORGAN-STANLEY-BOOSTS-SOLANA-ETF-STAKE-TO-29__POSTED.png",
             "alt": "Posted news card - Morgan Stanley boosts its Solana ETF stake"
           },
@@ -172,31 +182,6 @@
           },
           {
             "type": "image",
-            "src": "/case-studies/solana-diary/Example Telegram News Approval 01.png",
-            "alt": "Telegram approval - scored story suggestions with post controls"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/solana-diary/Example Telegram News Approval 02.png",
-            "alt": "Telegram approval - second example of the review flow"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/solana-diary/Figma Project Screenshot.png",
-            "alt": "The Figma template system - every post family on one type and colour system"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/solana-diary/Figma Project Components.png",
-            "alt": "Figma component library behind the post templates"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/solana-diary/diary weekly schedule.png",
-            "alt": "Automated weekly posting schedule across three daily slots"
-          },
-          {
-            "type": "image",
             "src": "/case-studies/solana-diary/Week Ahead Watchlist - 01.jpg",
             "alt": "Week-ahead watchlist - tokens to watch, posted Mondays"
           },
@@ -214,11 +199,6 @@
             "type": "image",
             "src": "/case-studies/solana-diary/new_launches_48h__2026-06-17__id8695__render.png",
             "alt": "New launches 48h - rendered data card"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/solana-diary/liquidity_flows_7d__2026-06-16__id7258__render.png",
-            "alt": "Liquidity flows 7d - rendered data card"
           },
           {
             "type": "image",
@@ -257,13 +237,33 @@
           },
           {
             "type": "image",
-            "src": "/case-studies/solana-diary/twitter-header.png",
-            "alt": "Solana Diary brand - logo and banner"
+            "src": "/case-studies/solana-diary/Example Telegram News Approval 01.png",
+            "alt": "Telegram approval - scored story suggestions with post controls"
           },
           {
             "type": "image",
-            "src": "/case-studies/solana-diary/SOLANA_DIARY_LOGO.png",
-            "alt": "Solana Diary logo lockup"
+            "src": "/case-studies/solana-diary/Example Telegram News Approval 02.png",
+            "alt": "Telegram approval - second example of the review flow"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/solana-diary/Figma Project Screenshot.png",
+            "alt": "The Figma template system - every post family on one type and colour system"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/solana-diary/Figma Project Components.png",
+            "alt": "Figma component library behind the post templates"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/solana-diary/diary weekly schedule.png",
+            "alt": "Automated weekly posting schedule across three daily slots"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/solana-diary/liquidity_flows_7d__2026-06-16__id7258__render.png",
+            "alt": "Liquidity flows 7d - rendered data card"
           }
         ],
         "gradient": "from-[#8b0020] to-[#ff003c]",
@@ -316,13 +316,8 @@
           "Web Design",
           "Art Direction"
         ],
-        "image": "/case-studies/uncx-rebrand/branding.webp",
+        "image": "/case-studies/uncx-rebrand/brand-designs.webp",
         "media": [
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-rebrand/branding.webp",
-            "alt": "UNCX branding system"
-          },
           {
             "type": "image",
             "src": "/case-studies/uncx-rebrand/brand-designs.webp",
@@ -330,13 +325,28 @@
           },
           {
             "type": "image",
-            "src": "/case-studies/uncx-rebrand/rebrand-concepts.webp",
-            "alt": "Rebrand concept directions"
+            "src": "/case-studies/uncx-rebrand/rebrand-designs.webp",
+            "alt": "Rebrand design variations"
           },
           {
             "type": "image",
-            "src": "/case-studies/uncx-rebrand/rebrand-designs.webp",
-            "alt": "Rebrand design variations"
+            "src": "/case-studies/uncx-rebrand/logo-square.webp",
+            "alt": "UNCX logo square mark"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-rebrand/website/launchpad.webp",
+            "alt": "Website launchpad page"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-rebrand/website/token-vesting.webp",
+            "alt": "Website token vesting page"
+          },
+          {
+            "type": "video",
+            "src": "/case-studies/uncx-rebrand/brand-launch-video.mp4",
+            "alt": "Brand launch video"
           },
           {
             "type": "image",
@@ -380,23 +390,8 @@
           },
           {
             "type": "image",
-            "src": "/case-studies/uncx-rebrand/logo-square.webp",
-            "alt": "UNCX logo square mark"
-          },
-          {
-            "type": "image",
             "src": "/case-studies/uncx-rebrand/website/homepage.webp",
             "alt": "Website homepage design"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-rebrand/website/launchpad.webp",
-            "alt": "Website launchpad page"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-rebrand/website/token-vesting.webp",
-            "alt": "Website token vesting page"
           },
           {
             "type": "image",
@@ -434,9 +429,9 @@
             "alt": "Website UNCX token page"
           },
           {
-            "type": "video",
-            "src": "/case-studies/uncx-rebrand/brand-launch-video.mp4",
-            "alt": "Brand launch video"
+            "type": "image",
+            "src": "/case-studies/uncx-rebrand/rebrand-concepts.webp",
+            "alt": "Rebrand concept directions"
           }
         ],
         "gradient": "from-[#ffffff] to-[#780015]",
@@ -495,6 +490,26 @@
             "alt": "YouTube thumbnail designs"
           },
           {
+            "type": "video",
+            "src": "/case-studies/uncx-video-system/hyperswap-integration.mp4",
+            "alt": "HyperSwap Integration video"
+          },
+          {
+            "type": "video",
+            "src": "/case-studies/uncx-video-system/token-minter-launch.mp4",
+            "alt": "Token Minter Launch Video"
+          },
+          {
+            "type": "video",
+            "src": "/case-studies/uncx-video-system/vesting-app-release.mp4",
+            "alt": "Vesting App Release Video"
+          },
+          {
+            "type": "video",
+            "src": "/case-studies/uncx-video-system/lock-announcement-rise.mp4",
+            "alt": "Lock Announcement - RISE"
+          },
+          {
             "type": "image",
             "src": "/case-studies/uncx-video-system/after-effects-pipeline.webp",
             "alt": "After Effects production pipeline"
@@ -543,26 +558,6 @@
             "type": "image",
             "src": "/case-studies/uncx-video-system/video-files.webp",
             "alt": "Video file management"
-          },
-          {
-            "type": "video",
-            "src": "/case-studies/uncx-video-system/hyperswap-integration.mp4",
-            "alt": "HyperSwap Integration video"
-          },
-          {
-            "type": "video",
-            "src": "/case-studies/uncx-video-system/lock-announcement-rise.mp4",
-            "alt": "Lock Announcement - RISE"
-          },
-          {
-            "type": "video",
-            "src": "/case-studies/uncx-video-system/token-minter-launch.mp4",
-            "alt": "Token Minter Launch Video"
-          },
-          {
-            "type": "video",
-            "src": "/case-studies/uncx-video-system/vesting-app-release.mp4",
-            "alt": "Vesting App Release Video"
           }
         ],
         "gradient": "from-[#8b0020] to-[#ff003c]",
@@ -597,6 +592,372 @@
       },
       {
         "id": 4,
+        "slug": "uncx-academy",
+        "title": "UNCX Academy Brand & Platform",
+        "category": "Platform System / Education Product",
+        "year": "2025",
+        "status": "Complete",
+        "shortDescription": "Educational platform brand and design system - logotype, component library, article system, video pages, and glossary for DeFi learning.",
+        "fullDescription": "Brand and platform design for UNCX Academy. I wrote the brief and design specification; an external team delivered the initial design system - custom logotype, component library, and page templates - and I brought the project in-house, completing designs for article categorisation, video learning pages, glossary, integrations hub, and about page, ready for development. My video production system was integrated to produce the platform's educational library.",
+        "tags": [
+          "Figma",
+          "Cinema 4D",
+          "Redshift",
+          "Adobe Photoshop",
+          "Brand Design",
+          "Platform Design",
+          "Content Systems",
+          "UI/UX"
+        ],
+        "image": "/case-studies/uncx-academy/main-page.webp",
+        "media": [
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-academy/logo-design.webp",
+            "alt": "Logo design process"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-academy/logotype.webp",
+            "alt": "Academy logotype"
+          },
+          {
+            "type": "video",
+            "src": "/case-studies/uncx-academy/promo-video.mp4",
+            "alt": "Academy promo video"
+          },
+          {
+            "type": "video",
+            "src": "/case-studies/uncx-academy/tutorial-lp-locking.mp4",
+            "alt": "LP Locking tutorial"
+          },
+          {
+            "type": "video",
+            "src": "/case-studies/uncx-academy/chain-spotlight-sei.mp4",
+            "alt": "Chain Spotlight - SEI"
+          },
+          {
+            "type": "video",
+            "src": "/case-studies/uncx-academy/flash-loans-defi.mp4",
+            "alt": "Flash Loans in DeFi"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-academy/main-page.webp",
+            "alt": "Academy main page"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-academy/articles-overview.webp",
+            "alt": "Articles overview page"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-academy/articles-home.webp",
+            "alt": "Articles home page"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-academy/article-categories.webp",
+            "alt": "Article categories page"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-academy/article-page.webp",
+            "alt": "Individual article page"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-academy/about-page.webp",
+            "alt": "About page"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-academy/videos-home.webp",
+            "alt": "Videos home page"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-academy/video-page.webp",
+            "alt": "Individual video page"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-academy/glossary-home.webp",
+            "alt": "Glossary home page"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-academy/integrations.webp",
+            "alt": "Platform integrations"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-academy/components.webp",
+            "alt": "Component library"
+          }
+        ],
+        "gradient": "from-[#ffa2b5] to-[#520012]",
+        "role": "Brand & Product Designer",
+        "client": "UNCX Network",
+        "overlaySections": [
+          {
+            "title": "Brief",
+            "body": "Design a complete educational platform brand and UI for UNCX Academy - covering identity, page designs, content structure, and a reusable component system."
+          },
+          {
+            "title": "Problem Frame",
+            "body": "DeFi education content was scattered across blog posts, YouTube videos, and documentation with no unified platform, no consistent visual language, and no structured learning progression."
+          },
+          {
+            "title": "System Design",
+            "body": "I wrote the brief and design specification. An external team delivered the logotype, brand identity, and modular Figma component library. I then brought the project in-house, refining content structure across articles, videos, glossary entries, and integrations - each with its own page template and navigation pattern."
+          },
+          {
+            "title": "Trade-offs",
+            "body": "Having navigated similar external-team constraints during the rebrand, I applied a more structured handoff process for the Academy. The external design team delivered strong foundational work - logotype, component library, and page templates - but lacked the product context to complete content-specific designs. I designed the hero graphics, page visuals, and layout specifics, then handed finished designs to an in-house developer who built the site and backend CMS. The video production system integrated seamlessly, as the platform and video content were built from the same brand specification. Beyond launch, I still produce all article header banners for the marketing team's ongoing output."
+          },
+          {
+            "title": "Delivery",
+            "body": "Complete Figma design system: logotype, component library, page templates for Main, Articles, Videos, Glossary, Integrations, and About. Finished in-house and prepared for development handoff with supporting brand guidelines."
+          },
+          {
+            "title": "Outcome",
+            "body": "Enabled UNCX Network to launch a structured education platform aligned with the parent brand. The video production system fed directly into the Academy's content library, and my ongoing production of article banners, page graphics, and video content created a single-source creative pipeline across the entire platform."
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "slug": "uncx-menu",
+        "title": "UNCX Unified Menu",
+        "category": "Interface System / Design System",
+        "year": "2026",
+        "status": "Design Complete",
+        "shortDescription": "Cross-product navigation component system with variable-driven Figma prototypes, research-backed hierarchy, and scalable state logic.",
+        "fullDescription": "A unified menu system designed to work across UNCX's entire product suite. Built as a variable-driven Figma component with researched navigation patterns, prototype states (open/closed), configurable content slots, and a scalable hierarchy that adapts to different product contexts.",
+        "tags": [
+          "Figma",
+          "Design Systems",
+          "UI/UX",
+          "Prototyping",
+          "Research"
+        ],
+        "image": "/case-studies/uncx-menu/menu-components.webp",
+        "media": [
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-menu/menu-components.webp",
+            "alt": "Menu component library"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-menu/prototypes-open.webp",
+            "alt": "Menu prototypes (open state)"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-menu/prototypes-closed.webp",
+            "alt": "Menu prototypes (closed state)"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-menu/research.webp",
+            "alt": "Menu research and analysis"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-menu/concepting.webp",
+            "alt": "Menu concepting phase"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-menu/contents-concept.webp",
+            "alt": "Menu contents concept"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-menu/variables-setup.webp",
+            "alt": "Figma variables setup"
+          }
+        ],
+        "gradient": "from-[#f6f3f4] to-[#ff003c]",
+        "role": "Systems Designer / Design Engineer",
+        "client": "UNCX Network",
+        "overlaySections": [
+          {
+            "title": "Brief",
+            "body": "Design a unified navigation component that could work across all UNCX Network products and platforms - replacing inconsistent platform menus with a single scalable system."
+          },
+          {
+            "title": "Problem Frame",
+            "body": "Each UNCX Network product had its own navigation pattern. Users moving between EVM tools, Solana products, Academy, and the homepage encountered different menu structures, creating cognitive overhead and inconsistent UX."
+          },
+          {
+            "title": "System Design",
+            "body": "Researched navigation patterns and hierarchy models. Designed a component-based menu with configurable content slots, variable-driven Figma states, and a scalable hierarchy that adapts per product context."
+          },
+          {
+            "title": "Trade-offs",
+            "body": "The project is on hold due to a shift in development priorities. The core design challenge was fitting multiple products and sub-brands into a single menu structure that remained efficient and navigable. An additional constraint was that the products are highly specialised - the menu needed to be mildly educational, helping users understand what each product does without slowing down experienced users. The main design compromise centred on hierarchy: several products generate significantly more revenue than others and needed visual priority, without devaluing the rest of the ecosystem."
+          },
+          {
+            "title": "Delivery",
+            "body": "Delivered a Figma design system component with documented states, variables, content slot patterns, and implementation specifications for the development team."
+          },
+          {
+            "title": "Outcome",
+            "body": "Delivered a complete design system ready for implementation. The hierarchy problem - balancing revenue-generating products against the broader ecosystem - was resolved by establishing definitive levels of hierarchy and de-prioritising non-value generating menu options. Currently on hold pending a shift in development priorities."
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "slug": "uncx-app-concepts",
+        "title": "UNCX App Prototyping",
+        "category": "Product Concepting / UX Prototyping",
+        "year": "2021-2026",
+        "status": "2021-2026",
+        "shortDescription": "Rapid prototyping across token minting, launchpad flows, Telegram bots, NFT minting, and full launchpad concepts - from wireframes to interactive concepts.",
+        "fullDescription": "A body of product concepting work spanning multiple UNCX Network features: token minter prototyping, launchpad UI components, Telegram chatbot and presale app flows, NFT minting interfaces, stealth launch concepts, and full launchpad concepts.",
+        "tags": [
+          "Figma",
+          "FigJam",
+          "Prototyping",
+          "UX Design",
+          "Wireframing",
+          "Product"
+        ],
+        "image": "/case-studies/uncx-app-concepts/launchpad-components.webp",
+        "media": [
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-app-concepts/token-minter-prototyping.webp",
+            "alt": "Token minter prototyping"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-app-concepts/token-minter-slide.webp",
+            "alt": "Token minter concept slide"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-app-concepts/token-minting-concept-2.webp",
+            "alt": "Token minting concept iteration"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-app-concepts/launchpad-components.webp",
+            "alt": "Launchpad component designs"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-app-concepts/launchpad-prototypes.webp",
+            "alt": "Launchpad concept prototypes"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-app-concepts/blueprint-minter.webp",
+            "alt": "Blueprint minter design"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-app-concepts/blueprint-minter-2.webp",
+            "alt": "Blueprint minter iteration"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-app-concepts/stealth-launch-concepts.webp",
+            "alt": "Stealth launch concepts"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-app-concepts/stealth-launch-admin.webp",
+            "alt": "Stealth launch admin prototype"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-app-concepts/ilo-v7-flow-diagrams.webp",
+            "alt": "Launchpad flow diagrams"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-app-concepts/nft-minting-designs.webp",
+            "alt": "NFT minting app designs"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-app-concepts/nft-minting-wireframes.webp",
+            "alt": "NFT minting wireframes"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-app-concepts/wireframing-v3-lockers.webp",
+            "alt": "V3 lockers wireframing"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-app-concepts/telegram-chatbot-flows.webp",
+            "alt": "Telegram chatbot flow designs"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-app-concepts/tg-presale-flow-1.webp",
+            "alt": "Telegram presale flow 1"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-app-concepts/tg-presale-flow-2.webp",
+            "alt": "Telegram presale flow 2"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-app-concepts/tg-bot-flow.webp",
+            "alt": "Telegram bot flow"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-app-concepts/tg-bot-flow-2.webp",
+            "alt": "Telegram bot flow 2"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-app-concepts/tg-apebot-flow.webp",
+            "alt": "Telegram apebot flow"
+          }
+        ],
+        "gradient": "from-[#8b0020] to-[#ff003c]",
+        "role": "Systems Designer / Product Prototyper",
+        "client": "UNCX Network",
+        "overlaySections": [
+          {
+            "title": "Brief",
+            "body": "Rapidly prototype and validate product concepts across UNCX Network's feature pipeline - covering token minting, launchpad flows, Telegram integrations, and NFT tooling."
+          },
+          {
+            "title": "Problem Frame",
+            "body": "New product features were being scoped without visual validation. Developers were building from text specs, leading to misalignment between design intent and implementation."
+          },
+          {
+            "title": "System Design",
+            "body": "A broad range of product concepts and prototypes spanning different stages and purposes. Some were built and shipped - token minter flows, launchpad components, and Telegram bot interactions. Others remained as design explorations - stealth launch interfaces, NFT minting tools, and full launchpad concepts. Each served to validate direction, align stakeholders, or define scope before committing development resources."
+          },
+          {
+            "title": "Trade-offs",
+            "body": "A recurring constraint across all concepts was incomplete requirements - specifications arrived gradually as projects developed, often requiring rework of existing prototypes. This made component-based design systems essential: rebuilding from reusable parts reduced the cost of iteration. Figma's later introduction of the variables system further reduced component creation overhead. A foundational part of each project was creating FigJam flow diagrams for novel product processes. These weren't problems with established UX conventions to reference - they required working out how the interactions should function from first principles."
+          },
+          {
+            "title": "Delivery",
+            "body": "Delivered Figma prototypes for each feature area: token minting (blueprint and standard), launchpad components, Telegram bot/app flows, NFT minting interfaces, stealth launch admin, and full launchpad flow diagrams."
+          },
+          {
+            "title": "Outcome",
+            "body": "Closed the gap between product specs and development handoff. The component-first approach meant that incomplete or shifting requirements - a constant across a five-year span of prototyping - could be absorbed without starting from scratch. Stakeholders could validate features visually before committing development resources, reducing rework and accelerating shipping."
+          }
+        ]
+      },
+      {
+        "id": 7,
         "slug": "badger-club",
         "title": "Badger Club App",
         "category": "Product System / Operational Platform",
@@ -700,7 +1061,7 @@
         ],
         "gradient": "from-[#ff4466] to-[#4f0012]",
         "role": "Product Designer / Developer",
-        "client": "Badger Club",
+        "client": "Personal Project",
         "overlaySections": [
           {
             "title": "Brief",
@@ -729,452 +1090,7 @@
         ]
       },
       {
-        "id": 5,
-        "slug": "ai-portfolio-system",
-        "title": "This Site: An Agentic Build System",
-        "category": "AI Workflow / Development Pipeline",
-        "year": "2026",
-        "status": "Live",
-        "shortDescription": "This portfolio is itself a case study - designed with Figma Make and built by a prompt system that walks a phased roadmap, executing build and QA tasks in an iterative loop.",
-        "fullDescription": "The site you're reading was produced by a working AI development pipeline: a roadmap decomposed into atomised phases, a custom prompt system that executes each phase with Claude Code and Codex, automated build and QA gates between steps, and human review at phase boundaries. The same approach ships my product work.",
-        "tags": [
-          "Claude Code",
-          "Codex",
-          "Agentic Workflow",
-          "React",
-          "TypeScript",
-          "Tailwind"
-        ],
-        "image": "",
-        "media": [],
-        "gradient": "from-[#ff4466] to-[#4f0012]",
-        "role": "Designer & Pipeline Builder",
-        "client": "Self-initiated",
-        "overlaySections": [
-          {
-            "title": "Brief",
-            "body": "Rebuild my portfolio - and treat the build itself as the demonstration: how much production software can an AI pipeline ship when the human supplies direction, taste, and review?"
-          },
-          {
-            "title": "Problem Frame",
-            "body": "AI-assisted development fails in two familiar ways: drift, where the agent wanders off-spec during long builds, and mush, where many small edits erode the architecture. Both are process problems, not model problems."
-          },
-          {
-            "title": "System Design",
-            "body": "A roadmap document decomposes the build into phases, and each phase into atomised tasks with acceptance criteria. A custom prompt system feeds one phase at a time to the coding agent, runs build and QA checks as gates between steps, and stops at phase boundaries for human review. Design direction comes from Figma Make; Claude Code and Codex execute; git history is the audit trail."
-          },
-          {
-            "title": "Trade-offs",
-            "body": "Atomised tasks cost planning time up front - but they are what prevents drift during autonomous stretches. Phase gates trade raw speed for reviewability: I would rather approve ten coherent checkpoints than untangle one five-thousand-line diff. Where the agent's output disagreed with the spec - and it happens - the roadmap won: the system treats the plan as the source of truth, and plan changes are explicit edits rather than silent divergence."
-          },
-          {
-            "title": "Delivery",
-            "body": "This site: React 19, TypeScript, and Tailwind 4, a JSON content model, a serverless contact relay with rate limiting, and a test suite - shipped through the loop described above."
-          },
-          {
-            "title": "Outcome",
-            "body": "A production site whose commit history doubles as evidence of the workflow. The same pattern - spec, phased roadmap, gated autonomous execution - is how I now approach product builds: AI provides the throughput, the system provides the discipline, and I provide the judgement."
-          }
-        ]
-      },
-      {
-        "id": 6,
-        "slug": "uncx-menu",
-        "title": "UNCX Unified Menu",
-        "category": "Interface System / Design System",
-        "year": "2026",
-        "status": "Design Complete",
-        "shortDescription": "Cross-product navigation component system with variable-driven Figma prototypes, research-backed hierarchy, and scalable state logic.",
-        "fullDescription": "A unified menu system designed to work across UNCX's entire product suite. Built as a variable-driven Figma component with researched navigation patterns, prototype states (open/closed), configurable content slots, and a scalable hierarchy that adapts to different product contexts.",
-        "tags": [
-          "Figma",
-          "Design Systems",
-          "UI/UX",
-          "Prototyping",
-          "Research"
-        ],
-        "image": "/case-studies/uncx-menu/menu-overview.webp",
-        "media": [
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-menu/menu-overview.webp",
-            "alt": "Menu system overview"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-menu/menu-components.webp",
-            "alt": "Menu component library"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-menu/prototypes-open.webp",
-            "alt": "Menu prototypes (open state)"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-menu/prototypes-closed.webp",
-            "alt": "Menu prototypes (closed state)"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-menu/research.webp",
-            "alt": "Menu research and analysis"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-menu/concepting.webp",
-            "alt": "Menu concepting phase"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-menu/contents-concept.webp",
-            "alt": "Menu contents concept"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-menu/variables-setup.webp",
-            "alt": "Figma variables setup"
-          }
-        ],
-        "gradient": "from-[#f6f3f4] to-[#ff003c]",
-        "role": "Systems Designer / Design Engineer",
-        "client": "UNCX Network",
-        "overlaySections": [
-          {
-            "title": "Brief",
-            "body": "Design a unified navigation component that could work across all UNCX Network products and platforms - replacing inconsistent platform menus with a single scalable system."
-          },
-          {
-            "title": "Problem Frame",
-            "body": "Each UNCX Network product had its own navigation pattern. Users moving between EVM tools, Solana products, Academy, and the homepage encountered different menu structures, creating cognitive overhead and inconsistent UX."
-          },
-          {
-            "title": "System Design",
-            "body": "Researched navigation patterns and hierarchy models. Designed a component-based menu with configurable content slots, variable-driven Figma states, and a scalable hierarchy that adapts per product context."
-          },
-          {
-            "title": "Trade-offs",
-            "body": "The project is on hold due to a shift in development priorities. The core design challenge was fitting multiple products and sub-brands into a single menu structure that remained efficient and navigable. An additional constraint was that the products are highly specialised - the menu needed to be mildly educational, helping users understand what each product does without slowing down experienced users. The main design compromise centred on hierarchy: several products generate significantly more revenue than others and needed visual priority, without devaluing the rest of the ecosystem."
-          },
-          {
-            "title": "Delivery",
-            "body": "Delivered a Figma design system component with documented states, variables, content slot patterns, and implementation specifications for the development team."
-          },
-          {
-            "title": "Outcome",
-            "body": "Delivered a complete design system ready for implementation. The hierarchy problem - balancing revenue-generating products against the broader ecosystem - was resolved by establishing definitive levels of hierarchy and de-prioritising non-value generating menu options. Currently on hold pending a shift in development priorities."
-          }
-        ]
-      },
-      {
-        "id": 7,
-        "slug": "uncx-academy",
-        "title": "UNCX Academy Brand & Platform",
-        "category": "Platform System / Education Product",
-        "year": "2025",
-        "status": "Complete",
-        "shortDescription": "Educational platform brand and design system - logotype, component library, article system, video pages, and glossary for DeFi learning.",
-        "fullDescription": "Brand and platform design for UNCX Academy. I wrote the brief and design specification; an external team delivered the initial design system - custom logotype, component library, and page templates - and I brought the project in-house, completing designs for article categorisation, video learning pages, glossary, integrations hub, and about page, ready for development. My video production system was integrated to produce the platform's educational library.",
-        "tags": [
-          "Figma",
-          "Cinema 4D",
-          "Redshift",
-          "Adobe Photoshop",
-          "Brand Design",
-          "Platform Design",
-          "Content Systems",
-          "UI/UX"
-        ],
-        "image": "/case-studies/uncx-academy/main-page.webp",
-        "media": [
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-academy/main-page.webp",
-            "alt": "Academy main page"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-academy/articles-overview.webp",
-            "alt": "Articles overview page"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-academy/articles-home.webp",
-            "alt": "Articles home page"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-academy/article-categories.webp",
-            "alt": "Article categories page"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-academy/article-page.webp",
-            "alt": "Individual article page"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-academy/about-page.webp",
-            "alt": "About page"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-academy/videos-home.webp",
-            "alt": "Videos home page"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-academy/video-page.webp",
-            "alt": "Individual video page"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-academy/glossary-home.webp",
-            "alt": "Glossary home page"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-academy/integrations.webp",
-            "alt": "Platform integrations"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-academy/components.webp",
-            "alt": "Component library"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-academy/logo-design.webp",
-            "alt": "Logo design process"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-academy/logotype.webp",
-            "alt": "Academy logotype"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-academy/internal-overview.webp",
-            "alt": "Internal project overview"
-          },
-          {
-            "type": "video",
-            "src": "/case-studies/uncx-academy/promo-video.mp4",
-            "alt": "Academy promo video"
-          },
-          {
-            "type": "video",
-            "src": "/case-studies/uncx-academy/tutorial-lp-locking.mp4",
-            "alt": "LP Locking tutorial"
-          },
-          {
-            "type": "video",
-            "src": "/case-studies/uncx-academy/chain-spotlight-sei.mp4",
-            "alt": "Chain Spotlight - SEI"
-          },
-          {
-            "type": "video",
-            "src": "/case-studies/uncx-academy/flash-loans-defi.mp4",
-            "alt": "Flash Loans in DeFi"
-          }
-        ],
-        "gradient": "from-[#ffa2b5] to-[#520012]",
-        "role": "Brand & Product Designer",
-        "client": "UNCX Network",
-        "overlaySections": [
-          {
-            "title": "Brief",
-            "body": "Design a complete educational platform brand and UI for UNCX Academy - covering identity, page designs, content structure, and a reusable component system."
-          },
-          {
-            "title": "Problem Frame",
-            "body": "DeFi education content was scattered across blog posts, YouTube videos, and documentation with no unified platform, no consistent visual language, and no structured learning progression."
-          },
-          {
-            "title": "System Design",
-            "body": "I wrote the brief and design specification. An external team delivered the logotype, brand identity, and modular Figma component library. I then brought the project in-house, refining content structure across articles, videos, glossary entries, and integrations - each with its own page template and navigation pattern."
-          },
-          {
-            "title": "Trade-offs",
-            "body": "Having navigated similar external-team constraints during the rebrand, I applied a more structured handoff process for the Academy. The external design team delivered strong foundational work - logotype, component library, and page templates - but lacked the product context to complete content-specific designs. I designed the hero graphics, page visuals, and layout specifics, then handed finished designs to an in-house developer who built the site and backend CMS. The video production system integrated seamlessly, as the platform and video content were built from the same brand specification. Beyond launch, I still produce all article header banners for the marketing team's ongoing output."
-          },
-          {
-            "title": "Delivery",
-            "body": "Complete Figma design system: logotype, component library, page templates for Main, Articles, Videos, Glossary, Integrations, and About. Finished in-house and prepared for development handoff with supporting brand guidelines."
-          },
-          {
-            "title": "Outcome",
-            "body": "Enabled UNCX Network to launch a structured education platform aligned with the parent brand. The video production system fed directly into the Academy's content library, and my ongoing production of article banners, page graphics, and video content created a single-source creative pipeline across the entire platform."
-          }
-        ]
-      },
-      {
         "id": 8,
-        "slug": "uncx-app-concepts",
-        "title": "UNCX App Prototyping",
-        "category": "Product Concepting / UX Prototyping",
-        "year": "2021-2026",
-        "status": "2021-2026",
-        "shortDescription": "Rapid prototyping across token minting, launchpad flows, Telegram bots, NFT minting, and full launchpad concepts - from wireframes to interactive concepts.",
-        "fullDescription": "A body of product concepting work spanning multiple UNCX Network features: token minter prototyping, launchpad UI components, Telegram chatbot and presale app flows, NFT minting interfaces, stealth launch concepts, and full launchpad concepts.",
-        "tags": [
-          "Figma",
-          "FigJam",
-          "Prototyping",
-          "UX Design",
-          "Wireframing",
-          "Product"
-        ],
-        "image": "/case-studies/uncx-app-concepts/launchpad-components.webp",
-        "media": [
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-app-concepts/token-minter-prototyping.webp",
-            "alt": "Token minter prototyping"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-app-concepts/token-minter-slide.webp",
-            "alt": "Token minter concept slide"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-app-concepts/token-minting-concept-2.webp",
-            "alt": "Token minting concept iteration"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-app-concepts/launchpad-components.webp",
-            "alt": "Launchpad component designs"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-app-concepts/launchpad-prototypes.webp",
-            "alt": "Launchpad concept prototypes"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-app-concepts/blueprint-minter-concept.webp",
-            "alt": "Blueprint token minter concept"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-app-concepts/blueprint-minter.webp",
-            "alt": "Blueprint minter design"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-app-concepts/blueprint-minter-2.webp",
-            "alt": "Blueprint minter iteration"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-app-concepts/minting-app-frame.webp",
-            "alt": "Minting app frame design"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-app-concepts/stealth-launch-concepts.webp",
-            "alt": "Stealth launch concepts"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-app-concepts/stealth-launch-admin.webp",
-            "alt": "Stealth launch admin prototype"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-app-concepts/ilo-v7-flow-diagrams.webp",
-            "alt": "Launchpad flow diagrams"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-app-concepts/v7-tailwind-designs.webp",
-            "alt": "Tailwind design system"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-app-concepts/nft-minting-designs.webp",
-            "alt": "NFT minting app designs"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-app-concepts/nft-minting-wireframes.webp",
-            "alt": "NFT minting wireframes"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-app-concepts/wireframing-v3-lockers.webp",
-            "alt": "V3 lockers wireframing"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-app-concepts/telegram-chatbot-flows.webp",
-            "alt": "Telegram chatbot flow designs"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-app-concepts/telegram-app.webp",
-            "alt": "Telegram app design"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-app-concepts/tg-presale-flow-1.webp",
-            "alt": "Telegram presale flow 1"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-app-concepts/tg-presale-flow-2.webp",
-            "alt": "Telegram presale flow 2"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-app-concepts/tg-bot-flow.webp",
-            "alt": "Telegram bot flow"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-app-concepts/tg-bot-flow-2.webp",
-            "alt": "Telegram bot flow 2"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-app-concepts/tg-apebot-flow.webp",
-            "alt": "Telegram apebot flow"
-          }
-        ],
-        "gradient": "from-[#8b0020] to-[#ff003c]",
-        "role": "Systems Designer / Product Prototyper",
-        "client": "UNCX Network",
-        "overlaySections": [
-          {
-            "title": "Brief",
-            "body": "Rapidly prototype and validate product concepts across UNCX Network's feature pipeline - covering token minting, launchpad flows, Telegram integrations, and NFT tooling."
-          },
-          {
-            "title": "Problem Frame",
-            "body": "New product features were being scoped without visual validation. Developers were building from text specs, leading to misalignment between design intent and implementation."
-          },
-          {
-            "title": "System Design",
-            "body": "A broad range of product concepts and prototypes spanning different stages and purposes. Some were built and shipped - token minter flows, launchpad components, and Telegram bot interactions. Others remained as design explorations - stealth launch interfaces, NFT minting tools, and full launchpad concepts. Each served to validate direction, align stakeholders, or define scope before committing development resources."
-          },
-          {
-            "title": "Trade-offs",
-            "body": "A recurring constraint across all concepts was incomplete requirements - specifications arrived gradually as projects developed, often requiring rework of existing prototypes. This made component-based design systems essential: rebuilding from reusable parts reduced the cost of iteration. Figma's later introduction of the variables system further reduced component creation overhead. A foundational part of each project was creating FigJam flow diagrams for novel product processes. These weren't problems with established UX conventions to reference - they required working out how the interactions should function from first principles."
-          },
-          {
-            "title": "Delivery",
-            "body": "Delivered Figma prototypes for each feature area: token minting (blueprint and standard), launchpad components, Telegram bot/app flows, NFT minting interfaces, stealth launch admin, and full launchpad flow diagrams."
-          },
-          {
-            "title": "Outcome",
-            "body": "Closed the gap between product specs and development handoff. The component-first approach meant that incomplete or shifting requirements - a constant across a five-year span of prototyping - could be absorbed without starting from scratch. Stakeholders could validate features visually before committing development resources, reducing rework and accelerating shipping."
-          }
-        ]
-      },
-      {
-        "id": 9,
         "slug": "noticia-lingo",
         "title": "Noticia Lingo App",
         "category": "Product System / Operational Platform",
@@ -1229,7 +1145,7 @@
         ],
         "gradient": "from-[#ff003c] to-[#7a001c]",
         "role": "Product Designer / Developer",
-        "client": "Self-initiated",
+        "client": "Personal Project",
         "overlaySections": [
           {
             "title": "Brief",
@@ -1254,6 +1170,55 @@
           {
             "title": "Outcome",
             "body": "Demonstrated a scalable learning system driven by live content. The shift from AI-generated simple quizzes to the pure-function lesson types I designed produced a more robust foundation. Active development, with multi-language expansion planned once the core 8-10 lesson types are validated in Spanish."
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "slug": "ai-portfolio-system",
+        "title": "This Site: An Agentic Build System",
+        "category": "AI Workflow / Development Pipeline",
+        "year": "2026",
+        "status": "Live",
+        "shortDescription": "This portfolio is itself a case study - designed with Figma Make and built by a prompt system that walks a phased roadmap, executing build and QA tasks in an iterative loop.",
+        "fullDescription": "The site you're reading was produced by a working AI development pipeline: a roadmap decomposed into atomised phases, a custom prompt system that executes each phase with Claude Code and Codex, automated build and QA gates between steps, and human review at phase boundaries. The same approach ships my product work.",
+        "tags": [
+          "Claude Code",
+          "Codex",
+          "Agentic Workflow",
+          "React",
+          "TypeScript",
+          "Tailwind"
+        ],
+        "image": "",
+        "media": [],
+        "gradient": "from-[#ff4466] to-[#4f0012]",
+        "role": "Designer & Pipeline Builder",
+        "client": "Self-initiated",
+        "overlaySections": [
+          {
+            "title": "Brief",
+            "body": "Rebuild my portfolio - and treat the build itself as the demonstration: how much production software can an AI pipeline ship when the human supplies direction, taste, and review?"
+          },
+          {
+            "title": "Problem Frame",
+            "body": "AI-assisted development fails in two familiar ways: drift, where the agent wanders off-spec during long builds, and mush, where many small edits erode the architecture. Both are process problems, not model problems."
+          },
+          {
+            "title": "System Design",
+            "body": "A roadmap document decomposes the build into phases, and each phase into atomised tasks with acceptance criteria. A custom prompt system feeds one phase at a time to the coding agent, runs build and QA checks as gates between steps, and stops at phase boundaries for human review. Design direction comes from Figma Make; Claude Code and Codex execute; git history is the audit trail."
+          },
+          {
+            "title": "Trade-offs",
+            "body": "Atomised tasks cost planning time up front - but they are what prevents drift during autonomous stretches. Phase gates trade raw speed for reviewability: I would rather approve ten coherent checkpoints than untangle one five-thousand-line diff. Where the agent's output disagreed with the spec - and it happens - the roadmap won: the system treats the plan as the source of truth, and plan changes are explicit edits rather than silent divergence."
+          },
+          {
+            "title": "Delivery",
+            "body": "This site: React 19, TypeScript, and Tailwind 4, a JSON content model, a serverless contact relay with rate limiting, and a test suite - shipped through the loop described above."
+          },
+          {
+            "title": "Outcome",
+            "body": "A production site whose commit history doubles as evidence of the workflow. The same pattern - spec, phased roadmap, gated autonomous execution - is how I now approach product builds: AI provides the throughput, the system provides the discipline, and I provide the judgement."
           }
         ]
       }
