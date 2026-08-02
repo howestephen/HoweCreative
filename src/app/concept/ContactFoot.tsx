@@ -108,7 +108,7 @@ export function ContactFoot() {
                   Message sent
                 </div>
                 <p className="headline-font text-2xl text-foreground">
-                  Thanks - I&rsquo;ll reply within 24 hours.
+                  Thanks for reaching out. I&rsquo;ll be in touch soon.
                 </p>
                 <button
                   type="button"
@@ -182,7 +182,7 @@ export function ContactFoot() {
                     {status === "error" ? (
                       <span className="text-accent">{errorMsg}</span>
                     ) : (
-                      "Replies within 24 hours"
+                      "Tell me what you're building"
                     )}
                   </span>
                   <button

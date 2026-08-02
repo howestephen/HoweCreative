@@ -1,8 +1,13 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { ChevronLeft, ChevronRight, Minus, Plus, X } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 
-import { portfolioProjects, type PortfolioProject } from "../data/portfolio";
+import {
+  portfolioProjects,
+  type PortfolioProject,
+  type ProjectMediaItem,
+} from "../data/portfolio";
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 
 /** Outcome-first teasers - the one line a hiring manager reads. */
@@ -39,6 +44,87 @@ function sectionBody(project: PortfolioProject, title: string) {
   return project.overlaySections.find((section) => section.title === title)?.body ?? "";
 }
 
+function GalleryStrip({
+  project,
+  images,
+  onOpenImage,
+}: {
+  project: PortfolioProject;
+  images: ProjectMediaItem[];
+  onOpenImage: (index: number) => void;
+}) {
+  const scrollerRef = useRef<HTMLDivElement>(null);
+
+  const scrollByPage = (direction: 1 | -1) => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    el.scrollBy({ left: direction * el.clientWidth * 0.8, behavior: "smooth" });
+  };
+
+  return (
+    <div>
+      <div className="mb-2 flex items-center justify-between gap-3">
+        <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-accent">
+          Gallery
+        </span>
+        <div className="flex items-center gap-2">
+          <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
+            {images.length} {images.length === 1 ? "image" : "images"}
+          </span>
+          <div className="flex gap-1">
+            <button
+              type="button"
+              onClick={() => scrollByPage(-1)}
+              aria-label="Scroll gallery left"
+              className="border border-border bg-card p-1 text-foreground transition-colors hover:border-accent hover:text-accent"
+            >
+              <ChevronLeft className="h-3.5 w-3.5" />
+            </button>
+            <button
+              type="button"
+              onClick={() => scrollByPage(1)}
+              aria-label="Scroll gallery right"
+              className="border border-border bg-card p-1 text-foreground transition-colors hover:border-accent hover:text-accent"
+            >
+              <ChevronRight className="h-3.5 w-3.5" />
+            </button>
+          </div>
+        </div>
+      </div>
+      {/* Two rows scrolling sideways so the gallery stays the height of the text
+          column; a visible scrollbar plus the arrow buttons give trackpad,
+          mouse-wheel, and touch users all a way through. */}
+      <div
+        ref={scrollerRef}
+        className="gallery-scroll -mx-1 overflow-x-auto px-1 pb-2"
+      >
+        <div className="grid w-max snap-x grid-flow-col grid-rows-2 gap-1.5">
+          {images.map((media) => {
+            const galleryIndex = (project.media ?? []).indexOf(media);
+            return (
+              <button
+                key={media.src}
+                type="button"
+                onClick={() => onOpenImage(galleryIndex)}
+                aria-label={`View larger: ${media.alt ?? project.title}`}
+                className="group/thumb block w-28 shrink-0 snap-start border border-border bg-card transition-colors hover:border-accent sm:w-32"
+              >
+                <ImageWithFallback
+                  src={thumbSrc(media.src)}
+                  alt={media.alt ?? project.title}
+                  loading="lazy"
+                  decoding="async"
+                  className="aspect-square w-full object-cover transition-opacity group-hover/thumb:opacity-85"
+                />
+              </button>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function ExpandedRow({
   project,
   onOpenImage,
@@ -49,7 +135,9 @@ function ExpandedRow({
   const brief = sectionBody(project, "Brief");
   const system = sectionBody(project, "System Design");
   const outcome = sectionBody(project, "Outcome");
-  const images = (project.media ?? []).filter((m) => m.type === "image");
+  const media = project.media ?? [];
+  const images = media.filter((m) => m.type === "image");
+  const videos = media.filter((m) => m.type === "video");
 
   return (
     // Left padding matches the index-number column plus its gap, so the
@@ -97,40 +185,29 @@ function ExpandedRow({
         </div>
       </div>
 
-      <div className="lg:col-span-2">
+      <div className="space-y-6 lg:col-span-2">
         {images.length > 0 && (
+          <GalleryStrip project={project} images={images} onOpenImage={onOpenImage} />
+        )}
+
+        {videos.length > 0 && (
           <div>
-            <div className="mb-2 flex items-baseline justify-between gap-3">
-              <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-accent">
-                Gallery
-              </span>
-              <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
-                {images.length} {images.length === 1 ? "image" : "images"} / scroll
-              </span>
+            <div className="mb-2 font-mono text-[10px] uppercase tracking-[0.18em] text-accent">
+              {videos.length === 1 ? "Video" : "Videos"}
             </div>
-            {/* Two rows scrolling sideways: keeps the gallery the same height as
-                the text column instead of running far past it, and means only the
-                first few images are ever fetched on load. */}
-            <div className="-mx-1 overflow-x-auto px-1 pb-2">
-              <div className="grid w-max snap-x snap-mandatory grid-flow-col grid-rows-2 gap-1.5">
-                {images.map((media, index) => (
-                  <button
-                    key={media.src}
-                    type="button"
-                    onClick={() => onOpenImage(index)}
-                    aria-label={`View larger: ${media.alt ?? project.title}`}
-                    className="group/thumb block w-28 shrink-0 snap-start border border-border bg-card transition-colors hover:border-accent sm:w-32"
-                  >
-                    <ImageWithFallback
-                      src={thumbSrc(media.src)}
-                      alt={media.alt ?? project.title}
-                      loading="lazy"
-                      decoding="async"
-                      className="aspect-square w-full object-cover transition-opacity group-hover/thumb:opacity-85"
-                    />
-                  </button>
-                ))}
-              </div>
+            <div className="space-y-2">
+              {videos.map((media) => (
+                <video
+                  key={media.src}
+                  src={media.src}
+                  poster={media.poster}
+                  controls
+                  preload="none"
+                  className="w-full border border-border bg-black"
+                >
+                  <track kind="captions" />
+                </video>
+              ))}
             </div>
           </div>
         )}
@@ -174,77 +251,101 @@ function Lightbox({
 
   if (!current) return null;
 
-  return (
+  // Rendered through a portal to <body> so it escapes the `main` element's
+  // stacking context (z-10). Nested inside main, even z-[200] sat below the
+  // fixed site header (z-50), which hid the close button under the menu.
+  return createPortal(
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.18 }}
-      className="fixed inset-0 z-[100] flex flex-col bg-background/97 backdrop-blur-sm"
+      className="fixed inset-0 z-[200] bg-background"
       role="dialog"
       aria-modal="true"
       aria-label={`${project.title} gallery`}
     >
-      <div className="flex items-center justify-between gap-4 border-b border-border px-4 py-3 sm:px-5">
-        <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground sm:text-[11px]">
+      {/* Full-viewport centering box with padding that reserves room for the
+          floating controls: because this box has a definite height (inset-0),
+          `max-h-full` on the image resolves correctly and nothing is clipped.
+          Clicking the empty area closes. */}
+      <div
+        className="absolute inset-0 flex items-center justify-center px-4 py-16 sm:px-20"
+        onClick={(e) => {
+          if (e.target === e.currentTarget) onClose();
+        }}
+      >
+        <ImageWithFallback
+          src={current.src}
+          alt={current.alt ?? project.title}
+          className="max-h-full max-w-full object-contain"
+        />
+      </div>
+
+      {/* Controls float above the image and never affect its layout. */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 flex items-start justify-between gap-4 p-3 sm:p-4">
+        <span className="pointer-events-auto bg-background/80 px-2.5 py-1.5 font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground sm:text-[11px]">
           {project.title} / {index + 1} of {images.length}
         </span>
-        {/* Deliberately a large, filled, labelled control: the previous
-            10px text link read as a caption, not a way out. */}
         <button
           type="button"
           onClick={onClose}
           autoFocus
-          className="inline-flex shrink-0 items-center gap-2 bg-accent px-4 py-2.5 text-sm font-medium text-accent-foreground transition-colors hover:bg-accent-hover"
+          className="pointer-events-auto inline-flex shrink-0 items-center gap-2 bg-accent px-4 py-2.5 text-sm font-medium text-accent-foreground shadow-lg transition-colors hover:bg-accent-hover"
         >
           <X className="h-4 w-4" />
           Close
         </button>
       </div>
 
-      <div className="flex min-h-0 flex-1 items-center gap-2 px-3 py-4 sm:px-5">
-        <button
-          type="button"
-          onClick={() => onStep(-1)}
-          aria-label="Previous image"
-          className="shrink-0 border border-border bg-card p-2 text-foreground transition-colors hover:border-accent hover:text-accent"
-        >
-          <ChevronLeft className="h-5 w-5" />
-        </button>
-        <div
-          className="flex min-h-0 flex-1 items-center justify-center"
-          onClick={(e) => {
-            // clicking the empty space around the image also closes
-            if (e.target === e.currentTarget) onClose();
-          }}
-        >
-          <ImageWithFallback
-            src={current.src}
-            alt={current.alt ?? project.title}
-            className="max-h-full max-w-full object-contain"
-          />
-        </div>
-        <button
-          type="button"
-          onClick={() => onStep(1)}
-          aria-label="Next image"
-          className="shrink-0 border border-border bg-card p-2 text-foreground transition-colors hover:border-accent hover:text-accent"
-        >
-          <ChevronRight className="h-5 w-5" />
-        </button>
-      </div>
+      {images.length > 1 && (
+        <>
+          <button
+            type="button"
+            onClick={() => onStep(-1)}
+            aria-label="Previous image"
+            className="absolute left-2 top-1/2 -translate-y-1/2 border border-border bg-card/90 p-2 text-foreground shadow-md transition-colors hover:border-accent hover:text-accent sm:left-4"
+          >
+            <ChevronLeft className="h-5 w-5" />
+          </button>
+          <button
+            type="button"
+            onClick={() => onStep(1)}
+            aria-label="Next image"
+            className="absolute right-2 top-1/2 -translate-y-1/2 border border-border bg-card/90 p-2 text-foreground shadow-md transition-colors hover:border-accent hover:text-accent sm:right-4"
+          >
+            <ChevronRight className="h-5 w-5" />
+          </button>
+        </>
+      )}
 
       {current.alt && (
-        <p className="border-t border-border px-5 py-3 text-center text-sm text-muted-foreground">
+        <p className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-background/90 to-transparent px-5 pb-4 pt-8 text-center text-sm text-muted-foreground">
           {current.alt}
         </p>
       )}
-    </motion.div>
+    </motion.div>,
+    document.body,
   );
 }
 
 export function WorkIndex() {
   const [openSlug, setOpenSlug] = useState<string | null>(null);
   const [lightbox, setLightbox] = useState<LightboxState>(null);
+  const rowRefs = useRef<Record<string, HTMLLIElement | null>>({});
+
+  // When a study opens, bring its row to the top of the viewport. Any other
+  // open study collapses at the same time, so the scroll target keeps moving
+  // during the animation; scrolling once the collapse has settled lands it
+  // cleanly at the top. Respects reduced-motion by jumping instantly.
+  useEffect(() => {
+    if (!openSlug) return;
+    const row = rowRefs.current[openSlug];
+    if (!row) return;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const scroll = () => row.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+    const id = window.setTimeout(scroll, reduce ? 0 : 360);
+    return () => window.clearTimeout(id);
+  }, [openSlug]);
 
   const lightboxProject = lightbox
     ? portfolioProjects.find((p) => p.slug === lightbox.slug)
@@ -284,23 +385,15 @@ export function WorkIndex() {
             return (
               <li
                 key={project.slug}
+                ref={(el) => {
+                  rowRefs.current[project.slug] = el;
+                }}
                 className="scroll-mt-20 border-b border-border first:border-t"
               >
                 <button
                   type="button"
                   aria-expanded={open}
-                  onClick={(e) => {
-                    const willOpen = !open;
-                    setOpenSlug(willOpen ? project.slug : null);
-                    // Opening a study collapses the others, which can leave the
-                    // reader mid-page; bring the chosen row back to the top.
-                    if (willOpen) {
-                      const row = e.currentTarget.closest("li");
-                      requestAnimationFrame(() =>
-                        row?.scrollIntoView({ behavior: "smooth", block: "start" }),
-                      );
-                    }
-                  }}
+                  onClick={() => setOpenSlug(open ? null : project.slug)}
                   className="group grid w-full grid-cols-[2.6rem_1fr_auto] items-baseline gap-x-4 py-6 text-left transition-colors hover:bg-card md:grid-cols-[3rem_1fr_12rem_4rem_2rem]"
                 >
                   <span className="font-mono text-[11px] tracking-[0.14em] text-muted-foreground">
