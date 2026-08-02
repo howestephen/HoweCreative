@@ -190,12 +190,6 @@ export function Method() {
               </div>
             ))}
           </div>
-
-          <p className="mt-6 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-            I also hold a Certified ScrumMaster qualification (Scrum Alliance, 2019) and have
-            worked in Agile teams throughout my career. The formal certification has since
-            lapsed, but running work in structured, iterative sprints is still how I ship.
-          </p>
         </div>
       </div>
     </section>
