@@ -12,10 +12,10 @@ import { PlotterMark } from "./PlotterMark";
 function buildMetrics() {
   const now = new Date();
   return [
-    { value: `${yearsSince(CAREER_START, now)} yrs`, label: "in design & technology" },
-    { value: tenureSince(UNCX_START, now), label: "lead designer, UNCX Network" },
-    { value: "30", label: "games shipped, Switch Studios" },
-    { value: "500+", label: "videos, UNCX + freelance + Switch" },
+    { value: `${yearsSince(CAREER_START, now)} yrs`, label: "in design & tech" },
+    { value: tenureSince(UNCX_START, now), label: "lead designer, UNCX" },
+    { value: "30", label: "games at Switch Studios" },
+    { value: "500+", label: "videos across roles" },
   ] as const;
 }
 
@@ -57,9 +57,8 @@ export function Masthead() {
             </motion.h1>
 
             <motion.p variants={item} className="max-w-xl text-lg leading-relaxed text-muted-foreground">
-              Stephen Howe - creative technologist. Two decades across brand, 3D, motion,
-              product, and code; lately, automated pipelines that render and publish live
-              data - built fast with AI.
+              Stephen Howe - Creative Technologist. Two decades across branding, 3D, motion,
+              product, and code. Currently focused on automated AI production pipelines.
             </motion.p>
 
             <motion.div variants={item} className="flex flex-wrap items-center gap-3">
@@ -100,13 +99,15 @@ export function Masthead() {
             </motion.div>
           </div>
 
-          <motion.dl variants={item} className="grid grid-cols-2 gap-x-8 gap-y-6 border-t border-border pt-6 sm:grid-cols-4">
+          <motion.dl variants={item} className="grid grid-cols-2 gap-x-6 gap-y-6 border-t border-border pt-6 sm:grid-cols-4">
             {metrics.map((metric) => (
               <div key={metric.label} className="flex flex-col">
-                <dt className="flex-1 font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
+                <dt className="flex-1 font-mono text-[10px] uppercase leading-tight tracking-[0.16em] text-muted-foreground">
                   {metric.label}
                 </dt>
-                <dd className="headline-font text-3xl text-foreground md:text-4xl">{metric.value}</dd>
+                <dd className="headline-font mt-1 whitespace-nowrap text-xl leading-none text-foreground md:text-2xl">
+                  {metric.value}
+                </dd>
               </div>
             ))}
           </motion.dl>

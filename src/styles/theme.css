@@ -255,3 +255,23 @@
     font-family: var(--font-technical) !important;
   }
 }
+
+/* Always-visible thin scrollbar for the case-study galleries, so trackpad and
+   touch are not the only way to move through a horizontal strip. */
+.gallery-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--accent) 55%, transparent) transparent;
+}
+.gallery-scroll::-webkit-scrollbar {
+  height: 8px;
+}
+.gallery-scroll::-webkit-scrollbar-track {
+  background: color-mix(in srgb, var(--foreground) 8%, transparent);
+}
+.gallery-scroll::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--accent) 55%, transparent);
+  border-radius: 4px;
+}
+.gallery-scroll::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
