@@ -23,41 +23,55 @@ let made = 0;
 let skipped = 0;
 let failed = 0;
 
+// Walk every case-study directory recursively so nested folders (such as
+// uncx-rebrand/website) get thumbnails too; the gallery derives thumb paths
+// as `<dir>/thumbs/<name>.jpg` at any depth.
+function walk(dir) {
+  const entries = readdirSync(dir);
+
+  const files = entries.filter(
+    (name) => SOURCE_EXT.has(path.extname(name).toLowerCase()),
+  );
+  if (files.length > 0) {
+    const thumbDir = path.join(dir, "thumbs");
+    mkdirSync(thumbDir, { recursive: true });
+
+    for (const file of files) {
+      const source = path.join(dir, file);
+      const target = path.join(thumbDir, `${path.parse(file).name}.jpg`);
+
+      if (existsSync(target) && statSync(target).mtimeMs >= statSync(source).mtimeMs) {
+        skipped += 1;
+        continue;
+      }
+
+      try {
+        execFileSync("sips", [
+          "-s", "format", "jpeg",
+          "-s", "formatOptions", "72",
+          "-Z", String(MAX_EDGE),
+          source,
+          "--out", target,
+        ], { stdio: "ignore" });
+        made += 1;
+      } catch {
+        console.warn(`could not thumbnail: ${path.relative(ROOT, source)}`);
+        failed += 1;
+      }
+    }
+  }
+
+  for (const name of entries) {
+    if (name === "thumbs") continue;
+    const child = path.join(dir, name);
+    if (statSync(child).isDirectory()) walk(child);
+  }
+}
+
 for (const slug of readdirSync(ROOT)) {
   const dir = path.join(ROOT, slug);
   if (!statSync(dir).isDirectory()) continue;
-
-  const files = readdirSync(dir).filter((file) =>
-    SOURCE_EXT.has(path.extname(file).toLowerCase()),
-  );
-  if (files.length === 0) continue;
-
-  const thumbDir = path.join(dir, "thumbs");
-  mkdirSync(thumbDir, { recursive: true });
-
-  for (const file of files) {
-    const source = path.join(dir, file);
-    const target = path.join(thumbDir, `${path.parse(file).name}.jpg`);
-
-    if (existsSync(target) && statSync(target).mtimeMs >= statSync(source).mtimeMs) {
-      skipped += 1;
-      continue;
-    }
-
-    try {
-      execFileSync("sips", [
-        "-s", "format", "jpeg",
-        "-s", "formatOptions", "72",
-        "-Z", String(MAX_EDGE),
-        source,
-        "--out", target,
-      ], { stdio: "ignore" });
-      made += 1;
-    } catch {
-      console.warn(`could not thumbnail: ${slug}/${file}`);
-      failed += 1;
-    }
-  }
+  walk(dir);
 }
 
 console.log(`thumbnails written: ${made}, up to date: ${skipped}, failed: ${failed}`);

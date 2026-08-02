@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 import { ChevronLeft, ChevronRight, Minus, Plus, X } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
@@ -17,7 +17,7 @@ const TEASERS: Record<string, string> = {
   "uncx-rebrand":
     "Two-phase rebrand of a multi-chain DeFi protocol - one visual system across 10+ product pages.",
   "uncx-video-system":
-    "The pipeline behind 232 videos at UNCX - templated 3D and motion production at launch cadence.",
+    "The pipeline behind 200+ videos at UNCX - templated 3D and motion production at launch cadence.",
   "badger-club":
     "A full-stack badge-tracking platform - design to deployed product, solo, AI-assisted.",
   "ai-portfolio-system": "The agentic build system whose output you're reading right now - spec to phased roadmap to gated build.",
@@ -44,14 +44,18 @@ function sectionBody(project: PortfolioProject, title: string) {
   return project.overlaySections.find((section) => section.title === title)?.body ?? "";
 }
 
-function GalleryStrip({
-  project,
-  images,
-  onOpenImage,
+/** A labelled horizontal scroller with arrow buttons and a visible scrollbar,
+ *  shared by the image gallery and the video strip so both behave the same. */
+function ScrollStrip({
+  label,
+  count,
+  unit,
+  children,
 }: {
-  project: PortfolioProject;
-  images: ProjectMediaItem[];
-  onOpenImage: (index: number) => void;
+  label: string;
+  count: number;
+  unit: string;
+  children: ReactNode;
 }) {
   const scrollerRef = useRef<HTMLDivElement>(null);
 
@@ -64,18 +68,16 @@ function GalleryStrip({
   return (
     <div>
       <div className="mb-2 flex items-center justify-between gap-3">
-        <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-accent">
-          Gallery
-        </span>
+        <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-accent">{label}</span>
         <div className="flex items-center gap-2">
           <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
-            {images.length} {images.length === 1 ? "image" : "images"}
+            {count} {count === 1 ? unit : `${unit}s`}
           </span>
           <div className="flex gap-1">
             <button
               type="button"
               onClick={() => scrollByPage(-1)}
-              aria-label="Scroll gallery left"
+              aria-label={`Scroll ${label.toLowerCase()} left`}
               className="border border-border bg-card p-1 text-foreground transition-colors hover:border-accent hover:text-accent"
             >
               <ChevronLeft className="h-3.5 w-3.5" />
@@ -83,7 +85,7 @@ function GalleryStrip({
             <button
               type="button"
               onClick={() => scrollByPage(1)}
-              aria-label="Scroll gallery right"
+              aria-label={`Scroll ${label.toLowerCase()} right`}
               className="border border-border bg-card p-1 text-foreground transition-colors hover:border-accent hover:text-accent"
             >
               <ChevronRight className="h-3.5 w-3.5" />
@@ -91,37 +93,70 @@ function GalleryStrip({
           </div>
         </div>
       </div>
-      {/* Two rows scrolling sideways so the gallery stays the height of the text
-          column; a visible scrollbar plus the arrow buttons give trackpad,
-          mouse-wheel, and touch users all a way through. */}
-      <div
-        ref={scrollerRef}
-        className="gallery-scroll -mx-1 overflow-x-auto px-1 pb-2"
-      >
-        <div className="grid w-max snap-x grid-flow-col grid-rows-2 gap-1.5">
-          {images.map((media) => {
-            const galleryIndex = (project.media ?? []).indexOf(media);
-            return (
-              <button
-                key={media.src}
-                type="button"
-                onClick={() => onOpenImage(galleryIndex)}
-                aria-label={`View larger: ${media.alt ?? project.title}`}
-                className="group/thumb block w-28 shrink-0 snap-start border border-border bg-card transition-colors hover:border-accent sm:w-32"
-              >
-                <ImageWithFallback
-                  src={thumbSrc(media.src)}
-                  alt={media.alt ?? project.title}
-                  loading="lazy"
-                  decoding="async"
-                  className="aspect-square w-full object-cover transition-opacity group-hover/thumb:opacity-85"
-                />
-              </button>
-            );
-          })}
-        </div>
+      <div ref={scrollerRef} className="gallery-scroll -mx-1 overflow-x-auto px-1 pb-2">
+        {children}
       </div>
     </div>
+  );
+}
+
+function GalleryStrip({
+  project,
+  images,
+  onOpenImage,
+}: {
+  project: PortfolioProject;
+  images: ProjectMediaItem[];
+  onOpenImage: (index: number) => void;
+}) {
+  return (
+    <ScrollStrip label="Gallery" count={images.length} unit="image">
+      {/* Two rows scrolling sideways so the gallery stays the height of the
+          text column. */}
+      <div className="grid w-max snap-x grid-flow-col grid-rows-2 gap-1.5">
+        {images.map((media) => {
+          const galleryIndex = (project.media ?? []).indexOf(media);
+          return (
+            <button
+              key={media.src}
+              type="button"
+              onClick={() => onOpenImage(galleryIndex)}
+              aria-label={`View larger: ${media.alt ?? project.title}`}
+              className="group/thumb block w-28 shrink-0 snap-start border border-border bg-card transition-colors hover:border-accent sm:w-32"
+            >
+              <ImageWithFallback
+                src={thumbSrc(media.src)}
+                alt={media.alt ?? project.title}
+                loading="lazy"
+                decoding="async"
+                className="aspect-square w-full object-cover transition-opacity group-hover/thumb:opacity-85"
+              />
+            </button>
+          );
+        })}
+      </div>
+    </ScrollStrip>
+  );
+}
+
+function VideoStrip({ videos }: { videos: ProjectMediaItem[] }) {
+  return (
+    <ScrollStrip label="Videos" count={videos.length} unit="video">
+      <div className="flex w-max gap-2">
+        {videos.map((media) => (
+          <video
+            key={media.src}
+            src={media.src}
+            poster={media.poster}
+            controls
+            preload="none"
+            className="w-64 shrink-0 snap-start border border-border bg-black sm:w-72"
+          >
+            <track kind="captions" />
+          </video>
+        ))}
+      </div>
+    </ScrollStrip>
   );
 }
 
@@ -136,8 +171,15 @@ function ExpandedRow({
   const system = sectionBody(project, "System Design");
   const outcome = sectionBody(project, "Outcome");
   const media = project.media ?? [];
-  const images = media.filter((m) => m.type === "image");
+  const allImages = media.filter((m) => m.type === "image");
   const videos = media.filter((m) => m.type === "video");
+
+  // Pull a brand logo out of the gallery and feature it above, for visual
+  // interest. Prefer a wordmark ("logotype"), else the first "logo" asset.
+  const logo =
+    allImages.find((m) => /logotype/i.test(m.src)) ??
+    allImages.find((m) => /logo/i.test(m.src));
+  const images = allImages.filter((m) => m !== logo);
 
   return (
     // Left padding matches the index-number column plus its gap, so the
@@ -186,31 +228,23 @@ function ExpandedRow({
       </div>
 
       <div className="space-y-6 lg:col-span-2">
+        {logo && (
+          <div className="flex w-fit items-center border border-border bg-neutral-900 px-5 py-3">
+            <ImageWithFallback
+              src={logo.src}
+              alt={logo.alt ?? `${project.title} logo`}
+              loading="lazy"
+              decoding="async"
+              className="h-9 w-auto object-contain sm:h-10"
+            />
+          </div>
+        )}
+
         {images.length > 0 && (
           <GalleryStrip project={project} images={images} onOpenImage={onOpenImage} />
         )}
 
-        {videos.length > 0 && (
-          <div>
-            <div className="mb-2 font-mono text-[10px] uppercase tracking-[0.18em] text-accent">
-              {videos.length === 1 ? "Video" : "Videos"}
-            </div>
-            <div className="space-y-2">
-              {videos.map((media) => (
-                <video
-                  key={media.src}
-                  src={media.src}
-                  poster={media.poster}
-                  controls
-                  preload="none"
-                  className="w-full border border-border bg-black"
-                >
-                  <track kind="captions" />
-                </video>
-              ))}
-            </div>
-          </div>
-        )}
+        {videos.length > 0 && <VideoStrip videos={videos} />}
       </div>
     </div>
   );
