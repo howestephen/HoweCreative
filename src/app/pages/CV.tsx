@@ -76,6 +76,18 @@ const CV_STYLES = `
     text-decoration-color: #d90429;
   }
 
+  /* Contact chips: quiet neutral boxes, not four red underlined links. */
+  .cv-contact a {
+    color: #262626;
+    text-decoration: none;
+  }
+  .cv-contact a:hover,
+  .cv-contact a:focus-visible {
+    color: #d90429;
+    border-color: #d90429;
+    text-decoration: none;
+  }
+
   .cv-page :focus-visible {
     outline-color: #d90429;
   }
@@ -152,12 +164,27 @@ export function CV() {
 
           <div className="mt-3 h-[3px] w-full bg-[#d90429]" />
 
-          <p className="mt-2.5 text-[12.5px] leading-relaxed text-neutral-600">
-            <a href="mailto:howestephen@gmail.com">howestephen@gmail.com</a>{" · "}
-            <a href="https://howecreative.co.uk" target="_blank" rel="noreferrer">howecreative.co.uk</a>{" · "}
-            <a href="https://www.linkedin.com/in/howestephen" target="_blank" rel="noreferrer">linkedin.com/in/howestephen</a>{" · "}
-            <a href="https://github.com/howestephen" target="_blank" rel="noreferrer">github.com/howestephen</a>
-          </p>
+          <div className="cv-contact mt-4 grid grid-cols-2 gap-2 sm:grid-cols-4">
+            {[
+              { label: "Email", value: "howestephen@gmail.com", href: "mailto:howestephen@gmail.com" },
+              { label: "Web", value: "howecreative.co.uk", href: "https://howecreative.co.uk" },
+              { label: "LinkedIn", value: "in/howestephen", href: "https://www.linkedin.com/in/howestephen" },
+              { label: "GitHub", value: "howestephen", href: "https://github.com/howestephen" },
+            ].map((item) => (
+              <a
+                key={item.label}
+                href={item.href}
+                target={item.href.startsWith("mailto") ? undefined : "_blank"}
+                rel="noreferrer"
+                className="block border border-neutral-200 px-3 py-2 transition-colors"
+              >
+                <span className="block font-mono text-[8px] uppercase tracking-[0.18em] text-neutral-400">
+                  {item.label}
+                </span>
+                <span className="mt-0.5 block break-all text-[11.5px] leading-tight">{item.value}</span>
+              </a>
+            ))}
+          </div>
         </header>
 
         <p className="mb-7 border-l-2 border-[#d90429] pl-4 text-[14px] leading-relaxed text-neutral-800">
@@ -169,40 +196,6 @@ export function CV() {
           natural strengths in pattern recognition, deep-focus problem solving, and forward planning in
           cross-functional teams.
         </p>
-
-        <section className="mb-6">
-          <h2 className={SECTION_HEADING}>Core Skills</h2>
-          <div className="mt-3 grid gap-x-7 gap-y-2.5 sm:grid-cols-2">
-            <div>
-              <h3 className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-neutral-900">AI &amp; Automation</h3>
-              <p className="mt-0.5 text-[12.5px] leading-snug text-neutral-700">
-                AI-assisted development (Claude Code, Codex), agentic build pipelines (spec → phased roadmap →
-                automated build and QA loops), generative asset workflows (ComfyUI), prompt system design,
-                automated publishing pipelines (Telegram approval → X API)
-              </p>
-            </div>
-            <div>
-              <h3 className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-neutral-900">Design &amp; Motion</h3>
-              <p className="mt-0.5 text-[12.5px] leading-snug text-neutral-700">
-                Figma (components, variables, prototyping), UI/UX, brand systems, design systems, Photoshop,
-                Illustrator, After Effects, Premiere Pro, Adobe Animate, Cinema 4D, Redshift, X-Particles
-              </p>
-            </div>
-            <div>
-              <h3 className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-neutral-900">Development</h3>
-              <p className="mt-0.5 text-[12.5px] leading-snug text-neutral-700">
-                React, Next.js, TypeScript, JavaScript, HTML5, CSS3, Tailwind CSS, Three.js / React Three Fiber,
-                GSAP, Node.js, Vite, Supabase, PostgreSQL, Vercel, Git
-              </p>
-            </div>
-            <div>
-              <h3 className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-neutral-900">Audio &amp; Delivery</h3>
-              <p className="mt-0.5 text-[12.5px] leading-snug text-neutral-700">
-                Ableton Live, Adobe Audition, Serum, Agile/Scrum working practice
-              </p>
-            </div>
-          </div>
-        </section>
 
         <section className="mb-6">
           <h2 className={SECTION_HEADING}>Experience</h2>
@@ -226,7 +219,7 @@ export function CV() {
               <li>Designed wireframes and UI concepts for 10+ apps, with 3-4 shipped to production</li>
               <li>Built UNCX Academy end-to-end: brand, site design, assets, and 30+ educational videos</li>
               <li>
-                Produced 232 tutorials, explainers, and announcement videos, plus the 3D/motion pipeline that makes
+                Produced 200+ tutorials, explainers, and announcement videos, plus the 3D/motion pipeline that makes
                 high-frequency output sustainable
               </li>
               <li>
@@ -276,42 +269,36 @@ export function CV() {
             </ul>
           </article>
 
-          <article className="mt-6 break-inside-avoid">
-            <div className="flex flex-wrap items-baseline justify-between gap-x-4">
-              <h3 className="text-base">Earlier career - design &amp; technology</h3>
-              <p className={ENTRY_META}>2005-2016</p>
-            </div>
-            <ul className={BULLET_LIST}>
-              <li>
-                <span className="font-medium">2nd Line Support Technician, Qtac Solutions</span> (2014-16) - senior
-                support for HMRC payroll software; trained the team and redesigned the company website
-              </li>
-              <li>
-                <span className="font-medium">Web &amp; Social Media Manager, Burger Theory UK</span> (2012-16,
-                concurrent) - brand, website, and social presence for a street-food startup, from launch
-              </li>
-              <li>
-                <span className="font-medium">Venue &amp; Promotions Manager, Hot Biscuit</span> (2011-12) - design
-                and promotion across three Brighton music venues
-              </li>
-              <li>
-                <span className="font-medium">Brand Manager, 412 Promotions</span> (2009-11) - website, shop, and
-                events; managed a 10+ freelance writing team
-              </li>
-              <li>
-                <span className="font-medium">Junior Helpdesk Technician, Right Click Computers</span> (2008-09) -
-                remote support for campus TV servers in ~150 UK universities
-              </li>
-              <li>
-                <span className="font-medium">Database Technician, BBC</span> (2007-08) - core-database migration and
-                cleansing at Television Centre
-              </li>
-              <li>
-                <span className="font-medium">Web Manager &amp; Graphic Designer, Good Salon Guide</span> (2005-06) -
-                websites, design, and office network, while at university
-              </li>
-            </ul>
-          </article>
+          <p className="mt-5 text-[12.5px] leading-relaxed text-neutral-600">
+            Earlier roles from 2005 to 2016 span support and database work at the BBC and Qtac, plus
+            brand, web, and events management across several companies.{" "}
+            <a href="https://www.linkedin.com/in/howestephen" target="_blank" rel="noreferrer">
+              See LinkedIn for my full career history
+            </a>
+            .
+          </p>
+        </section>
+
+        <section className="mb-6">
+          <h2 className={SECTION_HEADING}>Core Skills</h2>
+          <div className="mt-3 space-y-1.5 text-[12.5px] leading-snug text-neutral-700">
+            <p>
+              <span className="font-semibold text-neutral-900">AI &amp; automation:</span> Claude Code, Codex,
+              agentic build pipelines, ComfyUI, prompt systems, automated publishing (Telegram to X)
+            </p>
+            <p>
+              <span className="font-semibold text-neutral-900">Design &amp; motion:</span> Figma, UI/UX, brand and
+              design systems, Photoshop, Illustrator, After Effects, Premiere, Cinema 4D, Redshift, X-Particles
+            </p>
+            <p>
+              <span className="font-semibold text-neutral-900">Development:</span> React, Next.js, TypeScript,
+              Tailwind, Three.js / R3F, GSAP, Node.js, Supabase, PostgreSQL, Vercel, Git
+            </p>
+            <p>
+              <span className="font-semibold text-neutral-900">Audio &amp; delivery:</span> Ableton Live, Audition,
+              Serum, Agile / Scrum
+            </p>
+          </div>
         </section>
 
         <section className="mb-6">
