@@ -12,3 +12,6 @@ docs/private/
 
 # Local asset archive - unused project media kept for future redesigns
 assets-archive/
+
+# Temporary server bundle for static HTML generation
+.prerender/

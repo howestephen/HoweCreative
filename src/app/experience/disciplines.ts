@@ -1,0 +1,75 @@
+export const disciplines = [
+  {
+    id: "film",
+    label: "AI filmmaking",
+    shortLabel: "AI film",
+    title: "From a loose brief to a complete visual world.",
+    project: "Quiver",
+    slug: "quiver",
+    image: "/case-studies/quiver/hero-poster.jpg",
+    video: "/case-studies/quiver/hero-loop.mp4",
+    note: "Concept, script, generated footage, motion and music. One connected creative process.",
+    contribution: "Creative direction / Generative production / Moving image",
+    decision: "Design the shot around what the model can do.",
+    explanation:
+      "A bowstring is a small detail with complicated physics. I planned the start and end of each shot to avoid ambiguous movement, tested multiple generations and selected the takes that held together in the edit.",
+  },
+  {
+    id: "motion",
+    label: "3D & motion",
+    shortLabel: "3D & motion",
+    title: "Build the visual language. Then build with it.",
+    project: "UNCX Video & 3D",
+    slug: "uncx-video-system",
+    image: "/case-studies/uncx-video-system/token-minter-launch.poster.jpg",
+    note: "3D scenes, materials, animation and a reusable production system behind 200+ videos at UNCX.",
+    contribution: "Cinema 4D / Redshift / After Effects",
+    decision: "Make the production system part of the design.",
+    explanation:
+      "Reusable scenes, materials and editing structures let a visual identity carry through many releases. I made the films and developed the workflow around them, balancing distinctive output with the demands of ongoing production.",
+  },
+  {
+    id: "product",
+    label: "Product & code",
+    shortLabel: "Product",
+    title: "The person designing it can be the person building it.",
+    project: "Badger Club",
+    slug: "badger-club",
+    image: "/case-studies/badger-club/light-progress.webp",
+    note: "A product I designed and built, from the user flows and interface to authentication, data and email.",
+    contribution: "Product design / React / Supabase / In beta",
+    decision: "Remove the account before refining the sign-up.",
+    explanation:
+      "I restricted accounts to group leaders. Parents receive progress by email and can view it without signing up; children do not need accounts. That decision simplified the product and shaped its authentication, data model and communication flows.",
+  },
+  {
+    id: "systems",
+    label: "Creative systems",
+    shortLabel: "Systems",
+    title: "A designed output is only one part of the system.",
+    project: "Solana Diary",
+    slug: "solana-diary",
+    image:
+      "/case-studies/solana-diary/single_pool_spotlight__2026-06-15__id7115__render.png",
+    note: "Brand, templates and seven services connecting live data to media, with human approval in Telegram.",
+    contribution: "Information design / APIs / Rendering / Automation",
+    decision: "Keep the human decision inside the workflow.",
+    explanation:
+      "The pipeline prepared the media and copy, then sent it to Telegram for review before publishing. I designed that approval step alongside the templates and backend. The project is archived; its platform dependency is part of the lesson.",
+  },
+  {
+    id: "brand",
+    label: "Brand & experience",
+    shortLabel: "Brand",
+    title: "Carry an identity through every point of contact.",
+    project: "UNCX Brand Evolution",
+    slug: "uncx-rebrand",
+    image: "/case-studies/uncx-rebrand/minting-step-one.webp",
+    note: "Brand direction translated into product pages, campaign graphics, motion and a wider design system.",
+    contribution: "Creative direction / Brand systems / Digital design",
+    decision: "An identity needs to work beyond its guidelines.",
+    explanation:
+      "I led the 2022 name and logo change. For the 2024 evolution I briefed an external creative team, then completed product content, page layouts and graphics in-house, taking the foundations into the detail of the experience.",
+  },
+];
+export type Discipline = (typeof disciplines)[number];

@@ -1,195 +1,148 @@
-import { useState } from "react";
-import { Minus, Plus } from "lucide-react";
-import { motion } from "motion/react";
-
-import { CAREER_START, yearsSince } from "../lib/tenure";
-
-const PRINCIPLES = [
+const experience = [
   {
-    index: "01",
-    title: "Systems over surfaces",
-    body: "I don't hand over artefacts - I hand over the machine that makes them: templates, tokens, pipelines, and the documentation to run them without me.",
+    years: "Dec 2021 - Present",
+    role: "Lead Designer",
+    company: "UNCX Network",
+    note: "Sole in-house designer across brand, product UI, 3D, motion and educational content. Working with developers, marketing and external creative partners.",
   },
   {
-    index: "02",
-    title: "Trade-offs are the design",
-    body: "Every project above lists its compromises. That's deliberate: the constraints are where the real decisions live, and where senior work earns its keep.",
+    years: "Jul 2018 - Jun 2021",
+    role: "Designer",
+    company: "Switch Studios",
+    note: "Design, motion and production assets for 30 shipped HTML5 casino games. Embedded in the development team, committing assets directly to the codebase. Game art direction was set by the Art Lead.",
   },
   {
-    index: "03",
-    title: "Judgement where it pays",
-    body: "Automate production ruthlessly; keep taste and accountability human. One tap of approval should replace a day of production - never the other way round.",
+    years: "May 2016 - Aug 2018",
+    role: "Designer & Animator",
+    company: "Howe Creative / Freelance",
+    note: "Video, animation and web projects for international clients. Produced a digital chef-training course for Chalet Chardons and corporate learning content.",
   },
-] as const;
-
-const EXPERIENCE = [
-  {
-    years: "2021 -",
-    role: "Lead Designer, UNCX Network",
-    note: "Sole designer at a multi-chain DeFi protocol - brand to product.",
-  },
-  {
-    years: "2018-21",
-    role: "Designer, Switch Studios",
-    note: "30 HTML5 casino games shipped; embedded in the dev team.",
-  },
-  {
-    years: "2016-18",
-    role: "Designer & Animator, howecreative.co.uk",
-    note: "Freelance video, animation, and web for international clients.",
-  },
-  {
-    years: "2014-16",
-    role: "2nd Line Support Technician, Qtac Solutions",
-    note: "Senior support for HMRC payroll software; trained apprentices, rebuilt the company website.",
-  },
-  {
-    years: "2012-16",
-    role: "Web & Social Media Manager, Burger Theory",
-    note: "Website, social media, and event staffing for a street-food startup, from day one.",
-  },
-  {
-    years: "2011-12",
-    role: "Venue & Promotions Manager, Hot Biscuit",
-    note: "Events, marketing, design and venue management for three popular Brighton music venues.",
-  },
-  {
-    years: "2009-11",
-    role: "Brand Manager, 412 Promotions",
-    note: "Website designer and contribution editor, retail and brand manager.",
-  },
-  {
-    years: "2008-09",
-    role: "Junior Helpdesk Technician, Right Click Computers",
-    note: "Remote support for media servers in ~150 UK universities.",
-  },
-  {
-    years: "2007-08",
-    role: "Database Technician, BBC",
-    note: "Core-database migration and cleansing at BBC Television Centre.",
-  },
-  {
-    years: "2005-06",
-    role: "Web Manager & Graphic Designer, Good Salon Guide",
-    note: "Office network admin, graphic design, and building websites for clients.",
-  },
-] as const;
-
-const RECENT_ROLE_COUNT = 3;
-
-const QUALIFICATIONS = [
-  {
-    title: "BSc (Hons) Entertainment Technology, First Class",
-    institution: "University of Portsmouth",
-    year: "2007",
-    detail:
-      "The only First Class Honours on the course, and winner of the IBM Prize for Best Creative Technologies Project. My final dissertation received a grade of 90%, the highest in the department that year.",
-  },
-  {
-    title: "Full Stack Coding Bootcamp",
-    institution: "Tech Educators, 12 weeks intensive",
-    year: "2024",
-    detail:
-      "A twelve-week intensive covering modern full-stack development with React, Next.js, Node.js, PostgreSQL, and Supabase. I finished with an average score equivalent to a first-class degree, and now use these skills daily to ship production software alongside my design work.",
-  },
-] as const;
+];
+const earlier = [
+  [
+    "2014 - 2016",
+    "Qtac Solutions",
+    "2nd Line Support Technician",
+    "Payroll software support, staff training and company website redesign.",
+  ],
+  [
+    "2012 - 2016",
+    "Burger Theory",
+    "Web & Social Media Manager",
+    "Website implementation, promotion and events, alongside other roles.",
+  ],
+  [
+    "2011 - 2012",
+    "Hot Biscuit",
+    "Venue & Promotions Manager",
+    "Design, programming and promotion across three Brighton music venues.",
+  ],
+  [
+    "2009 - 2011",
+    "412 Promotions",
+    "Brand Manager",
+    "Web, editorial, event photography and an independent retail business.",
+  ],
+  [
+    "2008 - 2009",
+    "Right Click Computers",
+    "Junior Helpdesk Technician",
+    "Remote support for media servers across UK universities.",
+  ],
+  [
+    "2007 - 2008",
+    "BBC",
+    "Database Technician",
+    "Database migration and cleansing at Television Centre.",
+  ],
+  [
+    "2005 - 2006",
+    "Good Salon Guide",
+    "Web Manager & Graphic Designer",
+    "Client websites, graphic design and office network administration.",
+  ],
+];
 
 export function Method() {
-  const [showAllRoles, setShowAllRoles] = useState(false);
-  const visibleExperience = showAllRoles ? EXPERIENCE : EXPERIENCE.slice(0, RECENT_ROLE_COUNT);
-
   return (
-    <section id="method" className="scroll-mt-24 border-t border-border">
-      <div className="mx-auto max-w-6xl px-6 py-20 md:py-24">
-        <div className="mb-12 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
-          <h2 className="text-3xl md:text-4xl">How I work</h2>
-          <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-            the short version
-          </span>
+    <section id="experience" className="experience-section wrap">
+      <div className="about-intro">
+        <div>
+          <span className="eyebrow">03 / The person behind the work</span>
+          <h2>
+            A maker’s curiosity.
+            <br />A practitioner’s depth.
+          </h2>
+          <p>
+            I’m Stephen, a creative technologist based in Norwich. My career has
+            moved through music venues, independent brands, digital learning,
+            games and financial products. The thread is a habit of learning how
+            things work, then making them better.
+          </p>
+          <p>
+            Today I bring that experience to product design, creative tools and
+            AI-assisted production. I’m looking for a hands-on role where visual
+            craft and technical problem-solving matter equally.
+          </p>
         </div>
-
-        <div className="grid gap-10 md:grid-cols-3">
-          {PRINCIPLES.map((principle, i) => (
-            <motion.div
-              key={principle.index}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.45, delay: i * 0.08 }}
-            >
-              <div className="mb-3 font-mono text-[11px] tracking-[0.18em] text-accent">
-                {principle.index}
+        <figure>
+          <img
+            src="/profile-photo.webp"
+            alt="Stephen Howe"
+            width="400"
+            height="400"
+            loading="lazy"
+          />
+          <figcaption>Norwich, UK / Working remotely</figcaption>
+        </figure>
+      </div>
+      <div className="career-list">
+        {experience.map((job) => (
+          <article key={job.company}>
+            <span className="career-date">{job.years}</span>
+            <div>
+              <h3>
+                {job.role}
+                <span>{job.company}</span>
+              </h3>
+              <p>{job.note}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+      <details className="earlier-career">
+        <summary>Earlier experience, 2005 - 2016</summary>
+        <div className="career-list">
+          {earlier.map(([years, company, role, note]) => (
+            <article key={company}>
+              <span className="career-date">{years}</span>
+              <div>
+                <h3>
+                  {role}
+                  <span>{company}</span>
+                </h3>
+                <p>{note}</p>
               </div>
-              <h3 className="mb-3 text-xl">{principle.title}</h3>
-              <p className="text-sm leading-relaxed text-muted-foreground">{principle.body}</p>
-            </motion.div>
+            </article>
           ))}
         </div>
-
-        <div id="experience" className="mt-20 scroll-mt-24 border-t border-border pt-14">
-          <div className="mb-8 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
-            <h2 className="text-3xl md:text-4xl">Experience</h2>
-            <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-accent">
-              2005 to today · {yearsSince(CAREER_START)} years
-            </span>
-          </div>
-          <div className="space-y-0">
-            {visibleExperience.map((entry) => (
-              <div
-                key={entry.role}
-                className="grid gap-1 border-b border-border py-4 md:grid-cols-[7rem_1fr_1fr] md:gap-6"
-              >
-                <span className="font-mono text-[11px] text-muted-foreground">{entry.years}</span>
-                <span className="font-medium text-foreground">{entry.role}</span>
-                <span className="text-sm text-muted-foreground">{entry.note}</span>
-              </div>
-            ))}
-          </div>
-
-          {EXPERIENCE.length > RECENT_ROLE_COUNT && (
-            <button
-              type="button"
-              onClick={() => setShowAllRoles((value) => !value)}
-              aria-expanded={showAllRoles}
-              className="mt-5 inline-flex items-center gap-2 border border-foreground/25 px-4 py-2.5 font-mono text-[10px] uppercase tracking-[0.16em] text-foreground transition-colors hover:border-foreground hover:text-accent"
-            >
-              {showAllRoles ? (
-                <>
-                  <Minus className="h-3 w-3" /> Show recent roles only
-                </>
-              ) : (
-                <>
-                  <Plus className="h-3 w-3" /> Show {EXPERIENCE.length - RECENT_ROLE_COUNT} earlier
-                  roles
-                </>
-              )}
-            </button>
-          )}
-
+      </details>
+      <div className="education-row">
+        <div>
+          <span className="eyebrow">University of Portsmouth / 2007</span>
+          <h3>BSc (Hons) Entertainment Technology</h3>
+          <p>
+            First Class Honours. IBM Prize for Best Creative Technologies
+            Project.
+          </p>
         </div>
-
-        <div id="education" className="mt-20 scroll-mt-24 border-t border-border pt-14">
-          <div className="mb-8 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
-            <h2 className="text-3xl md:text-4xl">Education &amp; recognition</h2>
-            <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-              degree · bootcamp · certifications
-            </span>
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-2">
-            {QUALIFICATIONS.map((item) => (
-              <div key={item.title} className="border-l-2 border-accent pl-4">
-                <div className="flex items-baseline justify-between gap-3">
-                  <h3 className="text-lg leading-snug text-foreground">{item.title}</h3>
-                  <span className="shrink-0 font-mono text-[11px] text-muted-foreground">
-                    {item.year}
-                  </span>
-                </div>
-                <p className="mt-1 text-sm text-muted-foreground">{item.institution}</p>
-                <p className="mt-2 text-sm leading-relaxed text-foreground/90">{item.detail}</p>
-              </div>
-            ))}
-          </div>
+        <div>
+          <span className="eyebrow">Tech Educators / 2024</span>
+          <h3>Full Stack Coding Bootcamp</h3>
+          <p>
+            12-week intensive in React, Next.js, Node.js, PostgreSQL and
+            Supabase.
+          </p>
         </div>
       </div>
     </section>

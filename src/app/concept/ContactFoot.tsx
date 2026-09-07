@@ -72,7 +72,7 @@ export function ContactFoot() {
               Let&rsquo;s talk<span className="text-accent">.</span>
             </h2>
             <p className="mb-8 max-w-md text-base leading-relaxed text-muted-foreground">
-              Open to creative technologist, AI designer, and design engineer roles -
+              Open to creative technologist, design engineer and product designer roles -
               permanent or contract, remote from the UK with EU and US-East overlap.
             </p>
 
@@ -103,7 +103,7 @@ export function ContactFoot() {
 
           <div className="lg:col-span-3">
             {status === "success" ? (
-              <div className="flex h-full flex-col justify-center border border-border bg-card p-8">
+              <div role="status" className="flex h-full flex-col justify-center border border-border bg-card p-8">
                 <div className="mb-2 font-mono text-[10px] uppercase tracking-[0.18em] text-accent">
                   Message sent
                 </div>
@@ -180,7 +180,7 @@ export function ContactFoot() {
                 <div className="flex flex-col gap-3 md:col-span-2 md:flex-row md:items-center md:justify-between">
                   <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
                     {status === "error" ? (
-                      <span className="text-accent">{errorMsg}</span>
+                      <span role="alert" className="text-accent">{errorMsg}</span>
                     ) : (
                       "Tell me what you're building"
                     )}
@@ -200,8 +200,8 @@ export function ContactFoot() {
 
         <footer className="mt-20 flex flex-col justify-between gap-3 border-t border-border pt-6 pb-2 font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground md:flex-row">
           <span>© 2026 Stephen Howe · Norwich, UK - remote worldwide</span>
-          <a href="#work" className="transition-colors hover:text-accent">
-            This site was built by my agentic pipeline - the case study is above ↑
+          <a href="/#work" className="transition-colors hover:text-accent">
+            Explore the work ↑
           </a>
         </footer>
       </div>

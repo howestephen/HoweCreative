@@ -5,7 +5,7 @@ import react from '@vitejs/plugin-react'
 
 import { resolveContactBuildConfig } from './src/app/lib/contact-build-config'
 
-export default defineConfig(({ mode }) => {
+export default defineConfig(({ mode, isSsrBuild }) => {
   const env = loadEnv(mode, process.cwd(), '')
   const { contactTransport, publicEmailAccessKey } = resolveContactBuildConfig({
     ...env,
@@ -32,7 +32,7 @@ export default defineConfig(({ mode }) => {
     build: {
       rollupOptions: {
         output: {
-          manualChunks: {
+          manualChunks: isSsrBuild ? undefined : {
             icons: ['react-icons', 'lucide-react'],
           },
         },
