@@ -7,8 +7,8 @@
     "brandPrefix": "HOWE",
     "brandSuffix": "_CREATIVE",
     "role": "Creative Technologist",
-    "headline": "I design brand, product, and 3D systems - and build the AI pipelines that produce them at scale.",
-    "summary": "This portfolio was designed and built with Figma Make, Codex, and Claude Code - driven by a custom prompt system that walks a phased roadmap, executing build and QA tasks in an iterative loop.",
+    "headline": "Creative instinct. Technical range. I connect brand, product, motion and code to build working experiences.",
+    "summary": "Creative technologist connecting art direction, generative film, 3D, motion, product interfaces and hands-on development.",
     "navVersion": "v2.0",
     "githubUrl": "https://github.com/howestephen",
     "linkedinUrl": "https://www.linkedin.com/in/howestephen/",
@@ -122,6 +122,140 @@
       "status": "Status"
     },
     "projects": [
+      {
+        "id": 10,
+        "slug": "quiver",
+        "title": "Quiver",
+        "category": "Generative Film / Art Direction / Production Tools",
+        "year": "2026",
+        "status": "Complete",
+        "shortDescription": "A complete brand film production from an open marketing brief: visual direction, script, generated imagery and footage, motion design, editing and AI-generated music.",
+        "fullDescription": "The brief was simply to make a marketing video. I was given a logo, the product website and an early ident concept generated in Grok. From that starting point I developed the film's visual identity, script and production approach, creating the imagery, footage, animation, edit and music. ChatGPT provided image generation, while I used Claude to drive ComfyUI workflows for moving image and audio production. The work depended on shot planning and editorial judgement: designing moments that the models could resolve, selecting workable takes, and finishing the sequence in After Effects. A modular scene structure and production scripts supported revisions across two scripts, each delivered with and without phone imagery.",
+        "tags": [
+          "Art Direction",
+          "Generative AI",
+          "ComfyUI",
+          "ChatGPT Images",
+          "Claude",
+          "Shot Planning",
+          "After Effects",
+          "Motion Design",
+          "Video Editing",
+          "AI Audio",
+          "Production Scripting"
+        ],
+        "image": "/case-studies/quiver/hero-poster.jpg",
+        "gradient": "from-[#101113] to-[#44484b]",
+        "role": "Creative direction, script, AI imagery and footage, motion, edit and audio",
+        "client": "UNCX Network / Quiver",
+        "overlaySections": [
+          {
+            "title": "Brief",
+            "body": "Create a marketing video from a supplied logo, the product website and an early Grok-generated ident concept. There was no developed film treatment. I established the visual direction, wrote the script and shaped the production around a defined art style."
+          },
+          {
+            "title": "Problem Frame",
+            "body": "The creative problem was consistency: the film needed to feel like one intentional world across generated footage, product messages, motion graphics and music. The technical problem was reliable movement. A model can produce a convincing still of an archer and still misinterpret the relationship between the hand, arrow and bowstring when it invents the action between frames."
+          },
+          {
+            "title": "System Design",
+            "body": "I combined ChatGPT image generation with ComfyUI workflows driven through Claude, then assembled and finished the film in After Effects. The scene structure separated footage plates, generated mist and typography into depth layers, giving me control over the image, readability and motion. AI-assisted production scripts built the nested scene templates and reflowed the master sequence after edits while preserving scene order and trims."
+          },
+          {
+            "title": "Trade-offs",
+            "body": "I planned start and end moments that kept the action legible and avoided ambiguous transitions that could produce impossible bowstring physics. Planning and testing the source assets came before generating multiple takes, typically 5-10 attempts, and choosing the strongest usable result. In the edit, I could control impact timing, transitions and typography directly. This kept the final rhythm and reading pace in my hands."
+          },
+          {
+            "title": "Delivery",
+            "body": "Four finished 16:9 films: a 42-second basic explanation and a 58-second advanced explanation, each with and without phone imagery. The work included script, visual identity for the films, generated source imagery and footage, animation, editing, AI-generated music and a reusable After Effects production structure. The supplied logo, existing product interface and initial Grok ident concept were starting materials."
+          },
+          {
+            "title": "Outcome",
+            "body": "A coherent film treatment carried through four complete edits, with one person responsible for creative direction and production across image, motion and sound. The finished work is approved for public portfolio use. No campaign reach, conversion or commercial performance figures are claimed."
+          }
+        ],
+        "media": [
+          {
+            "type": "video",
+            "src": "/case-studies/quiver/basic-with-phone.mp4",
+            "poster": "/case-studies/quiver/basic-with-phone.poster.jpg",
+            "alt": "Quiver basic film with phone imagery, 42 seconds, including AI-generated music"
+          },
+          {
+            "type": "video",
+            "src": "/case-studies/quiver/advanced-with-phone.mp4",
+            "poster": "/case-studies/quiver/advanced-with-phone.poster.jpg",
+            "alt": "Quiver advanced film with phone imagery, 58 seconds, including AI-generated music"
+          },
+          {
+            "type": "video",
+            "src": "/case-studies/quiver/basic.mp4",
+            "poster": "/case-studies/quiver/basic.poster.jpg",
+            "alt": "Quiver basic film without phone imagery, 42 seconds, including AI-generated music"
+          },
+          {
+            "type": "video",
+            "src": "/case-studies/quiver/advanced.mp4",
+            "poster": "/case-studies/quiver/advanced.poster.jpg",
+            "alt": "Quiver advanced film without phone imagery, 58 seconds, including AI-generated music"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/quiver/archer-portrait.webp",
+            "alt": "Quiver film still: a hooded archer in directional light"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/quiver/hood-detail.webp",
+            "alt": "Quiver film still: close detail of the hooded figure"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/quiver/bow-detail.webp",
+            "alt": "Quiver film still: the bow and arrow, central to planning physically legible action"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/quiver/product-introduction.webp",
+            "alt": "Quiver film still: product introduction composed with phone imagery"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/quiver/launch-rules.webp",
+            "alt": "Quiver film still: launch rules, motion typography and product imagery"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/quiver/buy-enforcement.webp",
+            "alt": "Quiver film still: buy-enforcement message within the visual treatment"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/quiver/launch-control.webp",
+            "alt": "Quiver film still: launch-control message and art direction"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/quiver/process-impact-start.webp",
+            "alt": "Quiver source still: empty timber target prepared as the beginning of an impact shot"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/quiver/process-impact-end.webp",
+            "alt": "Quiver source still: arrow in the timber target, defining the impact endpoint"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/quiver/process-eye-wide.webp",
+            "alt": "Quiver source still: hooded figure with a glowing eye in a wider composition"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/quiver/process-eye-detail.webp",
+            "alt": "Quiver source still: glowing eye close-up prepared for a cutaway"
+          }
+        ]
+      },
       {
         "id": 1,
         "slug": "solana-diary",
@@ -264,6 +398,11 @@
             "type": "image",
             "src": "/case-studies/solana-diary/liquidity_flows_7d__2026-06-16__id7258__render.png",
             "alt": "Liquidity flows 7d - rendered data card"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/solana-diary/solana-diary-logo-pfp.png",
+            "alt": "Solana Diary profile icon"
           }
         ],
         "gradient": "from-[#8b0020] to-[#ff003c]",
@@ -276,7 +415,7 @@
           },
           {
             "title": "Problem Frame",
-            "body": "Daily crypto content is a production line: fresh data every few hours, news breaking constantly, and a hard requirement that nothing dangerous goes out. Doing it by hand doesn't scale; fully automating it risks posting bad data or shilling a token that's about to rug. The system had to produce publishable, on-brand work autonomously while keeping me accountable for every single post."
+            "body": "Daily crypto content is a production line: fresh data every few hours, news breaking constantly, and a hard requirement that nothing dangerous goes out. Doing it by hand doesn't scale; fully automating it risks posting bad data or shilling a token that's about to rug. The system had to produce publishable, on-brand work automatically while keeping me accountable for every single post."
           },
           {
             "title": "System Design",
@@ -430,7 +569,8 @@
           {
             "type": "video",
             "src": "/case-studies/uncx-rebrand/brand-launch-video.mp4",
-            "alt": "Brand launch video"
+            "alt": "Brand launch video",
+            "poster": "/case-studies/uncx-rebrand/brand-launch-video.poster.jpg"
           },
           {
             "type": "image",
@@ -556,7 +696,7 @@
         "year": "2026",
         "status": "In Beta",
         "shortDescription": "Full-stack badge tracking platform with dark/light themes, role-based dashboards, Supabase backend, and Resend email integration.",
-        "fullDescription": "A multi-role product system managing badge progress tracking, leader administration, parent communication, and public-facing group pages. Built with React, Supabase, Resend email integration, and Cloudflare security. Supports dark and light themes with a structured database schema designed for scalable group management.",
+        "fullDescription": "A badge-tracking product for group leaders, with progress management, leader administration, parent communication and public group pages. I designed and built the React interface, Supabase database, Google authentication and Resend email integration. The final scope uses leader-only accounts; parents and children interact without signing up. The product is in beta.",
         "tags": [
           "React",
           "Next.js",
@@ -677,7 +817,7 @@
           },
           {
             "title": "Outcome",
-            "body": "Eliminated manual tracking overhead. The constraint-driven simplification - leader-only accounts, no-signup parent access, streamlined messaging - produced a leaner product with fewer barriers to adoption. Created a scalable foundation with subscription-based monetisation and clear paths for feature expansion."
+            "body": "Delivered a working beta with badge tracking, leader administration and parent communication. Limiting accounts to leaders reduced the scope and removed sign-up requirements for parents and children. Adoption and time savings have not yet been measured."
           }
         ]
       },
@@ -709,22 +849,26 @@
           {
             "type": "video",
             "src": "/case-studies/uncx-video-system/hyperswap-integration.mp4",
-            "alt": "HyperSwap Integration video"
+            "alt": "HyperSwap Integration video",
+            "poster": "/case-studies/uncx-video-system/hyperswap-integration.poster.jpg"
           },
           {
             "type": "video",
             "src": "/case-studies/uncx-video-system/token-minter-launch.mp4",
-            "alt": "Token Minter Launch Video"
+            "alt": "Token Minter Launch Video",
+            "poster": "/case-studies/uncx-video-system/token-minter-launch.poster.jpg"
           },
           {
             "type": "video",
             "src": "/case-studies/uncx-video-system/vesting-app-release.mp4",
-            "alt": "Vesting App Release Video"
+            "alt": "Vesting App Release Video",
+            "poster": "/case-studies/uncx-video-system/vesting-app-release.poster.jpg"
           },
           {
             "type": "video",
             "src": "/case-studies/uncx-video-system/lock-announcement-rise.mp4",
-            "alt": "Lock Announcement - RISE"
+            "alt": "Lock Announcement - RISE",
+            "poster": "/case-studies/uncx-video-system/lock-announcement-rise.poster.jpg"
           },
           {
             "type": "image",
@@ -841,22 +985,26 @@
           {
             "type": "video",
             "src": "/case-studies/uncx-academy/promo-video.mp4",
-            "alt": "Academy promo video"
+            "alt": "Academy promo video",
+            "poster": "/case-studies/uncx-academy/promo-video.poster.jpg"
           },
           {
             "type": "video",
             "src": "/case-studies/uncx-academy/tutorial-lp-locking.mp4",
-            "alt": "LP Locking tutorial"
+            "alt": "LP Locking tutorial",
+            "poster": "/case-studies/uncx-academy/tutorial-lp-locking.poster.jpg"
           },
           {
             "type": "video",
             "src": "/case-studies/uncx-academy/chain-spotlight-sei.mp4",
-            "alt": "Chain Spotlight - SEI"
+            "alt": "Chain Spotlight - SEI",
+            "poster": "/case-studies/uncx-academy/chain-spotlight-sei.poster.jpg"
           },
           {
             "type": "video",
             "src": "/case-studies/uncx-academy/flash-loans-defi.mp4",
-            "alt": "Flash Loans in DeFi"
+            "alt": "Flash Loans in DeFi",
+            "poster": "/case-studies/uncx-academy/flash-loans-defi.poster.jpg"
           },
           {
             "type": "image",
@@ -1176,12 +1324,12 @@
       {
         "id": 9,
         "slug": "ai-portfolio-system",
-        "title": "This Site: An Agentic Build System",
+        "title": "AI-assisted Portfolio Development",
         "category": "AI Workflow / Development Pipeline",
         "year": "2026",
         "status": "Live",
         "shortDescription": "This portfolio is itself a case study - designed with Figma Make and built by a prompt system that walks a phased roadmap, executing build and QA tasks in an iterative loop.",
-        "fullDescription": "The site you're reading was produced by a working AI development pipeline: a roadmap decomposed into atomised phases, a custom prompt system that executes each phase with Claude Code and Codex, automated build and QA gates between steps, and human review at phase boundaries. The same approach ships my product work.",
+        "fullDescription": "This portfolio has evolved through a repeatable AI-assisted development process: a brief, scoped tasks, implementation, automated checks and human review. Earlier versions began in Figma Make; subsequent iterations use Claude Code and Codex directly in the repository.",
         "tags": [
           "Claude Code",
           "Codex",
@@ -1206,7 +1354,7 @@
           },
           {
             "title": "System Design",
-            "body": "A roadmap document decomposes the build into phases, and each phase into atomised tasks with acceptance criteria. A custom prompt system feeds one phase at a time to the coding agent, runs build and QA checks as gates between steps, and stops at phase boundaries for human review. Design direction comes from Figma Make; Claude Code and Codex execute; git history is the audit trail."
+            "body": "A roadmap document decomposes the build into phases, and each phase into atomised tasks with acceptance criteria. A custom prompt system feeds one phase at a time to the coding agent, runs build and QA checks as gates between steps, and stops at phase boundaries for human review. Earlier versions began with Figma Make. Current iterations use an explicit design brief with Claude Code and Codex; git history records the changes."
           },
           {
             "title": "Trade-offs",
@@ -1218,7 +1366,7 @@
           },
           {
             "title": "Outcome",
-            "body": "A production site whose commit history doubles as evidence of the workflow. The same pattern - spec, phased roadmap, gated autonomous execution - is how I now approach product builds: AI provides the throughput, the system provides the discipline, and I provide the judgement."
+            "body": "A production site whose commit history doubles as evidence of the workflow. The same pattern - spec, phased roadmap, verified AI-assisted execution - is how I now approach product builds: AI provides the throughput, the system provides the discipline, and I provide the judgement."
           }
         ]
       }

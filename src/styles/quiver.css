@@ -1,0 +1,860 @@
+.quiver-case {
+  --quiver-paper: #efeee9;
+  --quiver-ink: #151615;
+  --quiver-dim: #aaaead;
+  background: #080909;
+  color: #f1f0eb;
+}
+
+.quiver-width {
+  width: min(1360px, calc(100% - 96px));
+  margin-inline: auto;
+}
+
+.quiver-case :is(a, button):focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 6px;
+}
+
+.quiver-label {
+  display: block;
+  font-family: var(--font-technical);
+  font-size: 11px;
+  letter-spacing: 0.055em;
+  line-height: 1.6;
+  text-transform: uppercase;
+}
+
+.quiver-opening {
+  position: relative;
+  isolation: isolate;
+  min-height: min(800px, calc(100svh - 84px));
+  background: #060707;
+}
+
+.quiver-opening-image {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 66% center;
+}
+
+.quiver-opening::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(90deg, #04050566 0%, transparent 75%),
+    linear-gradient(0deg, #080909 0%, transparent 24%);
+}
+
+.quiver-opening-content {
+  min-height: inherit;
+  display: flex;
+  flex-direction: column;
+  padding-block: 32px 30px;
+}
+
+.quiver-return {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  width: fit-content;
+  min-height: 44px;
+  font-size: 13px;
+  color: #c3c6c3;
+}
+
+.quiver-title-block {
+  padding-block: 58px 78px;
+  margin-block: auto;
+}
+
+.quiver-title-block > .quiver-label {
+  color: #c1c4c0;
+}
+
+.quiver-title-block h1 {
+  font-size: clamp(90px, 14.6vw, 218px);
+  letter-spacing: -0.07em;
+  line-height: 0.93;
+  margin-block: 28px;
+  margin-left: -0.055em;
+}
+
+.quiver-deck {
+  max-width: 340px;
+  font-size: clamp(22px, 2vw, 30px);
+  line-height: 1.35;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+.quiver-watch {
+  display: inline-flex;
+  align-items: center;
+  gap: 13px;
+  margin-top: 36px;
+  font-size: 14px;
+}
+
+.quiver-play-icon {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border: 1px solid #ffffff55;
+  border-radius: 50%;
+  transition:
+    background 180ms,
+    color 180ms;
+}
+
+.quiver-play-icon svg {
+  margin-left: 2px;
+}
+
+.quiver-watch:hover .quiver-play-icon {
+  background: #f1f0eb;
+  color: #080909;
+}
+
+.quiver-watch-duration {
+  font-size: 11px;
+  font-family: var(--font-technical);
+  color: #afb3af;
+  margin-left: 9px;
+}
+
+.quiver-opening-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  font-size: 12px;
+  color: #b2b5b1;
+}
+
+.quiver-opening-bottom a {
+  display: inline-flex;
+  align-items: center;
+  gap: 20px;
+  min-height: 44px;
+}
+
+.quiver-screening {
+  padding-block: 76px 100px;
+  scroll-margin-top: 100px;
+}
+
+.quiver-section-intro {
+  display: grid;
+  grid-template-columns: 1fr 0.82fr;
+  align-items: end;
+  gap: 90px;
+  margin-bottom: 40px;
+}
+
+.quiver-section-intro .quiver-label,
+.quiver-chapter-copy > .quiver-label {
+  margin-bottom: 22px;
+}
+
+.quiver-case h2 {
+  font-size: clamp(32px, 4vw, 54px);
+  line-height: 1.08;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+}
+
+.quiver-section-intro > p,
+.quiver-chapter-copy > p {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #b9bdb8;
+}
+
+.quiver-screening .quiver-section-intro .quiver-label {
+  color: #adb2ac;
+}
+
+.quiver-cinema {
+  background: #000;
+}
+
+.quiver-cinema video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  background: #000;
+  color-scheme: dark;
+}
+
+.quiver-screening-caption {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 28px;
+  padding-block: 18px 30px;
+  font-size: 12px;
+  line-height: 1.6;
+  color: #a8ada7;
+}
+
+.quiver-screening-caption > span {
+  flex-shrink: 0;
+}
+
+.quiver-film-choices {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-bottom: 1px solid #ffffff25;
+}
+
+.quiver-film-choices a {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  row-gap: 12px;
+  column-gap: 12px;
+  align-content: start;
+  padding: 24px 20px;
+  border-top: 1px solid #ffffff25;
+  color: #a5aaa4;
+  transition:
+    color 180ms,
+    background 180ms;
+}
+
+.quiver-film-choices a + a {
+  border-left: 1px solid #ffffff25;
+}
+
+.quiver-film-choices a[aria-current="true"] {
+  border-top-color: #efeee9;
+  color: #efeee9;
+  background: #ffffff07;
+}
+
+.quiver-film-choices a:hover {
+  background: #ffffff0d;
+  color: #efeee9;
+}
+
+.quiver-film-number {
+  grid-column: 1;
+  font-family: var(--font-technical);
+  font-size: 11px;
+}
+
+.quiver-film-name {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  font-size: 14px;
+}
+
+.quiver-film-duration {
+  grid-column: 2;
+  grid-row: 1;
+  font-family: var(--font-technical);
+  font-size: 11px;
+}
+
+.quiver-film-choices svg {
+  grid-column: 2;
+  grid-row: 3;
+  margin-top: 4px;
+}
+
+.quiver-production {
+  background: var(--quiver-paper);
+  color: var(--quiver-ink);
+  scroll-margin-top: 84px;
+}
+
+.quiver-production .quiver-label {
+  color: #62665e;
+}
+
+.quiver-brief {
+  padding-block: 92px 80px;
+}
+
+.quiver-brief-heading {
+  display: grid;
+  grid-template-columns: 1fr 0.82fr;
+  gap: 90px;
+  margin-block: 30px 64px;
+}
+
+.quiver-brief-heading h2 {
+  max-width: 600px;
+}
+
+.quiver-brief-heading > p {
+  font-size: clamp(18px, 1.65vw, 23px);
+  line-height: 1.6;
+  letter-spacing: -0.02em;
+}
+
+.quiver-credits {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 50px;
+  padding-top: 26px;
+  border-top: 1px solid #15161535;
+}
+
+.quiver-credits dt,
+.quiver-tools dt {
+  font-family: var(--font-technical);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: #62665e;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.quiver-credits dd {
+  font-size: 14px;
+  line-height: 1.75;
+  color: #4f544c;
+}
+
+.quiver-direction {
+  display: grid;
+  grid-template-columns: 0.65fr 1fr;
+  gap: 76px;
+  align-items: center;
+  padding-block: 30px 100px;
+}
+
+.quiver-chapter-copy h2 {
+  margin-bottom: 26px;
+}
+
+.quiver-production .quiver-chapter-copy > p,
+.quiver-production .quiver-section-intro > p {
+  color: #555a51;
+}
+
+.quiver-chapter-copy > .quiver-principle {
+  padding-top: 28px;
+  margin-top: 28px;
+  border-top: 1px solid #15161535;
+  font-size: 13px;
+  color: #272a25;
+}
+
+.quiver-direction-image img {
+  width: 100%;
+  aspect-ratio: 1.12;
+  object-fit: cover;
+  object-position: 68% center;
+  background: #080909;
+}
+
+.quiver-case figcaption {
+  margin-top: 12px;
+  font-size: 12px;
+  line-height: 1.6;
+  color: #62665e;
+}
+
+.quiver-shot-section {
+  background: #141615;
+  color: #eeeee8;
+  padding-block: 90px 64px;
+}
+
+.quiver-shot-section .quiver-label {
+  color: #afb4ae;
+}
+
+.quiver-shot-section .quiver-section-intro > p {
+  color: #b8bdb6;
+}
+
+.quiver-shot-intro {
+  align-items: start;
+  margin-bottom: 50px;
+}
+
+.quiver-frame-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.quiver-frame-label {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-technical);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.035em;
+  border-top: 1px solid #ffffff35;
+  padding-block: 16px;
+}
+
+.quiver-frame-label > span + span {
+  color: #adb3aa;
+}
+
+.quiver-frame-pair img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1672 / 941;
+  background: #050605;
+}
+
+.quiver-frame-pair figcaption {
+  color: #b1b8af;
+  max-width: 420px;
+  padding-right: 24px;
+}
+
+.quiver-shot-note {
+  display: grid;
+  grid-template-columns: 1fr 0.82fr;
+  gap: 90px;
+  border-top: 1px solid #ffffff25;
+  padding-top: 26px;
+  margin-top: 42px;
+}
+
+.quiver-shot-note p {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #b8bdb6;
+}
+
+.quiver-generation {
+  display: grid;
+  grid-template-columns: 1fr 0.65fr;
+  gap: 76px;
+  align-items: center;
+  padding-block: 110px;
+}
+
+.quiver-eye-study {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.quiver-eye-study figure:first-child {
+  grid-column: 1 / -1;
+  margin-right: 14%;
+}
+
+.quiver-eye-study figure:last-child {
+  grid-column: 1 / -1;
+  margin-left: 28%;
+  margin-top: 12px;
+}
+
+.quiver-eye-study img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: #080909;
+}
+
+.quiver-tools {
+  border-top: 1px solid #15161535;
+  margin-top: 32px;
+  padding-top: 20px;
+}
+
+.quiver-tools > div {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.quiver-tools dt {
+  margin: 0;
+  font-size: 10px;
+}
+
+.quiver-tools dd {
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.quiver-edit {
+  padding-bottom: 80px;
+}
+
+.quiver-edit-frame img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  background: #080909;
+}
+
+.quiver-production-flow {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 50px;
+  margin-top: 45px;
+  padding: 0;
+  list-style: none;
+}
+
+.quiver-production-flow li {
+  padding-top: 24px;
+  border-top: 1px solid #15161535;
+}
+
+.quiver-production-flow h3 {
+  margin-block: 18px 12px;
+  font-size: 23px;
+  letter-spacing: -0.025em;
+}
+
+.quiver-production-flow p {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #555a51;
+}
+
+.quiver-collection {
+  padding-bottom: 90px;
+}
+
+.quiver-collection .gallery-heading {
+  border-top-color: #15161535;
+  margin-bottom: 35px;
+}
+
+.quiver-collection .gallery-heading h2 {
+  font-size: 35px;
+}
+
+.quiver-collection .gallery-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 30px 18px;
+}
+
+.quiver-collection .gallery-grid img {
+  aspect-ratio: 16 / 9;
+  background: #080909;
+  object-fit: cover;
+}
+
+.quiver-collection .gallery-grid button > span {
+  color: #555a51;
+}
+
+.quiver-next {
+  display: block;
+  background: #1d211e;
+  color: #f1f0eb;
+  padding-block: 74px;
+}
+
+.quiver-next .quiver-label {
+  color: #adb4ab;
+}
+
+.quiver-next > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.quiver-next h2 {
+  margin-block: 24px;
+  font-size: clamp(36px, 4.5vw, 64px);
+}
+
+.quiver-next-name {
+  font-size: 14px;
+  color: #adb4ab;
+}
+
+.quiver-next svg {
+  flex-shrink: 0;
+  transition: transform 250ms;
+}
+
+.quiver-next:hover svg {
+  transform: translate(6px, -6px);
+}
+
+@media (min-width: 1800px) {
+  .quiver-opening-image {
+    object-fit: contain;
+    object-position: right center;
+  }
+}
+
+@media (max-width: 1100px) {
+  .quiver-width {
+    width: calc(100% - 64px);
+  }
+
+  .quiver-section-intro,
+  .quiver-brief-heading,
+  .quiver-shot-note,
+  .quiver-direction,
+  .quiver-generation {
+    gap: 42px;
+  }
+
+  .quiver-credits,
+  .quiver-production-flow {
+    gap: 30px;
+  }
+
+  .quiver-film-choices a {
+    padding-inline: 15px;
+  }
+
+  .quiver-direction,
+  .quiver-generation {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .quiver-width {
+    width: calc(100% - 40px);
+  }
+
+  .quiver-opening {
+    min-height: min(740px, calc(100svh - 72px));
+  }
+
+  .quiver-opening-image {
+    object-position: 94% center;
+    opacity: 0.74;
+  }
+
+  .quiver-opening::after {
+    background:
+      linear-gradient(90deg, #04050565 0%, transparent 80%),
+      linear-gradient(0deg, #080909 0%, transparent 35%);
+  }
+
+  .quiver-opening-content {
+    padding-top: 16px;
+  }
+
+  .quiver-title-block {
+    padding-block: 100px 64px;
+  }
+
+  .quiver-title-block h1 {
+    font-size: clamp(90px, 24vw, 180px);
+    margin-block: 24px;
+  }
+
+  .quiver-title-block > .quiver-label {
+    font-size: 10px;
+  }
+
+  .quiver-deck {
+    max-width: 270px;
+  }
+
+  .quiver-watch-duration {
+    margin-left: 0;
+  }
+
+  .quiver-opening-bottom {
+    align-items: start;
+    font-size: 10px;
+    max-width: 500px;
+  }
+
+  .quiver-opening-bottom > span {
+    max-width: 165px;
+    line-height: 1.6;
+  }
+
+  .quiver-opening-bottom a {
+    gap: 10px;
+    min-height: 32px;
+    flex-shrink: 0;
+  }
+
+  .quiver-screening {
+    padding-block: 50px 60px;
+  }
+
+  .quiver-section-intro,
+  .quiver-brief-heading,
+  .quiver-direction,
+  .quiver-shot-note,
+  .quiver-generation {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .quiver-section-intro {
+    margin-bottom: 28px;
+  }
+
+  .quiver-case h2 {
+    max-width: 560px;
+    font-size: clamp(32px, 7vw, 48px);
+  }
+
+  .quiver-section-intro > p,
+  .quiver-chapter-copy > p {
+    font-size: 15px;
+  }
+
+  .quiver-screening-caption {
+    flex-direction: column;
+    gap: 8px;
+    padding-bottom: 24px;
+  }
+
+  .quiver-film-choices {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .quiver-film-choices a {
+    padding: 18px 14px;
+    row-gap: 9px;
+  }
+
+  .quiver-film-choices a:nth-child(3) {
+    border-left: 0;
+  }
+
+  .quiver-film-name {
+    font-size: 12px;
+  }
+
+  .quiver-brief {
+    padding-block: 60px;
+  }
+
+  .quiver-brief-heading {
+    margin-block: 24px 38px;
+  }
+
+  .quiver-credits {
+    grid-template-columns: 1fr;
+    gap: 26px;
+  }
+
+  .quiver-credits dt {
+    margin-bottom: 7px;
+  }
+
+  .quiver-direction {
+    padding-block: 15px 60px;
+  }
+
+  .quiver-direction-image img {
+    aspect-ratio: 1.4;
+  }
+
+  .quiver-chapter-copy > .quiver-principle {
+    padding-top: 20px;
+    margin-top: 22px;
+  }
+
+  .quiver-shot-section {
+    padding-block: 60px 45px;
+  }
+
+  .quiver-frame-pair {
+    gap: 30px;
+    grid-template-columns: 1fr;
+  }
+
+  .quiver-frame-pair figcaption {
+    max-width: none;
+    padding-right: 0;
+  }
+
+  .quiver-shot-note {
+    gap: 14px;
+    margin-top: 30px;
+  }
+
+  .quiver-generation {
+    padding-block: 60px;
+    gap: 40px;
+  }
+
+  .quiver-generation .quiver-chapter-copy {
+    grid-row: 1;
+  }
+
+  .quiver-tools > div {
+    grid-template-columns: 1fr 1.4fr;
+    max-width: 430px;
+  }
+
+  .quiver-eye-study figure:first-child {
+    margin-right: 10%;
+  }
+
+  .quiver-eye-study figure:last-child {
+    margin-left: 20%;
+  }
+
+  .quiver-production-flow {
+    grid-template-columns: 1fr;
+    gap: 26px;
+    margin-top: 30px;
+  }
+
+  .quiver-production-flow li {
+    padding-top: 20px;
+  }
+
+  .quiver-production-flow h3 {
+    margin-top: 12px;
+  }
+
+  .quiver-edit {
+    padding-bottom: 50px;
+  }
+
+  .quiver-collection {
+    padding-bottom: 60px;
+  }
+
+  .quiver-collection .gallery-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px 12px;
+  }
+
+  .quiver-collection .gallery-heading h2 {
+    font-size: 29px;
+  }
+
+  .quiver-next {
+    padding-block: 50px;
+  }
+
+  .quiver-next svg {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .quiver-case *,
+  .quiver-case *::before,
+  .quiver-case *::after {
+    transition: none;
+  }
+}

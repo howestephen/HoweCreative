@@ -1,0 +1,179 @@
+[
+  {
+    "slug": "chalet-chardons",
+    "title": "Chalet Chardons",
+    "era": "2017",
+    "disciplines": "Video production / Digital training",
+    "summary": "Turning a week of kitchen operations into a reusable digital training course. I filmed, edited and produced the video and web delivery, with a later expansion into housekeeping training.",
+    "credit": "Content and recipes by head chef Maciek 'Magic' Dolasinski. Filming, editing, motion graphics and website by Stephen Howe.",
+    "media": [
+      {
+        "type": "video",
+        "src": "/earlier-work/chalet-chardons/chef-training.mp4",
+        "poster": "/earlier-work/chalet-chardons/chef-training-poster.jpg",
+        "alt": "Chef training project retrospective, 2017"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/chalet-chardons/website.webp",
+        "alt": "Archived Chalet Chardons website"
+      }
+    ],
+    "cover": "/earlier-work/chalet-chardons/chef-training-poster.jpg"
+  },
+  {
+    "slug": "book-your-wellness",
+    "title": "Book Your Wellness",
+    "era": "2016 - 2018",
+    "disciplines": "Web / User experience / Visual design",
+    "summary": "Interface and page-layout work for a wellness marketplace, alongside ongoing web management and user-experience improvements for international leisure clients.",
+    "credit": "Freelance interface and graphic design. Shown as historical project material.",
+    "media": [
+      {
+        "type": "image",
+        "src": "/earlier-work/book-your-wellness/signup-page.webp",
+        "alt": "Book Your Wellness sign-up page design"
+      }
+    ],
+    "cover": "/earlier-work/book-your-wellness/signup-page.webp"
+  },
+  {
+    "slug": "qtac",
+    "title": "Qtac",
+    "era": "2015 - 2016",
+    "disciplines": "Web design / Technical implementation",
+    "summary": "A support role grew into responsibility for redesigning the company website. Product knowledge from handling payroll-software support informed the site structure, graphics and implementation.",
+    "credit": "Website redesign and implementation by Stephen Howe while employed at Qtac. Images are archived captures with the limitations of the original snapshots.",
+    "media": [
+      {
+        "type": "image",
+        "src": "/earlier-work/qtac/homepage.webp",
+        "alt": "Qtac website redesign, archived homepage"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/qtac/accountants.webp",
+        "alt": "Qtac accountants page"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/qtac/payroll.webp",
+        "alt": "Qtac payroll product page"
+      }
+    ],
+    "cover": "/earlier-work/qtac/homepage.webp"
+  },
+  {
+    "slug": "burger-theory",
+    "title": "Burger Theory",
+    "era": "2012 - 2016",
+    "disciplines": "Web development / Promotion / Events",
+    "summary": "From early pop-ups to festival trading: website implementation in HTML and CSS, promotional materials and an ongoing web and social presence for a growing street-food business.",
+    "credit": "Core brand identity and supplied website visual design by the founder's father. Website implementation, promotional graphics and web/social management by Stephen Howe.",
+    "media": [
+      {
+        "type": "image",
+        "src": "/earlier-work/burger-theory/homepage.webp",
+        "alt": "Burger Theory website: home"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/burger-theory/about.webp",
+        "alt": "Burger Theory website: about"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/burger-theory/menu.webp",
+        "alt": "Burger Theory website: menu"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/burger-theory/locations.webp",
+        "alt": "Burger Theory website: locations"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/burger-theory/booking.webp",
+        "alt": "Burger Theory website: booking"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/burger-theory/events.webp",
+        "alt": "Burger Theory website: events"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/burger-theory/happiness-poster.webp",
+        "alt": "Burger Theory promotional poster: Happiness"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/burger-theory/cows-poster.webp",
+        "alt": "Burger Theory promotional poster: Cows"
+      }
+    ],
+    "cover": "/earlier-work/burger-theory/homepage.webp"
+  },
+  {
+    "slug": "hot-biscuit",
+    "title": "Hot Biscuit",
+    "era": "2011 - 2012",
+    "disciplines": "Graphic design / Music / Events",
+    "summary": "Programming, promotion and design across three Brighton music venues. The work connected posters and event listings with artist liaison and live-event delivery.",
+    "credit": "Promotional design by Stephen Howe as Venue & Promotions Manager. Historical print work, shown as originally made.",
+    "media": [
+      {
+        "type": "image",
+        "src": "/earlier-work/hot-biscuit/turin-brakes.webp",
+        "alt": "Turin Brakes concert poster"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/hot-biscuit/sidewinder-listings.webp",
+        "alt": "Sidewinder December event listings"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/hot-biscuit/xuma-listings.webp",
+        "alt": "Xuma August event listings"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/hot-biscuit/sidewinder-flyer.webp",
+        "alt": "Sidewinder promotional flyer"
+      }
+    ],
+    "cover": "/earlier-work/hot-biscuit/turin-brakes.webp"
+  },
+  {
+    "slug": "412-promotions",
+    "title": "412 Promotions",
+    "era": "2009 - 2011",
+    "disciplines": "Editorial / Graphic design / Culture",
+    "summary": "Design and brand management for an independent shop and online culture publication: web graphics, editorial, event photography, promotional design and managing contributing writers.",
+    "credit": "Design and editorial work by Stephen Howe as Brand Manager. This selection shows surviving print and promotional material.",
+    "media": [
+      {
+        "type": "image",
+        "src": "/earlier-work/412-promotions/play-and-display.webp",
+        "alt": "Play and Display promotional design"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/412-promotions/hope-and-glory.webp",
+        "alt": "Hope and Glory flyer, reverse"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/412-promotions/412-sessions.webp",
+        "alt": "412 Sessions event flyer"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/412-promotions/kung-fu.webp",
+        "alt": "Kung Fu vs 412 poster"
+      }
+    ],
+    "cover": "/earlier-work/412-promotions/play-and-display.webp"
+  }
+]

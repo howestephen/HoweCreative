@@ -1,0 +1,177 @@
+{
+  "name": "Stephen Howe",
+  "location": "Norwich, UK | Remote | Permanent or contract",
+  "email": "howestephen@gmail.com",
+  "website": "https://howecreative.co.uk",
+  "linkedin": "https://www.linkedin.com/in/howestephen",
+  "github": "https://github.com/howestephen",
+  "variants": {
+    "creative-technologist": {
+      "title": "Creative Technologist",
+      "summary": "Creative technologist and hands-on creative lead with 20+ years across design, media and technology. Lead Designer at UNCX Network since December 2021, spanning brand, product interfaces, 3D and motion. I develop concepts into finished work: generative image/video and audio production in ComfyUI, complete brand films, reusable production systems and React-based prototypes. My practice connects art direction and storytelling with the technical judgement needed to make the work hold together.",
+      "projectOrder": [
+        "quiver",
+        "motion",
+        "solana",
+        "badger"
+      ],
+      "skillOrder": [
+        "creative",
+        "automation",
+        "development",
+        "product",
+        "audio"
+      ]
+    },
+    "design-engineer": {
+      "title": "Design Engineer",
+      "summary": "Designer and hands-on builder combining product and interaction design with React, TypeScript and full-stack personal projects. Lead Designer at UNCX Network since December 2021, with 20+ years across design and technology. I turn complex requirements into user flows, reusable components and working interfaces, using AI-assisted development, scoped implementation and verification. Background in 3D and motion brings an additional focus on visual craft and interaction detail.",
+      "projectOrder": [
+        "badger",
+        "solana",
+        "menu",
+        "noticia"
+      ],
+      "skillOrder": [
+        "development",
+        "product",
+        "automation",
+        "creative",
+        "audio"
+      ]
+    },
+    "product-designer": {
+      "title": "Product Designer",
+      "summary": "Product designer with deep technical and creative-production fluency. Lead Designer at UNCX Network since December 2021, designing product flows, interfaces, design systems and educational experiences. I combine user experience and visual design with hands-on React prototyping and first-hand generative video and audio production. Comfortable moving from ambiguous requirements to implementation detail, collaborating with engineers and creative partners.",
+      "projectOrder": [
+        "menu",
+        "badger",
+        "quiver",
+        "academy"
+      ],
+      "skillOrder": [
+        "product",
+        "development",
+        "creative",
+        "automation",
+        "audio"
+      ]
+    }
+  },
+  "experience": [
+    {
+      "title": "Lead Designer",
+      "company": "UNCX Network (SDDTech OÜ)",
+      "dates": "December 2021 - Present",
+      "context": "Remote | Multi-chain decentralised finance (DeFi) products",
+      "bullets": [
+        "Sole in-house designer across brand, product interfaces, 3D, motion and marketing, working with developers, marketing and external creative partners.",
+        "Designed wireframes and UI concepts for 10+ applications, with 3-4 shipped to production; mapped unfamiliar token-tool and Telegram workflows in FigJam and Figma.",
+        "Directed and produced Quiver brand films from a loose brief, covering script, art direction, generative imagery/video, animation, editing and AI-generated music using ChatGPT, ComfyUI and After Effects.",
+        "Led the 2022 name and logo rebrand. For the 2024 rebrand, briefed an external team on the foundations, then completed content, layouts and graphics across 10+ website pages.",
+        "Produced 200+ videos at UNCX using reusable Cinema 4D scenes, Redshift materials and After Effects templates for launches, tutorials and explainers.",
+        "Directed and completed UNCX Academy page designs and visuals, working from externally designed brand foundations with an in-house developer; produced 30+ educational videos."
+      ]
+    },
+    {
+      "title": "Designer",
+      "company": "Switch Studios",
+      "dates": "July 2018 - June 2021",
+      "context": "Ipswich, UK | HTML5 casino games",
+      "bullets": [
+        "Delivered design and production assets for 30 shipped games, working within the Art Lead's direction as an embedded member of the development team.",
+        "Created graphics, animation, 3D and launch marketing packs; prepared and compressed assets, built sprite sheets and committed work directly through Git and SVN.",
+        "Supported game localisation, accessibility adaptations and asset QA across concurrent releases."
+      ]
+    },
+    {
+      "title": "Designer and Animator",
+      "company": "Howe Creative (Freelance)",
+      "dates": "May 2016 - August 2018",
+      "context": "International clients | Video, animation and web",
+      "bullets": [
+        "Delivered video, motion graphics and web projects, including 140+ videos for one corporate-learning client by January 2018.",
+        "Filmed, edited and delivered a digital chef-training course and website for Chalet Chardons; recipes and operational content by head chef Maciek Dolasinski.",
+        "Produced music videos and explainers with rotoscoping and colour grading; improved website UI, content and SEO for international leisure clients."
+      ]
+    }
+  ],
+  "earlier": "Earlier experience: Qtac Solutions, 2nd Line Support Technician and website redesign (2014 - 2016); Burger Theory, Web & Social Media Manager (2012 - 2016, concurrent); Hot Biscuit, Venue & Promotions Manager (2011 - 2012); 412 Promotions, Brand Manager (2009 - 2011); Right Click Computers, Junior Helpdesk Technician (2008 - 2009); BBC, Database Technician (2007 - 2008); Good Salon Guide, Web Manager & Graphic Designer (2005 - 2006).",
+  "projects": {
+    "motion": {
+      "title": "UNCX Video & 3D System",
+      "dates": "2023 onwards | Professional work",
+      "slug": "uncx-video-system",
+      "body": "Built a modular creative-production workflow in Cinema 4D, Redshift and After Effects. Reusable scenes, materials and timeline structures support UNCX launches, tutorials and education without rebuilding every asset from scratch."
+    },
+    "solana": {
+      "title": "Solana Diary",
+      "dates": "2026 | Self-initiated | Archived",
+      "slug": "solana-diary",
+      "body": "Designed the brand and templates, and built seven Railway services connecting live-data APIs, code-driven rendering, rate limiting, Telegram approval and X publishing. Every post required human approval. Built with AI tools; Grok was an optional, button-triggered assist."
+    },
+    "badger": {
+      "title": "Badger Club",
+      "dates": "2026 | Personal project | In beta",
+      "slug": "badger-club",
+      "body": "Designed and built a badge-tracking product with React, Supabase, Google authentication and Resend. Scoped the product to leader-only accounts with parent communication without sign-up. Owned UI, database structure and implementation using AI-assisted development."
+    },
+    "academy": {
+      "title": "UNCX Academy",
+      "dates": "2025 | Professional work | Complete",
+      "slug": "uncx-academy",
+      "body": "Connected learning-platform design with creative production: article, video and glossary experiences plus educational media. Wrote the brief, completed page designs and graphics, and collaborated with external designers and the in-house developer."
+    },
+    "menu": {
+      "title": "UNCX Unified Menu",
+      "dates": "2026 | Professional work | Design complete",
+      "slug": "uncx-menu",
+      "body": "Researched navigation patterns and designed a shared product hierarchy with variable-driven Figma components, documented states and configurable content. Balanced product priority with discoverability. Implementation is currently on hold."
+    },
+    "noticia": {
+      "title": "Noticia Lingo",
+      "dates": "2026 | Personal project | In development",
+      "slug": "noticia-lingo",
+      "body": "Designed and built a language-learning prototype using news articles, quizzes, learner dashboards, React, Supabase and Google authentication. Refining contextual lesson types in Spanish before expanding the language scope."
+    },
+    "quiver": {
+      "title": "Quiver: Generative Brand Films",
+      "dates": "2026 | Professional work | Complete",
+      "slug": "quiver",
+      "body": "Developed the film identity from a supplied logo, product website and initial ident concept. Planned shots around model limitations, generated and selected imagery, footage and music using ChatGPT and ComfyUI, then finished four edits in After Effects. Used AI-assisted scripts for reusable scene construction and edit reflow."
+    }
+  },
+  "skills": {
+    "creative": {
+      "title": "Creative production",
+      "body": "Art direction, brand systems, 3D, motion design, video editing, Cinema 4D, Redshift, X-Particles, After Effects, Premiere Pro, Photoshop, Illustrator, Adobe Animate."
+    },
+    "product": {
+      "title": "Product and interaction design",
+      "body": "UI/UX, user flows, wireframing, rapid prototyping, Figma, FigJam, design systems, component libraries, variable-driven prototypes, developer handoff."
+    },
+    "development": {
+      "title": "Development",
+      "body": "React, Next.js, JavaScript, TypeScript, HTML, CSS, Tailwind CSS, Node.js, Supabase, PostgreSQL, Three.js / React Three Fiber, GSAP, Git, Bash, Vercel."
+    },
+    "automation": {
+      "title": "Generative AI and automation",
+      "body": "ComfyUI (video and audio), ChatGPT image generation, Claude / Claude Code, Codex, Cursor, shot planning, image-led generation, iteration and selection, production scripting, API integration, code-driven media rendering, Railway, Telegram approval flows."
+    },
+    "audio": {
+      "title": "Audio and delivery",
+      "body": "AI-generated music production (ComfyUI), Ableton Live, Audition, Serum, audio production, Agile and Scrum practices, cross-functional collaboration."
+    }
+  },
+  "education": [
+    {
+      "title": "BSc (Hons) Entertainment Technology, First Class",
+      "detail": "University of Portsmouth | 2007. IBM Prize for Best Creative Technologies Project. Dissertation: 90%."
+    },
+    {
+      "title": "Full Stack Coding Bootcamp",
+      "detail": "Tech Educators | March 2024. 12-week intensive covering React, Next.js, Node.js, PostgreSQL and Supabase."
+    }
+  ],
+  "languages": "English: native. Spanish: working proficiency."
+}

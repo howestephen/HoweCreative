@@ -15,7 +15,7 @@ import { execFileSync } from "node:child_process";
 import { existsSync, mkdirSync, readdirSync, statSync } from "node:fs";
 import path from "node:path";
 
-const ROOT = path.resolve(import.meta.dirname, "..", "public", "case-studies");
+const ROOT = path.resolve(import.meta.dirname, "..", "public");
 const MAX_EDGE = 480;
 const SOURCE_EXT = new Set([".png", ".jpg", ".jpeg", ".webp"]);
 
@@ -68,10 +68,9 @@ function walk(dir) {
   }
 }
 
-for (const slug of readdirSync(ROOT)) {
-  const dir = path.join(ROOT, slug);
-  if (!statSync(dir).isDirectory()) continue;
-  walk(dir);
+for (const folder of ["case-studies", "earlier-work"]) {
+  const dir = path.join(ROOT, folder);
+  if (existsSync(dir)) walk(dir);
 }
 
 console.log(`thumbnails written: ${made}, up to date: ${skipped}, failed: ${failed}`);

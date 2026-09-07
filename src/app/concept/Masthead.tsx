@@ -1,126 +1,78 @@
-import { ArrowUpRight } from "lucide-react";
-import { motion } from "motion/react";
-
-import { siteProfile } from "../data/portfolio";
-import { CAREER_START, UNCX_START, tenureSince, yearsSince } from "../lib/tenure";
-import { PlotterMark } from "./PlotterMark";
-
-// Every figure names where it came from: a stat with no employer attached
-// reads like current work, which is misleading across a 21-year career.
-// The two duration figures are computed from real start dates so they stay
-// correct without anyone editing this file.
-function buildMetrics() {
-  const now = new Date();
-  return [
-    { value: `${yearsSince(CAREER_START, now)} yrs`, label: "in design & tech" },
-    { value: tenureSince(UNCX_START, now), label: "lead designer, UNCX" },
-    { value: "30", label: "games at Switch Studios" },
-    { value: "500+", label: "videos across roles" },
-  ] as const;
-}
-
-const container = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } },
-};
-const item = {
-  hidden: { opacity: 0, y: 10 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" as const } },
-};
+import { ArrowDown, ArrowUpRight } from "lucide-react";
 
 export function Masthead() {
-  const metrics = buildMetrics();
-
   return (
-    <section id="top" className="mx-auto max-w-6xl scroll-mt-24 px-6 pb-16 pt-28 md:pb-24 md:pt-36">
-      <div className="grid items-stretch gap-12 lg:grid-cols-12">
-        <motion.div
-          variants={container}
-          initial="hidden"
-          animate="show"
-          className="flex flex-col justify-between gap-8 lg:col-span-7"
-        >
-          <div className="flex flex-col gap-7">
-            <motion.div variants={item}>
-              <span className="inline-flex items-center gap-2 border border-border bg-card px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-accent" />
-                Open to roles &amp; contracts - remote, UK
-              </span>
-            </motion.div>
-
-            <motion.h1
-              variants={item}
-              className="max-w-[14ch] text-[clamp(2.6rem,6.4vw,5rem)] leading-[1.04]"
-            >
-              I build the <em className="italic">systems</em> that ship the work
-              <span className="text-accent">.</span>
-            </motion.h1>
-
-            <motion.p variants={item} className="max-w-xl text-lg leading-relaxed text-muted-foreground">
-              Stephen Howe - Creative Technologist. Two decades across branding, 3D, motion,
-              product, and code. Currently focused on automated AI production pipelines.
-            </motion.p>
-
-            <motion.div variants={item} className="flex flex-wrap items-center gap-3">
-              <a
-                href="#contact"
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
-                }}
-                className="inline-flex items-center gap-2 bg-accent px-6 py-3.5 text-sm font-medium text-accent-foreground transition-colors hover:bg-accent-hover"
-              >
-                Get in touch
-              </a>
-              <a
-                href="/cv"
-                className="inline-flex items-center gap-2 border border-foreground/25 px-6 py-3.5 text-sm font-medium text-foreground transition-colors hover:border-foreground"
-              >
-                View CV
-              </a>
-              <span className="flex items-center gap-4 pl-2">
-                <a
-                  href={siteProfile.linkedinUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-1 font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground transition-colors hover:text-accent"
-                >
-                  LinkedIn <ArrowUpRight className="h-3 w-3" />
-                </a>
-                <a
-                  href={siteProfile.githubUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-1 font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground transition-colors hover:text-accent"
-                >
-                  GitHub <ArrowUpRight className="h-3 w-3" />
-                </a>
-              </span>
-            </motion.div>
+    <section id="top" className="portfolio-hero wrap">
+      <div className="hero-kicker">
+        <span>Stephen Howe / Creative Technologist</span>
+        <span className="availability">
+          Open to permanent &amp; contract roles
+        </span>
+      </div>
+      <div className="hero-grid">
+        <div className="hero-copy">
+          <h1>
+            Creative instinct.
+            <br />
+            <span>Technical range.</span>
+          </h1>
+          <p>
+            I connect brand, product, motion and code to take an idea all the
+            way to a working experience.
+          </p>
+          <p className="hero-intro">
+            Twenty years of making across disciplines. From directing a brand to
+            building the tools that bring it to life.
+          </p>
+          <div className="hero-actions">
+            <a className="action action-primary" href="#work">
+              Explore my work <ArrowDown size={18} />
+            </a>
+            <a className="action action-quiet" href="/cv">
+              View CV <ArrowUpRight size={18} />
+            </a>
           </div>
-
-          <motion.dl variants={item} className="grid grid-cols-2 gap-x-6 gap-y-6 border-t border-border pt-6 sm:grid-cols-4">
-            {metrics.map((metric) => (
-              <div key={metric.label} className="flex flex-col">
-                <dt className="flex-1 font-mono text-[10px] uppercase leading-tight tracking-[0.16em] text-muted-foreground">
-                  {metric.label}
-                </dt>
-                <dd className="headline-font mt-1 whitespace-nowrap text-xl leading-none text-foreground md:text-2xl">
-                  {metric.value}
-                </dd>
-              </div>
-            ))}
-          </motion.dl>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.7, delay: 0.35 }}
-          className="min-h-[340px] lg:col-span-5 lg:min-h-0"
+        </div>
+        <a
+          className="hero-art"
+          href="/work/uncx-video-system"
+          aria-label="Explore the UNCX motion and 3D production system"
         >
-          <PlotterMark />
-        </motion.div>
+          <img
+            src="/case-studies/uncx-rebrand/locking-solana.webp"
+            alt="UNCX launch artwork combining a 3D padlock, token materials and bold campaign typography"
+            fetchPriority="high"
+            width="1200"
+            height="675"
+          />
+          <span className="hero-art-caption">
+            <span>
+              <span className="eyebrow">Made at UNCX Network</span>
+              <strong>Brand thinking. In every dimension.</strong>
+            </span>
+            <span className="round-arrow">
+              <ArrowUpRight size={24} />
+            </span>
+          </span>
+        </a>
+      </div>
+      <div className="hero-proof">
+        <p>
+          <strong>Design to delivery</strong>
+          <span>Creative direction + hands-on making</span>
+        </p>
+        <p>
+          <strong>30 games</strong>
+          <span>Shipped at Switch Studios</span>
+        </p>
+        <p>
+          <strong>200+ videos</strong>
+          <span>Produced at UNCX Network</span>
+        </p>
+        <p>
+          <strong>First Class BSc</strong>
+          <span>IBM creative technologies project prize, 2007</span>
+        </p>
       </div>
     </section>
   );
