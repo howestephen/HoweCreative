@@ -92,12 +92,12 @@ Also retain Stephen's request to separate the original UNCX rebrand from the lat
 
 ### Complete source register
 
-Inventory verified on disk on 15 September: **16 files, comprising 12 Figma Design exports and 4 FigJam exports**. All filenames below are relative to `assets-archive/UNCX Archive/`. An unreviewed status means no conclusion about contents, quality, authorship or release status yet; a filename is only a lead.
+Inventory verified on disk on 15 September: **16 files, comprising 12 Figma Design exports and 4 FigJam exports**. All filenames below are relative to `assets-archive/UNCX Archive/`. All 12 Design files subsequently received the local structural scan recorded below. In this register, "not yet inspected" means detailed visual/runtime review is still outstanding; the structural scan does not establish quality, authorship or release status. The four FigJam files remain unreviewed.
 
 | Original filename | Inspection / release status | Next step and proposed use |
 | --- | --- | --- |
 | `New Menu System.fig` | Imported and structurally inspected. **Live in production**, confirmed by Stephen on 15 September. | First showcase candidate. Compare the live navigation with the prototype, establish contribution credits, curate desktop/mobile flows and retain the real project context. |
-| `V7 Tailwind Designs.fig` | Imported and inspected. Some expected connections are absent; Stephen confirmed they previously existed and deferred repairing them. Release/association status not established. | Paused for connection recovery. Preserve the depth of the app, rather than reducing it to isolated screens. Decide debranding after confirming which work was developed. |
+| `V7 Tailwind Designs.fig` | Imported copy inspected; expected connections were absent. The original export's subsequent structural scan reveals Desktop/Mobile Prototype pages, 16 flow starts and substantial navigation data. Release/association status not established. | Inspect/recover the original export before rebuilding any links. Manual connection repair remains paused. Preserve the app's depth and confirm brand treatment. |
 | `Blueprint Token Minter Concepts.fig` | Not yet inspected; release/association status unknown. | Assess as a distinct product case; confirm boundaries and relationship to other minting work. |
 | `NFT Minter Designs.fig` | Not yet inspected; release/association status unknown. | Assess its own flows, component logic and potential individual case. |
 | `UNCX Telegram App.fig` | Not yet inspected; release/association status unknown. | Review alongside the relevant FigJam flows; distinguish the app from bot and automation projects. |
@@ -119,7 +119,34 @@ Inventory verified on disk on 15 September: **16 files, comprising 12 Figma Desi
 
 Stephen's 15 September correction supersedes the existing "implementation on hold" account: **the project went into production and is live on the main website**. Source: Stephen in this conversation. The exact live URL, implementation differences and implementation credit still need recording. The current outcome in `src/app/data/project-stories.ts` and the corresponding `site-content.json` account must be reconciled when updating the case study. Do not repeat the old status or imply that Stephen wrote the production implementation without evidence. No public case-study copy has been changed as part of this note-taking task.
 
-**V7:** [imported file](https://www.figma.com/design/jsmfZSUJozs3MlM8lWbExD/V7-Tailwind-Designs?node-id=6309-15281). The imported version has substantial admin, creation and transaction-state work, but the inspection did not establish a fully connected end-to-end application. Stephen says those connections existed previously and will revisit them later. Preserve that distinction. His description of the original work predating variables must not be used to claim the present imported file has no variables. Keep V7 paused while another file is prepared.
+**V7:** [imported file](https://www.figma.com/design/jsmfZSUJozs3MlM8lWbExD/V7-Tailwind-Designs?node-id=6309-15281). The imported version has substantial admin, creation and transaction-state work, but the inspection did not establish a fully connected end-to-end application. Stephen says those connections existed previously and will revisit them later. Preserve that distinction. His description of the original work predating variables must not be used to claim the present imported file has no variables. The later local scan below changes the next diagnostic step: compare/recover the original Desktop/Mobile Prototype pages before considering manual repairs.
+
+### Local structural triage - 15 September 2026
+
+Stephen asked which exports contain the most complex UI and connected prototypes, without importing each one. All 12 `.fig` archives were decoded locally, reading `canvas.fig` from each ZIP and its bundled Kiwi schema. No files were uploaded or Figma MCP calls consumed by this scan. The first two validation parses took approximately 0.1 and 0.3 seconds; the slowest full-file scan took approximately 2.2 seconds. These timings exclude parser setup, research and interpretation.
+
+Method: read the bundled binary schema using [Evan Wallace's Kiwi library](https://github.com/evanw/kiwi), with raw-deflate/zstd decompression as described in this [local-file decoder implementation](https://github.com/sunyui/figma-parser/blob/main/scripts/decode_kiwi.cjs). Exclude internal-only/deleted node ancestry and deleted interaction records. Include explicit interactions and instance overrides, with legacy transition fields as a fallback. Count navigation destinations only for node-navigation actions, rather than treating stale destination fields on variable actions as links. Component definitions and overrides are stored records, not unique user journeys; inherited behaviour is not fully expanded. Local variables can be stored on the internal canvas, so filtered scene-node totals must not be interpreted as variable counts.
+
+| Original Design export | Flow starts | Stored navigation actions | Stored component-state changes | Review implication |
+| --- | ---: | ---: | ---: | --- |
+| V7 Tailwind Designs | 16 | 351 | 800 | Strongest app-prototype candidate. Also contains 256 overlay actions. Recover/check the original desktop and mobile pages first. |
+| Blueprint Token Minter Concepts | 2 | 34 | 78 | Best next fresh product inspection. Desktop/mobile flow starts; most explicit screen navigation is on the mobile/iFrame page. |
+| New Menu System | 3 | 0 | 277 | State-driven interaction system. Also contains variable-setting and conditional actions; zero screen-navigation actions does not mean a static prototype. |
+| UNCX Site (Internal) | 9 | 45 | 42 | Website and animation examples. The 23,905 component records are overwhelmingly icons, so they do not measure app complexity. |
+| UNCX Academy Website (Internal) | 7 | 2 | 16 | Multiple presentation starts, but little explicit screen navigation. Check page/template work rather than assuming a connected app. |
+| NFT Minter Designs | 0 | 0 | 236 | Desktop/mobile designs and component interactions. No explicit screen-navigation actions or named flow starts found in this export. |
+| UNCX Telegram App | 0 | 0 | 0 | Substantial design/library material, but no explicitly stored prototype interactions found. Of 2,380 components, 2,376 are on Tailwind parts/presets pages. |
+| UNCX Academy Branding (Internal) | 0 | 0 | 6 | Brand/library material rather than a connected app candidate. |
+| UNCX Branding & Templates (Internal) | 0 | 1 | 6 | Brand/template archive; a large file size is not evidence of a complex prototype. |
+| Solana Diary Rebrand | 0 | 0 | 0 | No explicitly stored prototype interactions found. Review as brand work. |
+| UNCX Widgets | 0 | 0 | 0 | No explicitly stored prototype interactions found. Inspect the designs before choosing showcase treatment. |
+| Vesting Flows | 0 | 0 | 0 | No explicitly stored prototype interactions found. Flow/design material still needs visual review. |
+
+**V7 recovery finding:** the original archive contains Components, a separator page, Mobile Prototype, Desktop Prototype and Stealth Launch Concept. The earlier cloud inspection exposed only Components and Stealth Launch Concept. The original's desktop/mobile pages include flow starts for Dashboard, Create Presale, Presale Page, Presale Listings, User Admin - Your Presales, User Admin - Your History and Super User on each platform. This is evidence that substantial prototype data remains in the local source. It does not establish why the inspected cloud copy differs or prove the original journeys run correctly. Do not spend time rebuilding links before comparing these pages.
+
+Some V7 and Blueprint actions have unset/absent destinations in the extracted records, including component-level placeholders. These require targeted inspection; they are not grounds to declare the whole flow broken. Raw action totals can include repeated component overrides or legacy metadata and do not prove reachability, successful interactions or authorship. The scan ranks candidates for review, not design quality, seniority or readiness to publish. A separate audit reviewed the parser assumptions and supported the V7/Blueprint priority with these limits.
+
+**Recommended inspection order:** revisit original V7 for recovery first; if continuing with a different file, open Blueprint Token Minter Concepts next. Keep New Menu System as the already-inspected first presentation/embedding milestone. Detailed review of every remaining export remains in scope.
 
 ### Per-file workflow and completion record
 
@@ -147,9 +174,10 @@ Official references checked on 15 September 2026: [Figma embeds](https://develop
 
 ### Next milestone
 
-Prepare and verify New Menu System as the first complete showcase, from source preservation through a visitor-usable embed. Use that result to establish the repeatable presentation structure, then process every remaining file in bounded batches. Keep V7 paused for connection recovery and leave unknown release/branding decisions explicit. The unresolved 3D hero remains a separate design task; this content-preparation work does not approve a new hero.
+Prepare and verify New Menu System as the first complete showcase, from source preservation through a visitor-usable embed. Use that result to establish the repeatable presentation structure, then process every remaining file in bounded batches. The next archive inspection should compare/recover V7's original desktop/mobile pages, or take Blueprint Token Minter as the next fresh file; manual V7 link rebuilding stays paused. Leave unknown release/branding decisions explicit. The unresolved 3D hero remains a separate design task; this content-preparation work does not approve a new hero.
 
 ## Revision record
 
 - 14 September 2026: replaced the rhythm-control proposal with the complete card grid and discipline/software filters following Stephen's feedback. Added a working filtering preview to the board. Marked the more ambitious hero as unresolved. No production homepage changes in this revision.
 - 15 September 2026: recorded the complete 12-Design/4-FigJam archive, per-project inspection status, original/showcase backup convention, conditional debranding workflow, individual case-study direction and reusable interactive-embed requirements. Corrected the New Menu System planning record to live in production, based on Stephen's update; logged the stale public copy for correction. Recorded V7 as paused and the need to retain cloud files backing public embeds. No Figma files, public site code or assets were modified in this documentation change.
+- 15 September 2026, structural triage: decoded all 12 original Design exports locally to compare stored flow starts, navigation and component-state interactions. Found substantial desktop/mobile prototype data in the original V7 archive beyond the pages seen in its cloud inspection. Prioritised original V7 recovery and Blueprint as the next fresh file, while distinguishing library/icon volume from authored product complexity. No source archive was modified and no runtime journey was certified by this scan.
