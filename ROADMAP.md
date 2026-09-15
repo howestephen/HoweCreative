@@ -12,6 +12,8 @@ Stephen requested a review of every Figma export, organised presentation copies,
 - [x] Record Stephen's correction: New Menu System is live in production. The existing public case-study status is stale and still needs updating.
 - [ ] Prepare New Menu System as the first verified showcase, preserving the original and checking the live implementation and contribution credits.
 - [ ] Add the reusable prototype embed component and verify the first case study in a signed-out browser and on mobile.
+- [ ] Add a protected employer area for restricted work. V7 is confirmed unlaunched and private-only, retaining its original branding. Resolve Figma access independently from the site password and keep restricted data/media out of public builds. See the private-area requirements in the register.
+- [ ] Review the existing V7/launchpad screenshots and thumbnails in public assets and their delivery paths before publishing a restricted V7 case study. No protection or relocation has been implemented yet.
 - [x] Structurally scan all 12 Design exports locally to prioritise inspection without using Figma API quota. Runtime verification and the four FigJam reviews remain outstanding.
 - [x] On 16 September, verify Stephen's V7 reimport: all five pages, seven named desktop/mobile flows each, and creation-step links are present. The new file key and direct page links are in the register. Runtime/public-embed testing remains outstanding.
 - [ ] Work through every remaining source file, updating its record. Blueprint Token Minter is the next fresh-file candidate. For V7, inspect isolated empty actions in context rather than rebuilding the main flow.
