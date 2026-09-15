@@ -1,12 +1,27 @@
 # ROADMAP
 
-## Current Milestone
+## Design reset checkpoint - 14 September 2026
+
+Current work is on `codex/creative-technologist-portfolio`. The editorial milestone below is historical. The revised [concept board](docs/reviews/2026-09-07-design-reset/index.html) now previews all projects in a card grid with discipline and software filters. The H-O-W-E rhythm strip has been removed. An ambitious 3D opening and its transition into the grid still need visual development and review. This checkpoint changes the proposal only. See the [current plan and revision record](docs/reviews/2026-09-07-design-reset/plan.md).
+
+## Current task - Figma archive and interactive showcases, 15 September 2026
+
+Stephen requested a review of every Figma export, organised presentation copies, debranding for undeveloped work or work that cannot be associated, and interactive Figma prototypes inside the portfolio. The [Figma register and workflow](docs/reviews/2026-09-07-design-reset/plan.md#figma-archive-and-interactive-showcases---15-september-2026) is the single working record, including all 12 Design and 4 FigJam files, backup naming, branding decisions, inspection findings and embed acceptance checks.
+
+- [x] Record the complete source inventory and preparation/integration workflow.
+- [x] Record Stephen's correction: New Menu System is live in production. The existing public case-study status is stale and still needs updating.
+- [ ] Prepare New Menu System as the first verified showcase, preserving the original and checking the live implementation and contribution credits.
+- [ ] Add the reusable prototype embed component and verify the first case study in a signed-out browser and on mobile.
+- [ ] Work through every remaining source file, updating its record. Keep V7 paused until the missing prototype connections can be revisited.
+
+This update records the work; no Figma files have been reorganised or debranded and no embed has been implemented yet. Published embed targets must remain online. The ambitious 3D opening remains unresolved and separate from this preparation milestone.
+
+## Historical editorial milestone
 
 `3.0 Validate and ship the career-focused editorial redesign`
 
-The work is happening on `claude/concept-editorial`. This branch is intended to
-replace the current production design on `main` once its content, CV, responsive
-behaviour, and conversion paths are approved.
+The earlier editorial work was developed on `claude/concept-editorial`. The
+design reset checkpoint above supersedes this milestone and its next steps.
 
 ## Goal
 
