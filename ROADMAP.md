@@ -13,8 +13,8 @@ Stephen requested a review of every Figma export, organised presentation copies,
 - [ ] Prepare New Menu System as the first verified showcase, preserving the original and checking the live implementation and contribution credits.
 - [ ] Add the reusable prototype embed component and verify the first case study in a signed-out browser and on mobile.
 - [x] Structurally scan all 12 Design exports locally to prioritise inspection without using Figma API quota. Runtime verification and the four FigJam reviews remain outstanding.
-- [ ] Reimport the verified original V7 export after Stephen deleted the previous cloud copy, then compare/recover its desktop/mobile prototype pages before rebuilding links. The source path and checksum are in the register. Blueprint Token Minter is the next fresh-file candidate.
-- [ ] Work through every remaining source file, updating its record. Keep manual V7 connection repairs paused pending the original-file comparison.
+- [x] On 16 September, verify Stephen's V7 reimport: all five pages, seven named desktop/mobile flows each, and creation-step links are present. The new file key and direct page links are in the register. Runtime/public-embed testing remains outstanding.
+- [ ] Work through every remaining source file, updating its record. Blueprint Token Minter is the next fresh-file candidate. For V7, inspect isolated empty actions in context rather than rebuilding the main flow.
 
 This update records the work; no Figma files have been reorganised or debranded and no embed has been implemented yet. Published embed targets must remain online. The ambitious 3D opening remains unresolved and separate from this preparation milestone.
 
