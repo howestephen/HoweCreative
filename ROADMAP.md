@@ -5,11 +5,12 @@
 Current work is on `codex/creative-technologist-portfolio`. Stephen's latest direction is a full-screen particle portrait, scroll-driven evaporation through 3D space, then a separate screen of five or six icon-and-text project cards. Each opens a substantial frosted-glass case study, with particles and other projects blurred behind it. Page Down from the opening should advance to the showcase. The complete filtered archive stays directly accessible. See the [current plan and revision record](docs/reviews/2026-09-07-design-reset/plan.md) and [three-state storyboard](docs/reviews/2026-09-07-design-reset/spatial-sequence.png).
 
 - [x] Record the confirmed portrait source, corrected sequence, card/detail distinction, depth/audio requirements and proposed six-project evidence roles.
-- [ ] Review the storyboard and choose the art treatment. The generated stills do not prove working 3D, sound or mobile behaviour.
-- [ ] Prove portrait evaporation, Page Down advancement and one readable glass case study in a bounded browser prototype before integrating the homepage.
+- [x] Stephen approved building the portrait sequence as a review prototype, with final showcase content deferred.
+- [x] Implement `/study`: portrait particles, scroll-driven evaporation, a separate six-card screen, a glass preview and a closing particle arc. Page Down, reverse scrolling, motion-off fallback and opt-in sound are available.
+- [ ] Review the working motion and art treatment with Stephen before integrating the homepage. The glass previews and six-project selection are provisional.
 - [ ] Finalise five or six primary projects after source review; keep archive coverage, discipline/software filters and private V7 requirements intact.
 
-The older [HTML concept board](docs/reviews/2026-09-07-design-reset/index.html) previews the previous complete image-card index. It has not been updated to implement this sequence. No production homepage or Figma design changed at this checkpoint. The editorial milestone below is historical.
+The current prototype runs at `/study`, separate from the existing homepage. Typecheck, 72 tests, lint and production build pass. Browser checks cover desktop and narrow phone layouts, keyboard advancement, reversible scrolling, modal focus restoration and motion/sound controls. Physical mobile-device testing and listening to the sound mix remain outstanding. The older [HTML concept board](docs/reviews/2026-09-07-design-reset/index.html) previews the previous complete image-card index. No production deployment or Figma design changed at this checkpoint. The editorial milestone below is historical.
 
 ## Current task - Figma archive and interactive showcases, 15 September 2026
 
