@@ -16,8 +16,8 @@ export const router = createBrowserRouter([
         path: "study",
         HydrateFallback: () => createElement("div", {
           role: "status",
-          style: { position: "fixed", inset: 0, display: "grid", placeItems: "center", background: "#060707", color: "#bec4bb", fontSize: 12 },
-        }, "Loading motion study"),
+          style: { position: "fixed", inset: 0, zIndex: 1000, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 18, background: "#060707", color: "#b7bdb8", fontSize: 11 },
+        }, createElement("span", { "aria-hidden": true, style: { width: 24, height: 24, border: "1px solid #ffffff26", borderTopColor: "#eceee5", borderRadius: "50%" } }), "Loading portrait"),
         lazy: async () => ({
           Component: (await import("./experience/PortraitExperience")).PortraitExperience,
         }),

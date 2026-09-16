@@ -8,7 +8,7 @@ import {
 } from "lucide-react";
 import { Link } from "react-router";
 import { useReducedMotion } from "motion/react";
-import { clamp, portraitFraming, portraitSource, scrollState, smooth, type ParticleMotion } from "./portrait-particles";
+import { acceptsPortraitPress, clamp, isPortraitSurface, portraitFraming, portraitSource, scrollState, smooth, type ParticleMotion } from "./portrait-particles";
 import { createPortraitAudio, type PortraitAudio } from "./portrait-audio";
 import "../../styles/portrait.css";
 
@@ -31,7 +31,7 @@ class PortraitBoundary extends Component<{ children: ReactNode; onFailure: () =>
 
 export const acceptsHeroPageDown = (event: KeyboardEvent, atOpening: boolean, dialogOpen: boolean) => {
   const target = event.target;
-  return event.key === "PageDown" && !event.defaultPrevented && !event.altKey && !event.ctrlKey && !event.metaKey && !event.shiftKey
+  return event.key === "PageDown" && !event.repeat && !event.defaultPrevented && !event.altKey && !event.ctrlKey && !event.metaKey && !event.shiftKey
     && atOpening && !dialogOpen
     && !(target instanceof HTMLElement && (target.isContentEditable || target.closest("a, button, input, textarea, select, [role='dialog'], [role='slider'], [contenteditable]")));
 };
@@ -43,6 +43,8 @@ export function PortraitExperience() {
   const [mounted, setMounted] = useState(false);
   const [ready, setReady] = useState(false);
   const [failed, setFailed] = useState(false);
+  const [posterReady, setPosterReady] = useState(false);
+  const [posterFailed, setPosterFailed] = useState(false);
   const [sound, setSound] = useState(false);
   const [audioError, setAudioError] = useState(false);
   const [selected, setSelected] = useState<number | null>(null);
@@ -56,15 +58,53 @@ export function PortraitExperience() {
   const alive = useRef(true);
   const soundOn = useRef(false);
   const activeDialog = useRef(false);
+  const scrollAnimation = useRef(0);
   const motion = useRef<ParticleMotion>({ release: 0, travel: 0, ending: 0, pointerX: 0, pointerY: 0, velocity: 0, paused: false });
   const onReady = useCallback(() => setReady(true), []);
   const onUnavailable = useCallback(() => { setFailed(true); setReady(false); }, []);
+  const loading = !mounted || ((reduced || failed) ? !posterReady && !posterFailed : !ready);
+  const loadingRef = useRef(loading);
+  loadingRef.current = loading;
 
-  const goToWork = useCallback(() => {
-    if (!work.current) return;
-    window.scrollTo({ top: work.current.offsetTop, behavior: reduced ? "instant" : "smooth" });
+  const travelTo = useCallback((target: number) => {
+    if (loadingRef.current) return;
+    cancelAnimationFrame(scrollAnimation.current);
+    if (reduced) { window.scrollTo({ top: target, behavior: "instant" }); return; }
+    const start = window.scrollY;
+    const started = performance.now();
+    const tick = (now: number) => {
+      const t = clamp((now - started) / 2100);
+      const eased = t * t * t * (t * (t * 6 - 15) + 10);
+      window.scrollTo({ top: start + (target - start) * eased, behavior: "instant" });
+      scrollAnimation.current = t < 1 ? requestAnimationFrame(tick) : 0;
+    };
+    scrollAnimation.current = requestAnimationFrame(tick);
   }, [reduced]);
-  const returnToPortrait = () => window.scrollTo({ top: 0, behavior: reduced ? "instant" : "smooth" });
+  const goToWork = useCallback(() => { if (work.current) travelTo(work.current.offsetTop); }, [travelTo]);
+  const returnToPortrait = () => travelTo(0);
+
+  useEffect(() => {
+    const interrupt = (event?: Event) => {
+      if (event instanceof KeyboardEvent && event.key === 'PageDown' && event.repeat) return;
+      cancelAnimationFrame(scrollAnimation.current); scrollAnimation.current = 0;
+    };
+    const events = ["wheel", "touchstart", "pointerdown", "keydown", "resize"] as const;
+    for (const event of events) window.addEventListener(event, interrupt, { passive: true });
+    return () => {
+      interrupt();
+      for (const event of events) window.removeEventListener(event, interrupt);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!loading) return;
+    const overflow = document.body.style.overflow;
+    const header = root.current?.closest('.portfolio-shell')?.querySelector('header');
+    const headerInert = header?.inert ?? false;
+    if (header) header.inert = true;
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = overflow; if (header) header.inert = headerInert; };
+  }, [loading]);
 
   useEffect(() => {
     alive.current = true;
@@ -151,11 +191,21 @@ export function PortraitExperience() {
       if (event.pointerType !== "mouse") return;
       pointerX = (event.clientX / window.innerWidth - 0.5) * 2;
       pointerY = -(event.clientY / height - 0.5) * 2;
+      motion.current.pointerX = pointerX;
+      motion.current.pointerY = pointerY;
+      if (!isPortraitSurface(event.target)) motion.current.pressed = false;
       wake();
     };
-    const resetPointer = () => { pointerX = 0; pointerY = 0; wake(); };
+    const resetPointer = () => { motion.current.pressed = false; wake(); };
+    const pointerDown = (event: PointerEvent) => {
+      if (loadingRef.current || !event.isPrimary || !isPortraitSurface(event.target)
+        || !acceptsPortraitPress(event.pointerType, event.button, motion.current.release, reduced || activeDialog.current)) return;
+      onPointer(event);
+      motion.current.pressed = true;
+      wake();
+    };
     const keydown = (event: KeyboardEvent) => {
-      if (acceptsHeroPageDown(event, window.scrollY < height * 0.45, activeDialog.current)) {
+      if (!loadingRef.current && acceptsHeroPageDown(event, window.scrollY < height * 0.45, activeDialog.current)) {
         event.preventDefault();
         goToWork();
       }
@@ -164,7 +214,7 @@ export function PortraitExperience() {
       cancelAnimationFrame(frame);
       frame = 0;
       previousTime = 0;
-      if (document.hidden) void audio.current?.suspend();
+      if (document.hidden) { motion.current.pressed = false; void audio.current?.suspend(); }
       else {
         if (soundOn.current) void audio.current?.resume().catch(() => setAudioError(true));
         wake();
@@ -175,6 +225,10 @@ export function PortraitExperience() {
     window.addEventListener("resize", measure);
     window.addEventListener("scroll", wake, { passive: true });
     window.addEventListener("pointermove", onPointer, { passive: true });
+    window.addEventListener("pointerdown", pointerDown, { passive: true });
+    window.addEventListener("pointerup", resetPointer, { passive: true });
+    window.addEventListener("pointercancel", resetPointer);
+    window.addEventListener("blur", resetPointer);
     document.addEventListener("pointerleave", resetPointer);
     window.addEventListener("keydown", keydown);
     document.addEventListener("visibilitychange", visibility);
@@ -185,6 +239,11 @@ export function PortraitExperience() {
       window.removeEventListener("resize", measure);
       window.removeEventListener("scroll", wake);
       window.removeEventListener("pointermove", onPointer);
+      window.removeEventListener("pointerdown", pointerDown);
+      window.removeEventListener("pointerup", resetPointer);
+      window.removeEventListener("pointercancel", resetPointer);
+      window.removeEventListener("blur", resetPointer);
+      motion.current.pressed = false;
       document.removeEventListener("pointerleave", resetPointer);
       window.removeEventListener("keydown", keydown);
       document.removeEventListener("visibilitychange", visibility);
@@ -234,11 +293,12 @@ export function PortraitExperience() {
     finally { audioPending.current = false; }
   };
 
-  return (
-    <div className="particle-experience" ref={root} data-motion={reduced ? "reduced" : "full"} data-renderer={failed ? "fallback" : ready && !reduced ? "ready" : "poster"}>
+  return (<>
+    {loading && <div className="portrait-loading" role="status" aria-live="polite"><span className="portrait-loading-icon" aria-hidden="true" /><span>Loading portrait</span></div>}
+    <div className="particle-experience" ref={root} inert={loading} aria-busy={loading} data-motion={reduced ? "reduced" : "full"} data-renderer={failed ? "fallback" : ready && !reduced ? "ready" : "poster"}>
       <div className="particle-environment" aria-hidden="true">
         <div className="particle-fallback">
-          <div className="portrait-source-crop"><img src={portraitSource} alt="" width="1536" height="1024" fetchPriority="high" /></div>
+          <div className="portrait-source-crop"><img src={portraitSource} alt="" width="1536" height="1024" fetchPriority="high" onLoad={() => setPosterReady(true)} onError={() => setPosterFailed(true)} /></div>
         </div>
         {mounted && !reduced && !failed && (
           <PortraitBoundary onFailure={onUnavailable}>
@@ -309,5 +369,5 @@ export function PortraitExperience() {
         </>}
       </dialog>
     </div>
-  );
+  </>);
 }

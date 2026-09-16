@@ -4,7 +4,7 @@ import {
   Points, Scene, ShaderMaterial, Vector2, WebGLRenderer,
 } from "three";
 import {
-  fragmentShader, PORTRAIT_CROP, portraitFraming, portraitSource, samplePortrait, vertexShader,
+  fragmentShader, PORTRAIT_CROP, portraitFraming, portraitPhases, portraitSource, samplePortrait, vertexShader,
   type ParticleMotion,
 } from "./portrait-particles";
 
@@ -38,6 +38,7 @@ export default function PortraitScene({ motion, onReady, onUnavailable }: Props)
       uRelease: { value: 0 }, uTravel: { value: 0 }, uEnding: { value: 0 },
       uTime: { value: 0 }, uDpr: { value: 1 }, uScale: { value: 1 },
       uAspect: { value: 1 }, uPixel: { value: 2 }, uPointer: { value: new Vector2() },
+      uSeparate: { value: 0 }, uDissolve: { value: 0 }, uPress: { value: 0 },
     };
     const material = new ShaderMaterial({
       uniforms, vertexShader, fragmentShader, transparent: true,
@@ -62,6 +63,7 @@ export default function PortraitScene({ motion, onReady, onUnavailable }: Props)
     let measuredFrames = 0;
     let totalFrameTime = 0;
     let ready = false;
+    let wasPressed = false;
     const fail = () => {
       if (disposed) return;
       loaded = false;
@@ -94,13 +96,22 @@ export default function PortraitScene({ motion, onReady, onUnavailable }: Props)
       previous = now;
       const state = motion.current;
       uniforms.uRelease.value = state.release;
+      const phase = portraitPhases(state.release);
+      uniforms.uSeparate.value = phase.separate;
+      uniforms.uDissolve.value = phase.dissolve;
       uniforms.uTravel.value = state.travel;
       uniforms.uEnding.value = state.ending;
-      camera.position.z = 6 - state.travel * 0.35;
+      const advance = phase.separate * (1 - phase.dissolve);
+      camera.position.z = 6 - advance * 1.15 - state.travel * 0.35;
+      camera.position.x = advance * 0.12;
       camera.position.y = -state.travel * 0.18 * (1 - state.ending);
       if (!state.paused) uniforms.uTime.value += dt;
       pointer.set(state.pointerX, state.pointerY);
-      uniforms.uPointer.value.lerp(pointer, 1 - Math.exp(-dt * 4));
+      const pressTarget = state.pressed && !state.paused && state.release < 0.18 ? 1 : 0;
+      if (pressTarget && !wasPressed) uniforms.uPointer.value.copy(pointer);
+      else uniforms.uPointer.value.lerp(pointer, 1 - Math.exp(-dt * 10));
+      wasPressed = Boolean(pressTarget);
+      uniforms.uPress.value += (pressTarget - uniforms.uPress.value) * (1 - Math.exp(-dt * 10));
       renderer.render(scene, camera);
       if (!loaded) return; // A shader error can occur synchronously in render.
       if (!ready) {
@@ -122,7 +133,9 @@ export default function PortraitScene({ motion, onReady, onUnavailable }: Props)
         resize();
         slowFrames = 0;
       }
-      if ((!state.paused && state.release > 0.001) || uniforms.uPointer.value.distanceToSquared(pointer) > 0.00001) {
+      if ((!state.paused && state.release > 0.001)
+        || Math.abs(pressTarget - uniforms.uPress.value) > 0.001
+        || uniforms.uPointer.value.distanceToSquared(pointer) > 0.00001) {
         frame = requestAnimationFrame(render);
       }
     };
@@ -137,6 +150,7 @@ export default function PortraitScene({ motion, onReady, onUnavailable }: Props)
       cancelAnimationFrame(frame);
       frame = 0;
       previous = 0;
+      if (document.hidden) { uniforms.uPress.value = 0; wasPressed = false; }
       if (!document.hidden && loaded) frame = requestAnimationFrame(render);
     };
     const contextLost = (event: Event) => { event.preventDefault(); fail(); };
@@ -162,6 +176,7 @@ export default function PortraitScene({ motion, onReady, onUnavailable }: Props)
         geometry.setAttribute("position", new Float32BufferAttribute(data.positions, 3));
         geometry.setAttribute("aColour", new Float32BufferAttribute(data.colours, 3));
         geometry.setAttribute("aSeed", new Float32BufferAttribute(data.seeds, 4));
+        geometry.setAttribute("aDepth", new Float32BufferAttribute(data.depths, 1));
         canvas.dataset.particles = String(data.positions.length / 3);
         loaded = true;
         resize();

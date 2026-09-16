@@ -34,10 +34,37 @@ const random = (seed: number) => {
   return n - Math.floor(n);
 };
 
+// The view enters a layered portrait before opening into the ambient field.
+export const portraitPhases = (progress: number) => ({
+  separate: smooth(0.015, 0.55, progress),
+  dissolve: smooth(0.55, 1, progress),
+});
+
+export const isPortraitSurface = (target: EventTarget | null) => target instanceof HTMLElement
+  && Boolean(target.closest('.particle-hero'))
+  && !target.closest('a, button, input, textarea, select, [role="dialog"], [contenteditable]');
+
+export const acceptsPortraitPress = (pointerType: string, button: number, release: number, paused: boolean) =>
+  pointerType === 'mouse' && button === 0 && release < 0.18 && !paused;
+
 export const samplePortrait = (pixels: Uint8ClampedArray, width: number, height: number) => {
   const positions: number[] = [];
   const colours: number[] = [];
   const seeds: number[] = [];
+  const depths: number[] = [];
+  // A summed-area table smooths source grain into coherent contour surfaces.
+  // This is an image-derived relief, not inferred physical facial geometry.
+  const stride = width + 1;
+  const integral = new Float64Array(stride * (height + 1));
+  for (let y = 0; y < height; y++) {
+    let row = 0;
+    for (let x = 0; x < width; x++) {
+      const i = (y * width + x) * 4;
+      row += (pixels[i] * 0.2126 + pixels[i + 1] * 0.7152 + pixels[i + 2] * 0.0722) / 255;
+      integral[(y + 1) * stride + x + 1] = integral[y * stride + x + 1] + row;
+    }
+  }
+  const radius = Math.max(1, Math.round(width * 0.035));
   for (let y = 0; y < height; y++) {
     for (let x = 0; x < width; x++) {
       const i = (y * width + x) * 4;
@@ -60,9 +87,15 @@ export const samplePortrait = (pixels: Uint8ClampedArray, width: number, height:
         Math.pow(pixels[i + 2] / 255, 2.2) * edge,
       );
       seeds.push(r, random(seed + 17), random(seed + 71), u);
+      const x0 = Math.max(0, x - radius), x1 = Math.min(width, x + radius + 1);
+      const y0 = Math.max(0, y - radius), y1 = Math.min(height, y + radius + 1);
+      const blurred = (integral[y1 * stride + x1] - integral[y0 * stride + x1] - integral[y1 * stride + x0] + integral[y0 * stride + x0]) / ((x1 - x0) * (y1 - y0));
+      const relief = clamp(0.18 + Math.sqrt(blurred) * 0.7 + (light - blurred) * 0.05);
+      // Continuous contour sheets avoid artificial terraces across skin detail.
+      depths.push(relief);
     }
   }
-  return { positions: new Float32Array(positions), colours: new Float32Array(colours), seeds: new Float32Array(seeds) };
+  return { positions: new Float32Array(positions), colours: new Float32Array(colours), seeds: new Float32Array(seeds), depths: new Float32Array(depths) };
 };
 
 export type ParticleMotion = {
@@ -73,13 +106,17 @@ export type ParticleMotion = {
   pointerY: number;
   velocity: number;
   paused: boolean;
+  pressed?: boolean;
   invalidate?: () => void;
 };
 
 export const vertexShader = /* glsl */ `
   attribute vec3 aColour;
   attribute vec4 aSeed;
+  attribute float aDepth;
   uniform float uRelease;
+  uniform float uSeparate;
+  uniform float uDissolve;
   uniform float uTravel;
   uniform float uEnding;
   uniform float uTime;
@@ -88,6 +125,7 @@ export const vertexShader = /* glsl */ `
   uniform float uAspect;
   uniform float uPixel;
   uniform vec2 uPointer;
+  uniform float uPress;
   varying vec3 vColour;
   varying float vOpacity;
   varying float vBlur;
@@ -96,14 +134,23 @@ export const vertexShader = /* glsl */ `
     float r = aSeed.x;
     float s = aSeed.y;
     float t = aSeed.z;
-    // Rear hair releases first; the profile remains briefly before following.
-    float threshold = 0.04 + aSeed.w * 0.36 + s * 0.1;
-    float release = smoothstep(threshold, min(1.0, threshold + 0.49), uRelease);
+    float threshold = (1.0 - aDepth) * 0.24 + s * 0.1;
+    float release = smoothstep(threshold, 0.75 + threshold * 0.6, uDissolve);
     float angle = s * TAU;
     float ribbon = floor(s * 5.0);
     vec3 p = position * uScale;
     p.x += uAspect > 1.1 ? 0.32 : -0.7 * uScale;
     p.y += 0.06;
+    vec3 original = p;
+    vec3 layered = original;
+    float contourDepth = ((aDepth - 0.28) * 3.8 + (t - 0.5) * 0.1) * uScale * uSeparate;
+    layered.z += contourDepth;
+    // Keep facial proportions at the initial camera plane. The camera advance
+    // then reveals differential scale without inflating every bright cheek.
+    layered.xy *= (6.0 - layered.z) / (6.0 - original.z);
+    // Most movement is in depth. A small lateral offset makes its sheets visible.
+    layered.x += contourDepth * 0.13;
+    layered.y += contourDepth * 0.035;
     // Continuous, coherent filaments, not independent radial explosions.
     vec3 plume = vec3(
       p.x - 2.8 - r * 5.8,
@@ -119,7 +166,7 @@ export const vertexShader = /* glsl */ `
     field.x += uTravel * (1.5 + t * 1.3);
     field.z += uTravel * 1.0;
     vec3 flowing = mix(plume, field, smoothstep(0.42, 1.0, uRelease));
-    p = mix(p, flowing, release);
+    p = mix(layered, flowing, release);
     // The closing form is a tilted, diffuse arc with space for readable type.
     float arc = r * TAU;
     float radius = 2.2 + pow(s, 2.0) * 1.4;
@@ -130,25 +177,26 @@ export const vertexShader = /* glsl */ `
     );
     ending.y += sin(arc * 3.0 + uTime * 0.1) * 0.11;
     p = mix(p, ending, uEnding);
-    // Bounded camera parallax preserves the photographic likeness at rest.
-    p.x += uPointer.x * (p.z + 0.3) * 0.11;
-    p.y += uPointer.y * (p.z + 0.3) * 0.08;
-    vec2 pointerWorld = uPointer * vec2(2.18382 * uAspect, 2.18382);
-    vec2 away = p.xy - pointerWorld;
-    float presence = smoothstep(0.02, 0.16, length(uPointer));
-    float touch = (1.0 - smoothstep(0.0, 0.6, length(away))) * presence;
-    p.xy += normalize(away + vec2(0.001)) * touch * 0.035;
-    p.z += touch * 0.06;
+    // Only a held press parts the points. Passive hover leaves the photo intact.
+    p.x += uPointer.x * (p.z + 0.3) * 0.11 * release;
+    p.y += uPointer.y * (p.z + 0.3) * 0.08 * release;
+    vec2 plane = vec2(2.18382 * uAspect, 2.18382) * ((6.0 - original.z) / 6.0);
+    float interactive = 1.0 - smoothstep(0.08, 0.4, uRelease);
+    vec2 away = original.xy - uPointer * plane;
+    float influence = 1.0 - smoothstep(0.0, 0.48 * uScale, length(away));
+    float pressure = influence * uPress * interactive;
+    p.xy += normalize(away + vec2(0.001)) * pressure * 0.23 * uScale;
+    p.z -= pressure * 0.18 * uScale;
     vec4 mv = modelViewMatrix * vec4(p, 1.0);
     float depth = -mv.z;
     float focus = abs(depth - 6.0);
-    vBlur = smoothstep(0.5, 3.8, focus) * release;
+    vBlur = smoothstep(0.7, 3.8, focus) * max(release, uSeparate * 0.7);
     float sparsity = 1.0 - smoothstep(0.025, 0.055, t);
     float fieldAlpha = mix(0.002, 0.72, sparsity) * (0.35 + s * 0.65);
     vOpacity = mix(0.97, fieldAlpha, release) * smoothstep(0.3, 1.5, depth);
     vOpacity *= mix(1.0, 0.46, uEnding);
     vColour = mix(aColour * 1.08, vec3(0.62, 0.65, 0.67) * (0.45 + r * 0.55), release);
-    float portraitSize = uPixel;
+    float portraitSize = uPixel * 6.0 / max(1.0, depth) + vBlur * 3.0;
     float fieldSize = (0.012 + pow(s, 16.0) * 0.072) * 520.0 / max(0.5, depth);
     gl_PointSize = min(42.0, mix(portraitSize, fieldSize + vBlur * 8.0, release)) * uDpr;
     gl_Position = projectionMatrix * mv;
