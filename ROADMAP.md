@@ -1,8 +1,15 @@
 # ROADMAP
 
-## Design reset checkpoint - 14 September 2026
+## Current design checkpoint - 16 September 2026
 
-Current work is on `codex/creative-technologist-portfolio`. The editorial milestone below is historical. The revised [concept board](docs/reviews/2026-09-07-design-reset/index.html) now previews all projects in a card grid with discipline and software filters. The H-O-W-E rhythm strip has been removed. An ambitious 3D opening and its transition into the grid still need visual development and review. This checkpoint changes the proposal only. See the [current plan and revision record](docs/reviews/2026-09-07-design-reset/plan.md).
+Current work is on `codex/creative-technologist-portfolio`. Stephen's latest direction is a full-screen particle portrait, scroll-driven evaporation through 3D space, then a separate screen of five or six icon-and-text project cards. Each opens a substantial frosted-glass case study, with particles and other projects blurred behind it. Page Down from the opening should advance to the showcase. The complete filtered archive stays directly accessible. See the [current plan and revision record](docs/reviews/2026-09-07-design-reset/plan.md) and [three-state storyboard](docs/reviews/2026-09-07-design-reset/spatial-sequence.png).
+
+- [x] Record the confirmed portrait source, corrected sequence, card/detail distinction, depth/audio requirements and proposed six-project evidence roles.
+- [ ] Review the storyboard and choose the art treatment. The generated stills do not prove working 3D, sound or mobile behaviour.
+- [ ] Prove portrait evaporation, Page Down advancement and one readable glass case study in a bounded browser prototype before integrating the homepage.
+- [ ] Finalise five or six primary projects after source review; keep archive coverage, discipline/software filters and private V7 requirements intact.
+
+The older [HTML concept board](docs/reviews/2026-09-07-design-reset/index.html) previews the previous complete image-card index. It has not been updated to implement this sequence. No production homepage or Figma design changed at this checkpoint. The editorial milestone below is historical.
 
 ## Current task - Figma archive and interactive showcases, 15 September 2026
 
@@ -22,7 +29,7 @@ Stephen requested a review of every Figma export, organised presentation copies 
 - [x] On 16 September, verify Stephen's V7 reimport: all five pages, seven named desktop/mobile flows each, and creation-step links are present. The new file key and direct page links are in the register. Runtime/public-embed testing remains outstanding.
 - [ ] Work through every remaining source file, updating its record. Blueprint Token Minter is the next fresh-file candidate. For V7, inspect isolated empty actions in context rather than rebuilding the main flow.
 
-This update records the work; no Figma files have been reorganised or debranded and no embed has been implemented yet. Published embed targets must remain online. The ambitious 3D opening remains unresolved and separate from this preparation milestone.
+This update records the work; no Figma files have been reorganised or debranded and no embed has been implemented yet. Published embed targets must remain online. The 3D opening's sequence is recorded above; its implementation and art treatment remain separate from this preparation milestone.
 
 ## Historical editorial milestone
 
@@ -45,7 +52,7 @@ design reset checkpoint above supersedes this milestone and its next steps.
 - ✓ Employer-focused positioning and light-first editorial art direction.
 - ✓ Outcome-first index for nine case studies.
 - ✓ Solana Diary and agentic portfolio case studies.
-- ✓ Full 2005–present career history.
+- ✓ Full 2005-present career history.
 - ✓ Standalone `/cv` route with print / save-as-PDF control.
 - ✓ Contact form replacing the public email address.
 - ✓ SEO, social metadata, favicon, and structured person data.
