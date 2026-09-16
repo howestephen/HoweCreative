@@ -47,26 +47,13 @@ export const isPortraitSurface = (target: EventTarget | null) => target instance
 export const acceptsPortraitPress = (pointerType: string, button: number, release: number, paused: boolean) =>
   pointerType === 'mouse' && button === 0 && release < 0.18 && !paused;
 
-const inEllipse = (u: number, v: number, cx: number, cy: number, rx: number, ry: number) =>
-  Math.pow((u - cx) / rx, 2) + Math.pow((v - cy) / ry, 2) < 1;
+export const PORTRAIT_PILLARS = 13;
 
-// The reference moves a small set of image sections through depth. It does
-// not turn the nose, cheek or other highlights into a facial height map.
-export const portraitSectionDepth = (u: number, v: number) => {
-  let depth = 0.09;
-  if (inEllipse(u, v, 0.55, 0.28, 0.38, 0.38)) depth = 0.34;
-  if (inEllipse(u, v, 0.7, 0.4, 0.34, 0.36)) {
-    const band = v + (u - 0.7) * 0.08;
-    depth = band < 0.25 ? 0.6
-      : band < 0.36 ? 0.69
-        : band < 0.47 ? 0.75
-          : band < 0.58 ? 0.67
-            : 0.59;
-  }
-  if (u < 0.43 || (v < 0.17 && u < 0.82)) depth = 0.31;
-  if (v > 0.61 && u < 0.73) depth = 0.43;
-  if (v > 0.82) depth = 0.22;
-  return depth;
+// Every point in one vertical strip shares a depth. The strip remains a rigid
+// image pillar until the later dust phase instead of deforming facial detail.
+export const portraitPillarDepth = (u: number) => {
+  const pillar = Math.min(PORTRAIT_PILLARS - 1, Math.max(0, Math.floor(u * PORTRAIT_PILLARS)));
+  return 0.5 + Math.sin((pillar + 1) * 2.17) * 0.33;
 };
 
 export const samplePortrait = (pixels: Uint8ClampedArray, width: number, height: number) => {
@@ -87,17 +74,15 @@ export const samplePortrait = (pixels: Uint8ClampedArray, width: number, height:
       // Jitter is less than half a source pixel; tonal detail stays resolved.
       const px = (u - 0.5 + (r - 0.5) / width * 0.65) * (700 / 650) * 4.6;
       const py = (0.5 - v + (random(seed + 2) - 0.5) / height * 0.65) * 4.6;
-      const sectionDepth = portraitSectionDepth(u, v);
-      const z = sectionDepth * 0.018;
-      const correction = (6 - z) / 6;
-      positions.push(px * correction, py * correction, z);
+      const pillarDepth = portraitPillarDepth(u);
+      positions.push(px, py, 0);
       colours.push(
         Math.pow(pixels[i] / 255, 2.2) * edge,
         Math.pow(pixels[i + 1] / 255, 2.2) * edge,
         Math.pow(pixels[i + 2] / 255, 2.2) * edge,
       );
       seeds.push(r, random(seed + 17), random(seed + 71), u);
-      depths.push(sectionDepth);
+      depths.push(pillarDepth);
     }
   }
   return { positions: new Float32Array(positions), colours: new Float32Array(colours), seeds: new Float32Array(seeds), depths: new Float32Array(depths) };
@@ -137,6 +122,11 @@ export const vertexShader = /* glsl */ `
   varying float vOpacity;
   varying float vBlur;
   const float TAU = 6.28318530718;
+  vec3 rotateY(vec3 value, float angle) {
+    float c = cos(angle);
+    float s = sin(angle);
+    return vec3(c * value.x + s * value.z, value.y, -s * value.x + c * value.z);
+  }
   void main() {
     float r = aSeed.x;
     float s = aSeed.y;
@@ -148,21 +138,17 @@ export const vertexShader = /* glsl */ `
     vec3 p = position * uScale;
     p.x += uAspect > 1.1 ? 0.32 : -0.7 * uScale;
     p.y += 0.06;
-    vec3 original = p;
-    vec3 layered = original;
-    // Authored section values keep each part of the image coherent while the
-    // camera reveals the space between them.
-    float depthSheet = floor(aDepth * 14.0 + 0.5) / 14.0;
-    float contourDepth = ((depthSheet - 0.1) * 3.15 + (t - 0.5) * 0.045) * uScale * uSeparate;
-    layered.z += contourDepth;
-    // Keep facial proportions at the initial camera plane. The camera advance
-    // then reveals differential scale without inflating every bright cheek.
-    float compensation = (6.0 - layered.z) / (6.0 - original.z);
-    layered.xy *= mix(1.0, compensation, 0.8);
-    // The layers reveal themselves mostly through perspective, with only a
-    // small diagonal drift like the supplied reference.
-    layered.x += (depthSheet - 0.48) * 0.42 * uScale * uSeparate;
-    layered.y += (depthSheet - 0.48) * 0.09 * uScale * uSeparate;
+    float pillarIndex = min(12.0, floor(aSeed.w * 13.0));
+    float pillarCentre = (pillarIndex + 0.5) / 13.0;
+    float baseYaw = -0.13;
+    vec3 original = rotateY(p, baseYaw);
+    vec3 pillar = p;
+    // The source is already a tilted object. Each broad vertical strip then
+    // moves as one rigid column, revealing the gaps from the side.
+    pillar.x += (pillarCentre - 0.5) * 0.34 * uScale * uSeparate;
+    pillar.y += sin((pillarIndex + 1.0) * 1.73) * 0.035 * uScale * uSeparate;
+    pillar.z += (aDepth - 0.5) * 3.1 * uScale * uSeparate;
+    vec3 layered = rotateY(pillar, baseYaw - uSeparate * 0.15);
     // Continuous, coherent filaments, not independent radial explosions.
     vec3 plume = vec3(
       p.x - 2.8 - r * 5.8,

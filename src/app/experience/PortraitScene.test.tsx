@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
-import { acceptsPortraitPress, isPortraitSurface, PORTRAIT_CROP, portraitFraming, portraitPhases, portraitSectionDepth, samplePortrait, scrollState } from "./portrait-particles";
+import { acceptsPortraitPress, isPortraitSurface, PORTRAIT_CROP, PORTRAIT_PILLARS, portraitFraming, portraitPhases, portraitPillarDepth, samplePortrait, scrollState } from "./portrait-particles";
 import PortraitScene from "./PortraitScene";
 
 vi.mock("three", async (original) => ({
@@ -80,7 +80,7 @@ describe("portrait source and reversible choreography", () => {
     }
   });
 
-  it('finishes the sectional expansion before beginning the particle dissolve', () => {
+  it('finishes the pillar expansion before beginning the particle dissolve', () => {
     expect(portraitPhases(0)).toEqual({ separate: 0, dissolve: 0 });
     expect(portraitPhases(0.35).separate).toBeGreaterThan(0.5);
     expect(portraitPhases(0.5).dissolve).toBe(0);
@@ -90,10 +90,9 @@ describe("portrait source and reversible choreography", () => {
     expect(portraitPhases(0)).toEqual({ separate: 0, dissolve: 0 });
   });
 
-  it('keeps the profile on one section instead of inflating the nose', () => {
-    expect(portraitSectionDepth(0.91, 0.42)).toBeCloseTo(portraitSectionDepth(0.72, 0.435));
-    expect(portraitSectionDepth(0.77, 0.48)).toBeGreaterThan(portraitSectionDepth(0.34, 0.3));
-    expect(portraitSectionDepth(0.34, 0.3)).toBeGreaterThan(portraitSectionDepth(0.5, 0.9));
+  it('assigns one shared depth per vertical pillar instead of using facial brightness', () => {
+    expect(portraitPillarDepth(0.5)).toBe(portraitPillarDepth(0.53));
+    expect(portraitPillarDepth(0.46)).not.toBe(portraitPillarDepth(0.5));
     const pixels = new Uint8ClampedArray(80 * 80 * 4);
     for (let y = 0; y < 80; y++) for (let x = 0; x < 80; x++) {
       const i = (y * 80 + x) * 4;
@@ -105,8 +104,9 @@ describe("portrait source and reversible choreography", () => {
     const { depths } = samplePortrait(pixels, 80, 80);
     expect(Math.min(...depths)).toBeGreaterThan(0);
     expect(Math.max(...depths)).toBeLessThan(1);
-    expect(new Set(depths).size).toBeGreaterThan(4);
-    expect(Math.max(...depths) - Math.min(...depths)).toBeGreaterThan(0.3);
+    expect(new Set(depths).size).toBeGreaterThan(6);
+    expect(new Set(depths).size).toBeLessThanOrEqual(PORTRAIT_PILLARS);
+    expect(Math.max(...depths) - Math.min(...depths)).toBeGreaterThan(0.5);
   });
 });
 
