@@ -7,7 +7,7 @@ Current work is on `codex/creative-technologist-portfolio`. Stephen's latest dir
 - [x] Record the confirmed portrait source, corrected sequence, card/detail distinction, depth/audio requirements and proposed six-project evidence roles.
 - [x] Stephen approved building the portrait sequence as a review prototype, with final showcase content deferred.
 - [x] Implement `/study`: portrait particles, scroll-driven evaporation, a separate six-card screen, a glass preview and a closing particle arc. Page Down, reverse scrolling, motion-off fallback and opt-in sound are available.
-- [x] Refine the opening after feedback: source-coherent depth and a camera advance based on the supplied recording; restrained mouse press-and-hold parting; a full-page first-frame loader; a calm 2.1-second, interruptible journey to work.
+- [x] Refine the opening after feedback: the portrait now separates into authored face, hair, neck and shoulder sections before the particle dissolve; the nose remains locked to its surrounding face section; mouse movement adds colour without displacement; press-and-hold parts nearby points; the first-frame loader fully covers setup; the interruptible journey to work lasts 6.5 seconds.
 - [ ] Review the working motion and art treatment with Stephen before integrating the homepage. The glass previews and six-project selection are provisional.
 - [ ] Finalise five or six primary projects after source review; keep archive coverage, discipline/software filters and private V7 requirements intact.
 
