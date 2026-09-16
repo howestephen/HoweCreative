@@ -135,10 +135,10 @@
       "body": "Designed and built a language-learning prototype using news articles, quizzes, learner dashboards, React, Supabase and Google authentication. Refining contextual lesson types in Spanish before expanding the language scope."
     },
     "quiver": {
-      "title": "Quiver: Generative Brand Films",
+      "title": "Quiver: Generative Launch Film",
       "dates": "2026 | Professional work | Complete",
       "slug": "quiver",
-      "body": "Developed the film identity from a supplied logo, product website and initial ident concept. Planned shots around model limitations, generated and selected imagery, footage and music using ChatGPT and ComfyUI, then finished four edits in After Effects. Used AI-assisted scripts for reusable scene construction and edit reflow."
+      "body": "Directed and produced a 68-second product launch film from a sparse brief. Designed constrained source plates around model limitations, ran local Wan 2.2 inference in ComfyUI, and built modular After Effects scenes with AI-assisted production scripts for reusable depth, typography and sequencing."
     }
   },
   "skills": {

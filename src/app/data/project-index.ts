@@ -27,14 +27,14 @@ export const projectEditorial: Record<
   }
 > = {
   quiver: {
-    label: "Generative film / Art direction / Production tools",
-    headline: "The craft behind a generated world.",
+    label: "Creative direction / Generative production / Motion systems",
+    headline: "A controlled filmmaking system for a technical launch.",
     summary:
-      "An open marketing brief became four finished films. I developed the visual direction and script, generated the imagery, footage and music, and built the motion and edit around them.",
+      "A sparse marketing brief became a 68-second launch film. I directed the world, designed constrained inputs for local and hosted generation, and built the modular motion system that finished it.",
     cover: "/case-studies/quiver/hero-poster.jpg",
-    fit: "I direct the idea, shape the source material and build the production tools that carry it into the final film.",
+    fit: "I connect art direction, emerging tools and hands-on production, then build a method that survives beyond one output.",
     credit:
-      "My work: film concept, script, art direction, generated imagery and footage, motion design, editing, AI-generated music and AI-assisted production scripts. The logo, product interface and an initial Grok-generated ident concept were supplied. Produced as Lead Designer at UNCX Network.",
+      "My work: concept, script, art direction, source-image direction, local inference workflow, motion design, editing, audio and AI-assisted production scripts. The logo, product and rough ident reference were supplied. Produced as Lead Designer at UNCX Network.",
   },
   "uncx-video-system": {
     label: "3D / Motion / Production",

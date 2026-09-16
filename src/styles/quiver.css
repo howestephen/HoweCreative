@@ -1,7 +1,6 @@
 .quiver-case {
   --quiver-paper: #efeee9;
   --quiver-ink: #151615;
-  --quiver-dim: #aaaead;
   background: #080909;
   color: #f1f0eb;
 }
@@ -48,8 +47,8 @@
   inset: 0;
   z-index: -1;
   background:
-    linear-gradient(90deg, #04050566 0%, transparent 75%),
-    linear-gradient(0deg, #080909 0%, transparent 24%);
+    linear-gradient(90deg, #040505c9 0%, #04050545 48%, transparent 76%),
+    linear-gradient(0deg, #080909 0%, transparent 27%);
 }
 
 .quiver-opening-content {
@@ -79,15 +78,15 @@
 }
 
 .quiver-title-block h1 {
+  margin-block: 28px;
+  margin-left: -0.055em;
   font-size: clamp(90px, 14.6vw, 218px);
   letter-spacing: -0.07em;
   line-height: 0.93;
-  margin-block: 28px;
-  margin-left: -0.055em;
 }
 
 .quiver-deck {
-  max-width: 340px;
+  max-width: 520px;
   font-size: clamp(22px, 2vw, 30px);
   line-height: 1.35;
   letter-spacing: -0.025em;
@@ -109,9 +108,7 @@
   height: 48px;
   border: 1px solid #ffffff55;
   border-radius: 50%;
-  transition:
-    background 180ms,
-    color 180ms;
+  transition: background 180ms, color 180ms;
 }
 
 .quiver-play-icon svg {
@@ -124,10 +121,10 @@
 }
 
 .quiver-watch-duration {
-  font-size: 11px;
-  font-family: var(--font-technical);
-  color: #afb3af;
   margin-left: 9px;
+  font-family: var(--font-technical);
+  font-size: 11px;
+  color: #afb3af;
 }
 
 .quiver-opening-bottom {
@@ -178,15 +175,18 @@
   color: #b9bdb8;
 }
 
-.quiver-screening .quiver-section-intro .quiver-label {
+.quiver-screening .quiver-label {
   color: #adb2ac;
 }
 
 .quiver-cinema {
+  overflow: hidden;
   background: #000;
+  box-shadow: 0 30px 80px #00000050;
 }
 
-.quiver-cinema video {
+.quiver-cinema video,
+.quiver-evidence-clip video {
   display: block;
   width: 100%;
   aspect-ratio: 16 / 9;
@@ -195,79 +195,66 @@
   color-scheme: dark;
 }
 
-.quiver-screening-caption {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 28px;
-  padding-block: 18px 30px;
-  font-size: 12px;
+.quiver-film-facts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  padding-top: 18px;
+  font-family: var(--font-technical);
+  font-size: 11px;
   line-height: 1.6;
   color: #a8ada7;
 }
 
-.quiver-screening-caption > span {
-  flex-shrink: 0;
+.quiver-film-facts span:nth-child(2) {
+  text-align: center;
 }
 
-.quiver-film-choices {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  border-bottom: 1px solid #ffffff25;
+.quiver-film-facts span:last-child {
+  text-align: right;
 }
 
-.quiver-film-choices a {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  row-gap: 12px;
-  column-gap: 12px;
-  align-content: start;
-  padding: 24px 20px;
+.quiver-film-alternative {
+  margin-top: 32px;
   border-top: 1px solid #ffffff25;
-  color: #a5aaa4;
-  transition:
-    color 180ms,
-    background 180ms;
+  color: #b9bdb8;
 }
 
-.quiver-film-choices a + a {
-  border-left: 1px solid #ffffff25;
-}
-
-.quiver-film-choices a[aria-current="true"] {
-  border-top-color: #efeee9;
-  color: #efeee9;
-  background: #ffffff07;
-}
-
-.quiver-film-choices a:hover {
-  background: #ffffff0d;
+.quiver-film-alternative summary {
+  width: fit-content;
+  padding-block: 20px;
+  cursor: pointer;
+  font-size: 13px;
   color: #efeee9;
 }
 
-.quiver-film-number {
-  grid-column: 1;
+.quiver-film-alternative ol {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  padding: 0 0 18px;
+  list-style: none;
+  counter-reset: quiver-film-sequence;
+}
+
+.quiver-film-alternative li {
+  counter-increment: quiver-film-sequence;
+  font-size: 12px;
+  line-height: 1.65;
+}
+
+.quiver-film-alternative li::before {
+  content: "0" counter(quiver-film-sequence);
+  display: block;
+  margin-bottom: 14px;
   font-family: var(--font-technical);
-  font-size: 11px;
+  font-size: 10px;
+  color: #777d77;
 }
 
-.quiver-film-name {
-  grid-column: 1 / -1;
-  grid-row: 2;
-  font-size: 14px;
-}
-
-.quiver-film-duration {
-  grid-column: 2;
-  grid-row: 1;
-  font-family: var(--font-technical);
-  font-size: 11px;
-}
-
-.quiver-film-choices svg {
-  grid-column: 2;
-  grid-row: 3;
-  margin-top: 4px;
+.quiver-film-alternative strong {
+  color: #efeee9;
+  font-weight: 500;
 }
 
 .quiver-production {
@@ -311,12 +298,12 @@
 
 .quiver-credits dt,
 .quiver-tools dt {
+  margin-bottom: 12px;
   font-family: var(--font-technical);
   font-size: 11px;
   letter-spacing: 0.04em;
   color: #62665e;
   text-transform: uppercase;
-  margin-bottom: 12px;
 }
 
 .quiver-credits dd {
@@ -325,12 +312,13 @@
   color: #4f544c;
 }
 
-.quiver-direction {
+.quiver-direction,
+.quiver-inference {
   display: grid;
   grid-template-columns: 0.65fr 1fr;
   gap: 76px;
   align-items: center;
-  padding-block: 30px 100px;
+  padding-block: 30px 110px;
 }
 
 .quiver-chapter-copy h2 {
@@ -350,12 +338,20 @@
   color: #272a25;
 }
 
-.quiver-direction-image img {
+.quiver-direction-image img,
+.quiver-source-frame img,
+.quiver-rejected-frame img,
+.quiver-edit-frame img {
+  display: block;
   width: 100%;
-  aspect-ratio: 1.12;
+  height: auto;
+  aspect-ratio: 16 / 9;
   object-fit: cover;
-  object-position: 68% center;
   background: #080909;
+}
+
+.quiver-direction-image img {
+  aspect-ratio: 8 / 3;
 }
 
 .quiver-case figcaption {
@@ -365,17 +361,23 @@
   color: #62665e;
 }
 
-.quiver-shot-section {
+.quiver-shot-section,
+.quiver-control {
   background: #141615;
   color: #eeeee8;
-  padding-block: 90px 64px;
 }
 
-.quiver-shot-section .quiver-label {
+.quiver-shot-section {
+  padding-block: 90px;
+}
+
+.quiver-shot-section .quiver-label,
+.quiver-control .quiver-label {
   color: #afb4ae;
 }
 
-.quiver-shot-section .quiver-section-intro > p {
+.quiver-shot-section .quiver-section-intro > p,
+.quiver-control .quiver-chapter-copy > p {
   color: #b8bdb6;
 }
 
@@ -393,12 +395,12 @@
 .quiver-frame-label {
   display: flex;
   justify-content: space-between;
+  padding-block: 16px;
+  border-top: 1px solid #ffffff35;
   font-family: var(--font-technical);
   font-size: 11px;
-  text-transform: uppercase;
   letter-spacing: 0.035em;
-  border-top: 1px solid #ffffff35;
-  padding-block: 16px;
+  text-transform: uppercase;
 }
 
 .quiver-frame-label > span + span {
@@ -406,76 +408,64 @@
 }
 
 .quiver-frame-pair img {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 1672 / 941;
-  background: #050605;
-}
-
-.quiver-frame-pair figcaption {
-  color: #b1b8af;
-  max-width: 420px;
-  padding-right: 24px;
-}
-
-.quiver-shot-note {
-  display: grid;
-  grid-template-columns: 1fr 0.82fr;
-  gap: 90px;
-  border-top: 1px solid #ffffff25;
-  padding-top: 26px;
-  margin-top: 42px;
-}
-
-.quiver-shot-note p {
-  font-size: 14px;
-  line-height: 1.8;
-  color: #b8bdb6;
-}
-
-.quiver-generation {
-  display: grid;
-  grid-template-columns: 1fr 0.65fr;
-  gap: 76px;
-  align-items: center;
-  padding-block: 110px;
-}
-
-.quiver-eye-study {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
-}
-
-.quiver-eye-study figure:first-child {
-  grid-column: 1 / -1;
-  margin-right: 14%;
-}
-
-.quiver-eye-study figure:last-child {
-  grid-column: 1 / -1;
-  margin-left: 28%;
-  margin-top: 12px;
-}
-
-.quiver-eye-study img {
   display: block;
   width: 100%;
   height: auto;
   aspect-ratio: 16 / 9;
+  background: #050605;
+}
+
+.quiver-frame-pair figcaption,
+.quiver-shot-section .quiver-evidence-clip figcaption {
+  color: #b1b8af;
+}
+
+.quiver-impact-proof {
+  width: min(72%, 960px);
+  margin: 54px auto 0;
+}
+
+.quiver-evidence-clip video {
   object-fit: cover;
-  background: #080909;
+}
+
+.quiver-evidence-clip figcaption {
+  display: grid;
+  grid-template-columns: 0.42fr 1fr;
+  gap: 24px;
+}
+
+.quiver-evidence-clip figcaption strong {
+  font-family: var(--font-technical);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.quiver-evidence-clip figcaption span {
+  line-height: 1.6;
+}
+
+.quiver-inference {
+  grid-template-columns: 0.72fr 1fr;
+  padding-block: 110px;
+}
+
+.quiver-inference-evidence {
+  display: grid;
+  gap: 38px;
 }
 
 .quiver-tools {
-  border-top: 1px solid #15161535;
-  margin-top: 32px;
   padding-top: 20px;
+  margin-top: 32px;
+  border-top: 1px solid #15161535;
 }
 
 .quiver-tools > div {
   display: grid;
-  grid-template-columns: 1fr 1.4fr;
+  grid-template-columns: 0.8fr 1.4fr;
   gap: 16px;
   margin-bottom: 14px;
 }
@@ -490,39 +480,75 @@
   line-height: 1.6;
 }
 
+.quiver-control {
+  padding-block: 105px;
+}
+
+.quiver-control-grid {
+  display: grid;
+  grid-template-columns: 0.72fr 1fr;
+  gap: 76px;
+  align-items: center;
+}
+
+.quiver-control .quiver-chapter-copy > .quiver-principle {
+  color: #f0eee8;
+  border-top-color: #ffffff30;
+}
+
+.quiver-control .quiver-rejected-frame figcaption {
+  color: #b1b8af;
+}
+
 .quiver-edit {
-  padding-bottom: 80px;
+  padding-block: 110px 90px;
 }
 
-.quiver-edit-frame img {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 16 / 9;
-  background: #080909;
+.quiver-assembly-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 0.75fr;
+  gap: 24px;
+  align-items: start;
 }
 
-.quiver-production-flow {
+.quiver-assembly-grid .quiver-evidence-clip video {
+  aspect-ratio: 9 / 12;
+}
+
+.quiver-authorship {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 50px;
-  margin-top: 45px;
-  padding: 0;
-  list-style: none;
+  gap: 42px;
+  margin-top: 48px;
 }
 
-.quiver-production-flow li {
-  padding-top: 24px;
+.quiver-authorship > div {
+  padding-top: 22px;
   border-top: 1px solid #15161535;
 }
 
-.quiver-production-flow h3 {
-  margin-block: 18px 12px;
-  font-size: 23px;
-  letter-spacing: -0.025em;
+.quiver-authorship p {
+  margin-top: 14px;
+  font-size: 14px;
+  line-height: 1.75;
+  color: #555a51;
 }
 
-.quiver-production-flow p {
-  font-size: 14px;
+.quiver-outcome {
+  display: grid;
+  grid-template-columns: 0.3fr 1fr 0.66fr;
+  gap: 50px;
+  align-items: start;
+  padding-block: 80px;
+  border-top: 1px solid #15161535;
+}
+
+.quiver-outcome h2 {
+  font-size: clamp(34px, 4vw, 56px);
+}
+
+.quiver-outcome > p {
+  font-size: 15px;
   line-height: 1.8;
   color: #555a51;
 }
@@ -532,8 +558,8 @@
 }
 
 .quiver-collection .gallery-heading {
-  border-top-color: #15161535;
   margin-bottom: 35px;
+  border-top-color: #15161535;
 }
 
 .quiver-collection .gallery-heading h2 {
@@ -547,8 +573,8 @@
 
 .quiver-collection .gallery-grid img {
   aspect-ratio: 16 / 9;
-  background: #080909;
   object-fit: cover;
+  background: #080909;
 }
 
 .quiver-collection .gallery-grid button > span {
@@ -557,9 +583,9 @@
 
 .quiver-next {
   display: block;
+  padding-block: 74px;
   background: #1d211e;
   color: #f1f0eb;
-  padding-block: 74px;
 }
 
 .quiver-next .quiver-label {
@@ -606,24 +632,29 @@
 
   .quiver-section-intro,
   .quiver-brief-heading,
-  .quiver-shot-note,
   .quiver-direction,
-  .quiver-generation {
+  .quiver-inference,
+  .quiver-control-grid {
     gap: 42px;
   }
 
   .quiver-credits,
-  .quiver-production-flow {
+  .quiver-authorship {
     gap: 30px;
   }
 
-  .quiver-film-choices a {
-    padding-inline: 15px;
+  .quiver-direction,
+  .quiver-inference,
+  .quiver-control-grid {
+    grid-template-columns: 1fr 1fr;
   }
 
-  .quiver-direction,
-  .quiver-generation {
-    grid-template-columns: 1fr 1fr;
+  .quiver-outcome {
+    grid-template-columns: 0.25fr 1fr;
+  }
+
+  .quiver-outcome > p {
+    grid-column: 2;
   }
 }
 
@@ -637,14 +668,14 @@
   }
 
   .quiver-opening-image {
-    object-position: 94% center;
-    opacity: 0.74;
+    object-position: 86% center;
+    opacity: 0.75;
   }
 
   .quiver-opening::after {
     background:
-      linear-gradient(90deg, #04050565 0%, transparent 80%),
-      linear-gradient(0deg, #080909 0%, transparent 35%);
+      linear-gradient(90deg, #040505d9 0%, #04050555 68%, transparent 100%),
+      linear-gradient(0deg, #080909 0%, transparent 38%);
   }
 
   .quiver-opening-content {
@@ -652,12 +683,12 @@
   }
 
   .quiver-title-block {
-    padding-block: 100px 64px;
+    padding-block: 90px 58px;
   }
 
   .quiver-title-block h1 {
-    font-size: clamp(90px, 24vw, 180px);
     margin-block: 24px;
+    font-size: clamp(88px, 24vw, 180px);
   }
 
   .quiver-title-block > .quiver-label {
@@ -665,7 +696,12 @@
   }
 
   .quiver-deck {
-    max-width: 270px;
+    max-width: 360px;
+    font-size: 21px;
+  }
+
+  .quiver-watch {
+    flex-wrap: wrap;
   }
 
   .quiver-watch-duration {
@@ -675,18 +711,17 @@
   .quiver-opening-bottom {
     align-items: start;
     font-size: 10px;
-    max-width: 500px;
   }
 
   .quiver-opening-bottom > span {
-    max-width: 165px;
+    max-width: 145px;
     line-height: 1.6;
   }
 
   .quiver-opening-bottom a {
-    gap: 10px;
+    gap: 8px;
     min-height: 32px;
-    flex-shrink: 0;
+    text-align: right;
   }
 
   .quiver-screening {
@@ -696,8 +731,9 @@
   .quiver-section-intro,
   .quiver-brief-heading,
   .quiver-direction,
-  .quiver-shot-note,
-  .quiver-generation {
+  .quiver-inference,
+  .quiver-control-grid,
+  .quiver-outcome {
     grid-template-columns: 1fr;
     gap: 28px;
   }
@@ -708,7 +744,7 @@
 
   .quiver-case h2 {
     max-width: 560px;
-    font-size: clamp(32px, 7vw, 48px);
+    font-size: clamp(32px, 9vw, 48px);
   }
 
   .quiver-section-intro > p,
@@ -716,27 +752,19 @@
     font-size: 15px;
   }
 
-  .quiver-screening-caption {
-    flex-direction: column;
-    gap: 8px;
-    padding-bottom: 24px;
+  .quiver-film-facts {
+    grid-template-columns: 1fr;
+    gap: 4px;
   }
 
-  .quiver-film-choices {
-    grid-template-columns: 1fr 1fr;
+  .quiver-film-facts span:nth-child(2),
+  .quiver-film-facts span:last-child {
+    text-align: left;
   }
 
-  .quiver-film-choices a {
-    padding: 18px 14px;
-    row-gap: 9px;
-  }
-
-  .quiver-film-choices a:nth-child(3) {
-    border-left: 0;
-  }
-
-  .quiver-film-name {
-    font-size: 12px;
+  .quiver-film-alternative ol {
+    grid-template-columns: 1fr;
+    gap: 24px;
   }
 
   .quiver-brief {
@@ -747,7 +775,8 @@
     margin-block: 24px 38px;
   }
 
-  .quiver-credits {
+  .quiver-credits,
+  .quiver-authorship {
     grid-template-columns: 1fr;
     gap: 26px;
   }
@@ -756,12 +785,13 @@
     margin-bottom: 7px;
   }
 
-  .quiver-direction {
+  .quiver-direction,
+  .quiver-inference {
     padding-block: 15px 60px;
   }
 
   .quiver-direction-image img {
-    aspect-ratio: 1.4;
+    aspect-ratio: 1.7 / 1;
   }
 
   .quiver-chapter-copy > .quiver-principle {
@@ -769,63 +799,58 @@
     margin-top: 22px;
   }
 
-  .quiver-shot-section {
-    padding-block: 60px 45px;
+  .quiver-shot-section,
+  .quiver-control {
+    padding-block: 60px;
   }
 
   .quiver-frame-pair {
-    gap: 30px;
     grid-template-columns: 1fr;
+    gap: 30px;
   }
 
-  .quiver-frame-pair figcaption {
-    max-width: none;
-    padding-right: 0;
+  .quiver-impact-proof {
+    width: 100%;
+    margin-top: 38px;
   }
 
-  .quiver-shot-note {
-    gap: 14px;
-    margin-top: 30px;
+  .quiver-evidence-clip figcaption {
+    grid-template-columns: 1fr;
+    gap: 6px;
   }
 
-  .quiver-generation {
-    padding-block: 60px;
-    gap: 40px;
+  .quiver-inference {
+    gap: 44px;
   }
 
-  .quiver-generation .quiver-chapter-copy {
+  .quiver-inference .quiver-chapter-copy {
     grid-row: 1;
   }
 
   .quiver-tools > div {
-    grid-template-columns: 1fr 1.4fr;
     max-width: 430px;
-  }
-
-  .quiver-eye-study figure:first-child {
-    margin-right: 10%;
-  }
-
-  .quiver-eye-study figure:last-child {
-    margin-left: 20%;
-  }
-
-  .quiver-production-flow {
-    grid-template-columns: 1fr;
-    gap: 26px;
-    margin-top: 30px;
-  }
-
-  .quiver-production-flow li {
-    padding-top: 20px;
-  }
-
-  .quiver-production-flow h3 {
-    margin-top: 12px;
+    grid-template-columns: 0.9fr 1.4fr;
   }
 
   .quiver-edit {
-    padding-bottom: 50px;
+    padding-block: 60px;
+  }
+
+  .quiver-assembly-grid {
+    grid-template-columns: 1fr;
+    gap: 38px;
+  }
+
+  .quiver-assembly-grid .quiver-evidence-clip video {
+    aspect-ratio: 16 / 9;
+  }
+
+  .quiver-outcome {
+    padding-block: 60px;
+  }
+
+  .quiver-outcome > p {
+    grid-column: 1;
   }
 
   .quiver-collection {
