@@ -57,6 +57,8 @@ describe("portrait review experience", () => {
     expect(container.querySelector(".portrait-source-crop img")).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Scroll to explore" })).toBeEnabled();
     expect(screen.queryByTestId("test-scene")).not.toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "Scroll to explore" }));
+    expect(window.scrollTo).toHaveBeenCalledWith(expect.objectContaining({ behavior: "instant" }));
   });
 
   it("bypasses WebGL when reduced motion is requested", async () => {
@@ -107,7 +109,7 @@ describe("portrait review experience", () => {
     expect(container.querySelector('.particle-experience')).toHaveAttribute('aria-busy', 'false');
   });
 
-  it('takes a calm two-second journey and yields immediately to manual scrolling', async () => {
+  it('takes a calm six-second journey and yields immediately to manual scrolling', async () => {
     vi.useFakeTimers();
     const { container } = mount();
     await act(async () => { vi.advanceTimersByTime(32); });
@@ -117,9 +119,12 @@ describe("portrait review experience", () => {
     act(() => { vi.advanceTimersByTime(500); });
     const early = vi.mocked(window.scrollTo).mock.lastCall?.[0] as ScrollToOptions;
     expect(early.top).toBeGreaterThan(0);
-    expect(early.top).toBeLessThan(150);
+    expect(early.top).toBeLessThan(30);
     fireEvent.keyDown(window, { key: 'PageDown', repeat: true });
-    act(() => { vi.advanceTimersByTime(1800); });
+    act(() => { vi.advanceTimersByTime(5800); });
+    const almostThere = vi.mocked(window.scrollTo).mock.lastCall?.[0] as ScrollToOptions;
+    expect(almostThere.top).toBeLessThan(1000);
+    act(() => { vi.advanceTimersByTime(300); });
     expect(window.scrollTo).toHaveBeenLastCalledWith({ top: 1000, behavior: 'instant' });
     fireEvent.click(screen.getByRole('button', { name: 'Scroll to explore' }));
     act(() => { vi.advanceTimersByTime(300); });
@@ -149,16 +154,20 @@ describe("portrait review experience", () => {
     const press = () => fireEvent.pointerDown(hero, { pointerType: 'mouse', isPrimary: true, button: 0, clientX: 400, clientY: 250 });
     fireEvent.pointerMove(hero, { pointerType: 'mouse', clientX: 400, clientY: 250 });
     expect(sceneState.current?.pressed).not.toBe(true);
+    expect(sceneState.current?.pointerActive).toBe(true);
     for (const interrupt of ['pointerup', 'pointercancel', 'blur']) {
       press();
       expect(sceneState.current?.pressed).toBe(true);
       fireEvent(window, new Event(interrupt));
       expect(sceneState.current?.pressed).toBe(false);
+      expect(sceneState.current?.pointerActive).toBe(false);
     }
     fireEvent.pointerDown(hero, { pointerType: 'touch', isPrimary: true, button: 0 });
     expect(sceneState.current?.pressed).toBe(false);
     fireEvent.pointerDown(screen.getByRole('button', { name: 'Scroll to explore' }), { pointerType: 'mouse', isPrimary: true, button: 0 });
     expect(sceneState.current?.pressed).toBe(false);
+    fireEvent.pointerMove(screen.getByRole('button', { name: 'Scroll to explore' }), { pointerType: 'mouse', clientX: 400, clientY: 250 });
+    expect(sceneState.current?.pointerActive).toBe(false);
   });
 
   it("suspends audio that finishes initialising after the tab becomes hidden", async () => {

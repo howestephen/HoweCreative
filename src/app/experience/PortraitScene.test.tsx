@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
-import { acceptsPortraitPress, isPortraitSurface, PORTRAIT_CROP, portraitFraming, portraitPhases, samplePortrait, scrollState } from "./portrait-particles";
+import { acceptsPortraitPress, isPortraitSurface, PORTRAIT_CROP, portraitFraming, portraitPhases, portraitSectionDepth, samplePortrait, scrollState } from "./portrait-particles";
 import PortraitScene from "./PortraitScene";
 
 vi.mock("three", async (original) => ({
@@ -62,7 +62,7 @@ describe("portrait source and reversible choreography", () => {
     const work = 1440;
     const end = 2400;
     expect(scrollState(0, h, work, end)).toEqual({ release: 0, travel: 0, ending: 0, intro: 1 });
-    expect(scrollState(work - h * 0.55, h, work, end).release).toBe(1);
+    expect(scrollState(work - h * 0.62, h, work, end).release).toBe(1);
     expect(scrollState(end + h * 0.12, h, work, end).ending).toBe(1);
     expect(scrollState(0, h, work, end).release).toBe(0);
   });
@@ -80,28 +80,33 @@ describe("portrait source and reversible choreography", () => {
     }
   });
 
-  it('reserves a depth-expansion interval before dissolving and returns to the same endpoints', () => {
+  it('finishes the sectional expansion before beginning the particle dissolve', () => {
     expect(portraitPhases(0)).toEqual({ separate: 0, dissolve: 0 });
-    expect(portraitPhases(0.5).separate).toBeGreaterThan(0.95);
+    expect(portraitPhases(0.35).separate).toBeGreaterThan(0.5);
     expect(portraitPhases(0.5).dissolve).toBe(0);
-    expect(portraitPhases(0.8).dissolve).toBeGreaterThan(0.5);
+    expect(portraitPhases(0.61)).toEqual({ separate: 1, dissolve: 0 });
+    expect(portraitPhases(0.82).dissolve).toBeGreaterThan(0.5);
     expect(portraitPhases(1)).toEqual({ separate: 1, dissolve: 1 });
     expect(portraitPhases(0)).toEqual({ separate: 0, dissolve: 0 });
   });
 
-  it('derives continuous source-coherent depth without assigning unrelated polygon cells', () => {
-    const pixels = new Uint8ClampedArray(80 * 80 * 4).fill(255);
-    const flat = samplePortrait(pixels, 80, 80);
-    expect(new Set(flat.depths).size).toBe(1);
+  it('keeps the profile on one section instead of inflating the nose', () => {
+    expect(portraitSectionDepth(0.91, 0.42)).toBeCloseTo(portraitSectionDepth(0.72, 0.435));
+    expect(portraitSectionDepth(0.77, 0.48)).toBeGreaterThan(portraitSectionDepth(0.34, 0.3));
+    expect(portraitSectionDepth(0.34, 0.3)).toBeGreaterThan(portraitSectionDepth(0.5, 0.9));
+    const pixels = new Uint8ClampedArray(80 * 80 * 4);
     for (let y = 0; y < 80; y++) for (let x = 0; x < 80; x++) {
       const i = (y * 80 + x) * 4;
-      pixels[i] = pixels[i + 1] = pixels[i + 2] = 20 + x * 2.8;
+      pixels[i + 3] = 255;
+      if (x >= 12 && x <= 67 && y >= 9 && y <= 70) {
+        pixels[i] = pixels[i + 1] = pixels[i + 2] = 150;
+      }
     }
     const { depths } = samplePortrait(pixels, 80, 80);
     expect(Math.min(...depths)).toBeGreaterThan(0);
     expect(Math.max(...depths)).toBeLessThan(1);
-    expect(new Set(depths).size).toBeGreaterThan(20);
-    expect(Math.max(...depths) - Math.min(...depths)).toBeGreaterThan(0.35);
+    expect(new Set(depths).size).toBeGreaterThan(4);
+    expect(Math.max(...depths) - Math.min(...depths)).toBeGreaterThan(0.3);
   });
 });
 

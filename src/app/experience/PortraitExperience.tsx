@@ -69,17 +69,17 @@ export function PortraitExperience() {
   const travelTo = useCallback((target: number) => {
     if (loadingRef.current) return;
     cancelAnimationFrame(scrollAnimation.current);
-    if (reduced) { window.scrollTo({ top: target, behavior: "instant" }); return; }
+    if (reduced || failed) { window.scrollTo({ top: target, behavior: "instant" }); return; }
     const start = window.scrollY;
     const started = performance.now();
     const tick = (now: number) => {
-      const t = clamp((now - started) / 2100);
+      const t = clamp((now - started) / 6500);
       const eased = t * t * t * (t * (t * 6 - 15) + 10);
       window.scrollTo({ top: start + (target - start) * eased, behavior: "instant" });
       scrollAnimation.current = t < 1 ? requestAnimationFrame(tick) : 0;
     };
     scrollAnimation.current = requestAnimationFrame(tick);
-  }, [reduced]);
+  }, [failed, reduced]);
   const goToWork = useCallback(() => { if (work.current) travelTo(work.current.offsetTop); }, [travelTo]);
   const returnToPortrait = () => travelTo(0);
 
@@ -193,10 +193,11 @@ export function PortraitExperience() {
       pointerY = -(event.clientY / height - 0.5) * 2;
       motion.current.pointerX = pointerX;
       motion.current.pointerY = pointerY;
-      if (!isPortraitSurface(event.target)) motion.current.pressed = false;
+      motion.current.pointerActive = isPortraitSurface(event.target) && !reduced && !activeDialog.current;
+      if (!motion.current.pointerActive) motion.current.pressed = false;
       wake();
     };
-    const resetPointer = () => { motion.current.pressed = false; wake(); };
+    const resetPointer = () => { motion.current.pressed = false; motion.current.pointerActive = false; wake(); };
     const pointerDown = (event: PointerEvent) => {
       if (loadingRef.current || !event.isPrimary || !isPortraitSurface(event.target)
         || !acceptsPortraitPress(event.pointerType, event.button, motion.current.release, reduced || activeDialog.current)) return;
@@ -214,7 +215,7 @@ export function PortraitExperience() {
       cancelAnimationFrame(frame);
       frame = 0;
       previousTime = 0;
-      if (document.hidden) { motion.current.pressed = false; void audio.current?.suspend(); }
+      if (document.hidden) { motion.current.pressed = false; motion.current.pointerActive = false; void audio.current?.suspend(); }
       else {
         if (soundOn.current) void audio.current?.resume().catch(() => setAudioError(true));
         wake();
@@ -255,6 +256,7 @@ export function PortraitExperience() {
     if (!panel || selected === null) return;
     activeDialog.current = true;
     motion.current.paused = true;
+    motion.current.pointerActive = false;
     motion.current.invalidate?.();
     audio.current?.update(0, 0, true);
     panel.showModal();
