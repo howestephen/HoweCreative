@@ -23,7 +23,7 @@ export const portraitFraming = (width: number, height: number) => {
 };
 
 export const scrollState = (y: number, height: number, workTop: number, endTop: number) => ({
-  release: smooth(height * 0.08, workTop - height * 0.62, y),
+  release: smooth(height * 0.08, workTop - height * 0.25, y),
   travel: smooth(workTop - height * 0.55, endTop - height * 0.7, y),
   ending: smooth(endTop - height * 0.7, endTop + height * 0.12, y),
   intro: 1 - smooth(height * 0.06, height * 0.45, y),
@@ -34,10 +34,12 @@ const random = (seed: number) => {
   return n - Math.floor(n);
 };
 
-// The view enters a layered portrait before opening into the ambient field.
+// Separation, surface atomisation and spatial drift overlap deliberately. This
+// avoids a finished pillar animation handing off to a second abrupt effect.
 export const portraitPhases = (progress: number) => ({
-  separate: smooth(0.015, 0.58, progress),
-  dissolve: smooth(0.62, 1, progress),
+  separate: smooth(0.015, 0.8, progress),
+  atomise: smooth(0.12, 1, progress),
+  disperse: clamp((progress - 0.32) / 0.68),
 });
 
 export const isPortraitSurface = (target: EventTarget | null) => target instanceof HTMLElement
@@ -49,8 +51,8 @@ export const acceptsPortraitPress = (pointerType: string, button: number, releas
 
 export const PORTRAIT_PILLARS = 13;
 
-// Every point in one vertical strip shares a depth. The strip remains a rigid
-// image pillar until the later dust phase instead of deforming facial detail.
+// Every point in one vertical strip shares its structural depth. The strip
+// moves as one pillar before individual points begin shedding from its surface.
 export const portraitPillarDepth = (u: number) => {
   const pillar = Math.min(PORTRAIT_PILLARS - 1, Math.max(0, Math.floor(u * PORTRAIT_PILLARS)));
   return 0.5 + Math.sin((pillar + 1) * 2.17) * 0.33;
@@ -107,7 +109,8 @@ export const vertexShader = /* glsl */ `
   attribute float aDepth;
   uniform float uRelease;
   uniform float uSeparate;
-  uniform float uDissolve;
+  uniform float uAtomise;
+  uniform float uDisperse;
   uniform float uTravel;
   uniform float uEnding;
   uniform float uTime;
@@ -131,8 +134,9 @@ export const vertexShader = /* glsl */ `
     float r = aSeed.x;
     float s = aSeed.y;
     float t = aSeed.z;
-    float threshold = (1.0 - aDepth) * 0.24 + s * 0.1;
-    float release = smoothstep(threshold, 0.75 + threshold * 0.6, uDissolve);
+    float threshold = (1.0 - aDepth) * 0.12 + s * 0.48;
+    float atomise = smoothstep(threshold, min(1.0, threshold + 0.62), uAtomise);
+    float drift = uDisperse;
     float angle = s * TAU;
     float ribbon = floor(s * 5.0);
     vec3 p = position * uScale;
@@ -149,22 +153,34 @@ export const vertexShader = /* glsl */ `
     pillar.y += sin((pillarIndex + 1.0) * 1.73) * 0.035 * uScale * uSeparate;
     pillar.z += (aDepth - 0.5) * 3.1 * uScale * uSeparate;
     vec3 layered = rotateY(pillar, baseYaw - uSeparate * 0.15);
-    // Continuous, coherent filaments, not independent radial explosions.
-    vec3 plume = vec3(
-      p.x - 2.8 - r * 5.8,
-      p.y * 0.3 + sin(r * 4.0 + position.y * 0.6) * 1.3,
-      cos(r * 4.0 + position.y * 0.6) * 1.6 + (s - 0.5) * 0.5
+    // The pillars shed locally while they are still separating. Released
+    // points stay close to their source before the later, slower spatial drift.
+    vec3 dustDirection = normalize(vec3(
+      (r - 0.5) * 1.15 + (pillarCentre - 0.5) * 0.22,
+      (s - 0.5) * 0.9,
+      (t - 0.5) * 1.2 + 0.04
+    ));
+    vec3 loosened = layered + dustDirection * (0.055 + t * 0.3) * uScale * atomise;
+    // A coherent control field bends every particle onto one continuous curve.
+    // Neighbouring surface detail therefore stretches before it loses all form.
+    vec3 flowControl = layered + vec3(
+      ((pillarCentre - 0.5) * 1.4 - 0.65) * uScale,
+      sin(position.y * 1.25 + pillarIndex * 0.35) * 0.42 * uScale,
+      ((aDepth - 0.5) * 1.2 + (t - 0.5) * 0.18) * uScale
     );
     vec3 field = vec3(
-      (r - 0.5) * 19.0,
-      sin(r * 8.0 + ribbon * 0.38) * 1.35 + (s - 0.5) * 2.8,
-      cos(r * 7.0 + ribbon * 0.7) * 2.4 - 1.6 + (t - 0.5) * 4.0
+      (r - 0.5) * 15.0 - 0.8,
+      sin(r * 8.0 + ribbon * 0.38) * 1.1 + (s - 0.5) * 2.4,
+      cos(r * 7.0 + ribbon * 0.7) * 2.0 - 1.3 + (t - 0.5) * 3.2
     );
     field.y += sin(angle + uTime * 0.09) * 0.13;
     field.x += uTravel * (1.5 + t * 1.3);
     field.z += uTravel * 1.0;
-    vec3 flowing = mix(plume, field, smoothstep(0.42, 1.0, uRelease));
-    p = mix(layered, flowing, release);
+    float flight = atomise * drift;
+    float retained = 1.0 - flight;
+    p = retained * retained * loosened
+      + 2.0 * retained * flight * flowControl
+      + flight * flight * field;
     // The closing form is a tilted, diffuse arc with space for readable type.
     float arc = r * TAU;
     float radius = 2.2 + pow(s, 2.0) * 1.4;
@@ -176,8 +192,8 @@ export const vertexShader = /* glsl */ `
     ending.y += sin(arc * 3.0 + uTime * 0.1) * 0.11;
     p = mix(p, ending, uEnding);
     // Only a held press parts the points. Passive hover changes colour only.
-    p.x += uPointer.x * (p.z + 0.3) * 0.11 * release;
-    p.y += uPointer.y * (p.z + 0.3) * 0.08 * release;
+    p.x += uPointer.x * (p.z + 0.3) * 0.11 * atomise * drift;
+    p.y += uPointer.y * (p.z + 0.3) * 0.08 * atomise * drift;
     vec2 plane = vec2(2.18382 * uAspect, 2.18382) * ((6.0 - original.z) / 6.0);
     float interactive = 1.0 - smoothstep(0.08, 0.4, uRelease);
     vec2 away = original.xy - uPointer * plane;
@@ -188,19 +204,22 @@ export const vertexShader = /* glsl */ `
     vec4 mv = modelViewMatrix * vec4(p, 1.0);
     float depth = -mv.z;
     float focus = abs(depth - 6.0);
-    vBlur = smoothstep(1.35, 4.4, focus) * max(release, uSeparate * 0.22);
+    float settledDust = drift * drift;
+    float dustAppearance = atomise * (0.08 + settledDust * 0.92);
+    float opticalSpread = atomise * 0.18 + settledDust * 0.82;
+    vBlur = smoothstep(1.35, 4.4, focus) * max(opticalSpread, uSeparate * 0.16);
     float sparsity = 1.0 - smoothstep(0.025, 0.055, t);
     float fieldAlpha = mix(0.002, 0.72, sparsity) * (0.35 + s * 0.65);
-    vOpacity = mix(0.97, fieldAlpha, release) * smoothstep(0.3, 1.5, depth);
+    vOpacity = mix(0.97, fieldAlpha, dustAppearance) * smoothstep(0.3, 1.5, depth);
     vOpacity *= mix(1.0, 0.46, uEnding);
-    vColour = mix(aColour * 1.08, vec3(0.62, 0.65, 0.67) * (0.45 + r * 0.55), release);
+    vColour = mix(aColour * 1.08, vec3(0.62, 0.65, 0.67) * (0.45 + r * 0.55), dustAppearance);
     float hover = exp(-pow(length(away * vec2(0.82, 1.15)) / (0.88 * uScale), 2.0) * 1.65) * uHover * interactive;
     float sourceLight = dot(aColour, vec3(0.2126, 0.7152, 0.0722));
     vec3 warmRed = vec3(sourceLight * 1.08, sourceLight * 0.19, sourceLight * 0.13);
     vColour = mix(vColour, warmRed, hover * (0.3 + uPress * 0.18));
     float portraitSize = uPixel * 6.0 / max(1.0, depth) + vBlur * 3.0;
     float fieldSize = (0.012 + pow(s, 16.0) * 0.072) * 520.0 / max(0.5, depth);
-    gl_PointSize = min(42.0, mix(portraitSize, fieldSize + vBlur * 8.0, release)) * uDpr;
+    gl_PointSize = min(42.0, mix(portraitSize, fieldSize + vBlur * 8.0, dustAppearance)) * uDpr;
     gl_Position = projectionMatrix * mv;
   }
 `;

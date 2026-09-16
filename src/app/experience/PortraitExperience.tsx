@@ -73,8 +73,8 @@ export function PortraitExperience() {
     const start = window.scrollY;
     const started = performance.now();
     const tick = (now: number) => {
-      const t = clamp((now - started) / 6500);
-      const eased = t * t * t * (t * (t * 6 - 15) + 10);
+      const t = clamp((now - started) / 9000);
+      const eased = t * t * (3 - 2 * t);
       window.scrollTo({ top: start + (target - start) * eased, behavior: "instant" });
       scrollAnimation.current = t < 1 ? requestAnimationFrame(tick) : 0;
     };
