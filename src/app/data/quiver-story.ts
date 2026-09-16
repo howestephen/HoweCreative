@@ -1,72 +1,56 @@
-export const quiverProcess: Array<{
-  title: string;
-  body: string;
-  image?: string;
-  caption?: string;
-}> = [
+export const quiverFilm = {
+  title: "Quiver launch film",
+  src: "/case-studies/quiver/quiver-launch-film.mp4",
+  poster: "/case-studies/quiver/hero-poster.jpg",
+  duration: "1:08",
+  format: "1920 x 1080 / 24 fps",
+  description:
+    "The finished launch film combines generated performances and atmospheres with authored typography, product storytelling and motion design.",
+};
+
+export const quiverEvidenceClips = [
   {
-    title: "Give the brief a visual language.",
-    body:
-      "The starting point was a logo, a product website and an early Grok-generated ident concept. I wrote the script and developed a consistent treatment for the film: a restrained monochrome world, directional light, material detail and space for the product story. The look had to remain coherent across generated imagery, typography and motion.",
-    image: "/case-studies/quiver/archer-portrait.webp",
-    caption: "The finished treatment: controlled light, a hidden face and room for the message.",
+    title: "Bounded impact",
+    src: "/case-studies/quiver/evidence-impact.mp4",
+    poster: "/case-studies/quiver/evidence-impact.poster.jpg",
+    description:
+      "A generated transition between two deliberately matched states: an empty plate and the arrow at rest.",
   },
   {
-    title: "Plan the action the model can resolve.",
-    body:
-      "A convincing image does not guarantee convincing movement. The model could misread bowstring physics and invent an impossible transition. I planned the start and end moments to remove that ambiguity before generating footage. Choosing the shot, testing the source assets and deciding where the action begins and ends were central production decisions.",
-    image: "/case-studies/quiver/process-impact-end.webp",
-    caption: "A prepared impact endpoint gives the generated action a clear destination.",
+    title: "Local character test",
+    src: "/case-studies/quiver/evidence-archer.mp4",
+    poster: "/case-studies/quiver/evidence-archer.poster.jpg",
+    description:
+      "A repeatable local inference pass developed from a composition designed around the model's limits.",
   },
   {
-    title: "Generate with a direction. Select with a purpose.",
-    body:
-      "I generated source images in ChatGPT and used Claude to drive ComfyUI for footage and audio. Image-led generation gave me a stronger starting point, but each shot still needed iteration, typically 5-10 attempts, followed by selection for usable movement and continuity. The music was also AI-generated through ComfyUI and shaped as part of the edit.",
-    image: "/case-studies/quiver/process-eye-detail.webp",
-    caption: "A prepared eye close-up, developed as a deliberate cutaway within the same visual world.",
-  },
-  {
-    title: "Build the film so it can change.",
-    body:
-      "In After Effects I separated footage, generated mist and typography into depth layers, then controlled entrances, impacts, transitions and reading pace in the edit. AI-assisted scripts built the scene templates and reflowed the master sequence while preserving trims and ordering. That structure supported four finished versions across two scripts, with and without phone imagery.",
-    image: "/case-studies/quiver/launch-rules.webp",
-    caption: "Finished frame: generated footage, authored motion typography and supplied product imagery brought together in the edit.",
+    title: "Independent atmosphere",
+    src: "/case-studies/quiver/evidence-mist.mp4",
+    poster: "/case-studies/quiver/evidence-mist.poster.jpg",
+    description:
+      "Mist generated as a separate layer so its timing, depth and intensity remained editable in After Effects.",
   },
 ];
 
-export const quiverFilms: Array<{
-  title: string;
-  src: string;
-  poster: string;
-  duration: string;
-  description: string;
-}> = [
+export const quiverProcess = [
   {
-    title: "Basic / with product",
-    src: "/case-studies/quiver/basic-with-phone.mp4",
-    poster: "/case-studies/quiver/basic-with-phone.poster.jpg",
-    duration: "0:42",
-    description: "The shorter explanation, with the supplied product interface presented on a phone.",
+    title: "Build a world from a sparse brief.",
+    body:
+      "The starting point was a logo, the existing product and a rough ident reference. I wrote the script and established a near-black world of empty hoods, cracked leather, hard overhead light, sparse smoke and controlled negative space. That direction gave image generation, typography, motion and sound one set of rules.",
   },
   {
-    title: "Advanced / with product",
-    src: "/case-studies/quiver/advanced-with-phone.mp4",
-    poster: "/case-studies/quiver/advanced-with-phone.poster.jpg",
-    duration: "0:58",
-    description: "The extended explanation, connecting the product interface to the film's visual narrative.",
+    title: "Constrain the action before generating it.",
+    body:
+      "A convincing still does not guarantee believable motion. Bowstrings, hands and arrows expose the model quickly. For impact shots I designed pixel-matched start and end plates, then asked the model to resolve one bounded transition. For character shots I fixed the camera, silhouette, bow hand, arrow length and title-safe space before inference.",
   },
   {
-    title: "Basic / film treatment",
-    src: "/case-studies/quiver/basic.mp4",
-    poster: "/case-studies/quiver/basic.poster.jpg",
-    duration: "0:42",
-    description: "The shorter explanation using the generated world and motion typography without phone imagery.",
+    title: "Use local inference where iteration matters.",
+    body:
+      "I ran Wan 2.2 in ComfyUI on a dedicated RTX 4090 for repeatable image-to-video and first-to-last-frame passes. Hosted tools remained useful for fast exploration, while the local route gave me owned, credit-free iteration for prepared shots. The workflow was hybrid by design rather than tied to one generator.",
   },
   {
-    title: "Advanced / film treatment",
-    src: "/case-studies/quiver/advanced.mp4",
-    poster: "/case-studies/quiver/advanced.poster.jpg",
-    duration: "0:58",
-    description: "The extended explanation using the generated world and motion typography without phone imagery.",
+    title: "Keep the finishing layer deterministic.",
+    body:
+      "In After Effects I assembled a modular scene system with separate footage, mist, typography and product layers. AI-assisted scripts created scene comps, text precomps, impact markers, shared 2.5D depth and camera movement. The logo, type, arrow beats, edit rhythm and final assembly stayed authored and repeatable.",
   },
 ];

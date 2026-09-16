@@ -1,50 +1,48 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router";
 import { describe, expect, it, vi } from "vitest";
 import { QuiverCaseStudy } from "./QuiverCaseStudy";
-import { quiverFilms } from "../data/quiver-story";
+import { quiverEvidenceClips, quiverFilm } from "../data/quiver-story";
 
 vi.mock("../concept/ContactFoot", () => ({ ContactFoot: () => null }));
 
-describe("Quiver film screening", () => {
-  it("replaces the player when a different edit is selected and leaves playback to the viewer", () => {
+describe("Quiver case study", () => {
+  it("leads with the final master and supports its process claims with inspectable evidence", () => {
     render(
       <MemoryRouter>
         <QuiverCaseStudy />
       </MemoryRouter>,
     );
-    const firstPlayer = screen.getByLabelText("Quiver: Basic / with product");
-    expect(firstPlayer).toHaveAttribute("controls");
-    expect(firstPlayer).not.toHaveAttribute("autoplay");
-    expect(firstPlayer).not.toHaveAttribute("muted");
+    const master = screen.getByLabelText(quiverFilm.title);
+    expect(master).toHaveAttribute("src", quiverFilm.src);
+    expect(master).toHaveAttribute("controls");
+    expect(master).not.toHaveAttribute("autoplay");
+    expect(master).not.toHaveAttribute("muted");
 
-    for (const film of quiverFilms) {
-      expect(
-        screen.getByRole("link", {
-          name: (name) => name.includes(film.title),
-        }),
-      ).toHaveAttribute("href", film.src);
+    for (const clip of quiverEvidenceClips) {
+      const evidence = screen.getByLabelText(clip.title);
+      expect(evidence).toHaveAttribute("src", clip.src);
+      expect(evidence).toHaveAttribute("controls");
+      expect((evidence as HTMLVideoElement).muted).toBe(true);
+      expect(evidence).not.toHaveAttribute("autoplay");
     }
-
-    fireEvent.click(
-      screen.getByRole("link", { name: /Advanced \/ film treatment/ }),
-    );
-
-    expect(firstPlayer).not.toBeInTheDocument();
-    const selectedPlayer = screen.getByLabelText(
-      "Quiver: Advanced / film treatment",
-    );
-    expect(selectedPlayer).toHaveAttribute(
-      "src",
-      "/case-studies/quiver/advanced.mp4",
-    );
-    expect(selectedPlayer).not.toHaveAttribute("autoplay");
     expect(
-      screen.getByRole("link", { name: /Advanced \/ film treatment/ }),
-    ).toHaveAttribute("aria-current", "true");
+      screen.getByRole("heading", {
+        name: "Failure is evidence when it changes the method.",
+      }),
+    ).toBeInTheDocument();
     expect(
-      screen.getByRole("link", { name: /Basic \/ with product/ }),
-    ).not.toHaveAttribute("aria-current");
+      screen.getByText("Wan 2.2 / ComfyUI / RTX 4090"),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText("Read the film’s sequence"),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(/signed authorisations replace on-chain allowlists/),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(/buy gate can be disabled permanently/),
+    ).toBeInTheDocument();
     expect(
       screen.getAllByRole("button", { name: /^View larger:/ }),
     ).toHaveLength(11);

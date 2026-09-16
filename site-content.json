@@ -126,11 +126,11 @@
         "id": 10,
         "slug": "quiver",
         "title": "Quiver",
-        "category": "Generative Film / Art Direction / Production Tools",
+        "category": "Creative Direction / Generative Production / Motion Systems",
         "year": "2026",
         "status": "Complete",
-        "shortDescription": "A complete brand film production from an open marketing brief: visual direction, script, generated imagery and footage, motion design, editing and AI-generated music.",
-        "fullDescription": "The brief was simply to make a marketing video. I was given a logo, the product website and an early ident concept generated in Grok. From that starting point I developed the film's visual identity, script and production approach, creating the imagery, footage, animation, edit and music. ChatGPT provided image generation, while I used Claude to drive ComfyUI workflows for moving image and audio production. The work depended on shot planning and editorial judgement: designing moments that the models could resolve, selecting workable takes, and finishing the sequence in After Effects. A modular scene structure and production scripts supported revisions across two scripts, each delivered with and without phone imagery.",
+        "shortDescription": "A 68-second product launch film developed from a sparse brief: creative direction, constrained generative production, motion design, editing and reusable production tooling.",
+        "fullDescription": "The brief was simply to make a marketing video. I was given a logo, the existing product and a rough ident reference. From that starting point I wrote the script and developed a near-black visual world, then designed source plates around the limits of generated motion. I ran repeatable image-to-video and first-to-last-frame passes with Wan 2.2 in ComfyUI on a dedicated RTX 4090, using hosted generation for fast exploration. In After Effects I kept footage, mist, typography and product layers independently editable, with AI-assisted scripts creating reusable scene structures, depth controls and impact markers. The final 68-second master combines generated material with authored communication and deterministic finishing.",
         "tags": [
           "Art Direction",
           "Generative AI",
@@ -151,7 +151,7 @@
         "overlaySections": [
           {
             "title": "Brief",
-            "body": "Create a marketing video from a supplied logo, the product website and an early Grok-generated ident concept. There was no developed film treatment. I established the visual direction, wrote the script and shaped the production around a defined art style."
+            "body": "Create a marketing video from a supplied logo, the existing product and a rough ident reference. There was no developed film treatment. I established the visual direction, wrote the script and shaped the production around a defined art style."
           },
           {
             "title": "Problem Frame",
@@ -159,45 +159,45 @@
           },
           {
             "title": "System Design",
-            "body": "I combined ChatGPT image generation with ComfyUI workflows driven through Claude, then assembled and finished the film in After Effects. The scene structure separated footage plates, generated mist and typography into depth layers, giving me control over the image, readability and motion. AI-assisted production scripts built the nested scene templates and reflowed the master sequence after edits while preserving scene order and trims."
+            "body": "I combined hosted image exploration with local Wan 2.2 inference in ComfyUI, then assembled and finished the film in After Effects. The scene structure separated footage plates, generated mist, typography and product layers, giving me control over image, readability and motion. AI-assisted production scripts created scene comps, text precomps, impact markers, shared 2.5D depth and camera movement."
           },
           {
             "title": "Trade-offs",
-            "body": "I planned start and end moments that kept the action legible and avoided ambiguous transitions that could produce impossible bowstring physics. Planning and testing the source assets came before generating multiple takes, typically 5-10 attempts, and choosing the strongest usable result. In the edit, I could control impact timing, transitions and typography directly. This kept the final rhythm and reading pace in my hands."
+            "body": "I planned start and end moments that kept the action legible and avoided ambiguous transitions that could produce impossible bowstring physics. Planning and testing source assets came before generation and selection. Hosted generation supported fast exploration; local inference required more preparation and storage but made repeated variants possible on owned hardware. In the edit I controlled impact timing, transitions and typography directly."
           },
           {
             "title": "Delivery",
-            "body": "Four finished 16:9 films: a 42-second basic explanation and a 58-second advanced explanation, each with and without phone imagery. The work included script, visual identity for the films, generated source imagery and footage, animation, editing, AI-generated music and a reusable After Effects production structure. The supplied logo, existing product interface and initial Grok ident concept were starting materials."
+            "body": "A 68-second 16:9 launch master at 1920 x 1080 and 24 fps, supported by a structured footage library and reusable After Effects production system. The work included concept, script, art direction, source-image direction, local inference workflow, motion design, editing, audio and production tooling. The supplied logo, existing product and rough ident reference were starting materials."
           },
           {
             "title": "Outcome",
-            "body": "A coherent film treatment carried through four complete edits, with one person responsible for creative direction and production across image, motion and sound. The finished work is approved for public portfolio use. No campaign reach, conversion or commercial performance figures are claimed."
+            "body": "A coherent launch film and a reusable method for designing inputs, bounding inference, selecting viable movement and finishing the result. The work is approved for public portfolio use. No campaign reach, conversion or commercial performance figures are claimed."
           }
         ],
         "media": [
           {
             "type": "video",
-            "src": "/case-studies/quiver/basic-with-phone.mp4",
-            "poster": "/case-studies/quiver/basic-with-phone.poster.jpg",
-            "alt": "Quiver basic film with phone imagery, 42 seconds, including AI-generated music"
+            "src": "/case-studies/quiver/quiver-launch-film.mp4",
+            "poster": "/case-studies/quiver/hero-poster.jpg",
+            "alt": "Quiver 68-second product launch film combining generated material with authored typography and motion design"
           },
           {
             "type": "video",
-            "src": "/case-studies/quiver/advanced-with-phone.mp4",
-            "poster": "/case-studies/quiver/advanced-with-phone.poster.jpg",
-            "alt": "Quiver advanced film with phone imagery, 58 seconds, including AI-generated music"
+            "src": "/case-studies/quiver/evidence-impact.mp4",
+            "poster": "/case-studies/quiver/evidence-impact.poster.jpg",
+            "alt": "Quiver impact test generated between matched empty and arrow-end source plates"
           },
           {
             "type": "video",
-            "src": "/case-studies/quiver/basic.mp4",
-            "poster": "/case-studies/quiver/basic.poster.jpg",
-            "alt": "Quiver basic film without phone imagery, 42 seconds, including AI-generated music"
+            "src": "/case-studies/quiver/evidence-archer.mp4",
+            "poster": "/case-studies/quiver/evidence-archer.poster.jpg",
+            "alt": "Quiver local inference test of a hooded archer prepared from a controlled source composition"
           },
           {
             "type": "video",
-            "src": "/case-studies/quiver/advanced.mp4",
-            "poster": "/case-studies/quiver/advanced.poster.jpg",
-            "alt": "Quiver advanced film without phone imagery, 58 seconds, including AI-generated music"
+            "src": "/case-studies/quiver/evidence-mist.mp4",
+            "poster": "/case-studies/quiver/evidence-mist.poster.jpg",
+            "alt": "Quiver atmosphere test generated as a separate editable mist layer"
           },
           {
             "type": "image",
