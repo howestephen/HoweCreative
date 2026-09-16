@@ -38,7 +38,7 @@ export default function PortraitScene({ motion, onReady, onUnavailable }: Props)
       uRelease: { value: 0 }, uTravel: { value: 0 }, uEnding: { value: 0 },
       uTime: { value: 0 }, uDpr: { value: 1 }, uScale: { value: 1 },
       uAspect: { value: 1 }, uPixel: { value: 2 }, uPointer: { value: new Vector2() },
-      uSeparate: { value: 0 }, uDissolve: { value: 0 }, uPress: { value: 0 }, uHover: { value: 0 },
+      uSeparate: { value: 0 }, uAtomise: { value: 0 }, uDisperse: { value: 0 }, uPress: { value: 0 }, uHover: { value: 0 },
     };
     const material = new ShaderMaterial({
       uniforms, vertexShader, fragmentShader, transparent: true,
@@ -98,12 +98,13 @@ export default function PortraitScene({ motion, onReady, onUnavailable }: Props)
       uniforms.uRelease.value = state.release;
       const phase = portraitPhases(state.release);
       uniforms.uSeparate.value = phase.separate;
-      uniforms.uDissolve.value = phase.dissolve;
+      uniforms.uAtomise.value = phase.atomise;
+      uniforms.uDisperse.value = phase.disperse;
       uniforms.uTravel.value = state.travel;
       uniforms.uEnding.value = state.ending;
-      const cameraT = Math.min(1, Math.max(0, (phase.separate - 0.58) / 0.42));
-      const cameraEase = cameraT * cameraT * (3 - 2 * cameraT);
-      const advance = cameraEase * (1 - phase.dissolve);
+      // Release is already eased across the full hero passage. Reusing it
+      // directly prevents a second remap from compressing the camera move.
+      const advance = state.release;
       camera.position.z = 6 - advance * 0.88 - state.travel * 0.35;
       camera.position.x = advance * 0.24;
       camera.position.y = -state.travel * 0.18 * (1 - state.ending);

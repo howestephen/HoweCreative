@@ -109,7 +109,7 @@ describe("portrait review experience", () => {
     expect(container.querySelector('.particle-experience')).toHaveAttribute('aria-busy', 'false');
   });
 
-  it('takes a calm six-second journey and yields immediately to manual scrolling', async () => {
+  it('takes a calm nine-second journey and yields immediately to manual scrolling', async () => {
     vi.useFakeTimers();
     const { container } = mount();
     await act(async () => { vi.advanceTimersByTime(32); });
@@ -121,16 +121,16 @@ describe("portrait review experience", () => {
     expect(early.top).toBeGreaterThan(0);
     expect(early.top).toBeLessThan(30);
     fireEvent.keyDown(window, { key: 'PageDown', repeat: true });
-    act(() => { vi.advanceTimersByTime(5800); });
+    act(() => { vi.advanceTimersByTime(8200); });
     const almostThere = vi.mocked(window.scrollTo).mock.lastCall?.[0] as ScrollToOptions;
     expect(almostThere.top).toBeLessThan(1000);
-    act(() => { vi.advanceTimersByTime(300); });
+    act(() => { vi.advanceTimersByTime(400); });
     expect(window.scrollTo).toHaveBeenLastCalledWith({ top: 1000, behavior: 'instant' });
     fireEvent.click(screen.getByRole('button', { name: 'Scroll to explore' }));
     act(() => { vi.advanceTimersByTime(300); });
     fireEvent.wheel(window);
     const stopped = vi.mocked(window.scrollTo).mock.calls.length;
-    act(() => { vi.advanceTimersByTime(2400); });
+    act(() => { vi.advanceTimersByTime(3000); });
     expect(vi.mocked(window.scrollTo).mock.calls.length).toBe(stopped);
   });
 

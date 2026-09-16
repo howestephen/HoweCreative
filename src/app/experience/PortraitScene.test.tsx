@@ -62,7 +62,7 @@ describe("portrait source and reversible choreography", () => {
     const work = 1440;
     const end = 2400;
     expect(scrollState(0, h, work, end)).toEqual({ release: 0, travel: 0, ending: 0, intro: 1 });
-    expect(scrollState(work - h * 0.62, h, work, end).release).toBe(1);
+    expect(scrollState(work - h * 0.25, h, work, end).release).toBe(1);
     expect(scrollState(end + h * 0.12, h, work, end).ending).toBe(1);
     expect(scrollState(0, h, work, end).release).toBe(0);
   });
@@ -80,14 +80,24 @@ describe("portrait source and reversible choreography", () => {
     }
   });
 
-  it('finishes the pillar expansion before beginning the particle dissolve', () => {
-    expect(portraitPhases(0)).toEqual({ separate: 0, dissolve: 0 });
-    expect(portraitPhases(0.35).separate).toBeGreaterThan(0.5);
-    expect(portraitPhases(0.5).dissolve).toBe(0);
-    expect(portraitPhases(0.61)).toEqual({ separate: 1, dissolve: 0 });
-    expect(portraitPhases(0.82).dissolve).toBeGreaterThan(0.5);
-    expect(portraitPhases(1)).toEqual({ separate: 1, dissolve: 1 });
-    expect(portraitPhases(0)).toEqual({ separate: 0, dissolve: 0 });
+  it('atomises the surfaces while the pillars are still separating, then drifts gradually', () => {
+    expect(portraitPhases(0)).toEqual({ separate: 0, atomise: 0, disperse: 0 });
+    const opening = portraitPhases(0.35);
+    expect(opening.separate).toBeGreaterThan(0);
+    expect(opening.separate).toBeLessThan(1);
+    expect(opening.atomise).toBeGreaterThan(0);
+    expect(opening.disperse).toBeGreaterThan(0);
+    expect(opening.disperse).toBeLessThan(opening.atomise);
+    const middle = portraitPhases(0.7);
+    expect(middle.separate).toBeGreaterThan(middle.atomise);
+    expect(middle.atomise).toBeGreaterThan(middle.disperse);
+    expect(middle.disperse).toBeGreaterThan(0);
+    expect(portraitPhases(0.5).disperse).toBeGreaterThan(0.2);
+    expect(portraitPhases(0.85).disperse).toBeLessThan(0.8);
+    const complete = portraitPhases(1);
+    expect(complete.separate).toBe(1);
+    expect(complete.atomise).toBe(1);
+    expect(complete.disperse).toBeCloseTo(1);
   });
 
   it('assigns one shared depth per vertical pillar instead of using facial brightness', () => {
