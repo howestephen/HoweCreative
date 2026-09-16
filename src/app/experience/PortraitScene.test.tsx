@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
-import { PORTRAIT_CROP, portraitFraming, samplePortrait, scrollState } from "./portrait-particles";
+import { acceptsPortraitPress, isPortraitSurface, PORTRAIT_CROP, portraitFraming, portraitPhases, samplePortrait, scrollState } from "./portrait-particles";
 import PortraitScene from "./PortraitScene";
 
 vi.mock("three", async (original) => ({
@@ -40,10 +40,12 @@ describe("portrait source and reversible choreography", () => {
     const b = samplePortrait(pixels, 20, 20);
     expect(a.positions).toEqual(b.positions);
     expect(a.seeds).toEqual(b.seeds);
+    expect(a.depths).toEqual(b.depths);
+    expect(a.depths.length).toBe(a.positions.length / 3);
     expect(a.positions.length).toBeGreaterThan(0);
     expect(a.positions.length / 3).toBe(a.seeds.length / 4);
     expect(a.positions.length).toBe(a.colours.length);
-    expect([...a.positions, ...a.colours, ...a.seeds].every(Number.isFinite)).toBe(true);
+    expect([...a.positions, ...a.colours, ...a.seeds, ...a.depths].every(Number.isFinite)).toBe(true);
   });
 
   it("does not scatter the black background or transparent pixels as a rectangle", () => {
@@ -76,5 +78,49 @@ describe("portrait source and reversible choreography", () => {
         }
       }
     }
+  });
+
+  it('reserves a depth-expansion interval before dissolving and returns to the same endpoints', () => {
+    expect(portraitPhases(0)).toEqual({ separate: 0, dissolve: 0 });
+    expect(portraitPhases(0.5).separate).toBeGreaterThan(0.95);
+    expect(portraitPhases(0.5).dissolve).toBe(0);
+    expect(portraitPhases(0.8).dissolve).toBeGreaterThan(0.5);
+    expect(portraitPhases(1)).toEqual({ separate: 1, dissolve: 1 });
+    expect(portraitPhases(0)).toEqual({ separate: 0, dissolve: 0 });
+  });
+
+  it('derives continuous source-coherent depth without assigning unrelated polygon cells', () => {
+    const pixels = new Uint8ClampedArray(80 * 80 * 4).fill(255);
+    const flat = samplePortrait(pixels, 80, 80);
+    expect(new Set(flat.depths).size).toBe(1);
+    for (let y = 0; y < 80; y++) for (let x = 0; x < 80; x++) {
+      const i = (y * 80 + x) * 4;
+      pixels[i] = pixels[i + 1] = pixels[i + 2] = 20 + x * 2.8;
+    }
+    const { depths } = samplePortrait(pixels, 80, 80);
+    expect(Math.min(...depths)).toBeGreaterThan(0);
+    expect(Math.max(...depths)).toBeLessThan(1);
+    expect(new Set(depths).size).toBeGreaterThan(20);
+    expect(Math.max(...depths) - Math.min(...depths)).toBeGreaterThan(0.35);
+  });
+});
+
+describe('portrait press interaction', () => {
+  it('leaves touch scrolling, secondary clicks, dispersed state and paused/reduced mode alone', () => {
+    expect(acceptsPortraitPress('mouse', 0, 0, false)).toBe(true);
+    expect(acceptsPortraitPress('touch', 0, 0, false)).toBe(false);
+    expect(acceptsPortraitPress('mouse', 2, 0, false)).toBe(false);
+    expect(acceptsPortraitPress('mouse', 0, 0.5, false)).toBe(false);
+    expect(acceptsPortraitPress('mouse', 0, 0, true)).toBe(false);
+  });
+  it('only accepts the portrait surface and leaves controls alone', () => {
+    const hero = document.createElement('section');
+    hero.className = 'particle-hero';
+    const button = document.createElement('button');
+    const icon = document.createElement('span');
+    button.append(icon); hero.append(button);
+    expect(isPortraitSurface(hero)).toBe(true);
+    expect(isPortraitSurface(icon)).toBe(false);
+    expect(isPortraitSurface(document.body)).toBe(false);
   });
 });

@@ -7,10 +7,11 @@ Current work is on `codex/creative-technologist-portfolio`. Stephen's latest dir
 - [x] Record the confirmed portrait source, corrected sequence, card/detail distinction, depth/audio requirements and proposed six-project evidence roles.
 - [x] Stephen approved building the portrait sequence as a review prototype, with final showcase content deferred.
 - [x] Implement `/study`: portrait particles, scroll-driven evaporation, a separate six-card screen, a glass preview and a closing particle arc. Page Down, reverse scrolling, motion-off fallback and opt-in sound are available.
+- [x] Refine the opening after feedback: source-coherent depth and a camera advance based on the supplied recording; restrained mouse press-and-hold parting; a full-page first-frame loader; a calm 2.1-second, interruptible journey to work.
 - [ ] Review the working motion and art treatment with Stephen before integrating the homepage. The glass previews and six-project selection are provisional.
 - [ ] Finalise five or six primary projects after source review; keep archive coverage, discipline/software filters and private V7 requirements intact.
 
-The current prototype runs at `/study`, separate from the existing homepage. Typecheck, 72 tests, lint and production build pass. Browser checks cover desktop and narrow phone layouts, keyboard advancement, reversible scrolling, modal focus restoration and motion/sound controls. Physical mobile-device testing and listening to the sound mix remain outstanding. The older [HTML concept board](docs/reviews/2026-09-07-design-reset/index.html) previews the previous complete image-card index. No production deployment or Figma design changed at this checkpoint. The editorial milestone below is historical.
+The current prototype runs at `/study`, separate from the existing homepage. Typecheck, 80 tests, lint and production build pass. Browser checks cover desktop and narrow phone layouts, keyboard advancement, reversible scrolling, modal focus restoration and motion/sound controls. The revised depth treatment remains subject to Stephen's visual review. Physical mobile-device testing and listening to the sound mix remain outstanding. The older [HTML concept board](docs/reviews/2026-09-07-design-reset/index.html) previews the previous complete image-card index. No production deployment or Figma design changed at this checkpoint. The editorial milestone below is historical.
 
 ## Current task - Figma archive and interactive showcases, 15 September 2026
 
