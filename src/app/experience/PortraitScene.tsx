@@ -105,7 +105,7 @@ export default function PortraitScene({ motion, onReady, onUnavailable }: Props)
       const cameraEase = cameraT * cameraT * (3 - 2 * cameraT);
       const advance = cameraEase * (1 - phase.dissolve);
       camera.position.z = 6 - advance * 0.88 - state.travel * 0.35;
-      camera.position.x = advance * 0.12;
+      camera.position.x = advance * 0.24;
       camera.position.y = -state.travel * 0.18 * (1 - state.ending);
       if (!state.paused) uniforms.uTime.value += dt;
       pointer.set(state.pointerX, state.pointerY);
