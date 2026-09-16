@@ -6,12 +6,16 @@ Current work is on `codex/creative-technologist-portfolio`. The editorial milest
 
 ## Current task - Figma archive and interactive showcases, 15 September 2026
 
-Stephen requested a review of every Figma export, organised presentation copies, debranding for undeveloped work or work that cannot be associated, and interactive Figma prototypes inside the portfolio. The [Figma register and workflow](docs/reviews/2026-09-07-design-reset/plan.md#figma-archive-and-interactive-showcases---15-september-2026) is the single working record, including all 12 Design and 4 FigJam files, backup naming, branding decisions, inspection findings and embed acceptance checks.
+Stephen requested a review of every Figma export, organised presentation copies and appropriate public/private treatment. On 16 September he limited Figma to three active files with no paid subscription, provisionally two public showcases and private V7; the final selection and split are deferred. Other projects should use screenshots/recordings, with suitable projects across the archive considered for live coded demos. The [Figma register and workflow](docs/reviews/2026-09-07-design-reset/plan.md#figma-archive-and-interactive-showcases---15-september-2026) is the single working record, including all 12 Design and 4 FigJam files, backup naming, branding/access decisions, delivery formats and verification.
 
 - [x] Record the complete source inventory and preparation/integration workflow.
 - [x] Record Stephen's correction: New Menu System is live in production. The existing public case-study status is stale and still needs updating.
-- [ ] Prepare New Menu System as the first verified showcase, preserving the original and checking the live implementation and contribution credits.
-- [ ] Add the reusable prototype embed component and verify the first case study in a signed-out browser and on mobile.
+- [x] Record the three-file cap, no paid Figma plan, provisional split and broader coded-demo direction. Final showcase selection remains deferred.
+- [ ] Review New Menu System's live implementation and contribution credits; keep it as a showcase candidate pending the format/slot selection.
+- [ ] Agree the final Figma allocation with Stephen later, then prepare the selected showcases with verified local backups. Keep temporary imports within the cap and preserve active embed targets.
+- [ ] Add the reusable prototype embed component for selected Figma cases and verify actual visitor access and mobile use.
+- [ ] Prepare image-rich case studies with screenshots and/or recordings for other projects, respecting their access classification.
+- [ ] Assess coded-demo potential across all projects and shortlist bounded, useful live interactions before building. An NFT minter is one possible candidate, not the only option or an approved product build. Distinguish new portfolio implementation from original design/engineering credit.
 - [ ] Add a protected employer area for restricted work. V7 is confirmed unlaunched and private-only, retaining its original branding. Resolve Figma access independently from the site password and keep restricted data/media out of public builds. See the private-area requirements in the register.
 - [ ] Review the existing V7/launchpad screenshots and thumbnails in public assets and their delivery paths before publishing a restricted V7 case study. No protection or relocation has been implemented yet.
 - [x] Structurally scan all 12 Design exports locally to prioritise inspection without using Figma API quota. Runtime verification and the four FigJam reviews remain outstanding.
