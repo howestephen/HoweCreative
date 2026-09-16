@@ -5,6 +5,7 @@ import { ArrowUpRight } from "lucide-react";
 
 export function Layout() {
   const { pathname, hash } = useLocation();
+  const isPortraitHome = pathname === "/study";
   useEffect(() => {
     if (hash) {
       const frame = requestAnimationFrame(() =>
@@ -16,17 +17,19 @@ export function Layout() {
   }, [pathname, hash]);
   return (
     <MotionConfig reducedMotion="user">
-      <div className="portfolio-shell">
+      <div className={`portfolio-shell${isPortraitHome ? " portrait-home" : ""}`}>
         <a href="#main-content" className="skip-link">
           Skip to content
         </a>
         <header className="site-header">
           <div className="wrap header-inner">
-            <Link to="/#top" className="wordmark" aria-label="Stephen Howe home">
-              Stephen Howe<span className="identity-role">Creative technologist</span>
+            <Link to={isPortraitHome ? "/study#top" : "/#top"} className="wordmark" aria-label="Stephen Howe home">
+              Stephen Howe
+              <span className="identity-role">Creative technologist</span>
             </Link>
             <nav aria-label="Main navigation">
-              <a href="/#work">All work</a>
+              <Link to={isPortraitHome ? "/study#work" : "/#work"}>{isPortraitHome ? "Work" : "All work"}</Link>
+              {isPortraitHome && <Link to="/#work">Archive</Link>}
               <a href="/#experience" className="nav-about">
                 About
               </a>
@@ -34,7 +37,8 @@ export function Layout() {
                 CV <ArrowUpRight size={14} />
               </Link>
               <a className="nav-contact" href="/#contact">
-                Let’s talk <ArrowUpRight size={15} />
+                {isPortraitHome ? "Contact" : "Let’s talk"}{" "}
+                <ArrowUpRight size={15} />
               </a>
             </nav>
           </div>
