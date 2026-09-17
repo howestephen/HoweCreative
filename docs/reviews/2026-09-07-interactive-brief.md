@@ -2,6 +2,8 @@
 
 Built on `codex/creative-technologist-portfolio`, 7 September 2026. Local preview: port 5174. No production deployment is included.
 
+**Later review status:** Stephen rejected this concertina implementation, then rejected the subsequent portrait implementation. This document is a historical implementation record. Its technical verification does not establish visual acceptance. See [the subsequent reference and feasibility research](2026-09-07-research/index.html) before further design work.
+
 ## The recovered brief
 
 Stephen supplied these references in the project conversation on 4 September:

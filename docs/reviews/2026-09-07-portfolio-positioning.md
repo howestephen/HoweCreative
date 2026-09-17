@@ -2,6 +2,8 @@
 
 Reviewed 7 September 2026. Branch: `codex/creative-technologist-portfolio`.
 
+**Later review status:** Both homepage concepts implemented after this review were rejected. The role and CV work remains documented below, but the homepage descriptions are historical, not approved art direction. A later retrieval could not verify the supplied Luma opening; the [new role research](2026-09-07-role-evidence-research.md) explicitly distinguishes a separate official Luma posting. See [the visual reference research](2026-09-07-research/index.html) for current findings.
+
 ## The current CV
 
 Stephen confirmed that the white `/cv` page with its export control is the current CV. The black PDF in `docs/` is historical reference, not the document used to judge the current application's parsing risk.
