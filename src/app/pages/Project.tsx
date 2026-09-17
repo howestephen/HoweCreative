@@ -8,6 +8,7 @@ import { ProjectGallery } from "../components/ProjectGallery";
 import { ContactFoot } from "../concept/ContactFoot";
 import { QuiverCaseStudy } from "./QuiverCaseStudy";
 import "../../styles/project-stories.css";
+import "../../styles/spatial-case-study.css";
 
 function findMedia(project: PortfolioProject, filename?: string) {
   return filename
@@ -191,7 +192,8 @@ function Chapter({
 function ProjectStory({ project }: { project: PortfolioProject }) {
   const editorial = projectEditorial[project.slug];
   const story = projectStories[project.slug];
-  const next = projects[(projects.indexOf(project) + 1) % projects.length];
+  const publicProjects = projects.filter((item) => item.slug !== "uncx-app-concepts");
+  const next = publicProjects[(publicProjects.indexOf(project) + 1) % publicProjects.length];
   const lead = findMedia(project, story?.lead);
   const galleryMedia = (project.media ?? []).filter(
     (item) => !(lead?.type === "video" && item.src === lead.src),
@@ -207,11 +209,15 @@ function ProjectStory({ project }: { project: PortfolioProject }) {
         : project.status;
 
   return (
-    <>
+    <div className={`spatial-case spatial-case-${project.slug}`}>
+      <div className="case-atmosphere" aria-hidden="true">
+        {(editorial.cover || project.image) && <img src={editorial.cover || project.image} alt="" />}
+        <span />
+      </div>
       <article className={`wrap case-study case-study-${project.slug}`}>
         <div className="case-breadcrumb">
-          <Link to="/#work">
-            <ArrowLeft size={15} /> All work
+          <Link to="/study#work">
+            <ArrowLeft size={15} /> Selected work
           </Link>
           <span className="eyebrow">
             {String(projects.indexOf(project) + 1).padStart(2, "0")} /{" "}
@@ -313,8 +319,8 @@ function ProjectStory({ project }: { project: PortfolioProject }) {
           <ArrowUpRight size={36} />
         </Link>
       </article>
-      <ContactFoot />
-    </>
+      <div className="spatial-contact"><ContactFoot /></div>
+    </div>
   );
 }
 

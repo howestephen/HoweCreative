@@ -8,19 +8,28 @@ import {
 } from "lucide-react";
 import { Link } from "react-router";
 import { useReducedMotion } from "motion/react";
+import { ContactFoot } from "../concept/ContactFoot";
+import { projects as portfolioProjects, projectEditorial } from "../data/project-index";
 import { acceptsPortraitPress, clamp, isPortraitSurface, portraitFraming, portraitSource, scrollState, smooth, type ParticleMotion } from "./portrait-particles";
 import { createPortraitAudio, type PortraitAudio } from "./portrait-audio";
 import "../../styles/portrait.css";
 
 const PortraitScene = lazy(() => import("./PortraitScene"));
-const projects = [
-  { name: "Quiver", description: "Art direction and generative film", icon: Feather, area: "Film" },
-  { name: "Unified Menu", description: "Navigation across a product suite", icon: Network, area: "Product" },
-  { name: "Solana Diary", description: "Automated media with human approval", icon: BookOpen, area: "Systems" },
-  { name: "UNCX Video System", description: "Reusable 3D and motion production", icon: Layers3, area: "Motion" },
-  { name: "UNCX 2024 Rebrand", description: "External collaboration and in-house design", icon: Shapes, area: "Brand" },
-  { name: "Badger Club", description: "Product design through implementation", icon: Hexagon, area: "Product" },
+const projectFrames = [
+  { slug: "quiver", description: "Art direction and generative film", icon: Feather, area: "Film" },
+  { slug: "uncx-menu", description: "Navigation across a product suite", icon: Network, area: "Product" },
+  { slug: "solana-diary", description: "Automated media with human approval", icon: BookOpen, area: "Systems" },
+  { slug: "uncx-video-system", description: "Reusable 3D and motion production", icon: Layers3, area: "Motion" },
+  { slug: "uncx-rebrand", description: "External collaboration and in-house design", icon: Shapes, area: "Brand" },
+  { slug: "badger-club", description: "Product design through implementation", icon: Hexagon, area: "Product" },
 ];
+
+const selectedProjects = projectFrames.map((frame) => {
+  const project = portfolioProjects.find((item) => item.slug === frame.slug);
+  const editorial = projectEditorial[frame.slug];
+  if (!project || !editorial) throw new Error(`Missing selected project data: ${frame.slug}`);
+  return { ...frame, project, editorial };
+});
 
 class PortraitBoundary extends Component<{ children: ReactNode; onFailure: () => void }, { failed: boolean }> {
   state = { failed: false };
@@ -64,6 +73,7 @@ export function PortraitExperience() {
   const onUnavailable = useCallback(() => { setFailed(true); setReady(false); }, []);
   const loading = !mounted || ((reduced || failed) ? !posterReady && !posterFailed : !ready);
   const loadingRef = useRef(loading);
+  const selectedProject = selected === null ? null : selectedProjects[selected];
   loadingRef.current = loading;
 
   const travelTo = useCallback((target: number) => {
@@ -325,29 +335,31 @@ export function PortraitExperience() {
       <section className="spatial-work" id="work" ref={work} aria-labelledby="spatial-work-title">
         <div className="spatial-work-heading">
           <h2 id="spatial-work-title">Selected work</h2>
-          <Link to="/#work">Full archive <ArrowUpRight size={15} /></Link>
+          <Link to="/archive">Full archive <ArrowUpRight size={15} /></Link>
         </div>
         <div className="spatial-grid">
-          {projects.map((project, index) => (
-            <button className="spatial-card" key={project.name} onClick={() => setSelected(index)} aria-label={`Open ${project.name} preview`} style={{ "--card-order": index } as CSSProperties}>
-              <project.icon className="spatial-card-icon" size={30} strokeWidth={1.2} aria-hidden="true" />
-              <h3>{project.name}</h3>
-              <p>{project.description}</p>
-              <span className="spatial-card-foot"><span>{project.area}</span><ArrowUpRight size={20} strokeWidth={1.2} /></span>
+          {selectedProjects.map((item, index) => (
+            <button className="spatial-card" key={item.slug} onClick={() => setSelected(index)} aria-label={`Open ${item.project.title} preview`} style={{ "--card-order": index } as CSSProperties}>
+              <item.icon className="spatial-card-icon" size={30} strokeWidth={1.2} aria-hidden="true" />
+              <h3>{item.project.title}</h3>
+              <p>{item.description}</p>
+              <span className="spatial-card-foot"><span>{item.area}</span><ArrowUpRight size={20} strokeWidth={1.2} /></span>
             </button>
           ))}
         </div>
-        <p className="spatial-preview-note">A first look at the space. Project showcases are next.</p>
+        <p className="spatial-preview-note">Six projects across creative direction, product, motion and systems. The complete archive contains the wider practice.</p>
       </section>
 
       <section className="particle-ending" id="ending" ref={ending} aria-labelledby="particle-ending-title">
         <div className="particle-ending-inner">
           <p>Have something in mind?</p>
           <h2 id="particle-ending-title">Let's talk.</h2>
-          <Link className="particle-contact" to="/#contact">Start a conversation <ArrowUpRight size={18} /></Link>
+          <a className="particle-contact" href="#contact">Start a conversation <ArrowUpRight size={18} /></a>
           <button className="particle-return" onClick={returnToPortrait}><ArrowUp size={15} /> Back to the portrait</button>
         </div>
       </section>
+
+      <div className="particle-contact-section"><ContactFoot /></div>
 
       <div className="particle-tools">
         <button onClick={() => void toggleAudio()} aria-pressed={sound} aria-label={sound ? "Turn sound off" : "Turn sound on"}>
@@ -359,15 +371,28 @@ export function PortraitExperience() {
         {failed && <span role="status">Static view</span>}
         {audioError && <span role="status">Sound unavailable</span>}
       </div>
-      <span className="particle-study-label">Motion study</span>
+      <span className="particle-study-label">Interactive portrait</span>
 
       <dialog className="spatial-dialog" ref={dialog} aria-labelledby="spatial-dialog-title" onCancel={() => setSelected(null)} onClose={() => setSelected(null)}>
-        {selected !== null && <>
-          <header><p>Selected work / {projects[selected].area}</p><button onClick={() => setSelected(null)} aria-label="Close preview">Close <X size={18} /></button></header>
-          <h2 id="spatial-dialog-title">{projects[selected].name}</h2>
-          <p className="spatial-dialog-subtitle">{projects[selected].description}</p>
-          {selected === 0 && <img className="spatial-dialog-art" src="/case-studies/quiver/hero-poster.jpg" alt="Quiver's illustrated archer and visual identity" />}
-          <div className="spatial-dialog-copy"><p>This is a preview of the reading space.</p><p>The project story, films and process will follow once the motion and art direction are settled.</p></div>
+        {selectedProject && <>
+          <header><p>Selected work / {selectedProject.area}</p><button onClick={() => setSelected(null)} aria-label="Close preview">Close <X size={18} /></button></header>
+          <div className="spatial-dialog-heading">
+            <div>
+              <p>{selectedProject.project.year} / {selectedProject.project.status}</p>
+              <h2 id="spatial-dialog-title">{selectedProject.project.title}</h2>
+              <p className="spatial-dialog-subtitle">{selectedProject.editorial.headline}</p>
+            </div>
+            <p>{selectedProject.editorial.fit}</p>
+          </div>
+          <img className="spatial-dialog-art" src={selectedProject.editorial.cover || selectedProject.project.image} alt="" />
+          <div className="spatial-dialog-copy">
+            <p>{selectedProject.editorial.summary}</p>
+            <p>{selectedProject.editorial.credit}</p>
+          </div>
+          <div className="spatial-dialog-footer">
+            <div>{selectedProject.project.tags.slice(0, 5).map((tag) => <span key={tag}>{tag}</span>)}</div>
+            <Link to={`/work/${selectedProject.slug}`} onClick={() => setSelected(null)}>Read the full case study <ArrowUpRight size={17} /></Link>
+          </div>
         </>}
       </dialog>
     </div>

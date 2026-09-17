@@ -1,0 +1,35 @@
+.spatial-shell {
+  --background: #060707;
+  --foreground: #edece7;
+  --card: #111515;
+  --card-foreground: #edece7;
+  --muted-foreground: #a4aca5;
+  --border: #c4cec421;
+  --accent: #d3d9d0;
+  --accent-foreground: #060707;
+  background: #060707;
+  color: #edece7;
+}
+.spatial-shell .site-header { position: fixed; inset: 0 0 auto; z-index: 30; border: 0; background: linear-gradient(#060707e8, #06070700); backdrop-filter: none; }
+.spatial-shell .header-inner { width: calc(100% - 88px); height: 106px; align-items: center; }
+.spatial-shell .wordmark { display: block; color: #edece7; font-size: 19px; letter-spacing: -.5px; font-weight: 500; line-height: 1.35; }
+.spatial-shell .wordmark .identity-role { display: block; margin-top: 3px; color: #a5aaa8; font-size: 12px; font-weight: 400; letter-spacing: 0; }
+.spatial-shell .site-header nav { gap: 32px; color: #d8dad6; font-size: 13px; }
+.spatial-shell .site-header nav a { color: inherit; }
+.spatial-shell .nav-contact { padding: 0; color: inherit; background: none; }
+.spatial-shell .nav-contact svg,
+.spatial-shell nav a[href='/cv'] svg { display: none; }
+.spatial-shell :focus-visible { outline: 2px solid #e3d9c2; outline-offset: 4px; }
+
+@media (max-width: 900px) {
+  .spatial-shell .header-inner { width: calc(100% - 48px); height: 90px; }
+  .spatial-shell .site-header nav { gap: 20px; }
+}
+@media (max-width: 650px) {
+  .spatial-shell .header-inner { width: calc(100% - 40px); height: 110px; gap: 12px; flex-direction: column; align-items: flex-start; justify-content: center; }
+  .spatial-shell .wordmark { font-size: 16px; }
+  .spatial-shell .wordmark .identity-role { font-size: 10px; }
+  .spatial-shell .site-header nav { width: 100%; gap: 0; justify-content: space-between; font-size: 10px; }
+  .spatial-shell .nav-about { display: none; }
+  .spatial-shell .nav-contact { display: inline-flex; }
+}

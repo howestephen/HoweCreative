@@ -1,0 +1,78 @@
+.spatial-case { position: relative; min-height: 100svh; overflow: hidden; padding-top: 118px; background: #060707; color: #edece7; }
+.case-atmosphere { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.case-atmosphere::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, #060707d6, #060707 56%), radial-gradient(circle at 72% 8%, #59665b2e, transparent 45%); }
+.case-atmosphere img { position: absolute; top: -18vh; right: -8vw; width: min(75vw, 1050px); height: 78vh; object-fit: cover; opacity: .15; filter: blur(45px) saturate(.6); transform: scale(1.16); }
+.case-atmosphere span { position: absolute; right: 12vw; top: 30vh; width: 38vw; aspect-ratio: 1; border-radius: 50%; background: #9ba89c0f; filter: blur(110px); }
+.spatial-case .case-study { position: relative; z-index: 1; width: min(1320px, calc(100% - 88px)); max-width: none; padding: 22px 0 130px; color: #edece7; }
+.spatial-case .case-breadcrumb { color: #9ea69f; margin-bottom: 76px; }
+.spatial-case .case-breadcrumb > a { color: #cbd0ca; }
+.spatial-case .case-heading > .eyebrow,
+.spatial-case .case-context .eyebrow,
+.spatial-case .case-chapter .eyebrow,
+.spatial-case .case-outcome > .eyebrow,
+.spatial-case .case-collection-intro > .eyebrow { color: #aeb7ae; }
+.spatial-case .case-heading h1 { max-width: 1160px; color: #f0efe9; font-size: clamp(55px, 7vw, 108px); font-weight: 400 !important; line-height: .96; letter-spacing: -.07em; }
+.spatial-case .case-heading-bottom { margin-block: 40px 60px; padding-top: 25px; border-top: 1px solid #c3ccc329; }
+.spatial-case .case-heading-bottom > p { max-width: 780px; color: #b6bdb6; font-size: clamp(17px, 1.5vw, 22px); }
+.spatial-case .case-heading-bottom > a { border-color: #bfc8bf48; color: #d9ddd7; }
+.spatial-case .case-film-lead,
+.spatial-case .case-art-lead,
+.spatial-case .case-product-lead,
+.spatial-case .case-output-lead,
+.spatial-case .case-workflow { position: relative; border: 1px solid #bdc7bd20; background: #0d1110; box-shadow: 0 45px 120px #0006; }
+.spatial-case .case-film-lead video { background: #020303; }
+.spatial-case .case-film-lead figcaption,
+.spatial-case .case-image figcaption { color: #929b94; }
+.spatial-case .case-art-lead .case-image > a,
+.spatial-case .case-evidence .case-image > a { background: #111513; }
+.spatial-case .case-product-screen { background: #101513; }
+.spatial-case .case-screen-controls { padding-inline: 18px; border-color: #c3ccc329; }
+.spatial-case .case-screen-controls button { color: #919991; }
+.spatial-case .case-screen-controls button[aria-pressed='true'] { color: #eceee8; border-bottom-color: #a7b6aa; }
+.spatial-case .case-screen-controls button[aria-pressed='true'] > span { color: #bac6bc; }
+.spatial-case .case-facts { margin-top: 24px; padding: 28px 30px; border: 1px solid #c5cec526; border-radius: 10px; background: linear-gradient(120deg, #d9e1da0b, #ffffff03); backdrop-filter: blur(18px); }
+.spatial-case .case-facts dt { color: #8e978f; }
+.spatial-case .case-facts dd { color: #d1d6d0; }
+.spatial-case .case-context { padding-block: 105px; }
+.spatial-case .case-context h2 { color: #e2e5df; }
+.spatial-case .case-contribution > p,
+.spatial-case .case-chapter-copy p,
+.spatial-case .case-outcome p,
+.spatial-case .case-full-context p { color: #a8b0a9; }
+.spatial-case .case-tools > span { color: #919a92; }
+.spatial-case .case-chapter { padding-block: 100px; border-color: #c3ccc325; }
+.spatial-case .case-chapter-copy h2 { color: #edeee8; font-weight: 400 !important; }
+.spatial-case .case-evidence { gap: 30px; }
+.spatial-case .case-image > a { overflow: hidden; border: 1px solid #c0c9c01c; }
+.spatial-case .case-image-expand { border-color: #dfe6dc48; background: #08100bcc; }
+.spatial-case .case-workflow { color: #f0f1eb; }
+.spatial-case .case-workflow .eyebrow { color: #b5c0b6; }
+.spatial-case .case-workflow p { color: #aeb6af; }
+.spatial-case .case-outcome { padding-block: 90px; border-color: #c3ccc325; }
+.spatial-case .case-outcome h2 { color: #edf0e9; }
+.spatial-case .case-full-context { padding-top: 16px; border-color: #c3ccc325; }
+.spatial-case .case-full-context > summary { color: #d4d9d3; }
+.spatial-case .case-full-context h3 { color: #e2e6e0; }
+.spatial-case .case-collection { padding-top: 50px; }
+.spatial-case .case-collection-intro p { color: #929a93; }
+.spatial-case .gallery-grid button { background: #111513; }
+.spatial-case .gallery-grid button > span,
+.spatial-case .gallery-heading { color: #a5ada6; }
+.spatial-case .next-project { border-color: #c3ccc32c; color: #e5e8e2; }
+.spatial-case .next-project:hover { background: #c7d0c70a; }
+.spatial-case .case-next strong { font-weight: 400 !important; }
+
+@media (max-width: 900px) {
+  .spatial-case .case-study { width: calc(100% - 48px); }
+}
+@media (max-width: 700px) {
+  .spatial-case { padding-top: 125px; }
+  .spatial-case .case-study { width: calc(100% - 40px); padding-top: 0; }
+  .spatial-case .case-breadcrumb { margin-bottom: 42px; }
+  .spatial-case .case-heading h1 { font-size: clamp(44px, 13vw, 68px); }
+  .spatial-case .case-heading-bottom { margin-block: 28px 36px; }
+  .spatial-case .case-facts { padding: 22px; }
+  .spatial-case .case-context,
+  .spatial-case .case-chapter { padding-block: 62px; }
+  .spatial-case .case-outcome { padding-block: 58px; }
+}

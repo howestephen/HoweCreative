@@ -1,6 +1,6 @@
 # Stephen Howe: creative direction and production plan
 
-7 September 2026, updated 16 September 2026. Stephen selected the detailed monochrome portrait from an earlier concept and approved a working prototype of its full-screen opening, spatial evaporation, separate showcase screen and frosted overlays. The review prototype is now implemented at `/study`; final art treatment and project content await his review. This supersedes the simultaneous portrait/image-card studies and the earlier default of showing the complete archive first. Implementation status is recorded below; the wider archive and Figma work remains planned.
+7 September 2026, updated 17 September 2026. Stephen selected the detailed monochrome portrait from an earlier concept and approved a working prototype of its full-screen opening, spatial evaporation, separate showcase screen and frosted overlays. The review experience is implemented at `/study`, with the integrated archive at `/archive` and public case-study routes under `/work/`; final art treatment, project selection and most case-study evidence still await his review. This supersedes the simultaneous portrait/image-card studies and the earlier default of showing the complete archive first. Implementation status is recorded below; the Figma archive and restricted employer area remain planned.
 
 ## The position the site should establish
 
@@ -292,7 +292,72 @@ Official references checked on 15 September 2026: [Figma embeds](https://develop
 
 Continue archive review in bounded batches and record the best presentation format and coded-demo potential for each project. Blueprint Token Minter remains the next fresh-file candidate; New Menu System remains a public showcase candidate. Choose the final three-file allocation with Stephen later, without a paid subscription. V7's page coverage and creation links are verified structurally, but it remains private: establish the free employer-viewing approach and resolve existing public copies before publishing its restricted case study. Leave unknown release/sharing decisions explicit. No coded demo has been selected or built by this planning update. The portrait/showcase/glass sequence is now recorded above, but its working implementation and final art treatment remain separate review milestones.
 
+## Agent handoff - 17 September 2026
+
+### Current decision and boundary
+
+Continue on `codex/creative-technologist-portfolio`. This is the single active redesign branch. Do not start another homepage concept, switch back to the rejected concertina or bronze portrait, merge to `main`, deploy to production, or replace the root homepage without Stephen's explicit approval. The accepted working direction is the particle portrait at `/study`: a full-screen portrait, slow vertical-pillar separation and overlapping atomisation, a continuous particle field, six selected project cards, substantial glass previews and a closing contact state. The existing `/` route remains the older editorial homepage so the redesign can be reviewed safely.
+
+Stephen asked to build out the rest of this direction before refining every project. That branch integration is now present. The next content task is the evidence audit he requested after the motion work, starting with Unified Menu because it shipped to production and its contribution, live implementation and strongest source material can be checked. Audit one project at a time before changing its case-study claims or selecting the final five or six primary cases.
+
+### Review locations
+
+- Local development: `http://127.0.0.1:5174/study` using `npm run dev -- --host 127.0.0.1 --port 5174`.
+- Private Tailscale review: `https://macbook-pro.tail37ad60.ts.net:8443/study`.
+- Full archive: `https://macbook-pro.tail37ad60.ts.net:8443/archive`.
+- Evidence-led Quiver case: `https://macbook-pro.tail37ad60.ts.net:8443/work/quiver`.
+- The Tailscale service proxies the production build on local port 5175. Rebuild before relying on it after code or content changes. The site is not publicly deployed from this branch.
+
+### Implemented site state
+
+- `/study` lazy-loads the Three.js particle scene behind a fully covering first-frame loader. It supports reversible scroll progress, a 9-second interruptible move to work, Page Down, reduced motion, a static fallback, opt-in sound and a held mouse interaction. Passive pointer movement changes colour without displacing the face.
+- Six selected cards use the real project index: Quiver, Unified Menu, Solana Diary, UNCX Video and 3D System, UNCX Rebrand and Badger Club App. Each opens an accessible native dialog with real status, summary, contribution, artwork, tags and a full-case link.
+- `/archive` exposes nine public current projects, discipline buttons, a software/platform select whose state is stored in the URL, six earlier-work collections, the multidisciplinary positioning and an explicit restricted-work boundary. V7 and the mixed UNCX app concepts are omitted from this grid, but that is a presentation choice rather than access protection.
+- `/work/quiver` is a dedicated evidence-led case built from the curated portfolio pack. Other public `/work/:slug` routes share the dark spatial case-study treatment and remain provisional until their project evidence is audited.
+- `/study` and `/archive` are prerendered with readable HTML and route metadata. The route verification covers them alongside the CV and project pages.
+- Shared spatial navigation, contact, archive and case-study presentation work on desktop and narrow layouts. The root homepage and standalone white `/cv` route remain separate.
+
+### Code and content map
+
+| Responsibility | Start here |
+| --- | --- |
+| Particle page and selected-work dialogs | `src/app/experience/PortraitExperience.tsx` |
+| Particle sampling, phases and shaders | `src/app/experience/portrait-particles.ts` |
+| Three.js scene lifecycle | `src/app/experience/PortraitScene.tsx` |
+| Archive, filters and restricted boundary | `src/app/pages/Archive.tsx` |
+| Shared public case-study renderer | `src/app/pages/Project.tsx` |
+| Quiver evidence case | `src/app/pages/QuiverCaseStudy.tsx` and `src/app/data/quiver-story.ts` |
+| Project facts, editorial summaries and credits | `src/app/data/project-index.ts` and `src/app/data/project-stories.ts` |
+| Earlier collections | `src/app/data/earlier-work.json` |
+| Routes and shared shell | `src/app/routes.ts` and `src/app/components/Layout.tsx` |
+| Prerender and build checks | `src/prerender.tsx`, `scripts/prerender.mjs`, `scripts/verify-build.mjs` |
+| Spatial styling | `src/styles/portrait.css`, `src/styles/spatial-shell.css`, `src/styles/spatial-archive.css`, `src/styles/spatial-case-study.css` |
+
+The portrait source currently used by the particle renderer is `docs/reviews/2026-09-07-design-reset/portrait-reference.png`. The unused MakeHuman GLB experiment in the local `public/portrait/` directory is not part of the accepted renderer and must not be substituted for this source. Preserve unused creative assets in `assets-archive/` rather than deleting them.
+
+### Verified and outstanding
+
+The current integrated build passed `npm run typecheck && npm test && npm run lint && npm run build`. The production build prerendered and verified 14 routes. Browser review covered the desktop and phone archive, filters, selected-work grid, dialog behaviour, contact navigation and a representative shared case study. The HTTPS Tailscale routes for `/study`, `/archive` and `/work/quiver` returned 200 on 17 September.
+
+Still outstanding:
+
+1. Stephen's visual review of the integrated archive and cases, followed by explicit approval before making `/study` the root homepage.
+2. Physical phone and lower-powered hardware checks for the particle renderer, plus listening to the opt-in sound across the full scroll sequence.
+3. Evidence audits for the other current cases. Do not treat the present shared case copy as final. Review the remaining five selected cases, starting with Unified Menu, then continue with Solana Diary, UNCX Video, UNCX Rebrand and Badger Club against their source material.
+4. Final selection of five or six primary cases after those audits. The current six are provisional evidence roles, not a locked curation decision.
+5. Recovery of Quiver's intended audible launch master if it exists. The supplied AAC stream measures approximately -91 dB, so the case currently makes no sound promise.
+6. The protected employer area for V7. **Current deployment blocker:** `/work/uncx-app-concepts` is still prerendered, listed in the sitemap and directly routable, and `public/case-studies/uncx-app-concepts/` still contains the mixed prototype imagery including `ilo-v7-flow-diagrams.webp`. The 14 verified routes include this legacy case. Omitting it from `/archive` does not make it private. Do not deploy the branch publicly until restricted material has been removed from the public build or served through genuine authenticated delivery. Do not treat a hidden archive card or client-side check as protection.
+7. The remaining Figma register work, final three-file allocation and signed-out visitor tests. Keep Stephen's no-subscription and three-active-file limit.
+
+### Exact next task
+
+Audit Unified Menu as the next bounded project. Compare the live production menu, its Figma source and the current portfolio copy. Record the problem, constraints, Stephen's verified contribution, major interaction and systems decisions, what shipped, and the strongest screenshots or recordings. Correct only claims supported by those sources. Then propose the case-study evidence sequence for Stephen's review before implementing it. Keep the current site structure and particle direction unchanged during that audit.
+
 ## Revision record
+
+- 17 September 2026, handoff: consolidated the accepted particle direction, integrated route state, review URLs, source map, verification, privacy boundary and outstanding work into one executable pickup record. Set Unified Menu's evidence audit as the next bounded task. No homepage promotion, public deployment, Figma edit or V7 access implementation is authorised by this handoff.
+
+- 17 September 2026, site integration: extended the accepted particle portrait into a branch-only review site. The six selected cards now use real project data and open useful glass previews with full-case links. Added a filterable `/archive` covering nine public current projects and six earlier-work collections, with discipline filters, software/platform filtering, URL state and an explicit restricted-work boundary. Restyled the shared non-Quiver case-study template in the dark spatial system and connected navigation/contact across the review routes. Desktop and mobile browser checks covered the archive, selected-work grid, preview reader and Unified Menu case. V7 is omitted from the new archive, but existing mixed prototype assets remain a separate public-exposure audit; no password area was implemented. The existing root homepage and production deployment remain unchanged pending Stephen's review.
 
 - 16 September 2026, Quiver evidence case: replaced the older four-edit presentation with one 68-second launch-film master and a process narrative verified against the curated portfolio pack. The case now shows paired impact plates, representative local inference outputs, a rejected full-draw direction, the approved banner reference, the local Wan 2.2 and ComfyUI route, and the separate generative, authored and production layers. No public clip-count claim is made because the production manifests do not yet reconcile. The supplied master contains an AAC track at -91 dB while older cuts are audible, so the case does not promise sound and an audible replacement remains outstanding if one exists. The superseded four-cut files and posters are retained locally in `assets-archive/`. The remaining current showcases still require the same evidence audit before the final primary-project selection.
 

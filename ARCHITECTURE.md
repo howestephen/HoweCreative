@@ -12,6 +12,9 @@
 Current runtime boundaries:
 
 - active homepage: `src/app/concept/`
+- branch review experience: `src/app/experience/PortraitExperience.tsx` at `/study`
+- branch work archive: `src/app/pages/Archive.tsx` at `/archive`
+- shared public case-study template: `src/app/pages/Project.tsx`
 - standalone printable CV: `src/app/pages/CV.tsx`
 - typed content adapter: `src/app/data/portfolio.ts`
 - primary content model: `site-content.json`
@@ -22,6 +25,14 @@ The CV route is lazy-loaded so its long career-history module does not block the
 homepage. The active editorial homepage uses Canvas 2D for its generative mark.
 The previous WebGL/dossier components are retained but not mounted while the
 replacement design is reviewed.
+
+On `codex/creative-technologist-portfolio`, the review experience is kept at
+`/study` so it can be tested without changing the production root route. The
+Three.js portrait chunk is lazy-loaded. The archive and case-study routes use
+HTML-first content, route-specific CSS and the same dark spatial shell. Archive
+filters are stored in the URL. V7 and the mixed UNCX application concepts are
+not linked from the new public archive; the existing public assets remain an
+open audit item and are not protected by this UI decision.
 
 Contact delivery has two explicit modes:
 

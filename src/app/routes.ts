@@ -5,6 +5,11 @@ import { CVRoute } from "./cv-route";
 import { Layout } from "./components/Layout";
 import { Home } from "./pages/Home";
 
+const darkRouteFallback = (label: string) => () => createElement("div", {
+  role: "status",
+  style: { minHeight: "100svh", display: "grid", placeItems: "center", background: "#060707", color: "#b7bdb8", fontSize: 11 },
+}, label);
+
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -23,7 +28,15 @@ export const router = createBrowserRouter([
         }),
       },
       {
+        path: "archive",
+        HydrateFallback: darkRouteFallback("Loading archive"),
+        lazy: async () => ({
+          Component: (await import("./pages/Archive")).Archive,
+        }),
+      },
+      {
         path: "work/:slug",
+        HydrateFallback: darkRouteFallback("Loading project"),
         lazy: async () => ({
           Component: (await import("./pages/Project")).Project,
         }),
