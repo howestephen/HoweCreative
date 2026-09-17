@@ -353,6 +353,10 @@ Still outstanding:
 
 Audit Unified Menu as the next bounded project. Compare the live production menu, its Figma source and the current portfolio copy. Record the problem, constraints, Stephen's verified contribution, major interaction and systems decisions, what shipped, and the strongest screenshots or recordings. Correct only claims supported by those sources. Then propose the case-study evidence sequence for Stephen's review before implementing it. Keep the current site structure and particle direction unchanged during that audit.
 
+### Local working-tree exclusions
+
+A fresh checkout of the branch is complete for this milestone. This Mac still has pre-existing local changes and untracked historical material that were deliberately excluded from the handoff commits: `.claude/settings.local.json`, `.claude/hooks-state/`, the `/job-applications/` ignore rule, `docs/Stephen_Howe_CV_2026.pdf`, `docs/plans/2026-08-14-earlier-work-archive-design.md`, the rejected portrait feasibility/restart/model-source notes, `public/portrait/` and `scripts/build-portrait.py`. The PDF is the old black CV, not the current white `/cv` page. The portrait directory and Blender script belong to the abandoned GLB experiment, not the accepted particle renderer. Inspect ownership and references before committing, moving or discarding any of these files.
+
 ## Revision record
 
 - 17 September 2026, handoff: consolidated the accepted particle direction, integrated route state, review URLs, source map, verification, privacy boundary and outstanding work into one executable pickup record. Set Unified Menu's evidence audit as the next bounded task. No homepage promotion, public deployment, Figma edit or V7 access implementation is authorised by this handoff.
