@@ -61,7 +61,7 @@ export function QuiverCaseStudy() {
             fetchPriority="high"
           />
           <div className="quiver-width quiver-opening-content">
-            <Link to="/?view=film#work" className="quiver-return">
+            <Link to="/study#work" className="quiver-return">
               <ArrowLeft size={15} aria-hidden="true" /> All work
             </Link>
             <div className="quiver-title-block">

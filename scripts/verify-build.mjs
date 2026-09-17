@@ -12,6 +12,8 @@ const cv = JSON.parse(
 );
 const routes = [
   "/",
+  "/study",
+  "/archive",
   "/cv",
   ...content.caseStudies.projects.map((project) => `/work/${project.slug}`),
 ];

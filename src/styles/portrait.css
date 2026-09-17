@@ -61,9 +61,20 @@
 .spatial-dialog header button { display: flex; align-items: center; gap: 12px; padding: 8px; color: #e7ece1; border: 0; background: none; cursor: pointer; font-size: 12px; }
 .spatial-dialog h2 { font-size: 44px; font-weight: 500; letter-spacing: -1.6px; margin: 0 0 8px; line-height: 1.15; }
 .spatial-dialog-subtitle { font-size: 15px; color: #c7cec4; margin-bottom: 28px; }
-.spatial-dialog-art { width: 100%; max-height: 40svh; object-fit: cover; object-position: center; border: 1px solid #bec9b72e; border-radius: 5px; }
-.spatial-dialog-copy { margin-top: 28px; font-size: 14px; line-height: 1.7; max-width: 62ch; }
+.spatial-dialog-heading { display: grid; grid-template-columns: 1.5fr .75fr; gap: 50px; align-items: end; }
+.spatial-dialog-heading > div > p:first-child { color: #9da79e; font-size: 10px; margin-bottom: 13px; }
+.spatial-dialog-heading > p { color: #aeb8ae; font-size: 12px; line-height: 1.7; padding-bottom: 27px; }
+.spatial-dialog-art { width: 100%; max-height: 34svh; object-fit: cover; object-position: center; border: 1px solid #bec9b72e; border-radius: 5px; }
+.spatial-dialog-copy { display: grid; grid-template-columns: 1.25fr 1fr; gap: 45px; margin-top: 28px; font-size: 14px; line-height: 1.7; }
 .spatial-dialog-copy p + p { color: #b9c4b8; margin-top: 8px; }
+.spatial-dialog-footer { display: flex; justify-content: space-between; align-items: end; gap: 30px; margin-top: 34px; padding-top: 23px; border-top: 1px solid #c4cec42e; }
+.spatial-dialog-footer > div { display: flex; flex-wrap: wrap; gap: 7px; }
+.spatial-dialog-footer > div span { padding: 6px 9px; border: 1px solid #c4cec429; border-radius: 999px; color: #aeb8ae; font-size: 9px; }
+.spatial-dialog-footer > a { display: inline-flex; align-items: center; gap: 15px; padding: 10px 0; border-bottom: 1px solid #c4cec44d; color: #f0f1eb; font-size: 12px; white-space: nowrap; }
+.particle-contact-section { position: relative; z-index: 2; }
+.particle-contact-section #contact { border-color: #c4cec424; background: #0b0f0fd9; }
+.particle-contact-section input,
+.particle-contact-section textarea { background: #121616; }
 @keyframes spatial-open { from { opacity: 0; transform: perspective(1000px) translateZ(-90px) translateY(20px); } to { opacity: 1; transform: perspective(1000px) translateZ(0) translateY(0); } }
 [data-motion='reduced'] .particle-hero { height: 100svh; }
 [data-renderer='fallback'] .particle-hero { height: 100svh; }
@@ -110,6 +121,12 @@
   .spatial-dialog header { margin-bottom: 26px; }
   .spatial-dialog h2 { font-size: 34px; }
   .spatial-dialog-art { min-height: 210px; }
+  .spatial-dialog-heading,
+  .spatial-dialog-copy { grid-template-columns: 1fr; gap: 12px; }
+  .spatial-dialog-heading > p { padding-bottom: 18px; }
+  .spatial-dialog-copy p + p { margin-top: 0; }
+  .spatial-dialog-footer { display: block; }
+  .spatial-dialog-footer > a { margin-top: 22px; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

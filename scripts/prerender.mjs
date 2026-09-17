@@ -70,6 +70,8 @@ try {
     const routeStylePattern =
       page.path === "/cv"
         ? /^CV-.*\.css$/
+        : page.path === "/archive"
+          ? /^Archive-.*\.css$/
         : page.path.startsWith("/work/")
           ? /^Project-.*\.css$/
           : null;

@@ -24,9 +24,13 @@ export default defineConfig(({ mode, isSsrBuild }) => {
       'import.meta.env.VITE_EMAIL_ACCESS_KEY': JSON.stringify(publicEmailAccessKey),
     },
     resolve: {
+      dedupe: ['react', 'react-dom', 'three'],
       alias: {
         '@': path.resolve(__dirname, './src'),
       },
+    },
+    optimizeDeps: {
+      include: ['three', '@react-three/fiber', 'three/addons/loaders/GLTFLoader.js', 'three/addons/environments/RoomEnvironment.js'],
     },
     assetsInclude: ['**/*.svg', '**/*.csv'],
     build: {

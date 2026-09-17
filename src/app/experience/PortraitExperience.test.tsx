@@ -36,7 +36,7 @@ describe("portrait review experience", () => {
     const hero = screen.getByRole("region", { name: "Stephen Howe, creative technologist" });
     expect(hero.querySelector(".spatial-card")).toBeNull();
     expect(screen.getAllByRole("button", { name: /^Open .* preview$/ })).toHaveLength(6);
-    expect(screen.getByRole("link", { name: "Full archive" })).toHaveAttribute("href", "/#work");
+    expect(screen.getByRole("link", { name: "Full archive" })).toHaveAttribute("href", "/archive");
     expect(createAudio).not.toHaveBeenCalled();
   });
 
@@ -92,6 +92,7 @@ describe("portrait review experience", () => {
     fireEvent.click(screen.getByRole('button', { name: 'Scene ready', hidden: true }));
     fireEvent.click(screen.getByRole("button", { name: "Open Quiver preview" }));
     expect(screen.getByRole("dialog")).toHaveAttribute("open");
+    expect(screen.getByRole("link", { name: "Read the full case study" })).toHaveAttribute("href", "/work/quiver");
     expect(document.body.style.overflow).toBe("hidden");
     fireEvent.click(screen.getByRole("button", { name: "Close preview" }));
     expect(document.body.style.overflow).toBe("auto");
