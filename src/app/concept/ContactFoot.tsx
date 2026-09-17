@@ -8,10 +8,27 @@ type Status = "idle" | "sending" | "success" | "error";
 
 const inputClasses =
   "w-full border border-border bg-card px-4 py-3 text-sm text-foreground outline-none transition-colors focus:border-accent";
-const labelClasses =
-  "mb-2 block font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground";
 
-export function ContactFoot() {
+type ContactFootProps = {
+  // The editorial homepage keeps its mono eyebrows and accent dot. Spatial
+  // routes share the dark particle system, so their chrome is quiet sans.
+  variant?: "editorial" | "spatial";
+  // The particle page already carries "Let's talk." in its closing arc, so
+  // its form omits the repeated heading.
+  heading?: boolean;
+};
+
+export function ContactFoot({ variant = "editorial", heading = true }: ContactFootProps) {
+  const spatial = variant === "spatial";
+  const labelClasses = spatial
+    ? "mb-2 block text-[12px] text-muted-foreground"
+    : "mb-2 block font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground";
+  const smallClasses = spatial
+    ? "text-[12px] text-muted-foreground"
+    : "font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground";
+  const linkClasses = spatial
+    ? "inline-flex items-center gap-1 text-[13px] text-muted-foreground transition-colors hover:text-foreground"
+    : "inline-flex items-center gap-1 font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground transition-colors hover:text-accent";
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [projectType, setProjectType] = useState("");
@@ -61,16 +78,20 @@ export function ContactFoot() {
   }
 
   return (
-    <section id="contact" className="scroll-mt-24 border-t border-border bg-card/60">
+    <section id="contact" className="scroll-mt-24 border-t border-border bg-card/60" data-variant={variant}>
       <div className="mx-auto max-w-6xl px-6 pb-10 pt-20 md:pt-28">
         <div className="grid gap-12 lg:grid-cols-5">
           <div className="lg:col-span-2">
-            <div className="mb-3 font-mono text-[10px] uppercase tracking-[0.18em] text-accent">
-              Contact
-            </div>
-            <h2 className="mb-6 text-4xl md:text-5xl">
-              Let&rsquo;s talk<span className="text-accent">.</span>
-            </h2>
+            {!spatial && (
+              <div className="mb-3 font-mono text-[10px] uppercase tracking-[0.18em] text-accent">
+                Contact
+              </div>
+            )}
+            {heading && (
+              <h2 className="mb-6 text-4xl md:text-5xl">
+                Let&rsquo;s talk{spatial ? "." : <span className="text-accent">.</span>}
+              </h2>
+            )}
             <p className="mb-8 max-w-md text-base leading-relaxed text-muted-foreground">
               Open to creative technologist, design engineer and product designer roles -
               permanent or contract, remote from the UK with EU and US-East overlap.
@@ -93,7 +114,7 @@ export function ContactFoot() {
                   href={link.href}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-1 font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground transition-colors hover:text-accent"
+                  className={linkClasses}
                 >
                   {link.label} <ArrowUpRight className="h-3 w-3" />
                 </a>
@@ -104,7 +125,7 @@ export function ContactFoot() {
           <div className="lg:col-span-3">
             {status === "success" ? (
               <div role="status" className="flex h-full flex-col justify-center border border-border bg-card p-8">
-                <div className="mb-2 font-mono text-[10px] uppercase tracking-[0.18em] text-accent">
+                <div className={spatial ? "mb-2 text-[12px] text-muted-foreground" : "mb-2 font-mono text-[10px] uppercase tracking-[0.18em] text-accent"}>
                   Message sent
                 </div>
                 <p className="headline-font text-2xl text-foreground">
@@ -113,7 +134,7 @@ export function ContactFoot() {
                 <button
                   type="button"
                   onClick={() => setStatus("idle")}
-                  className="mt-6 w-fit font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground underline underline-offset-4 transition-colors hover:text-accent"
+                  className={`mt-6 w-fit ${smallClasses} underline underline-offset-4 transition-colors hover:text-accent`}
                 >
                   Send another
                 </button>
@@ -178,7 +199,7 @@ export function ContactFoot() {
                 />
 
                 <div className="flex flex-col gap-3 md:col-span-2 md:flex-row md:items-center md:justify-between">
-                  <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
+                  <span className={smallClasses}>
                     {status === "error" ? (
                       <span role="alert" className="text-accent">{errorMsg}</span>
                     ) : (
@@ -198,10 +219,10 @@ export function ContactFoot() {
           </div>
         </div>
 
-        <footer className="mt-20 flex flex-col justify-between gap-3 border-t border-border pt-6 pb-2 font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground md:flex-row">
-          <span>© 2026 Stephen Howe · Norwich, UK - remote worldwide</span>
-          <a href="/#work" className="transition-colors hover:text-accent">
-            Explore the work ↑
+        <footer className={`mt-20 flex flex-col justify-between gap-3 border-t border-border pt-6 pb-2 md:flex-row ${smallClasses}`}>
+          <span>© 2026 Stephen Howe {spatial ? "-" : "·"} Norwich, UK - remote worldwide</span>
+          <a href={spatial ? "/study#work" : "/#work"} className="transition-colors hover:text-accent">
+            {spatial ? "Back to selected work" : "Explore the work ↑"}
           </a>
         </footer>
       </div>

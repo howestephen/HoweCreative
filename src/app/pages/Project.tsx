@@ -319,7 +319,7 @@ function ProjectStory({ project }: { project: PortfolioProject }) {
           <ArrowUpRight size={36} />
         </Link>
       </article>
-      <div className="spatial-contact"><ContactFoot /></div>
+      <div className="spatial-contact"><ContactFoot variant="spatial" /></div>
     </div>
   );
 }

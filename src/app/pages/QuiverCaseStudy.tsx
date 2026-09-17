@@ -454,7 +454,7 @@ export function QuiverCaseStudy() {
           </Link>
         </div>
       </article>
-      <ContactFoot />
+      <ContactFoot variant="spatial" />
     </>
   );
 }
