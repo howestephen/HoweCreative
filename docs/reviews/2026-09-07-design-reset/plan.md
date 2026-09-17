@@ -337,6 +337,8 @@ The portrait source currently used by the particle renderer is `docs/reviews/202
 
 ### Verified and outstanding
 
+The 17 September dissolve softening and design pass (see the revision record) sits on top of the state below; its verification and open items are recorded there.
+
 The current integrated build passed `npm run typecheck && npm test && npm run lint && npm run build`. The production build prerendered and verified 14 routes. Browser review covered the desktop and phone archive, filters, selected-work grid, dialog behaviour, contact navigation and a representative shared case study. The HTTPS Tailscale routes for `/study`, `/archive` and `/work/quiver` returned 200 on 17 September.
 
 Still outstanding:
@@ -358,6 +360,8 @@ Audit Unified Menu as the next bounded project. Compare the live production menu
 A fresh checkout of the branch is complete for this milestone. This Mac still has pre-existing local changes and untracked historical material that were deliberately excluded from the handoff commits: `.claude/settings.local.json`, `.claude/hooks-state/`, the `/job-applications/` ignore rule, `docs/Stephen_Howe_CV_2026.pdf`, `docs/plans/2026-08-14-earlier-work-archive-design.md`, the rejected portrait feasibility/restart/model-source notes, `public/portrait/` and `scripts/build-portrait.py`. The PDF is the old black CV, not the current white `/cv` page. The portrait directory and Blender script belong to the abandoned GLB experiment, not the accepted particle renderer. Inspect ownership and references before committing, moving or discarding any of these files.
 
 ## Revision record
+
+- 17 September 2026, dissolve softening and design pass (Claude): Stephen judged the opening 70% there but the first face movement and the turn to particles too quick and aggressive, and asked for a softer, deeper, more cinematic process plus a site-wide design lift. The particle choreography in `src/app/experience/portrait-particles.ts` now holds the portrait for the first sixth of a viewport, separates feathered pillars along depth without the vertical stagger or hard seams, dissolves in a spatial wave (back of head and crown first, features last, with a ripple so the front is never a straight edge), lifts released points with a slow sway, fades most of them as vapour and carries a minority as embers into a near/mid/far field with decorrelated scatter. The release window can no longer invert on an unmeasured layout. The design pass added a spatial variant of the shared contact form (no mono caps or orange accent, one "Let's talk."), lifted every 9-11px string to 12-13px, removed the "Interactive portrait" label, calmed the card entrance, cleared the fixed controls from the footer and set the document background so overscroll never flashes white. Verified with headless contact sheets at 1440x900 and 390x844, typecheck, 82 tests and lint; the pillar-depth test now covers feathered seams. Not yet verified: the motion on a physical phone, real-time scroll feel in a live browser at Stephen's own pace, and the opt-in sound against the new timing.
 
 - 17 September 2026, handoff: consolidated the accepted particle direction, integrated route state, review URLs, source map, verification, privacy boundary and outstanding work into one executable pickup record. Set Unified Menu's evidence audit as the next bounded task. No homepage promotion, public deployment, Figma edit or V7 access implementation is authorised by this handoff.
 
