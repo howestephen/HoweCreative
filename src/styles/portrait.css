@@ -23,8 +23,8 @@
 .particle-hero { height: 470svh; position: relative; scroll-margin-top: 0; }
 .particle-hero-inner { position: sticky; top: 0; height: 100svh; opacity: var(--intro-opacity); pointer-events: none; }
 .particle-introduction { position: absolute; left: 44px; bottom: 106px; }
-.particle-introduction h1 { font-size: clamp(14px, 1.17vw, 18px); font-weight: 400; line-height: 1.55; letter-spacing: -.1px; margin: 0; color: #d5d6d2; }
-.particle-scroll { position: absolute; bottom: 92px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 10px; color: #d7d8d3; font-size: 11px; border: 0; padding: 12px; background: none; cursor: pointer; pointer-events: auto; }
+.particle-introduction h1 { font-size: clamp(16px, 1.3vw, 20px); font-weight: 400; line-height: 1.5; letter-spacing: -.15px; margin: 0; color: #dcddd8; }
+.particle-scroll { position: absolute; bottom: 92px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 10px; color: #d7d8d3; font-size: 12px; border: 0; padding: 12px; background: none; cursor: pointer; pointer-events: auto; }
 .particle-scroll > svg { display: none; }
 .scroll-track { height: 30px; width: 18px; border: 1px solid #a4a9a2; border-radius: 12px; position: relative; }
 .scroll-track > span { position: absolute; top: 6px; left: 7px; width: 2px; height: 6px; border-radius: 2px; background: #dddcd3; animation: particle-scroll-cue 2.8s ease-in-out infinite; }
@@ -32,47 +32,46 @@
 .spatial-work { position: relative; width: min(1140px, calc(100% - 120px)); min-height: 115svh; margin: 0 auto; padding: 118px 0 130px; scroll-margin-top: 0; }
 .spatial-work-heading { display: flex; justify-content: space-between; align-items: center; gap: 20px; margin-bottom: 28px; }
 .spatial-work-heading h2 { font-size: clamp(25px, 2.6vw, 35px); font-weight: 500; letter-spacing: -1px; margin: 0; }
-.spatial-work-heading a { display: flex; align-items: center; gap: 12px; font-size: 12px; color: #b9bfba; padding: 10px 0; }
+.spatial-work-heading a { display: flex; align-items: center; gap: 12px; font-size: 13px; color: #c3c9c4; padding: 10px 0; }
 .spatial-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; perspective: 1100px; }
-.spatial-card { position: relative; display: flex; flex-direction: column; align-items: flex-start; min-height: 210px; text-align: left; padding: 23px; border-radius: 9px; border: 1px solid #a4aaa333; background: linear-gradient(125deg, #d1d9d91a, #777d7f08 45%, #c8d6d30c), #15191b72; box-shadow: inset 0 1px 0 #ffffff0c, 0 20px 50px #00000030; backdrop-filter: blur(20px) saturate(.4); -webkit-backdrop-filter: blur(20px) saturate(.4); color: #eaece6; cursor: pointer; transform-origin: center bottom; transition: border-color .3s, background-color .3s, box-shadow .3s; will-change: transform, opacity; }
+.spatial-card { position: relative; display: flex; flex-direction: column; align-items: flex-start; min-height: 224px; text-align: left; padding: 26px; border-radius: 9px; border: 1px solid #a4aaa333; background: linear-gradient(125deg, #d1d9d91a, #777d7f08 45%, #c8d6d30c), #15191b72; box-shadow: inset 0 1px 0 #ffffff0c, 0 20px 50px #00000030; backdrop-filter: blur(20px) saturate(.4); -webkit-backdrop-filter: blur(20px) saturate(.4); color: #eaece6; cursor: pointer; transform-origin: center bottom; transition: border-color .3s, background-color .3s, box-shadow .3s; will-change: transform, opacity; }
 .spatial-card:hover, .spatial-card:focus-visible { border-color: #c6ccc27a; background-color: #3b414578; box-shadow: inset 0 1px 0 #ffffff30, 0 20px 60px #00000066; }
 .spatial-card-icon { margin-bottom: 18px; color: #d1d5cc; }
 .spatial-card h3 { margin: 0 0 7px; font-size: clamp(18px, 1.5vw, 22px); font-weight: 500; letter-spacing: -.4px; }
-.spatial-card p { margin: 0 0 18px; font-size: 12px; color: #b7bdb8; line-height: 1.55; max-width: 26ch; }
+.spatial-card p { margin: 0 0 18px; font-size: 13px; color: #bcc2bd; line-height: 1.55; max-width: 26ch; }
 .spatial-card-foot { margin-top: auto; width: 100%; display: flex; align-items: center; justify-content: space-between; }
-.spatial-card-foot > span { color: #a9b0aa; font-size: 10px; }
+.spatial-card-foot > span { color: #aeb5af; font-size: 12px; }
 .spatial-card-foot > svg { color: #d3d8cf; }
-.spatial-preview-note { font-size: 11px; color: #8d9690; margin-top: 27px; }
+.spatial-preview-note { font-size: 13px; color: #949d97; margin-top: 27px; }
 .particle-ending { position: relative; min-height: 138svh; text-align: center; padding: 38svh 24px 0; }
 .particle-ending-inner { position: sticky; top: 33svh; opacity: var(--end-opacity); }
-.particle-ending-inner > p { color: #b3b9b2; font-size: 14px; margin-bottom: 15px; }
+.particle-ending-inner > p { color: #b3b9b2; font-size: 15px; margin-bottom: 15px; }
 .particle-ending h2 { font-size: clamp(64px, 9vw, 130px); line-height: 1.1; font-weight: 400; letter-spacing: -.065em; margin: 0 0 30px; }
-.particle-contact { display: inline-flex; align-items: center; gap: 20px; font-size: 13px; padding: 12px 2px; border-bottom: 1px solid #b1b9ad55; }
-.particle-return { display: flex; align-items: center; justify-content: center; gap: 9px; margin: 64px auto 0; padding: 12px; border: 0; background: none; color: #9ba69b; font-size: 11px; cursor: pointer; }
+.particle-contact { display: inline-flex; align-items: center; gap: 20px; font-size: 14px; padding: 12px 2px; border-bottom: 1px solid #b1b9ad55; }
+.particle-return { display: flex; align-items: center; justify-content: center; gap: 9px; margin: 64px auto 0; padding: 12px; border: 0; background: none; color: #a3ada3; font-size: 12px; cursor: pointer; }
 .particle-tools { position: fixed; z-index: 21; left: 44px; bottom: 26px; display: flex; align-items: center; gap: 20px; }
-.particle-tools button { display: flex; align-items: center; gap: 8px; min-height: 38px; background: none; color: #bcc4ba; font-size: 10px; padding: 8px 0; cursor: pointer; border: 0; }
-.particle-tools [role='status'] { font-size: 10px; color: #b9b29f; }
-.particle-study-label { position: fixed; bottom: 39px; right: 44px; font-size: 10px; color: #828d83; pointer-events: none; }
+.particle-tools button { display: flex; align-items: center; gap: 8px; min-height: 38px; background: none; color: #bcc4ba; font-size: 11px; padding: 8px 0; cursor: pointer; border: 0; }
+.particle-tools [role='status'] { font-size: 11px; color: #b9b29f; }
 .spatial-dialog { position: fixed; margin: auto; width: min(1000px, calc(100% - 80px)); max-height: 86svh; overflow: auto; overscroll-behavior: contain; padding: 35px 44px 44px; border-radius: 15px; border: 1px solid #d4dbce70; background: linear-gradient(130deg, #68747855, #1e2527bd 50%), #121718d9; color: #f0f0e9; box-shadow: 0 50px 150px #000a, inset 0 1px 0 #fff2; backdrop-filter: blur(36px); -webkit-backdrop-filter: blur(36px); }
 .spatial-dialog[open] { animation: spatial-open .4s cubic-bezier(.2,.8,.2,1) both; }
 .spatial-dialog::backdrop { background: #02060655; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
 .spatial-dialog header { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-bottom: 35px; }
-.spatial-dialog header p { margin: 0; color: #b8c2b8; font-size: 11px; }
-.spatial-dialog header button { display: flex; align-items: center; gap: 12px; padding: 8px; color: #e7ece1; border: 0; background: none; cursor: pointer; font-size: 12px; }
+.spatial-dialog header p { margin: 0; color: #b8c2b8; font-size: 12px; }
+.spatial-dialog header button { display: flex; align-items: center; gap: 12px; padding: 8px; color: #e7ece1; border: 0; background: none; cursor: pointer; font-size: 13px; }
 .spatial-dialog h2 { font-size: 44px; font-weight: 500; letter-spacing: -1.6px; margin: 0 0 8px; line-height: 1.15; }
 .spatial-dialog-subtitle { font-size: 15px; color: #c7cec4; margin-bottom: 28px; }
 .spatial-dialog-heading { display: grid; grid-template-columns: 1.5fr .75fr; gap: 50px; align-items: end; }
-.spatial-dialog-heading > div > p:first-child { color: #9da79e; font-size: 10px; margin-bottom: 13px; }
-.spatial-dialog-heading > p { color: #aeb8ae; font-size: 12px; line-height: 1.7; padding-bottom: 27px; }
+.spatial-dialog-heading > div > p:first-child { color: #a3ada4; font-size: 12px; margin-bottom: 13px; }
+.spatial-dialog-heading > p { color: #b4beb4; font-size: 13px; line-height: 1.7; padding-bottom: 27px; }
 .spatial-dialog-art { width: 100%; max-height: 34svh; object-fit: cover; object-position: center; border: 1px solid #bec9b72e; border-radius: 5px; }
 .spatial-dialog-copy { display: grid; grid-template-columns: 1.25fr 1fr; gap: 45px; margin-top: 28px; font-size: 14px; line-height: 1.7; }
 .spatial-dialog-copy p + p { color: #b9c4b8; margin-top: 8px; }
 .spatial-dialog-footer { display: flex; justify-content: space-between; align-items: end; gap: 30px; margin-top: 34px; padding-top: 23px; border-top: 1px solid #c4cec42e; }
 .spatial-dialog-footer > div { display: flex; flex-wrap: wrap; gap: 7px; }
-.spatial-dialog-footer > div span { padding: 6px 9px; border: 1px solid #c4cec429; border-radius: 999px; color: #aeb8ae; font-size: 9px; }
-.spatial-dialog-footer > a { display: inline-flex; align-items: center; gap: 15px; padding: 10px 0; border-bottom: 1px solid #c4cec44d; color: #f0f1eb; font-size: 12px; white-space: nowrap; }
+.spatial-dialog-footer > div span { padding: 6px 10px; border: 1px solid #c4cec429; border-radius: 999px; color: #b4beb4; font-size: 11px; }
+.spatial-dialog-footer > a { display: inline-flex; align-items: center; gap: 15px; padding: 10px 0; border-bottom: 1px solid #c4cec44d; color: #f0f1eb; font-size: 13px; white-space: nowrap; }
 .particle-contact-section { position: relative; z-index: 2; }
-.particle-contact-section #contact { border-color: #c4cec424; background: #0b0f0fd9; }
+.particle-contact-section #contact { border-color: #c4cec424; background: #0b0f0fd9; padding-bottom: 56px; }
 .particle-contact-section input,
 .particle-contact-section textarea { background: #121616; }
 @keyframes spatial-open { from { opacity: 0; transform: perspective(1000px) translateZ(-90px) translateY(20px); } to { opacity: 1; transform: perspective(1000px) translateZ(0) translateY(0); } }
@@ -89,7 +88,6 @@
   .spatial-grid { gap: 14px; }
   .spatial-card { padding: 22px; }
   .particle-introduction, .particle-tools { left: 24px; }
-  .particle-study-label { right: 24px; }
 }
 @media (max-width: 650px) {
   .portfolio-shell.portrait-home .header-inner { width: calc(100% - 40px); height: 110px; gap: 12px; flex-direction: column; align-items: flex-start; justify-content: center; }
@@ -110,13 +108,12 @@
   .spatial-card-icon { margin-bottom: 22px; width: 29px; }
   .spatial-card h3 { font-size: 22px; }
   .spatial-card p { max-width: 35ch; font-size: 13px; margin-bottom: 24px; }
-  .spatial-card-foot > span { font-size: 11px; }
-  .spatial-preview-note { max-width: 29ch; font-size: 11px; line-height: 1.6; }
+  .spatial-card-foot > span { font-size: 12px; }
+  .spatial-preview-note { max-width: 32ch; font-size: 13px; line-height: 1.6; }
   .particle-ending { min-height: 130svh; padding-top: 34svh; }
   .particle-ending h2 { font-size: 76px; }
-  .particle-ending-inner > p { font-size: 12px; }
+  .particle-ending-inner > p { font-size: 13px; }
   .particle-tools { left: 22px; bottom: 17px; gap: 16px; }
-  .particle-study-label { bottom: 31px; right: 22px; font-size: 9px; }
   .spatial-dialog { width: calc(100% - 28px); max-height: 86svh; padding: 21px; border-radius: 12px; }
   .spatial-dialog header { margin-bottom: 26px; }
   .spatial-dialog h2 { font-size: 34px; }

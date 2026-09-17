@@ -202,7 +202,7 @@ export function Archive() {
           </div>
         </section>
       </main>
-      <div className="spatial-contact"><ContactFoot /></div>
+      <div className="spatial-contact"><ContactFoot variant="spatial" /></div>
     </div>
   );
 }

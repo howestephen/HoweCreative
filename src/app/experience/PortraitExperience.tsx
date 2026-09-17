@@ -183,12 +183,13 @@ export function PortraitExperience() {
       if (intro) intro.inert = state.intro < 0.05;
       for (const [index, card] of cards.entries()) {
         const top = (cardTops.get(card) ?? 0) - actualY;
-        const enter = reduced ? 1 : smooth(height * 0.98, height * 0.62, top);
+        const enter = reduced ? 1 : smooth(height * 0.98, height * 0.56, top);
         const leave = reduced ? 1 : 1 - smooth(0.04, 0.74, state.ending);
         const opacity = enter * leave;
-        const offset = (1 - enter) * 120 - (1 - leave) * 95;
+        // Cards settle from a little below and behind, not a tumble.
+        const offset = (1 - enter) * 72 - (1 - leave) * 60;
         card.style.opacity = String(opacity);
-        card.style.transform = reduced ? "none" : `translate3d(0, ${offset.toFixed(2)}px, ${(-80 * (1 - enter) - 160 * (1 - leave)).toFixed(2)}px) rotateX(${((1 - enter) * 12).toFixed(2)}deg) rotateY(${((1 - enter) * (index % 3 - 1) * -7).toFixed(2)}deg)`;
+        card.style.transform = reduced ? "none" : `translate3d(0, ${offset.toFixed(2)}px, ${(-60 * (1 - enter) - 120 * (1 - leave)).toFixed(2)}px) rotateX(${((1 - enter) * 5).toFixed(2)}deg) rotateY(${((1 - enter) * (index % 3 - 1) * -3).toFixed(2)}deg)`;
         card.inert = opacity < 0.45;
       }
       motion.current.invalidate?.();
@@ -359,7 +360,7 @@ export function PortraitExperience() {
         </div>
       </section>
 
-      <div className="particle-contact-section"><ContactFoot /></div>
+      <div className="particle-contact-section"><ContactFoot variant="spatial" heading={false} /></div>
 
       <div className="particle-tools">
         <button onClick={() => void toggleAudio()} aria-pressed={sound} aria-label={sound ? "Turn sound off" : "Turn sound on"}>
@@ -371,7 +372,6 @@ export function PortraitExperience() {
         {failed && <span role="status">Static view</span>}
         {audioError && <span role="status">Sound unavailable</span>}
       </div>
-      <span className="particle-study-label">Interactive portrait</span>
 
       <dialog className="spatial-dialog" ref={dialog} aria-labelledby="spatial-dialog-title" onCancel={() => setSelected(null)} onClose={() => setSelected(null)}>
         {selectedProject && <>

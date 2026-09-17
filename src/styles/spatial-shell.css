@@ -1,3 +1,5 @@
+/* Overscroll and paint gaps show the document background, so it matches. */
+html:has(.spatial-shell) { background: #060707; }
 .spatial-shell {
   --background: #060707;
   --foreground: #edece7;
@@ -20,6 +22,25 @@
 .spatial-shell .nav-contact svg,
 .spatial-shell nav a[href='/cv'] svg { display: none; }
 .spatial-shell :focus-visible { outline: 2px solid #e3d9c2; outline-offset: 4px; }
+
+/* The shared contact form, restyled for the dark spatial routes. The editorial
+   homepage keeps its own light treatment in portfolio.css. */
+.spatial-shell #contact { --accent: #d3d9d0; --accent-hover: #edece7; --border: #c4cec42e; --muted-foreground: #a8b0a9; border-top: 1px solid #c4cec424; background: #090c0c; }
+.spatial-shell #contact > div { width: min(1320px, calc(100% - 88px)); max-width: none; padding-inline: 0; }
+.spatial-shell #contact h2 { font-size: clamp(3rem, 5vw, 4.8rem); font-weight: 400; letter-spacing: -.055em; color: #edece7; }
+.spatial-shell #contact input,
+.spatial-shell #contact textarea { font-size: 16px; border-radius: 6px; border-color: #c4cec42e; background: #101414; color: #edece7; }
+.spatial-shell #contact input:focus,
+.spatial-shell #contact textarea:focus { border-color: #d3d9d0; }
+.spatial-shell #contact input::placeholder { color: #7d867f; }
+.spatial-shell #contact button[type='submit'] { border-radius: 6px; background: #edece7; color: #060707; }
+.spatial-shell #contact button[type='submit']:hover { background: #ffffff; }
+.spatial-shell #contact a[href='/cv'] { border-radius: 6px; border-color: #c4cec44d; color: #edece7; }
+.spatial-shell #contact a[href='/cv']:hover { border-color: #edece7; }
+.spatial-shell #contact footer { color: #8f9891; }
+.spatial-shell #contact footer a:hover { color: #edece7; }
+@media (max-width: 900px) { .spatial-shell #contact > div { width: calc(100% - 48px); } }
+@media (max-width: 650px) { .spatial-shell #contact > div { width: calc(100% - 40px); } }
 
 @media (max-width: 900px) {
   .spatial-shell .header-inner { width: calc(100% - 48px); height: 90px; }
