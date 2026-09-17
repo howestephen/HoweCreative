@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
-import { acceptsPortraitPress, isPortraitSurface, PORTRAIT_CROP, PORTRAIT_PILLARS, portraitFraming, portraitPhases, portraitPillarDepth, samplePortrait, scrollState } from "./portrait-particles";
+import { acceptsPortraitPress, isPortraitSurface, PILLAR_FEATHER, PORTRAIT_CROP, PORTRAIT_PILLARS, portraitFraming, portraitPhases, portraitPillarDepth, portraitSurfaceDepth, samplePortrait, scrollState } from "./portrait-particles";
 import PortraitScene from "./PortraitScene";
 
 vi.mock("three", async (original) => ({
@@ -103,19 +103,37 @@ describe("portrait source and reversible choreography", () => {
   it('assigns one shared depth per vertical pillar instead of using facial brightness', () => {
     expect(portraitPillarDepth(0.5)).toBe(portraitPillarDepth(0.53));
     expect(portraitPillarDepth(0.46)).not.toBe(portraitPillarDepth(0.5));
-    const pixels = new Uint8ClampedArray(80 * 80 * 4);
-    for (let y = 0; y < 80; y++) for (let x = 0; x < 80; x++) {
-      const i = (y * 80 + x) * 4;
+    // Away from a seam the surface depth is the rigid pillar depth.
+    expect(portraitSurfaceDepth(0.5)).toBe(portraitPillarDepth(0.5));
+    // Inside the feathered seam it sits between the two neighbouring pillars
+    // and meets the neighbour halfway exactly at the boundary.
+    const boundary = 7 / PORTRAIT_PILLARS;
+    const left = portraitPillarDepth(boundary - PILLAR_FEATHER * 2);
+    const right = portraitPillarDepth(boundary + PILLAR_FEATHER * 2);
+    const seam = portraitSurfaceDepth(boundary + PILLAR_FEATHER * 0.25);
+    expect(seam).not.toBe(left);
+    expect(seam).not.toBe(right);
+    expect((seam - left) * (seam - right)).toBeLessThan(0);
+    expect(portraitSurfaceDepth(boundary)).toBeCloseTo((left + right) / 2, 10);
+    expect(portraitSurfaceDepth(boundary + PILLAR_FEATHER)).toBe(right);
+    expect(portraitSurfaceDepth(0)).toBe(portraitPillarDepth(0));
+    expect(portraitSurfaceDepth(1)).toBe(portraitPillarDepth(1));
+    const pixels = new Uint8ClampedArray(320 * 40 * 4);
+    for (let y = 0; y < 40; y++) for (let x = 0; x < 320; x++) {
+      const i = (y * 320 + x) * 4;
       pixels[i + 3] = 255;
-      if (x >= 12 && x <= 67 && y >= 9 && y <= 70) {
+      if (x >= 48 && x <= 270 && y >= 4 && y <= 34) {
         pixels[i] = pixels[i + 1] = pixels[i + 2] = 150;
       }
     }
-    const { depths } = samplePortrait(pixels, 80, 80);
+    const { depths } = samplePortrait(pixels, 320, 40);
     expect(Math.min(...depths)).toBeGreaterThan(0);
     expect(Math.max(...depths)).toBeLessThan(1);
-    expect(new Set(depths).size).toBeGreaterThan(6);
-    expect(new Set(depths).size).toBeLessThanOrEqual(PORTRAIT_PILLARS);
+    const rigid = new Set(Array.from({ length: PORTRAIT_PILLARS }, (_, i) => Math.fround(portraitPillarDepth((i + 0.5) / PORTRAIT_PILLARS))));
+    const onPillar = depths.filter((depth) => rigid.has(depth)).length;
+    expect(new Set(depths.filter((depth) => rigid.has(depth))).size).toBeGreaterThan(6);
+    // Seams are narrow: most sampled points still sit on a rigid pillar depth.
+    expect(onPillar / depths.length).toBeGreaterThan(0.6);
     expect(Math.max(...depths) - Math.min(...depths)).toBeGreaterThan(0.5);
   });
 });
