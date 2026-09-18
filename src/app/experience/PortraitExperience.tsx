@@ -25,23 +25,23 @@ const areaTints: Record<string, string> = {
   Systems: "#668e88",
   Brand: "#9a778d",
 };
-// Each preview shows the project's identity, not a cropped screenshot: a
-// wordmark, a mark, a rendered asset or, for Quiver, its own poster frame.
-// `contain` keeps a logo whole on a mat; `cover` is for photographic art.
-type Preview = { src: string; alt: string; fit: "contain" | "cover"; mat?: string; focus?: string };
+// Each preview shows the project's identity, whole and centred on one plain
+// panel: a wordmark, a mark, a rendered asset or a screen. Only Quiver's
+// poster fills the panel, because it is a photographic frame.
+type Preview = { src: string; alt: string; fit: "contain" | "cover"; focus?: string };
 const projectFrames: { slug: string; description: string; icon: typeof Feather; area: string; preview: Preview }[] = [
   { slug: "quiver", description: "Art direction and generative film", icon: Feather, area: "Film",
-    preview: { src: "/case-studies/quiver/hero-poster.jpg", alt: "A hooded archer in mist, from the Quiver launch film", fit: "cover", focus: "68% center" } },
+    preview: { src: "/case-studies/quiver/hero-poster.jpg", alt: "A hooded archer in mist, from the Quiver launch film", fit: "cover", focus: "right center" } },
   { slug: "uncx-menu", description: "Navigation across a product suite", icon: Network, area: "Product",
-    preview: { src: "/case-studies/uncx-menu/menu-open-panel.webp", alt: "The unified UNCX menu in its open state", fit: "contain" } },
+    preview: { src: "/case-studies/uncx-menu/menu-open-phone.webp", alt: "The unified UNCX menu open on a phone", fit: "contain" } },
   { slug: "solana-diary", description: "Automated media with human approval", icon: BookOpen, area: "Systems",
     preview: { src: "/case-studies/solana-diary/SOLANA_DIARY_LOGO.png", alt: "Solana Diary wordmark", fit: "contain" } },
   { slug: "uncx-video-system", description: "Reusable 3D and motion production", icon: Layers3, area: "Motion",
     preview: { src: "/case-studies/uncx-video-system/3d-asset.webp", alt: "A rendered UNCX padlock asset from the 3D system", fit: "contain" } },
   { slug: "uncx-rebrand", description: "External collaboration and in-house design", icon: Shapes, area: "Brand",
-    preview: { src: "/case-studies/uncx-rebrand/logo-square.webp", alt: "UNCX Network mark", fit: "contain", mat: "#060807" } },
+    preview: { src: "/case-studies/uncx-rebrand/uncx-logotype.svg", alt: "UNCX Network logotype", fit: "contain" } },
   { slug: "badger-club", description: "Product design through implementation", icon: Hexagon, area: "Product",
-    preview: { src: "/case-studies/badger-club/badger-club-crest.webp", alt: "Badger Club crest", fit: "contain", mat: "#f5f3ee" } },
+    preview: { src: "/case-studies/badger-club/badger-club-crest.webp", alt: "Badger Club crest", fit: "contain" } },
 ];
 
 const selectedProjects = projectFrames.map((frame) => {
@@ -404,7 +404,7 @@ export function PortraitExperience() {
 
       <dialog className="spatial-dialog" ref={dialog} aria-labelledby="spatial-dialog-title" onCancel={() => setSelected(null)} onClose={() => setSelected(null)}>
         {selectedProject && <>
-          <div className="spatial-dialog-visual" data-fit={selectedProject.preview.fit} style={{ "--card-tint": areaTints[selectedProject.area] ?? "#849589", "--preview-mat": selectedProject.preview.mat, "--preview-focus": selectedProject.preview.focus } as CSSProperties}>
+          <div className="spatial-dialog-visual" data-fit={selectedProject.preview.fit} style={{ "--card-tint": areaTints[selectedProject.area] ?? "#849589", "--preview-focus": selectedProject.preview.focus } as CSSProperties}>
             <img src={selectedProject.preview.src} alt={selectedProject.preview.alt} />
           </div>
           <div className="spatial-dialog-body">
