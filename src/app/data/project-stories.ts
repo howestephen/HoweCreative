@@ -20,6 +20,7 @@ export type EvidenceChapter = {
 export type ProjectStory = {
   lead?: string;
   leadCaption?: string;
+  leadRatio?: FrameRatio;
   chapters: EvidenceChapter[];
   outcome: { title: string; body: string };
 };
@@ -37,14 +38,15 @@ export const projectStories: Record<string, ProjectStory> = {
         title: "Build a visual language into the working files.",
         paragraphs: [
           "I built reusable Cinema 4D scenes, camera rigs and Redshift materials so that a new product could enter an established visual world. The camera, lighting and assets became production decisions I could carry from one film to the next.",
-          "The rig and takes system shown here made those decisions reusable. I could develop the next scene without rebuilding the entire setup.",
+          "Assets, materials and lighting carried from one film to the next. The rigging and takes system that made them reusable is in the collection below.",
         ],
-        images: [
-          "cinema4d-viewport.webp",
-          "c4d-ui-rigging.webp",
-          "c4d-ui-takes.webp",
+        images: ["cinema4d-viewport.webp", "3d-asset.webp"],
+        layout: "paired",
+        ratio: "screen",
+        captions: [
+          "Cinema 4D scene with the reusable camera rig and lighting setup.",
+          "A finished Redshift asset built to drop into the established world.",
         ],
-        layout: "wide",
       },
       {
         label: "02 / Editorial constraints",
@@ -53,8 +55,13 @@ export const projectStories: Record<string, ProjectStory> = {
           "Early films paired long scripts with bespoke animation for every scene. Running the pipeline solo alongside product and brand work made that approach difficult to sustain.",
           "I introduced script-length limits, cut unnecessary scenes and organised reusable After Effects compositions around recurring content. Launches, partner announcements and educational videos could share a production system while keeping their own story.",
         ],
-        images: ["after-effects-pipeline.webp"],
-        layout: "wide",
+        images: ["youtube-thumbnails.webp", "after-effects-ui.webp"],
+        layout: "paired",
+        ratio: "screen",
+        captions: [
+          "Published output across launches, explainers and tutorials in one visual language.",
+          "A reusable After Effects composition for a recurring announcement format.",
+        ],
       },
     ],
     outcome: {
@@ -74,6 +81,7 @@ export const projectStories: Record<string, ProjectStory> = {
         ],
         images: ["dark-progress-2.webp", "dark-message-leader.webp"],
         layout: "paired",
+        ratio: "tall",
       },
       {
         label: "02 / Design through implementation",
@@ -83,7 +91,12 @@ export const projectStories: Record<string, ProjectStory> = {
           "Messaging was another deliberate simplification: leaders use an in-app inbox with email notifications; parents receive messages by email. It avoids asking families to manage another inbox.",
         ],
         images: ["dark-edit-progress.webp", "database-schema.webp"],
-        layout: "wide",
+        layout: "paired",
+        ratio: "screen",
+        captions: [
+          "Editing a badge record in the leader workspace.",
+          "The Supabase data model behind leaders, badges and families.",
+        ],
       },
     ],
     outcome: {
@@ -101,11 +114,25 @@ export const projectStories: Record<string, ProjectStory> = {
           "I designed the identity and post families in Figma, then built a renderer that populated them from live data. Typography, hierarchy and colour carried across news, momentum, liquidity and risk content.",
           "Seven services on Railway handled collection, scheduling, rendering and publishing. A rate-limiting layer paced requests to free-tier APIs so the channel could gather data throughout the day.",
         ],
+        // The claim is a running system producing designed media every day, so
+        // the evidence is the volume of it, not two posts shown large.
         images: [
-          "liquidity_flows_7d__2026-06-16__id7258__render.png",
+          "Single Token - 01.jpg",
+          "Token Warning - 01.jpg",
           "news_cards__2026-05-22__id5201__USDF-STABLECOIN-LAUNCHES-ON-SOLANA-WITH-COIN__POSTED.png",
+          "news_cards__2026-06-04__id5665__X402-AI-ECONOMY-TOPS-50M-VOLUME-IN-UNDER-A-M__POSTED.png",
+          "news_cards__2026-06-11__id6873__COLLECTOR-CRYPT-HITS-9.6M-DAILY-ATH-IN-PACK__POSTED.png",
+          "single_pool_spotlight__2026-06-15__id7115__render.png",
+          "liquidity_flows_7d__2026-06-16__id7258__render.png",
+          "biggest_movers_48h__2026-06-13__id6926__render.png",
+          "trending_memecoins_48h__2026-06-12__id6901__POSTED.png",
+          "holder_growth_leaders_7d__2026-06-09__id6817__POSTED.png",
+          "new_launches_48h__2026-06-17__id8695__render.png",
+          "top_trading_apps_fees_30d__2026-06-10__id6852__POSTED.png",
         ],
-        layout: "paired",
+        layout: "mosaic",
+        ratio: "square",
+        focus: "centre",
       },
       {
         label: "02 / The publishing decision",
@@ -116,6 +143,7 @@ export const projectStories: Record<string, ProjectStory> = {
         ],
         images: ["Example Telegram News Approval 01.png"],
         layout: "portrait",
+        ratio: "tall",
       },
     ],
     outcome: {
@@ -136,6 +164,7 @@ export const projectStories: Record<string, ProjectStory> = {
         ],
         images: ["chain-based-design.webp", "chains.webp"],
         layout: "paired",
+        ratio: "cinema",
       },
       {
         label: "02 / From identity to experience",
@@ -143,8 +172,15 @@ export const projectStories: Record<string, ProjectStory> = {
         paragraphs: [
           "The challenge continued through implementation: individual product teams had to apply the same design direction consistently. Page layouts, marketing graphics and motion references gave the identity a practical form beyond the brand guidelines.",
         ],
+        // Full-page captures at roughly 1:5. Cropped to the page header, which
+        // is the part that carries the identity.
         images: ["website/launchpad.webp", "website/token-vesting.webp"],
         layout: "paired",
+        ratio: "screen",
+        captions: [
+          "Launchpad product page, built in-house from the shared brand direction.",
+          "Token vesting page, using the same layout and graphic system.",
+        ],
       },
     ],
     outcome: {
@@ -154,6 +190,7 @@ export const projectStories: Record<string, ProjectStory> = {
   },
   "uncx-menu": {
     lead: "prototypes-open.webp",
+    leadRatio: "cinema",
     leadCaption:
       "Open navigation states across the UNCX product suite. Figma prototype.",
     chapters: [
@@ -164,8 +201,13 @@ export const projectStories: Record<string, ProjectStory> = {
           "The menu had to connect specialised financial products, each with its own navigation history. I researched patterns and worked through how much product explanation the shared navigation should contain.",
           "Revenue-generating products needed priority without making the rest of the ecosystem difficult to find. Explicit hierarchy and configurable content slots resolved that balance.",
         ],
-        images: ["contents-concept.webp", "research.webp"],
-        layout: "wide",
+        images: ["menu-components.webp", "research.webp"],
+        layout: "paired",
+        ratio: "screen",
+        captions: [
+          "Menu component set with the agreed hierarchy and content slots.",
+          "Navigation patterns reviewed across comparable products.",
+        ],
       },
       {
         label: "02 / Interaction specification",
@@ -174,7 +216,12 @@ export const projectStories: Record<string, ProjectStory> = {
           "I built variable-driven Figma components for open and closed states, with documented content patterns and implementation specifications. The deliverable describes a reusable interaction system across products.",
         ],
         images: ["prototypes-closed.webp", "variables-setup.webp"],
-        layout: "wide",
+        layout: "paired",
+        ratio: "screen",
+        captions: [
+          "Closed navigation state across the product suite.",
+          "Figma variables driving the open and closed states.",
+        ],
       },
     ],
     outcome: {
@@ -195,6 +242,7 @@ export const projectStories: Record<string, ProjectStory> = {
         ],
         images: ["articles-home.webp", "glossary-home.webp"],
         layout: "paired",
+        ratio: "screen",
       },
       {
         label: "02 / Platform and production",
@@ -205,6 +253,7 @@ export const projectStories: Record<string, ProjectStory> = {
         ],
         images: ["video-page.webp", "article-page.webp"],
         layout: "paired",
+        ratio: "screen",
       },
     ],
     outcome: {
@@ -214,6 +263,7 @@ export const projectStories: Record<string, ProjectStory> = {
   },
   "uncx-app-concepts": {
     lead: "token-minter-slide.webp",
+    leadRatio: "tall",
     chapters: [
       {
         label: "01 / Finding the interaction",
@@ -222,7 +272,8 @@ export const projectStories: Record<string, ProjectStory> = {
           "Token tooling and Telegram products often arrived with unfamiliar interaction problems and incomplete requirements. I used FigJam flows and Figma prototypes to make those processes concrete enough for the team to discuss.",
         ],
         images: ["tg-presale-flow-1.webp", "telegram-chatbot-flows.webp"],
-        layout: "wide",
+        layout: "paired",
+        ratio: "screen",
       },
       {
         label: "02 / Iteration",
@@ -232,7 +283,8 @@ export const projectStories: Record<string, ProjectStory> = {
           "Token-minter flows, launchpad components and Telegram interactions reached production. Stealth-launch, NFT and other concepts remained explorations. The gallery records both stages of work.",
         ],
         images: ["launchpad-components.webp", "nft-minting-wireframes.webp"],
-        layout: "wide",
+        layout: "paired",
+        ratio: "screen",
       },
     ],
     outcome: {
@@ -242,6 +294,7 @@ export const projectStories: Record<string, ProjectStory> = {
   },
   "noticia-lingo": {
     lead: "signed-out-hero.webp",
+    leadRatio: "screen",
     chapters: [
       {
         label: "01 / Learning experience",
@@ -251,6 +304,7 @@ export const projectStories: Record<string, ProjectStory> = {
         ],
         images: ["quiz-page.webp", "dashboard.webp"],
         layout: "paired",
+        ratio: "tall",
       },
       {
         label: "02 / Prototype judgement",
@@ -260,7 +314,8 @@ export const projectStories: Record<string, ProjectStory> = {
           "The React frontend, Supabase integration and Google authentication provide a working foundation. I am keeping the scope to Spanish while refining the lesson types before considering other languages.",
         ],
         images: ["database-schema.webp"],
-        layout: "wide",
+        layout: "portrait",
+        ratio: "tall",
       },
     ],
     outcome: {
