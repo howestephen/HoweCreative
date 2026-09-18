@@ -89,7 +89,7 @@ export function PortraitExperience() {
   const soundOn = useRef(false);
   const activeDialog = useRef(false);
   const scrollAnimation = useRef(0);
-  const motion = useRef<ParticleMotion>({ release: 0, travel: 0, ending: 0, pointerX: 0, pointerY: 0, velocity: 0, paused: false });
+  const motion = useRef<ParticleMotion>({ release: 0, approach: 0, travel: 0, ending: 0, pointerX: 0, pointerY: 0, velocity: 0, paused: false });
   const onReady = useCallback(() => setReady(true), []);
   const onUnavailable = useCallback(() => { setFailed(true); setReady(false); }, []);
   const loading = !mounted || ((reduced || failed) ? !posterReady && !posterFailed : !ready);
@@ -187,6 +187,7 @@ export function PortraitExperience() {
       currentY += (actualY - currentY) * (reduced ? 1 : 1 - Math.exp(-dt * 14));
       const state = scrollState(currentY, height, workTop, endTop);
       motion.current.release = reduced ? (actualY > height * 0.4 ? 1 : 0) : state.release;
+      motion.current.approach = reduced ? 0 : state.approach;
       motion.current.travel = state.travel;
       motion.current.ending = state.ending;
       motion.current.paused = reduced || activeDialog.current;

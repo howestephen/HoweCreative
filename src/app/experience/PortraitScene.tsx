@@ -64,6 +64,7 @@ export default function PortraitScene({ motion, onReady, onUnavailable }: Props)
     let totalFrameTime = 0;
     let ready = false;
     let wasPressed = false;
+    let headX = 0;
     const fail = () => {
       if (disposed) return;
       loaded = false;
@@ -86,6 +87,7 @@ export default function PortraitScene({ motion, onReady, onUnavailable }: Props)
       // The peripheral constellation may extend off-screen; the face may not.
       uniforms.uScale.value = framing.scale;
       uniforms.uPixel.value = Math.max(1.25, framing.pixelHeight / sampleHeight * 1.55);
+      headX = camera.aspect > 1.1 ? 0.32 : -0.7 * framing.scale;
       wake();
     };
     const render = (now: number) => {
@@ -105,9 +107,20 @@ export default function PortraitScene({ motion, onReady, onUnavailable }: Props)
       // Release is already eased across the full hero passage. Reusing it
       // directly prevents a second remap from compressing the camera move.
       const advance = state.release;
-      camera.position.z = 6 - advance * 0.88 - state.travel * 0.35;
-      camera.position.x = advance * 0.24;
-      camera.position.y = -state.travel * 0.18 * (1 - state.ending);
+      // The camera swings around the portrait rather than sliding past it, so
+      // the separating surface is read from the side and its depth is visible.
+      // The arc opens on the first scroll and continues through the release.
+      const orbit = state.approach * 0.26 + advance * 0.3;
+      const distance = 6 - advance * 0.8 - state.travel * 0.35;
+      camera.position.set(
+        headX + Math.sin(orbit) * distance,
+        advance * 0.16 - state.travel * 0.18 * (1 - state.ending),
+        headX * 0 + Math.cos(orbit) * distance,
+      );
+      camera.lookAt(headX, 0.06, 0);
+      // lookAt centres the head; the original composition holds it off centre,
+      // so the camera steps sideways in its own frame to put it back.
+      camera.translateX(-headX);
       if (!state.paused) uniforms.uTime.value += dt;
       pointer.set(state.pointerX, state.pointerY);
       const pressTarget = state.pressed && !state.paused && state.release < 0.18 ? 1 : 0;
