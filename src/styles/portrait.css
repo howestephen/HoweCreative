@@ -61,24 +61,30 @@
 .particle-tools { position: fixed; z-index: 21; left: 44px; bottom: 26px; display: flex; align-items: center; gap: 20px; }
 .particle-tools button { display: flex; align-items: center; gap: 8px; min-height: 38px; background: none; color: #bcc4ba; font-size: 11px; padding: 8px 0; cursor: pointer; border: 0; }
 .particle-tools [role='status'] { font-size: 11px; color: #b9b29f; }
-.spatial-dialog { position: fixed; margin: auto; width: min(1000px, calc(100% - 80px)); max-height: 86svh; overflow: auto; overscroll-behavior: contain; padding: 35px 44px 44px; border-radius: 15px; border: 1px solid #d4dbce70; background: linear-gradient(130deg, #68747855, #1e2527bd 50%), #121718d9; color: #f0f0e9; box-shadow: 0 50px 150px #000a, inset 0 1px 0 #fff2; backdrop-filter: blur(36px); -webkit-backdrop-filter: blur(36px); }
-.spatial-dialog[open] { animation: spatial-open .4s cubic-bezier(.2,.8,.2,1) both; }
-.spatial-dialog::backdrop { background: #02060655; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
-.spatial-dialog header { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-bottom: 35px; }
-.spatial-dialog header p { margin: 0; color: #b8c2b8; font-size: 12px; }
-.spatial-dialog header button { display: flex; align-items: center; gap: 12px; padding: 8px; color: #e7ece1; border: 0; background: none; cursor: pointer; font-size: 13px; }
-.spatial-dialog h2 { font-size: 44px; font-weight: 500; letter-spacing: -1.6px; margin: 0 0 8px; line-height: 1.15; }
-.spatial-dialog-subtitle { font-size: 15px; color: #c7cec4; margin-bottom: 28px; }
-.spatial-dialog-heading { display: grid; grid-template-columns: 1.5fr .75fr; gap: 50px; align-items: end; }
-.spatial-dialog-heading > div > p:first-child { color: #a3ada4; font-size: 12px; margin-bottom: 13px; }
-.spatial-dialog-heading > p { color: #b4beb4; font-size: 13px; line-height: 1.7; padding-bottom: 27px; }
-.spatial-dialog-art { width: 100%; max-height: 34svh; object-fit: cover; object-position: center; border: 1px solid #bec9b72e; border-radius: 5px; }
-.spatial-dialog-copy { display: grid; grid-template-columns: 1.25fr 1fr; gap: 45px; margin-top: 28px; font-size: 14px; line-height: 1.7; }
-.spatial-dialog-copy p + p { color: #b9c4b8; margin-top: 8px; }
-.spatial-dialog-footer { display: flex; justify-content: space-between; align-items: end; gap: 30px; margin-top: 34px; padding-top: 23px; border-top: 1px solid #c4cec42e; }
-.spatial-dialog-footer > div { display: flex; flex-wrap: wrap; gap: 7px; }
-.spatial-dialog-footer > div span { padding: 6px 10px; border: 1px solid #c4cec429; border-radius: 999px; color: #b4beb4; font-size: 11px; }
-.spatial-dialog-footer > a { display: inline-flex; align-items: center; gap: 15px; padding: 10px 0; border-bottom: 1px solid #c4cec44d; color: #f0f1eb; font-size: 13px; white-space: nowrap; }
+/* Preview card: one screen, one image that is the project's identity, one
+   short pitch and one way onward. Nothing in it should need scrolling on a
+   laptop; the full case study is where the detail lives. */
+.spatial-dialog { position: fixed; margin: auto; width: min(1040px, calc(100% - 64px)); max-height: min(640px, calc(100svh - 56px)); padding: 0; overflow: hidden; border-radius: 16px; border: 1px solid #d4dbce5c; background: #101515f2; color: #f0f0e9; box-shadow: 0 50px 150px #000a, inset 0 1px 0 #ffffff1c; backdrop-filter: blur(36px); -webkit-backdrop-filter: blur(36px); }
+.spatial-dialog[open] { display: grid; grid-template-columns: 0.9fr 1.1fr; animation: spatial-open .4s cubic-bezier(.2,.8,.2,1) both; }
+.spatial-dialog::backdrop { background: #02060566; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+.spatial-dialog-visual { position: relative; display: grid; place-items: center; min-height: 420px; padding: 34px; overflow: hidden; background: radial-gradient(circle at 28% 18%, color-mix(in srgb, var(--card-tint), transparent 66%), transparent 62%), var(--preview-mat, #0a0e0d); border-right: 1px solid #d4dbce1f; }
+.spatial-dialog-visual img { display: block; max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; filter: drop-shadow(0 24px 40px #00000066); }
+.spatial-dialog-visual[data-fit='cover'] { padding: 0; background: var(--preview-mat, #0a0e0d); }
+.spatial-dialog-visual[data-fit='cover'] img { width: 100%; height: 100%; object-fit: cover; object-position: var(--preview-focus, center); filter: none; }
+.spatial-dialog-body { display: flex; flex-direction: column; min-height: 0; padding: 30px 40px 36px; overflow: auto; overscroll-behavior: contain; }
+.spatial-dialog-body header { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-bottom: 34px; }
+.spatial-dialog-body header p { display: flex; gap: 14px; margin: 0; color: #a8b1a9; font-size: 12px; }
+.spatial-dialog-body header p span:first-child { color: color-mix(in srgb, var(--card-tint, #c4cec4), #ffffff 50%); }
+.spatial-dialog-body header button { display: flex; align-items: center; gap: 10px; margin-right: -8px; padding: 8px; color: #e7ece1; border: 0; background: none; cursor: pointer; font-size: 13px; }
+.spatial-dialog h2 { margin: 0 0 12px; font-size: clamp(34px, 3.4vw, 46px); font-weight: 500; letter-spacing: -1.5px; line-height: 1.05; }
+.spatial-dialog-headline { margin: 0 0 18px; font-size: clamp(17px, 1.45vw, 20px); line-height: 1.4; letter-spacing: -.2px; color: #e6e8e1; max-width: 26ch; }
+.spatial-dialog-summary { margin: 0; font-size: 14px; line-height: 1.7; color: #b6bfb7; max-width: 44ch; }
+.spatial-dialog-facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin: 28px 0 0; padding-top: 22px; border-top: 1px solid #c4cec42a; }
+.spatial-dialog-facts dt { margin-bottom: 6px; color: #8f9891; font-size: 11px; }
+.spatial-dialog-facts dd { margin: 0; color: #dfe3dc; font-size: 13px; line-height: 1.45; }
+.spatial-dialog-cta { display: inline-flex; align-items: center; justify-content: space-between; gap: 16px; width: 100%; margin-top: auto; padding: 16px 18px; border-radius: 10px; background: #edece7; color: #060707; font-size: 14px; font-weight: 500; transition: background-color .25s, transform .25s; }
+.spatial-dialog-cta:hover, .spatial-dialog-cta:focus-visible { background: #ffffff; }
+.spatial-dialog-facts + .spatial-dialog-cta { margin-top: max(28px, auto); }
 .particle-contact-section { position: relative; z-index: 2; }
 .particle-contact-section #contact { border-color: #c4cec424; background: #0b0f0fd9; padding-bottom: 56px; }
 .particle-contact-section input,
@@ -125,16 +131,17 @@
   .particle-ending h2 { font-size: 76px; }
   .particle-ending-inner > p { font-size: 13px; }
   .particle-tools { left: 22px; bottom: 17px; gap: 16px; }
-  .spatial-dialog { width: calc(100% - 28px); max-height: 86svh; padding: 21px; border-radius: 12px; }
-  .spatial-dialog header { margin-bottom: 26px; }
-  .spatial-dialog h2 { font-size: 34px; }
-  .spatial-dialog-art { min-height: 210px; }
-  .spatial-dialog-heading,
-  .spatial-dialog-copy { grid-template-columns: 1fr; gap: 12px; }
-  .spatial-dialog-heading > p { padding-bottom: 18px; }
-  .spatial-dialog-copy p + p { margin-top: 0; }
-  .spatial-dialog-footer { display: block; }
-  .spatial-dialog-footer > a { margin-top: 22px; }
+  .spatial-dialog { width: calc(100% - 24px); max-height: calc(100svh - 32px); border-radius: 14px; }
+  .spatial-dialog[open] { grid-template-columns: 1fr; grid-template-rows: auto minmax(0, 1fr); }
+  .spatial-dialog-visual { min-height: 0; aspect-ratio: 16 / 10; padding: 28px; border-right: 0; border-bottom: 1px solid #d4dbce1f; }
+  .spatial-dialog-body { padding: 20px 22px 22px; }
+  .spatial-dialog-body header { margin-bottom: 18px; }
+  .spatial-dialog h2 { font-size: 30px; }
+  .spatial-dialog-headline { font-size: 16px; margin-bottom: 12px; }
+  .spatial-dialog-summary { font-size: 13px; }
+  .spatial-dialog-facts { grid-template-columns: 1fr 1fr; gap: 14px 16px; margin-top: 18px; padding-top: 16px; }
+  .spatial-dialog-facts > div:first-child { grid-column: 1 / -1; }
+  .spatial-dialog-facts + .spatial-dialog-cta { margin-top: 20px; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

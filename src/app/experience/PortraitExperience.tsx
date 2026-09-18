@@ -25,13 +25,23 @@ const areaTints: Record<string, string> = {
   Systems: "#668e88",
   Brand: "#9a778d",
 };
-const projectFrames = [
-  { slug: "quiver", description: "Art direction and generative film", icon: Feather, area: "Film" },
-  { slug: "uncx-menu", description: "Navigation across a product suite", icon: Network, area: "Product" },
-  { slug: "solana-diary", description: "Automated media with human approval", icon: BookOpen, area: "Systems" },
-  { slug: "uncx-video-system", description: "Reusable 3D and motion production", icon: Layers3, area: "Motion" },
-  { slug: "uncx-rebrand", description: "External collaboration and in-house design", icon: Shapes, area: "Brand" },
-  { slug: "badger-club", description: "Product design through implementation", icon: Hexagon, area: "Product" },
+// Each preview shows the project's identity, not a cropped screenshot: a
+// wordmark, a mark, a rendered asset or, for Quiver, its own poster frame.
+// `contain` keeps a logo whole on a mat; `cover` is for photographic art.
+type Preview = { src: string; alt: string; fit: "contain" | "cover"; mat?: string; focus?: string };
+const projectFrames: { slug: string; description: string; icon: typeof Feather; area: string; preview: Preview }[] = [
+  { slug: "quiver", description: "Art direction and generative film", icon: Feather, area: "Film",
+    preview: { src: "/case-studies/quiver/hero-poster.jpg", alt: "A hooded archer in mist, from the Quiver launch film", fit: "cover", focus: "68% center" } },
+  { slug: "uncx-menu", description: "Navigation across a product suite", icon: Network, area: "Product",
+    preview: { src: "/case-studies/uncx-menu/menu-open-panel.webp", alt: "The unified UNCX menu in its open state", fit: "contain" } },
+  { slug: "solana-diary", description: "Automated media with human approval", icon: BookOpen, area: "Systems",
+    preview: { src: "/case-studies/solana-diary/SOLANA_DIARY_LOGO.png", alt: "Solana Diary wordmark", fit: "contain" } },
+  { slug: "uncx-video-system", description: "Reusable 3D and motion production", icon: Layers3, area: "Motion",
+    preview: { src: "/case-studies/uncx-video-system/3d-asset.webp", alt: "A rendered UNCX padlock asset from the 3D system", fit: "contain" } },
+  { slug: "uncx-rebrand", description: "External collaboration and in-house design", icon: Shapes, area: "Brand",
+    preview: { src: "/case-studies/uncx-rebrand/logo-square.webp", alt: "UNCX Network mark", fit: "contain", mat: "#060807" } },
+  { slug: "badger-club", description: "Product design through implementation", icon: Hexagon, area: "Product",
+    preview: { src: "/case-studies/badger-club/badger-club-crest.webp", alt: "Badger Club crest", fit: "contain", mat: "#f5f3ee" } },
 ];
 
 const selectedProjects = projectFrames.map((frame) => {
@@ -394,23 +404,23 @@ export function PortraitExperience() {
 
       <dialog className="spatial-dialog" ref={dialog} aria-labelledby="spatial-dialog-title" onCancel={() => setSelected(null)} onClose={() => setSelected(null)}>
         {selectedProject && <>
-          <header><p>Selected work / {selectedProject.area}</p><button onClick={() => setSelected(null)} aria-label="Close preview">Close <X size={18} /></button></header>
-          <div className="spatial-dialog-heading">
-            <div>
-              <p>{selectedProject.project.year} / {selectedProject.project.status}</p>
-              <h2 id="spatial-dialog-title">{selectedProject.project.title}</h2>
-              <p className="spatial-dialog-subtitle">{selectedProject.editorial.headline}</p>
-            </div>
-            <p>{selectedProject.editorial.fit}</p>
+          <div className="spatial-dialog-visual" data-fit={selectedProject.preview.fit} style={{ "--card-tint": areaTints[selectedProject.area] ?? "#849589", "--preview-mat": selectedProject.preview.mat, "--preview-focus": selectedProject.preview.focus } as CSSProperties}>
+            <img src={selectedProject.preview.src} alt={selectedProject.preview.alt} />
           </div>
-          <img className="spatial-dialog-art" src={selectedProject.editorial.cover || selectedProject.project.image} alt="" />
-          <div className="spatial-dialog-copy">
-            <p>{selectedProject.editorial.summary}</p>
-            <p>{selectedProject.editorial.credit}</p>
-          </div>
-          <div className="spatial-dialog-footer">
-            <div>{selectedProject.project.tags.slice(0, 5).map((tag) => <span key={tag}>{tag}</span>)}</div>
-            <Link to={`/work/${selectedProject.slug}`} onClick={() => setSelected(null)}>Read the full case study <ArrowUpRight size={17} /></Link>
+          <div className="spatial-dialog-body">
+            <header>
+              <p><span>{selectedProject.area}</span><span>{selectedProject.project.year}</span></p>
+              <button onClick={() => setSelected(null)} aria-label="Close preview">Close <X size={18} /></button>
+            </header>
+            <h2 id="spatial-dialog-title">{selectedProject.project.title}</h2>
+            <p className="spatial-dialog-headline">{selectedProject.editorial.headline}</p>
+            <p className="spatial-dialog-summary">{selectedProject.editorial.summary}</p>
+            <dl className="spatial-dialog-facts">
+              <div><dt>Role</dt><dd>{selectedProject.project.role}</dd></div>
+              <div><dt>For</dt><dd>{selectedProject.project.client}</dd></div>
+              <div><dt>Status</dt><dd>{selectedProject.project.status}</dd></div>
+            </dl>
+            <Link className="spatial-dialog-cta" to={`/work/${selectedProject.slug}`} onClick={() => setSelected(null)}>Read the full case study <ArrowUpRight size={17} /></Link>
           </div>
         </>}
       </dialog>
