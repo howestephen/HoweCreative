@@ -91,7 +91,7 @@ export const projectEditorial: Record<
     headline: "An easier way into a complex subject.",
     summary:
       "An educational platform connecting articles, video and a glossary. Brand direction, finished page designs and educational media in one coherent experience.",
-    cover: "/case-studies/uncx-academy/main-page.webp",
+    cover: "/case-studies/uncx-academy/main-page-hero.webp",
     fit: "I understand creator workflows because I design the platform and produce its content.",
     credit:
       "I wrote the brief and specification, then completed page layouts, graphics and video content. An external team created the initial identity and components; an in-house developer built the site and CMS.",

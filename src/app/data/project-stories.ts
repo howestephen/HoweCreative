@@ -240,9 +240,13 @@ export const projectStories: Record<string, ProjectStory> = {
         paragraphs: [
           "Articles, videos, glossary entries and integrations needed distinct structures within one platform. I wrote the brief and specification, then developed the content-specific layouts and graphics from the external team's initial identity and components.",
         ],
-        images: ["articles-home.webp", "glossary-home.webp"],
+        images: ["articles-home-hero.webp", "glossary-home-hero.webp"],
         layout: "paired",
         ratio: "screen",
+        captions: [
+          "The articles section, with its own landing page and structure.",
+          "The glossary, built for quick reference rather than reading order.",
+        ],
       },
       {
         label: "02 / Platform and production",
@@ -251,9 +255,13 @@ export const projectStories: Record<string, ProjectStory> = {
           "I produced educational videos and page imagery alongside the platform design. Working across those disciplines helped the content and interface use the same visual language.",
           "An in-house developer implemented the finished designs and CMS. My role continued into video production and article banners for the marketing team's ongoing publishing.",
         ],
-        images: ["video-page.webp", "article-page.webp"],
+        images: ["videos-home-hero.webp", "article-page-hero.webp"],
         layout: "paired",
         ratio: "screen",
+        captions: [
+          "Video courses, produced as well as designed.",
+          "An article page carrying a banner made for the same subject.",
+        ],
       },
     ],
     outcome: {

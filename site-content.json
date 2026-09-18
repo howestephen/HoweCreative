@@ -965,7 +965,7 @@
           "Content Systems",
           "UI/UX"
         ],
-        "image": "/case-studies/uncx-academy/main-page.webp",
+        "image": "/case-studies/uncx-academy/main-page-hero.webp",
         "media": [
           {
             "type": "image",
@@ -1003,8 +1003,8 @@
           },
           {
             "type": "image",
-            "src": "/case-studies/uncx-academy/main-page.webp",
-            "alt": "Academy main page"
+            "src": "/case-studies/uncx-academy/main-page-hero.webp",
+            "alt": "Academy home page, above the fold"
           },
           {
             "type": "image",
@@ -1013,43 +1013,38 @@
           },
           {
             "type": "image",
-            "src": "/case-studies/uncx-academy/articles-home.webp",
-            "alt": "Articles home page"
+            "src": "/case-studies/uncx-academy/articles-home-hero.webp",
+            "alt": "Articles section landing page"
           },
           {
             "type": "image",
-            "src": "/case-studies/uncx-academy/article-categories.webp",
-            "alt": "Article categories page"
+            "src": "/case-studies/uncx-academy/article-page-hero.webp",
+            "alt": "Individual article page with its banner"
           },
           {
             "type": "image",
-            "src": "/case-studies/uncx-academy/article-page.webp",
-            "alt": "Individual article page"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-academy/about-page.webp",
+            "src": "/case-studies/uncx-academy/about-page-hero.webp",
             "alt": "About page"
           },
           {
             "type": "image",
-            "src": "/case-studies/uncx-academy/videos-home.webp",
-            "alt": "Videos home page"
+            "src": "/case-studies/uncx-academy/videos-home-hero.webp",
+            "alt": "Video courses landing page"
           },
           {
             "type": "image",
-            "src": "/case-studies/uncx-academy/video-page.webp",
-            "alt": "Individual video page"
+            "src": "/case-studies/uncx-academy/video-page-hero.webp",
+            "alt": "Individual video lesson page"
           },
           {
             "type": "image",
-            "src": "/case-studies/uncx-academy/glossary-home.webp",
-            "alt": "Glossary home page"
+            "src": "/case-studies/uncx-academy/glossary-home-hero.webp",
+            "alt": "Glossary section landing page"
           },
           {
             "type": "image",
-            "src": "/case-studies/uncx-academy/integrations.webp",
-            "alt": "Platform integrations"
+            "src": "/case-studies/uncx-academy/integrations-hero.webp",
+            "alt": "Partner integrations page"
           },
           {
             "type": "image",
