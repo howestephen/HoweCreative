@@ -41,8 +41,8 @@ const projectFrames: { slug: string; description: string; icon: typeof Feather; 
     preview: { src: "/case-studies/uncx-video-system/uncx-lock-2026.webp", alt: "The UNCX glass padlock render from the 3D system", fit: "contain" } },
   { slug: "uncx-rebrand", description: "External collaboration and in-house design", icon: Shapes, area: "Brand",
     preview: { src: "/case-studies/uncx-rebrand/uncx-logotype.svg", alt: "UNCX Network logotype", fit: "contain" } },
-  { slug: "badger-club", description: "Product design through implementation", icon: Hexagon, area: "Product",
-    preview: { src: "/case-studies/badger-club/badger-club-crest.webp", alt: "Badger Club crest", fit: "contain" } },
+  { slug: "noticia-lingo", description: "Product design through implementation", icon: Hexagon, area: "Product",
+    preview: { src: "/case-studies/noticia-lingo/noticia-lingo-app.webp", alt: "The Noticia Lingo reading feed on a phone", fit: "contain" } },
 ];
 
 const selectedProjects = projectFrames.map((frame) => {
