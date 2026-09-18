@@ -1,6 +1,6 @@
-import { useEffect, useMemo } from "react";
-import { ArrowUpRight, LockKeyhole, SlidersHorizontal } from "lucide-react";
-import { Link, useSearchParams } from "react-router";
+import { useEffect } from "react";
+import { ArrowUpRight, LockKeyhole } from "lucide-react";
+import { Link } from "react-router";
 
 import earlierWork from "../data/earlier-work.json";
 import { projects, projectEditorial } from "../data/project-index";
@@ -9,144 +9,81 @@ import { ProjectGallery } from "../components/ProjectGallery";
 import { ContactFoot } from "../concept/ContactFoot";
 import "../../styles/spatial-archive.css";
 
-const disciplines = [
-  "All",
-  "Creative direction",
-  "Film and motion",
-  "Product design",
-  "Brand systems",
-  "Code and systems",
-  "AI production",
-] as const;
-
-type Discipline = (typeof disciplines)[number];
-
-const projectDisciplines: Record<string, Discipline[]> = {
-  quiver: ["Creative direction", "Film and motion", "Brand systems", "AI production"],
-  "uncx-video-system": ["Film and motion", "Brand systems"],
-  "badger-club": ["Product design", "Code and systems"],
-  "solana-diary": ["Creative direction", "Brand systems", "Code and systems", "AI production"],
-  "uncx-rebrand": ["Creative direction", "Brand systems"],
-  "uncx-menu": ["Product design", "Brand systems"],
-  "uncx-academy": ["Film and motion", "Product design", "Brand systems"],
-  "noticia-lingo": ["Product design", "Code and systems", "AI production"],
-  "ai-portfolio-system": ["Creative direction", "Code and systems", "AI production"],
+// Kept as a label per project. The archive no longer filters on these: the
+// selected work is already organised by discipline, so a filter over nine
+// projects only repeated that grouping in a second, less useful form.
+const projectDisciplines: Record<string, string> = {
+  quiver: "Creative direction / Film and motion / AI production",
+  "uncx-video-system": "Film and motion / Brand systems",
+  "badger-club": "Product design / Code and systems",
+  "solana-diary": "Brand systems / Code and systems / AI production",
+  "uncx-rebrand": "Creative direction / Brand systems",
+  "uncx-menu": "Product design / Brand systems",
+  "uncx-academy": "Product design / Film and motion",
+  "noticia-lingo": "Product design / Code and systems",
+  "ai-portfolio-system": "Creative direction / AI production",
 };
 
 const publicProjects = projects.filter((project) => project.slug !== "uncx-app-concepts");
-const tools = Array.from(new Set(publicProjects.flatMap((project) => project.tags))).sort();
-
-const filterKey = (value: string) => value.toLowerCase().replace(/ /g, "-");
 
 export function Archive() {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const requestedDiscipline = searchParams.get("discipline") ?? "All";
-  const activeDiscipline = disciplines.includes(requestedDiscipline as Discipline)
-    ? requestedDiscipline as Discipline
-    : "All";
-  const activeTool = searchParams.get("tool") ?? "All tools";
-
   useEffect(() => {
     const previous = document.title;
     document.title = "Work archive - Stephen Howe";
     return () => { document.title = previous; };
   }, []);
 
-  const filteredProjects = useMemo(() => publicProjects.filter((project) => {
-    const matchesDiscipline = activeDiscipline === "All"
-      || projectDisciplines[project.slug]?.includes(activeDiscipline);
-    const matchesTool = activeTool === "All tools" || project.tags.includes(activeTool);
-    return matchesDiscipline && matchesTool;
-  }), [activeDiscipline, activeTool]);
-
-  const updateFilter = (key: "discipline" | "tool", value: string) => {
-    const next = new URLSearchParams(searchParams);
-    const defaultValue = key === "discipline" ? "All" : "All tools";
-    if (value === defaultValue) next.delete(key);
-    else next.set(key, value);
-    setSearchParams(next, { replace: true });
-  };
-
   return (
-    <div className="spatial-archive" data-discipline={filterKey(activeDiscipline)}>
+    <div className="spatial-archive">
       <div className="archive-atmosphere" aria-hidden="true"><span /><span /></div>
       <header className="archive-intro">
         <p>Creative technologist / Selected and earlier work</p>
         <h1>Different disciplines.<br />One working practice.</h1>
         <div className="archive-intro-foot">
           <p>
-            Art direction, product design, moving image and code. Filter the
-            archive to see how the same judgement moves between them.
+            Art direction, product design, moving image and code. Every project
+            here, current and earlier, with the detail one level down.
           </p>
           <a href="#archive-projects">Explore the archive <span aria-hidden="true">↓</span></a>
         </div>
       </header>
 
       <main id="archive-projects" className="archive-main">
-        <section className="archive-filter-panel" aria-label="Filter projects">
-          <div className="archive-filter-heading">
-            <span><SlidersHorizontal size={15} /> Filter by discipline</span>
-            <span aria-live="polite">{filteredProjects.length} projects</span>
+        <section className="archive-section" aria-labelledby="current-title">
+          <div className="archive-section-heading">
+            <p>2021 to now</p>
+            <h2 id="current-title">Current work</h2>
+            <p>{publicProjects.length} projects. Open one for a summary and its collection, or read the full case study.</p>
           </div>
-          <div className="archive-discipline-filters" role="group" aria-label="Disciplines">
-            {disciplines.map((discipline) => (
-              <button
-                key={discipline}
-                type="button"
-                aria-pressed={activeDiscipline === discipline}
-                onClick={() => updateFilter("discipline", discipline)}
-              >
-                {discipline}
-              </button>
-            ))}
+          <div className="archive-list">
+            {publicProjects.map((project) => {
+              const editorial = projectEditorial[project.slug];
+              // Stills only here. The films belong in the case study; a row of
+              // video players would make the index heavier than what it indexes.
+              const media = (project.media ?? []).filter((item) => item.type === "image").slice(0, 6);
+              return (
+                <details key={project.slug} className="archive-era">
+                  <summary>
+                    <span>{project.year}</span>
+                    <strong>{project.title}</strong>
+                    <span>{projectDisciplines[project.slug]}</span>
+                    <span aria-hidden="true">+</span>
+                  </summary>
+                  <div className="archive-era-body">
+                    <div>
+                      <p>{editorial.summary}</p>
+                      <p className="archive-era-credit">{project.role} / {project.client} / {project.status}</p>
+                      <Link className="archive-era-link" to={`/work/${project.slug}`}>
+                        Read the full case study <ArrowUpRight size={15} />
+                      </Link>
+                    </div>
+                    {media.length > 0 && <ProjectGallery media={media} title={project.title} />}
+                  </div>
+                </details>
+              );
+            })}
           </div>
-          <label className="archive-tool-filter">
-            <span>Filter by software or platform</span>
-            <select value={activeTool} onChange={(event) => updateFilter("tool", event.target.value)}>
-              <option>All tools</option>
-              {tools.map((tool) => <option key={tool}>{tool}</option>)}
-            </select>
-          </label>
         </section>
-
-        <section className="archive-project-grid" aria-label="Current project archive">
-          {filteredProjects.map((project) => {
-            const editorial = projectEditorial[project.slug];
-            const cover = editorial.cover || project.image;
-            return (
-              <article className="archive-project-card" key={project.slug}>
-                <Link to={`/work/${project.slug}`} className="archive-project-image" aria-label={`Read ${project.title} case study`}>
-                  {cover ? (
-                    <img src={cover} alt="" loading="lazy" decoding="async" />
-                  ) : (
-                    <span className="archive-code-study" aria-hidden="true"><i /><i /><i /></span>
-                  )}
-                  <span className="archive-project-open"><ArrowUpRight size={20} /></span>
-                </Link>
-                <div className="archive-project-meta">
-                  <span>{project.year}</span>
-                  <span>{project.status}</span>
-                </div>
-                <h2><Link to={`/work/${project.slug}`}>{project.title}</Link></h2>
-                <p>{editorial.summary}</p>
-                <div className="archive-project-disciplines">
-                  {projectDisciplines[project.slug]?.slice(0, 3).map((discipline) => (
-                    <button key={discipline} type="button" onClick={() => updateFilter("discipline", discipline)}>
-                      {discipline}
-                    </button>
-                  ))}
-                </div>
-              </article>
-            );
-          })}
-        </section>
-
-        {filteredProjects.length === 0 && (
-          <div className="archive-empty" role="status">
-            <p>No project matches both filters.</p>
-            <button type="button" onClick={() => setSearchParams({}, { replace: true })}>Clear filters</button>
-          </div>
-        )}
 
         <section className="archive-restricted" aria-labelledby="restricted-title">
           <LockKeyhole size={23} strokeWidth={1.25} />
@@ -176,12 +113,12 @@ export function Archive() {
         </section>
 
         <section className="archive-earlier" aria-labelledby="earlier-title">
-          <div className="archive-earlier-heading">
+          <div className="archive-section-heading">
             <p>2009 to 2018</p>
             <h2 id="earlier-title">Earlier work</h2>
             <p>Music, culture, hospitality and the early web, shown with its original context and credits.</p>
           </div>
-          <div className="archive-earlier-list">
+          <div className="archive-list">
             {earlierWork.map((entry) => (
               <details key={entry.slug} className="archive-era">
                 <summary>
