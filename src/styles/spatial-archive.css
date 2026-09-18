@@ -81,6 +81,7 @@
 .archive-era-body > div:first-child p { color: #b2b8b2; font-size: 14px; line-height: 1.8; }
 .archive-era-credit { color: #858f87 !important; font-size: 12px !important; }
 .archive-era .gallery-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.spatial-archive .gallery-grid img { aspect-ratio: 16 / 10; object-fit: cover; object-position: center top; background: #0d1110; border: 1px solid #c0c9c020; border-radius: 5px; }
 .archive-era .gallery-heading { color: #aab2aa; }
 .spatial-contact { position: relative; z-index: 2; }
 .spatial-shell .spatial-contact #contact { border-color: #bdc6bd26; background: #0b0e0edb; }
