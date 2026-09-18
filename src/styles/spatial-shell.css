@@ -37,6 +37,7 @@ html:has(.spatial-shell) { background: #060707; }
 .spatial-shell #contact button[type='submit']:hover { background: #ffffff; }
 .spatial-shell #contact a[href='/cv'] { border-radius: 6px; border-color: #c4cec44d; color: #edece7; }
 .spatial-shell #contact a[href='/cv']:hover { border-color: #edece7; }
+.spatial-shell #contact .text-accent { color: #e7b9a6; }
 .spatial-shell #contact footer { color: #8f9891; }
 .spatial-shell #contact footer a:hover { color: #edece7; }
 @media (max-width: 900px) { .spatial-shell #contact > div { width: calc(100% - 48px); } }
