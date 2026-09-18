@@ -28,6 +28,9 @@ export const scrollState = (y: number, height: number, workTop: number, endTop: 
   // The window can never invert, so a layout that has not measured yet
   // (or a very short one) still reports an intact portrait at the top.
   release: smooth(height * 0.16, Math.max(workTop - height * 0.25, height * 0.17), y),
+  // The camera begins its arc on the first scroll, before the portrait starts
+  // to come apart, so the opening answers movement immediately.
+  approach: smooth(0, height * 0.6, y),
   travel: smooth(workTop - height * 0.55, endTop - height * 0.7, y),
   ending: smooth(endTop - height * 0.7, endTop + height * 0.12, y),
   intro: 1 - smooth(height * 0.06, height * 0.45, y),
@@ -55,35 +58,15 @@ export const isPortraitSurface = (target: EventTarget | null) => target instance
 export const acceptsPortraitPress = (pointerType: string, button: number, release: number, paused: boolean) =>
   pointerType === 'mouse' && button === 0 && release < 0.18 && !paused;
 
-export const PORTRAIT_PILLARS = 13;
-// Width, in source u, of the feathered seam either side of a pillar boundary.
-// Points inside it blend towards the neighbouring pillar's depth, so a seam
-// stretches like a sheared surface instead of reading as a knife cut.
-export const PILLAR_FEATHER = 0.012;
-
-const pillarDepthAt = (pillar: number) =>
-  0.5 + Math.sin((Math.min(PORTRAIT_PILLARS - 1, Math.max(0, pillar)) + 1) * 2.17) * 0.33;
-
-// Every point in one vertical strip shares its structural depth. The strip
-// moves as one pillar before individual points begin shedding from its surface.
-export const portraitPillarDepth = (u: number) =>
-  pillarDepthAt(Math.floor(clamp(u) * PORTRAIT_PILLARS));
-
-// The rigid pillar depth, feathered across each boundary.
+// The portrait sits in depth as one continuous undulating surface. An earlier
+// version divided it into thirteen rigid pillars; their seams opened into hard
+// vertical lines once the surface began to move, clearly so on phones, where
+// fewer sampled points meant nothing filled the gap. Two smooth waves give the
+// same sense of a tilted field separating through space with no edges in it.
 export const portraitSurfaceDepth = (u: number) => {
-  const pillar = Math.min(PORTRAIT_PILLARS - 1, Math.max(0, Math.floor(clamp(u) * PORTRAIT_PILLARS)));
-  const own = pillarDepthAt(pillar);
-  const fromLeft = u - pillar / PORTRAIT_PILLARS;
-  const fromRight = (pillar + 1) / PORTRAIT_PILLARS - u;
-  if (pillar > 0 && fromLeft < PILLAR_FEATHER) {
-    const weight = 0.5 - (fromLeft / PILLAR_FEATHER) * 0.5;
-    return own + (pillarDepthAt(pillar - 1) - own) * weight;
-  }
-  if (pillar < PORTRAIT_PILLARS - 1 && fromRight < PILLAR_FEATHER) {
-    const weight = 0.5 - (fromRight / PILLAR_FEATHER) * 0.5;
-    return own + (pillarDepthAt(pillar + 1) - own) * weight;
-  }
-  return own;
+  const x = clamp(u);
+  const wave = Math.sin(x * 7.4 + 0.9) * 0.62 + Math.sin(x * 3.1 + 2.3) * 0.38;
+  return 0.5 + wave * 0.33;
 };
 
 export const samplePortrait = (pixels: Uint8ClampedArray, width: number, height: number) => {
@@ -119,6 +102,7 @@ export const samplePortrait = (pixels: Uint8ClampedArray, width: number, height:
 
 export type ParticleMotion = {
   release: number;
+  approach: number;
   travel: number;
   ending: number;
   pointerX: number;
@@ -173,8 +157,8 @@ export const vertexShader = /* glsl */ `
     // travelling as one straight edge along a pillar boundary.
     float order = 0.02 + smoothstep(0.22, 1.0, u) * 0.42 + s * 0.2
       + (0.5 - position.y / 4.6) * 0.08
-      + sin(position.y * 3.1 + u * 11.0) * 0.035
-      + (1.0 - aDepth) * 0.04;
+      + sin(position.y * 3.1 + u * 4.0) * 0.03
+      + (1.0 - aDepth) * 0.05;
     float atomise = smoothstep(order, order + 0.26, uAtomise);
     float flight = atomise * smoothstep(0.0, 1.0, uDisperse);
     vec3 p = position * uScale;
@@ -182,13 +166,13 @@ export const vertexShader = /* glsl */ `
     p.y += 0.06;
     float baseYaw = -0.13;
     vec3 original = rotateY(p, baseYaw);
-    // The source is already a tilted object. Each broad vertical strip moves
-    // along depth as one rigid column with a gentle continuous fan across the
-    // head, so the seams open from the side without slicing the face.
-    vec3 pillar = p;
-    pillar.x += (u - 0.64) * 0.14 * uScale * uSeparate;
-    pillar.z += (aDepth - 0.5) * 3.4 * uScale * uSeparate;
-    vec3 layered = rotateY(pillar, baseYaw - uSeparate * 0.28);
+    // The source is already a tilted object. Its surface draws apart through
+    // depth as one continuous field, fanning slightly across the head, so the
+    // separation reads from the side without ever cutting the face.
+    vec3 relief = p;
+    relief.x += (u - 0.64) * 0.14 * uScale * uSeparate;
+    relief.z += (aDepth - 0.5) * 3.4 * uScale * uSeparate;
+    vec3 layered = rotateY(relief, baseYaw - uSeparate * 0.2);
     // Lift-off: a released point rises and eases off the surface, swaying
     // slowly, so the surface breathes apart instead of bursting.
     vec3 sway = vec3(
