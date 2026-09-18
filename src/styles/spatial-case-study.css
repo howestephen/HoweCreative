@@ -43,8 +43,22 @@
 .spatial-case .case-chapter { padding-block: 100px; border-color: #c3ccc325; }
 .spatial-case .case-chapter-copy h2 { color: #edeee8; font-weight: 400 !important; }
 .spatial-case .case-evidence { gap: 30px; }
-.spatial-case .case-image > a { overflow: hidden; border: 1px solid #c0c9c01c; }
+.spatial-case .case-image > a { overflow: hidden; border: 1px solid #c0c9c026; border-radius: 6px; box-shadow: 0 24px 60px #00000052; }
 .spatial-case .case-image-expand { border-color: #dfe6dc48; background: #08100bcc; }
+/* The gallery thumbnail background is set on the image itself in the editorial
+   stylesheet, so the dark routes have to override the image, not its button. */
+.spatial-case .gallery-grid img,
+.spatial-case .case-collection .gallery-grid img {
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: center top;
+  background: #0d1110;
+  border: 1px solid #c0c9c020;
+  border-radius: 5px;
+}
+.spatial-case .gallery-grid button:hover img { opacity: 1; border-color: #c6ccc26b; }
+.spatial-case .case-product-screen { padding: 0; background: none; }
+.spatial-case .case-art-lead .case-image > a { background: #0d1110; }
 .spatial-case .case-workflow { color: #f0f1eb; }
 .spatial-case .case-workflow .eyebrow { color: #b5c0b6; }
 .spatial-case .case-workflow p { color: #aeb6af; }

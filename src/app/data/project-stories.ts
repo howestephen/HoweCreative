@@ -1,9 +1,20 @@
+// Every frame inside one chapter shares a single aspect ratio, so an evidence
+// row reads as a considered set rather than a ragged collage of screenshots.
+export type FrameRatio = "cinema" | "screen" | "square" | "tall" | "panorama" | "free";
+
 export type EvidenceChapter = {
   label: string;
   title: string;
   paragraphs: string[];
   images: string[];
-  layout?: "wide" | "paired" | "portrait";
+  layout?: "wide" | "paired" | "portrait" | "trio" | "mosaic";
+  ratio?: FrameRatio;
+  // Cropped frames hold the top of a screenshot by default. `contain` is for
+  // artwork that must not lose an edge, such as a diagram or a logotype.
+  fit?: "cover" | "contain";
+  focus?: "top" | "centre";
+  // A short line per image, in the same order. Falls back to the media alt.
+  captions?: string[];
 };
 
 export type ProjectStory = {

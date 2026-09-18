@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type CSSProperties } from "react";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { Link, useParams } from "react-router";
 import { projects, projectEditorial } from "../data/project-index";
-import { projectStories, type EvidenceChapter } from "../data/project-stories";
+import { projectStories, type EvidenceChapter, type FrameRatio } from "../data/project-stories";
 import type { PortfolioProject, ProjectMediaItem } from "../data/portfolio";
 import { ProjectGallery } from "../components/ProjectGallery";
 import { ContactFoot } from "../concept/ContactFoot";
@@ -16,17 +16,44 @@ function findMedia(project: PortfolioProject, filename?: string) {
     : undefined;
 }
 
+// One framed piece of evidence. The frame declares its aspect ratio so a row
+// of them lines up exactly; the full, uncropped image is one click away.
+const frameRatios: Record<FrameRatio, string> = {
+  cinema: "16 / 9",
+  screen: "16 / 10",
+  square: "1 / 1",
+  tall: "4 / 5",
+  panorama: "21 / 9",
+  free: "auto",
+};
+
 function EvidenceImage({
   media,
   eager = false,
   caption,
+  ratio = "cinema",
+  fit = "cover",
+  focus = "top",
+  label,
 }: {
   media: ProjectMediaItem;
   eager?: boolean;
   caption?: string;
+  ratio?: FrameRatio;
+  fit?: "cover" | "contain";
+  focus?: "top" | "centre";
+  label?: string;
 }) {
   return (
-    <figure className="case-image">
+    <figure
+      className="case-image"
+      data-ratio={ratio}
+      data-fit={fit}
+      style={{
+        "--frame-ratio": frameRatios[ratio],
+        "--frame-focus": focus === "top" ? "center top" : "center center",
+      } as CSSProperties}
+    >
       <a href={media.src} target="_blank" rel="noreferrer">
         <img
           src={media.src}
@@ -34,6 +61,7 @@ function EvidenceImage({
           loading={eager ? "eager" : "lazy"}
           decoding="async"
         />
+        {label && <span className="case-frame-label" aria-hidden="true">{label}</span>}
         <span className="case-image-expand" aria-hidden="true">
           <ArrowUpRight size={18} />
         </span>
@@ -180,8 +208,15 @@ function Chapter({
       </div>
       {media.length > 0 && (
         <div className={`case-evidence case-evidence-${media.length}`}>
-          {media.map((item) => (
-            <EvidenceImage key={item.src} media={item} />
+          {media.map((item, index) => (
+            <EvidenceImage
+              key={item.src}
+              media={item}
+              ratio={chapter.ratio}
+              fit={chapter.fit}
+              focus={chapter.focus}
+              caption={chapter.captions?.[index]}
+            />
           ))}
         </div>
       )}
