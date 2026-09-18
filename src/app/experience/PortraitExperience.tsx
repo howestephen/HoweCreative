@@ -15,6 +15,16 @@ import { createPortraitAudio, type PortraitAudio } from "./portrait-audio";
 import "../../styles/portrait.css";
 
 const PortraitScene = lazy(() => import("./PortraitScene"));
+// The card tints are the archive's discipline colours, so a project keeps the
+// same identity here and on /archive. Two product cards share one tint on
+// purpose: the colour names the discipline, not the project.
+const areaTints: Record<string, string> = {
+  Film: "#9a7258",
+  Motion: "#a78566",
+  Product: "#7896a1",
+  Systems: "#668e88",
+  Brand: "#9a778d",
+};
 const projectFrames = [
   { slug: "quiver", description: "Art direction and generative film", icon: Feather, area: "Film" },
   { slug: "uncx-menu", description: "Navigation across a product suite", icon: Network, area: "Product" },
@@ -340,11 +350,20 @@ export function PortraitExperience() {
         </div>
         <div className="spatial-grid">
           {selectedProjects.map((item, index) => (
-            <button className="spatial-card" key={item.slug} onClick={() => setSelected(index)} aria-label={`Open ${item.project.title} preview`} style={{ "--card-order": index } as CSSProperties}>
-              <item.icon className="spatial-card-icon" size={30} strokeWidth={1.2} aria-hidden="true" />
+            <button className="spatial-card" key={item.slug} onClick={() => setSelected(index)} aria-label={`Open ${item.project.title} preview`} style={{ "--card-order": index, "--card-tint": areaTints[item.area] ?? "#849589" } as CSSProperties}>
+              <span className="spatial-card-top">
+                <span className="spatial-card-area">{item.area}</span>
+                <span className="spatial-card-year">{item.project.year}</span>
+              </span>
+              <span className="spatial-card-icon" aria-hidden="true">
+                <item.icon size={22} strokeWidth={1.3} />
+              </span>
               <h3>{item.project.title}</h3>
               <p>{item.description}</p>
-              <span className="spatial-card-foot"><span>{item.area}</span><ArrowUpRight size={20} strokeWidth={1.2} /></span>
+              <span className="spatial-card-foot">
+                <span>{item.project.status}</span>
+                <ArrowUpRight size={19} strokeWidth={1.3} />
+              </span>
             </button>
           ))}
         </div>
