@@ -270,8 +270,13 @@ export const projectStories: Record<string, ProjectStory> = {
     },
   },
   "uncx-app-concepts": {
-    lead: "token-minter-slide.webp",
-    leadRatio: "tall",
+    // The previous lead was a single prototype screen still carrying Lorem
+    // ipsum placeholder copy. This one shows the connected flow, which is
+    // what the case is actually about.
+    lead: "token-minter-prototyping.webp",
+    leadRatio: "free",
+    leadCaption:
+      "The token minter prototype, wired screen to screen so the flow could be tested before any of it was built.",
     chapters: [
       {
         label: "01 / Finding the interaction",
