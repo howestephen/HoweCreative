@@ -27,17 +27,18 @@ const areaTints: Record<string, string> = {
 };
 // Each preview shows the project's identity, whole and centred on one plain
 // panel: a wordmark, a mark, a rendered asset or a screen. Only Quiver's
-// poster fills the panel, because it is a photographic frame.
+// poster and the menu's phone view fill the panel; everything else is
+// shown whole.
 type Preview = { src: string; alt: string; fit: "contain" | "cover"; focus?: string };
 const projectFrames: { slug: string; description: string; icon: typeof Feather; area: string; preview: Preview }[] = [
   { slug: "quiver", description: "Art direction and generative film", icon: Feather, area: "Film",
     preview: { src: "/case-studies/quiver/hero-poster.jpg", alt: "A hooded archer in mist, from the Quiver launch film", fit: "cover", focus: "right center" } },
   { slug: "uncx-menu", description: "Navigation across a product suite", icon: Network, area: "Product",
-    preview: { src: "/case-studies/uncx-menu/menu-open-phone.webp", alt: "The unified UNCX menu open on a phone", fit: "contain" } },
+    preview: { src: "/case-studies/uncx-menu/menu-open-phone.webp", alt: "The unified UNCX menu open on a phone", fit: "cover", focus: "center top" } },
   { slug: "solana-diary", description: "Automated media with human approval", icon: BookOpen, area: "Systems",
     preview: { src: "/case-studies/solana-diary/SOLANA_DIARY_LOGO.png", alt: "Solana Diary wordmark", fit: "contain" } },
   { slug: "uncx-video-system", description: "Reusable 3D and motion production", icon: Layers3, area: "Motion",
-    preview: { src: "/case-studies/uncx-video-system/3d-asset.webp", alt: "A rendered UNCX padlock asset from the 3D system", fit: "contain" } },
+    preview: { src: "/case-studies/uncx-video-system/uncx-lock-2026.webp", alt: "The UNCX glass padlock render from the 3D system", fit: "contain" } },
   { slug: "uncx-rebrand", description: "External collaboration and in-house design", icon: Shapes, area: "Brand",
     preview: { src: "/case-studies/uncx-rebrand/uncx-logotype.svg", alt: "UNCX Network logotype", fit: "contain" } },
   { slug: "badger-club", description: "Product design through implementation", icon: Hexagon, area: "Product",
