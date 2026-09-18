@@ -83,7 +83,7 @@ function BadgerLead({ project }: { project: PortfolioProject }) {
   return (
     <div className="case-product-lead">
       <div className="case-product-screen">
-        <EvidenceImage media={media} eager />
+        <EvidenceImage media={media} ratio="screen" eager />
       </div>
       <div
         className="case-screen-controls"
@@ -130,6 +130,7 @@ function SolanaLead({ project }: { project: PortfolioProject }) {
           <EvidenceImage
             key={filename}
             media={findMedia(project, filename)!}
+            ratio="tall"
             eager
           />
         ))}
@@ -180,7 +181,12 @@ function CaseLead({ project }: { project: PortfolioProject }) {
   }
   return (
     <div className={`case-art-lead case-art-${project.slug}`}>
-      <EvidenceImage media={lead} eager caption={story.leadCaption} />
+      <EvidenceImage
+        media={lead}
+        eager
+        caption={story.leadCaption}
+        ratio={story.leadRatio ?? "cinema"}
+      />
     </div>
   );
 }

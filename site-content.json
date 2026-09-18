@@ -311,11 +311,6 @@
           },
           {
             "type": "image",
-            "src": "/case-studies/solana-diary/x-page-screenshot.png",
-            "alt": "The live @solana_diary account on X"
-          },
-          {
-            "type": "image",
             "src": "/case-studies/solana-diary/Week Ahead Watchlist - 01.jpg",
             "alt": "Week-ahead watchlist - tokens to watch, posted Mondays"
           },
@@ -1545,7 +1540,7 @@
       "projectType": "Project Type",
       "brief": "Brief"
     },
-    "visualOnlyLabel": "Prefer email? howestephen@gmail.com",
+    "visualOnlyLabel": "Prefer not to use the form? Reach me on LinkedIn.",
     "submitLabel": "Send"
   },
   "archive": {
