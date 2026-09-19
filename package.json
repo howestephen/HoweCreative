@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "vite build && node scripts/prerender.mjs && node scripts/verify-build.mjs",
+    "build:portrait-depth": "node scripts/build-portrait-depth.mjs",
     "dev": "vite",
     "lint": "eslint src api",
     "test": "vitest run",
@@ -24,6 +25,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@huggingface/transformers": "^4.3.0",
     "@tailwindcss/vite": "4.1.12",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
@@ -37,6 +39,7 @@
     "eslint": "^10.1.0",
     "globals": "^17.4.0",
     "jsdom": "^29.0.1",
+    "sharp": "^0.35.4",
     "tailwindcss": "4.1.12",
     "typescript": "^6.0.2",
     "typescript-eslint": "^8.57.2",
