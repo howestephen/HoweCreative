@@ -1,10 +1,10 @@
 import { useEffect, useRef, type RefObject } from "react";
 import {
   BufferGeometry, Float32BufferAttribute, NoToneMapping, PerspectiveCamera,
-  Points, Scene, ShaderMaterial, Vector2, WebGLRenderer,
+  Points, Scene, ShaderMaterial, Vector2, Vector3, WebGLRenderer,
 } from "three";
 import {
-  fragmentShader, PORTRAIT_CROP, portraitFraming, portraitPhases, portraitSource, samplePortrait, vertexShader,
+  fragmentShader, PORTRAIT_CROP, PORTRAIT_POINTS_SOURCE, portraitFraming, portraitPhases, samplePortrait, vertexShader,
   type ParticleMotion,
 } from "./portrait-particles";
 
@@ -38,7 +38,8 @@ export default function PortraitScene({ motion, onReady, onUnavailable }: Props)
       uRelease: { value: 0 }, uTravel: { value: 0 }, uEnding: { value: 0 },
       uTime: { value: 0 }, uDpr: { value: 1 }, uScale: { value: 1 },
       uAspect: { value: 1 }, uPixel: { value: 2 }, uPointer: { value: new Vector2() },
-      uSeparate: { value: 0 }, uTurn: { value: 0 }, uAtomise: { value: 0 }, uDisperse: { value: 0 }, uPress: { value: 0 }, uHover: { value: 0 },
+      uCamera: { value: new Vector3(0, 0, 6) },
+      uTurn: { value: 0 }, uLoosen: { value: 0 }, uDisperse: { value: 0 }, uPress: { value: 0 }, uHover: { value: 0 },
     };
     const material = new ShaderMaterial({
       uniforms, vertexShader, fragmentShader, transparent: true,
@@ -97,23 +98,27 @@ export default function PortraitScene({ motion, onReady, onUnavailable }: Props)
       const state = motion.current;
       uniforms.uRelease.value = state.release;
       const phase = portraitPhases(state.release);
-      uniforms.uSeparate.value = phase.separate;
       // The portrait turns on its own axis. It stays exactly where it is in
       // frame, so nothing can slide out of a narrow viewport, and the total
-      // angle stays well short of showing the relief edge-on.
-      // The turn exists to show the columns coming apart, so it runs with the
-      // separation and is finished by the time they start to atomise.
-      uniforms.uTurn.value = state.approach * 0.1 + phase.separate * 0.42;
-      uniforms.uAtomise.value = phase.atomise;
+      // angle stays well short of showing the relief edge-on. The turn is what
+      // makes the per-pixel relief read as parallax rather than as a flat image.
+      uniforms.uTurn.value = state.approach * 0.08 + phase.approach * 0.5;
+      uniforms.uLoosen.value = phase.loosen;
       uniforms.uDisperse.value = phase.disperse;
       uniforms.uTravel.value = state.travel;
       uniforms.uEnding.value = state.ending;
-      // Release is already eased across the full hero passage. Reusing it
-      // directly prevents a second remap from compressing the camera move.
+      // One dolly through the cloud, which spans roughly z in [-0.9, 0.9] *
+      // uScale once the relief is added. The lens also tracks sideways towards
+      // the head, which sits right of the camera axis, so it passes the cheek
+      // and jaw rather than the ear. Release is already eased across the hero,
+      // so the dolly reads it directly: easing it a second time runs the lens
+      // out of travel by about four fifths of the passage and leaves the last
+      // stretch looking at an empty frame from behind the cloud.
       const advance = state.release;
-      camera.position.z = 6 - advance * 0.88 - state.travel * 0.35;
-      camera.position.x = advance * 0.24;
-      camera.position.y = -state.travel * 0.18 * (1 - state.ending);
+      camera.position.z = 6 - advance * 6.6 - state.travel * 0.35;
+      camera.position.x = advance * (camera.aspect > 1.1 ? 1.1 : 0.35);
+      camera.position.y = -advance * 0.25 - state.travel * 0.18 * (1 - state.ending);
+      uniforms.uCamera.value.copy(camera.position);
       if (!state.paused) uniforms.uTime.value += dt;
       pointer.set(state.pointerX, state.pointerY);
       const pressTarget = state.pressed && !state.paused && state.release < 0.18 ? 1 : 0;
@@ -177,14 +182,25 @@ export default function PortraitScene({ motion, onReady, onUnavailable }: Props)
       try {
         const width = window.innerWidth < 700 ? 400 : 640;
         sampleHeight = Math.round(width * PORTRAIT_CROP.height / PORTRAIT_CROP.width);
-        const sample = document.createElement("canvas");
-        sample.width = width;
-        sample.height = sampleHeight;
-        const context = sample.getContext("2d", { willReadFrequently: true });
-        if (!context) throw new Error("Portrait sampling unavailable");
-        const { x, y, width: cropWidth, height: cropHeight } = PORTRAIT_CROP;
-        context.drawImage(image, x, y, cropWidth, cropHeight, 0, 0, width, sampleHeight);
-        const data = samplePortrait(context.getImageData(0, 0, width, sampleHeight).data, width, sampleHeight);
+        const { width: cropWidth, height: cropHeight } = PORTRAIT_CROP;
+        // The plate must be colour and depth side by side, or the depth
+        // half would be sampled from the wrong region without complaint.
+        if (image.naturalWidth !== cropWidth * 2 || image.naturalHeight !== cropHeight) {
+          throw new Error("Portrait plate is not colour and depth side by side");
+        }
+        // One plate, two halves: colour on the left, depth on the right. Both
+        // are resampled to the same grid so a point's colour and its relief
+        // come from the same source pixel.
+        const plane = (sourceX: number) => {
+          const canvas = document.createElement("canvas");
+          canvas.width = width;
+          canvas.height = sampleHeight;
+          const context = canvas.getContext("2d", { willReadFrequently: true });
+          if (!context) throw new Error("Portrait sampling unavailable");
+          context.drawImage(image, sourceX, 0, cropWidth, cropHeight, 0, 0, width, sampleHeight);
+          return context.getImageData(0, 0, width, sampleHeight).data;
+        };
+        const data = samplePortrait(plane(0), plane(cropWidth), width, sampleHeight);
         geometry.setAttribute("position", new Float32BufferAttribute(data.positions, 3));
         geometry.setAttribute("aColour", new Float32BufferAttribute(data.colours, 3));
         geometry.setAttribute("aSeed", new Float32BufferAttribute(data.seeds, 4));
@@ -196,7 +212,7 @@ export default function PortraitScene({ motion, onReady, onUnavailable }: Props)
       } catch { fail(); }
     };
     image.onerror = fail;
-    image.src = portraitSource;
+    image.src = PORTRAIT_POINTS_SOURCE;
     return () => {
       disposed = true;
       cancelAnimationFrame(frame);

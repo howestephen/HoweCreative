@@ -1,10 +1,20 @@
 import portraitSource from "../../../docs/reviews/2026-09-07-design-reset/portrait-reference.png";
 
 export { portraitSource };
+// The opening is a depth-mapped point cloud, not a stack of flat cards.
+// The left half of PORTRAIT_POINTS_SOURCE is the approved 2D likeness, cropped
+// exactly as PORTRAIT_CROP describes it; the right half is a per-pixel depth
+// estimate written by scripts/build-portrait-depth.mjs. Every point therefore
+// carries its own relief, so the head shows real parallax when it turns and
+// the camera can travel into the cloud.
+// The depth map is a monocular estimate from the 2D reference. It is
+// art-directed relief, not measured geometry or a claim to reconstruct
+// Stephen's actual facial geometry.
 // This crop deliberately stops above the navigation baked into the concept.
-// The source is an approved 2D likeness. Its shallow relief is art-directed,
-// not a claim to reconstruct Stephen's actual facial geometry.
 export const PORTRAIT_CROP = { x: 440, y: 8, width: 700, height: 650 };
+// Packed colour + depth plate, 1400x650: colour on the left, depth on the
+// right. Served from public/ so the sampler fetches one image, not two.
+export const PORTRAIT_POINTS_SOURCE = "/portrait/portrait-source.png";
 export const clamp = (value: number) => Math.min(1, Math.max(0, value));
 export const smooth = (start: number, end: number, value: number) => {
   const t = clamp((value - start) / (end - start));
@@ -41,14 +51,23 @@ const random = (seed: number) => {
   return n - Math.floor(n);
 };
 
-// Separation, surface atomisation and spatial drift overlap deliberately. This
-// avoids a finished pillar animation handing off to a second abrupt effect.
-// Disperse stays linear here; the shader eases each point's own flight so the
-// field interpolation is spread through the middle and late passage.
+// The depth estimator puts the face in roughly the top two fifths of its
+// range, so the raw grey is re-stretched before it becomes relief. Anything
+// at or behind 0.45 flattens to the back plane; 1.0 is the nearest point.
+export const portraitRelief = (raw: number) => clamp((raw - 0.45) / 0.55);
+
+// Three overlapping movements, all driven by one scroll position. Approach
+// dollies the lens into the cloud and turns the head, so the relief reads as
+// parallax rather than as a flat image sliding. Loosen releases each point in
+// its own time, ordered by depth, so hair and the back of the head go first
+// and the features hold longest; it is also what reduces the image to its
+// stipple. Disperse then carries the survivors into the field. Disperse stays
+// linear here; the shader eases each point's own flight so the field
+// interpolation spreads through the middle and late passage.
 export const portraitPhases = (progress: number) => ({
-  separate: smooth(0.02, 0.4, progress),
-  atomise: smooth(0.42, 0.95, progress),
-  disperse: clamp((progress - 0.52) / 0.48),
+  approach: smooth(0, 0.8, progress),
+  loosen: smooth(0.12, 0.7, progress),
+  disperse: clamp((progress - 0.5) / 0.5),
 });
 
 export const isPortraitSurface = (target: EventTarget | null) => target instanceof HTMLElement
@@ -58,42 +77,7 @@ export const isPortraitSurface = (target: EventTarget | null) => target instance
 export const acceptsPortraitPress = (pointerType: string, button: number, release: number, paused: boolean) =>
   pointerType === 'mouse' && button === 0 && release < 0.18 && !paused;
 
-export const PORTRAIT_PILLARS = 13;
-// Width, in source u, of the feathered seam either side of a pillar boundary.
-// Points inside it blend towards the neighbouring pillar's depth, so a seam
-// stretches like a sheared surface instead of reading as a knife cut.
-export const PILLAR_FEATHER = 0.012;
-
-// Every column keeps its own depth so that, once they draw apart and the
-// portrait turns, the space between them is visible. Release timing is
-// deliberately not tied to this value: when it was, whole columns let go at
-// different moments and solid ones stood beside dissolved ones.
-const pillarDepthAt = (pillar: number) =>
-  0.5 + Math.sin((Math.min(PORTRAIT_PILLARS - 1, Math.max(0, pillar)) + 1) * 2.17) * 0.33;
-
-// Every point in one vertical strip shares its structural depth. The strip
-// moves as one pillar before individual points begin shedding from its surface.
-export const portraitPillarDepth = (u: number) =>
-  pillarDepthAt(Math.floor(clamp(u) * PORTRAIT_PILLARS));
-
-// The rigid pillar depth, feathered across each boundary.
-export const portraitSurfaceDepth = (u: number) => {
-  const pillar = Math.min(PORTRAIT_PILLARS - 1, Math.max(0, Math.floor(clamp(u) * PORTRAIT_PILLARS)));
-  const own = pillarDepthAt(pillar);
-  const fromLeft = u - pillar / PORTRAIT_PILLARS;
-  const fromRight = (pillar + 1) / PORTRAIT_PILLARS - u;
-  if (pillar > 0 && fromLeft < PILLAR_FEATHER) {
-    const weight = 0.5 - (fromLeft / PILLAR_FEATHER) * 0.5;
-    return own + (pillarDepthAt(pillar - 1) - own) * weight;
-  }
-  if (pillar < PORTRAIT_PILLARS - 1 && fromRight < PILLAR_FEATHER) {
-    const weight = 0.5 - (fromRight / PILLAR_FEATHER) * 0.5;
-    return own + (pillarDepthAt(pillar + 1) - own) * weight;
-  }
-  return own;
-};
-
-export const samplePortrait = (pixels: Uint8ClampedArray, width: number, height: number) => {
+export const samplePortrait = (pixels: Uint8ClampedArray, depthPixels: Uint8ClampedArray, width: number, height: number) => {
   const positions: number[] = [];
   const colours: number[] = [];
   const seeds: number[] = [];
@@ -118,7 +102,10 @@ export const samplePortrait = (pixels: Uint8ClampedArray, width: number, height:
         Math.pow(pixels[i + 2] / 255, 2.2) * edge,
       );
       seeds.push(r, random(seed + 17), random(seed + 71), u);
-      depths.push(portraitSurfaceDepth(u));
+      // Depth is read from the matching pixel of the depth half, never from
+      // the portrait's own brightness: a bright cheek and a bright collar are
+      // not at the same distance.
+      depths.push(portraitRelief(depthPixels[i] / 255));
     }
   }
   return { positions: new Float32Array(positions), colours: new Float32Array(colours), seeds: new Float32Array(seeds), depths: new Float32Array(depths) };
@@ -143,9 +130,8 @@ export const vertexShader = /* glsl */ `
   attribute vec4 aSeed;
   attribute float aDepth;
   uniform float uRelease;
-  uniform float uSeparate;
   uniform float uTurn;
-  uniform float uAtomise;
+  uniform float uLoosen;
   uniform float uDisperse;
   uniform float uTravel;
   uniform float uEnding;
@@ -155,6 +141,7 @@ export const vertexShader = /* glsl */ `
   uniform float uAspect;
   uniform float uPixel;
   uniform vec2 uPointer;
+  uniform vec3 uCamera;
   uniform float uPress;
   uniform float uHover;
   varying vec3 vColour;
@@ -174,44 +161,71 @@ export const vertexShader = /* glsl */ `
     float r = aSeed.x;
     float s = aSeed.y;
     float t = aSeed.z;
-    float u = aSeed.w;
     float angle = s * TAU;
-    // The dissolve is a wave, not a lottery: the back of the head loosens
-    // first, the crown before the neck, and the features hold longest. A
-    // low-frequency ripple and per-point randomness keep the front from ever
-    // travelling as one straight edge along a pillar boundary.
-    // When a point lets go depends on where it sits on the face, never on
-    // which pillar holds it. Keying this to aDepth, which is one of thirteen
-    // quantised values, made whole columns dissolve at different times, so
-    // solid pillars stood beside dissolved ones and the edges between them
-    // read as vertical lines. The ripple also drops below the pillar
-    // frequency so it cannot beat against the same boundaries.
-    float order = 0.02 + smoothstep(0.22, 1.0, u) * 0.42 + s * 0.2
-      + (0.5 - position.y / 4.6) * 0.08
-      + sin(position.y * 3.1 + u * 4.0) * 0.035;
-    float atomise = smoothstep(order, order + 0.26, uAtomise);
-    float flight = atomise * smoothstep(0.0, 1.0, uDisperse);
-    vec3 p = position * uScale;
-    p.x += uAspect > 1.1 ? 0.32 : -0.7 * uScale;
-    p.y += 0.06;
+    float light = dot(aColour, LUMA);
+    // The image reduces to a stipple. About a fifth of the points survive the
+    // loosening (the band runs 0.12 to 0.52, weighted towards the bright
+    // ones) and the rest fade out as they let go. The survivors grow to hold the coverage
+    // the others gave up, and they are the points that fly into the field.
+    // The weighting reads perceptual tone, not linear light: aColour is stored
+    // linear and this portrait is dark, so nine points in ten sit below 0.1
+    // there and weighting on it keeps a flat tenth of the image everywhere.
+    float tone = pow(light, 0.4545);
+    float keep = step(r, 0.12 + tone * 0.40);
+    // When a point lets go is keyed to its own relief. aDepth is 1 at the
+    // nearest surface, so the features hold longest and hair and the back of
+    // the head release first. Randomness and a low ripple keep the front from
+    // travelling as one straight edge.
+    float order = 0.04 + aDepth * 0.5 + s * 0.22 + sin(position.y * 3.1 + aSeed.w * 4.0) * 0.03;
+    float loose = smoothstep(order, order + 0.3, uLoosen);
+    float flight = loose * smoothstep(0.0, 1.0, uDisperse);
+    // The relief is unprojected, not extruded: each point is pushed along its
+    // own view ray from the opening lens, so the cloud carries true depth and
+    // still projects exactly as the flat plate did.
+    vec3 plate = position * uScale;
+    vec2 framing = vec2(uAspect > 1.1 ? 0.32 : -0.7 * uScale, 0.06);
+    plate.xy += framing;
     float baseYaw = -0.13;
-    vec3 original = rotateY(p, baseYaw);
-    // The source is already a tilted object. Each broad vertical strip moves
-    // along depth as one rigid column with a gentle continuous fan across the
-    // head, so the seams open from the side without slicing the face.
-    vec3 pillar = p;
-    pillar.x += (u - 0.64) * 0.14 * uScale * uSeparate;
-    pillar.z += (aDepth - 0.5) * 3.4 * uScale * uSeparate;
-    vec3 layered = rotateY(pillar, baseYaw - uTurn);
+    vec3 original = rotateY(plate, baseYaw);
+    vec3 eye = vec3(0.0, 0.0, 6.0);
+    float reach = 6.0 - original.z;
+    float relief = (aDepth - 0.5) * 1.8 * uScale;
+    float rest = reach - relief;
+    vec3 surface = eye + (original - eye) * (rest / reach);
     // Lift-off: a released point rises and eases off the surface, swaying
     // slowly, so the surface breathes apart instead of bursting.
     vec3 sway = vec3(
       sin(uTime * 0.5 + s * TAU),
       cos(uTime * 0.37 + r * TAU),
       sin(uTime * 0.43 + t * TAU)
-    ) * 0.035;
-    vec3 liftDirection = normalize(vec3((r - 0.5) * 0.5, 0.55 + s * 0.4, 0.35 + (t - 0.5) * 0.5));
-    vec3 lifted = layered + (liftDirection * (0.04 + t * 0.24) + sway * atomise) * uScale * atomise;
+    ) * 0.16;
+    // Hair splays into wisps: the drift is outward from the head's centre and
+    // slightly upward, carried on two slow waves rather than a radial burst.
+    // The yaw pivots about the face, not the head's centre. Pivoting at the
+    // centre swings the face forward by most of a unit, so the lens passes it
+    // while it is still the subject and is left looking at the dark back of
+    // the head. Pivoting at the face holds it at its own depth and swings the
+    // back of the head away instead, which is what opens a depth range for
+    // near blobs to read against finer points behind them.
+    vec3 centre = vec3(0.7 * uScale + framing.x, framing.y, 0.0);
+    vec3 pivot = vec3(1.75 * uScale + framing.x, 0.0, 0.0);
+    vec3 outward = normalize(surface - centre + vec3(0.001, 0.0, 0.0));
+    vec3 liftDirection = normalize(outward + vec3((r - 0.5) * 0.4, 0.8 + s * 0.35, 0.2 + (t - 0.5) * 0.5));
+    vec3 drift = vec3(
+      sin(position.y * 1.6 + uTime * 0.23 + s * TAU) * 0.6 + cos(position.x * 1.05 - uTime * 0.17 + t * TAU) * 0.4,
+      cos(position.x * 1.3 + uTime * 0.19 + r * TAU) * 0.5 + sin(position.y * 0.85 + uTime * 0.13) * 0.35,
+      sin(position.x * 0.9 + position.y * 1.15 + uTime * 0.21 + s * TAU) * 0.55
+    );
+    // A point that has not loosened sits exactly on the relief surface. Hair
+    // and the back of the head splay the full distance; the features, which
+    // sit forward, barely leave their surface. The amplitude is small because
+    // the stipple carries the reduction now: displacing points by most of a
+    // head once the lens is among them empties the frame it is looking at.
+    float splay = mix(1.0, 0.22, aDepth);
+    vec3 wander = (liftDirection * (0.35 + t * 0.55) + drift * 0.42 + sway) * 0.3 * uScale * loose * splay;
+    // The head turns about its own centre, so nothing slides out of a narrow
+    // viewport and the total angle stays short of showing the relief edge-on.
+    vec3 lifted = rotateY(surface + wander - pivot, -uTurn) + pivot;
     // A curved route carries each ember up and out before it reaches its
     // place in the field, so neighbouring detail stretches before it dissolves.
     vec3 control = lifted + vec3((r - 0.5) * 1.6, 0.9 + s * 0.8, 0.6 + (t - 0.5) * 0.8) * uScale;
@@ -220,16 +234,19 @@ export const vertexShader = /* glsl */ `
     float near = 1.0 - smoothstep(0.0, 0.07, t);
     float far = smoothstep(0.3, 0.6, t);
     float scatter = hash2(vec2(r, s));
+    // The field and the closing arc were authored for a lens at z = 6, which
+    // now travels, so both are carried with it.
+    vec3 lens = uCamera - vec3(0.0, 0.0, 6.0);
     vec3 field = vec3(
       (r - 0.5) * 14.0 - 0.6,
       (s - 0.5) * 5.0 + sin(scatter * TAU + far * 2.0) * 0.8,
       mix(mix(0.6, 2.9, near), -6.0, far) + (hash2(vec2(s, t)) - 0.5) * 1.5
-    );
+    ) + lens;
     field.y += sin(angle + uTime * 0.09) * 0.15;
     field.x += uTravel * (1.4 + t * 1.2);
     field.z += uTravel * 0.8;
     float retained = 1.0 - flight;
-    p = retained * retained * lifted
+    vec3 p = retained * retained * lifted
       + 2.0 * retained * flight * control
       + flight * flight * field;
     // The closing form is a tilted, diffuse arc with space for readable type.
@@ -239,7 +256,7 @@ export const vertexShader = /* glsl */ `
       cos(arc) * radius * min(1.65, uAspect * 0.92),
       sin(arc) * radius * 0.56,
       sin(arc) * 1.3 + (t - 0.5) * 1.25 - 0.8
-    );
+    ) + lens;
     ending.y += sin(arc * 3.0 + uTime * 0.1) * 0.11;
     p = mix(p, ending, uEnding);
     // Only a held press parts the points. Passive hover changes colour only.
@@ -255,21 +272,25 @@ export const vertexShader = /* glsl */ `
     vec4 mv = modelViewMatrix * vec4(p, 1.0);
     float depth = -mv.z;
     float focus = abs(depth - 6.0);
-    // Most released points are vapour: they lift, soften and fade within the
-    // first half of their flight. A minority survive as embers that carry the
-    // portrait's light into the field and the closing arc.
-    float survivor = smoothstep(0.86, 0.9, fract(r * 97.3 + s * 31.1));
-    float vapour = (1.0 - survivor) * (1.0 - smoothstep(0.2, 0.9, atomise)) * (1.0 - smoothstep(0.03, 0.55, flight));
-    float loosened = smoothstep(0.0, 0.6, atomise);
+    // Geometric growth alone is not enough: uPixel is about 2px on a 1280x800
+    // desktop. A real lens turns a near point into a soft disc well beyond its
+    // geometric size, so the last stretch in front of the camera adds a swell.
+    // It is inert beyond 2.4 units, so the opening frame is untouched.
+    float grow = rest / max(0.3, depth);
+    float swell = 1.0 + (1.0 - smoothstep(0.3, 2.4, depth)) * 1.6;
     float settled = flight * flight;
-    float opticalSpread = loosened * 0.2 + settled * 0.8;
-    vBlur = smoothstep(1.35, 4.4, focus) * max(opticalSpread, uSeparate * 0.16);
-    vBlur = max(vBlur, (1.0 - survivor) * loosened * 0.55 + near * settled * 0.7);
-    float emberAlpha = survivor * mix(0.72, 0.42, near) * (0.4 + r * 0.6) * mix(1.0, 0.55, far);
-    float releasedAlpha = max(emberAlpha, vapour * (0.9 - loosened * 0.3));
-    vOpacity = mix(0.97, releasedAlpha, loosened) * smoothstep(0.3, 1.5, depth);
+    float opticalSpread = flight * 0.2 + settled * 0.8;
+    vBlur = smoothstep(1.35, 4.4, focus) * opticalSpread;
+    vBlur = max(vBlur, near * settled * 0.7);
+    // Close to the lens a point is past the focal plane: it grows, softens and
+    // goes out rather than popping as it passes the camera.
+    vBlur = max(vBlur, 1.0 - smoothstep(0.4, 1.6, depth));
+    // A point the stipple drops fades out as it loosens; a kept point holds
+    // full opacity through the loosening and leaves as an ember.
+    float held = mix(1.0 - smoothstep(0.05, 0.6, loose), 1.0, keep);
+    float emberAlpha = keep * mix(0.72, 0.42, near) * (0.4 + r * 0.6) * mix(1.0, 0.55, far);
+    vOpacity = mix(0.97 * held, emberAlpha, smoothstep(0.0, 0.45, flight)) * smoothstep(0.12, 0.7, depth);
     vOpacity *= mix(1.0, 0.46, uEnding);
-    float light = dot(aColour, LUMA);
     vec3 silver = vec3(0.66, 0.69, 0.71);
     vec3 warm = vec3(0.86, 0.79, 0.68);
     vec3 ember = mix(silver, warm, near * 0.6) * (0.42 + light * 0.9 + r * 0.25);
@@ -277,11 +298,19 @@ export const vertexShader = /* glsl */ `
     float hover = exp(-pow(length(away * vec2(0.82, 1.15)) / (0.88 * uScale), 2.0) * 1.65) * uHover * interactive;
     vec3 warmRed = vec3(light * 1.08, light * 0.19, light * 0.13);
     vColour = mix(vColour, warmRed, hover * (0.3 + uPress * 0.18));
-    float portraitSize = uPixel * 6.0 / max(1.0, depth) + vBlur * 3.0;
-    float emberSize = mix(mix(0.022, 0.012, far), 0.11, near) * 520.0 / max(0.5, depth);
-    float vapourSize = portraitSize * (1.0 + loosened * 0.7);
-    float releasedSize = mix(vapourSize, emberSize + vBlur * 8.0, survivor);
-    gl_PointSize = min(42.0, mix(portraitSize, releasedSize, smoothstep(0.0, 1.0, max(loosened * 0.5, flight)))) * uDpr;
+    // The sampler lays points out on a screen-space grid, so their spacing on
+    // screen is fixed at the opening whatever their relief. Each point keeps
+    // its opening size and grows as the lens closes on it; a kept point grows
+    // again as the stipple thins, to hold the coverage the dropped ones gave up.
+    float portraitSize = uPixel * 6.0 / (6.0 - original.z) * grow * swell + vBlur * 3.0;
+    portraitSize *= mix(1.0, 2.4, loose * keep);
+    // The field carries only the kept points, so each one is scaled up to hold
+    // the coverage the stipple gave up, exactly as portraitSize is.
+    float emberSize = mix(mix(0.022, 0.012, far), 0.11, near) * 1250.0 / max(0.5, depth);
+    // A dropped point that has fully faded still costs fill at up to 72px in
+    // the blended pass, so once it is gone it is drawn at no size at all.
+    float dropped = (1.0 - keep) * smoothstep(0.55, 0.62, loose);
+    gl_PointSize = min(72.0, mix(portraitSize, emberSize + vBlur * 8.0, smoothstep(0.0, 1.0, flight))) * uDpr * (1.0 - dropped);
     gl_Position = projectionMatrix * mv;
   }
 `;
