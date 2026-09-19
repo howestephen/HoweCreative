@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
-import { acceptsPortraitPress, isPortraitSurface, PORTRAIT_CROP, portraitFraming, portraitPhases, portraitSurfaceDepth, samplePortrait, scrollState } from "./portrait-particles";
+import { acceptsPortraitPress, isPortraitSurface, PILLAR_FEATHER, PORTRAIT_CROP, PORTRAIT_PILLARS, portraitFraming, portraitPhases, portraitPillarDepth, portraitSurfaceDepth, samplePortrait, scrollState } from "./portrait-particles";
 import PortraitScene from "./PortraitScene";
 
 vi.mock("three", async (original) => ({
@@ -11,7 +11,7 @@ vi.mock("three", async (original) => ({
 it("reports unavailable WebGL without leaving a blank canvas attached", () => {
   const onUnavailable = vi.fn();
   const onReady = vi.fn();
-  const motion = { current: { release: 0, travel: 0, ending: 0, approach: 0, pointerX: 0, pointerY: 0, velocity: 0, paused: false } };
+  const motion = { current: { release: 0, approach: 0, travel: 0, ending: 0, pointerX: 0, pointerY: 0, velocity: 0, paused: false } };
   const { container } = render(<PortraitScene motion={motion} onReady={onReady} onUnavailable={onUnavailable} />);
   expect(onUnavailable).toHaveBeenCalledOnce();
   expect(onReady).not.toHaveBeenCalled();
@@ -62,7 +62,7 @@ describe("portrait source and reversible choreography", () => {
     const work = 1440;
     const end = 2400;
     expect(scrollState(0, h, work, end)).toEqual({ release: 0, approach: 0, travel: 0, ending: 0, intro: 1 });
-    // The camera arc answers the very first scroll; the portrait still holds.
+    // The camera arc answers the first scroll; the portrait still holds.
     expect(scrollState(h * 0.1, h, work, end).approach).toBeGreaterThan(0);
     expect(scrollState(h * 0.1, h, work, end).release).toBe(0);
     expect(scrollState(work - h * 0.25, h, work, end).release).toBe(1);
@@ -103,42 +103,41 @@ describe("portrait source and reversible choreography", () => {
     expect(complete.disperse).toBeCloseTo(1);
   });
 
-  it('varies surface depth continuously across the portrait, never in steps', () => {
-    // No seam: neighbouring columns must never jump. A rigid-pillar field used
-    // to step here, and those steps showed as vertical lines once it moved.
-    let biggest = 0;
-    for (let u = 0; u <= 1; u += 0.002) {
-      biggest = Math.max(biggest, Math.abs(portraitSurfaceDepth(u) - portraitSurfaceDepth(u + 0.002)));
-    }
-    expect(biggest).toBeLessThan(0.02);
-    // It still has to travel: a flat field would separate into nothing.
-    const across = Array.from({ length: 200 }, (_, i) => portraitSurfaceDepth(i / 199));
-    expect(Math.max(...across) - Math.min(...across)).toBeGreaterThan(0.5);
-    expect(Math.min(...across)).toBeGreaterThan(0);
-    expect(Math.max(...across)).toBeLessThan(1);
-    expect(portraitSurfaceDepth(-1)).toBe(portraitSurfaceDepth(0));
-    expect(portraitSurfaceDepth(2)).toBe(portraitSurfaceDepth(1));
-
-    // Depth comes from position across the portrait, never from brightness.
+  it('assigns one shared depth per vertical pillar instead of using facial brightness', () => {
+    expect(portraitPillarDepth(0.5)).toBe(portraitPillarDepth(0.53));
+    expect(portraitPillarDepth(0.46)).not.toBe(portraitPillarDepth(0.5));
+    // Away from a seam the surface depth is the rigid pillar depth.
+    expect(portraitSurfaceDepth(0.5)).toBe(portraitPillarDepth(0.5));
+    // Inside the feathered seam it sits between the two neighbouring pillars
+    // and meets the neighbour halfway exactly at the boundary.
+    const boundary = 7 / PORTRAIT_PILLARS;
+    const left = portraitPillarDepth(boundary - PILLAR_FEATHER * 2);
+    const right = portraitPillarDepth(boundary + PILLAR_FEATHER * 2);
+    const seam = portraitSurfaceDepth(boundary + PILLAR_FEATHER * 0.25);
+    expect(seam).not.toBe(left);
+    expect(seam).not.toBe(right);
+    expect((seam - left) * (seam - right)).toBeLessThan(0);
+    expect(portraitSurfaceDepth(boundary)).toBeCloseTo((left + right) / 2, 10);
+    expect(portraitSurfaceDepth(boundary + PILLAR_FEATHER)).toBe(right);
+    expect(portraitSurfaceDepth(0)).toBe(portraitPillarDepth(0));
+    expect(portraitSurfaceDepth(1)).toBe(portraitPillarDepth(1));
     const pixels = new Uint8ClampedArray(320 * 40 * 4);
     for (let y = 0; y < 40; y++) for (let x = 0; x < 320; x++) {
       const i = (y * 320 + x) * 4;
       pixels[i + 3] = 255;
       if (x >= 48 && x <= 270 && y >= 4 && y <= 34) {
-        const bright = y < 19 ? 40 : 230;
-        pixels[i] = pixels[i + 1] = pixels[i + 2] = bright;
+        pixels[i] = pixels[i + 1] = pixels[i + 2] = 150;
       }
     }
-    const { depths, positions } = samplePortrait(pixels, 320, 40);
-    const column = new Map<number, Set<number>>();
-    for (let i = 0; i < depths.length; i++) {
-      const x = Math.round(positions[i * 3] * 1000);
-      if (!column.has(x)) column.set(x, new Set());
-      column.get(x)!.add(Math.round(depths[i] * 1e6));
-    }
-    // Dark and bright points in one column share a depth, so a bright feature
-    // can never inflate away from the surface it belongs to.
-    expect([...column.values()].every((set) => set.size === 1)).toBe(true);
+    const { depths } = samplePortrait(pixels, 320, 40);
+    expect(Math.min(...depths)).toBeGreaterThan(0);
+    expect(Math.max(...depths)).toBeLessThan(1);
+    const rigid = new Set(Array.from({ length: PORTRAIT_PILLARS }, (_, i) => Math.fround(portraitPillarDepth((i + 0.5) / PORTRAIT_PILLARS))));
+    const onPillar = depths.filter((depth) => rigid.has(depth)).length;
+    expect(new Set(depths.filter((depth) => rigid.has(depth))).size).toBeGreaterThan(6);
+    // Seams are narrow: most sampled points still sit on a rigid pillar depth.
+    expect(onPillar / depths.length).toBeGreaterThan(0.6);
+    expect(Math.max(...depths) - Math.min(...depths)).toBeGreaterThan(0.5);
   });
 });
 
