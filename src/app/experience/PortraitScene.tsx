@@ -101,7 +101,9 @@ export default function PortraitScene({ motion, onReady, onUnavailable }: Props)
       // The portrait turns on its own axis. It stays exactly where it is in
       // frame, so nothing can slide out of a narrow viewport, and the total
       // angle stays well short of showing the relief edge-on.
-      uniforms.uTurn.value = state.approach * 0.16 + phase.separate * 0.28;
+      // The turn exists to show the columns coming apart, so it runs with the
+      // separation and is finished by the time they start to atomise.
+      uniforms.uTurn.value = state.approach * 0.1 + phase.separate * 0.42;
       uniforms.uAtomise.value = phase.atomise;
       uniforms.uDisperse.value = phase.disperse;
       uniforms.uTravel.value = state.travel;
