@@ -137,7 +137,18 @@ describe("portrait source and reversible choreography", () => {
     expect(new Set(depths.filter((depth) => rigid.has(depth))).size).toBeGreaterThan(6);
     // Seams are narrow: most sampled points still sit on a rigid pillar depth.
     expect(onPillar / depths.length).toBeGreaterThan(0.6);
-    expect(Math.max(...depths) - Math.min(...depths)).toBeGreaterThan(0.5);
+    expect(Math.max(...depths) - Math.min(...depths)).toBeGreaterThan(0.4);
+    // Across the whole portrait the field still uses its full depth range.
+    const all = Array.from({ length: PORTRAIT_PILLARS }, (_, i) => portraitPillarDepth((i + 0.5) / PORTRAIT_PILLARS));
+    expect(Math.max(...all) - Math.min(...all)).toBeGreaterThan(0.6);
+    // Neighbouring pillars stay close, which is what stops the seam between
+    // them tearing open into a vertical line as they separate through depth.
+    // An earlier ordering put 0.77 against 0.19 and that gap was the line.
+    const jumps = all.slice(1).map((depth, i) => Math.abs(depth - all[i]));
+    expect(Math.max(...jumps)).toBeLessThan(0.15);
+    // The sweep is monotonic, so the middle can never sit forward of both
+    // edges: a bulging face was a rejected direction.
+    expect(all.every((depth, i) => i === 0 || depth >= all[i - 1] - 0.05)).toBe(true);
   });
 });
 
