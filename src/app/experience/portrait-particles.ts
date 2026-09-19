@@ -61,13 +61,18 @@ export const portraitRelief = (raw: number) => clamp((raw - 0.45) / 0.55);
 // parallax rather than as a flat image sliding. Loosen releases each point in
 // its own time, ordered by depth, so hair and the back of the head go first
 // and the features hold longest; it is also what reduces the image to its
-// stipple. Disperse then carries the survivors into the field. Disperse stays
+// stipple. It starts on the first scroll and runs through almost the whole
+// passage, so the head is pulling apart continuously rather than holding
+// whole until the lens arrives. Disperse then carries the survivors into the
+// field. Disperse stays
 // linear here; the shader eases each point's own flight so the field
 // interpolation spreads through the middle and late passage.
 export const portraitPhases = (progress: number) => ({
   approach: smooth(0, 0.8, progress),
-  loosen: smooth(0.12, 0.7, progress),
-  disperse: clamp((progress - 0.5) / 0.5),
+  // Linear, not eased: progress is already eased across the hero, and easing
+  // it again held the whole head still through the first third of the scroll.
+  loosen: clamp((progress - 0.01) / 0.75),
+  disperse: clamp((progress - 0.42) / 0.58),
 });
 
 export const isPortraitSurface = (target: EventTarget | null) => target instanceof HTMLElement
@@ -175,9 +180,14 @@ export const vertexShader = /* glsl */ `
     // When a point lets go is keyed to its own relief. aDepth is 1 at the
     // nearest surface, so the features hold longest and hair and the back of
     // the head release first. Randomness and a low ripple keep the front from
-    // travelling as one straight edge.
-    float order = 0.04 + aDepth * 0.5 + s * 0.22 + sin(position.y * 3.1 + aSeed.w * 4.0) * 0.03;
-    float loose = smoothstep(order, order + 0.3, uLoosen);
+    // travelling as one straight edge. The spread is narrow and the window is
+    // wide, so every part of the head is moving from early in the passage and
+    // the order decides how far along each one is, not whether it has begun.
+    // The window is wider than the spread of orders on purpose: each point
+    // takes most of the passage to leave, so the head comes apart steadily
+    // instead of tipping over between one scroll position and the next.
+    float order = 0.02 + aDepth * 0.10 + s * 0.10 + sin(position.y * 3.1 + aSeed.w * 4.0) * 0.03;
+    float loose = smoothstep(order, order + 0.6, uLoosen);
     float flight = loose * smoothstep(0.0, 1.0, uDisperse);
     // The relief is unprojected, not extruded: each point is pushed along its
     // own view ray from the opening lens, so the cloud carries true depth and
@@ -210,19 +220,25 @@ export const vertexShader = /* glsl */ `
     vec3 centre = vec3(0.7 * uScale + framing.x, framing.y, 0.0);
     vec3 pivot = vec3(1.75 * uScale + framing.x, 0.0, 0.0);
     vec3 outward = normalize(surface - centre + vec3(0.001, 0.0, 0.0));
-    vec3 liftDirection = normalize(outward + vec3((r - 0.5) * 0.4, 0.8 + s * 0.35, 0.2 + (t - 0.5) * 0.5));
+    // The lens travels right and in, so the points stream the other way. The
+    // bias dominates and the outward term is halved: at full weight it points
+    // the cheek back out to the right, cancelling the bias on exactly the
+    // points that should be leaving towards the viewer.
+    vec3 liftDirection = normalize(outward * 0.5
+      + vec3(-0.55, 0.2, 0.45)
+      + vec3((r - 0.5) * 0.4, 0.8 + s * 0.35, 0.2 + (t - 0.5) * 0.5));
     vec3 drift = vec3(
       sin(position.y * 1.6 + uTime * 0.23 + s * TAU) * 0.6 + cos(position.x * 1.05 - uTime * 0.17 + t * TAU) * 0.4,
       cos(position.x * 1.3 + uTime * 0.19 + r * TAU) * 0.5 + sin(position.y * 0.85 + uTime * 0.13) * 0.35,
       sin(position.x * 0.9 + position.y * 1.15 + uTime * 0.21 + s * TAU) * 0.55
     );
     // A point that has not loosened sits exactly on the relief surface. Hair
-    // and the back of the head splay the full distance; the features, which
-    // sit forward, barely leave their surface. The amplitude is small because
-    // the stipple carries the reduction now: displacing points by most of a
-    // head once the lens is among them empties the frame it is looking at.
-    float splay = mix(1.0, 0.22, aDepth);
-    vec3 wander = (liftDirection * (0.35 + t * 0.55) + drift * 0.42 + sway) * 0.3 * uScale * loose * splay;
+    // and the back of the head travel furthest, the features a little less,
+    // but the face does travel: the whole head has to come apart as it turns,
+    // not shed an outline while its middle stays put. Amplitude follows loose
+    // directly, so the pull is continuous across the passage.
+    float splay = mix(1.0, 0.75, aDepth);
+    vec3 wander = (liftDirection * (0.35 + t * 0.55) + drift * 0.42 + sway) * 1.1 * uScale * loose * splay;
     // The head turns about its own centre, so nothing slides out of a narrow
     // viewport and the total angle stays short of showing the relief edge-on.
     vec3 lifted = rotateY(surface + wander - pivot, -uTurn) + pivot;

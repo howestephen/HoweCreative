@@ -90,26 +90,33 @@ describe("portrait source and reversible choreography", () => {
   it('approaches and turns first, loosens through the middle, then disperses', () => {
     expect(portraitPhases(0)).toEqual({ approach: 0, loosen: 0, disperse: 0 });
 
-    // Early on the lens leads: it is already travelling and the head is only
-    // starting to come apart, with nothing carried off yet.
-    const early = portraitPhases(0.4);
-    expect(early.approach).toBeGreaterThan(early.loosen);
+    // Separation begins on the first scroll: the head is already coming
+    // apart well before anything is carried off.
+    expect(portraitPhases(0.1).loosen).toBeGreaterThan(0);
+    expect(portraitPhases(0.1).disperse).toBe(0);
+
+    const early = portraitPhases(0.2);
     expect(early.loosen).toBeGreaterThan(0);
     expect(early.disperse).toBe(0);
 
-    // Late on all three are running. Loosening finishes before the approach
-    // does, so it leads by here, and dispersal trails both throughout: a point
-    // is always released before anything carries it away.
-    const late = portraitPhases(0.75);
-    expect(late.approach).toBeGreaterThan(0);
-    expect(late.loosen).toBeGreaterThanOrEqual(late.approach);
-    expect(late.approach).toBeGreaterThan(late.disperse);
-    expect(late.disperse).toBeGreaterThan(0);
+    // By halfway all three are running, and dispersal trails the loosening
+    // that feeds it: a point is always released before anything carries it away.
+    const middle = portraitPhases(0.5);
+    expect(middle.approach).toBeGreaterThan(0);
+    expect(middle.loosen).toBeGreaterThan(0);
+    expect(middle.disperse).toBeGreaterThan(0);
+    expect(middle.disperse).toBeLessThan(middle.loosen);
 
     const complete = portraitPhases(1);
     expect(complete.approach).toBe(1);
     expect(complete.loosen).toBe(1);
     expect(complete.disperse).toBeCloseTo(1);
+
+    // Loosen is linear in progress: the scroll is already eased once, and a
+    // second easing held the whole head together for the first third.
+    const step = (a: number, b: number) => portraitPhases(b).loosen - portraitPhases(a).loosen;
+    expect(step(0.1, 0.2)).toBeCloseTo(step(0.2, 0.3), 6);
+    expect(step(0.3, 0.4)).toBeCloseTo(step(0.5, 0.6), 6);
   });
 
   it('takes relief from the depth half of the plate, never from brightness', () => {
