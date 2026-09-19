@@ -46,9 +46,9 @@ const random = (seed: number) => {
 // Disperse stays linear here; the shader eases each point's own flight so the
 // field interpolation is spread through the middle and late passage.
 export const portraitPhases = (progress: number) => ({
-  separate: smooth(0.05, 0.82, progress),
-  atomise: smooth(0.12, 1, progress),
-  disperse: clamp((progress - 0.28) / 0.72),
+  separate: smooth(0.02, 0.4, progress),
+  atomise: smooth(0.42, 0.95, progress),
+  disperse: clamp((progress - 0.52) / 0.48),
 });
 
 export const isPortraitSurface = (target: EventTarget | null) => target instanceof HTMLElement
@@ -64,19 +64,12 @@ export const PORTRAIT_PILLARS = 13;
 // stretches like a sheared surface instead of reading as a knife cut.
 export const PILLAR_FEATHER = 0.012;
 
-// Depth follows the profile: u runs from the back of the head to the nose, so
-// the pillars step forward across the face the way the head actually sits.
-// The old ordering was sin(pillar * 2.17), which put 0.77 against 0.19 on
-// neighbouring columns. Points render smaller and dimmer the further back
-// they are, so those neighbours drew at visibly different brightness and the
-// face broke into alternating light and dark stripes. Stepping forward in
-// order keeps neighbours close, and being monotonic it cannot bulge: the
-// middle never sits proud of both edges.
-const pillarDepthAt = (pillar: number) => {
-  const index = Math.min(PORTRAIT_PILLARS - 1, Math.max(0, pillar));
-  const t = index / (PORTRAIT_PILLARS - 1);
-  return 0.17 + t * t * (3 - 2 * t) * 0.66;
-};
+// Every column keeps its own depth so that, once they draw apart and the
+// portrait turns, the space between them is visible. Release timing is
+// deliberately not tied to this value: when it was, whole columns let go at
+// different moments and solid ones stood beside dissolved ones.
+const pillarDepthAt = (pillar: number) =>
+  0.5 + Math.sin((Math.min(PORTRAIT_PILLARS - 1, Math.max(0, pillar)) + 1) * 2.17) * 0.33;
 
 // Every point in one vertical strip shares its structural depth. The strip
 // moves as one pillar before individual points begin shedding from its surface.
@@ -208,9 +201,7 @@ export const vertexShader = /* glsl */ `
     // head, so the seams open from the side without slicing the face.
     vec3 pillar = p;
     pillar.x += (u - 0.64) * 0.14 * uScale * uSeparate;
-    // Shallower than the old 3.4. Ordered relief tilts the whole surface, so
-    // too much of it turns the flat source edge-on to the camera.
-    pillar.z += (aDepth - 0.5) * 1.8 * uScale * uSeparate;
+    pillar.z += (aDepth - 0.5) * 3.4 * uScale * uSeparate;
     vec3 layered = rotateY(pillar, baseYaw - uTurn);
     // Lift-off: a released point rises and eases off the surface, swaying
     // slowly, so the surface breathes apart instead of bursting.

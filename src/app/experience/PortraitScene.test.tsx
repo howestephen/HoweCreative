@@ -83,20 +83,31 @@ describe("portrait source and reversible choreography", () => {
     }
   });
 
-  it('atomises the surfaces while the pillars are still separating, then drifts gradually', () => {
+  it('separates the columns first, then atomises them, then lets them flow away', () => {
     expect(portraitPhases(0)).toEqual({ separate: 0, atomise: 0, disperse: 0 });
-    const opening = portraitPhases(0.35);
-    expect(opening.separate).toBeGreaterThan(0);
-    expect(opening.separate).toBeLessThan(1);
-    expect(opening.atomise).toBeGreaterThan(0);
-    expect(opening.disperse).toBeGreaterThan(0);
-    expect(opening.disperse).toBeLessThan(opening.atomise);
-    const middle = portraitPhases(0.7);
-    expect(middle.separate).toBeGreaterThan(middle.atomise);
-    expect(middle.atomise).toBeGreaterThan(middle.disperse);
-    expect(middle.disperse).toBeGreaterThan(0);
-    expect(portraitPhases(0.5).disperse).toBeGreaterThan(0.2);
-    expect(portraitPhases(0.85).disperse).toBeLessThan(0.8);
+
+    // The columns pull apart and hold. Nothing has broken up yet, so there is
+    // a passage where whole columns stand in space and the turn can show the
+    // gaps between them.
+    const parting = portraitPhases(0.3);
+    expect(parting.separate).toBeGreaterThan(0.8);
+    expect(parting.atomise).toBe(0);
+    expect(parting.disperse).toBe(0);
+
+    // Fully apart before the surfaces begin to go.
+    expect(portraitPhases(0.4).separate).toBe(1);
+    expect(portraitPhases(0.42).atomise).toBe(0);
+
+    // Then they atomise, and the particles leave afterwards, never before.
+    const breaking = portraitPhases(0.62);
+    expect(breaking.separate).toBe(1);
+    expect(breaking.atomise).toBeGreaterThan(0);
+    expect(breaking.disperse).toBeLessThan(breaking.atomise);
+
+    const flowing = portraitPhases(0.85);
+    expect(flowing.atomise).toBeGreaterThan(flowing.disperse);
+    expect(flowing.disperse).toBeGreaterThan(0.4);
+
     const complete = portraitPhases(1);
     expect(complete.separate).toBe(1);
     expect(complete.atomise).toBe(1);
