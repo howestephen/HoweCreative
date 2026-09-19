@@ -28,8 +28,8 @@ export const scrollState = (y: number, height: number, workTop: number, endTop: 
   // The window can never invert, so a layout that has not measured yet
   // (or a very short one) still reports an intact portrait at the top.
   release: smooth(height * 0.16, Math.max(workTop - height * 0.25, height * 0.17), y),
-  // Drives the camera arc only. It begins on the first scroll, so the opening
-  // answers movement before the portrait itself starts to come apart.
+  // Drives the turn only. It starts on the first scroll, so the portrait
+  // answers movement before it begins to come apart.
   approach: smooth(0, height * 0.6, y),
   travel: smooth(workTop - height * 0.55, endTop - height * 0.7, y),
   ending: smooth(endTop - height * 0.7, endTop + height * 0.12, y),
@@ -64,19 +64,18 @@ export const PORTRAIT_PILLARS = 13;
 // stretches like a sheared surface instead of reading as a knife cut.
 export const PILLAR_FEATHER = 0.012;
 
-// The pillars keep their full depth range, but they are ordered so that each
-// one sits close to its neighbours: the field sweeps from back to front across
-// the head rather than alternating. Depth used to be sin(pillar * 2.17), which
-// put 0.77 hard against 0.19, so those two columns tore apart as they
-// separated and the gap between them read as a straight vertical line. An
-// eased sweep cannot bulge the face, because the middle never comes forward
-// of both edges.
+// Depth follows the profile: u runs from the back of the head to the nose, so
+// the pillars step forward across the face the way the head actually sits.
+// The old ordering was sin(pillar * 2.17), which put 0.77 against 0.19 on
+// neighbouring columns. Points render smaller and dimmer the further back
+// they are, so those neighbours drew at visibly different brightness and the
+// face broke into alternating light and dark stripes. Stepping forward in
+// order keeps neighbours close, and being monotonic it cannot bulge: the
+// middle never sits proud of both edges.
 const pillarDepthAt = (pillar: number) => {
   const index = Math.min(PORTRAIT_PILLARS - 1, Math.max(0, pillar));
   const t = index / (PORTRAIT_PILLARS - 1);
-  const eased = t * t * (3 - 2 * t);
-  // A slight alternation keeps the stack from reading as a mechanical ramp.
-  return 0.17 + eased * 0.66 + Math.sin(index * 2.6) * 0.018;
+  return 0.17 + t * t * (3 - 2 * t) * 0.66;
 };
 
 // Every point in one vertical strip shares its structural depth. The strip
@@ -152,6 +151,7 @@ export const vertexShader = /* glsl */ `
   attribute float aDepth;
   uniform float uRelease;
   uniform float uSeparate;
+  uniform float uTurn;
   uniform float uAtomise;
   uniform float uDisperse;
   uniform float uTravel;
@@ -187,10 +187,15 @@ export const vertexShader = /* glsl */ `
     // first, the crown before the neck, and the features hold longest. A
     // low-frequency ripple and per-point randomness keep the front from ever
     // travelling as one straight edge along a pillar boundary.
+    // When a point lets go depends on where it sits on the face, never on
+    // which pillar holds it. Keying this to aDepth, which is one of thirteen
+    // quantised values, made whole columns dissolve at different times, so
+    // solid pillars stood beside dissolved ones and the edges between them
+    // read as vertical lines. The ripple also drops below the pillar
+    // frequency so it cannot beat against the same boundaries.
     float order = 0.02 + smoothstep(0.22, 1.0, u) * 0.42 + s * 0.2
       + (0.5 - position.y / 4.6) * 0.08
-      + sin(position.y * 3.1 + u * 11.0) * 0.035
-      + (1.0 - aDepth) * 0.04;
+      + sin(position.y * 3.1 + u * 4.0) * 0.035;
     float atomise = smoothstep(order, order + 0.26, uAtomise);
     float flight = atomise * smoothstep(0.0, 1.0, uDisperse);
     vec3 p = position * uScale;
@@ -203,8 +208,10 @@ export const vertexShader = /* glsl */ `
     // head, so the seams open from the side without slicing the face.
     vec3 pillar = p;
     pillar.x += (u - 0.64) * 0.14 * uScale * uSeparate;
-    pillar.z += (aDepth - 0.5) * 3.4 * uScale * uSeparate;
-    vec3 layered = rotateY(pillar, baseYaw - uSeparate * 0.28);
+    // Shallower than the old 3.4. Ordered relief tilts the whole surface, so
+    // too much of it turns the flat source edge-on to the camera.
+    pillar.z += (aDepth - 0.5) * 1.8 * uScale * uSeparate;
+    vec3 layered = rotateY(pillar, baseYaw - uTurn);
     // Lift-off: a released point rises and eases off the surface, swaying
     // slowly, so the surface breathes apart instead of bursting.
     vec3 sway = vec3(
