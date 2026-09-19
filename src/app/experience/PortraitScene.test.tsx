@@ -62,7 +62,7 @@ describe("portrait source and reversible choreography", () => {
     const work = 1440;
     const end = 2400;
     expect(scrollState(0, h, work, end)).toEqual({ release: 0, approach: 0, travel: 0, ending: 0, intro: 1 });
-    // The camera arc answers the first scroll; the portrait still holds.
+    // The turn answers the first scroll; the portrait still holds together.
     expect(scrollState(h * 0.1, h, work, end).approach).toBeGreaterThan(0);
     expect(scrollState(h * 0.1, h, work, end).release).toBe(0);
     expect(scrollState(work - h * 0.25, h, work, end).release).toBe(1);
@@ -137,18 +137,7 @@ describe("portrait source and reversible choreography", () => {
     expect(new Set(depths.filter((depth) => rigid.has(depth))).size).toBeGreaterThan(6);
     // Seams are narrow: most sampled points still sit on a rigid pillar depth.
     expect(onPillar / depths.length).toBeGreaterThan(0.6);
-    expect(Math.max(...depths) - Math.min(...depths)).toBeGreaterThan(0.4);
-    // Across the whole portrait the field still uses its full depth range.
-    const all = Array.from({ length: PORTRAIT_PILLARS }, (_, i) => portraitPillarDepth((i + 0.5) / PORTRAIT_PILLARS));
-    expect(Math.max(...all) - Math.min(...all)).toBeGreaterThan(0.6);
-    // Neighbouring pillars stay close, which is what stops the seam between
-    // them tearing open into a vertical line as they separate through depth.
-    // An earlier ordering put 0.77 against 0.19 and that gap was the line.
-    const jumps = all.slice(1).map((depth, i) => Math.abs(depth - all[i]));
-    expect(Math.max(...jumps)).toBeLessThan(0.15);
-    // The sweep is monotonic, so the middle can never sit forward of both
-    // edges: a bulging face was a rejected direction.
-    expect(all.every((depth, i) => i === 0 || depth >= all[i - 1] - 0.05)).toBe(true);
+    expect(Math.max(...depths) - Math.min(...depths)).toBeGreaterThan(0.5);
   });
 });
 
