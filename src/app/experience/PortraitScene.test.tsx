@@ -1,6 +1,8 @@
 import { render } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
-import { acceptsPortraitPress, isPortraitSurface, PILLAR_FEATHER, PORTRAIT_CROP, PORTRAIT_PILLARS, portraitFraming, portraitPhases, portraitPillarDepth, portraitSurfaceDepth, samplePortrait, scrollState } from "./portrait-particles";
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
+import { acceptsPortraitPress, isPortraitSurface, PORTRAIT_CROP, PORTRAIT_POINTS_SOURCE, portraitFraming, portraitPhases, portraitRelief, samplePortrait, scrollState } from "./portrait-particles";
 import PortraitScene from "./PortraitScene";
 
 vi.mock("three", async (original) => ({
@@ -36,8 +38,9 @@ describe("portrait source and reversible choreography", () => {
   it("retains identical source points on repeated sampling without a random remount", () => {
     const pixels = new Uint8ClampedArray(20 * 20 * 4).fill(180);
     for (let i = 3; i < pixels.length; i += 4) pixels[i] = 255;
-    const a = samplePortrait(pixels, 20, 20);
-    const b = samplePortrait(pixels, 20, 20);
+    const depth = new Uint8ClampedArray(20 * 20 * 4).fill(200);
+    const a = samplePortrait(pixels, depth, 20, 20);
+    const b = samplePortrait(pixels, depth, 20, 20);
     expect(a.positions).toEqual(b.positions);
     expect(a.seeds).toEqual(b.seeds);
     expect(a.depths).toEqual(b.depths);
@@ -51,10 +54,11 @@ describe("portrait source and reversible choreography", () => {
   it("does not scatter the black background or transparent pixels as a rectangle", () => {
     const black = new Uint8ClampedArray(20 * 20 * 4);
     for (let i = 3; i < black.length; i += 4) black[i] = 255;
-    expect(samplePortrait(black, 20, 20).positions).toHaveLength(0);
+    const depth = new Uint8ClampedArray(20 * 20 * 4).fill(200);
+    expect(samplePortrait(black, depth, 20, 20).positions).toHaveLength(0);
     const invisible = new Uint8ClampedArray(20 * 20 * 4).fill(255);
     for (let i = 3; i < invisible.length; i += 4) invisible[i] = 0;
-    expect(samplePortrait(invisible, 20, 20).positions).toHaveLength(0);
+    expect(samplePortrait(invisible, depth, 20, 20).positions).toHaveLength(0);
   });
 
   it("releases the head completely before the work viewport and finishes the closing form", () => {
@@ -83,72 +87,64 @@ describe("portrait source and reversible choreography", () => {
     }
   });
 
-  it('separates the columns first, then atomises them, then lets them flow away', () => {
-    expect(portraitPhases(0)).toEqual({ separate: 0, atomise: 0, disperse: 0 });
+  it('approaches and turns first, loosens through the middle, then disperses', () => {
+    expect(portraitPhases(0)).toEqual({ approach: 0, loosen: 0, disperse: 0 });
 
-    // The columns pull apart and hold. Nothing has broken up yet, so there is
-    // a passage where whole columns stand in space and the turn can show the
-    // gaps between them.
-    const parting = portraitPhases(0.3);
-    expect(parting.separate).toBeGreaterThan(0.8);
-    expect(parting.atomise).toBe(0);
-    expect(parting.disperse).toBe(0);
+    // Early on the lens leads: it is already travelling and the head is only
+    // starting to come apart, with nothing carried off yet.
+    const early = portraitPhases(0.4);
+    expect(early.approach).toBeGreaterThan(early.loosen);
+    expect(early.loosen).toBeGreaterThan(0);
+    expect(early.disperse).toBe(0);
 
-    // Fully apart before the surfaces begin to go.
-    expect(portraitPhases(0.4).separate).toBe(1);
-    expect(portraitPhases(0.42).atomise).toBe(0);
-
-    // Then they atomise, and the particles leave afterwards, never before.
-    const breaking = portraitPhases(0.62);
-    expect(breaking.separate).toBe(1);
-    expect(breaking.atomise).toBeGreaterThan(0);
-    expect(breaking.disperse).toBeLessThan(breaking.atomise);
-
-    const flowing = portraitPhases(0.85);
-    expect(flowing.atomise).toBeGreaterThan(flowing.disperse);
-    expect(flowing.disperse).toBeGreaterThan(0.4);
+    // Late on all three are running. Loosening finishes before the approach
+    // does, so it leads by here, and dispersal trails both throughout: a point
+    // is always released before anything carries it away.
+    const late = portraitPhases(0.75);
+    expect(late.approach).toBeGreaterThan(0);
+    expect(late.loosen).toBeGreaterThanOrEqual(late.approach);
+    expect(late.approach).toBeGreaterThan(late.disperse);
+    expect(late.disperse).toBeGreaterThan(0);
 
     const complete = portraitPhases(1);
-    expect(complete.separate).toBe(1);
-    expect(complete.atomise).toBe(1);
+    expect(complete.approach).toBe(1);
+    expect(complete.loosen).toBe(1);
     expect(complete.disperse).toBeCloseTo(1);
   });
 
-  it('assigns one shared depth per vertical pillar instead of using facial brightness', () => {
-    expect(portraitPillarDepth(0.5)).toBe(portraitPillarDepth(0.53));
-    expect(portraitPillarDepth(0.46)).not.toBe(portraitPillarDepth(0.5));
-    // Away from a seam the surface depth is the rigid pillar depth.
-    expect(portraitSurfaceDepth(0.5)).toBe(portraitPillarDepth(0.5));
-    // Inside the feathered seam it sits between the two neighbouring pillars
-    // and meets the neighbour halfway exactly at the boundary.
-    const boundary = 7 / PORTRAIT_PILLARS;
-    const left = portraitPillarDepth(boundary - PILLAR_FEATHER * 2);
-    const right = portraitPillarDepth(boundary + PILLAR_FEATHER * 2);
-    const seam = portraitSurfaceDepth(boundary + PILLAR_FEATHER * 0.25);
-    expect(seam).not.toBe(left);
-    expect(seam).not.toBe(right);
-    expect((seam - left) * (seam - right)).toBeLessThan(0);
-    expect(portraitSurfaceDepth(boundary)).toBeCloseTo((left + right) / 2, 10);
-    expect(portraitSurfaceDepth(boundary + PILLAR_FEATHER)).toBe(right);
-    expect(portraitSurfaceDepth(0)).toBe(portraitPillarDepth(0));
-    expect(portraitSurfaceDepth(1)).toBe(portraitPillarDepth(1));
-    const pixels = new Uint8ClampedArray(320 * 40 * 4);
-    for (let y = 0; y < 40; y++) for (let x = 0; x < 320; x++) {
-      const i = (y * 320 + x) * 4;
-      pixels[i + 3] = 255;
-      if (x >= 48 && x <= 270 && y >= 4 && y <= 34) {
-        pixels[i] = pixels[i + 1] = pixels[i + 2] = 150;
+  it('takes relief from the depth half of the plate, never from brightness', () => {
+    // The remap flattens everything at or behind the estimator's mid range and
+    // puts the nearest surface at 1.
+    expect(portraitRelief(0.45)).toBe(0);
+    expect(portraitRelief(0.2)).toBe(0);
+    expect(portraitRelief(1)).toBe(1);
+
+    const width = 20;
+    const height = 20;
+    const pixels = new Uint8ClampedArray(width * height * 4);
+    const depth = new Uint8ClampedArray(width * height * 4);
+    for (let y = 0; y < height; y++) {
+      for (let x = 0; x < width; x++) {
+        const i = (y * width + x) * 4;
+        // One flat tone everywhere: brightness carries no depth information.
+        pixels[i] = pixels[i + 1] = pixels[i + 2] = 180;
+        pixels[i + 3] = 255;
+        const near = x >= width / 2 ? 250 : 140;
+        depth[i] = depth[i + 1] = depth[i + 2] = near;
+        depth[i + 3] = 255;
       }
     }
-    const { depths } = samplePortrait(pixels, 320, 40);
-    expect(Math.min(...depths)).toBeGreaterThan(0);
-    expect(Math.max(...depths)).toBeLessThan(1);
-    const rigid = new Set(Array.from({ length: PORTRAIT_PILLARS }, (_, i) => Math.fround(portraitPillarDepth((i + 0.5) / PORTRAIT_PILLARS))));
-    const onPillar = depths.filter((depth) => rigid.has(depth)).length;
-    expect(new Set(depths.filter((depth) => rigid.has(depth))).size).toBeGreaterThan(6);
-    // Seams are narrow: most sampled points still sit on a rigid pillar depth.
-    expect(onPillar / depths.length).toBeGreaterThan(0.6);
-    expect(Math.max(...depths) - Math.min(...depths)).toBeGreaterThan(0.5);
+    const { positions, depths } = samplePortrait(pixels, depth, width, height);
+    expect(depths.length).toBeGreaterThan(20);
+    const left = depths.filter((_, index) => positions[index * 3] < 0);
+    const right = depths.filter((_, index) => positions[index * 3] > 0);
+    expect(left.length).toBeGreaterThan(0);
+    expect(right.length).toBeGreaterThan(0);
+    expect(new Set(left).size).toBe(1);
+    expect(new Set(right).size).toBe(1);
+    expect(left[0]).toBeLessThan(right[0]);
+    expect(left[0]).toBeCloseTo(portraitRelief(140 / 255), 5);
+    expect(right[0]).toBeCloseTo(portraitRelief(250 / 255), 5);
   });
 });
 
@@ -169,5 +165,19 @@ describe('portrait press interaction', () => {
     expect(isPortraitSurface(hero)).toBe(true);
     expect(isPortraitSurface(icon)).toBe(false);
     expect(isPortraitSurface(document.body)).toBe(false);
+  });
+});
+
+describe("portrait plate asset", () => {
+  it("ships the packed colour and depth plate the scene fetches at runtime", () => {
+    // The scene loads this from public/ with new Image(), which no build
+    // check follows, so this is the only gate that notices a missing plate.
+    expect(PORTRAIT_POINTS_SOURCE.endsWith("/portrait/portrait-source.png")).toBe(true);
+    const plate = readFileSync(resolve(process.cwd(), "public/portrait/portrait-source.png"));
+    expect(plate.subarray(1, 4).toString("ascii")).toBe("PNG");
+    expect(plate.readUInt32BE(16)).toBe(PORTRAIT_CROP.width * 2);
+    expect(plate.readUInt32BE(20)).toBe(PORTRAIT_CROP.height);
+    expect(plate[24]).toBe(8);
+    expect(plate[25]).toBe(2);
   });
 });
