@@ -64,8 +64,20 @@ export const PORTRAIT_PILLARS = 13;
 // stretches like a sheared surface instead of reading as a knife cut.
 export const PILLAR_FEATHER = 0.012;
 
-const pillarDepthAt = (pillar: number) =>
-  0.5 + Math.sin((Math.min(PORTRAIT_PILLARS - 1, Math.max(0, pillar)) + 1) * 2.17) * 0.33;
+// The pillars keep their full depth range, but they are ordered so that each
+// one sits close to its neighbours: the field sweeps from back to front across
+// the head rather than alternating. Depth used to be sin(pillar * 2.17), which
+// put 0.77 hard against 0.19, so those two columns tore apart as they
+// separated and the gap between them read as a straight vertical line. An
+// eased sweep cannot bulge the face, because the middle never comes forward
+// of both edges.
+const pillarDepthAt = (pillar: number) => {
+  const index = Math.min(PORTRAIT_PILLARS - 1, Math.max(0, pillar));
+  const t = index / (PORTRAIT_PILLARS - 1);
+  const eased = t * t * (3 - 2 * t);
+  // A slight alternation keeps the stack from reading as a mechanical ramp.
+  return 0.17 + eased * 0.66 + Math.sin(index * 2.6) * 0.018;
+};
 
 // Every point in one vertical strip shares its structural depth. The strip
 // moves as one pillar before individual points begin shedding from its surface.
