@@ -64,6 +64,7 @@ export default function PortraitScene({ motion, onReady, onUnavailable }: Props)
     let measuredFrames = 0;
     let totalFrameTime = 0;
     let ready = false;
+    let paintedFrames = 0;
     let wasPressed = false;
     const fail = () => {
       if (disposed) return;
@@ -131,8 +132,14 @@ export default function PortraitScene({ motion, onReady, onUnavailable }: Props)
       renderer.render(scene, camera);
       if (!loaded) return; // A shader error can occur synchronously in render.
       if (!ready) {
-        ready = true;
-        onReady();
+        paintedFrames++;
+        // Do not remove the loading cover in the same frame that first paints
+        // the canvas. A second complete frame gives the browser one compositor
+        // turn to promote the WebGL surface before any scroll can wake it.
+        if (paintedFrames >= 2) {
+          ready = true;
+          onReady();
+        }
       }
       // Expose a small diagnostic on the actual rendered canvas for review.
       // No per-frame React updates or particle-buffer uploads are required.
@@ -149,7 +156,8 @@ export default function PortraitScene({ motion, onReady, onUnavailable }: Props)
         resize();
         slowFrames = 0;
       }
-      if ((!state.paused && state.release > 0.001)
+      if (!ready
+        || (!state.paused && state.release > 0.001)
         || Math.abs(pressTarget - uniforms.uPress.value) > 0.001
         || Math.abs(hoverTarget - uniforms.uHover.value) > 0.001
         || uniforms.uPointer.value.distanceToSquared(pointer) > 0.00001) {

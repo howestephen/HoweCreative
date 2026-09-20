@@ -32,19 +32,23 @@ export const portraitFraming = (width: number, height: number) => {
   };
 };
 
-// The portrait holds for the first stretch of scrolling so the visitor meets
-// a whole face before anything moves. Release then spans the rest of the hero.
-export const scrollState = (y: number, height: number, workTop: number, endTop: number) => ({
+// Release begins with the first scroll and stays linear across the hero. The
+// scroll follower in PortraitExperience already damps input, so easing here as
+// well held the face together for too long before the separation became visible.
+export const scrollState = (y: number, height: number, workTop: number, endTop: number) => {
   // The window can never invert, so a layout that has not measured yet
   // (or a very short one) still reports an intact portrait at the top.
-  release: smooth(height * 0.16, Math.max(workTop - height * 0.25, height * 0.17), y),
-  // Drives the turn only. It starts on the first scroll, so the portrait
-  // answers movement before it begins to come apart.
-  approach: smooth(0, height * 0.6, y),
-  travel: smooth(workTop - height * 0.55, endTop - height * 0.7, y),
-  ending: smooth(endTop - height * 0.7, endTop + height * 0.12, y),
-  intro: 1 - smooth(height * 0.06, height * 0.45, y),
-});
+  const releaseEnd = Math.max(workTop - height * 0.25, height * 0.17, 1);
+  return {
+    release: clamp(y / releaseEnd),
+    // The turn shares the first scroll response, but retains its shorter eased
+    // window so the portrait does not snap to an angle.
+    approach: smooth(0, height * 0.6, y),
+    travel: smooth(workTop - height * 0.55, endTop - height * 0.7, y),
+    ending: smooth(endTop - height * 0.7, endTop + height * 0.12, y),
+    intro: 1 - smooth(height * 0.06, height * 0.45, y),
+  };
+};
 
 const random = (seed: number) => {
   const n = Math.sin(seed * 127.1 + 311.7) * 43758.5453123;

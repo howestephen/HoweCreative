@@ -66,9 +66,13 @@ describe("portrait source and reversible choreography", () => {
     const work = 1440;
     const end = 2400;
     expect(scrollState(0, h, work, end)).toEqual({ release: 0, approach: 0, travel: 0, ending: 0, intro: 1 });
-    // The turn answers the first scroll; the portrait still holds together.
-    expect(scrollState(h * 0.1, h, work, end).approach).toBeGreaterThan(0);
-    expect(scrollState(h * 0.1, h, work, end).release).toBe(0);
+    // Both the turn and separation answer the first scroll. The release is
+    // linear because the scroll follower already supplies the easing.
+    const firstScroll = scrollState(h * 0.1, h, work, end);
+    const secondScroll = scrollState(h * 0.2, h, work, end);
+    expect(firstScroll.approach).toBeGreaterThan(0);
+    expect(firstScroll.release).toBeGreaterThan(0);
+    expect(secondScroll.release).toBeCloseTo(firstScroll.release * 2, 6);
     expect(scrollState(work - h * 0.25, h, work, end).release).toBe(1);
     expect(scrollState(end + h * 0.12, h, work, end).ending).toBe(1);
     expect(scrollState(0, h, work, end).release).toBe(0);
