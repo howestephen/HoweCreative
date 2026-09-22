@@ -41,9 +41,6 @@ export const scrollState = (y: number, height: number, workTop: number, endTop: 
   const releaseEnd = Math.max(workTop - height * 0.25, height * 0.17, 1);
   return {
     release: clamp(y / releaseEnd),
-    // The turn shares the first scroll response, but retains its shorter eased
-    // window so the portrait does not snap to an angle.
-    approach: smooth(0, height * 0.6, y),
     travel: smooth(workTop - height * 0.55, endTop - height * 0.7, y),
     ending: smooth(endTop - height * 0.7, endTop + height * 0.12, y),
     intro: 1 - smooth(height * 0.06, height * 0.45, y),
@@ -72,12 +69,26 @@ export const portraitRelief = (raw: number) => clamp((raw - 0.45) / 0.55);
 // linear here; the shader eases each point's own flight so the field
 // interpolation spreads through the middle and late passage.
 export const portraitPhases = (progress: number) => ({
-  approach: smooth(0, 0.8, progress),
-  // Linear, not eased: progress is already eased across the hero, and easing
-  // it again held the whole head still through the first third of the scroll.
-  loosen: clamp((progress - 0.01) / 0.75),
+  // Let the point cloud begin opening before the camera moves. When both
+  // started together the intact likeness appeared to jump from a flat image
+  // into a differently framed 3D render on the first scroll.
+  approach: smooth(0.05, 0.82, progress),
+  // Linear, not eased: progress is already eased across the hero. The shorter
+  // window makes the separation legible during the first part of the scroll.
+  loosen: clamp(progress / 0.62),
   disperse: clamp((progress - 0.42) / 0.58),
 });
+
+export const portraitCamera = (release: number, travel: number, aspect: number) => {
+  // Hold the exact opening projection while the first points pull away. This
+  // prevents a change in framing from reading as a poster-to-WebGL swap.
+  const advance = smooth(0.055, 0.92, release);
+  return {
+    x: advance * (aspect > 1.1 ? 1.1 : 0.35),
+    y: -advance * 0.25 - travel * 0.18,
+    z: 6 - advance * 6.6 - travel * 0.35,
+  };
+};
 
 export const isPortraitSurface = (target: EventTarget | null) => target instanceof HTMLElement
   && Boolean(target.closest('.particle-hero'))
@@ -122,7 +133,6 @@ export const samplePortrait = (pixels: Uint8ClampedArray, depthPixels: Uint8Clam
 
 export type ParticleMotion = {
   release: number;
-  approach: number;
   travel: number;
   ending: number;
   pointerX: number;
@@ -190,8 +200,9 @@ export const vertexShader = /* glsl */ `
     // The window is wider than the spread of orders on purpose: each point
     // takes most of the passage to leave, so the head comes apart steadily
     // instead of tipping over between one scroll position and the next.
-    float order = 0.02 + aDepth * 0.10 + s * 0.10 + sin(position.y * 3.1 + aSeed.w * 4.0) * 0.03;
-    float loose = smoothstep(order, order + 0.6, uLoosen);
+    float order = aDepth * 0.06 + s * 0.07
+      + (sin(position.y * 3.1 + aSeed.w * 4.0) + 1.0) * 0.0125;
+    float loose = smoothstep(order, order + 0.42, uLoosen);
     float flight = loose * smoothstep(0.0, 1.0, uDisperse);
     // The relief is unprojected, not extruded: each point is pushed along its
     // own view ray from the opening lens, so the cloud carries true depth and
@@ -241,8 +252,13 @@ export const vertexShader = /* glsl */ `
     // but the face does travel: the whole head has to come apart as it turns,
     // not shed an outline while its middle stays put. Amplitude follows loose
     // directly, so the pull is continuous across the passage.
-    float splay = mix(1.0, 0.75, aDepth);
-    vec3 wander = (liftDirection * (0.35 + t * 0.55) + drift * 0.42 + sway) * 1.1 * uScale * loose * splay;
+    float splay = mix(1.0, 0.72, aDepth);
+    vec3 wander = (liftDirection * (0.42 + t * 0.7) + drift * 0.5 + sway) * 1.45 * uScale * loose * splay;
+    // Pull different points both in front of and behind the original surface.
+    // This depth fan is independent of the image brightness, so the face opens
+    // into a volume rather than expanding as one flat sheet.
+    float depthPull = (pow(t, 1.6) - 0.35) * 1.55 + (1.0 - aDepth) * 0.45;
+    wander.z += depthPull * uScale * loose;
     // The head turns about its own centre, so nothing slides out of a narrow
     // viewport and the total angle stays short of showing the relief edge-on.
     vec3 lifted = rotateY(surface + wander - pivot, -uTurn) + pivot;
@@ -318,19 +334,19 @@ export const vertexShader = /* glsl */ `
     float hover = exp(-pow(length(away * vec2(0.82, 1.15)) / (0.88 * uScale), 2.0) * 1.65) * uHover * interactive;
     vec3 warmRed = vec3(light * 1.08, light * 0.19, light * 0.13);
     vColour = mix(vColour, warmRed, hover * (0.3 + uPress * 0.18));
-    // The sampler lays points out on a screen-space grid, so their spacing on
-    // screen is fixed at the opening whatever their relief. Each point keeps
-    // its opening size and grows as the lens closes on it; a kept point grows
-    // again as the stipple thins, to hold the coverage the dropped ones gave up.
+    // Preserve the photographic opening, then introduce a broad, biased size
+    // range as the surface separates. Most points become fine dust, a smaller
+    // group stays mid-sized and only a few become large near-lens particles.
+    float sizeVariation = mix(0.35, 1.9, pow(t, 2.8));
+    float separatedSize = mix(1.0, sizeVariation, smoothstep(0.02, 0.5, loose));
     float portraitSize = uPixel * 6.0 / (6.0 - original.z) * grow * swell + vBlur * 3.0;
-    portraitSize *= mix(1.0, 2.4, loose * keep);
-    // The field carries only the kept points, so each one is scaled up to hold
-    // the coverage the stipple gave up, exactly as portraitSize is.
-    float emberSize = mix(mix(0.022, 0.012, far), 0.11, near) * 1250.0 / max(0.5, depth);
-    // A dropped point that has fully faded still costs fill at up to 72px in
+    portraitSize *= separatedSize * mix(1.0, 1.35 + sizeVariation * 0.55, loose * keep);
+    float emberSize = mix(mix(0.011, 0.006, far), 0.055, near)
+      * 1250.0 / max(0.5, depth) * sizeVariation;
+    // A dropped point that has fully faded still costs fill in
     // the blended pass, so once it is gone it is drawn at no size at all.
     float dropped = (1.0 - keep) * smoothstep(0.55, 0.62, loose);
-    gl_PointSize = min(72.0, mix(portraitSize, emberSize + vBlur * 8.0, smoothstep(0.0, 1.0, flight))) * uDpr * (1.0 - dropped);
+    gl_PointSize = min(56.0, mix(portraitSize, emberSize + vBlur * 5.0, smoothstep(0.0, 1.0, flight))) * uDpr * (1.0 - dropped);
     gl_Position = projectionMatrix * mv;
   }
 `;

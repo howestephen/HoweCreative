@@ -15,7 +15,8 @@
 /* The loading cover stays up through two painted WebGL frames, so the renderer
    is fully opaque and composited before it is revealed. Fading it in after
    readiness exposed a partial handoff when the visitor first scrolled. */
-.particle-renderer { opacity: 1; }
+.particle-renderer { opacity: 1; transform: translateZ(0); will-change: transform; }
+.particle-renderer canvas { backface-visibility: hidden; }
 .particle-fallback { position: absolute; inset: 0; opacity: 0; transition: opacity .35s; display: grid; place-items: center; }
 [data-motion='reduced'] .particle-fallback, [data-renderer='fallback'] .particle-fallback { opacity: var(--portrait-opacity); }
 [data-renderer='ready'] .particle-fallback { opacity: 0; }

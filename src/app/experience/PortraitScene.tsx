@@ -4,7 +4,7 @@ import {
   Points, Scene, ShaderMaterial, Vector2, Vector3, WebGLRenderer,
 } from "three";
 import {
-  fragmentShader, PORTRAIT_CROP, PORTRAIT_POINTS_SOURCE, portraitFraming, portraitPhases, samplePortrait, vertexShader,
+  fragmentShader, PORTRAIT_CROP, PORTRAIT_POINTS_SOURCE, portraitCamera, portraitFraming, portraitPhases, samplePortrait, vertexShader,
   type ParticleMotion,
 } from "./portrait-particles";
 
@@ -21,14 +21,14 @@ export default function PortraitScene({ motion, onReady, onUnavailable }: Props)
     if (!element) return;
     let renderer: WebGLRenderer;
     try {
-      renderer = new WebGLRenderer({ alpha: true, antialias: false, powerPreference: "high-performance" });
+      renderer = new WebGLRenderer({ alpha: false, antialias: false, powerPreference: "high-performance" });
     } catch {
       onUnavailable();
       return;
     }
     const canvas = renderer.domElement;
     element.appendChild(canvas);
-    renderer.setClearColor(0x060707, 0);
+    renderer.setClearColor(0x060707, 1);
     renderer.toneMapping = NoToneMapping;
     const scene = new Scene();
     const camera = new PerspectiveCamera(40, 1, 0.1, 40);
@@ -65,6 +65,7 @@ export default function PortraitScene({ motion, onReady, onUnavailable }: Props)
     let totalFrameTime = 0;
     let ready = false;
     let paintedFrames = 0;
+    let warmFrames = 0;
     let wasPressed = false;
     const fail = () => {
       if (disposed) return;
@@ -103,22 +104,17 @@ export default function PortraitScene({ motion, onReady, onUnavailable }: Props)
       // frame, so nothing can slide out of a narrow viewport, and the total
       // angle stays well short of showing the relief edge-on. The turn is what
       // makes the per-pixel relief read as parallax rather than as a flat image.
-      uniforms.uTurn.value = state.approach * 0.08 + phase.approach * 0.5;
+      uniforms.uTurn.value = phase.approach * 0.58;
       uniforms.uLoosen.value = phase.loosen;
       uniforms.uDisperse.value = phase.disperse;
       uniforms.uTravel.value = state.travel;
       uniforms.uEnding.value = state.ending;
       // One dolly through the cloud, which spans roughly z in [-0.9, 0.9] *
-      // uScale once the relief is added. The lens also tracks sideways towards
-      // the head, which sits right of the camera axis, so it passes the cheek
-      // and jaw rather than the ear. Release is already eased across the hero,
-      // so the dolly reads it directly: easing it a second time runs the lens
-      // out of travel by about four fifths of the passage and leaves the last
-      // stretch looking at an empty frame from behind the cloud.
-      const advance = state.release;
-      camera.position.z = 6 - advance * 6.6 - state.travel * 0.35;
-      camera.position.x = advance * (camera.aspect > 1.1 ? 1.1 : 0.35);
-      camera.position.y = -advance * 0.25 - state.travel * 0.18 * (1 - state.ending);
+      // uScale once the relief is added. The lens initially holds still while
+      // particles separate, then tracks sideways towards the head so it passes
+      // the cheek and jaw rather than the ear.
+      const cameraPosition = portraitCamera(state.release, state.travel * (1 - state.ending), camera.aspect);
+      camera.position.set(cameraPosition.x, cameraPosition.y, cameraPosition.z);
       uniforms.uCamera.value.copy(camera.position);
       if (!state.paused) uniforms.uTime.value += dt;
       pointer.set(state.pointerX, state.pointerY);
@@ -156,7 +152,9 @@ export default function PortraitScene({ motion, onReady, onUnavailable }: Props)
         resize();
         slowFrames = 0;
       }
+      warmFrames = Math.max(0, warmFrames - 1);
       if (!ready
+        || warmFrames > 0
         || (!state.paused && state.release > 0.001)
         || Math.abs(pressTarget - uniforms.uPress.value) > 0.001
         || Math.abs(hoverTarget - uniforms.uHover.value) > 0.001
@@ -165,6 +163,10 @@ export default function PortraitScene({ motion, onReady, onUnavailable }: Props)
       }
     };
     const wake = () => {
+      // Keep the WebGL surface active across the first wheel or touch frames.
+      // A single invalidated frame can be composited after the page has moved,
+      // which presents as a flash even though no poster is being swapped in.
+      warmFrames = Math.max(warmFrames, 4);
       if (!frame && loaded && !disposed && !document.hidden) {
         previous = 0;
         frame = requestAnimationFrame(render);
