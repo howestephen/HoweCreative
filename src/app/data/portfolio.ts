@@ -3,44 +3,15 @@ import type { ComponentType, SVGProps } from "react";
 type IconComponent = ComponentType<SVGProps<SVGSVGElement>>;
 import {
   Archive,
-  AudioLines,
-  AudioWaveform,
-  Bot,
-  Box,
   BriefcaseBusiness,
   Cpu,
-  Film,
   Fingerprint,
   House,
-  Image,
-  Layers,
   Mail,
   MapPin,
   Menu,
-  PenTool,
   Send,
-  Shapes,
-  Triangle,
-  Video,
-  WandSparkles,
-  Wrench,
 } from "lucide-react";
-import {
-  SiCss,
-  SiFigma,
-  SiGithub,
-  SiGnubash,
-  SiHtml5,
-  SiJavascript,
-  SiNextdotjs,
-  SiOpenai,
-  SiReact,
-  SiSourcetree,
-  SiTailwindcss,
-  SiThreedotjs,
-  SiTypescript,
-  SiVite,
-} from "react-icons/si";
 
 import rawContent from "../../../site-content.json";
 
@@ -75,13 +46,6 @@ export type PortfolioProject = {
   overlaySections: PortfolioSection[];
   /** Optional media gallery. Falls back to { type:"image", src: image } if omitted. */
   media?: ProjectMediaItem[];
-};
-
-export type PortfolioTool = {
-  name: string;
-  icon: IconComponent;
-  color: string;
-  category: string;
 };
 
 export type ArchiveEntry = {
@@ -138,20 +102,7 @@ const content = rawContent as {
     files: Array<{ fileLabel: string; title: string; body: string }>;
   };
   caseStudies: {
-    eyebrow: string;
-    title: string;
-    description: string;
-    openFileLabel: string;
-    closeLabel: string;
-    sectionsLabel: string;
-    metaLabels: { role: string; client: string; status: string };
     projects: Array<PortfolioProject & { media?: ProjectMediaItem[] }>;
-  };
-  toolsSkills: {
-    eyebrow: string;
-    title: string;
-    description: string;
-    items: Array<{ name: string; icon: string; color: string; category: string }>;
   };
   contact: {
     eyebrow: string;
@@ -182,38 +133,6 @@ const content = rawContent as {
     statusLabel: string;
     iconTitles: { linkedin: string; github: string; dribbble: string };
   };
-};
-
-const toolIconMap: Record<string, IconComponent> = {
-  // Lucide - used as brand fallbacks
-  AudioLines,     // Ableton Live
-  AudioWaveform,  // Serum
-  Bot,
-  Box,
-  Film,           // After Effects
-  Image,          // Photoshop
-  Layers,         // Adobe Animate
-  PenTool,        // Illustrator
-  Shapes,         // FigJam
-  Triangle,       // Redshift
-  Video,          // Premiere Pro
-  WandSparkles,
-  Wrench,
-  // Simple Icons
-  SiCss,
-  SiFigma,
-  SiGithub,
-  SiGnubash,
-  SiHtml5,
-  SiJavascript,
-  SiNextdotjs,
-  SiOpenai,
-  SiReact,
-  SiSourcetree,
-  SiTailwindcss,
-  SiThreedotjs,
-  SiTypescript,
-  SiVite,
 };
 
 const navIconMap: Record<string, IconComponent> = {
@@ -247,8 +166,6 @@ export const siteProfile = {
 
 export const heroContent = content.hero;
 export const operatorProfileContent = content.operatorProfile;
-export const caseStudiesContent = content.caseStudies;
-export const toolsSkillsContent = content.toolsSkills;
 export const contactContent = content.contact;
 export const archiveContent = content.archive;
 export const footerContent = content.footer;
@@ -263,27 +180,5 @@ export const navItems: NavItem[] = content.navigation.items.map((item, index) =>
 
 export const portfolioProjects: PortfolioProject[] = content.caseStudies.projects;
 
-export const portfolioTools: PortfolioTool[] = content.toolsSkills.items.map((tool) => ({
-  name: tool.name,
-  icon: toolIconMap[tool.icon] ?? Wrench,
-  color: tool.color,
-  category: tool.category,
-}));
-
 export const archiveEntries: ArchiveEntry[] = content.archive.entries;
 export const archiveTools = content.archive.tools as readonly string[];
-
-// Map tag names (including aliases) to toolkit icons & colours
-const tagAliases: Record<string, string> = {
-  "Adobe Illustrator": "Illustrator",
-  "Adobe Photoshop": "Photoshop",
-};
-
-export const tagToolLookup: Record<string, { icon: IconComponent; color: string }> = {};
-for (const tool of portfolioTools) {
-  tagToolLookup[tool.name] = { icon: tool.icon, color: tool.color };
-}
-for (const [alias, canonical] of Object.entries(tagAliases)) {
-  const tool = tagToolLookup[canonical];
-  if (tool) tagToolLookup[alias] = tool;
-}
