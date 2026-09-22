@@ -68,21 +68,24 @@ export const portraitRelief = (raw: number) => clamp((raw - 0.45) / 0.55);
 // field. Disperse stays
 // linear here; the shader eases each point's own flight so the field
 // interpolation spreads through the middle and late passage.
-export const portraitPhases = (progress: number) => ({
-  // Let the point cloud begin opening before the camera moves. When both
-  // started together the intact likeness appeared to jump from a flat image
-  // into a differently framed 3D render on the first scroll.
-  approach: smooth(0.05, 0.82, progress),
-  // Linear, not eased: progress is already eased across the hero. The shorter
-  // window makes the separation legible during the first part of the scroll.
-  loosen: clamp(progress / 0.62),
-  disperse: clamp((progress - 0.42) / 0.58),
-});
+export const portraitPhases = (progress: number) => {
+  const disperse = clamp((progress - 0.42) / 0.58);
+  return {
+    // Linear, not eased: progress is already eased across the hero. The shorter
+    // window makes the separation legible during the first part of the scroll.
+    loosen: clamp(progress / 0.62),
+    disperse,
+    // Rotation belongs to the travel through the released cloud, not the
+    // opening portrait. Starting it while the likeness was still coherent
+    // produced the cross-browser flicker and zoom-to-a-point effect.
+    turn: smooth(0.05, 0.8, disperse),
+  };
+};
 
-export const portraitCamera = (release: number, travel: number, aspect: number) => {
-  // Hold the exact opening projection while the first points pull away. This
-  // prevents a change in framing from reading as a poster-to-WebGL swap.
-  const advance = smooth(0.055, 0.92, release);
+export const portraitCamera = (disperse: number, travel: number, aspect: number) => {
+  // Camera travel is driven by the field transition. The whole separation
+  // phase therefore uses one fixed projection with no hidden zoom threshold.
+  const advance = smooth(0, 1, disperse);
   return {
     x: advance * (aspect > 1.1 ? 1.1 : 0.35),
     y: -advance * 0.25 - travel * 0.18,
