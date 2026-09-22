@@ -38,7 +38,10 @@ export const portraitFraming = (width: number, height: number) => {
 export const scrollState = (y: number, height: number, workTop: number, endTop: number) => {
   // The window can never invert, so a layout that has not measured yet
   // (or a very short one) still reports an intact portrait at the top.
-  const releaseEnd = Math.max(workTop - height * 0.25, height * 0.17, 1);
+  // Finish the portrait exactly as the first work row begins entering the
+  // viewport. The previous quarter-screen allowance left a long empty passage
+  // after the cloud had thinned but before any case-study content was visible.
+  const releaseEnd = Math.max(workTop - height * 0.6, height * 0.17, 1);
   return {
     release: clamp(y / releaseEnd),
     travel: smooth(workTop - height * 0.55, endTop - height * 0.7, y),
@@ -69,27 +72,26 @@ export const portraitRelief = (raw: number) => clamp((raw - 0.45) / 0.55);
 // linear here; the shader eases each point's own flight so the field
 // interpolation spreads through the middle and late passage.
 export const portraitPhases = (progress: number) => {
-  const disperse = clamp((progress - 0.42) / 0.58);
+  const disperse = smooth(0, 1, progress);
   return {
-    // Linear, not eased: progress is already eased across the hero. The shorter
-    // window makes the separation legible during the first part of the scroll.
-    loosen: clamp(progress / 0.62),
+    // The surface begins opening on the first scroll. Dispersal overlaps it
+    // almost immediately, so there is no separate stipple state that can flash
+    // into view before the three-dimensional movement begins.
+    loosen: smooth(0, 0.85, progress),
     disperse,
-    // Rotation belongs to the travel through the released cloud, not the
-    // opening portrait. Starting it while the likeness was still coherent
-    // produced the cross-browser flicker and zoom-to-a-point effect.
-    turn: smooth(0.05, 0.8, disperse),
+    turn: smooth(0.04, 0.9, disperse),
   };
 };
 
 export const portraitCamera = (disperse: number, travel: number, aspect: number) => {
-  // Camera travel is driven by the field transition. The whole separation
-  // phase therefore uses one fixed projection with no hidden zoom threshold.
+  // The depth comes from the particles, not from driving the lens through the
+  // cloud. Keeping the dolly shallow prevents the field collapsing into a
+  // single enlarged point on both desktop and mobile GPUs.
   const advance = smooth(0, 1, disperse);
   return {
-    x: advance * (aspect > 1.1 ? 1.1 : 0.35),
-    y: -advance * 0.25 - travel * 0.18,
-    z: 6 - advance * 6.6 - travel * 0.35,
+    x: advance * (aspect > 1.1 ? 0.48 : 0.2),
+    y: -advance * 0.1 - travel * 0.1,
+    z: 6 - advance * 0.75 - travel * 0.15,
   };
 };
 
@@ -205,7 +207,11 @@ export const vertexShader = /* glsl */ `
     // instead of tipping over between one scroll position and the next.
     float order = aDepth * 0.06 + s * 0.07
       + (sin(position.y * 3.1 + aSeed.w * 4.0) + 1.0) * 0.0125;
-    float loose = smoothstep(order, order + 0.42, uLoosen);
+    // Ordering remains visible across the surface, but it may shift the start
+    // by only a small fraction of the passage. The previous full order value
+    // kept most points still, then released them together as scroll crossed a
+    // hidden threshold.
+    float loose = smoothstep(0.0, 0.78, max(0.0, uLoosen - order * 0.12));
     float flight = loose * smoothstep(0.0, 1.0, uDisperse);
     // The relief is unprojected, not extruded: each point is pushed along its
     // own view ray from the opening lens, so the cloud carries true depth and
@@ -252,9 +258,8 @@ export const vertexShader = /* glsl */ `
     );
     // A point that has not loosened sits exactly on the relief surface. Hair
     // and the back of the head travel furthest, the features a little less,
-    // but the face does travel: the whole head has to come apart as it turns,
-    // not shed an outline while its middle stays put. Amplitude follows loose
-    // directly, so the pull is continuous across the passage.
+    // but the face does travel. Position changes continuously from the first
+    // scroll while size and opacity remain stable until flight is established.
     float splay = mix(1.0, 0.72, aDepth);
     vec3 wander = (liftDirection * (0.42 + t * 0.7) + drift * 0.5 + sway) * 1.45 * uScale * loose * splay;
     // Pull different points both in front of and behind the original surface.
@@ -324,11 +329,13 @@ export const vertexShader = /* glsl */ `
     // Close to the lens a point is past the focal plane: it grows, softens and
     // goes out rather than popping as it passes the camera.
     vBlur = max(vBlur, 1.0 - smoothstep(0.4, 1.6, depth));
-    // A point the stipple drops fades out as it loosens; a kept point holds
-    // full opacity through the loosening and leaves as an ember.
-    float held = mix(1.0 - smoothstep(0.05, 0.6, loose), 1.0, keep);
+    // Keep the full cloud visible throughout the portrait passage. Thinning is
+    // part of the handoff to the work section, not an early flash between the
+    // opening portrait and the dispersed field.
+    float thinning = smoothstep(0.04, 0.72, uTravel);
+    float cloudAlpha = mix(0.97, 0.48 + r * 0.42, smoothstep(0.08, 0.82, flight));
     float emberAlpha = keep * mix(0.72, 0.42, near) * (0.4 + r * 0.6) * mix(1.0, 0.55, far);
-    vOpacity = mix(0.97 * held, emberAlpha, smoothstep(0.0, 0.45, flight)) * smoothstep(0.12, 0.7, depth);
+    vOpacity = mix(cloudAlpha, emberAlpha, thinning) * smoothstep(0.12, 0.7, depth);
     vOpacity *= mix(1.0, 0.46, uEnding);
     vec3 silver = vec3(0.66, 0.69, 0.71);
     vec3 warm = vec3(0.86, 0.79, 0.68);
@@ -340,16 +347,22 @@ export const vertexShader = /* glsl */ `
     // Preserve the photographic opening, then introduce a broad, biased size
     // range as the surface separates. Most points become fine dust, a smaller
     // group stays mid-sized and only a few become large near-lens particles.
-    float sizeVariation = mix(0.35, 1.9, pow(t, 2.8));
-    float separatedSize = mix(1.0, sizeVariation, smoothstep(0.02, 0.5, loose));
+    // Deliberate small, medium and large populations make the depth layers
+    // legible without enlarging the whole cloud together.
+    float sizeVariation = scatter < 0.72
+      ? mix(0.24, 0.62, scatter / 0.72)
+      : (scatter < 0.95
+        ? mix(0.85, 1.55, (scatter - 0.72) / 0.23)
+        : mix(2.0, 3.1, (scatter - 0.95) / 0.05));
+    float separatedSize = mix(1.0, sizeVariation, smoothstep(0.08, 0.78, flight));
     float portraitSize = uPixel * 6.0 / (6.0 - original.z) * grow * swell + vBlur * 3.0;
-    portraitSize *= separatedSize * mix(1.0, 1.35 + sizeVariation * 0.55, loose * keep);
-    float emberSize = mix(mix(0.011, 0.006, far), 0.055, near)
+    portraitSize *= separatedSize;
+    float emberSize = mix(mix(0.008, 0.004, far), 0.036, near)
       * 1250.0 / max(0.5, depth) * sizeVariation;
-    // A dropped point that has fully faded still costs fill in
-    // the blended pass, so once it is gone it is drawn at no size at all.
-    float dropped = (1.0 - keep) * smoothstep(0.55, 0.62, loose);
-    gl_PointSize = min(56.0, mix(portraitSize, emberSize + vBlur * 5.0, smoothstep(0.0, 1.0, flight))) * uDpr * (1.0 - dropped);
+    // Cull dropped points only while the work is arriving. Before that they
+    // remain part of the visible volume, closing the old empty handoff gap.
+    float dropped = (1.0 - keep) * smoothstep(0.04, 0.72, uTravel);
+    gl_PointSize = min(48.0, mix(portraitSize, emberSize + vBlur * 3.5, smoothstep(0.0, 1.0, flight))) * uDpr * (1.0 - dropped);
     gl_Position = projectionMatrix * mv;
   }
 `;
