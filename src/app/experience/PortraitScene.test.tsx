@@ -2,6 +2,7 @@ import { act, cleanup, render } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import type { Scene, ShaderMaterial } from "three";
 import { readFileSync } from "node:fs";
+import { createHash } from "node:crypto";
 import { resolve } from "node:path";
 import { acceptsPortraitPress, isPortraitSurface, PORTRAIT_CROP, PORTRAIT_POINTS_SOURCE, portraitCamera, portraitFraming, portraitPhases, portraitRelief, samplePortrait, scrollState, vertexShader } from "./portrait-particles";
 import PortraitScene from "./PortraitScene";
@@ -157,6 +158,19 @@ it("reports unavailable WebGL without leaving a blank canvas attached", () => {
 });
 
 describe("portrait source and reversible choreography", () => {
+  it("preserves the accepted hero and work shader outside the isolated closing form", () => {
+    const closing = / {4}\/\/ The closing form[\s\S]*?(?= {4}\/\/ Only a held press)/;
+    const block = vertexShader.match(closing)?.[0];
+    expect(block).toBeDefined();
+    expect(block).toContain("if (uEnding > 0.0)");
+    expect(block).toContain("p = mix(p, ending, uEnding);");
+    // Baseline from f6067a8, whose first-scroll flicker was confirmed resolved.
+    // A change anywhere in the opening, flight, sizing, colour or interaction
+    // shader must fail this guard, not silently accompany a closing redesign.
+    expect(createHash("sha256").update(vertexShader.replace(closing, "")).digest("hex"))
+      .toBe("174131397f0badbd706a25128c744c0c74afd9acd1e8051fbfc54d1ea2b52219");
+  });
+
   it.each([[320, 900], [390, 844], [768, 1024]])("fits the physical head on a %i by %i viewport", (width, height) => {
     const { pixelHeight, pixelOffset } = portraitFraming(width, height);
     const pixelWidth = pixelHeight * 700 / 650;
