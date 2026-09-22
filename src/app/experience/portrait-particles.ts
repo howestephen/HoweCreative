@@ -102,6 +102,12 @@ export const isPortraitSurface = (target: EventTarget | null) => target instance
 export const acceptsPortraitPress = (pointerType: string, button: number, release: number, paused: boolean) =>
   pointerType === 'mouse' && button === 0 && release < 0.18 && !paused;
 
+// Match the sRGB plate, including its shadow toe. A plain power of 2.2
+// crushed the neck's dark tones before the shader converted back to sRGB.
+export const portraitLinearColour = (value: number) => value <= 0.04045
+  ? value / 12.92
+  : Math.pow((value + 0.055) / 1.055, 2.4);
+
 export const samplePortrait = (pixels: Uint8ClampedArray, depthPixels: Uint8ClampedArray, width: number, height: number) => {
   const positions: number[] = [];
   const colours: number[] = [];
@@ -122,9 +128,9 @@ export const samplePortrait = (pixels: Uint8ClampedArray, depthPixels: Uint8Clam
       const py = (0.5 - v + (random(seed + 2) - 0.5) / height * 0.65) * 4.6;
       positions.push(px, py, 0);
       colours.push(
-        Math.pow(pixels[i] / 255, 2.2) * edge,
-        Math.pow(pixels[i + 1] / 255, 2.2) * edge,
-        Math.pow(pixels[i + 2] / 255, 2.2) * edge,
+        portraitLinearColour(pixels[i] / 255) * edge,
+        portraitLinearColour(pixels[i + 1] / 255) * edge,
+        portraitLinearColour(pixels[i + 2] / 255) * edge,
       );
       seeds.push(r, random(seed + 17), random(seed + 71), u);
       // Depth is read from the matching pixel of the depth half, never from
@@ -293,33 +299,35 @@ export const vertexShader = /* glsl */ `
     vec3 p = retained * retained * lifted
       + 2.0 * retained * flight * control
       + flight * flight * field;
-    // The closing form is independent of the accepted opening and work field.
-    // In particular, r determines which particles survive. Using r as the
-    // old ring's angle removed entire sectors rather than thinning the ring.
-    if (uEnding > 0.0) {
-      // Use the existing CPU-generated seeds for spatial placement.
-      // A large-multiplier GPU sine hash quantised along into visible columns.
-      float along = s;
-      float across = t * 2.0 - 1.0;
-      float grain = hash2(aSeed.yz + vec2(8.4, 23.6)) * 2.0 - 1.0;
-      float sweep = along * 2.0 - 1.0;
-      float taper = pow(max(0.0, sin(along * 3.14159265359)), 0.7);
-      float twist = along * TAU * 1.25 + uTime * 0.14;
-      // One open, folded ribbon. Fine strands turn towards and away from the
-      // lens, with a quiet centre below for the contact heading and links.
-      float strand = across * (0.12 + 0.14 * taper) * taper;
-      float wave = sin(sweep * 3.4 + uTime * 0.12);
-      vec3 ending = vec3(
-        sweep * min(3.7, uAspect * 2.0),
-        1.15 + wave * 0.20 + strand * cos(twist),
-        sin(sweep * 2.2 - 0.4) * 1.15 + strand * sin(twist) * 2.2 + grain * 0.09
+    // The closing form and travelling volume begin only after the breakup.
+    // s, not the survival seed r, covers the complete circular path. These
+    // positions live in world space: no camera-following offset or projection
+    // cancellation, so the near and far sides really pass through depth.
+    float volume = smoothstep(0.0, 0.65, uTravel);
+    if (uTravel > 0.0 || uEnding > 0.0) {
+      float orbit = s * TAU + uTime * 0.16 + uTravel * 1.6;
+      float crossSection = fract(s * 73.13 + t * 29.7) * TAU;
+      float widthFit = min(1.0, uAspect * 0.75);
+      float radius = 1.55 + t * 0.38;
+      radius += sin(orbit * 3.0 - uTime * 0.23) * 0.14;
+      float tube = 0.12 + 0.24 * (1.0 - uEnding);
+      vec3 circular = vec3(
+        cos(orbit) * (radius + cos(crossSection) * tube),
+        sin(orbit) * (radius + cos(crossSection) * tube),
+        sin(crossSection) * tube
       );
-      // Keep both tapered tips within the viewport while the ribbon folds
-      // through depth. Projected placement and optical particle size are
-      // separate, so a near fold cannot crop off one side of the sculpture.
-      ending.xy *= (6.0 - ending.z) / 6.0;
-      ending += lens;
-      p = mix(p, ending, uEnding);
+      // Tilt the loop as a volume, not a flattened screen-space ellipse.
+      float tilt = 0.66 + sin(uTime * 0.07) * 0.10;
+      circular.yz = mat2(cos(tilt), sin(tilt), -sin(tilt), cos(tilt)) * circular.yz;
+      circular = rotateY(circular, -0.24 + sin(uTime * 0.05) * 0.12);
+      circular.x *= widthFit;
+      circular.y *= mix(0.62, 1.0, smoothstep(0.55, 1.1, uAspect));
+      circular.xy += vec2(uAspect > 1.1 ? 0.48 : 0.2, -0.4);
+      vec3 stream = circular;
+      stream.z += (t - 0.5) * 4.2;
+      stream.y += sin(s * TAU * 2.0 + uTime * 0.19) * 0.55 - uTravel * 0.65;
+      p = mix(p, stream, volume);
+      p = mix(p, circular, uEnding);
     }
     // Only a held press parts the points. Passive hover changes colour only.
     p.x += uPointer.x * (p.z + 0.3) * 0.11 * flight;
@@ -358,7 +366,7 @@ export const vertexShader = /* glsl */ `
     vec3 silver = vec3(0.66, 0.69, 0.71);
     vec3 warm = vec3(0.86, 0.79, 0.68);
     vec3 ember = mix(silver, warm, near * 0.6) * (0.42 + light * 0.9 + r * 0.25);
-    vColour = mix(aColour * 1.08, ember, smoothstep(0.1, 0.9, flight));
+    vColour = mix(aColour, ember, smoothstep(0.1, 0.9, flight));
     float hover = exp(-pow(length(away * vec2(0.82, 1.15)) / (0.88 * uScale), 2.0) * 1.65) * uHover * interactive;
     vec3 warmRed = vec3(light * 1.08, light * 0.19, light * 0.13);
     vColour = mix(vColour, warmRed, hover * (0.3 + uPress * 0.18));
@@ -381,6 +389,15 @@ export const vertexShader = /* glsl */ `
     // remain part of the visible volume, closing the old empty handoff gap.
     float dropped = (1.0 - keep) * smoothstep(0.04, 0.72, uTravel);
     gl_PointSize = min(48.0, mix(portraitSize, emberSize + vBlur * 3.5, smoothstep(0.0, 1.0, flight))) * uDpr * (1.0 - dropped);
+    // Optical size and softness follow actual distance in the late volume,
+    // rather than a random near/far label inherited from the portrait.
+    if (volume > 0.0) {
+      float lensNear = 1.0 - smoothstep(2.0, 6.0, depth);
+      float opticalSize = (1.9 + lensNear * 2.2) * sizeVariation * 5.5 / max(0.7, depth);
+      float opticalBlur = smoothstep(0.8, 3.8, abs(depth - 5.0));
+      vBlur = mix(vBlur, opticalBlur, volume);
+      gl_PointSize = mix(gl_PointSize, min(30.0, opticalSize + opticalBlur * 4.0) * uDpr * (1.0 - dropped), volume);
+    }
     gl_Position = projectionMatrix * mv;
   }
 `;

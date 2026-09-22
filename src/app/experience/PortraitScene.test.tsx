@@ -1,10 +1,10 @@
 import { act, cleanup, render } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import type { Scene, ShaderMaterial } from "three";
+import { Color, SRGBColorSpace, type Scene, type ShaderMaterial } from "three";
 import { readFileSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { resolve } from "node:path";
-import { acceptsPortraitPress, isPortraitSurface, PORTRAIT_CROP, PORTRAIT_POINTS_SOURCE, portraitCamera, portraitFraming, portraitPhases, portraitRelief, samplePortrait, scrollState, vertexShader } from "./portrait-particles";
+import { acceptsPortraitPress, isPortraitSurface, PORTRAIT_CROP, PORTRAIT_POINTS_SOURCE, portraitCamera, portraitFraming, portraitLinearColour, portraitPhases, portraitRelief, samplePortrait, scrollState, vertexShader } from "./portrait-particles";
 import PortraitScene from "./PortraitScene";
 
 const rendererFactory = vi.hoisted(() => vi.fn());
@@ -158,17 +158,49 @@ it("reports unavailable WebGL without leaving a blank canvas attached", () => {
 });
 
 describe("portrait source and reversible choreography", () => {
-  it("preserves the accepted hero and work shader outside the isolated closing form", () => {
+  it("preserves accepted hero motion outside the requested late-volume and colour corrections", () => {
     const closing = / {4}\/\/ The closing form[\s\S]*?(?= {4}\/\/ Only a held press)/;
     const block = vertexShader.match(closing)?.[0];
     expect(block).toBeDefined();
-    expect(block).toContain("if (uEnding > 0.0)");
-    expect(block).toContain("p = mix(p, ending, uEnding);");
+    expect(block).toContain("if (uTravel > 0.0 || uEnding > 0.0)");
+    expect(block).toContain("p = mix(p, circular, uEnding);");
     // Baseline from f6067a8, whose first-scroll flicker was confirmed resolved.
-    // A change anywhere in the opening, flight, sizing, colour or interaction
-    // shader must fail this guard, not silently accompany a closing redesign.
-    expect(createHash("sha256").update(vertexShader.replace(closing, "")).digest("hex"))
+    // The user subsequently requested colour fidelity and late-volume depth.
+    // Exclude only those explicit edits; retain the accepted hash for every
+    // opening position, breakup, timing and interaction calculation.
+    const hero = vertexShader.replace(closing, "")
+      .replace(/ {4}\/\/ Optical size[\s\S]*?(?= {4}gl_Position)/, "")
+      .replace("mix(aColour, ember", "mix(aColour * 1.08, ember");
+    expect(createHash("sha256").update(hero).digest("hex"))
       .toBe("174131397f0badbd706a25128c744c0c74afd9acd1e8051fbfc54d1ea2b52219");
+  });
+
+  it.each([0, 8, 16, 32, 64, 128, 255])("preserves sRGB tone %i instead of crushing the portrait shadows", (byte) => {
+    const value = byte / 255;
+    const reference = new Color().setRGB(value, value, value, SRGBColorSpace);
+    expect(portraitLinearColour(value)).toBeCloseTo(reference.r, 7);
+  });
+
+  it("applies shadow-preserving conversion to the actual uploaded portrait colours", () => {
+    const pixels = new Uint8ClampedArray(20 * 20 * 4).fill(16);
+    for (let i = 3; i < pixels.length; i += 4) pixels[i] = 255;
+    const depth = new Uint8ClampedArray(20 * 20 * 4).fill(180);
+    const sampled = samplePortrait(pixels, depth, 20, 20);
+    const expected = new Color().setRGB(16 / 255, 16 / 255, 16 / 255, SRGBColorSpace).r;
+    for (const channel of [0, 1, 2]) {
+      const peak = Math.max(...sampled.colours.filter((_value, index) => index % 3 === channel));
+      expect(peak).toBeCloseTo(expected, 7);
+      expect(peak).toBeGreaterThan(Math.pow(16 / 255, 2.2));
+    }
+  });
+
+  it("starts the new travelling volume only after the hero release has completed", () => {
+    for (const [height, work, end] of [[720, 1224, 2165], [844, 1477, 3500]]) {
+      for (let y = 0; y <= end; y += 1) {
+        const state = scrollState(y, height, work, end);
+        if (state.travel > 0 || state.ending > 0) expect(state.release).toBe(1);
+      }
+    }
   });
 
   it.each([[320, 900], [390, 844], [768, 1024]])("fits the physical head on a %i by %i viewport", (width, height) => {

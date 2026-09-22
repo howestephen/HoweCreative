@@ -98,7 +98,7 @@ export default function PortraitScene({ motion, onReady, onUnavailable }: Props)
       // Fit the physical head (source u=0.29..0.99) on tall, narrow screens.
       // The peripheral constellation may extend off-screen; the face may not.
       uniforms.uScale.value = framing.scale;
-      uniforms.uPixel.value = Math.max(1.25, framing.pixelHeight / sampleHeight * 1.55);
+      uniforms.uPixel.value = Math.max(1.25, framing.pixelHeight / sampleHeight * 1.8);
       return true;
     };
     const render = (now: number) => {
