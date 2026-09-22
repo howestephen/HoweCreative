@@ -31,6 +31,46 @@ beforeEach(() => {
 afterEach(() => { cleanup(); vi.useRealTimers(); vi.restoreAllMocks(); vi.unstubAllGlobals(); });
 
 describe("portrait review experience", () => {
+  it("keeps scroll progress stable through browser-bar resize and aligns the background fade to the real footer", async () => {
+    const callbacks = new Map<number, FrameRequestCallback>();
+    let nextId = 0;
+    vi.stubGlobal("requestAnimationFrame", (cb: FrameRequestCallback) => { callbacks.set(++nextId, cb); return nextId; });
+    vi.stubGlobal("cancelAnimationFrame", (id: number) => callbacks.delete(id));
+    vi.spyOn(HTMLElement.prototype, "clientHeight", "get").mockImplementation(function(this: HTMLElement) {
+      return this.classList.contains("particle-hero-inner") ? 700 : 844;
+    });
+    vi.spyOn(HTMLElement.prototype, "offsetTop", "get").mockImplementation(function(this: HTMLElement) {
+      if (this.classList.contains("spatial-work")) return 1190;
+      if (this.classList.contains("particle-ending")) return 2500;
+      if (this.classList.contains("particle-contact-section")) return 3400;
+      return 0;
+    });
+    const scrollPosition = vi.spyOn(window, "scrollY", "get").mockReturnValue(120);
+    const viewportHeight = vi.spyOn(window, "innerHeight", "get").mockReturnValue(700);
+    const { container } = mount();
+    const tick = async () => {
+      const pending = [...callbacks.values()]; callbacks.clear();
+      await act(async () => pending.forEach(cb => cb(100)));
+    };
+    await tick();
+    const before = sceneState.current?.release;
+    expect(before).toBeCloseTo(120 / (1190 - 700 * 0.6));
+    viewportHeight.mockReturnValue(844);
+    fireEvent.resize(window);
+    await tick();
+    expect(sceneState.current?.release).toBe(before);
+    expect(container.querySelector<HTMLElement>(".particle-experience")?.style.getPropertyValue("--contact-top")).toBe("3280px");
+    scrollPosition.mockReturnValue(3100);
+    fireEvent.scroll(window);
+    await tick();
+    expect(container.querySelector<HTMLElement>(".particle-experience")?.style.getPropertyValue("--contact-top")).toBe("300px");
+    expect(container.querySelector<HTMLElement>(".particle-tools")?.inert).toBe(true);
+    scrollPosition.mockReturnValue(0);
+    fireEvent.scroll(window);
+    await tick();
+    expect(container.querySelector<HTMLElement>(".particle-tools")?.inert).toBe(false);
+  });
+
   it("separates the hero and six-card collection structurally and preserves the archive link", () => {
     mount();
     const hero = screen.getByRole("region", { name: "Stephen Howe, creative technologist" });

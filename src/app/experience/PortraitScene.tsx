@@ -43,12 +43,10 @@ export default function PortraitScene({ motion, onReady, onUnavailable }: Props)
     };
     const material = new ShaderMaterial({
       uniforms, vertexShader, fragmentShader, transparent: true,
-      depthWrite: false, depthTest: true,
+      // A translucent cloud, not an opaque surface. Depth-writing cores made
+      // neighbouring samples switch occlusion as soon as the relief moved.
+      depthWrite: false, depthTest: false,
     });
-    const cores = new ShaderMaterial({ uniforms, vertexShader, fragmentShader, defines: { CORE_PASS: "" }, depthWrite: true, depthTest: true });
-    const corePoints = new Points(geometry, cores);
-    corePoints.frustumCulled = false;
-    scene.add(corePoints);
     const points = new Points(geometry, material);
     points.renderOrder = 1;
     const pointer = new Vector2();
@@ -67,6 +65,10 @@ export default function PortraitScene({ motion, onReady, onUnavailable }: Props)
     let paintedFrames = 0;
     let warmFrames = 0;
     let wasPressed = false;
+    let sizeDirty = true;
+    let drawnWidth = 0;
+    let drawnHeight = 0;
+    let drawnRatio = 0;
     const fail = () => {
       if (disposed) return;
       loaded = false;
@@ -74,12 +76,20 @@ export default function PortraitScene({ motion, onReady, onUnavailable }: Props)
       onUnavailable();
     };
     renderer.debug.onShaderError = () => fail();
-    const resize = () => {
+    const applySize = () => {
+      if (!sizeDirty) return true;
       const { width, height } = element.getBoundingClientRect();
-      if (!width || !height) return;
+      if (!width || !height) return false;
+      sizeDirty = false;
       const ratio = Math.min(window.devicePixelRatio || 1, quality);
-      renderer.setPixelRatio(ratio);
-      renderer.setSize(width, height, false);
+      // Three clears the drawing buffer even for an unchanged setSize call.
+      // Allocate only when necessary, and only immediately BEFORE painting.
+      if (width !== drawnWidth || height !== drawnHeight || ratio !== drawnRatio) {
+        renderer.setDrawingBufferSize(width, height, ratio);
+        drawnWidth = width;
+        drawnHeight = height;
+        drawnRatio = ratio;
+      }
       camera.aspect = width / height;
       camera.updateProjectionMatrix();
       const framing = portraitFraming(width, height);
@@ -89,7 +99,7 @@ export default function PortraitScene({ motion, onReady, onUnavailable }: Props)
       // The peripheral constellation may extend off-screen; the face may not.
       uniforms.uScale.value = framing.scale;
       uniforms.uPixel.value = Math.max(1.25, framing.pixelHeight / sampleHeight * 1.55);
-      wake();
+      return true;
     };
     const render = (now: number) => {
       frame = 0;
@@ -97,6 +107,13 @@ export default function PortraitScene({ motion, onReady, onUnavailable }: Props)
       const elapsed = previous ? (now - previous) / 1000 : 0;
       const dt = Math.min(elapsed, 0.05);
       previous = now;
+      slowFrames = dt > 0.032 ? slowFrames + 1 : Math.max(0, slowFrames - 1);
+      if (slowFrames > 45 && quality > 1) {
+        quality = 1;
+        sizeDirty = true;
+        slowFrames = 0;
+      }
+      if (!applySize()) return; // Wait for a measurable ResizeObserver update.
       const state = motion.current;
       uniforms.uRelease.value = state.release;
       const phase = portraitPhases(state.release);
@@ -146,12 +163,6 @@ export default function PortraitScene({ motion, onReady, onUnavailable }: Props)
         measuredFrames = 0;
         totalFrameTime = 0;
       }
-      slowFrames = dt > 0.032 ? slowFrames + 1 : Math.max(0, slowFrames - 1);
-      if (slowFrames > 45 && quality > 1) {
-        quality = 1;
-        resize();
-        slowFrames = 0;
-      }
       warmFrames = Math.max(0, warmFrames - 1);
       if (!ready
         || warmFrames > 0
@@ -171,6 +182,13 @@ export default function PortraitScene({ motion, onReady, onUnavailable }: Props)
         previous = 0;
         frame = requestAnimationFrame(render);
       }
+    };
+    const resize = () => {
+      const { width, height } = element.getBoundingClientRect();
+      if (!sizeDirty && width === drawnWidth && height === drawnHeight
+        && Math.min(window.devicePixelRatio || 1, quality) === drawnRatio) return;
+      sizeDirty = true;
+      wake();
     };
     motion.current.invalidate = wake;
     const visibility = () => {
@@ -233,7 +251,6 @@ export default function PortraitScene({ motion, onReady, onUnavailable }: Props)
       canvas.removeEventListener("webglcontextlost", contextLost);
       geometry.dispose();
       material.dispose();
-      cores.dispose();
       if (motion.current.invalidate === wake) delete motion.current.invalidate;
       renderer.dispose();
       renderer.forceContextLoss();
