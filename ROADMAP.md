@@ -48,6 +48,11 @@ behaviour, and conversion paths are approved.
    design is approved, so rollback remains simple.
 7. Merge the approved branch to `main` and validate the production deployment.
 
+## Production Maintenance
+
+- ✓ Added Google Search Console HTML ownership verification to the canonical
+  production homepage.
+
 ## Acceptance Criteria
 
 - A first-time visitor can answer who Stephen is, what he does, what proves it,
