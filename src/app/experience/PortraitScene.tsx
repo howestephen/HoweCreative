@@ -104,7 +104,7 @@ export default function PortraitScene({ motion, onReady, onUnavailable }: Props)
       // frame, so nothing can slide out of a narrow viewport, and the total
       // angle stays well short of showing the relief edge-on. The turn is what
       // makes the per-pixel relief read as parallax rather than as a flat image.
-      uniforms.uTurn.value = phase.approach * 0.58;
+      uniforms.uTurn.value = phase.turn * 0.58;
       uniforms.uLoosen.value = phase.loosen;
       uniforms.uDisperse.value = phase.disperse;
       uniforms.uTravel.value = state.travel;
@@ -113,7 +113,7 @@ export default function PortraitScene({ motion, onReady, onUnavailable }: Props)
       // uScale once the relief is added. The lens initially holds still while
       // particles separate, then tracks sideways towards the head so it passes
       // the cheek and jaw rather than the ear.
-      const cameraPosition = portraitCamera(state.release, state.travel * (1 - state.ending), camera.aspect);
+      const cameraPosition = portraitCamera(phase.disperse, state.travel * (1 - state.ending), camera.aspect);
       camera.position.set(cameraPosition.x, cameraPosition.y, cameraPosition.z);
       uniforms.uCamera.value.copy(camera.position);
       if (!state.paused) uniforms.uTime.value += dt;

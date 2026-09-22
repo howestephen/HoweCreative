@@ -90,8 +90,8 @@ describe("portrait source and reversible choreography", () => {
     }
   });
 
-  it('loosens before the camera approaches, then disperses', () => {
-    expect(portraitPhases(0)).toEqual({ approach: 0, loosen: 0, disperse: 0 });
+  it('loosens before the camera turns or travels, then disperses', () => {
+    expect(portraitPhases(0)).toEqual({ loosen: 0, disperse: 0, turn: 0 });
 
     // Separation begins on the first scroll: the head is already coming
     // apart well before anything is carried off.
@@ -100,8 +100,8 @@ describe("portrait source and reversible choreography", () => {
 
     const firstMovement = portraitPhases(0.03);
     expect(firstMovement.loosen).toBeGreaterThan(0);
-    expect(firstMovement.approach).toBe(0);
-    expect(portraitCamera(0.03, 0, 16 / 9)).toEqual({ x: 0, y: -0, z: 6 });
+    expect(firstMovement.turn).toBe(0);
+    expect(portraitCamera(firstMovement.disperse, 0, 16 / 9)).toEqual({ x: 0, y: -0, z: 6 });
 
     const early = portraitPhases(0.2);
     expect(early.loosen).toBeGreaterThan(0);
@@ -110,21 +110,35 @@ describe("portrait source and reversible choreography", () => {
     // By halfway all three are running, and dispersal trails the loosening
     // that feeds it: a point is always released before anything carries it away.
     const middle = portraitPhases(0.5);
-    expect(middle.approach).toBeGreaterThan(0);
     expect(middle.loosen).toBeGreaterThan(0);
     expect(middle.disperse).toBeGreaterThan(0);
+    expect(middle.turn).toBeGreaterThan(0);
     expect(middle.disperse).toBeLessThan(middle.loosen);
 
     const complete = portraitPhases(1);
-    expect(complete.approach).toBe(1);
     expect(complete.loosen).toBe(1);
     expect(complete.disperse).toBeCloseTo(1);
+    expect(complete.turn).toBe(1);
 
     // Loosen is linear in progress: the scroll is already eased once, and a
     // second easing held the whole head together for the first third.
     const step = (a: number, b: number) => portraitPhases(b).loosen - portraitPhases(a).loosen;
     expect(step(0.1, 0.2)).toBeCloseTo(step(0.2, 0.3), 6);
     expect(step(0.3, 0.4)).toBeCloseTo(step(0.5, 0.6), 6);
+  });
+
+  it('locks camera and rotation throughout breakup, then moves through the dispersed cloud', () => {
+    const breakup = portraitPhases(0.4);
+    expect(breakup.loosen).toBeGreaterThan(0.6);
+    expect(breakup.disperse).toBe(0);
+    expect(breakup.turn).toBe(0);
+    expect(portraitCamera(breakup.disperse, 0, 16 / 9)).toEqual({ x: 0, y: -0, z: 6 });
+
+    const travel = portraitPhases(0.65);
+    const camera = portraitCamera(travel.disperse, 0, 16 / 9);
+    expect(travel.turn).toBeGreaterThan(0);
+    expect(camera.x).toBeGreaterThan(0);
+    expect(camera.z).toBeLessThan(6);
   });
 
   it('uses a biased particle-size range instead of uniformly enlarging the cloud', () => {
