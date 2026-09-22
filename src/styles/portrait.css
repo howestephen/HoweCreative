@@ -24,7 +24,7 @@
 .portrait-source-crop img { position: absolute; width: 219.42857%; max-width: none; height: auto; left: -62.85714%; top: -1.23077%; }
 .particle-vignette { position: absolute; inset: 0; background: linear-gradient(0deg, #060707 0%, #06070700 13%, #06070700 87%, #06070766 100%); }
 .particle-hero, .spatial-work, .particle-ending { z-index: 1; }
-.particle-hero { height: 470svh; position: relative; scroll-margin-top: 0; }
+.particle-hero { height: 170svh; position: relative; scroll-margin-top: 0; }
 .particle-hero-inner { position: sticky; top: 0; height: 100svh; opacity: var(--intro-opacity); pointer-events: none; }
 .particle-introduction { position: absolute; left: 44px; bottom: 106px; }
 .particle-introduction h1 { font-size: clamp(16px, 1.3vw, 20px); font-weight: 400; line-height: 1.5; letter-spacing: -.15px; margin: 0; color: #dcddd8; }
@@ -114,7 +114,7 @@
   .portfolio-shell.portrait-home .wordmark .identity-role { font-size: 10px; margin-top: 4px; }
   .portfolio-shell.portrait-home .site-header nav { gap: 24px; font-size: 11px; }
   .portfolio-shell.portrait-home .nav-contact { display: inline-flex; }
-  .particle-hero { height: 420svh; }
+  .particle-hero { height: 175svh; }
   .particle-introduction { left: 22px; bottom: 136px; }
   .particle-introduction h1 { font-size: 14px; line-height: 1.6; }
   .particle-scroll { left: auto; right: 19px; bottom: 123px; transform: none; font-size: 10px; gap: 8px; }
