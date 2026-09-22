@@ -293,16 +293,34 @@ export const vertexShader = /* glsl */ `
     vec3 p = retained * retained * lifted
       + 2.0 * retained * flight * control
       + flight * flight * field;
-    // The closing form is a tilted, diffuse arc with space for readable type.
-    float arc = r * TAU;
-    float radius = 2.2 + pow(s, 2.0) * 1.4;
-    vec3 ending = vec3(
-      cos(arc) * radius * min(1.65, uAspect * 0.92),
-      sin(arc) * radius * 0.56,
-      sin(arc) * 1.3 + (t - 0.5) * 1.25 - 0.8
-    ) + lens;
-    ending.y += sin(arc * 3.0 + uTime * 0.1) * 0.11;
-    p = mix(p, ending, uEnding);
+    // The closing form is independent of the accepted opening and work field.
+    // In particular, r determines which particles survive. Using r as the
+    // old ring's angle removed entire sectors rather than thinning the ring.
+    if (uEnding > 0.0) {
+      // Use the existing CPU-generated seeds for spatial placement.
+      // A large-multiplier GPU sine hash quantised along into visible columns.
+      float along = s;
+      float across = t * 2.0 - 1.0;
+      float grain = hash2(aSeed.yz + vec2(8.4, 23.6)) * 2.0 - 1.0;
+      float sweep = along * 2.0 - 1.0;
+      float taper = pow(max(0.0, sin(along * 3.14159265359)), 0.7);
+      float twist = along * TAU * 1.25 + uTime * 0.14;
+      // One open, folded ribbon. Fine strands turn towards and away from the
+      // lens, with a quiet centre below for the contact heading and links.
+      float strand = across * (0.12 + 0.14 * taper) * taper;
+      float wave = sin(sweep * 3.4 + uTime * 0.12);
+      vec3 ending = vec3(
+        sweep * min(3.7, uAspect * 2.0),
+        1.15 + wave * 0.20 + strand * cos(twist),
+        sin(sweep * 2.2 - 0.4) * 1.15 + strand * sin(twist) * 2.2 + grain * 0.09
+      );
+      // Keep both tapered tips within the viewport while the ribbon folds
+      // through depth. Projected placement and optical particle size are
+      // separate, so a near fold cannot crop off one side of the sculpture.
+      ending.xy *= (6.0 - ending.z) / 6.0;
+      ending += lens;
+      p = mix(p, ending, uEnding);
+    }
     // Only a held press parts the points. Passive hover changes colour only.
     p.x += uPointer.x * (p.z + 0.3) * 0.11 * flight;
     p.y += uPointer.y * (p.z + 0.3) * 0.08 * flight;
