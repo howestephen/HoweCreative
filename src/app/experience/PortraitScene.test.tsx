@@ -2,7 +2,7 @@ import { render } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
-import { acceptsPortraitPress, isPortraitSurface, PORTRAIT_CROP, PORTRAIT_POINTS_SOURCE, portraitFraming, portraitPhases, portraitRelief, samplePortrait, scrollState } from "./portrait-particles";
+import { acceptsPortraitPress, isPortraitSurface, PORTRAIT_CROP, PORTRAIT_POINTS_SOURCE, portraitCamera, portraitFraming, portraitPhases, portraitRelief, samplePortrait, scrollState, vertexShader } from "./portrait-particles";
 import PortraitScene from "./PortraitScene";
 
 vi.mock("three", async (original) => ({
@@ -13,7 +13,7 @@ vi.mock("three", async (original) => ({
 it("reports unavailable WebGL without leaving a blank canvas attached", () => {
   const onUnavailable = vi.fn();
   const onReady = vi.fn();
-  const motion = { current: { release: 0, approach: 0, travel: 0, ending: 0, pointerX: 0, pointerY: 0, velocity: 0, paused: false } };
+  const motion = { current: { release: 0, travel: 0, ending: 0, pointerX: 0, pointerY: 0, velocity: 0, paused: false } };
   const { container } = render(<PortraitScene motion={motion} onReady={onReady} onUnavailable={onUnavailable} />);
   expect(onUnavailable).toHaveBeenCalledOnce();
   expect(onReady).not.toHaveBeenCalled();
@@ -65,12 +65,11 @@ describe("portrait source and reversible choreography", () => {
     const h = 800;
     const work = 1440;
     const end = 2400;
-    expect(scrollState(0, h, work, end)).toEqual({ release: 0, approach: 0, travel: 0, ending: 0, intro: 1 });
-    // Both the turn and separation answer the first scroll. The release is
-    // linear because the scroll follower already supplies the easing.
+    expect(scrollState(0, h, work, end)).toEqual({ release: 0, travel: 0, ending: 0, intro: 1 });
+    // Separation answers the first scroll. The release is linear because the
+    // scroll follower already supplies the easing.
     const firstScroll = scrollState(h * 0.1, h, work, end);
     const secondScroll = scrollState(h * 0.2, h, work, end);
-    expect(firstScroll.approach).toBeGreaterThan(0);
     expect(firstScroll.release).toBeGreaterThan(0);
     expect(secondScroll.release).toBeCloseTo(firstScroll.release * 2, 6);
     expect(scrollState(work - h * 0.25, h, work, end).release).toBe(1);
@@ -91,13 +90,18 @@ describe("portrait source and reversible choreography", () => {
     }
   });
 
-  it('approaches and turns first, loosens through the middle, then disperses', () => {
+  it('loosens before the camera approaches, then disperses', () => {
     expect(portraitPhases(0)).toEqual({ approach: 0, loosen: 0, disperse: 0 });
 
     // Separation begins on the first scroll: the head is already coming
     // apart well before anything is carried off.
     expect(portraitPhases(0.1).loosen).toBeGreaterThan(0);
     expect(portraitPhases(0.1).disperse).toBe(0);
+
+    const firstMovement = portraitPhases(0.03);
+    expect(firstMovement.loosen).toBeGreaterThan(0);
+    expect(firstMovement.approach).toBe(0);
+    expect(portraitCamera(0.03, 0, 16 / 9)).toEqual({ x: 0, y: -0, z: 6 });
 
     const early = portraitPhases(0.2);
     expect(early.loosen).toBeGreaterThan(0);
@@ -121,6 +125,12 @@ describe("portrait source and reversible choreography", () => {
     const step = (a: number, b: number) => portraitPhases(b).loosen - portraitPhases(a).loosen;
     expect(step(0.1, 0.2)).toBeCloseTo(step(0.2, 0.3), 6);
     expect(step(0.3, 0.4)).toBeCloseTo(step(0.5, 0.6), 6);
+  });
+
+  it('uses a biased particle-size range instead of uniformly enlarging the cloud', () => {
+    expect(vertexShader).toContain('mix(0.35, 1.9, pow(t, 2.8))');
+    expect(vertexShader).toContain('min(56.0');
+    expect(vertexShader).not.toContain('mix(1.0, 2.4, loose * keep)');
   });
 
   it('takes relief from the depth half of the plate, never from brightness', () => {
