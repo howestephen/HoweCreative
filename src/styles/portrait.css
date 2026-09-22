@@ -1,4 +1,5 @@
 /* Approved photographic study: silver, charcoal, quiet type and optical depth. */
+html:has(.portrait-home) { scrollbar-gutter: stable; }
 .portfolio-shell.portrait-home { --background: #060707; --foreground: #edece7; background: #060707; color: #edece7; }
 .portfolio-shell.portrait-home .site-header { position: fixed; inset: 0 0 auto; border: 0; background: linear-gradient(#060707c9, #06070700); backdrop-filter: none; z-index: 20; }
 .portfolio-shell.portrait-home .header-inner { width: calc(100% - 88px); height: 106px; align-items: center; }
@@ -10,7 +11,9 @@
 .portfolio-shell.portrait-home .nav-about { display: none; }
 .portfolio-shell.portrait-home :focus-visible { outline-color: #e3d9c2; }
 .particle-experience { position: relative; isolation: isolate; background: #060707; color: #edece7; --intro-opacity: 1; --portrait-opacity: 1; --end-opacity: 0; }
-.particle-environment { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+/* Browser chrome can expand/collapse without changing the camera's frame. */
+.particle-environment { position: fixed; inset: 0 0 auto; height: 100lvh; pointer-events: none; z-index: 0; overflow: hidden; }
+.particle-environment::after { content: ""; position: absolute; inset: calc(var(--contact-top, 100000px) - 160px) 0 0; background: linear-gradient(transparent, #060707 160px); }
 .particle-renderer, .particle-renderer canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 /* The loading cover stays up through two painted WebGL frames, so the renderer
    is fully opaque and composited before it is revealed. Fading it in after
@@ -62,7 +65,7 @@
 .particle-ending h2 { font-size: clamp(64px, 9vw, 130px); line-height: 1.1; font-weight: 400; letter-spacing: -.065em; margin: 0 0 30px; }
 .particle-contact { display: inline-flex; align-items: center; gap: 20px; font-size: 14px; padding: 12px 2px; border-bottom: 1px solid #b1b9ad55; }
 .particle-return { display: flex; align-items: center; justify-content: center; gap: 9px; margin: 64px auto 0; padding: 12px; border: 0; background: none; color: #a3ada3; font-size: 12px; cursor: pointer; }
-.particle-tools { position: fixed; z-index: 21; left: 44px; bottom: 26px; display: flex; align-items: center; gap: 20px; }
+.particle-tools { position: fixed; z-index: 1; left: 44px; bottom: 26px; display: flex; align-items: center; gap: 20px; }
 .particle-tools button { display: flex; align-items: center; gap: 8px; min-height: 38px; background: none; color: #bcc4ba; font-size: 11px; padding: 8px 0; cursor: pointer; border: 0; }
 .particle-tools [role='status'] { font-size: 11px; color: #b9b29f; }
 /* Preview card: one fixed size for every project, so each opens with the
@@ -89,7 +92,7 @@
 .spatial-dialog-cta { display: inline-flex; align-items: center; justify-content: space-between; gap: 16px; width: 100%; margin-top: 26px; padding: 16px 18px; border-radius: 10px; background: #edece7; color: #060707; font-size: 14px; font-weight: 500; transition: background-color .25s; }
 .spatial-dialog-cta:hover, .spatial-dialog-cta:focus-visible { background: #ffffff; }
 .particle-contact-section { position: relative; z-index: 2; }
-.particle-contact-section #contact { border-color: #c4cec424; background: #0b0f0fd9; padding-bottom: 56px; }
+.particle-contact-section #contact { border: 0; background: #060707; padding-bottom: 56px; }
 .particle-contact-section input,
 .particle-contact-section textarea { background: #121616; }
 @keyframes spatial-open { from { opacity: 0; transform: perspective(1000px) translateZ(-90px) translateY(20px); } to { opacity: 1; transform: perspective(1000px) translateZ(0) translateY(0); } }
@@ -151,7 +154,6 @@
   .spatial-dialog[open], .scroll-track > span { animation: none; }
 }
 
-.particle-experience::after { content: ""; position: fixed; inset: auto 0 0; height: 75px; background: linear-gradient(transparent, #060707ed 75%); pointer-events: none; z-index: 19; }
 .portrait-loading { position: fixed; inset: 0; z-index: 1000; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; background: #060707; color: #b7bdb8; font-size: 11px; }
 .portrait-loading-icon { width: 24px; height: 24px; border: 1px solid #ffffff26; border-top-color: #eceee5; border-radius: 50%; animation: portrait-loading-spin 1.2s linear infinite; }
 @keyframes portrait-loading-spin { to { transform: rotate(360deg); } }

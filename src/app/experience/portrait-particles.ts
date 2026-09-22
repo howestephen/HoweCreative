@@ -377,13 +377,7 @@ export const fragmentShader = /* glsl */ `
     float sharp = 1.0 - smoothstep(0.65, 1.0, d);
     float soft = exp(-d * d * 5.0) * 0.5;
     float alpha = mix(sharp, soft, vBlur) * vOpacity;
-    #ifdef CORE_PASS
-      // Solid in-focus centres write depth; soft optical halos remain blended.
-      if (alpha < 0.3 || d > 0.55 || vBlur > 0.35) discard;
-      gl_FragColor = vec4(vColour, 1.0);
-    #else
-      gl_FragColor = vec4(vColour, alpha);
-    #endif
+    gl_FragColor = vec4(vColour, alpha);
     #include <colorspace_fragment>
   }
 `;

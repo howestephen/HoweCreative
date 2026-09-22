@@ -1,14 +1,150 @@
-import { render } from "@testing-library/react";
-import { describe, expect, it, vi } from "vitest";
+import { act, cleanup, render } from "@testing-library/react";
+import { afterEach, describe, expect, it, vi } from "vitest";
+import type { Scene, ShaderMaterial } from "three";
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { acceptsPortraitPress, isPortraitSurface, PORTRAIT_CROP, PORTRAIT_POINTS_SOURCE, portraitCamera, portraitFraming, portraitPhases, portraitRelief, samplePortrait, scrollState, vertexShader } from "./portrait-particles";
 import PortraitScene from "./PortraitScene";
 
+const rendererFactory = vi.hoisted(() => vi.fn());
 vi.mock("three", async (original) => ({
   ...await original<typeof import("three")>(),
-  WebGLRenderer: class { constructor() { throw new Error("WebGL disabled"); } },
+  WebGLRenderer: class { constructor() {
+    const renderer = rendererFactory();
+    if (!renderer) throw new Error("WebGL disabled");
+    return renderer;
+  } },
 }));
+
+afterEach(() => { cleanup(); vi.restoreAllMocks(); vi.unstubAllGlobals(); rendererFactory.mockReset(); });
+
+// Exercise the mounted scene and its real frame scheduler. The renderer double
+// records buffer clears as well as paints: checking uniforms alone missed a
+// real blank frame caused by resizing AFTER a completed render.
+const mountRenderer = () => {
+  const events: string[] = [];
+  const callbacks = new Map<number, FrameRequestCallback>();
+  let nextId = 0;
+  let now = 100;
+  let notifyResize = () => {};
+  let loadImage = () => {};
+  let width = 1280;
+  const renderer = {
+    domElement: document.createElement("canvas"), debug: {},
+    setClearColor: vi.fn(),
+    setDrawingBufferSize: vi.fn(() => events.push("clear")),
+    setPixelRatio: vi.fn(() => events.push("clear")),
+    setSize: vi.fn(() => events.push("clear")),
+    render: vi.fn((_scene: Scene) => events.push("paint")),
+    dispose: vi.fn(), forceContextLoss: vi.fn(),
+  };
+  rendererFactory.mockReturnValue(renderer);
+  vi.stubGlobal("devicePixelRatio", 2);
+  vi.stubGlobal("requestAnimationFrame", (cb: FrameRequestCallback) => { callbacks.set(++nextId, cb); return nextId; });
+  vi.stubGlobal("cancelAnimationFrame", (id: number) => callbacks.delete(id));
+  vi.stubGlobal("ResizeObserver", class {
+    constructor(callback: () => void) { notifyResize = callback; }
+    observe() {} disconnect() {}
+  });
+  vi.stubGlobal("Image", class {
+    naturalWidth = PORTRAIT_CROP.width * 2;
+    naturalHeight = PORTRAIT_CROP.height;
+    onload: (() => void) | null = null;
+    set src(_src: string) { loadImage = () => this.onload?.(); }
+  });
+  vi.spyOn(HTMLElement.prototype, "getBoundingClientRect").mockImplementation(() => ({ width, height: 720 }) as DOMRect);
+  vi.spyOn(HTMLCanvasElement.prototype, "getContext").mockImplementation((() => ({
+    drawImage: () => {},
+    getImageData: (_x: number, _y: number, w: number, h: number) => ({ data: new Uint8ClampedArray(w * h * 4) }),
+  })) as unknown as typeof HTMLCanvasElement.prototype.getContext);
+  const motion = { current: { release: 0, travel: 0, ending: 0, pointerX: 0, pointerY: 0, velocity: 0, paused: false, invalidate: undefined as (() => void) | undefined } };
+  const onReady = vi.fn();
+  const onUnavailable = vi.fn();
+  const mounted = render(<PortraitScene motion={motion} onReady={onReady} onUnavailable={onUnavailable} />);
+  act(loadImage);
+  const tick = (milliseconds = 16) => {
+    now += milliseconds;
+    const pending = [...callbacks.values()];
+    callbacks.clear();
+    act(() => pending.forEach(cb => cb(now)));
+    // In particular, resizing from inside render must not create two loops.
+    expect(callbacks.size).toBeLessThanOrEqual(1);
+  };
+  return { ...mounted, renderer, events, motion, onReady, onUnavailable, tick, callbacks,
+    resize: (newWidth = width) => { width = newWidth; act(notifyResize); } };
+};
+
+describe("frame-safe portrait renderer", () => {
+  it("paints a single blended cloud and waits for two completed frames before ready", () => {
+    const fixture = mountRenderer();
+    expect(fixture.events).toEqual([]);
+    fixture.tick();
+    expect(fixture.events).toEqual(["clear", "paint"]);
+    expect(fixture.onReady).not.toHaveBeenCalled();
+    const scene = fixture.renderer.render.mock.calls[0][0];
+    expect(scene.children).toHaveLength(1);
+    const material = (scene.children[0] as import("three").Points).material as ShaderMaterial;
+    expect(material.depthWrite).toBe(false);
+    expect(material.depthTest).toBe(false);
+    expect(material.fragmentShader).not.toContain("CORE_PASS");
+    fixture.tick();
+    expect(fixture.onReady).toHaveBeenCalledOnce();
+    expect(fixture.onUnavailable).not.toHaveBeenCalled();
+  });
+
+  it("does not clear an idle canvas on repeated observer notifications", () => {
+    const fixture = mountRenderer();
+    for (let i = 0; i < 5; i++) fixture.tick();
+    expect(fixture.callbacks.size).toBe(0);
+    fixture.events.length = 0;
+    fixture.resize(); fixture.resize();
+    expect(fixture.events).toEqual([]);
+    fixture.tick();
+    expect(fixture.events).toEqual([]);
+    expect(fixture.callbacks.size).toBe(0);
+  });
+
+  it("orders a real resize immediately before the paint in the same callback", () => {
+    const fixture = mountRenderer();
+    fixture.tick();
+    fixture.events.length = 0;
+    fixture.resize(390);
+    expect(fixture.events).toEqual([]);
+    fixture.tick();
+    expect(fixture.events).toEqual(["clear", "paint"]);
+    expect(fixture.renderer.setDrawingBufferSize).toHaveBeenLastCalledWith(390, 720, 1.75);
+  });
+
+  it("keeps a zero-size resize pending until the host is measurable", () => {
+    const fixture = mountRenderer();
+    fixture.resize(0);
+    fixture.tick();
+    expect(fixture.events).toEqual([]);
+    expect(fixture.onReady).not.toHaveBeenCalled();
+    expect(fixture.callbacks.size).toBe(0);
+    fixture.resize(390);
+    fixture.tick();
+    expect(fixture.events).toEqual(["clear", "paint"]);
+    fixture.tick();
+    expect(fixture.onReady).toHaveBeenCalledOnce();
+  });
+
+  it("reduces quality before painting under sustained slow frames without duplicating the loop", () => {
+    const fixture = mountRenderer();
+    fixture.motion.current.release = 0.1;
+    fixture.tick();
+    fixture.events.length = 0;
+    for (let i = 0; i < 50; i++) {
+      fixture.tick(40);
+      expect(fixture.events[fixture.events.length - 1]).toBe("paint");
+    }
+    expect(fixture.events.filter(event => event === "clear")).toHaveLength(1);
+    expect(fixture.renderer.setDrawingBufferSize).toHaveBeenLastCalledWith(1280, 720, 1);
+    fixture.unmount();
+    expect(fixture.callbacks.size).toBe(0);
+    expect(fixture.renderer.dispose).toHaveBeenCalledOnce();
+  });
+});
 
 it("reports unavailable WebGL without leaving a blank canvas attached", () => {
   const onUnavailable = vi.fn();

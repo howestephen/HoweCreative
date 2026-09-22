@@ -162,12 +162,21 @@ export function PortraitExperience() {
     let pointerY = 0;
     const cards = Array.from(element.querySelectorAll<HTMLElement>(".spatial-card"));
     const intro = element.querySelector<HTMLElement>(".particle-hero-inner");
+    const environment = element.querySelector<HTMLElement>(".particle-environment");
+    const contact = element.querySelector<HTMLElement>(".particle-contact-section");
+    const tools = element.querySelector<HTMLElement>(".particle-tools");
+    let contactTop = contact?.offsetTop ?? Number.MAX_SAFE_INTEGER;
+    let toolsBottom = window.innerHeight;
     const cardTops = new Map<HTMLElement, number>();
     const measure = () => {
-      height = window.innerHeight;
+      // The hero uses svh: browser toolbar animation must not remap scroll
+      // progress or reframe the portrait during the first touch gesture.
+      height = intro?.clientHeight || window.innerHeight;
       workTop = work.current?.offsetTop ?? height;
       endTop = ending.current?.offsetTop ?? height * 3;
-      const framing = portraitFraming(window.innerWidth, height);
+      contactTop = contact?.offsetTop ?? Number.MAX_SAFE_INTEGER;
+      toolsBottom = tools?.getBoundingClientRect().bottom || window.innerHeight;
+      const framing = portraitFraming(environment?.clientWidth || window.innerWidth, environment?.clientHeight || height);
       element.style.setProperty("--portrait-height", `${framing.pixelHeight}px`);
       element.style.setProperty("--portrait-offset", `${framing.pixelOffset * 2}px`);
       for (const card of cards) {
@@ -199,6 +208,12 @@ export function PortraitExperience() {
       element.style.setProperty("--intro-opacity", String(state.intro));
       element.style.setProperty("--portrait-opacity", String(reduced ? 1 - smooth(0.05, 0.4, actualY / height) : 1 - smooth(0.05, 0.7, state.release)));
       element.style.setProperty("--end-opacity", String(reduced ? 1 : smooth(0.18, 0.75, state.ending)));
+      // Follow the actual HTML edge, not the damped particle progress. The
+      // fade lives inside the background and cannot obscure links or fields.
+      element.style.setProperty("--contact-top", `${contactTop - actualY}px`);
+      // The opaque contact section covers the fixed scene controls. Do not
+      // leave covered buttons in the keyboard focus order over the form.
+      if (tools) tools.inert = contactTop - actualY < toolsBottom;
       element.style.setProperty("--pointer-x", String(pointerX));
       element.style.setProperty("--pointer-y", String(pointerY));
       if (intro) intro.inert = state.intro < 0.05;
@@ -225,8 +240,9 @@ export function PortraitExperience() {
     };
     const onPointer = (event: PointerEvent) => {
       if (event.pointerType !== "mouse") return;
-      pointerX = (event.clientX / window.innerWidth - 0.5) * 2;
-      pointerY = -(event.clientY / height - 0.5) * 2;
+      const bounds = environment?.getBoundingClientRect();
+      pointerX = ((event.clientX - (bounds?.left ?? 0)) / (bounds?.width || window.innerWidth) - 0.5) * 2;
+      pointerY = -((event.clientY - (bounds?.top ?? 0)) / (bounds?.height || height) - 0.5) * 2;
       motion.current.pointerX = pointerX;
       motion.current.pointerY = pointerY;
       motion.current.pointerActive = isPortraitSurface(event.target) && !reduced && !activeDialog.current;
