@@ -230,8 +230,8 @@ function ExpandedRow({
   return (
     // Left padding matches the index-number column plus its gap, so the
     // expanded content aligns with the project title rather than the number.
-    <div className="grid gap-10 pb-10 pt-2 pl-[3.6rem] md:pl-16 lg:grid-cols-5">
-      <div className="space-y-6 lg:col-span-3">
+    <div className="grid min-w-0 grid-cols-[minmax(0,1fr)] gap-10 pb-10 pt-2 pl-[3.6rem] md:pl-16 lg:grid-cols-5">
+      <div className="min-w-0 space-y-6 lg:col-span-3">
         <p className="max-w-2xl leading-relaxed text-foreground/90">{project.fullDescription}</p>
 
         {brief && (
@@ -273,7 +273,7 @@ function ExpandedRow({
         </div>
       </div>
 
-      <div className="space-y-6 lg:col-span-2">
+      <div className="min-w-0 space-y-6 lg:col-span-2">
         {logo && (
           <div className="flex w-full items-center justify-center border border-border bg-neutral-900 px-6 py-8">
             <ImageWithFallback
