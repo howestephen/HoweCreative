@@ -361,6 +361,27 @@ A fresh checkout of the branch is complete for this milestone. This Mac still ha
 
 ## Revision record
 
+- 24 September 2026, restore the closing interaction: the quicker access to
+  Selected work is retained. The previous revision incorrectly removed the
+  circle's movement from behind the case studies to around the closing text,
+  and the sticky hold before the contact form enters. Restore the circular
+  stream/closing geometry from `f61456a` after the portrait release, with the
+  original 138svh desktop / 130svh phone closing section and 33svh sticky text
+  position. The contact form remains inline after it, unchanged. No dialog or
+  alternative contact flow is introduced. The compact hero, normal-flow cards,
+  opening geometry, source and frame-safe renderer are unchanged. Closing
+  progress is clamped to start after release even on tall, short-page layouts.
+  This correction supersedes the earlier removal of all closing choreography.
+
+  Verification: typecheck, 107 tests, lint and the 14-route build pass; the
+  independent audit found no blocker. Changing the sticky position back to
+  relative makes the new regression test fail, then the correct rule was
+  restored. On the rebuilt 8443 preview, the desktop text remains at 237.6px
+  through scroll positions 1600 to 1750 while contact remains below the 720px
+  viewport. At 390x844 it remains at 278.5px through positions 2800 to 2950,
+  again with contact below the viewport. Further scroll brings the existing
+  form up after the hold. Physical-device rendering remains unverified.
+
 - 24 September 2026, compact single movement: the latest brief supersedes the
   separate-stage choreography and nine-second journey. The portrait releases
   into one broad, folded circulation that continues through the work and

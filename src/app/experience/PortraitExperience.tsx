@@ -202,6 +202,7 @@ export function PortraitExperience() {
       audio.current?.update(state.release, motion.current.velocity, !soundOn.current || activeDialog.current);
       element.style.setProperty("--intro-opacity", String(state.intro));
       element.style.setProperty("--portrait-opacity", String(reduced ? 1 - smooth(0.05, 0.4, actualY / height) : 1 - smooth(0.05, 0.7, state.release)));
+      element.style.setProperty("--end-opacity", String(reduced ? 1 : smooth(0.18, 0.75, state.ending)));
       // Follow the actual HTML edge, not the damped particle progress. The
       // fade lives inside the background and cannot obscure links or fields.
       element.style.setProperty("--contact-top", `${contactTop - actualY}px`);

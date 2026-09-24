@@ -31,6 +31,16 @@ beforeEach(() => {
 afterEach(() => { cleanup(); vi.useRealTimers(); vi.restoreAllMocks(); vi.unstubAllGlobals(); });
 
 describe("portrait review experience", () => {
+  it("keeps the contact form inline immediately after the held closing section", () => {
+    const { container } = mount();
+    const ending = container.querySelector('.particle-ending')!;
+    const contact = ending.nextElementSibling!;
+    expect(contact).toHaveClass('particle-contact-section');
+    expect(contact.querySelector('#contact form')).not.toBeNull();
+    expect(contact.closest('dialog')).toBeNull();
+    expect(ending.querySelector('.particle-contact')).toHaveAttribute('href', '#contact');
+  });
+
   it("clears the fixed header when the explore control targets the compact work section", async () => {
     preferences.reduced = true;
     vi.spyOn(HTMLElement.prototype, "offsetTop", "get").mockImplementation(function(this: HTMLElement) {
