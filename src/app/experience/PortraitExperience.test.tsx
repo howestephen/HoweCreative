@@ -2,6 +2,7 @@ import { act, cleanup, fireEvent, render, screen } from "@testing-library/react"
 import { MemoryRouter } from "react-router";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { acceptsHeroPageDown, PortraitExperience } from "./PortraitExperience";
+import { RELEASE_LENGTH } from "./portrait-particles";
 import type { ParticleMotion } from './portrait-particles';
 
 const preferences = vi.hoisted(() => ({ reduced: false }));
@@ -93,7 +94,9 @@ describe("portrait review experience", () => {
     };
     await tick();
     const before = sceneState.current?.release;
-    expect(before).toBeCloseTo(120 / (1190 - 700 * 0.6));
+    // Release runs over RELEASE_LENGTH hero heights, measured from the sticky
+    // opening, not from the window or from where work sits.
+    expect(before).toBeCloseTo(120 / (700 * RELEASE_LENGTH));
     viewportHeight.mockReturnValue(844);
     fireEvent.resize(window);
     await tick();

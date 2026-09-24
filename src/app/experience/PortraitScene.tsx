@@ -38,7 +38,8 @@ export default function PortraitScene({ motion, onReady, onUnavailable }: Props)
       uRelease: { value: 0 }, uEnding: { value: 0 },
       uTime: { value: 0 }, uDpr: { value: 1 }, uScale: { value: 1 },
       uAspect: { value: 1 }, uPixel: { value: 2 }, uPointer: { value: new Vector2() },
-      uTurn: { value: 0 }, uLoosen: { value: 0 }, uDisperse: { value: 0 }, uPress: { value: 0 }, uHover: { value: 0 },
+      uTurn: { value: 0 }, uSeparate: { value: 0 }, uLoosen: { value: 0 }, uDisperse: { value: 0 }, uFocus: { value: 6 },
+      uPress: { value: 0 }, uHover: { value: 0 },
     };
     const material = new ShaderMaterial({
       uniforms, vertexShader, fragmentShader, transparent: true,
@@ -118,16 +119,19 @@ export default function PortraitScene({ motion, onReady, onUnavailable }: Props)
       const phase = portraitPhases(state.release);
       // The portrait turns on its own axis. It stays exactly where it is in
       // frame, so nothing can slide out of a narrow viewport, and the total
-      // angle stays well short of showing the relief edge-on. The turn is what
-      // makes the per-pixel relief read as parallax rather than as a flat image.
-      uniforms.uTurn.value = phase.turn * 0.58;
+      // angle stays well short of showing the relief edge-on. The turn and the
+      // dolly are what make the slices and relief read as parallax.
+      uniforms.uTurn.value = phase.turn * 0.62;
+      uniforms.uSeparate.value = phase.separate;
       uniforms.uLoosen.value = phase.loosen;
       uniforms.uDisperse.value = phase.disperse;
       uniforms.uEnding.value = state.ending;
       // The opening camera settles once. Page travel does not add another
       // movement while the circle gathers around the closing text.
-      const cameraPosition = portraitCamera(phase.disperse, camera.aspect);
+      const cameraPosition = portraitCamera(state.release, camera.aspect);
       camera.position.set(cameraPosition.x, cameraPosition.y, cameraPosition.z);
+      // The focal plane sits at the face pivot (z = 0) throughout the dolly.
+      uniforms.uFocus.value = cameraPosition.z;
       if (!state.paused) uniforms.uTime.value += dt;
       pointer.set(state.pointerX, state.pointerY);
       const pressTarget = state.pressed && !state.paused && state.release < 0.18 ? 1 : 0;

@@ -1,5 +1,23 @@
 # ROADMAP
 
+## Animation review correction, second pass - 24 September 2026
+
+Stephen rejected the compact revision: work entered before the head had begun
+to separate, the breakup read as a flat image on one plane, and the entry into
+the ring looked forced. This pass restores the three-dimensional reading and
+the scroll pacing without changing the opening frame, the ring or the closing
+hold. See the latest design-plan revision for the mechanism and verification.
+
+- [x] Hero holds 2.2 viewports with a 1.6-viewport release; the work heading
+  enters at three quarters of the release, never a particle-only screen.
+- [x] Feathered depth slices and deeper relief along the view ray, revealed by
+  a larger turn and dolly; coherent lift-off in sheets; spiral entry into the
+  ring in its own frame; earlier thinning in transit.
+- [x] Frozen shader hash replaced by numerical tests of the actual scalar
+  blocks, including a round-trip of the ring-frame inverse.
+- [ ] Visual acceptance on desktop and physical phones at Stephen's own scroll
+  pace. Automated checks and browser-sized captures do not establish it.
+
 ## Animation review correction - 24 September 2026
 
 Join correction: the restored circle was blended with a differently phased
