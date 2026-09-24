@@ -36,15 +36,12 @@ export const portraitFraming = (width: number, height: number) => {
 // scroll follower in PortraitExperience already damps input, so easing here as
 // well held the face together for too long before the separation became visible.
 export const scrollState = (y: number, height: number, workTop: number, endTop: number) => {
-  // The window can never invert, so a layout that has not measured yet
-  // (or a very short one) still reports an intact portrait at the top.
-  // Finish the portrait exactly as the first work row begins entering the
-  // viewport. The previous quarter-screen allowance left a long empty passage
-  // after the cloud had thinned but before any case-study content was visible.
-  const releaseEnd = Math.max(workTop - height * 0.6, height * 0.17, 1);
+  // Keep the established opening speed independently of the section spacing.
+  // Work enters during the release, rather than waiting for an empty field.
+  const releaseEnd = Math.max(height * 1.1, 1);
   return {
     release: clamp(y / releaseEnd),
-    travel: smooth(workTop - height * 0.55, endTop - height * 0.7, y),
+    travel: smooth(Math.max(releaseEnd, workTop - height * 0.4), Math.max(releaseEnd + height, endTop), y),
     ending: smooth(endTop - height * 0.7, endTop + height * 0.12, y),
     intro: 1 - smooth(height * 0.06, height * 0.45, y),
   };
@@ -191,7 +188,6 @@ export const vertexShader = /* glsl */ `
     float r = aSeed.x;
     float s = aSeed.y;
     float t = aSeed.z;
-    float angle = s * TAU;
     float light = dot(aColour, LUMA);
     // The image reduces to a stipple. About a fifth of the points survive the
     // loosening (the band runs 0.12 to 0.52, weighted towards the bright
@@ -279,56 +275,30 @@ export const vertexShader = /* glsl */ `
     // A curved route carries each ember up and out before it reaches its
     // place in the field, so neighbouring detail stretches before it dissolves.
     vec3 control = lifted + vec3((r - 0.5) * 1.6, 0.9 + s * 0.8, 0.6 + (t - 0.5) * 0.8) * uScale;
-    // The field is stratified: a few large soft points close to the lens, a
-    // body of fine points in the middle distance and dust far behind.
+    // One destination from release to contact. A broad folded circulation,
+    // not a random screen-filling scatter followed by separate target shapes.
+    // Phase and cross-section do not use the survival seed, so thinning cannot
+    // remove one side. Scroll only carries the same volume gently downwards.
     float near = 1.0 - smoothstep(0.0, 0.07, t);
     float far = smoothstep(0.3, 0.6, t);
     float scatter = hash2(vec2(r, s));
-    // The field and the closing arc were authored for a lens at z = 6, which
-    // now travels, so both are carried with it.
-    vec3 lens = uCamera - vec3(0.0, 0.0, 6.0);
+    float orbit = s * TAU + uTime * 0.075;
+    float crossSection = fract(s * 73.13 + t * 29.7) * TAU;
+    float spread = 0.18 + sqrt(t) * 0.55;
+    float radial = 1.85 + cos(crossSection) * spread;
+    float wave = sin(orbit * 2.0) * 0.18;
     vec3 field = vec3(
-      (r - 0.5) * 14.0 - 0.6,
-      (s - 0.5) * 5.0 + sin(scatter * TAU + far * 2.0) * 0.8,
-      mix(mix(0.6, 2.9, near), -6.0, far) + (hash2(vec2(s, t)) - 0.5) * 1.5
-    ) + lens;
-    field.y += sin(angle + uTime * 0.09) * 0.15;
-    field.x += uTravel * (1.4 + t * 1.2);
-    field.z += uTravel * 0.8;
+      cos(orbit) * radial,
+      sin(orbit) * radial * 0.62 + wave,
+      sin(orbit) * 1.15 + sin(crossSection) * spread
+    );
+    field.xy = mat2(0.94, -0.342, 0.342, 0.94) * field.xy;
+    field.x *= min(1.2, uAspect * 0.72);
+    field.xy += vec2(0.12, -0.18 - uTravel * 0.45);
     float retained = 1.0 - flight;
     vec3 p = retained * retained * lifted
       + 2.0 * retained * flight * control
       + flight * flight * field;
-    // The closing form and travelling volume begin only after the breakup.
-    // s, not the survival seed r, covers the complete circular path. These
-    // positions live in world space: no camera-following offset or projection
-    // cancellation, so the near and far sides really pass through depth.
-    float volume = smoothstep(0.0, 0.65, uTravel);
-    if (uTravel > 0.0 || uEnding > 0.0) {
-      float orbit = s * TAU + uTime * 0.16 + uTravel * 1.6;
-      float crossSection = fract(s * 73.13 + t * 29.7) * TAU;
-      float widthFit = min(1.0, uAspect * 0.75);
-      float radius = 1.55 + t * 0.38;
-      radius += sin(orbit * 3.0 - uTime * 0.23) * 0.14;
-      float tube = 0.12 + 0.24 * (1.0 - uEnding);
-      vec3 circular = vec3(
-        cos(orbit) * (radius + cos(crossSection) * tube),
-        sin(orbit) * (radius + cos(crossSection) * tube),
-        sin(crossSection) * tube
-      );
-      // Tilt the loop as a volume, not a flattened screen-space ellipse.
-      float tilt = 0.66 + sin(uTime * 0.07) * 0.10;
-      circular.yz = mat2(cos(tilt), sin(tilt), -sin(tilt), cos(tilt)) * circular.yz;
-      circular = rotateY(circular, -0.24 + sin(uTime * 0.05) * 0.12);
-      circular.x *= widthFit;
-      circular.y *= mix(0.62, 1.0, smoothstep(0.55, 1.1, uAspect));
-      circular.xy += vec2(uAspect > 1.1 ? 0.48 : 0.2, -0.4);
-      vec3 stream = circular;
-      stream.z += (t - 0.5) * 4.2;
-      stream.y += sin(s * TAU * 2.0 + uTime * 0.19) * 0.55 - uTravel * 0.65;
-      p = mix(p, stream, volume);
-      p = mix(p, circular, uEnding);
-    }
     // Only a held press parts the points. Passive hover changes colour only.
     p.x += uPointer.x * (p.z + 0.3) * 0.11 * flight;
     p.y += uPointer.y * (p.z + 0.3) * 0.08 * flight;
@@ -355,14 +325,12 @@ export const vertexShader = /* glsl */ `
     // Close to the lens a point is past the focal plane: it grows, softens and
     // goes out rather than popping as it passes the camera.
     vBlur = max(vBlur, 1.0 - smoothstep(0.4, 1.6, depth));
-    // Keep the full cloud visible throughout the portrait passage. Thinning is
-    // part of the handoff to the work section, not an early flash between the
-    // opening portrait and the dispersed field.
-    float thinning = smoothstep(0.04, 0.72, uTravel);
+    // Thin gradually as released points travel, before the frame can fill
+    // with photographic sampling density. The intact opening is unaffected.
+    float thinning = smoothstep(0.18, 0.9, flight);
     float cloudAlpha = mix(0.97, 0.48 + r * 0.42, smoothstep(0.08, 0.82, flight));
     float emberAlpha = keep * mix(0.72, 0.42, near) * (0.4 + r * 0.6) * mix(1.0, 0.55, far);
     vOpacity = mix(cloudAlpha, emberAlpha, thinning) * smoothstep(0.12, 0.7, depth);
-    vOpacity *= mix(1.0, 0.46, uEnding);
     vec3 silver = vec3(0.66, 0.69, 0.71);
     vec3 warm = vec3(0.86, 0.79, 0.68);
     vec3 ember = mix(silver, warm, near * 0.6) * (0.42 + light * 0.9 + r * 0.25);
@@ -385,12 +353,11 @@ export const vertexShader = /* glsl */ `
     portraitSize *= separatedSize;
     float emberSize = mix(mix(0.008, 0.004, far), 0.036, near)
       * 1250.0 / max(0.5, depth) * sizeVariation;
-    // Cull dropped points only while the work is arriving. Before that they
-    // remain part of the visible volume, closing the old empty handoff gap.
-    float dropped = (1.0 - keep) * smoothstep(0.04, 0.72, uTravel);
+    float dropped = (1.0 - keep) * thinning;
     gl_PointSize = min(48.0, mix(portraitSize, emberSize + vBlur * 3.5, smoothstep(0.0, 1.0, flight))) * uDpr * (1.0 - dropped);
-    // Optical size and softness follow actual distance in the late volume,
-    // rather than a random near/far label inherited from the portrait.
+    // The same optical treatment follows the released points all the way
+    // down the page. It never switches at work or at the closing section.
+    float volume = smoothstep(0.18, 0.9, flight);
     if (volume > 0.0) {
       float lensNear = 1.0 - smoothstep(2.0, 6.0, depth);
       float opticalSize = (1.9 + lensNear * 2.2) * sizeVariation * 5.5 / max(0.7, depth);

@@ -103,15 +103,20 @@ export function PortraitExperience() {
     if (reduced || failed) { window.scrollTo({ top: target, behavior: "instant" }); return; }
     const start = window.scrollY;
     const started = performance.now();
+    const duration = Math.min(2400, Math.max(800, Math.abs(target - start) * 3));
     const tick = (now: number) => {
-      const t = clamp((now - started) / 9000);
+      const t = clamp((now - started) / duration);
       const eased = t * t * (3 - 2 * t);
       window.scrollTo({ top: start + (target - start) * eased, behavior: "instant" });
       scrollAnimation.current = t < 1 ? requestAnimationFrame(tick) : 0;
     };
     scrollAnimation.current = requestAnimationFrame(tick);
   }, [failed, reduced]);
-  const goToWork = useCallback(() => { if (work.current) travelTo(work.current.offsetTop); }, [travelTo]);
+  const goToWork = useCallback(() => {
+    if (!work.current) return;
+    const clearance = Number.parseFloat(getComputedStyle(work.current).scrollMarginTop) || 0;
+    travelTo(Math.max(0, work.current.offsetTop - clearance));
+  }, [travelTo]);
   const returnToPortrait = () => travelTo(0);
 
   useEffect(() => {
@@ -160,14 +165,11 @@ export function PortraitExperience() {
     let endTop = ending.current.offsetTop;
     let pointerX = 0;
     let pointerY = 0;
-    const cards = Array.from(element.querySelectorAll<HTMLElement>(".spatial-card"));
     const intro = element.querySelector<HTMLElement>(".particle-hero-inner");
     const environment = element.querySelector<HTMLElement>(".particle-environment");
     const contact = element.querySelector<HTMLElement>(".particle-contact-section");
     const tools = element.querySelector<HTMLElement>(".particle-tools");
     let contactTop = contact?.offsetTop ?? Number.MAX_SAFE_INTEGER;
-    let toolsBottom = window.innerHeight;
-    const cardTops = new Map<HTMLElement, number>();
     const measure = () => {
       // The hero uses svh: browser toolbar animation must not remap scroll
       // progress or reframe the portrait during the first touch gesture.
@@ -175,16 +177,9 @@ export function PortraitExperience() {
       workTop = work.current?.offsetTop ?? height;
       endTop = ending.current?.offsetTop ?? height * 3;
       contactTop = contact?.offsetTop ?? Number.MAX_SAFE_INTEGER;
-      toolsBottom = tools?.getBoundingClientRect().bottom || window.innerHeight;
       const framing = portraitFraming(environment?.clientWidth || window.innerWidth, environment?.clientHeight || height);
       element.style.setProperty("--portrait-height", `${framing.pixelHeight}px`);
       element.style.setProperty("--portrait-offset", `${framing.pixelOffset * 2}px`);
-      for (const card of cards) {
-        let top = 0;
-        let node: HTMLElement | null = card;
-        while (node) { top += node.offsetTop; node = node.offsetParent as HTMLElement | null; }
-        cardTops.set(card, top);
-      }
       wake();
     };
     const update = (now: number) => {
@@ -207,27 +202,15 @@ export function PortraitExperience() {
       audio.current?.update(state.release, motion.current.velocity, !soundOn.current || activeDialog.current);
       element.style.setProperty("--intro-opacity", String(state.intro));
       element.style.setProperty("--portrait-opacity", String(reduced ? 1 - smooth(0.05, 0.4, actualY / height) : 1 - smooth(0.05, 0.7, state.release)));
-      element.style.setProperty("--end-opacity", String(reduced ? 1 : smooth(0.18, 0.75, state.ending)));
       // Follow the actual HTML edge, not the damped particle progress. The
       // fade lives inside the background and cannot obscure links or fields.
       element.style.setProperty("--contact-top", `${contactTop - actualY}px`);
-      // The opaque contact section covers the fixed scene controls. Do not
-      // leave covered buttons in the keyboard focus order over the form.
-      if (tools) tools.inert = contactTop - actualY < toolsBottom;
+      // Controls leave with the opening. Do not keep its faded controls in
+      // the keyboard order beneath the fixed header or over the work.
+      if (tools) tools.inert = actualY > height * 0.45;
       element.style.setProperty("--pointer-x", String(pointerX));
       element.style.setProperty("--pointer-y", String(pointerY));
       if (intro) intro.inert = state.intro < 0.05;
-      for (const [index, card] of cards.entries()) {
-        const top = (cardTops.get(card) ?? 0) - actualY;
-        const enter = reduced ? 1 : smooth(height * 0.98, height * 0.56, top);
-        const leave = reduced ? 1 : 1 - smooth(0.04, 0.74, state.ending);
-        const opacity = enter * leave;
-        // Cards settle from a little below and behind, not a tumble.
-        const offset = (1 - enter) * 72 - (1 - leave) * 60;
-        card.style.opacity = String(opacity);
-        card.style.transform = reduced ? "none" : `translate3d(0, ${offset.toFixed(2)}px, ${(-60 * (1 - enter) - 120 * (1 - leave)).toFixed(2)}px) rotateX(${((1 - enter) * 5).toFixed(2)}deg) rotateY(${((1 - enter) * (index % 3 - 1) * -3).toFixed(2)}deg)`;
-        card.inert = opacity < 0.45;
-      }
       motion.current.invalidate?.();
       if (!reduced && (Math.abs(actualY - currentY) > 0.1 || motion.current.velocity > 0.001)) frame = requestAnimationFrame(update);
     };

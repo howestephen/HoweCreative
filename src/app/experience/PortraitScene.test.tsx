@@ -158,21 +158,24 @@ it("reports unavailable WebGL without leaving a blank canvas attached", () => {
 });
 
 describe("portrait source and reversible choreography", () => {
-  it("preserves accepted hero motion outside the requested late-volume and colour corrections", () => {
-    const closing = / {4}\/\/ The closing form[\s\S]*?(?= {4}\/\/ Only a held press)/;
-    const block = vertexShader.match(closing)?.[0];
-    expect(block).toBeDefined();
-    expect(block).toContain("if (uTravel > 0.0 || uEnding > 0.0)");
-    expect(block).toContain("p = mix(p, circular, uEnding);");
-    // Baseline from f6067a8, whose first-scroll flicker was confirmed resolved.
-    // The user subsequently requested colour fidelity and late-volume depth.
-    // Exclude only those explicit edits; retain the accepted hash for every
-    // opening position, breakup, timing and interaction calculation.
-    const hero = vertexShader.replace(closing, "")
-      .replace(/ {4}\/\/ Optical size[\s\S]*?(?= {4}gl_Position)/, "")
-      .replace("mix(aColour, ember", "mix(aColour * 1.08, ember");
-    expect(createHash("sha256").update(hero).digest("hex"))
-      .toBe("174131397f0badbd706a25128c744c0c74afd9acd1e8051fbfc54d1ea2b52219");
+  it("preserves the accepted portrait relief, lift, turn and flight control geometry", () => {
+    // The 24 September request replaces the destination and its succession
+    // of shapes. Freeze the opening geometry independently of that destination.
+    const opening = vertexShader.slice(vertexShader.indexOf("    // When a point lets go"), vertexShader.indexOf("    // One destination"));
+    expect(createHash("sha256").update(opening).digest("hex"))
+      .toBe("b28358eba36e623022830263c5c74a25605dea49bb0c3444943437803f3feb6f");
+  });
+
+  it("keeps one particle destination with no work or ending shape switch", () => {
+    const destination = vertexShader.slice(vertexShader.indexOf("    // One destination"), vertexShader.indexOf("    // Only a held press"));
+    expect(destination).toContain("float orbit = s * TAU + uTime * 0.075;");
+    expect(destination).toContain("flight * flight * field");
+    expect(destination).not.toMatch(/uEnding|mix\(p,|vec3 stream|vec3 circular/);
+    expect(destination).not.toContain("(r - 0.5) * 14.0");
+    // Only vertical transport depends on scroll. Angular movement is slow and
+    // time-driven, so crossing a section cannot spin or reshape the volume.
+    expect(destination.match(/uTravel/g)).toHaveLength(1);
+    expect(destination).toContain("-0.18 - uTravel * 0.45");
   });
 
   it.each([0, 8, 16, 32, 64, 128, 255])("preserves sRGB tone %i instead of crushing the portrait shadows", (byte) => {
@@ -198,7 +201,7 @@ describe("portrait source and reversible choreography", () => {
     for (const [height, work, end] of [[720, 1224, 2165], [844, 1477, 3500]]) {
       for (let y = 0; y <= end; y += 1) {
         const state = scrollState(y, height, work, end);
-        if (state.travel > 0 || state.ending > 0) expect(state.release).toBe(1);
+        if (state.travel > 0) expect(state.release).toBe(1);
       }
     }
   });
@@ -243,7 +246,7 @@ describe("portrait source and reversible choreography", () => {
     expect(samplePortrait(invisible, depth, 20, 20).positions).toHaveLength(0);
   });
 
-  it("releases the head completely before the work viewport and finishes the closing form", () => {
+  it("retains the opening pace independently of where work is placed", () => {
     const h = 800;
     const work = 1440;
     const end = 2400;
@@ -254,7 +257,11 @@ describe("portrait source and reversible choreography", () => {
     const secondScroll = scrollState(h * 0.2, h, work, end);
     expect(firstScroll.release).toBeGreaterThan(0);
     expect(secondScroll.release).toBeCloseTo(firstScroll.release * 2, 6);
-    expect(scrollState(work - h * 0.6, h, work, end).release).toBe(1);
+    expect(scrollState(h * 1.1, h, work, end).release).toBe(1);
+    for (const workPosition of [h, h * 1.15, h * 1.7]) {
+      expect(scrollState(h * 0.3, h, workPosition, end).release).toBeCloseTo(0.3 / 1.1);
+      expect(scrollState(h * 0.6, h, workPosition, end).release).toBeLessThan(1);
+    }
     expect(scrollState(end + h * 0.12, h, work, end).ending).toBe(1);
     expect(scrollState(0, h, work, end).release).toBe(0);
   });
@@ -334,7 +341,8 @@ describe("portrait source and reversible choreography", () => {
     expect(vertexShader).toContain('mix(0.85, 1.55');
     expect(vertexShader).toContain('mix(2.0, 3.1');
     expect(vertexShader).toContain('smoothstep(0.08, 0.78, flight)');
-    expect(vertexShader).toContain('smoothstep(0.04, 0.72, uTravel)');
+    expect(vertexShader).toContain('float thinning = smoothstep(0.18, 0.9, flight)');
+    expect(vertexShader).not.toContain('smoothstep(0.04, 0.72, uTravel)');
     expect(vertexShader).toContain('min(48.0');
     expect(vertexShader).not.toContain('mix(1.0, 2.4, loose * keep)');
     expect(vertexShader).not.toContain('smoothstep(0.55, 0.62, loose)');

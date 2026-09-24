@@ -361,14 +361,48 @@ A fresh checkout of the branch is complete for this milestone. This Mac still ha
 
 ## Revision record
 
+- 24 September 2026, compact single movement: the latest brief supersedes the
+  separate-stage choreography and nine-second journey. The portrait releases
+  into one broad, folded circulation that continues through the work and
+  closing content. No section changes its target shape. The same silver and
+  charcoal palette, typography, project content and card treatment remain.
+  The layout is one opening viewport, normal-flow work, a compact closing
+  invitation and contact. Cards enter while the portrait is dispersing.
+  Opening release still takes 1.1 viewport heights, independently of layout;
+  source, relief, lift and turn geometry are unchanged. Thinning and optical
+  size follow each particle's release rather than a later section boundary.
+  The camera no longer reverses its travel offset at the ending.
+  Explore/Page Down clears the header and completes in at most 2.4 seconds,
+  remaining interruptible. Controls scroll away with the hero; the header
+  background gains opacity behind passing content.
+
+  Reference review: the live [USTA site](https://usta.agency/) demonstrates a
+  substantial particle volume composed alongside content. The authored
+  [Aether-1 process](https://tympanus.net/codrops/2025/08/06/building-aether-1-sound-without-boundaries/)
+  describes storyboarding and motion development before web integration.
+  These informed a single spatial composition, not a copy of their branding
+  or implementation. The rejected narrow spiral and full-screen random
+  scatter are not retained as alternative modes. Validation is recorded below;
+  physical-phone behaviour and aesthetic acceptance still require review.
+
+  Verification: typecheck, 105 tests, lint and the 14-route production build
+  pass. Restoring the old layout-dependent release window makes the new timing
+  test fail; the correct implementation was restored. Independent audit
+  identified the header-clearance and overlong button journey, both corrected
+  and re-audited. Browser checks on the rebuilt 8443 preview cover 1280x720 and
+  390x844 layouts, work entering during release, reverse scrolling back to the
+  portrait, the contact composition and the explore target. The mobile target
+  places the work heading at 150px below a 110px header. No horizontal overflow
+  was observed. These checks do not certify physical Safari/Chrome rendering.
+
 - 24 September 2026, rejected current revision: Stephen reviewed `8424bd9` and
   rejected the result. Reverted its particle destination, density/optical
   changes, shorter hero and ending, card arrivals and header treatment to the
   preceding design. The preview host configuration remains. The original
   request for improved particle composition and a better work handoff is still
   open. Automated checks and code audit had passed but did not establish the
-  visual quality of that revision. Specific regression feedback is pending
-  before further choreography changes.
+  visual quality of that revision. The subsequent compact single-movement
+  brief above replaces the rejected direction.
 
 Verification for the latest circular-depth and tone correction: typecheck, 102 tests, lint and the 14-route production build pass. An independent code audit found no blocking defect. Deliberately restoring the old gamma conversion to just the red sampler channel initially exposed a weak all-channel maximum assertion; the test now checks each channel separately and fails under that mutation. The correct conversion was restored before the final checks. Browser-sized mobile checks are not physical-device testing.
 
