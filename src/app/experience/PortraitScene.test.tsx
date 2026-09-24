@@ -158,16 +158,21 @@ it("reports unavailable WebGL without leaving a blank canvas attached", () => {
 });
 
 describe("portrait source and reversible choreography", () => {
-  it("preserves the accepted surface, relief, turn and lift calculations while the released field is redesigned", () => {
-    // 24 September authorises a new released field and a shorter layout.
-    // Freeze the original surface, relief, turn, lift and flight calculations
-    // against f61456a. This digest was measured from that committed source,
-    // not generated from the replacement flow. Lifecycle checks above remain.
-    const boundary = "    // One circulating current";
-    expect(vertexShader).toContain(boundary);
-    const opening = vertexShader.split(boundary)[0];
-    expect(createHash("sha256").update(opening).digest("hex"))
-      .toBe("36b911ac411739d2e0ad26511ddd5190ab1cd2a0d385b2909b8662055e3985d1");
+  it("preserves accepted hero motion outside the requested late-volume and colour corrections", () => {
+    const closing = / {4}\/\/ The closing form[\s\S]*?(?= {4}\/\/ Only a held press)/;
+    const block = vertexShader.match(closing)?.[0];
+    expect(block).toBeDefined();
+    expect(block).toContain("if (uTravel > 0.0 || uEnding > 0.0)");
+    expect(block).toContain("p = mix(p, circular, uEnding);");
+    // Baseline from f6067a8, whose first-scroll flicker was confirmed resolved.
+    // The user subsequently requested colour fidelity and late-volume depth.
+    // Exclude only those explicit edits; retain the accepted hash for every
+    // opening position, breakup, timing and interaction calculation.
+    const hero = vertexShader.replace(closing, "")
+      .replace(/ {4}\/\/ Optical size[\s\S]*?(?= {4}gl_Position)/, "")
+      .replace("mix(aColour, ember", "mix(aColour * 1.08, ember");
+    expect(createHash("sha256").update(hero).digest("hex"))
+      .toBe("174131397f0badbd706a25128c744c0c74afd9acd1e8051fbfc54d1ea2b52219");
   });
 
   it.each([0, 8, 16, 32, 64, 128, 255])("preserves sRGB tone %i instead of crushing the portrait shadows", (byte) => {
@@ -189,9 +194,7 @@ describe("portrait source and reversible choreography", () => {
     }
   });
 
-  it("starts scroll-driven circulation and closing only after the hero release has completed", () => {
-    // This checks the scroll-state boundaries, not particle flight: the new
-    // current is the destination during release as well as behind the work.
+  it("starts the new travelling volume only after the hero release has completed", () => {
     for (const [height, work, end] of [[720, 1224, 2165], [844, 1477, 3500]]) {
       for (let y = 0; y <= end; y += 1) {
         const state = scrollState(y, height, work, end);
@@ -325,21 +328,13 @@ describe("portrait source and reversible choreography", () => {
     expect(complete.z).toBeLessThan(6);
   });
 
-  it('varies size and sheds density only after flight is established', () => {
+  it('varies size only after flight starts and keeps the cloud through the work handoff', () => {
     expect(vertexShader).toContain('scatter < 0.72');
     expect(vertexShader).toContain('mix(0.24, 0.62');
     expect(vertexShader).toContain('mix(0.85, 1.55');
     expect(vertexShader).toContain('mix(2.0, 3.1');
     expect(vertexShader).toContain('smoothstep(0.08, 0.78, flight)');
-    const thinning = vertexShader.match(/float thinning = smoothstep\(([\d.]+), ([\d.]+), flight\);/);
-    expect(thinning).not.toBeNull();
-    // Read the actual shader's interval: density must be unchanged at first
-    // movement, fade over most of flight, and finish before the field settles.
-    const start = Number(thinning?.[1]);
-    const end = Number(thinning?.[2]);
-    expect(start).toBeGreaterThanOrEqual(0.1);
-    expect(end - start).toBeGreaterThan(0.7);
-    expect(end).toBeLessThanOrEqual(1);
+    expect(vertexShader).toContain('smoothstep(0.04, 0.72, uTravel)');
     expect(vertexShader).toContain('min(48.0');
     expect(vertexShader).not.toContain('mix(1.0, 2.4, loose * keep)');
     expect(vertexShader).not.toContain('smoothstep(0.55, 0.62, loose)');
