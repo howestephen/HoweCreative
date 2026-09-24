@@ -31,6 +31,35 @@ beforeEach(() => {
 afterEach(() => { cleanup(); vi.useRealTimers(); vi.restoreAllMocks(); vi.unstubAllGlobals(); });
 
 describe("portrait review experience", () => {
+  it("clears the fixed header when the explore control targets the compact work section", async () => {
+    preferences.reduced = true;
+    vi.spyOn(HTMLElement.prototype, "offsetTop", "get").mockImplementation(function(this: HTMLElement) {
+      return this.classList.contains("spatial-work") ? 844 : 0;
+    });
+    const { container } = mount();
+    await act(async () => { await new Promise(resolve => setTimeout(resolve, 40)); });
+    const work = container.querySelector<HTMLElement>(".spatial-work")!;
+    work.style.scrollMarginTop = "110px";
+    fireEvent.load(container.querySelector('.portrait-source-crop img')!);
+    fireEvent.click(screen.getByRole("button", { name: "Scroll to explore" }));
+    expect(window.scrollTo).toHaveBeenLastCalledWith({ top: 734, behavior: "instant" });
+  });
+
+  it("never fades, tumbles or disables work cards as scroll crosses the closing section", async () => {
+    const scrollPosition = vi.spyOn(window, "scrollY", "get").mockReturnValue(0);
+    const { container } = mount();
+    for (const y of [0, 400, 1200, 2600, 400]) {
+      scrollPosition.mockReturnValue(y);
+      fireEvent.scroll(window);
+      await act(async () => { await new Promise(resolve => setTimeout(resolve, 40)); });
+      for (const card of container.querySelectorAll<HTMLElement>(".spatial-card")) {
+        expect(card.style.transform).toBe("");
+        expect(card.style.opacity).toBe("");
+        expect(card.inert).not.toBe(true);
+      }
+    }
+  });
+
   it("keeps scroll progress stable through browser-bar resize and aligns the background fade to the real footer", async () => {
     const callbacks = new Map<number, FrameRequestCallback>();
     let nextId = 0;
@@ -150,7 +179,7 @@ describe("portrait review experience", () => {
     expect(container.querySelector('.particle-experience')).toHaveAttribute('aria-busy', 'false');
   });
 
-  it('takes a calm nine-second journey and yields immediately to manual scrolling', async () => {
+  it('completes the compact journey within 2.4 seconds and yields to manual scrolling', async () => {
     vi.useFakeTimers();
     const { container } = mount();
     await act(async () => { vi.advanceTimersByTime(32); });
@@ -160,12 +189,12 @@ describe("portrait review experience", () => {
     act(() => { vi.advanceTimersByTime(500); });
     const early = vi.mocked(window.scrollTo).mock.lastCall?.[0] as ScrollToOptions;
     expect(early.top).toBeGreaterThan(0);
-    expect(early.top).toBeLessThan(30);
+    expect(early.top).toBeLessThan(150);
     fireEvent.keyDown(window, { key: 'PageDown', repeat: true });
-    act(() => { vi.advanceTimersByTime(8200); });
+    act(() => { vi.advanceTimersByTime(1700); });
     const almostThere = vi.mocked(window.scrollTo).mock.lastCall?.[0] as ScrollToOptions;
     expect(almostThere.top).toBeLessThan(1000);
-    act(() => { vi.advanceTimersByTime(400); });
+    act(() => { vi.advanceTimersByTime(250); });
     expect(window.scrollTo).toHaveBeenLastCalledWith({ top: 1000, behavior: 'instant' });
     fireEvent.click(screen.getByRole('button', { name: 'Scroll to explore' }));
     act(() => { vi.advanceTimersByTime(300); });

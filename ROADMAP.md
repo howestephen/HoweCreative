@@ -2,12 +2,22 @@
 
 ## Animation review correction - 24 September 2026
 
-The continuous-current and shortened-handoff revision in `8424bd9` was reviewed
-and rejected. The preceding design is restored; the frame-safe renderer remains
-unchanged. Improving the particle
-composition and hero-to-work spacing remains unresolved; passing automated
-checks does not establish visual acceptance. Obtain specific regression
-feedback before another change to the choreography or overall pacing.
+The revision in `8424bd9` was rejected and rolled back in `b5f473b`. Subsequent
+feedback fixes the brief: a compact portfolio with one portrait-to-particle
+movement continuing down the page, work arriving during the release, and no
+successive background shapes or empty animation-only screens.
+
+- [x] Implement one broad circulating destination, independent of section
+  boundaries; remove the scatter, travelling-shape and ending-shape sequence.
+- [x] Retain the established opening release speed independently of the hero
+  height. Place work directly after one viewport, keep cards in normal flow,
+  and remove the oversized sticky closing section.
+- [x] Preserve portrait source, relief/lift/turn geometry and the frame-safe
+  renderer lifecycle. Remove the late camera reset and keep navigation and
+  controls from overlapping work.
+- [ ] Visual acceptance of this revision on desktop and physical phones.
+  Automated checks and browser-sized inspection do not establish acceptance.
+  See the current revision record in the design plan for verification.
 
 ## Deferred commercial positioning - 22 September 2026
 
