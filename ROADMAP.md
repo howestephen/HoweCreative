@@ -2,6 +2,14 @@
 
 ## Animation review correction - 24 September 2026
 
+Join correction: the restored circle was blended with a differently phased
+opening field, causing a folded shape and scroll-driven rotation between the
+work and ending. Replace both destinations with one circle calculation, one
+angular phase and a fixed basis. Closing progress only gathers its thickness
+and depth and lowers its centre. Keep the short hero-to-work gap, closing hold
+and inline contact sequence. Numeric regression checks must cover intermediate
+positions and elapsed times, not just continuity and endpoint screenshots.
+
 Latest correction: keep the improved short hero-to-work gap, but restore the
 circle behind the work gathering around the closing text, and the held
 "Let's talk" stage before the inline contact form enters. The contact form

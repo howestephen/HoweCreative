@@ -4,8 +4,26 @@ import { Color, SRGBColorSpace, type Scene, type ShaderMaterial } from "three";
 import { readFileSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { resolve } from "node:path";
-import { acceptsPortraitPress, isPortraitSurface, PORTRAIT_CROP, PORTRAIT_POINTS_SOURCE, portraitCamera, portraitFraming, portraitLinearColour, portraitPhases, portraitRelief, samplePortrait, scrollState, vertexShader } from "./portrait-particles";
+import { acceptsPortraitPress, isPortraitSurface, particleFlowShader, PORTRAIT_CROP, PORTRAIT_POINTS_SOURCE, portraitCamera, portraitFraming, portraitLinearColour, portraitPhases, portraitRelief, samplePortrait, scrollState, vertexShader } from "./portrait-particles";
 import PortraitScene from "./PortraitScene";
+
+// Execute the actual scalar block interpolated into the GPU shader, not a
+// separately maintained imitation. These GLSL expressions are also valid JS
+// once scalar declarations and standard maths functions have been supplied.
+const flowAt = new Function("s", "t", "uTime", "uEnding", "uAspect", `
+  const TAU = 6.28318530718;
+  const sin = Math.sin, cos = Math.cos, min = Math.min;
+  const fract = value => value - Math.floor(value);
+  const mix = (a, b, t) => a * (1 - t) + b * t;
+  const smoothstep = (a, b, value) => {
+    const t = Math.max(0, Math.min(1, (value - a) / (b - a)));
+    return t * t * (3 - 2 * t);
+  };
+  ${particleFlowShader.replace(/\bfloat\b/g, "const")}
+  return { orbit, localX, localY, x: flowX, y: flowY, z: flowZ };
+`) as (s: number, t: number, time: number, ending: number, aspect: number) => {
+  orbit: number; localX: number; localY: number; x: number; y: number; z: number;
+};
 
 const rendererFactory = vi.hoisted(() => vi.fn());
 vi.mock("three", async (original) => ({
@@ -161,30 +179,44 @@ describe("portrait source and reversible choreography", () => {
   it("preserves the accepted portrait relief, lift, turn and flight control geometry", () => {
     // The 24 September request replaces the destination and its succession
     // of shapes. Freeze the opening geometry independently of that destination.
-    const opening = vertexShader.slice(vertexShader.indexOf("    // When a point lets go"), vertexShader.indexOf("    // Opening destination"));
+    const opening = vertexShader.slice(vertexShader.indexOf("    // When a point lets go"), vertexShader.indexOf("    // The released particles"));
     expect(createHash("sha256").update(opening).digest("hex"))
       .toBe("b28358eba36e623022830263c5c74a25605dea49bb0c3444943437803f3feb6f");
   });
 
-  it("keeps the improved opening destination before the restored closing circle", () => {
-    const destination = vertexShader.slice(vertexShader.indexOf("    // Opening destination"), vertexShader.indexOf("    // Restore the circular"));
-    expect(destination).toContain("float orbit = s * TAU + uTime * 0.075;");
-    expect(destination).toContain("flight * flight * field");
-    expect(destination).not.toMatch(/uEnding|mix\(p,|vec3 stream|vec3 circular/);
-    expect(destination).not.toContain("(r - 0.5) * 14.0");
-    // Only vertical transport depends on scroll. Angular movement is slow and
-    // time-driven, so crossing a section cannot spin or reshape the volume.
-    expect(destination.match(/uTravel/g)).toHaveLength(1);
-    expect(destination).toContain("-0.18 - uTravel * 0.45");
+  it("uses one phase and basis from release through the closing hold", () => {
+    expect(vertexShader.split(particleFlowShader)).toHaveLength(2);
+    expect(vertexShader.match(/float orbit =/g)).toHaveLength(1);
+    expect(vertexShader).toContain("flight * flight * field");
+    expect(vertexShader).not.toMatch(/uTravel|closingFlow|mix\(p,|vec3 stream|vec3 circular/);
+  });
+
+  it("cannot collapse or rotate the circle when scroll progress changes, regardless of dwell time", () => {
+    for (const aspect of [390 / 844, 1280 / 720, 2.5]) {
+      for (const time of [0, 15, 30, 60, 300]) {
+        for (let i = 0; i < 64; i++) {
+          const s = i / 64;
+          const t = ((i * 17) % 63) / 63;
+          const start = flowAt(s, t, time, 0, aspect);
+          let previous = start;
+          for (let step = 0; step <= 20; step++) {
+            const point = flowAt(s, t, time, step / 20, aspect);
+            expect(point.orbit).toBe(start.orbit);
+            expect(Math.hypot(point.localX, point.localY)).toBeGreaterThan(1.04);
+            expect(Math.hypot(point.localX, point.localY)).toBeLessThan(2.44);
+            expect(Math.hypot(point.x - previous.x, point.y - previous.y, point.z - previous.z)).toBeLessThan(0.06);
+            expect(5.25 - point.z).toBeGreaterThan(3.1);
+            previous = point;
+          }
+        }
+      }
+    }
   });
 
   it("restores the work circle gathering around the closing text without removing contact", () => {
-    const closing = vertexShader.slice(vertexShader.indexOf("    // Restore the circular"), vertexShader.indexOf("    // Only a held press"));
-    expect(closing).toContain("float closingFlow = smoothstep(0.0, 0.65, uTravel);");
-    expect(closing).toContain("p = mix(p, stream, closingFlow);");
-    expect(closing).toContain("p = mix(p, circular, uEnding);");
-    expect(closing).toContain("float orbit = s * TAU");
-    expect(closing).not.toContain("float orbit = r * TAU");
+    expect(particleFlowShader).toContain("float tube = mix(0.36, 0.12, uEnding);");
+    expect(particleFlowShader).toContain("mix(-0.05, -0.4, uEnding)");
+    expect(particleFlowShader).toContain("float orbit = s * TAU");
     const css = readFileSync(resolve("src/styles/portrait.css"), "utf8");
     expect(css).toContain(".particle-hero { height: 100svh;");
     expect(css).toContain(".particle-ending { position: relative; min-height: 138svh;");
@@ -308,7 +340,7 @@ describe("portrait source and reversible choreography", () => {
     expect(firstMovement.loosen).toBeGreaterThan(0);
     expect(firstMovement.disperse).toBeGreaterThan(0);
     expect(firstMovement.turn).toBe(0);
-    const firstCamera = portraitCamera(firstMovement.disperse, 0, 16 / 9);
+    const firstCamera = portraitCamera(firstMovement.disperse, 16 / 9);
     expect(firstCamera.x).toBeLessThan(0.001);
     expect(firstCamera.z).toBeGreaterThan(5.99);
 
@@ -339,11 +371,11 @@ describe("portrait source and reversible choreography", () => {
 
   it('keeps camera travel shallow while the particles create the depth', () => {
     const early = portraitPhases(0.03);
-    const opening = portraitCamera(early.disperse, 0, 16 / 9);
+    const opening = portraitCamera(early.disperse, 16 / 9);
     expect(opening.x).toBeLessThan(0.001);
     expect(opening.z).toBeGreaterThan(5.99);
 
-    const complete = portraitCamera(1, 1, 16 / 9);
+    const complete = portraitCamera(1, 16 / 9);
     expect(complete.x).toBeGreaterThan(0);
     expect(complete.z).toBeGreaterThanOrEqual(5.1);
     expect(complete.z).toBeLessThan(6);

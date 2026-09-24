@@ -361,6 +361,35 @@ A fresh checkout of the branch is complete for this milestone. This Mac still ha
 
 ## Revision record
 
+- 24 September 2026, correct the particle-path join: the restored closing
+  block used `s * TAU + time * .16 + travel * 1.6`, while the opening field
+  used `s * TAU + time * .075`. Interpolating those differently phased and
+  oriented paths compressed and twisted the circle at intermediate scroll
+  positions. The mismatch grew with dwell time, which endpoint captures and
+  a continuity-only audit did not catch. The complete scroll/controller,
+  camera, shader and layout code was reviewed before replacing that join.
+  One shared circle calculation now supplies the released particle target
+  throughout. Its basis is fixed and its angular phase does not depend on
+  scroll. Ending progress changes only tube/depth spread and centre height.
+  The camera settles with the portrait release and adds no later travel.
+  The short hero-to-work gap, sticky closing hold, ending opacity and inline
+  contact form are unchanged. The portrait's source and lift/turn geometry,
+  and the renderer's frame-safe lifecycle, remain intact.
+
+  Tests execute the actual shared scalar shader source at intermediate
+  closing positions, mobile/desktop aspects and elapsed times up to five
+  minutes, checking angular identity, non-collapsing radius, bounded movement
+  and camera depth. Reintroducing a scroll-dependent phase makes that test
+  fail. This is a numerical regression check, not proof of GPU behaviour or
+  visual acceptance. Real browser review covers the work-to-ending interval
+  in both directions, not only the final circle.
+
+  Verification: typecheck, 108 tests, lint, the 14-route build and independent
+  geometry/test audit pass. Rebuilt 8443 browser checks cover intermediate
+  desktop and 390x844 positions through the work-to-closing join and its
+  reversal, with the sticky hold and inline contact retained. Physical Safari
+  and Chrome devices and aesthetic acceptance remain unverified.
+
 - 24 September 2026, restore the closing interaction: the quicker access to
   Selected work is retained. The previous revision incorrectly removed the
   circle's movement from behind the case studies to around the closing text,
