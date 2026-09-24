@@ -217,15 +217,16 @@ export function PortraitExperience() {
       element.style.setProperty("--pointer-x", String(pointerX));
       element.style.setProperty("--pointer-y", String(pointerY));
       if (intro) intro.inert = state.intro < 0.05;
-      for (const [index, card] of cards.entries()) {
+      for (const card of cards) {
         const top = (cardTops.get(card) ?? 0) - actualY;
-        const enter = reduced ? 1 : smooth(height * 0.98, height * 0.56, top);
+        const enter = reduced ? 1 : smooth(height * 0.98, height * 0.78, top);
         const leave = reduced ? 1 : 1 - smooth(0.04, 0.74, state.ending);
         const opacity = enter * leave;
-        // Cards settle from a little below and behind, not a tumble.
-        const offset = (1 - enter) * 72 - (1 - leave) * 60;
+        // Short, level arrivals keep the collection aligned and readable as
+        // it enters. A long invisible approach recreated the handoff gap.
+        const offset = (1 - enter) * 24 - (1 - leave) * 24;
         card.style.opacity = String(opacity);
-        card.style.transform = reduced ? "none" : `translate3d(0, ${offset.toFixed(2)}px, ${(-60 * (1 - enter) - 120 * (1 - leave)).toFixed(2)}px) rotateX(${((1 - enter) * 5).toFixed(2)}deg) rotateY(${((1 - enter) * (index % 3 - 1) * -3).toFixed(2)}deg)`;
+        card.style.transform = reduced ? "none" : `translate3d(0, ${offset.toFixed(2)}px, 0)`;
         card.inert = opacity < 0.45;
       }
       motion.current.invalidate?.();
