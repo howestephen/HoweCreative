@@ -28,7 +28,8 @@ html:has(.portrait-home) { scrollbar-gutter: stable; }
 .portrait-source-crop img { position: absolute; width: 219.42857%; max-width: none; height: auto; left: -62.85714%; top: -1.23077%; }
 .particle-vignette { position: absolute; inset: 0; background: linear-gradient(0deg, #060707 0%, #06070700 13%, #06070700 87%, #06070766 100%); }
 .particle-hero, .spatial-work, .particle-ending { z-index: 1; }
-.particle-hero { height: 100svh; position: relative; scroll-margin-top: 0; }
+/* The hero holds 2.2 viewports of scroll (HERO_HEIGHT in portrait-particles.ts); the release takes 1.6 of them and the work heading enters at 0.75 of the release. */
+.particle-hero { height: 220svh; position: relative; scroll-margin-top: 0; }
 .particle-hero-inner { position: sticky; top: 0; height: 100svh; opacity: var(--intro-opacity); pointer-events: none; }
 .particle-introduction { position: absolute; left: 44px; bottom: 106px; }
 .particle-introduction h1 { font-size: clamp(16px, 1.3vw, 20px); font-weight: 400; line-height: 1.5; letter-spacing: -.15px; margin: 0; color: #dcddd8; }

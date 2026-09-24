@@ -361,6 +361,76 @@ A fresh checkout of the branch is complete for this milestone. This Mac still ha
 
 ## Revision record
 
+- 24 September 2026, three-dimensional release and hero scroll range (Claude):
+  Stephen reviewed the compact revision and rejected it. The work heading was
+  on screen before the head had begun to come apart, the breakup read as a
+  flat image turning into particles on one plane with the depth surviving only
+  in the ring, and the entry into the ring looked like a forced explosion that
+  filled the screen. Causes found in the code, not guessed: the hero was one
+  viewport tall with work in normal flow directly after it; the release ran
+  over 1.1 viewports; released points lifted along per-point random noise,
+  which destroyed the neighbourhood coherence that parallax depends on; and
+  the route into the ring was a Bezier with large control offsets that
+  scattered every point across the frame before converging.
+
+  The change keeps the accepted opening frame, the depth-mapped relief, the
+  face pivot, the stipple thinning, the ring and the closing hold, and alters
+  the passage between them:
+  - The hero holds 2.2 viewports of scroll with the opening sticky
+    (`HERO_HEIGHT` in `portrait-particles.ts`, mirrored in `portrait.css`);
+    the release runs over 1.6 (`RELEASE_LENGTH`). The work heading reaches the
+    bottom of the screen at three quarters of the release and is mid-screen
+    when the release ends. No screen shows particles alone; the dissolving
+    head is the content until the heading arrives.
+  - `portraitSliceShader` separates the plate into thirteen vertical slices at
+    their own depths, feathered over the last third of each column into one
+    corrugated sheet so nothing tears open between neighbours, and deepens the
+    relief. Both run along each point's view ray from the opening lens, so the
+    opening frame is unchanged by construction and the depth is revealed by
+    the turn (now 0.62 rad) and a deeper dolly (6 to 4.9, tracking 0.55).
+    This restores the depth reading of the 16 September reference (slices
+    separating along depth as the angle increases) without the seams that
+    rigid pillars showed on phones.
+  - Lift-off follows one low-frequency field towards the lens and up to the
+    left; neighbours leave together, so the head smears into sheets that keep
+    their parallax. The reach varies smoothly across the plate with 30%
+    per-point randomness: a fully random reach along one shared direction
+    extruded the fine-toned hair into perspective streaks.
+  - `portraitOrderShader` keys release to the point's own relief (hair and the
+    back of the head first, features last) with loosening leading flight for
+    every point; the last features are still in flight as the release ends.
+  - The route into the ring is a spiral in the ring's own frame:
+    `particleFrameShader` is the inverse of the ring basis, and
+    `particleFlowShader` eases radius and height onto the ring while the angle
+    turns the short way round to the point's own place, which is the ring
+    angle nearest to where it left the head, spread by its seed so no sector
+    is empty. Mid-flight the cloud is therefore already a visible vortex. The
+    ring's angle remains independent of scroll, so the 24 September join fix
+    stands. Doomed points thin between 0.1 and 0.6 of flight and the optical
+    sizing arrives after 0.3, so the vortex is drawn by the survivors and the
+    frame never fills with sampling density in transit.
+  - The focal plane follows the lens to the face (`uFocus`).
+
+  The constellation of lines in the hair at the opening is part of the
+  approved source concept image, checked by cropping the plate; it is not a
+  rendering artefact.
+
+  Tests replace the frozen shader hash with numerical checks that execute the
+  actual scalar blocks: the unseparated relief equals the accepted relief,
+  slices are continuous across every column boundary and bounded, hair leads
+  the face and loosening leads flight monotonically, the ring frame inverse
+  round-trips exactly at e = 0 and reaches the ring exactly at e = 1 with the
+  angle turning no more than half a turn, the ring remains phase-fixed under
+  scroll and dwell, the camera is monotonic and stays at least 2.6 units in
+  front of the ring, and the hero/release ratios hold. Verified: typecheck,
+  110 tests, lint, the production build and an independent audit of the
+  shader, inverse maths, opening invariance and tests pass. The passage, the
+  ending and the reverse scroll were inspected live in the desktop app's
+  browser pane at 1440x900 and 390x844 with no console errors; those views
+  and the canvas's own frame-rate reading were not saved as artefacts.
+  Physical phones, Stephen's own scroll pace and aesthetic acceptance remain
+  unverified.
+
 - 24 September 2026, correct the particle-path join: the restored closing
   block used `s * TAU + time * .16 + travel * 1.6`, while the opening field
   used `s * TAU + time * .075`. Interpolating those differently phased and
