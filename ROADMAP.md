@@ -1,20 +1,13 @@
 # ROADMAP
 
-## Current animation revision - 24 September 2026
+## Animation review correction - 24 September 2026
 
-The current request is to improve particle composition and shorten the handoff
-from the hero to Selected work on `/study`. This supersedes the earlier freeze
-on released-field choreography and scroll distance, while preserving the
-portrait source, surface/relief/turn/lift calculations and frame-safe renderer.
-
-- [x] Replace the random field and separate closing morph with one circulating
-  current that opens through the work and closes into a tilted loop. Gradually
-  shed density during established flight and use smaller, distance-based points.
-- [x] Reduce hero height from 170/175 to 115svh on desktop/phones; remove the
-  work section's minimum-height spacer and tighten its exit. Shorten card
-  arrivals and settle them level so content becomes readable near the screen edge.
-- [ ] Review the rebuilt 8443 sequence on physical Safari and Chrome phones
-  and obtain visual approval before any promotion to the live homepage.
+The continuous-current and shortened-handoff revision in `8424bd9` was reviewed
+and rejected. The preceding design is restored; the frame-safe renderer remains
+unchanged. Improving the particle
+composition and hero-to-work spacing remains unresolved; passing automated
+checks does not establish visual acceptance. Obtain specific regression
+feedback before another change to the choreography or overall pacing.
 
 ## Deferred commercial positioning - 22 September 2026
 

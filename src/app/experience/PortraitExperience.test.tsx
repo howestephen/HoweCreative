@@ -31,40 +31,6 @@ beforeEach(() => {
 afterEach(() => { cleanup(); vi.useRealTimers(); vi.restoreAllMocks(); vi.unstubAllGlobals(); });
 
 describe("portrait review experience", () => {
-  it("makes entering cards readable and interactive near the viewport edge, and reverses on scroll back", async () => {
-    const callbacks = new Map<number, FrameRequestCallback>();
-    let nextId = 0;
-    vi.stubGlobal("requestAnimationFrame", (cb: FrameRequestCallback) => { callbacks.set(++nextId, cb); return nextId; });
-    vi.stubGlobal("cancelAnimationFrame", (id: number) => callbacks.delete(id));
-    vi.spyOn(HTMLElement.prototype, "clientHeight", "get").mockReturnValue(700);
-    vi.spyOn(HTMLElement.prototype, "offsetTop", "get").mockImplementation(function(this: HTMLElement) {
-      if (this.classList.contains("spatial-work")) return 805;
-      if (this.classList.contains("spatial-card")) return 1060;
-      if (this.classList.contains("particle-ending")) return 3000;
-      return 0;
-    });
-    const scroll = vi.spyOn(window, "scrollY", "get").mockReturnValue(0);
-    const { container } = mount();
-    const tick = async () => {
-      const pending = [...callbacks.values()]; callbacks.clear();
-      await act(async () => pending.forEach(cb => cb(100)));
-    };
-    await tick();
-    const card = container.querySelector<HTMLElement>(".spatial-card")!;
-    expect(card.inert).toBe(true);
-    scroll.mockReturnValue(500); // Top of the card is at 80% of the viewport.
-    fireEvent.scroll(window);
-    await tick();
-    expect(Number(card.style.opacity)).toBeGreaterThan(0.9);
-    expect(card.inert).toBe(false);
-    expect(card.style.transform).not.toContain("rotate");
-    scroll.mockReturnValue(0);
-    fireEvent.scroll(window);
-    await tick();
-    expect(card.style.opacity).toBe("0");
-    expect(card.inert).toBe(true);
-  });
-
   it("keeps scroll progress stable through browser-bar resize and aligns the background fade to the real footer", async () => {
     const callbacks = new Map<number, FrameRequestCallback>();
     let nextId = 0;

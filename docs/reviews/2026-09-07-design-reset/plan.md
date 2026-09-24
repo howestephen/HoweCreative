@@ -361,35 +361,14 @@ A fresh checkout of the branch is complete for this milestone. This Mac still ha
 
 ## Revision record
 
-- 24 September 2026, continuous current and shorter handoff: the new request
-  authorises redesigning the released particles and reducing the distance to
-  work. Replaced the uniformly scattered destination and separate closing
-  morph with one current, stretched into a descending helix through the work
-  and gathered into a tilted loop at the ending. Angular placement remains
-  independent of survival; cross-section angle is decorrelated from spread.
-  Density fades over established flight rather than retaining every source
-  pixel until the work screen. Smaller points and distance-based softness
-  expose the current's structure; phone helix pitch is compressed to keep
-  more of the curve visible. Hero height changes from 170/175svh to 115svh,
-  with reduced work-exit and ending spacing. Cards arrive level over 24px
-  instead of travelling 72px with rotation, and reach full opacity earlier.
-  A component regression test checks readability and activation when a card
-  reaches 80% viewport height, including reverse scroll; restoring the old
-  entrance interval makes it fail at 0.394 opacity. The header gains a solid
-  background after the introduction fades so card text cannot cross its links.
-  The
-  source, surface relief, turn/lift calculations, camera function, single draw
-  and resize/readiness lifecycle are unchanged. The rendered breakup does
-  change because it now travels into the new current over a shorter distance.
-  Tests freeze the preserved surface calculations against the committed
-  baseline and check the actual density interval; they do not certify visual
-  quality. Typecheck, 103 tests, lint and the 14-route build pass. Independent
-  review found no blocking defect after correcting a cross-section banding
-  risk and test wording. Browser checks on the actual rebuilt 8443 route cover
-  desktop and phone-sized viewports, early scroll, the work handoff, preview
-  open/close, closing framing and restoration of the portrait on reverse scroll.
-  Physical-device performance and aesthetic acceptance remain outstanding.
-  Main and production unchanged.
+- 24 September 2026, rejected current revision: Stephen reviewed `8424bd9` and
+  rejected the result. Reverted its particle destination, density/optical
+  changes, shorter hero and ending, card arrivals and header treatment to the
+  preceding design. The preview host configuration remains. The original
+  request for improved particle composition and a better work handoff is still
+  open. Automated checks and code audit had passed but did not establish the
+  visual quality of that revision. Specific regression feedback is pending
+  before further choreography changes.
 
 Verification for the latest circular-depth and tone correction: typecheck, 102 tests, lint and the 14-route production build pass. An independent code audit found no blocking defect. Deliberately restoring the old gamma conversion to just the red sampler channel initially exposed a weak all-channel maximum assertion; the test now checks each channel separately and fails under that mutation. The correct conversion was restored before the final checks. Browser-sized mobile checks are not physical-device testing.
 
