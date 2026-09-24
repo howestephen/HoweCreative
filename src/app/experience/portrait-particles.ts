@@ -81,15 +81,15 @@ export const portraitPhases = (progress: number) => {
   };
 };
 
-export const portraitCamera = (disperse: number, travel: number, aspect: number) => {
+export const portraitCamera = (disperse: number, aspect: number) => {
   // The depth comes from the particles, not from driving the lens through the
   // cloud. Keeping the dolly shallow prevents the field collapsing into a
   // single enlarged point on both desktop and mobile GPUs.
   const advance = smooth(0, 1, disperse);
   return {
     x: advance * (aspect > 1.1 ? 0.48 : 0.2),
-    y: -advance * 0.1 - travel * 0.1,
-    z: 6 - advance * 0.75 - travel * 0.15,
+    y: -advance * 0.1,
+    z: 6 - advance * 0.75,
   };
 };
 
@@ -153,6 +153,28 @@ export type ParticleMotion = {
   invalidate?: () => void;
 };
 
+// One angular coordinate and one fixed basis for the whole released cloud.
+// Scroll gathers its cross-section and lowers its centre to the closing text;
+// it never changes particle correspondence or rotates the basis. Keep this
+// scalar block shared with the numerical regression test of the actual shader.
+export const particleFlowShader = /* glsl */ `
+    float orbit = s * TAU + uTime * 0.075;
+    float crossSection = fract(s * 73.13 + t * 29.7) * TAU;
+    float radius = 1.55 + t * 0.38 + sin(orbit * 3.0) * 0.14;
+    float tube = mix(0.36, 0.12, uEnding);
+    float radial = radius + cos(crossSection) * tube;
+    float localX = cos(orbit) * radial;
+    float localY = sin(orbit) * radial;
+    float localZ = sin(crossSection) * tube + (t - 0.5) * 0.8 * (1.0 - uEnding);
+    float tiltedY = cos(0.66) * localY - sin(0.66) * localZ;
+    float tiltedZ = sin(0.66) * localY + cos(0.66) * localZ;
+    float flowX = (cos(-0.24) * localX + sin(-0.24) * tiltedZ)
+      * min(1.0, uAspect * 0.75) + (uAspect > 1.1 ? 0.48 : 0.2);
+    float flowY = tiltedY * mix(0.62, 1.0, smoothstep(0.55, 1.1, uAspect))
+      + mix(-0.05, -0.4, uEnding);
+    float flowZ = -sin(-0.24) * localX + cos(-0.24) * tiltedZ;
+`;
+
 export const vertexShader = /* glsl */ `
   attribute vec3 aColour;
   attribute vec4 aSeed;
@@ -161,7 +183,6 @@ export const vertexShader = /* glsl */ `
   uniform float uTurn;
   uniform float uLoosen;
   uniform float uDisperse;
-  uniform float uTravel;
   uniform float uEnding;
   uniform float uTime;
   uniform float uDpr;
@@ -169,7 +190,6 @@ export const vertexShader = /* glsl */ `
   uniform float uAspect;
   uniform float uPixel;
   uniform vec2 uPointer;
-  uniform vec3 uCamera;
   uniform float uPress;
   uniform float uHover;
   varying vec3 vColour;
@@ -276,57 +296,17 @@ export const vertexShader = /* glsl */ `
     // A curved route carries each ember up and out before it reaches its
     // place in the field, so neighbouring detail stretches before it dissolves.
     vec3 control = lifted + vec3((r - 0.5) * 1.6, 0.9 + s * 0.8, 0.6 + (t - 0.5) * 0.8) * uScale;
-    // Opening destination retained from the compact-handoff revision. Phase
-    // and cross-section do not use the survival seed, so thinning cannot
-    // remove one side. The closing movement below starts after release.
+    // The released particles follow the same circle behind work and around
+    // the closing text. There is no second destination to interpolate into.
     float near = 1.0 - smoothstep(0.0, 0.07, t);
     float far = smoothstep(0.3, 0.6, t);
     float scatter = hash2(vec2(r, s));
-    float orbit = s * TAU + uTime * 0.075;
-    float crossSection = fract(s * 73.13 + t * 29.7) * TAU;
-    float spread = 0.18 + sqrt(t) * 0.55;
-    float radial = 1.85 + cos(crossSection) * spread;
-    float wave = sin(orbit * 2.0) * 0.18;
-    vec3 field = vec3(
-      cos(orbit) * radial,
-      sin(orbit) * radial * 0.62 + wave,
-      sin(orbit) * 1.15 + sin(crossSection) * spread
-    );
-    field.xy = mat2(0.94, -0.342, 0.342, 0.94) * field.xy;
-    field.x *= min(1.2, uAspect * 0.72);
-    field.xy += vec2(0.12, -0.18 - uTravel * 0.45);
+    ${particleFlowShader}
+    vec3 field = vec3(flowX, flowY, flowZ);
     float retained = 1.0 - flight;
     vec3 p = retained * retained * lifted
       + 2.0 * retained * flight * control
       + flight * flight * field;
-    // Restore the circular movement behind the work and its gathering around
-    // the held closing text. This starts after release, leaving the opening
-    // destination and compact hero-to-work handoff unchanged.
-    float closingFlow = smoothstep(0.0, 0.65, uTravel);
-    if (uTravel > 0.0 || uEnding > 0.0) {
-      float orbit = s * TAU + uTime * 0.16 + uTravel * 1.6;
-      float crossSection = fract(s * 73.13 + t * 29.7) * TAU;
-      float widthFit = min(1.0, uAspect * 0.75);
-      float radius = 1.55 + t * 0.38;
-      radius += sin(orbit * 3.0 - uTime * 0.23) * 0.14;
-      float tube = 0.12 + 0.24 * (1.0 - uEnding);
-      vec3 circular = vec3(
-        cos(orbit) * (radius + cos(crossSection) * tube),
-        sin(orbit) * (radius + cos(crossSection) * tube),
-        sin(crossSection) * tube
-      );
-      float tilt = 0.66 + sin(uTime * 0.07) * 0.10;
-      circular.yz = mat2(cos(tilt), sin(tilt), -sin(tilt), cos(tilt)) * circular.yz;
-      circular = rotateY(circular, -0.24 + sin(uTime * 0.05) * 0.12);
-      circular.x *= widthFit;
-      circular.y *= mix(0.62, 1.0, smoothstep(0.55, 1.1, uAspect));
-      circular.xy += vec2(uAspect > 1.1 ? 0.48 : 0.2, -0.4);
-      vec3 stream = circular;
-      stream.z += (t - 0.5) * 4.2;
-      stream.y += sin(s * TAU * 2.0 + uTime * 0.19) * 0.55 - uTravel * 0.65;
-      p = mix(p, stream, closingFlow);
-      p = mix(p, circular, uEnding);
-    }
     // Only a held press parts the points. Passive hover changes colour only.
     p.x += uPointer.x * (p.z + 0.3) * 0.11 * flight;
     p.y += uPointer.y * (p.z + 0.3) * 0.08 * flight;

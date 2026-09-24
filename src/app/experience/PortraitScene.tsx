@@ -1,7 +1,7 @@
 import { useEffect, useRef, type RefObject } from "react";
 import {
   BufferGeometry, Float32BufferAttribute, NoToneMapping, PerspectiveCamera,
-  Points, Scene, ShaderMaterial, Vector2, Vector3, WebGLRenderer,
+  Points, Scene, ShaderMaterial, Vector2, WebGLRenderer,
 } from "three";
 import {
   fragmentShader, PORTRAIT_CROP, PORTRAIT_POINTS_SOURCE, portraitCamera, portraitFraming, portraitPhases, samplePortrait, vertexShader,
@@ -35,10 +35,9 @@ export default function PortraitScene({ motion, onReady, onUnavailable }: Props)
     camera.position.z = 6;
     const geometry = new BufferGeometry();
     const uniforms = {
-      uRelease: { value: 0 }, uTravel: { value: 0 }, uEnding: { value: 0 },
+      uRelease: { value: 0 }, uEnding: { value: 0 },
       uTime: { value: 0 }, uDpr: { value: 1 }, uScale: { value: 1 },
       uAspect: { value: 1 }, uPixel: { value: 2 }, uPointer: { value: new Vector2() },
-      uCamera: { value: new Vector3(0, 0, 6) },
       uTurn: { value: 0 }, uLoosen: { value: 0 }, uDisperse: { value: 0 }, uPress: { value: 0 }, uHover: { value: 0 },
     };
     const material = new ShaderMaterial({
@@ -124,15 +123,11 @@ export default function PortraitScene({ motion, onReady, onUnavailable }: Props)
       uniforms.uTurn.value = phase.turn * 0.58;
       uniforms.uLoosen.value = phase.loosen;
       uniforms.uDisperse.value = phase.disperse;
-      uniforms.uTravel.value = state.travel;
       uniforms.uEnding.value = state.ending;
-      // One dolly through the cloud, which spans roughly z in [-0.9, 0.9] *
-      // uScale once the relief is added. The lens initially holds still while
-      // particles separate, then tracks sideways towards the head so it passes
-      // the cheek and jaw rather than the ear.
-      const cameraPosition = portraitCamera(phase.disperse, state.travel, camera.aspect);
+      // The opening camera settles once. Page travel does not add another
+      // movement while the circle gathers around the closing text.
+      const cameraPosition = portraitCamera(phase.disperse, camera.aspect);
       camera.position.set(cameraPosition.x, cameraPosition.y, cameraPosition.z);
-      uniforms.uCamera.value.copy(camera.position);
       if (!state.paused) uniforms.uTime.value += dt;
       pointer.set(state.pointerX, state.pointerY);
       const pressTarget = state.pressed && !state.paused && state.release < 0.18 ? 1 : 0;
