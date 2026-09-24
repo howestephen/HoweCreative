@@ -11,7 +11,7 @@ html:has(.portrait-home) { scrollbar-gutter: stable; }
 .portfolio-shell.portrait-home .nav-contact svg, .portfolio-shell.portrait-home nav a[href='/cv'] svg { display: none; }
 .portfolio-shell.portrait-home .nav-about { display: none; }
 .portfolio-shell.portrait-home :focus-visible { outline-color: #e3d9c2; }
-.particle-experience { position: relative; isolation: isolate; background: #060707; color: #edece7; --intro-opacity: 1; --portrait-opacity: 1; }
+.particle-experience { position: relative; isolation: isolate; background: #060707; color: #edece7; --intro-opacity: 1; --portrait-opacity: 1; --end-opacity: 0; }
 /* Browser chrome can expand/collapse without changing the camera's frame. */
 .particle-environment { position: fixed; inset: 0 0 auto; height: 100lvh; pointer-events: none; z-index: 0; overflow: hidden; }
 .particle-environment::after { content: ""; position: absolute; inset: calc(var(--contact-top, 100000px) - 160px) 0 0; background: linear-gradient(transparent, #060707 160px); }
@@ -60,8 +60,8 @@ html:has(.portrait-home) { scrollbar-gutter: stable; }
 .spatial-card-foot > svg { color: #d3d8cf; transition: transform .35s cubic-bezier(.2,.8,.2,1); }
 .spatial-card:hover .spatial-card-foot > svg, .spatial-card:focus-visible .spatial-card-foot > svg { transform: translate(3px, -3px); }
 .spatial-preview-note { font-size: 13px; color: #949d97; margin-top: 27px; }
-.particle-ending { position: relative; text-align: center; padding: 80px 24px 96px; }
-.particle-ending-inner { position: relative; }
+.particle-ending { position: relative; min-height: 138svh; text-align: center; padding: 38svh 24px 0; }
+.particle-ending-inner { position: sticky; top: 33svh; opacity: var(--end-opacity); }
 .particle-ending-inner > p { color: #b3b9b2; font-size: 15px; margin-bottom: 15px; }
 .particle-ending h2 { font-size: clamp(64px, 9vw, 130px); line-height: 1.1; font-weight: 400; letter-spacing: -.065em; margin: 0 0 30px; }
 .particle-contact { display: inline-flex; align-items: center; gap: 20px; font-size: 14px; padding: 12px 2px; border-bottom: 1px solid #b1b9ad55; }
@@ -102,6 +102,8 @@ html:has(.portrait-home) { scrollbar-gutter: stable; }
 [data-motion='reduced'] .scroll-track > span { animation: none; }
 [data-motion='reduced'] .spatial-card, [data-motion='reduced'] .spatial-dialog, [data-motion='reduced'] .particle-fallback { transition: none; animation: none; }
 [data-motion='reduced'] .spatial-card-foot > svg, [data-motion='reduced'] .spatial-card-icon { transition: none; }
+[data-motion='reduced'] .particle-ending { min-height: 100svh; padding-top: 30svh; }
+[data-motion='reduced'] .particle-ending-inner { opacity: 1; }
 @media (max-width: 850px) {
   .portfolio-shell.portrait-home .header-inner { width: calc(100% - 48px); height: 88px; }
   .portfolio-shell.portrait-home .site-header nav { gap: 20px; }
@@ -131,7 +133,7 @@ html:has(.portrait-home) { scrollbar-gutter: stable; }
   .spatial-card p { max-width: 35ch; font-size: 13px; margin-bottom: 24px; }
   .spatial-card-foot > span { font-size: 12px; }
   .spatial-preview-note { max-width: 32ch; font-size: 13px; line-height: 1.6; }
-  .particle-ending { padding: 64px 24px 72px; }
+  .particle-ending { min-height: 130svh; padding-top: 34svh; }
   .particle-ending h2 { font-size: 76px; }
   .particle-ending-inner > p { font-size: 13px; }
   .particle-tools { left: 22px; top: calc(100svh - 55px); gap: 16px; }

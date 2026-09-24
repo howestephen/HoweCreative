@@ -161,13 +161,13 @@ describe("portrait source and reversible choreography", () => {
   it("preserves the accepted portrait relief, lift, turn and flight control geometry", () => {
     // The 24 September request replaces the destination and its succession
     // of shapes. Freeze the opening geometry independently of that destination.
-    const opening = vertexShader.slice(vertexShader.indexOf("    // When a point lets go"), vertexShader.indexOf("    // One destination"));
+    const opening = vertexShader.slice(vertexShader.indexOf("    // When a point lets go"), vertexShader.indexOf("    // Opening destination"));
     expect(createHash("sha256").update(opening).digest("hex"))
       .toBe("b28358eba36e623022830263c5c74a25605dea49bb0c3444943437803f3feb6f");
   });
 
-  it("keeps one particle destination with no work or ending shape switch", () => {
-    const destination = vertexShader.slice(vertexShader.indexOf("    // One destination"), vertexShader.indexOf("    // Only a held press"));
+  it("keeps the improved opening destination before the restored closing circle", () => {
+    const destination = vertexShader.slice(vertexShader.indexOf("    // Opening destination"), vertexShader.indexOf("    // Restore the circular"));
     expect(destination).toContain("float orbit = s * TAU + uTime * 0.075;");
     expect(destination).toContain("flight * flight * field");
     expect(destination).not.toMatch(/uEnding|mix\(p,|vec3 stream|vec3 circular/);
@@ -176,6 +176,20 @@ describe("portrait source and reversible choreography", () => {
     // time-driven, so crossing a section cannot spin or reshape the volume.
     expect(destination.match(/uTravel/g)).toHaveLength(1);
     expect(destination).toContain("-0.18 - uTravel * 0.45");
+  });
+
+  it("restores the work circle gathering around the closing text without removing contact", () => {
+    const closing = vertexShader.slice(vertexShader.indexOf("    // Restore the circular"), vertexShader.indexOf("    // Only a held press"));
+    expect(closing).toContain("float closingFlow = smoothstep(0.0, 0.65, uTravel);");
+    expect(closing).toContain("p = mix(p, stream, closingFlow);");
+    expect(closing).toContain("p = mix(p, circular, uEnding);");
+    expect(closing).toContain("float orbit = s * TAU");
+    expect(closing).not.toContain("float orbit = r * TAU");
+    const css = readFileSync(resolve("src/styles/portrait.css"), "utf8");
+    expect(css).toContain(".particle-hero { height: 100svh;");
+    expect(css).toContain(".particle-ending { position: relative; min-height: 138svh;");
+    expect(css).toContain(".particle-ending-inner { position: sticky; top: 33svh;");
+    expect(css).toContain(".particle-ending { min-height: 130svh; padding-top: 34svh;");
   });
 
   it.each([0, 8, 16, 32, 64, 128, 255])("preserves sRGB tone %i instead of crushing the portrait shadows", (byte) => {
@@ -198,10 +212,10 @@ describe("portrait source and reversible choreography", () => {
   });
 
   it("starts the new travelling volume only after the hero release has completed", () => {
-    for (const [height, work, end] of [[720, 1224, 2165], [844, 1477, 3500]]) {
+    for (const [height, work, end] of [[720, 720, 1524], [844, 844, 2900], [1440, 1440, 2180]]) {
       for (let y = 0; y <= end; y += 1) {
         const state = scrollState(y, height, work, end);
-        if (state.travel > 0) expect(state.release).toBe(1);
+        if (state.travel > 0 || state.ending > 0) expect(state.release).toBe(1);
       }
     }
   });

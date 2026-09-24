@@ -2,6 +2,13 @@
 
 ## Animation review correction - 24 September 2026
 
+Latest correction: keep the improved short hero-to-work gap, but restore the
+circle behind the work gathering around the closing text, and the held
+"Let's talk" stage before the inline contact form enters. The contact form
+stays in place. No dialog, removal or replacement contact flow is requested.
+The general single-movement description below does not supersede this closing
+interaction. See the latest design-plan revision for verification.
+
 The revision in `8424bd9` was rejected and rolled back in `b5f473b`. Subsequent
 feedback fixes the brief: a compact portfolio with one portrait-to-particle
 movement continuing down the page, work arriving during the release, and no

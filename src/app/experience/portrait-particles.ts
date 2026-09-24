@@ -39,10 +39,11 @@ export const scrollState = (y: number, height: number, workTop: number, endTop: 
   // Keep the established opening speed independently of the section spacing.
   // Work enters during the release, rather than waiting for an empty field.
   const releaseEnd = Math.max(height * 1.1, 1);
+  const endingStart = Math.max(releaseEnd, endTop - height * 0.7);
   return {
     release: clamp(y / releaseEnd),
     travel: smooth(Math.max(releaseEnd, workTop - height * 0.4), Math.max(releaseEnd + height, endTop), y),
-    ending: smooth(endTop - height * 0.7, endTop + height * 0.12, y),
+    ending: smooth(endingStart, Math.max(endingStart + 1, endTop + height * 0.12), y),
     intro: 1 - smooth(height * 0.06, height * 0.45, y),
   };
 };
@@ -275,10 +276,9 @@ export const vertexShader = /* glsl */ `
     // A curved route carries each ember up and out before it reaches its
     // place in the field, so neighbouring detail stretches before it dissolves.
     vec3 control = lifted + vec3((r - 0.5) * 1.6, 0.9 + s * 0.8, 0.6 + (t - 0.5) * 0.8) * uScale;
-    // One destination from release to contact. A broad folded circulation,
-    // not a random screen-filling scatter followed by separate target shapes.
-    // Phase and cross-section do not use the survival seed, so thinning cannot
-    // remove one side. Scroll only carries the same volume gently downwards.
+    // Opening destination retained from the compact-handoff revision. Phase
+    // and cross-section do not use the survival seed, so thinning cannot
+    // remove one side. The closing movement below starts after release.
     float near = 1.0 - smoothstep(0.0, 0.07, t);
     float far = smoothstep(0.3, 0.6, t);
     float scatter = hash2(vec2(r, s));
@@ -299,6 +299,34 @@ export const vertexShader = /* glsl */ `
     vec3 p = retained * retained * lifted
       + 2.0 * retained * flight * control
       + flight * flight * field;
+    // Restore the circular movement behind the work and its gathering around
+    // the held closing text. This starts after release, leaving the opening
+    // destination and compact hero-to-work handoff unchanged.
+    float closingFlow = smoothstep(0.0, 0.65, uTravel);
+    if (uTravel > 0.0 || uEnding > 0.0) {
+      float orbit = s * TAU + uTime * 0.16 + uTravel * 1.6;
+      float crossSection = fract(s * 73.13 + t * 29.7) * TAU;
+      float widthFit = min(1.0, uAspect * 0.75);
+      float radius = 1.55 + t * 0.38;
+      radius += sin(orbit * 3.0 - uTime * 0.23) * 0.14;
+      float tube = 0.12 + 0.24 * (1.0 - uEnding);
+      vec3 circular = vec3(
+        cos(orbit) * (radius + cos(crossSection) * tube),
+        sin(orbit) * (radius + cos(crossSection) * tube),
+        sin(crossSection) * tube
+      );
+      float tilt = 0.66 + sin(uTime * 0.07) * 0.10;
+      circular.yz = mat2(cos(tilt), sin(tilt), -sin(tilt), cos(tilt)) * circular.yz;
+      circular = rotateY(circular, -0.24 + sin(uTime * 0.05) * 0.12);
+      circular.x *= widthFit;
+      circular.y *= mix(0.62, 1.0, smoothstep(0.55, 1.1, uAspect));
+      circular.xy += vec2(uAspect > 1.1 ? 0.48 : 0.2, -0.4);
+      vec3 stream = circular;
+      stream.z += (t - 0.5) * 4.2;
+      stream.y += sin(s * TAU * 2.0 + uTime * 0.19) * 0.55 - uTravel * 0.65;
+      p = mix(p, stream, closingFlow);
+      p = mix(p, circular, uEnding);
+    }
     // Only a held press parts the points. Passive hover changes colour only.
     p.x += uPointer.x * (p.z + 0.3) * 0.11 * flight;
     p.y += uPointer.y * (p.z + 0.3) * 0.08 * flight;
@@ -331,6 +359,7 @@ export const vertexShader = /* glsl */ `
     float cloudAlpha = mix(0.97, 0.48 + r * 0.42, smoothstep(0.08, 0.82, flight));
     float emberAlpha = keep * mix(0.72, 0.42, near) * (0.4 + r * 0.6) * mix(1.0, 0.55, far);
     vOpacity = mix(cloudAlpha, emberAlpha, thinning) * smoothstep(0.12, 0.7, depth);
+    vOpacity *= mix(1.0, 0.46, uEnding);
     vec3 silver = vec3(0.66, 0.69, 0.71);
     vec3 warm = vec3(0.86, 0.79, 0.68);
     vec3 ember = mix(silver, warm, near * 0.6) * (0.42 + light * 0.9 + r * 0.25);
