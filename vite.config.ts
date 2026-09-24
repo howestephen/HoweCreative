@@ -33,6 +33,9 @@ export default defineConfig(({ mode, isSsrBuild }) => {
       include: ['three', '@react-three/fiber', 'three/addons/loaders/GLTFLoader.js', 'three/addons/environments/RoomEnvironment.js'],
     },
     assetsInclude: ['**/*.svg', '**/*.csv'],
+    preview: {
+      allowedHosts: ['macbook-pro.tail37ad60.ts.net'],
+    },
     build: {
       rollupOptions: {
         output: {
