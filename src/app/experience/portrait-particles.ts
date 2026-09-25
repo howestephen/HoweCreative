@@ -334,6 +334,13 @@ export const vertexShader = /* glsl */ `
     float near = 1.0 - smoothstep(0.0, 0.07, t);
     float far = smoothstep(0.3, 0.6, t);
     float scatter = hash2(vec2(r, s));
+    // One point in twenty carries a colour: a warm ember red, an amber or a
+    // cool teal. It is latent in the photographic opening, shown under the
+    // pointer, and shown for good once the point is in flight, so the field
+    // lower down the page is where the colour lives.
+    float accent = step(hash2(vec2(t, r) + 0.37), 0.05);
+    float hue = hash2(vec2(s, t) + 0.71);
+    vec3 accentColour = hue < 0.45 ? vec3(0.98, 0.34, 0.2) : (hue < 0.75 ? vec3(0.98, 0.72, 0.3) : vec3(0.36, 0.76, 0.86));
     float liftedX = lifted.x;
     float liftedY = lifted.y;
     float liftedZ = lifted.z;
@@ -351,6 +358,11 @@ export const vertexShader = /* glsl */ `
     float pressure = influence * uPress * interactive;
     p.xy += normalize(away + vec2(0.001)) * pressure * 0.055 * uScale;
     p.z -= pressure * 0.08 * uScale;
+    // Under the pointer the coloured points split a little way out of the
+    // surface and settle back as it leaves: colour is released, not painted.
+    float hover = exp(-pow(length(away * vec2(0.82, 1.15)) / (0.88 * uScale), 2.0) * 1.65) * uHover * interactive;
+    p.xy += normalize(away + vec2(0.001)) * hover * accent * 0.045 * uScale;
+    p.z += hover * accent * 0.06 * uScale;
     vec4 mv = modelViewMatrix * vec4(p, 1.0);
     float depth = -mv.z;
     // The focal plane follows the lens to the face, so the separated slices
@@ -374,16 +386,21 @@ export const vertexShader = /* glsl */ `
     // The intact opening is unaffected.
     float thinning = smoothstep(0.1, 0.6, flight);
     float cloudAlpha = mix(0.97, 0.48 + r * 0.42, smoothstep(0.08, 0.82, flight));
-    float emberAlpha = keep * mix(0.72, 0.42, near) * (0.4 + r * 0.6) * mix(1.0, 0.55, far);
+    float emberAlpha = keep * mix(0.88, 0.55, near) * (0.55 + r * 0.45) * mix(1.0, 0.72, far);
     vOpacity = mix(cloudAlpha, emberAlpha, thinning) * smoothstep(0.12, 0.7, depth);
-    vOpacity *= mix(1.0, 0.46, uEnding);
-    vec3 silver = vec3(0.66, 0.69, 0.71);
-    vec3 warm = vec3(0.86, 0.79, 0.68);
-    vec3 ember = mix(silver, warm, near * 0.6) * (0.42 + light * 0.9 + r * 0.25);
+    vOpacity *= mix(1.0, 0.62, uEnding);
+    // The released field keeps its light: a point's brightness no longer
+    // depends on how dark its source pixel was, and the nearer it is to the
+    // lens the brighter it is, in step with its size and softness.
+    vec3 silver = vec3(0.76, 0.79, 0.82);
+    vec3 warm = vec3(0.92, 0.84, 0.72);
+    float lensNear = 1.0 - smoothstep(2.0, 6.0, depth);
+    vec3 ember = mix(silver, warm, near * 0.6) * (0.78 + light * 0.5 + r * 0.3) * (0.9 + lensNear * 0.35);
     vColour = mix(aColour, ember, smoothstep(0.1, 0.9, flight));
-    float hover = exp(-pow(length(away * vec2(0.82, 1.15)) / (0.88 * uScale), 2.0) * 1.65) * uHover * interactive;
     vec3 warmRed = vec3(light * 1.08, light * 0.19, light * 0.13);
-    vColour = mix(vColour, warmRed, hover * (0.3 + uPress * 0.18));
+    vColour = mix(vColour, warmRed, hover * (0.55 + uPress * 0.2));
+    float revealed = accent * max(hover, smoothstep(0.15, 0.7, flight));
+    vColour = mix(vColour, accentColour * (0.75 + light * 0.4 + r * 0.25) * (0.9 + lensNear * 0.35), revealed);
     // Preserve the photographic opening, then introduce a broad, biased size
     // range as the surface separates. Most points become fine dust, a smaller
     // group stays mid-sized and only a few become large near-lens particles.
@@ -405,7 +422,6 @@ export const vertexShader = /* glsl */ `
     // down the page. It never switches at work or at the closing section.
     float volume = smoothstep(0.3, 0.95, flight);
     if (volume > 0.0) {
-      float lensNear = 1.0 - smoothstep(2.0, 6.0, depth);
       float opticalSize = (1.9 + lensNear * 2.2) * sizeVariation * 5.5 / max(0.7, depth);
       float opticalBlur = smoothstep(0.8, 3.8, abs(depth - 5.0));
       vBlur = mix(vBlur, opticalBlur, volume);

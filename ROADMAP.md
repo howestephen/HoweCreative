@@ -1,5 +1,21 @@
 # ROADMAP
 
+## Field light, colour, music and controls - 25 September 2026
+
+Stephen accepted the general setup and asked for the field to keep its light
+down the page, a small coloured population, real sound behind the control and
+the controls moved. See the latest design-plan revision for the mechanism.
+
+- [x] Ember brightness independent of source tone, nearer points brighter,
+  ending dim eased; 5% accent points in red, amber and teal, released under
+  the pointer and shown in flight; stronger pointer red.
+- [x] Generative ambient music in plain Web Audio behind the Sound control,
+  with unit-tested note selection; no dependency added.
+- [x] Controls bottom right on desktop, top right under the header on tablets
+  and phones; introduction lowered to the same baseline.
+- [ ] Listen to the mix on speakers and a phone; visual acceptance of the
+  colour balance at Stephen's own pace.
+
 ## Animation review correction, second pass - 24 September 2026
 
 Stephen rejected the compact revision: work entered before the head had begun

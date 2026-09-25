@@ -361,6 +361,44 @@ A fresh checkout of the branch is complete for this milestone. This Mac still ha
 
 ## Revision record
 
+- 25 September 2026, field light, colour, music and control placement
+  (Claude): Stephen accepted the general setup of the previous revision and
+  asked for four refinements. The released field was soft grey by the time it
+  reached the ring: its brightness was scaled by the darkness of each point's
+  source pixel and dimmed again at the ending. Ember colour is now lifted off
+  the source tone, brighter the nearer a point is to the lens (in step with
+  its size and softness), ember opacity is raised and the ending dim eased
+  from 0.46 to 0.62. One point in twenty carries a colour (ember red, amber or
+  teal, chosen by seed): latent in the photographic opening, released under
+  the pointer, where the coloured points also split a little way out of the
+  surface and settle back, and shown for good once in flight, so the colour
+  lives lower down the page. The pointer's red tint is raised from 0.3 to 0.55.
+
+  The sound control had nothing audible behind it: the noise bed's gain at
+  rest was about 0.001. `portrait-audio.ts` is now a generative ambient piece
+  in plain Web Audio, with no dependency: a slow pad in D major pentatonic,
+  one note every 2.8 to 6.5 seconds with a long attack and release, never a
+  repeat and never a leap beyond a fifth, a bass note every few notes, a
+  low-pass tone and a synthesised reverb, over the original noise bed as
+  texture. Scroll opens the tone and brings notes closer; it never steps or
+  clicks. Tone.js was considered and not added: the piece needs none of its
+  transport and it would add several hundred kilobytes for a slow random
+  drone. The scheduler stops on suspend and close and restarts on resume.
+
+  The sound and motion controls move from the bottom left, where they pushed
+  the introduction up, to the bottom right on desktop (level with the
+  introduction and the scroll cue, all at 92px) and to the top right under
+  the header on tablets and phones.
+
+  Verified: typecheck, tests, lint and build pass; the new music helpers are
+  unit-tested (pitch, scale membership, no repeats, leap bound, spacing). In
+  the browser pane at 1440x900: the controls, the hover release around the
+  glasses, the brighter ring with colour at work and at the closing text;
+  the audio engine was instrumented at the master gain after the Sound
+  control and showed a running context and a measurable signal. At 390x844:
+  the controls under the header and the ring. Listening to the mix on
+  speakers or a phone, and aesthetic acceptance, remain Stephen's.
+
 - 24 September 2026, three-dimensional release and hero scroll range (Claude):
   Stephen reviewed the compact revision and rejected it. The work heading was
   on screen before the head had begun to come apart, the breakup read as a
