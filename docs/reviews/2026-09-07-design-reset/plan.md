@@ -365,8 +365,10 @@ A fresh checkout of the branch is complete for this milestone. This Mac still ha
   hover effect outright, so the red tint, the colour reveal and the split
   under the mouse are gone from the shader and the hover uniform from the
   scene; pointer movement now does nothing. Press-and-hold parting remains.
-  He also rejected the gold accent colour; no replacement is chosen until he
-  decides.
+  He also rejected the gold accent colour, which had been substituted for
+  the Matrix green he asked for; the accent share is set to zero so the field
+  is silver only, and a Matrix-style treatment is to be proposed from research
+  before any code.
 
 - 25 September 2026, field light, colour, music and control placement
   (Claude): Stephen accepted the general setup of the previous revision and

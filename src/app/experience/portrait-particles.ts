@@ -333,12 +333,10 @@ export const vertexShader = /* glsl */ `
     float near = 1.0 - smoothstep(0.0, 0.07, t);
     float far = smoothstep(0.3, 0.6, t);
     float scatter = hash2(vec2(r, s));
-    // One point in seven carries the gold of the constellation on the back
-    // of the head in the source image, from deep amber to pale gold. It is
-    // latent in the photographic opening and shown once the point is in
-    // flight, so the field lower down the page is made of the same material
-    // the head was.
-    float accent = step(hash2(vec2(t, r) + 0.37), 0.14);
+    // Accent colour is switched off (share 0.0) until a Matrix-style
+    // treatment is agreed; the gold was rejected. The mechanism stays so a
+    // replacement does not have to rebuild it.
+    float accent = step(hash2(vec2(t, r) + 0.37), 0.0);
     float hue = hash2(vec2(s, t) + 0.71);
     vec3 accentColour = mix(vec3(0.98, 0.62, 0.22), vec3(1.0, 0.9, 0.62), hue);
     float liftedX = lifted.x;
