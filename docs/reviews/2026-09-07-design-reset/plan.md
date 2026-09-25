@@ -361,6 +361,13 @@ A fresh checkout of the branch is complete for this milestone. This Mac still ha
 
 ## Revision record
 
+- 25 September 2026, hover removed (Claude): Stephen rejected the pointer
+  hover effect outright, so the red tint, the colour reveal and the split
+  under the mouse are gone from the shader and the hover uniform from the
+  scene; pointer movement now does nothing. Press-and-hold parting remains.
+  He also rejected the gold accent colour; no replacement is chosen until he
+  decides.
+
 - 25 September 2026, field light, colour, music and control placement
   (Claude): Stephen accepted the general setup of the previous revision and
   asked for four refinements. The released field was soft grey by the time it
