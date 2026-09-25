@@ -334,13 +334,14 @@ export const vertexShader = /* glsl */ `
     float near = 1.0 - smoothstep(0.0, 0.07, t);
     float far = smoothstep(0.3, 0.6, t);
     float scatter = hash2(vec2(r, s));
-    // One point in twenty carries a colour: a warm ember red, an amber or a
-    // cool teal. It is latent in the photographic opening, shown under the
-    // pointer, and shown for good once the point is in flight, so the field
-    // lower down the page is where the colour lives.
-    float accent = step(hash2(vec2(t, r) + 0.37), 0.05);
+    // One point in seven carries the gold of the constellation on the back
+    // of the head in the source image, from deep amber to pale gold. It is
+    // latent in the photographic opening, shown under the pointer, and shown
+    // for good once the point is in flight, so the field lower down the page
+    // is made of the same material the head was.
+    float accent = step(hash2(vec2(t, r) + 0.37), 0.14);
     float hue = hash2(vec2(s, t) + 0.71);
-    vec3 accentColour = hue < 0.45 ? vec3(0.98, 0.34, 0.2) : (hue < 0.75 ? vec3(0.98, 0.72, 0.3) : vec3(0.36, 0.76, 0.86));
+    vec3 accentColour = mix(vec3(0.98, 0.62, 0.22), vec3(1.0, 0.9, 0.62), hue);
     float liftedX = lifted.x;
     float liftedY = lifted.y;
     float liftedZ = lifted.z;
@@ -386,7 +387,7 @@ export const vertexShader = /* glsl */ `
     // The intact opening is unaffected.
     float thinning = smoothstep(0.1, 0.6, flight);
     float cloudAlpha = mix(0.97, 0.48 + r * 0.42, smoothstep(0.08, 0.82, flight));
-    float emberAlpha = keep * mix(0.88, 0.55, near) * (0.55 + r * 0.45) * mix(1.0, 0.72, far);
+    float emberAlpha = keep * mix(0.88, 0.55, near) * (0.55 + r * 0.45) * mix(1.0, 0.72, far) * (1.0 + accent * 0.15);
     vOpacity = mix(cloudAlpha, emberAlpha, thinning) * smoothstep(0.12, 0.7, depth);
     vOpacity *= mix(1.0, 0.62, uEnding);
     // The released field keeps its light: a point's brightness no longer
@@ -400,7 +401,7 @@ export const vertexShader = /* glsl */ `
     vec3 warmRed = vec3(light * 1.08, light * 0.19, light * 0.13);
     vColour = mix(vColour, warmRed, hover * (0.55 + uPress * 0.2));
     float revealed = accent * max(hover, smoothstep(0.15, 0.7, flight));
-    vColour = mix(vColour, accentColour * (0.75 + light * 0.4 + r * 0.25) * (0.9 + lensNear * 0.35), revealed);
+    vColour = mix(vColour, accentColour * (0.95 + light * 0.3 + r * 0.25) * (0.9 + lensNear * 0.35), revealed);
     // Preserve the photographic opening, then introduce a broad, biased size
     // range as the surface separates. Most points become fine dust, a smaller
     // group stays mid-sized and only a few become large near-lens particles.
@@ -411,6 +412,7 @@ export const vertexShader = /* glsl */ `
       : (scatter < 0.95
         ? mix(0.85, 1.55, (scatter - 0.72) / 0.23)
         : mix(2.0, 3.1, (scatter - 0.95) / 0.05));
+    sizeVariation *= 1.0 + accent * 0.35;
     float separatedSize = mix(1.0, sizeVariation, smoothstep(0.08, 0.78, flight));
     float portraitSize = uPixel * 6.0 / (6.0 - original.z) * grow * swell + vBlur * 3.0;
     portraitSize *= separatedSize;
