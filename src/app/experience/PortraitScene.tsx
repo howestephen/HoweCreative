@@ -39,7 +39,7 @@ export default function PortraitScene({ motion, onReady, onUnavailable }: Props)
       uTime: { value: 0 }, uDpr: { value: 1 }, uScale: { value: 1 },
       uAspect: { value: 1 }, uPixel: { value: 2 }, uPointer: { value: new Vector2() },
       uTurn: { value: 0 }, uSeparate: { value: 0 }, uLoosen: { value: 0 }, uDisperse: { value: 0 }, uFocus: { value: 6 },
-      uPress: { value: 0 }, uHover: { value: 0 },
+      uPress: { value: 0 },
     };
     const material = new ShaderMaterial({
       uniforms, vertexShader, fragmentShader, transparent: true,
@@ -135,12 +135,10 @@ export default function PortraitScene({ motion, onReady, onUnavailable }: Props)
       if (!state.paused) uniforms.uTime.value += dt;
       pointer.set(state.pointerX, state.pointerY);
       const pressTarget = state.pressed && !state.paused && state.release < 0.18 ? 1 : 0;
-      const hoverTarget = state.pointerActive && !state.paused && state.release < 0.22 ? 1 : 0;
       if (pressTarget && !wasPressed) uniforms.uPointer.value.copy(pointer);
       else uniforms.uPointer.value.lerp(pointer, 1 - Math.exp(-dt * 10));
       wasPressed = Boolean(pressTarget);
       uniforms.uPress.value += (pressTarget - uniforms.uPress.value) * (1 - Math.exp(-dt * 10));
-      uniforms.uHover.value += (hoverTarget - uniforms.uHover.value) * (1 - Math.exp(-dt * 7));
       renderer.render(scene, camera);
       if (!loaded) return; // A shader error can occur synchronously in render.
       if (!ready) {
@@ -167,7 +165,6 @@ export default function PortraitScene({ motion, onReady, onUnavailable }: Props)
         || warmFrames > 0
         || (!state.paused && state.release > 0.001)
         || Math.abs(pressTarget - uniforms.uPress.value) > 0.001
-        || Math.abs(hoverTarget - uniforms.uHover.value) > 0.001
         || uniforms.uPointer.value.distanceToSquared(pointer) > 0.00001) {
         frame = requestAnimationFrame(render);
       }
@@ -194,7 +191,7 @@ export default function PortraitScene({ motion, onReady, onUnavailable }: Props)
       cancelAnimationFrame(frame);
       frame = 0;
       previous = 0;
-      if (document.hidden) { uniforms.uPress.value = 0; uniforms.uHover.value = 0; wasPressed = false; }
+      if (document.hidden) { uniforms.uPress.value = 0; wasPressed = false; }
       if (!document.hidden && loaded) frame = requestAnimationFrame(render);
     };
     const contextLost = (event: Event) => { event.preventDefault(); fail(); };

@@ -10,6 +10,10 @@ the controls moved. See the latest design-plan revision for the mechanism.
   ending dim eased; one point in seven in the source image's constellation
   gold, released under the pointer and shown in flight; stronger pointer red.
   A first pass in red, amber and teal at 5% was rejected as too faint.
+- [x] Pointer hover effect removed entirely (red tint, colour reveal and
+  split under the mouse) at Stephen's request. Press-and-hold parting stays.
+- [ ] Accent colour is undecided: the gold was rejected. Awaiting Stephen's
+  choice before any further colour work.
 - [x] Generative ambient music in plain Web Audio behind the Sound control,
   with unit-tested note selection; no dependency added.
 - [x] Controls bottom right on desktop, top right under the header on tablets

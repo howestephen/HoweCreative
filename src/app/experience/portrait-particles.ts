@@ -246,7 +246,6 @@ export const vertexShader = /* glsl */ `
   uniform float uFocus;
   uniform vec2 uPointer;
   uniform float uPress;
-  uniform float uHover;
   varying vec3 vColour;
   varying float vOpacity;
   varying float vBlur;
@@ -336,9 +335,9 @@ export const vertexShader = /* glsl */ `
     float scatter = hash2(vec2(r, s));
     // One point in seven carries the gold of the constellation on the back
     // of the head in the source image, from deep amber to pale gold. It is
-    // latent in the photographic opening, shown under the pointer, and shown
-    // for good once the point is in flight, so the field lower down the page
-    // is made of the same material the head was.
+    // latent in the photographic opening and shown once the point is in
+    // flight, so the field lower down the page is made of the same material
+    // the head was.
     float accent = step(hash2(vec2(t, r) + 0.37), 0.14);
     float hue = hash2(vec2(s, t) + 0.71);
     vec3 accentColour = mix(vec3(0.98, 0.62, 0.22), vec3(1.0, 0.9, 0.62), hue);
@@ -349,7 +348,7 @@ export const vertexShader = /* glsl */ `
     float e = flight;
     ${particleFlowShader}
     vec3 p = vec3(flowX, flowY, flowZ);
-    // Only a held press parts the points. Passive hover changes colour only.
+    // Only a held press parts the points. Pointer movement does nothing.
     p.x += uPointer.x * (p.z + 0.3) * 0.11 * flight;
     p.y += uPointer.y * (p.z + 0.3) * 0.08 * flight;
     vec2 plane = vec2(2.18382 * uAspect, 2.18382) * ((6.0 - original.z) / 6.0);
@@ -359,11 +358,6 @@ export const vertexShader = /* glsl */ `
     float pressure = influence * uPress * interactive;
     p.xy += normalize(away + vec2(0.001)) * pressure * 0.055 * uScale;
     p.z -= pressure * 0.08 * uScale;
-    // Under the pointer the coloured points split a little way out of the
-    // surface and settle back as it leaves: colour is released, not painted.
-    float hover = exp(-pow(length(away * vec2(0.82, 1.15)) / (0.88 * uScale), 2.0) * 1.65) * uHover * interactive;
-    p.xy += normalize(away + vec2(0.001)) * hover * accent * 0.045 * uScale;
-    p.z += hover * accent * 0.06 * uScale;
     vec4 mv = modelViewMatrix * vec4(p, 1.0);
     float depth = -mv.z;
     // The focal plane follows the lens to the face, so the separated slices
@@ -398,9 +392,7 @@ export const vertexShader = /* glsl */ `
     float lensNear = 1.0 - smoothstep(2.0, 6.0, depth);
     vec3 ember = mix(silver, warm, near * 0.6) * (0.78 + light * 0.5 + r * 0.3) * (0.9 + lensNear * 0.35);
     vColour = mix(aColour, ember, smoothstep(0.1, 0.9, flight));
-    vec3 warmRed = vec3(light * 1.08, light * 0.19, light * 0.13);
-    vColour = mix(vColour, warmRed, hover * (0.55 + uPress * 0.2));
-    float revealed = accent * max(hover, smoothstep(0.15, 0.7, flight));
+    float revealed = accent * smoothstep(0.15, 0.7, flight);
     vColour = mix(vColour, accentColour * (0.95 + light * 0.3 + r * 0.25) * (0.9 + lensNear * 0.35), revealed);
     // Preserve the photographic opening, then introduce a broad, biased size
     // range as the surface separates. Most points become fine dust, a smaller
