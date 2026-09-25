@@ -7,8 +7,9 @@ down the page, a small coloured population, real sound behind the control and
 the controls moved. See the latest design-plan revision for the mechanism.
 
 - [x] Ember brightness independent of source tone, nearer points brighter,
-  ending dim eased; 5% accent points in red, amber and teal, released under
-  the pointer and shown in flight; stronger pointer red.
+  ending dim eased; one point in seven in the source image's constellation
+  gold, released under the pointer and shown in flight; stronger pointer red.
+  A first pass in red, amber and teal at 5% was rejected as too faint.
 - [x] Generative ambient music in plain Web Audio behind the Sound control,
   with unit-tested note selection; no dependency added.
 - [x] Controls bottom right on desktop, top right under the header on tablets

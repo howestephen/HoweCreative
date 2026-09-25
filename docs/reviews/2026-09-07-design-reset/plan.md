@@ -368,11 +368,17 @@ A fresh checkout of the branch is complete for this milestone. This Mac still ha
   source pixel and dimmed again at the ending. Ember colour is now lifted off
   the source tone, brighter the nearer a point is to the lens (in step with
   its size and softness), ember opacity is raised and the ending dim eased
-  from 0.46 to 0.62. One point in twenty carries a colour (ember red, amber or
-  teal, chosen by seed): latent in the photographic opening, released under
-  the pointer, where the coloured points also split a little way out of the
-  surface and settle back, and shown for good once in flight, so the colour
-  lives lower down the page. The pointer's red tint is raised from 0.3 to 0.55.
+  from 0.46 to 0.62. Stephen rejected a first pass of red, amber and teal accents
+  on one point in twenty as too faint down the page and the wrong colours.
+  The colour is now the gold of the constellation drawn on the back of the
+  head in the source image, from deep amber to pale gold, on one point in
+  seven: latent in the photographic opening, released under the pointer,
+  where the gold points also split a little way out of the surface and settle
+  back, and shown for good once in flight, slightly larger and brighter than
+  the silver so it reads through the ring and around the closing text. The
+  pointer's red tint is raised from 0.3 to 0.55. Matrix green was considered
+  and not used: it would fight the silver and charcoal, while the gold is
+  already in the picture.
 
   The sound control had nothing audible behind it: the noise bed's gain at
   rest was about 0.001. `portrait-audio.ts` is now a generative ambient piece
