@@ -52,6 +52,12 @@ behaviour, and conversion paths are approved.
 
 - ✓ Added Google Search Console HTML ownership verification to the canonical
   production homepage.
+- Branch `feat/quiver-and-work-cards` (awaiting approval): the Quiver launch
+  film case study is ported from the redesign branch as the featured first
+  study, and Selected work becomes a card grid (three wide on desktop, compact
+  cards on phones) whose studies open in an overlay. The open study is kept in
+  the URL (`/?study=quiver`) so it can be shared directly; Back and Escape close
+  it.
 
 ## Acceptance Criteria
 

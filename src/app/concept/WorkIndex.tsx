@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
+import { useLocation, useNavigate, useSearchParams } from "react-router";
 import { createPortal } from "react-dom";
-import { ChevronLeft, ChevronRight, Minus, Plus, X } from "lucide-react";
-import { AnimatePresence, motion } from "motion/react";
+import { ArrowUpRight, ChevronLeft, ChevronRight, X } from "lucide-react";
+import { motion } from "motion/react";
 
 import {
   portfolioProjects,
@@ -208,7 +209,7 @@ function VideoStrip({ videos }: { videos: ProjectMediaItem[] }) {
   );
 }
 
-function ExpandedRow({
+function StudyDetail({
   project,
   onOpenImage,
 }: {
@@ -233,9 +234,7 @@ function ExpandedRow({
   const images = allImages.filter((m) => m !== logo);
 
   return (
-    // Left padding matches the index-number column plus its gap, so the
-    // expanded content aligns with the project title rather than the number.
-    <div className="grid min-w-0 grid-cols-[minmax(0,1fr)] gap-10 pb-10 pt-2 pl-[3.6rem] md:pl-16 lg:grid-cols-5">
+    <div className="grid min-w-0 grid-cols-[minmax(0,1fr)] gap-10 lg:grid-cols-5">
       {featured && (
         <video
           src={featured.src}
@@ -337,15 +336,10 @@ function Lightbox({
       if (e.key === "ArrowRight") onStep(1);
       if (e.key === "ArrowLeft") onStep(-1);
     };
+    // The lightbox only opens from inside the study overlay, which already
+    // holds the page scroll lock, so it must not release it on close.
     window.addEventListener("keydown", onKey);
-    document.body.style.overflow = "hidden";
-    return () => {
-      window.removeEventListener("keydown", onKey);
-      // Restore to the stylesheet default rather than a captured value: this
-      // effect can re-run, and capturing "hidden" from a previous run would
-      // leave the page permanently unscrollable after closing.
-      document.body.style.overflow = "";
-    };
+    return () => window.removeEventListener("keydown", onKey);
   }, [onClose, onStep]);
 
   if (!current) return null;
@@ -427,24 +421,285 @@ function Lightbox({
   );
 }
 
-export function WorkIndex() {
-  const [openSlug, setOpenSlug] = useState<string | null>(null);
-  const [lightbox, setLightbox] = useState<LightboxState>(null);
-  const rowRefs = useRef<Record<string, HTMLLIElement | null>>({});
+function indexLabel(index: number) {
+  return String(index + 1).padStart(2, "0");
+}
 
-  // When a study opens, bring its row to the top of the viewport. Any other
-  // open study collapses at the same time, so the scroll target keeps moving
-  // during the animation; scrolling once the collapse has settled lands it
-  // cleanly at the top. Respects reduced-motion by jumping instantly.
+function shortCategory(project: PortfolioProject) {
+  return project.category.split("/")[0].trim();
+}
+
+/** Card image. Grid cards use the 480px thumbnail; the featured card is wide
+ *  enough to need the original. Projects without an image get a quiet
+ *  typographic panel so the grid rhythm holds. */
+function CardImage({ project, featured }: { project: PortfolioProject; featured: boolean }) {
+  if (!project.image) {
+    return (
+      <div className="flex h-full w-full items-end bg-neutral-900 p-4">
+        <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-neutral-400">
+          {shortCategory(project)}
+        </span>
+      </div>
+    );
+  }
+  return (
+    <ImageWithFallback
+      src={featured ? project.image : thumbSrc(project.image)}
+      alt=""
+      loading={featured ? "eager" : "lazy"}
+      decoding="async"
+      className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+    />
+  );
+}
+
+function StudyCard({
+  project,
+  index,
+  featured,
+  onOpen,
+  cardRef,
+}: {
+  project: PortfolioProject;
+  index: number;
+  featured: boolean;
+  onOpen: () => void;
+  cardRef: (el: HTMLButtonElement | null) => void;
+}) {
+  const teaser = TEASERS[project.slug] ?? project.shortDescription;
+
+  return (
+    <li className={featured ? "sm:col-span-2 lg:col-span-3" : undefined}>
+      <button
+        ref={cardRef}
+        type="button"
+        onClick={onOpen}
+        aria-haspopup="dialog"
+        className={
+          featured
+            ? "group grid h-full w-full border border-border bg-card text-left transition-colors hover:border-accent lg:grid-cols-5"
+            : // Phones get a compact horizontal card so ten studies stay a
+              // short scroll; from `sm` up the image sits on top.
+              "group flex h-full w-full border border-border bg-card text-left transition-colors hover:border-accent sm:flex-col"
+        }
+      >
+        <div
+          className={
+            featured
+              ? "aspect-video overflow-hidden bg-neutral-900 lg:col-span-3 lg:aspect-auto lg:min-h-[22rem]"
+              : "aspect-square w-24 shrink-0 overflow-hidden bg-neutral-900 sm:aspect-[16/10] sm:w-full"
+          }
+        >
+          <CardImage project={project} featured={featured} />
+        </div>
+
+        <div
+          className={
+            featured
+              ? "flex flex-col gap-3 p-5 sm:p-7 lg:col-span-2 lg:justify-center"
+              : "flex min-w-0 flex-1 flex-col gap-1.5 p-4 sm:gap-2 sm:p-5"
+          }
+        >
+          <div className="flex items-baseline justify-between gap-3 font-mono text-[10px] uppercase tracking-[0.14em]">
+            <span className="min-w-0 truncate text-accent">
+              {indexLabel(index)} · {shortCategory(project)}
+            </span>
+            <span className="shrink-0 text-muted-foreground">{project.year}</span>
+          </div>
+          <h3
+            className={
+              featured
+                ? "text-2xl text-foreground transition-colors group-hover:text-accent md:text-3xl"
+                : "text-lg leading-snug text-foreground transition-colors group-hover:text-accent sm:text-xl"
+            }
+          >
+            {project.title}
+          </h3>
+          <p
+            className={
+              featured
+                ? "text-sm leading-relaxed text-muted-foreground md:text-base"
+                : "line-clamp-2 text-sm leading-relaxed text-muted-foreground sm:line-clamp-3"
+            }
+          >
+            {teaser}
+          </p>
+          <span
+            className={`mt-auto items-center gap-1.5 pt-2 font-mono text-[10px] uppercase tracking-[0.16em] text-foreground transition-colors group-hover:text-accent ${featured ? "inline-flex" : "hidden sm:inline-flex"}`}
+          >
+            {featured && project.media?.[0]?.type === "video" ? "Watch the film" : "Open study"}
+            <ArrowUpRight className="h-3.5 w-3.5" />
+          </span>
+        </div>
+      </button>
+    </li>
+  );
+}
+
+const FOCUSABLE =
+  'a[href], button:not([disabled]), video[controls], [tabindex]:not([tabindex="-1"])';
+
+function StudyOverlay({
+  project,
+  index,
+  lightboxOpen,
+  onClose,
+  onOpenImage,
+}: {
+  project: PortfolioProject;
+  index: number;
+  lightboxOpen: boolean;
+  onClose: () => void;
+  onOpenImage: (index: number) => void;
+}) {
+  const panelRef = useRef<HTMLDivElement>(null);
+  const scrollerRef = useRef<HTMLDivElement>(null);
+  const titleId = `study-${project.slug}-title`;
+
+  // Hold the page still behind the overlay. Restore to the stylesheet default
+  // rather than a captured value so a re-run can never leave it locked.
   useEffect(() => {
-    if (!openSlug) return;
-    const row = rowRefs.current[openSlug];
-    if (!row) return;
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const scroll = () => row.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
-    const id = window.setTimeout(scroll, reduce ? 0 : 360);
-    return () => window.clearTimeout(id);
-  }, [openSlug]);
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, []);
+
+  // A new study always starts at its top.
+  useEffect(() => {
+    if (scrollerRef.current) scrollerRef.current.scrollTop = 0;
+  }, [project.slug]);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      // The lightbox sits above the overlay and handles its own keys.
+      if (lightboxOpen) return;
+      if (e.key === "Escape") {
+        onClose();
+        return;
+      }
+      // Keep keyboard focus inside the dialog.
+      if (e.key !== "Tab" || !panelRef.current) return;
+      const focusable = Array.from(
+        panelRef.current.querySelectorAll<HTMLElement>(FOCUSABLE),
+      );
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      const active = document.activeElement;
+      if (e.shiftKey && (active === first || !panelRef.current.contains(active))) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && (active === last || !panelRef.current.contains(active))) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [lightboxOpen, onClose]);
+
+  // Portalled to <body> for the same reason as the lightbox: inside `main`
+  // (z-10) it would sit under the fixed site header (z-50).
+  return createPortal(
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.2 }}
+      ref={scrollerRef}
+      className="fixed inset-0 z-[150] overflow-y-auto overscroll-contain bg-foreground/45 backdrop-blur-sm"
+    >
+      <div
+        className="flex min-h-full items-start justify-center sm:p-6 lg:p-10"
+        onClick={(e) => {
+          if (e.target === e.currentTarget) onClose();
+        }}
+      >
+        <motion.div
+          ref={panelRef}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby={titleId}
+          initial={{ y: 16, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.28, ease: [0.25, 0.8, 0.3, 1] }}
+          className="relative min-h-screen w-full max-w-5xl border-border bg-background shadow-2xl sm:min-h-0 sm:border"
+        >
+          <header className="sticky top-0 z-10 flex items-start justify-between gap-4 border-b border-border bg-background/95 px-5 py-4 backdrop-blur-md sm:px-8">
+            <div className="min-w-0">
+              <div className="font-mono text-[10px] uppercase tracking-[0.14em] text-accent">
+                {indexLabel(index)} · {shortCategory(project)} · {project.year}
+              </div>
+              <h2 id={titleId} className="mt-1 text-2xl md:text-3xl">
+                {project.title}
+              </h2>
+            </div>
+            <button
+              type="button"
+              onClick={onClose}
+              autoFocus
+              className="inline-flex shrink-0 items-center gap-2 bg-accent px-3.5 py-2 text-sm font-medium text-accent-foreground transition-colors hover:bg-accent-hover"
+            >
+              <X className="h-4 w-4" />
+              Close
+            </button>
+          </header>
+          <div className="px-5 py-7 sm:px-8 sm:py-9">
+            <StudyDetail project={project} onOpenImage={onOpenImage} />
+          </div>
+        </motion.div>
+      </div>
+    </motion.div>,
+    document.body,
+  );
+}
+
+const STUDY_PARAM = "study";
+
+export function WorkIndex() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [lightbox, setLightbox] = useState<LightboxState>(null);
+  const cardRefs = useRef<Record<string, HTMLButtonElement | null>>({});
+
+  // The open study lives in the URL (?study=quiver) so a study can be linked
+  // to directly and the browser Back button closes it.
+  const openSlug = searchParams.get(STUDY_PARAM);
+  const openIndex = portfolioProjects.findIndex((p) => p.slug === openSlug);
+  const openProject = openIndex >= 0 ? portfolioProjects[openIndex] : undefined;
+
+  const openStudy = (slug: string) => {
+    const next = new URLSearchParams(searchParams);
+    next.set(STUDY_PARAM, slug);
+    setSearchParams(next, { preventScrollReset: true, state: { studyFromGrid: true } });
+  };
+
+  const fromGrid = Boolean((location.state as { studyFromGrid?: boolean } | null)?.studyFromGrid);
+  const closeStudy = useCallback(() => {
+    setLightbox(null);
+    // Opened from the grid: step back so Back/Forward stay in step. Arrived on
+    // a shared link: drop the parameter in place instead of leaving the site.
+    if (fromGrid) {
+      navigate(-1);
+      return;
+    }
+    const next = new URLSearchParams(searchParams);
+    next.delete(STUDY_PARAM);
+    setSearchParams(next, { replace: true, preventScrollReset: true });
+  }, [fromGrid, navigate, searchParams, setSearchParams]);
+
+  // Return focus to the card that opened the study once it closes.
+  const lastOpenSlug = useRef<string | null>(null);
+  useEffect(() => {
+    if (openProject) {
+      lastOpenSlug.current = openProject.slug;
+      return;
+    }
+    const slug = lastOpenSlug.current;
+    lastOpenSlug.current = null;
+    if (slug) cardRefs.current[slug]?.focus({ preventScroll: true });
+  }, [openProject]);
 
   const lightboxProject = lightbox
     ? portfolioProjects.find((p) => p.slug === lightbox.slug)
@@ -473,79 +728,39 @@ export function WorkIndex() {
         </div>
         <p className="mb-10 max-w-xl text-sm leading-relaxed text-muted-foreground">
           Every project is shown as a system - the brief, the machinery, the outcome. Open a
-          row for the working detail.
+          study for the working detail.
         </p>
 
-        <ol>
-          {portfolioProjects.map((project, index) => {
-            const open = openSlug === project.slug;
-            const teaser = TEASERS[project.slug] ?? project.shortDescription;
-
-            return (
-              <li
-                key={project.slug}
-                ref={(el) => {
-                  rowRefs.current[project.slug] = el;
-                }}
-                className="scroll-mt-20 border-b border-border first:border-t"
-              >
-                <button
-                  type="button"
-                  aria-expanded={open}
-                  onClick={() => setOpenSlug(open ? null : project.slug)}
-                  className="group grid w-full grid-cols-[2.6rem_1fr_auto] items-baseline gap-x-4 py-6 text-left transition-colors hover:bg-card md:grid-cols-[3rem_1fr_12rem_4rem_2rem]"
-                >
-                  <span className="font-mono text-[11px] tracking-[0.14em] text-accent">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <span>
-                    <span className="block text-xl text-foreground transition-colors group-hover:text-accent md:text-2xl">
-                      {project.title}
-                    </span>
-                    <span className="mt-1.5 block max-w-xl text-sm leading-relaxed text-muted-foreground">
-                      {teaser}
-                    </span>
-                  </span>
-                  <span className="hidden font-mono text-[10px] uppercase tracking-[0.14em] text-accent md:block">
-                    {project.category.split("/")[0].trim()}
-                  </span>
-                  <span className="hidden font-mono text-[11px] text-muted-foreground md:block">
-                    {project.year}
-                  </span>
-                  <span className="justify-self-end text-muted-foreground transition-colors group-hover:text-accent">
-                    {open ? <Minus className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
-                  </span>
-                </button>
-
-                <AnimatePresence initial={false}>
-                  {open && (
-                    <motion.div
-                      key="detail"
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.35, ease: [0.25, 0.8, 0.3, 1] }}
-                      className="overflow-hidden"
-                    >
-                      <ExpandedRow
-                        project={project}
-                        onOpenImage={(imageIndex) =>
-                          setLightbox({ slug: project.slug, index: imageIndex })
-                        }
-                      />
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </li>
-            );
-          })}
+        <ol className="grid grid-cols-[minmax(0,1fr)] gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
+          {portfolioProjects.map((project, index) => (
+            <StudyCard
+              key={project.slug}
+              project={project}
+              index={index}
+              featured={index === 0}
+              onOpen={() => openStudy(project.slug)}
+              cardRef={(el) => {
+                cardRefs.current[project.slug] = el;
+              }}
+            />
+          ))}
         </ol>
       </div>
 
-      {/* Rendered outside AnimatePresence deliberately: an exit animation here
-          could leave a fully transparent, click-blocking overlay mounted if the
-          exit never completed. Mount/unmount is unconditional; only the entry
-          is animated. */}
+      {openProject && (
+        <StudyOverlay
+          project={openProject}
+          index={openIndex}
+          lightboxOpen={lightbox !== null}
+          onClose={closeStudy}
+          onOpenImage={(imageIndex) => setLightbox({ slug: openProject.slug, index: imageIndex })}
+        />
+      )}
+
+      {/* Rendered outside any exit animation deliberately: an exit here could
+          leave a fully transparent, click-blocking overlay mounted if the exit
+          never completed. Mount/unmount is unconditional; only the entry is
+          animated. */}
       {lightbox && lightboxProject && (
         <Lightbox
           project={lightboxProject}
