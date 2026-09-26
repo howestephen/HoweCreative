@@ -16,7 +16,7 @@ Stephen Howe’s production portfolio for Creative Technologist, AI Designer, an
 ## Active experience
 
 - `Masthead` — positioning, proof metrics, primary actions, and generative plotter mark
-- `WorkIndex` — nine expandable, outcome-first case studies
+- `WorkIndex` - ten outcome-first case studies as a card grid (Quiver featured full width); each opens in an overlay addressable as `/?study=<slug>`
 - `Capabilities` — role and service fit
 - `Method` — working principles and full 2005–present career history
 - `ContactFoot` — contact form and conversion links
