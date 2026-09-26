@@ -56,8 +56,8 @@ behaviour, and conversion paths are approved.
   film case study is ported from the redesign branch as the featured first
   study, and Selected work becomes a card grid (three wide on desktop, compact
   cards on phones) whose studies open in an overlay. The open study is kept in
-  the URL (`/?study=quiver`) so it can be shared directly; Back and Escape close
-  it.
+  the URL (`/?study=quiver`) so it can be shared directly. Close and Escape
+  always return to the grid; Back does too when the study was opened from it.
 
 ## Acceptance Criteria
 
