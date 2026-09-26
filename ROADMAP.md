@@ -1,5 +1,21 @@
 # ROADMAP
 
+## Concept research and three concept branches - 26 September 2026
+
+Stephen asked for concepts derived from award-winning precedents, with their
+implementation problems researched, each built on its own branch. See
+[the concept research](docs/reviews/2026-09-26-concept-research.md).
+
+- [x] Research precedents and their build accounts; write three concepts.
+- [ ] `concept/index-preview`: editorial work index with a cursor-following
+  preview (Snellenberg pattern), touch-safe.
+- [ ] `concept/chapter-reel`: /reel, a muted chaptered showreel from the
+  existing films with attribution panels.
+- [ ] `concept/portrait-into-work`: /study particles reform into each
+  project's image in a pinned showcase.
+- [ ] Stephen chooses; unchosen branches are tagged and retired to restore the
+  two-branch rule.
+
 ## Field light, colour, music and controls - 25 September 2026
 
 Stephen accepted the general setup and asked for the field to keep its light
