@@ -12,6 +12,8 @@ import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 
 /** Outcome-first teasers - the one line a hiring manager reads. */
 const TEASERS: Record<string, string> = {
+  quiver:
+    "A 68-second launch film from a sparse brief - generated locally with Wan 2.2 on an RTX 4090, finished as a modular motion system.",
   "solana-diary":
     "Seven services that turned live Solana data and news into designed posts - every one approved from my phone before it hit X.",
   "uncx-rebrand":
@@ -218,7 +220,10 @@ function ExpandedRow({
   const outcome = sectionBody(project, "Outcome");
   const media = project.media ?? [];
   const allImages = media.filter((m) => m.type === "image");
-  const videos = media.filter((m) => m.type === "video");
+  // A study that leads with a video (Quiver's launch film) features it at full
+  // width; the strip below keeps the supporting clips.
+  const featured = media[0]?.type === "video" ? media[0] : undefined;
+  const videos = media.filter((m) => m.type === "video" && m !== featured);
 
   // Pull a brand logo out of the gallery and feature it above, for visual
   // interest. Prefer a wordmark ("logotype"), else the first "logo" asset.
@@ -231,6 +236,20 @@ function ExpandedRow({
     // Left padding matches the index-number column plus its gap, so the
     // expanded content aligns with the project title rather than the number.
     <div className="grid min-w-0 grid-cols-[minmax(0,1fr)] gap-10 pb-10 pt-2 pl-[3.6rem] md:pl-16 lg:grid-cols-5">
+      {featured && (
+        <video
+          src={featured.src}
+          poster={featured.poster}
+          controls
+          playsInline
+          preload="none"
+          aria-label={featured.alt ?? project.title}
+          className="aspect-video w-full border border-border bg-black lg:col-span-5"
+        >
+          <track kind="captions" />
+        </video>
+      )}
+
       <div className="min-w-0 space-y-6 lg:col-span-3">
         <p className="max-w-2xl leading-relaxed text-foreground/90">{project.fullDescription}</p>
 

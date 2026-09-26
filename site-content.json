@@ -123,6 +123,140 @@
     },
     "projects": [
       {
+        "id": 10,
+        "slug": "quiver",
+        "title": "Quiver",
+        "category": "Creative Direction / Generative Production / Motion Systems",
+        "year": "2026",
+        "status": "Complete",
+        "shortDescription": "A 68-second product launch film developed from a sparse brief: creative direction, constrained generative production, motion design, editing and reusable production tooling.",
+        "fullDescription": "The brief was simply to make a marketing video. I was given a logo, the existing product and a rough ident reference. From that starting point I wrote the script and developed a near-black visual world, then designed source plates around the limits of generated motion. I ran repeatable image-to-video and first-to-last-frame passes with Wan 2.2 in ComfyUI on a dedicated RTX 4090, using hosted generation for fast exploration. In After Effects I kept footage, mist, typography and product layers independently editable, with AI-assisted scripts creating reusable scene structures, depth controls and impact markers. The final 68-second master combines generated material with authored communication and deterministic finishing.",
+        "tags": [
+          "Art Direction",
+          "Generative AI",
+          "ComfyUI",
+          "ChatGPT Images",
+          "Claude",
+          "Shot Planning",
+          "After Effects",
+          "Motion Design",
+          "Video Editing",
+          "AI Audio",
+          "Production Scripting"
+        ],
+        "image": "/case-studies/quiver/hero-poster.jpg",
+        "gradient": "from-[#101113] to-[#44484b]",
+        "role": "Creative direction, script, AI imagery and footage, motion, edit and audio",
+        "client": "UNCX Network / Quiver",
+        "overlaySections": [
+          {
+            "title": "Brief",
+            "body": "Create a marketing video from a supplied logo, the existing product and a rough ident reference. There was no developed film treatment. I established the visual direction, wrote the script and shaped the production around a defined art style."
+          },
+          {
+            "title": "Problem Frame",
+            "body": "The creative problem was consistency: the film needed to feel like one intentional world across generated footage, product messages, motion graphics and music. The technical problem was reliable movement. A model can produce a convincing still of an archer and still misinterpret the relationship between the hand, arrow and bowstring when it invents the action between frames."
+          },
+          {
+            "title": "System Design",
+            "body": "I combined hosted image exploration with local Wan 2.2 inference in ComfyUI, then assembled and finished the film in After Effects. The scene structure separated footage plates, generated mist, typography and product layers, giving me control over image, readability and motion. AI-assisted production scripts created scene comps, text precomps, impact markers, shared 2.5D depth and camera movement."
+          },
+          {
+            "title": "Trade-offs",
+            "body": "I planned start and end moments that kept the action legible and avoided ambiguous transitions that could produce impossible bowstring physics. Planning and testing source assets came before generation and selection. Hosted generation supported fast exploration; local inference required more preparation and storage but made repeated variants possible on owned hardware. In the edit I controlled impact timing, transitions and typography directly."
+          },
+          {
+            "title": "Delivery",
+            "body": "A 68-second 16:9 launch master at 1920 x 1080 and 24 fps, supported by a structured footage library and reusable After Effects production system. The work included concept, script, art direction, source-image direction, local inference workflow, motion design, editing, audio and production tooling. The supplied logo, existing product and rough ident reference were starting materials."
+          },
+          {
+            "title": "Outcome",
+            "body": "A coherent launch film and a reusable method for designing inputs, bounding inference, selecting viable movement and finishing the result. The work is approved for public portfolio use. No campaign reach, conversion or commercial performance figures are claimed."
+          }
+        ],
+        "media": [
+          {
+            "type": "video",
+            "src": "/case-studies/quiver/quiver-launch-film.mp4",
+            "poster": "/case-studies/quiver/hero-poster.jpg",
+            "alt": "Quiver 68-second product launch film combining generated material with authored typography and motion design"
+          },
+          {
+            "type": "video",
+            "src": "/case-studies/quiver/evidence-impact.mp4",
+            "poster": "/case-studies/quiver/evidence-impact.poster.jpg",
+            "alt": "Quiver impact test generated between matched empty and arrow-end source plates"
+          },
+          {
+            "type": "video",
+            "src": "/case-studies/quiver/evidence-archer.mp4",
+            "poster": "/case-studies/quiver/evidence-archer.poster.jpg",
+            "alt": "Quiver local inference test of a hooded archer prepared from a controlled source composition"
+          },
+          {
+            "type": "video",
+            "src": "/case-studies/quiver/evidence-mist.mp4",
+            "poster": "/case-studies/quiver/evidence-mist.poster.jpg",
+            "alt": "Quiver atmosphere test generated as a separate editable mist layer"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/quiver/archer-portrait.webp",
+            "alt": "Quiver film still: a hooded archer in directional light"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/quiver/hood-detail.webp",
+            "alt": "Quiver film still: close detail of the hooded figure"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/quiver/bow-detail.webp",
+            "alt": "Quiver film still: the bow and arrow, central to planning physically legible action"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/quiver/product-introduction.webp",
+            "alt": "Quiver film still: product introduction composed with phone imagery"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/quiver/launch-rules.webp",
+            "alt": "Quiver film still: launch rules, motion typography and product imagery"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/quiver/buy-enforcement.webp",
+            "alt": "Quiver film still: buy-enforcement message within the visual treatment"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/quiver/launch-control.webp",
+            "alt": "Quiver film still: launch-control message and art direction"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/quiver/process-impact-start.webp",
+            "alt": "Quiver source still: empty timber target prepared as the beginning of an impact shot"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/quiver/process-impact-end.webp",
+            "alt": "Quiver source still: arrow in the timber target, defining the impact endpoint"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/quiver/process-eye-wide.webp",
+            "alt": "Quiver source still: hooded figure with a glowing eye in a wider composition"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/quiver/process-eye-detail.webp",
+            "alt": "Quiver source still: glowing eye close-up prepared for a cutaway"
+          }
+        ]
+      },
+      {
         "id": 1,
         "slug": "solana-diary",
         "title": "Solana Diary",
@@ -1397,7 +1531,7 @@
       "projectType": "Project Type",
       "brief": "Brief"
     },
-    "visualOnlyLabel": "Prefer email? howestephen@gmail.com",
+    "visualOnlyLabel": "Prefer email? Use the contact form.",
     "submitLabel": "Send"
   },
   "archive": {
