@@ -36,6 +36,7 @@ describe("WorkIndex", () => {
     const dialog = screen.getByRole("dialog", { name: "Quiver" });
     expect(router.state.location.search).toBe("?study=quiver");
     expect(document.body.style.overflow).toBe("hidden");
+    expect(document.documentElement.style.overflow).toBe("hidden");
     expect(within(dialog).getByRole("button", { name: "Close" })).toHaveFocus();
   });
 
@@ -67,6 +68,7 @@ describe("WorkIndex", () => {
     expect(router.state.location.search).toBe("");
     expect(router.state.historyAction).toBe("POP");
     expect(document.body.style.overflow).toBe("");
+    expect(document.documentElement.style.overflow).toBe("");
     expect(cards()[2]).toHaveFocus();
   });
 
@@ -94,6 +96,25 @@ describe("WorkIndex", () => {
     expect(screen.queryByRole("dialog", { name: "Quiver gallery" })).not.toBeInTheDocument();
     expect(screen.getByRole("dialog", { name: "Quiver" })).toBeInTheDocument();
     expect(document.body.style.overflow).toBe("hidden");
+  });
+
+  it("keeps Tab focus inside the lightbox while it covers the study", () => {
+    renderAt("/?study=quiver");
+    fireEvent.click(screen.getAllByRole("button", { name: /view larger/i })[0]);
+    const lightbox = screen.getByRole("dialog", { name: "Quiver gallery" });
+    // Park focus on a control of the study underneath, as native Tab could.
+    within(screen.getByRole("dialog", { name: "Quiver" }))
+      .getByRole("button", { name: "Close" })
+      .focus();
+
+    fireEvent.keyDown(window, { key: "Tab" });
+    expect(lightbox.contains(document.activeElement)).toBe(true);
+  });
+
+  it("gives each card a short accessible name with the teaser as its description", () => {
+    renderAt("/");
+    expect(cards()[0]).toHaveAccessibleName("Quiver, Creative Direction, 2026");
+    expect(cards()[0]).toHaveAccessibleDescription(/68-second launch film/);
   });
 
   it("ignores an unknown study slug", () => {

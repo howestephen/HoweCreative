@@ -316,6 +316,26 @@ function StudyDetail({
 
 type LightboxState = { slug: string; index: number } | null;
 
+const FOCUSABLE =
+  'a[href], button:not([disabled]), video[controls], [tabindex]:not([tabindex="-1"])';
+
+/** Keep Tab and Shift+Tab cycling inside `container`. */
+function trapTab(e: KeyboardEvent, container: HTMLElement | null) {
+  if (e.key !== "Tab" || !container) return;
+  const focusable = Array.from(container.querySelectorAll<HTMLElement>(FOCUSABLE));
+  if (focusable.length === 0) return;
+  const first = focusable[0];
+  const last = focusable[focusable.length - 1];
+  const active = document.activeElement;
+  if (e.shiftKey && (active === first || !container.contains(active))) {
+    e.preventDefault();
+    last.focus();
+  } else if (!e.shiftKey && (active === last || !container.contains(active))) {
+    e.preventDefault();
+    first.focus();
+  }
+}
+
 function Lightbox({
   project,
   index,
@@ -329,12 +349,15 @@ function Lightbox({
 }) {
   const images = (project.media ?? []).filter((m) => m.type === "image");
   const current = images[index];
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
       if (e.key === "ArrowRight") onStep(1);
       if (e.key === "ArrowLeft") onStep(-1);
+      // The study overlay stays mounted underneath; keep focus up here.
+      trapTab(e, containerRef.current);
     };
     // The lightbox only opens from inside the study overlay, which already
     // holds the page scroll lock, so it must not release it on close.
@@ -352,6 +375,7 @@ function Lightbox({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.18 }}
+      ref={containerRef}
       className="fixed inset-0 z-[200] bg-background"
       role="dialog"
       aria-modal="true"
@@ -475,6 +499,10 @@ function StudyCard({
         type="button"
         onClick={onOpen}
         aria-haspopup="dialog"
+        // A short name for screen readers instead of the whole card's text;
+        // the teaser stays available as its description.
+        aria-label={`${project.title}, ${shortCategory(project)}, ${project.year}`}
+        aria-describedby={`card-${project.slug}-teaser`}
         className={
           featured
             ? "group grid h-full w-full border border-border bg-card text-left transition-colors hover:border-accent lg:grid-cols-5"
@@ -516,6 +544,7 @@ function StudyCard({
             {project.title}
           </h3>
           <p
+            id={`card-${project.slug}-teaser`}
             className={
               featured
                 ? "text-sm leading-relaxed text-muted-foreground md:text-base"
@@ -536,9 +565,6 @@ function StudyCard({
   );
 }
 
-const FOCUSABLE =
-  'a[href], button:not([disabled]), video[controls], [tabindex]:not([tabindex="-1"])';
-
 function StudyOverlay({
   project,
   index,
@@ -558,10 +584,13 @@ function StudyOverlay({
 
   // Hold the page still behind the overlay. Restore to the stylesheet default
   // rather than a captured value so a re-run can never leave it locked.
+  // Locking <html> as well as <body> is what stops background scroll on iOS
+  // Safari, which ignores overflow on <body> alone.
   useEffect(() => {
-    document.body.style.overflow = "hidden";
+    const roots = [document.documentElement, document.body];
+    for (const el of roots) el.style.overflow = "hidden";
     return () => {
-      document.body.style.overflow = "";
+      for (const el of roots) el.style.overflow = "";
     };
   }, []);
 
@@ -579,21 +608,7 @@ function StudyOverlay({
         return;
       }
       // Keep keyboard focus inside the dialog.
-      if (e.key !== "Tab" || !panelRef.current) return;
-      const focusable = Array.from(
-        panelRef.current.querySelectorAll<HTMLElement>(FOCUSABLE),
-      );
-      if (focusable.length === 0) return;
-      const first = focusable[0];
-      const last = focusable[focusable.length - 1];
-      const active = document.activeElement;
-      if (e.shiftKey && (active === first || !panelRef.current.contains(active))) {
-        e.preventDefault();
-        last.focus();
-      } else if (!e.shiftKey && (active === last || !panelRef.current.contains(active))) {
-        e.preventDefault();
-        first.focus();
-      }
+      trapTab(e, panelRef.current);
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
