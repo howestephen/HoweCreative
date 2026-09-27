@@ -166,7 +166,7 @@ export function CV() {
 
           <div className="cv-contact mt-4 grid grid-cols-2 gap-2 sm:grid-cols-4">
             {[
-              { label: "Email", value: "howestephen@gmail.com", href: "mailto:howestephen@gmail.com" },
+              { label: "Email", value: "contact@howecreative.co.uk", href: "mailto:contact@howecreative.co.uk" },
               { label: "Web", value: "howecreative.co.uk", href: "https://howecreative.co.uk" },
               { label: "LinkedIn", value: "in/howestephen", href: "https://www.linkedin.com/in/howestephen" },
               { label: "GitHub", value: "howestephen", href: "https://github.com/howestephen" },
