@@ -129,8 +129,8 @@
         "category": "Creative Direction / Generative Production / Motion Systems",
         "year": "2026",
         "status": "Complete",
-        "shortDescription": "A 68-second product launch film developed from a sparse brief: creative direction, constrained generative production, motion design, editing and reusable production tooling.",
-        "fullDescription": "The brief was simply to make a marketing video. I was given a logo, the existing product and a rough ident reference. From that starting point I wrote the script and developed a near-black visual world, then designed source plates around the limits of generated motion. I ran repeatable image-to-video and first-to-last-frame passes with Wan 2.2 in ComfyUI on a dedicated RTX 4090, using hosted generation for fast exploration. In After Effects I kept footage, mist, typography and product layers independently editable, with AI-assisted scripts creating reusable scene structures, depth controls and impact markers. The final 68-second master combines generated material with authored communication and deterministic finishing.",
+        "shortDescription": "Four product launch films developed from a sparse brief: creative direction, constrained generative production, motion design, editing, AI-generated music and reusable production tooling.",
+        "fullDescription": "The brief was simply to make a marketing video. I was given a logo, the existing product and a rough ident reference. From that starting point I wrote the script and developed a near-black visual world, then designed source plates around the limits of generated motion. I ran repeatable image-to-video and first-to-last-frame passes with Wan 2.2 in ComfyUI on a dedicated RTX 4090, using hosted generation for fast exploration. In After Effects I kept footage, mist, typography and product layers independently editable, with AI-assisted scripts creating reusable scene structures, depth controls and impact markers. The four finished films combine generated material with authored communication and deterministic finishing.",
         "tags": [
           "Art Direction",
           "Generative AI",
@@ -167,19 +167,37 @@
           },
           {
             "title": "Delivery",
-            "body": "A 68-second 16:9 launch master at 1920 x 1080 and 24 fps, supported by a structured footage library and reusable After Effects production system. The work included concept, script, art direction, source-image direction, local inference workflow, motion design, editing, audio and production tooling. The supplied logo, existing product and rough ident reference were starting materials."
+            "body": "Four finished 16:9 films at 1920 x 1080 and 24 fps: a 42-second basic explanation and a 58-second advanced explanation, each with and without phone imagery, supported by a structured footage library and reusable After Effects production system. The work included concept, script, art direction, source-image direction, local inference workflow, motion design, editing, audio and production tooling. The supplied logo, existing product and rough ident reference were starting materials."
           },
           {
             "title": "Outcome",
-            "body": "A coherent launch film and a reusable method for designing inputs, bounding inference, selecting viable movement and finishing the result. The work is approved for public portfolio use. No campaign reach, conversion or commercial performance figures are claimed."
+            "body": "A coherent film treatment carried through four complete edits, and a reusable method for designing inputs, bounding inference, selecting viable movement and finishing the result. The work is approved for public portfolio use. No campaign reach, conversion or commercial performance figures are claimed."
           }
         ],
         "media": [
           {
             "type": "video",
-            "src": "/case-studies/quiver/quiver-launch-film.mp4",
-            "poster": "/case-studies/quiver/hero-poster.jpg",
-            "alt": "Quiver 68-second product launch film combining generated material with authored typography and motion design"
+            "src": "/case-studies/quiver/advanced.mp4",
+            "poster": "/case-studies/quiver/advanced.poster.jpg",
+            "alt": "Quiver advanced film without phone imagery, 58 seconds, including AI-generated music"
+          },
+          {
+            "type": "video",
+            "src": "/case-studies/quiver/basic.mp4",
+            "poster": "/case-studies/quiver/basic.poster.jpg",
+            "alt": "Quiver basic film without phone imagery, 42 seconds, including AI-generated music"
+          },
+          {
+            "type": "video",
+            "src": "/case-studies/quiver/advanced-with-phone.mp4",
+            "poster": "/case-studies/quiver/advanced-with-phone.poster.jpg",
+            "alt": "Quiver advanced film with phone imagery, 58 seconds, including AI-generated music"
+          },
+          {
+            "type": "video",
+            "src": "/case-studies/quiver/basic-with-phone.mp4",
+            "poster": "/case-studies/quiver/basic-with-phone.poster.jpg",
+            "alt": "Quiver basic film with phone imagery, 42 seconds, including AI-generated music"
           },
           {
             "type": "video",
