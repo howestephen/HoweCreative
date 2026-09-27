@@ -52,7 +52,7 @@ export function Masthead() {
               variants={item}
               className="max-w-[14ch] text-[clamp(2.6rem,6.4vw,5rem)] leading-[1.04]"
             >
-              I build the <em className="italic">systems</em> that ship the work
+              I build the <em className="italic text-accent">systems</em> that ship the work
               <span className="text-accent">.</span>
             </motion.h1>
 
