@@ -14,7 +14,7 @@ import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 /** Outcome-first teasers - the one line a hiring manager reads. */
 const TEASERS: Record<string, string> = {
   quiver:
-    "A 68-second launch film from a sparse brief - generated locally with Wan 2.2 on an RTX 4090, finished as a modular motion system.",
+    "Four launch films from a sparse brief - generated locally with Wan 2.2 on an RTX 4090, finished as a modular motion system.",
   "solana-diary":
     "Seven services that turned live Solana data and news into designed posts - every one approved from my phone before it hit X.",
   "uncx-rebrand":

@@ -40,13 +40,15 @@ describe("WorkIndex", () => {
     expect(within(dialog).getByRole("button", { name: "Close" })).toHaveFocus();
   });
 
-  it("features the Quiver launch film at the top of its study", () => {
+  it("features the Quiver advanced film at the top of its study", () => {
     renderAt("/?study=quiver");
     const dialog = screen.getByRole("dialog", { name: "Quiver" });
-    const films = dialog.querySelectorAll('video[src$="quiver-launch-film.mp4"]');
-    // Featured once, and not repeated in the supporting video strip.
-    expect(films).toHaveLength(1);
-    expect(dialog.querySelectorAll("video")).toHaveLength(4);
+    const featured = dialog.querySelector("video.aspect-video");
+    expect(featured).toHaveAttribute("src", "/case-studies/quiver/advanced.mp4");
+    // Featured once, not repeated in the strip: the other three finals plus
+    // three process clips.
+    expect(dialog.querySelectorAll('video[src$="/advanced.mp4"]')).toHaveLength(1);
+    expect(dialog.querySelectorAll("video")).toHaveLength(7);
   });
 
   it("does not feature a video for studies that lead with an image", () => {
@@ -114,7 +116,7 @@ describe("WorkIndex", () => {
   it("gives each card a short accessible name with the teaser as its description", () => {
     renderAt("/");
     expect(cards()[0]).toHaveAccessibleName("Quiver, Creative Direction, 2026");
-    expect(cards()[0]).toHaveAccessibleDescription(/68-second launch film/);
+    expect(cards()[0]).toHaveAccessibleDescription(/Four launch films/);
   });
 
   it("ignores an unknown study slug", () => {
