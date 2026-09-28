@@ -43,7 +43,7 @@ html:has(.portrait-home) { scrollbar-gutter: stable; }
 .spatial-work-heading h2 { font-size: clamp(25px, 2.6vw, 35px); font-weight: 500; letter-spacing: -1px; margin: 0; }
 .spatial-work-heading a { display: flex; align-items: center; gap: 12px; font-size: 13px; color: #c3c9c4; padding: 10px 0; }
 .spatial-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; perspective: 1100px; }
-.spatial-card { position: relative; display: flex; flex-direction: column; align-items: flex-start; min-height: 262px; text-align: left; padding: 22px 24px 20px; border-radius: 10px; border: 1px solid #a4aaa333; background: linear-gradient(125deg, #d1d9d91a, #777d7f08 45%, #c8d6d30c), #15191b72; box-shadow: inset 0 1px 0 #ffffff0c, 0 20px 50px #00000030; backdrop-filter: blur(20px) saturate(.4); -webkit-backdrop-filter: blur(20px) saturate(.4); color: #eaece6; cursor: pointer; overflow: hidden; transform-origin: center bottom; transition: border-color .35s, background-color .35s, box-shadow .35s; will-change: transform, opacity; }
+.spatial-card { position: relative; display: flex; flex-direction: column; align-items: flex-start; min-height: 262px; text-align: left; padding: 22px 24px 20px; border-radius: 10px; border: 1px solid #a4aaa333; background: linear-gradient(125deg, #d1d9d91a, #777d7f08 45%, #c8d6d30c), #15191bd9; box-shadow: inset 0 1px 0 #ffffff0c, 0 20px 50px #00000030; color: #eaece6; cursor: pointer; overflow: hidden; transform-origin: center bottom; transition: border-color .35s, background-color .35s, box-shadow .35s; will-change: transform, opacity; }
 /* The discipline colour enters as light from the top edge, not as a swatch. */
 .spatial-card::before { content: ""; position: absolute; inset: 0 0 auto; height: 1px; background: linear-gradient(90deg, var(--card-tint), #ffffff00 62%); opacity: .85; }
 .spatial-card::after { content: ""; position: absolute; left: -12%; top: -46%; width: 62%; aspect-ratio: 1; border-radius: 50%; background: var(--card-tint); filter: blur(52px); opacity: .13; pointer-events: none; transition: opacity .35s; }
@@ -74,9 +74,9 @@ html:has(.portrait-home) { scrollbar-gutter: stable; }
 /* Preview card: one fixed size for every project, so each opens with the
    same balance of image and information. One image, whole and centred (or
    filling, for Quiver's poster), one short pitch and one way onward. */
-.spatial-dialog { position: fixed; margin: auto; width: min(1040px, calc(100% - 64px)); height: min(600px, calc(100svh - 56px)); padding: 0; overflow: hidden; border-radius: 16px; border: 1px solid #d4dbce5c; background: #101515f2; color: #f0f0e9; box-shadow: 0 50px 150px #000a, inset 0 1px 0 #ffffff1c; backdrop-filter: blur(36px); -webkit-backdrop-filter: blur(36px); }
+.spatial-dialog { position: fixed; margin: auto; width: min(1040px, calc(100% - 64px)); height: min(600px, calc(100svh - 56px)); padding: 0; overflow: hidden; border-radius: 16px; border: 1px solid #d4dbce5c; background: #101515; color: #f0f0e9; box-shadow: 0 50px 150px #000a, inset 0 1px 0 #ffffff1c; }
 .spatial-dialog[open] { display: grid; grid-template-columns: 0.9fr 1.1fr; grid-template-rows: minmax(0, 1fr); animation: spatial-open .4s cubic-bezier(.2,.8,.2,1) both; }
-.spatial-dialog::backdrop { background: #02060566; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+.spatial-dialog::backdrop { background: #1a1d1db3; }
 .spatial-dialog-visual { position: relative; min-height: 0; padding: 44px; overflow: hidden; background: #0a0e0d; border-right: 1px solid #d4dbce1f; }
 .spatial-dialog-visual img { display: block; width: 100%; height: 100%; object-fit: contain; object-position: center; }
 .spatial-dialog-visual[data-fit='cover'] { padding: 0; }

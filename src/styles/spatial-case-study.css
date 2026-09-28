@@ -30,7 +30,7 @@
 .spatial-case .case-screen-controls button { color: #919991; }
 .spatial-case .case-screen-controls button[aria-pressed='true'] { color: #eceee8; border-bottom-color: #a7b6aa; }
 .spatial-case .case-screen-controls button[aria-pressed='true'] > span { color: #bac6bc; }
-.spatial-case .case-facts { margin-top: 24px; padding: 28px 30px; border: 1px solid #c5cec526; border-radius: 10px; background: linear-gradient(120deg, #d9e1da0b, #ffffff03); backdrop-filter: blur(18px); }
+.spatial-case .case-facts { margin-top: 24px; padding: 28px 30px; border: 1px solid #c5cec526; border-radius: 10px; background: linear-gradient(120deg, #d9e1da0b, #ffffff03), #0c100fcc; }
 .spatial-case .case-facts dt { color: #8e978f; }
 .spatial-case .case-facts dd { color: #d1d6d0; }
 .spatial-case .case-context { padding-block: 105px; }

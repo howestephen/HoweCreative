@@ -110,11 +110,10 @@
   left: 12px;
   padding: 5px 9px;
   border-radius: 3px;
-  background: #0a0e0dc4;
+  background: #0a0e0d;
   color: #dfe4dd;
   font-size: 10px;
   letter-spacing: 0.02em;
-  backdrop-filter: blur(6px);
 }
 .case-image figcaption {
   color: #77726a;
