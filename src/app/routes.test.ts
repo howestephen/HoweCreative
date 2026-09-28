@@ -53,3 +53,20 @@ describe("CV lazy route", () => {
     expect(consoleError).toHaveBeenCalled();
   });
 });
+
+describe("site routes", () => {
+  it("serves the portrait experience at / and redirects the old /study address there", async () => {
+    const { router } = await import("./routes");
+    const shell = router.routes.find((route) => route.path === "/")!;
+    const home = shell.children!.find((route) => route.index)!;
+    const study = shell.children!.find((route) => route.path === "study")!;
+
+    const homeModule = await (home.lazy as () => Promise<{ Component: unknown }>)();
+    const { PortraitExperience } = await import("./experience/PortraitExperience");
+    expect(homeModule.Component).toBe(PortraitExperience);
+
+    const response = (await (study.loader as () => Promise<Response> | Response)()) as Response;
+    expect(response.status).toBe(302);
+    expect(response.headers.get("Location")).toBe("/");
+  });
+});

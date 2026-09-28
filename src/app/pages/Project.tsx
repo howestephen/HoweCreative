@@ -255,7 +255,7 @@ function ProjectStory({ project }: { project: PortfolioProject }) {
       </div>
       <article className={`wrap case-study case-study-${project.slug}`}>
         <div className="case-breadcrumb">
-          <Link to="/study#work">
+          <Link to="/#work">
             <ArrowLeft size={15} /> Selected work
           </Link>
           <span className="eyebrow">

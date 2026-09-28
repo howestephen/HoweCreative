@@ -28,7 +28,7 @@ try {
   const template = await readFile(path.join(root, "dist/index.html"), "utf8");
   const assets = await readdir(path.join(root, "dist/assets"));
   for (const page of pages) {
-    const url = `https://howecreative.co.uk${page.path === "/" ? "/" : page.path}`;
+    const url = `https://particle.howecreative.co.uk${page.path === "/" ? "/" : page.path}`;
     let html = template
       .replace(
         '<div id="root"></div>',
@@ -90,7 +90,7 @@ try {
   }
   await writeFile(
     path.join(root, "dist/sitemap.xml"),
-    `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${pages.map((page) => `<url><loc>https://howecreative.co.uk${page.path}</loc></url>`).join("")}</urlset>`,
+    `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${pages.map((page) => `<url><loc>https://particle.howecreative.co.uk${page.path}</loc></url>`).join("")}</urlset>`,
   );
   console.log(
     `Prerendered ${pages.length} pages with readable content and route metadata.`,

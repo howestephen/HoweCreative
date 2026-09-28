@@ -1,4 +1,3 @@
+# The particle redesign is an interview demo; howecreative.co.uk is the indexed site.
 User-agent: *
-Allow: /
-Disallow: /api/
-Sitemap: https://howecreative.co.uk/sitemap.xml
+Disallow: /

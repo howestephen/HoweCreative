@@ -221,7 +221,7 @@ export function ContactFoot({ variant = "editorial", heading = true }: ContactFo
 
         <footer className={`mt-20 flex flex-col justify-between gap-3 border-t border-border pt-6 pb-2 md:flex-row ${smallClasses}`}>
           <span>© 2026 Stephen Howe {spatial ? "-" : "·"} Norwich, UK - remote worldwide</span>
-          <a href={spatial ? "/study#work" : "/#work"} className="transition-colors hover:text-accent">
+          <a href="/#work" className="transition-colors hover:text-accent">
             {spatial ? "Back to selected work" : "Explore the work ↑"}
           </a>
         </footer>
