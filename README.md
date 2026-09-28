@@ -8,21 +8,22 @@ Stephen Howe’s production portfolio for Creative Technologist, AI Designer, an
 - Vite 6 and Tailwind CSS 4
 - React Router 7
 - Motion for interface animation
-- Canvas 2D for the seeded plotter mark
 - Three.js / React Three Fiber retained for the portfolio’s 3D experiments
 - Web3Forms contact delivery
 - Vercel deployment and serverless fallback
 
 ## Active experience
 
-- `Masthead` — positioning, proof metrics, primary actions, and generative plotter mark
-- `WorkIndex` — nine expandable, outcome-first case studies
-- `Capabilities` — role and service fit
-- `Method` — working principles and full 2005–present career history
-- `ContactFoot` — contact form and conversion links
-- `/cv` — standalone printable CV, loaded as a separate route chunk
+- `PortfolioExperience` - home hero and discipline introduction
+- `WorkIndex` - ten case studies, each linking to its own `/work/:slug` page
+- `Capabilities` - role and service fit
+- `Method` - working principles and full 2005-present career history
+- `EarlierWork` - selected work from before 2021
+- `ContactFoot` - contact form and conversion links
+- `/study` - the portrait experience; `/archive` - the full project archive
+- `/cv` - standalone printable CV, loaded as a separate route chunk, with PDFs built by `scripts/build-cv.py`
 
-The earlier dossier/WebGL implementation remains under `src/app/components/` for reference, but `src/app/pages/Home.tsx` composes the active editorial design from `src/app/concept/`.
+`src/app/pages/Home.tsx` composes the home page from `src/app/experience/` and `src/app/concept/`.
 
 ## Setup
 
