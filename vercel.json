@@ -4,6 +4,41 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "rewrites": [
-    { "source": "/((?!api/).*)", "destination": "/index.html" }
+    {
+      "source": "/particle-redesign",
+      "destination": "https://howecreative-particle-howestephen-projects.vercel.app/"
+    },
+    {
+      "source": "/particle-redesign/:path*",
+      "destination": "https://howecreative-particle-howestephen-projects.vercel.app/:path*"
+    },
+    {
+      "source": "/assets/:path*",
+      "destination": "https://howecreative-particle-howestephen-projects.vercel.app/assets/:path*"
+    },
+    {
+      "source": "/case-studies/:path*",
+      "destination": "https://howecreative-particle-howestephen-projects.vercel.app/case-studies/:path*"
+    },
+    {
+      "source": "/earlier-work/:path*",
+      "destination": "https://howecreative-particle-howestephen-projects.vercel.app/earlier-work/:path*"
+    },
+    {
+      "source": "/portrait/:path*",
+      "destination": "https://howecreative-particle-howestephen-projects.vercel.app/portrait/:path*"
+    },
+    {
+      "source": "/models/:path*",
+      "destination": "https://howecreative-particle-howestephen-projects.vercel.app/models/:path*"
+    },
+    {
+      "source": "/cv/:file.pdf",
+      "destination": "https://howecreative-particle-howestephen-projects.vercel.app/cv/:file.pdf"
+    },
+    {
+      "source": "/((?!api/).*)",
+      "destination": "/index.html"
+    }
   ]
 }
