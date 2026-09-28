@@ -303,12 +303,12 @@
         "media": [
           {
             "type": "image",
-            "src": "/case-studies/solana-diary/twitter-header.png",
+            "src": "/case-studies/solana-diary/twitter-header.webp",
             "alt": "Solana Diary brand - logo and banner"
           },
           {
             "type": "image",
-            "src": "/case-studies/solana-diary/SOLANA_DIARY_LOGO.png",
+            "src": "/case-studies/solana-diary/SOLANA_DIARY_LOGO.webp",
             "alt": "Solana Diary logo lockup"
           },
           {
@@ -318,7 +318,7 @@
           },
           {
             "type": "image",
-            "src": "/case-studies/solana-diary/holder_growth_leaders_7d__2026-06-09__id6817__POSTED.png",
+            "src": "/case-studies/solana-diary/holder_growth_leaders_7d__2026-06-09__id6817__POSTED.webp",
             "alt": "Posted holder-growth leaderboard with rugcheck scores"
           },
           {
@@ -333,7 +333,7 @@
           },
           {
             "type": "image",
-            "src": "/case-studies/solana-diary/x-page-screenshot.png",
+            "src": "/case-studies/solana-diary/x-page-screenshot.webp",
             "alt": "The live @solana_diary account on X"
           },
           {
@@ -353,7 +353,7 @@
           },
           {
             "type": "image",
-            "src": "/case-studies/solana-diary/new_launches_48h__2026-06-17__id8695__render.png",
+            "src": "/case-studies/solana-diary/new_launches_48h__2026-06-17__id8695__render.webp",
             "alt": "New launches 48h - rendered data card"
           },
           {
@@ -388,7 +388,7 @@
           },
           {
             "type": "image",
-            "src": "/case-studies/solana-diary/top_trading_apps_fees_30d__2026-06-10__id6852__POSTED.png",
+            "src": "/case-studies/solana-diary/top_trading_apps_fees_30d__2026-06-10__id6852__POSTED.webp",
             "alt": "Posted top-trading-apps fees leaderboard"
           },
           {
@@ -398,17 +398,17 @@
           },
           {
             "type": "image",
-            "src": "/case-studies/solana-diary/Example Telegram News Approval 02.png",
+            "src": "/case-studies/solana-diary/Example Telegram News Approval 02.webp",
             "alt": "Telegram approval - second example of the review flow"
           },
           {
             "type": "image",
-            "src": "/case-studies/solana-diary/Figma Project Screenshot.png",
+            "src": "/case-studies/solana-diary/Figma Project Screenshot.webp",
             "alt": "The Figma template system - every post family on one type and colour system"
           },
           {
             "type": "image",
-            "src": "/case-studies/solana-diary/Figma Project Components.png",
+            "src": "/case-studies/solana-diary/Figma Project Components.webp",
             "alt": "Figma component library behind the post templates"
           },
           {
@@ -598,8 +598,18 @@
           },
           {
             "type": "image",
+            "src": "/case-studies/uncx-rebrand/website/launchpad-section-2.webp",
+            "alt": "Website launchpad page (section)"
+          },
+          {
+            "type": "image",
             "src": "/case-studies/uncx-rebrand/website/token-vesting.webp",
             "alt": "Website token vesting page"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-rebrand/website/token-vesting-section-2.webp",
+            "alt": "Website token vesting page (section)"
           },
           {
             "type": "video",
@@ -653,8 +663,23 @@
           },
           {
             "type": "image",
+            "src": "/case-studies/uncx-rebrand/website/homepage-section-2.webp",
+            "alt": "Website homepage design (section)"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-rebrand/website/homepage-section-3.webp",
+            "alt": "Website homepage design (section)"
+          },
+          {
+            "type": "image",
             "src": "/case-studies/uncx-rebrand/website/token-minter.webp",
             "alt": "Website token minter page"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-rebrand/website/token-minter-section-2.webp",
+            "alt": "Website token minter page (section)"
           },
           {
             "type": "image",
@@ -663,13 +688,28 @@
           },
           {
             "type": "image",
+            "src": "/case-studies/uncx-rebrand/website/network-section-2.webp",
+            "alt": "Website network page (section)"
+          },
+          {
+            "type": "image",
             "src": "/case-studies/uncx-rebrand/website/staking-farming.webp",
             "alt": "Website staking & farming page"
           },
           {
             "type": "image",
+            "src": "/case-studies/uncx-rebrand/website/staking-farming-section-2.webp",
+            "alt": "Website staking & farming page (section)"
+          },
+          {
+            "type": "image",
             "src": "/case-studies/uncx-rebrand/website/team.webp",
             "alt": "Website team page"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-rebrand/website/team-section-2.webp",
+            "alt": "Website team page (section)"
           },
           {
             "type": "image",
@@ -685,6 +725,11 @@
             "type": "image",
             "src": "/case-studies/uncx-rebrand/website/uncx-token.webp",
             "alt": "Website UNCX token page"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-rebrand/website/uncx-token-section-2.webp",
+            "alt": "Website UNCX token page (section)"
           },
           {
             "type": "image",
@@ -1057,6 +1102,11 @@
           },
           {
             "type": "image",
+            "src": "/case-studies/uncx-academy/main-page-section-2.webp",
+            "alt": "Academy main page (section)"
+          },
+          {
+            "type": "image",
             "src": "/case-studies/uncx-academy/articles-overview.webp",
             "alt": "Articles overview page"
           },
@@ -1064,6 +1114,11 @@
             "type": "image",
             "src": "/case-studies/uncx-academy/articles-home.webp",
             "alt": "Articles home page"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-academy/articles-home-section-2.webp",
+            "alt": "Articles home page (section)"
           },
           {
             "type": "image",
@@ -1082,8 +1137,18 @@
           },
           {
             "type": "image",
+            "src": "/case-studies/uncx-academy/about-page-section-2.webp",
+            "alt": "About page (section)"
+          },
+          {
+            "type": "image",
             "src": "/case-studies/uncx-academy/videos-home.webp",
             "alt": "Videos home page"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-academy/videos-home-section-2.webp",
+            "alt": "Videos home page (section)"
           },
           {
             "type": "image",
@@ -1097,8 +1162,18 @@
           },
           {
             "type": "image",
+            "src": "/case-studies/uncx-academy/glossary-home-section-2.webp",
+            "alt": "Glossary home page (section)"
+          },
+          {
+            "type": "image",
             "src": "/case-studies/uncx-academy/integrations.webp",
             "alt": "Platform integrations"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-academy/integrations-section-2.webp",
+            "alt": "Platform integrations (section)"
           },
           {
             "type": "image",
@@ -1167,6 +1242,11 @@
             "type": "image",
             "src": "/case-studies/noticia-lingo/noticia-landing-full.webp",
             "alt": "Full landing page"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/noticia-lingo/noticia-landing-full-section-2.webp",
+            "alt": "Full landing page (section)"
           },
           {
             "type": "image",
