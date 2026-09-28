@@ -35,7 +35,7 @@ export const disciplines = [
     title: "The person designing it can be the person building it.",
     project: "Badger Club",
     slug: "badger-club",
-    image: "/case-studies/badger-club/light-progress.webp",
+    image: "/case-studies/badger-club/badger-family-progress.webp",
     note: "A product I designed and built, from the user flows and interface to authentication, data and email.",
     contribution: "Product design / React / Supabase / In beta",
     decision: "Remove the account before refining the sign-up.",

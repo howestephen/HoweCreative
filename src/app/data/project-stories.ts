@@ -70,7 +70,7 @@ export const projectStories: Record<string, ProjectStory> = {
     },
   },
   "badger-club": {
-    lead: "dark-badger-management.webp",
+    lead: "badger-home-dark.webp",
     chapters: [
       {
         label: "01 / Product scope",
@@ -79,7 +79,7 @@ export const projectStories: Record<string, ProjectStory> = {
           "The original idea gave leaders, parents and children their own accounts. I reduced that to leader-only access, with shareable progress views for families. Parents and children can see achievements without a registration process.",
           "That decision shaped the product as well as the build: operational controls stay with leaders, while the family-facing experience concentrates on progress and communication.",
         ],
-        images: ["dark-progress-2.webp", "dark-message-leader.webp"],
+        images: ["badger-family-progress-phone.webp", "badger-family-message-phone.webp"],
         layout: "paired",
         ratio: "tall",
       },
@@ -90,11 +90,11 @@ export const projectStories: Record<string, ProjectStory> = {
           "I designed the screens and implemented the React frontend, Supabase data model, Google authentication and Resend email integration. Managing the complete flow meant I could change the product's scope alongside its technical structure.",
           "Messaging was another deliberate simplification: leaders use an in-app inbox with email notifications; parents receive messages by email. It avoids asking families to manage another inbox.",
         ],
-        images: ["dark-edit-progress.webp", "database-schema.webp"],
+        images: ["badger-thread.webp", "database-schema.webp"],
         layout: "paired",
         ratio: "screen",
         captions: [
-          "Editing a badge record in the leader workspace.",
+          "A parent conversation in the leader inbox, continued by email.",
           "The Supabase data model behind leaders, badges and families.",
         ],
       },
@@ -306,7 +306,7 @@ export const projectStories: Record<string, ProjectStory> = {
     },
   },
   "noticia-lingo": {
-    lead: "noticia-feed.webp",
+    lead: "noticia-landing.webp",
     leadRatio: "screen",
     chapters: [
       {
@@ -315,7 +315,7 @@ export const projectStories: Record<string, ProjectStory> = {
         paragraphs: [
           "I designed and built a prototype for practising Spanish through current news. Article reading, quizzes and a learner dashboard connect the learning experience to material from the wider world.",
         ],
-        images: ["noticia-exercise-comprehension.webp", "noticia-exercise-sort.webp"],
+        images: ["noticia-exercise.webp", "noticia-feed-portrait.webp"],
         layout: "paired",
         ratio: "tall",
       },
