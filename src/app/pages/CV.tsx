@@ -222,8 +222,12 @@ export function CV() {
                 high-frequency output sustainable
               </li>
               <li>
-                Built marketing assets and tools for UNCX partners: four AI-generated launch films for Quiver, and
-                an automated pipeline for Solana Diary turning live Solana data into designed, approved posts for X
+                Created four AI-generated launch films for Quiver, a UNCX partner, from script and art direction to
+                local generation, motion and edit
+              </li>
+              <li>
+                Built an automated marketing pipeline for Solana Diary, a UNCX partner, turning live Solana data into
+                designed, approved posts for X
               </li>
               <li>
                 Designed a cross-product navigation design system (variable-driven Figma components) for the full
