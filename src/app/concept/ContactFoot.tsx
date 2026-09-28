@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from "react";
+import { withBase } from "../lib/base-path";
 import { ArrowUpRight } from "lucide-react";
 
 import { siteProfile } from "../data/portfolio";
@@ -99,7 +100,7 @@ export function ContactFoot({ variant = "editorial", heading = true }: ContactFo
 
             <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
               <a
-                href="/cv"
+                href={withBase("/cv")}
                 className="inline-flex items-center gap-2 border border-foreground/25 px-5 py-3 text-sm font-medium text-foreground transition-colors hover:border-foreground"
               >
                 View CV
@@ -221,7 +222,7 @@ export function ContactFoot({ variant = "editorial", heading = true }: ContactFo
 
         <footer className={`mt-20 flex flex-col justify-between gap-3 border-t border-border pt-6 pb-2 md:flex-row ${smallClasses}`}>
           <span>© 2026 Stephen Howe {spatial ? "-" : "·"} Norwich, UK - remote worldwide</span>
-          <a href="/#work" className="transition-colors hover:text-accent">
+          <a href={withBase("/#work")} className="transition-colors hover:text-accent">
             {spatial ? "Back to selected work" : "Explore the work ↑"}
           </a>
         </footer>

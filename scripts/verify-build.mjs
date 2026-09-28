@@ -27,7 +27,7 @@ for (const route of routes) {
   );
   assert.equal(
     document.querySelector('link[rel="canonical"]').href,
-    `https://particle.howecreative.co.uk${route}`,
+    `https://howecreative.co.uk/particle-redesign${route}`,
   );
   assert.equal(
     document.querySelector('meta[name="robots"]')?.content,

@@ -2,6 +2,7 @@ import { MotionConfig } from "motion/react";
 import { Link, Outlet, useLocation } from "react-router";
 import { useEffect } from "react";
 import { ArrowUpRight } from "lucide-react";
+import { withBase } from "../lib/base-path";
 
 export function Layout() {
   const { pathname, hash } = useLocation();
@@ -31,13 +32,13 @@ export function Layout() {
             <nav aria-label="Main navigation">
               <Link to="/#work">Selected work</Link>
               <Link to="/archive">Archive</Link>
-              <a href="/archive#profile" className="nav-about">
+              <a href={withBase("/archive#profile")} className="nav-about">
                 About
               </a>
               <Link to="/cv">
                 CV <ArrowUpRight size={14} />
               </Link>
-              <a className="nav-contact" href="/#contact">
+              <a className="nav-contact" href={withBase("/#contact")}>
                 Contact{" "}
                 <ArrowUpRight size={15} />
               </a>

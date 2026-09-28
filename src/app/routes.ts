@@ -3,6 +3,7 @@ import { createElement } from "react";
 import { AppErrorBoundary } from "./components/AppErrorBoundary";
 import { CVRoute } from "./cv-route";
 import { Layout } from "./components/Layout";
+import { BASE_PATH } from "./lib/base-path";
 
 const darkRouteFallback = (label: string) => () => createElement("div", {
   role: "status",
@@ -50,4 +51,4 @@ export const router = createBrowserRouter([
     Component: CVRoute,
     ErrorBoundary: AppErrorBoundary,
   },
-]);
+], { basename: BASE_PATH || undefined });
