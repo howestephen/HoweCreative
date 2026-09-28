@@ -330,6 +330,76 @@ function trapTab(e: KeyboardEvent, container: HTMLElement | null) {
   }
 }
 
+const MAX_ZOOM = 4;
+
+/** An image the viewer can pinch to zoom (up to 4x), pan while zoomed and
+ *  double-tap to toggle, using a CSS transform instead of page zoom. */
+function ZoomableImage({ src, alt }: { src: string; alt: string }) {
+  const [view, setView] = useState({ scale: 1, x: 0, y: 0 });
+  const pointers = useRef(new Map<number, { x: number; y: number }>());
+  const pinch = useRef<{ distance: number; scale: number } | null>(null);
+  const lastTap = useRef(0);
+
+  // iOS Safari fires its own gesture events for pinch; cancel them so the page
+  // never zooms while the viewer is open.
+  useEffect(() => {
+    const block = (e: Event) => e.preventDefault();
+    document.addEventListener("gesturestart", block);
+    document.addEventListener("gesturechange", block);
+    return () => {
+      document.removeEventListener("gesturestart", block);
+      document.removeEventListener("gesturechange", block);
+    };
+  }, []);
+
+  const distance = () => {
+    const [a, b] = [...pointers.current.values()];
+    return Math.hypot(a.x - b.x, a.y - b.y);
+  };
+
+  return (
+    <ImageWithFallback
+      src={src}
+      alt={alt}
+      draggable={false}
+      style={{
+        transform: `translate(${view.x}px, ${view.y}px) scale(${view.scale})`,
+        touchAction: "none",
+      }}
+      className="max-h-full max-w-full select-none object-contain"
+      onPointerDown={(e) => {
+        e.currentTarget.setPointerCapture?.(e.pointerId);
+        pointers.current.set(e.pointerId, { x: e.clientX, y: e.clientY });
+        if (pointers.current.size === 2) pinch.current = { distance: distance(), scale: view.scale };
+      }}
+      onPointerMove={(e) => {
+        const previous = pointers.current.get(e.pointerId);
+        if (!previous) return;
+        pointers.current.set(e.pointerId, { x: e.clientX, y: e.clientY });
+        if (pointers.current.size === 2 && pinch.current) {
+          const scale = Math.min(MAX_ZOOM, Math.max(1, (pinch.current.scale * distance()) / pinch.current.distance));
+          setView((v) => (scale === 1 ? { scale: 1, x: 0, y: 0 } : { ...v, scale }));
+        } else if (pointers.current.size === 1 && view.scale > 1) {
+          setView((v) => ({ ...v, x: v.x + e.clientX - previous.x, y: v.y + e.clientY - previous.y }));
+        }
+      }}
+      onPointerUp={(e) => {
+        pointers.current.delete(e.pointerId);
+        if (pointers.current.size < 2) pinch.current = null;
+        if (e.pointerType === "touch" && pointers.current.size === 0) {
+          const now = Date.now();
+          if (now - lastTap.current < 300) setView((v) => (v.scale > 1 ? { scale: 1, x: 0, y: 0 } : { scale: 2.5, x: 0, y: 0 }));
+          lastTap.current = now;
+        }
+      }}
+      onPointerCancel={(e) => {
+        pointers.current.delete(e.pointerId);
+        pinch.current = null;
+      }}
+    />
+  );
+}
+
 function Lightbox({
   project,
   index,
@@ -370,6 +440,10 @@ function Lightbox({
       animate={{ opacity: 1 }}
       transition={{ duration: 0.18 }}
       ref={containerRef}
+      // The browser's own pinch-zoom is disabled here: zooming the whole page
+      // over a full-screen image exhausted memory on iPhones and crashed the
+      // tab. ZoomableImage handles pinch and pan on the image alone.
+      style={{ touchAction: "none" }}
       className="fixed inset-0 z-[200] bg-background"
       role="dialog"
       aria-modal="true"
@@ -385,11 +459,7 @@ function Lightbox({
           if (e.target === e.currentTarget) onClose();
         }}
       >
-        <ImageWithFallback
-          src={current.src}
-          alt={current.alt ?? project.title}
-          className="max-h-full max-w-full object-contain"
-        />
+        <ZoomableImage key={current.src} src={current.src} alt={current.alt ?? project.title} />
       </div>
 
       {/* Controls float above the image and never affect its layout. */}
@@ -618,7 +688,7 @@ function StudyOverlay({
       animate={{ opacity: 1 }}
       transition={{ duration: 0.2 }}
       ref={scrollerRef}
-      className="fixed inset-0 z-[150] overflow-y-auto overscroll-contain bg-foreground/45 backdrop-blur-sm"
+      className="fixed inset-0 z-[150] overflow-y-auto overscroll-contain bg-neutral-900/70"
     >
       <div
         className="flex min-h-full items-start justify-center sm:p-6 lg:p-10"
@@ -636,7 +706,7 @@ function StudyOverlay({
           transition={{ duration: 0.28, ease: [0.25, 0.8, 0.3, 1] }}
           className="relative min-h-screen w-full max-w-5xl border-border bg-background shadow-2xl sm:min-h-0 sm:border"
         >
-          <header className="sticky top-0 z-10 flex items-start justify-between gap-4 border-b border-border bg-background/95 px-5 py-4 backdrop-blur-md sm:px-8">
+          <header className="sticky top-0 z-10 flex items-start justify-between gap-4 border-b border-border bg-background px-5 py-4 sm:px-8">
             <div className="min-w-0">
               <div className="font-mono text-[10px] uppercase tracking-[0.14em] text-accent">
                 {indexLabel(index)} · {shortCategory(project)} · {project.year}

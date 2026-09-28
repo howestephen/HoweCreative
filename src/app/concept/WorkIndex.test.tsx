@@ -100,6 +100,36 @@ describe("WorkIndex", () => {
     expect(document.body.style.overflow).toBe("hidden");
   });
 
+  it("zooms the lightbox image with a pinch instead of zooming the page", () => {
+    renderAt("/?study=quiver");
+    fireEvent.click(screen.getAllByRole("button", { name: /view larger/i })[0]);
+    const lightbox = screen.getByRole("dialog", { name: "Quiver gallery" });
+    // Page pinch-zoom over the full-screen image crashed iPhones; it is off here.
+    expect(lightbox.style.touchAction).toBe("none");
+
+    const image = lightbox.querySelector("img")!;
+    const touch = (type: string, pointerId: number, clientX: number) => {
+      const event = new Event(type, { bubbles: true });
+      Object.assign(event, { pointerId, clientX, clientY: 300, pointerType: "touch" });
+      fireEvent(image, event);
+    };
+    touch("pointerdown", 1, 100);
+    touch("pointerdown", 2, 200);
+    touch("pointermove", 2, 300); // fingers twice as far apart
+    expect(image.style.transform).toContain("scale(2)");
+
+    // Pinching back in never shrinks the image below its fitted size.
+    touch("pointermove", 2, 110);
+    expect(image.style.transform).toContain("scale(1)");
+  });
+
+  it("uses a solid scrim, not a backdrop blur, behind the study", () => {
+    renderAt("/?study=quiver");
+    const overlay = screen.getByRole("dialog", { name: "Quiver" }).closest(".fixed");
+    expect(document.querySelector("[class*='backdrop-blur']")).toBeNull();
+    expect(overlay?.className).toContain("bg-neutral-900/70");
+  });
+
   it("keeps Tab focus inside the lightbox while it covers the study", () => {
     renderAt("/?study=quiver");
     fireEvent.click(screen.getAllByRole("button", { name: /view larger/i })[0]);
