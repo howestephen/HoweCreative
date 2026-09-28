@@ -74,9 +74,9 @@ function EvidenceImage({
 
 function BadgerLead({ project }: { project: PortfolioProject }) {
   const screens = [
-    { label: "Leader workspace", filename: "dark-badger-management.webp" },
-    { label: "Progress & achievements", filename: "dark-progress-2.webp" },
-    { label: "Family communication", filename: "dark-message-leader.webp" },
+    { label: "Leader workspace", filename: "badger-home-dark.webp" },
+    { label: "Progress & achievements", filename: "badger-family-progress-dark.webp" },
+    { label: "Family communication", filename: "badger-family-message.webp" },
   ];
   const [selected, setSelected] = useState(0);
   const media = findMedia(project, screens[selected].filename)!;
