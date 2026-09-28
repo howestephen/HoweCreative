@@ -1,11 +1,11 @@
 export const quiverFilm = {
   title: "Quiver launch film",
-  src: "/case-studies/quiver/quiver-launch-film.mp4",
-  poster: "/case-studies/quiver/hero-poster.jpg",
-  duration: "1:08",
+  src: "/case-studies/quiver/advanced.mp4",
+  poster: "/case-studies/quiver/advanced.poster.jpg",
+  duration: "0:58",
   format: "1920 x 1080 / 24 fps",
   description:
-    "The finished launch film combines generated performances and atmospheres with authored typography, product storytelling and motion design.",
+    "The advanced launch film, one of four finished edits, combines generated performances and atmospheres with authored typography, product storytelling and motion design.",
 };
 
 export const quiverEvidenceClips = [
@@ -46,7 +46,7 @@ export const quiverProcess = [
   {
     title: "Use local inference where iteration matters.",
     body:
-      "I ran Wan 2.2 in ComfyUI on a dedicated RTX 4090 for repeatable image-to-video and first-to-last-frame passes. Hosted tools remained useful for fast exploration, while the local route gave me owned, credit-free iteration for prepared shots. The workflow was hybrid by design rather than tied to one generator.",
+      "Cloud generation made the number of attempts this film needed too costly on subscription services. Running Wan 2.2 in ComfyUI on a dedicated RTX 4090 turned that cost into time: I rendered three to five attempts per scene and kept the one that looked right, with Claude queuing scenes in ComfyUI while Codex generated source images in the same project folder.",
   },
   {
     title: "Keep the finishing layer deterministic.",

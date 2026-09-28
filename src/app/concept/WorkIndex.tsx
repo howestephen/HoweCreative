@@ -32,9 +32,9 @@ export function WorkIndex() {
                 {String(index + 1).padStart(2, "0")}
               </span>
               <span className="work-entry-image">
-                {editorial.cover ? (
+                {project.image || editorial.cover ? (
                   <img
-                    src={thumbnail(editorial.cover)}
+                    src={thumbnail(project.image || editorial.cover)}
                     alt=""
                     loading="lazy"
                     decoding="async"

@@ -240,12 +240,10 @@ function ProjectStory({ project }: { project: PortfolioProject }) {
     (item) => !(lead?.type === "video" && item.src === lead.src),
   );
   const brief = project.overlaySections.find(
-    (section) => section.title === "Brief",
+    (section) => section.title === "Problem",
   );
   const status =
-    project.slug === "uncx-menu"
-      ? "Design complete / implementation on hold"
-      : project.status === "2021-2026"
+    project.status === "2021-2026"
         ? "Shipped features + explorations"
         : project.status;
 
@@ -329,7 +327,15 @@ function ProjectStory({ project }: { project: PortfolioProject }) {
           {project.overlaySections.map((section) => (
             <section key={section.title}>
               <h3>{section.title}</h3>
-              <p>{section.body}</p>
+              {section.body.split("\n").every((line) => line.startsWith("- ")) ? (
+                <ul>
+                  {section.body.split("\n").map((line) => (
+                    <li key={line}>{line.slice(2)}</li>
+                  ))}
+                </ul>
+              ) : (
+                <p>{section.body}</p>
+              )}
             </section>
           ))}
         </details>

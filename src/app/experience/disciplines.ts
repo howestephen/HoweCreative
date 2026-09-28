@@ -37,7 +37,7 @@ export const disciplines = [
     slug: "badger-club",
     image: "/case-studies/badger-club/badger-family-progress.webp",
     note: "A product I designed and built, from the user flows and interface to authentication, data and email.",
-    contribution: "Product design / React / Supabase / In beta",
+    contribution: "Product design / React / Supabase / In development",
     decision: "Remove the account before refining the sign-up.",
     explanation:
       "I restricted accounts to group leaders. Parents receive progress by email and can view it without signing up; children do not need accounts. That decision simplified the product and shaped its authentication, data model and communication flows.",

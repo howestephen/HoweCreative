@@ -30,11 +30,11 @@ export const projectEditorial: Record<
     label: "Creative direction / Generative production / Motion systems",
     headline: "A controlled filmmaking system for a technical launch.",
     summary:
-      "A sparse marketing brief became a 68-second launch film. I directed the world, designed constrained inputs for local and hosted generation, and built the modular motion system that finished it.",
+      "A sparse brief from Quiver, a UNCX partner, became four launch films. I set the visual world, designed constrained inputs for local generation, and built the modular motion system that finished them.",
     cover: "/case-studies/quiver/hero-poster.jpg",
     fit: "I connect art direction, emerging tools and hands-on production, then build a method that survives beyond one output.",
     credit:
-      "My work: concept, script, art direction, source-image direction, local inference workflow, motion design, editing, audio and AI-assisted production scripts. The logo, product and rough ident reference were supplied. Produced as Lead Designer at UNCX Network.",
+      "My work: concept, script, art direction, source-image direction, local inference workflow, motion design, editing, audio and AI-assisted production scripts. The logo, product and rough ident reference were supplied. Made for Quiver, a UNCX partner, as a client.",
   },
   "uncx-video-system": {
     label: "3D / Motion / Production",
@@ -54,7 +54,7 @@ export const projectEditorial: Record<
     cover: "/case-studies/badger-club/badger-home-dark.webp",
     fit: "I take responsibility for the experience from user flow to working code.",
     credit:
-      "Solo product design and development with AI-assisted tooling. The working beta covers leader accounts, progress tracking and communication with families.",
+      "Solo product design and development with AI-assisted tooling. In development: the redesigned system is being prepared for launch, with legal and EU compliance work under way.",
   },
   "solana-diary": {
     label: "Creative automation / API integration",
@@ -64,17 +64,17 @@ export const projectEditorial: Record<
     cover: "/case-studies/solana-diary/twitter-header.png",
     fit: "I connect visual systems to real data, APIs and the people responsible for the output.",
     credit:
-      "Solo brand, template design and engineering. Built with AI tools; the running pipeline used code-driven rendering. Grok was an optional, button-triggered assist. Archived.",
+      "Built for Solana Diary, a UNCX partner: brand assets, template design and engineering. The name and purpose predated my involvement, and the account was banned over the name. Archived.",
   },
   "uncx-rebrand": {
     label: "Brand direction / Digital design",
     headline: "One identity across a growing ecosystem.",
     summary:
-      "Two stages of brand evolution: a solo name and logo change, then a collaborative identity system and website brought into focus across 10+ pages.",
+      "Unicrypt Network became UNCX Network in 2022, then moved to a more modern brand, website and Academy in 2024, across 10+ pages.",
     cover: "/case-studies/uncx-rebrand/chain-based-design.webp",
     fit: "I connect a brand's direction to the detail of its products, pages and media.",
     credit:
-      "I led the 2022 name and logo rebrand. For 2024, I wrote the brief and specification; an external team created the brand foundations and initial website designs. I completed product content, layouts and graphics in-house.",
+      "In 2022 I rebuilt the logo, brand, marketing and website, with a developer implementing the site. For 2024 an outside studio built a more modern system from my direction; I finished the website, Academy and brand rollout in-house.",
   },
   "uncx-menu": {
     label: "Interaction design / Design systems",
@@ -84,7 +84,7 @@ export const projectEditorial: Record<
     cover: "/case-studies/uncx-menu/prototypes-open.webp",
     fit: "I resolve unfamiliar interaction problems and document states engineers can implement.",
     credit:
-      "My work: research, interaction design, components, variables and implementation specifications. Design complete; implementation is on hold.",
+      "My work: research, interaction design, components, variables and implementation specifications. Signed off and implemented, then adapted by the development team.",
   },
   "uncx-academy": {
     label: "Product design / Creative education",
@@ -110,11 +110,11 @@ export const projectEditorial: Record<
     label: "Product experiment / Learning design",
     headline: "Learn a language through the world around you.",
     summary:
-      "A working prototype turning news into contextual Spanish lessons, with article reading, quizzes, authentication and a learner dashboard.",
+      "A language-learning app turning news into contextual lessons, starting with English to Spanish, with levels, a learner dashboard and a multilingual framework.",
     cover: "/case-studies/noticia-lingo/noticia-landing.webp",
     fit: "I use prototypes to examine the learning experience as well as the technology.",
     credit:
-      "Solo product design and AI-assisted development. In development; the lesson architecture is still being refined.",
+      "Solo product design and AI-assisted development. In development: every lesson type is built, with multilingual and legal foundations in place.",
   },
   "ai-portfolio-system": {
     label: "AI-assisted development / Workflow",

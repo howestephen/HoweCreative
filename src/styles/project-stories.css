@@ -440,6 +440,19 @@
   font-size: 14px;
   line-height: 1.85;
 }
+.case-full-context ul {
+  margin: 0;
+  padding-left: 1.2em;
+  list-style: disc;
+}
+
+.case-full-context li {
+  margin-top: 0.35em;
+  color: #696761;
+  font-size: 14px;
+  line-height: 1.85;
+}
+
 .case-full-context h3 {
   font-size: 19px;
   margin-bottom: 12px;
