@@ -20,6 +20,27 @@ describe("project gallery navigation", () => {
   afterEach(() => {
     vi.restoreAllMocks();
   });
+  it("zooms the open image with a pinch instead of zooming the page", () => {
+    render(
+      <ProjectGallery title="Zoom" media={[{ type: "image", src: "/one.webp", alt: "One" }]} />,
+    );
+    fireEvent.click(screen.getByRole("button", { name: "View larger: One" }));
+    const dialog = screen.getByRole("dialog");
+    expect(dialog.style.touchAction).toBe("none");
+    const image = dialog.querySelector(".dialog-image img") as HTMLImageElement;
+    const touch = (type: string, pointerId: number, clientX: number) => {
+      const event = new Event(type, { bubbles: true });
+      Object.assign(event, { pointerId, clientX, clientY: 300, pointerType: "touch" });
+      fireEvent(image, event);
+    };
+    touch("pointerdown", 1, 100);
+    touch("pointerdown", 2, 200);
+    touch("pointermove", 2, 300);
+    expect(image.style.transform).toContain("scale(2)");
+    touch("pointermove", 2, 110);
+    expect(image.style.transform).toContain("scale(1)");
+  });
+
   it("uses image indexes even when videos precede images, wraps keyboard navigation and restores focus", () => {
     render(
       <ProjectGallery

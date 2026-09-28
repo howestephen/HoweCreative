@@ -10,8 +10,7 @@
   position: sticky;
   top: 0;
   z-index: 50;
-  background: color-mix(in srgb, var(--background) 94%, transparent);
-  backdrop-filter: blur(18px);
+  background: var(--background);
   border-bottom: 1px solid var(--border);
 }
 .header-inner {

@@ -2,6 +2,76 @@ import { useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import type { ProjectMediaItem } from "../data/portfolio";
 
+const MAX_ZOOM = 4;
+
+/** An image the viewer can pinch to zoom (up to 4x), pan while zoomed and
+ *  double-tap to toggle, using a CSS transform instead of page zoom. */
+function ZoomableImage({ src, alt }: { src: string; alt: string }) {
+  const [view, setView] = useState({ scale: 1, x: 0, y: 0 });
+  const pointers = useRef(new Map<number, { x: number; y: number }>());
+  const pinch = useRef<{ distance: number; scale: number } | null>(null);
+  const lastTap = useRef(0);
+
+  // iOS Safari fires its own gesture events for pinch; cancel them so the page
+  // never zooms while the viewer is open.
+  useEffect(() => {
+    const block = (e: Event) => e.preventDefault();
+    document.addEventListener("gesturestart", block);
+    document.addEventListener("gesturechange", block);
+    return () => {
+      document.removeEventListener("gesturestart", block);
+      document.removeEventListener("gesturechange", block);
+    };
+  }, []);
+
+  const distance = () => {
+    const [a, b] = [...pointers.current.values()];
+    return Math.hypot(a.x - b.x, a.y - b.y);
+  };
+
+  return (
+    <img
+      src={src}
+      alt={alt}
+      draggable={false}
+      style={{
+        transform: `translate(${view.x}px, ${view.y}px) scale(${view.scale})`,
+        touchAction: "none",
+        userSelect: "none",
+      }}
+      onPointerDown={(e) => {
+        e.currentTarget.setPointerCapture?.(e.pointerId);
+        pointers.current.set(e.pointerId, { x: e.clientX, y: e.clientY });
+        if (pointers.current.size === 2) pinch.current = { distance: distance(), scale: view.scale };
+      }}
+      onPointerMove={(e) => {
+        const previous = pointers.current.get(e.pointerId);
+        if (!previous) return;
+        pointers.current.set(e.pointerId, { x: e.clientX, y: e.clientY });
+        if (pointers.current.size === 2 && pinch.current) {
+          const scale = Math.min(MAX_ZOOM, Math.max(1, (pinch.current.scale * distance()) / pinch.current.distance));
+          setView((v) => (scale === 1 ? { scale: 1, x: 0, y: 0 } : { ...v, scale }));
+        } else if (pointers.current.size === 1 && view.scale > 1) {
+          setView((v) => ({ ...v, x: v.x + e.clientX - previous.x, y: v.y + e.clientY - previous.y }));
+        }
+      }}
+      onPointerUp={(e) => {
+        pointers.current.delete(e.pointerId);
+        if (pointers.current.size < 2) pinch.current = null;
+        if (e.pointerType === "touch" && pointers.current.size === 0) {
+          const now = Date.now();
+          if (now - lastTap.current < 300) setView((v) => (v.scale > 1 ? { scale: 1, x: 0, y: 0 } : { scale: 2.5, x: 0, y: 0 }));
+          lastTap.current = now;
+        }
+      }}
+      onPointerCancel={(e) => {
+        pointers.current.delete(e.pointerId);
+        pinch.current = null;
+      }}
+    />
+  );
+}
+
 export function thumbnail(src: string) {
   const slash = src.lastIndexOf("/");
   const dot = src.lastIndexOf(".");
@@ -36,6 +106,9 @@ function ImageDialog({
     <dialog
       ref={dialog}
       className="image-dialog"
+      // Page pinch-zoom over a full-screen image exhausted memory on iPhones;
+      // ZoomableImage zooms the image alone.
+      style={{ touchAction: "none" }}
       aria-label={`${title} gallery`}
       onCancel={onClose}
       onClick={(event) => {
@@ -61,7 +134,7 @@ function ImageDialog({
         </button>
       </div>
       <div className="dialog-image">
-        <img src={images[index].src} alt={images[index].alt ?? title} />
+        <ZoomableImage key={images[index].src} src={images[index].src} alt={images[index].alt ?? title} />
       </div>
       <div className="dialog-footer">
         <button
