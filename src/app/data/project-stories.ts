@@ -306,7 +306,7 @@ export const projectStories: Record<string, ProjectStory> = {
     },
   },
   "noticia-lingo": {
-    lead: "signed-out-hero.webp",
+    lead: "noticia-feed.webp",
     leadRatio: "screen",
     chapters: [
       {
@@ -315,7 +315,7 @@ export const projectStories: Record<string, ProjectStory> = {
         paragraphs: [
           "I designed and built a prototype for practising Spanish through current news. Article reading, quizzes and a learner dashboard connect the learning experience to material from the wider world.",
         ],
-        images: ["quiz-page.webp", "dashboard.webp"],
+        images: ["noticia-exercise-comprehension.webp", "noticia-exercise-sort.webp"],
         layout: "paired",
         ratio: "tall",
       },

@@ -42,7 +42,7 @@ const projectFrames: { slug: string; description: string; icon: typeof Feather; 
   { slug: "uncx-rebrand", description: "External collaboration and in-house design", icon: Shapes, area: "Brand",
     preview: { src: "/case-studies/uncx-rebrand/uncx-logotype.svg", alt: "UNCX Network logotype", fit: "contain" } },
   { slug: "noticia-lingo", description: "Product design through implementation", icon: Hexagon, area: "Product",
-    preview: { src: "/case-studies/noticia-lingo/noticia-lingo-app.webp", alt: "The Noticia Lingo reading feed on a phone", fit: "contain" } },
+    preview: { src: "/case-studies/noticia-lingo/noticia-feed-phone.webp", alt: "The Noticia Lingo reading feed on a phone", fit: "contain" } },
 ];
 
 const selectedProjects = projectFrames.map((frame) => {
