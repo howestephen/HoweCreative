@@ -43,8 +43,20 @@ function thumbSrc(src: string): string {
   return `${src.slice(0, slash)}/thumbs/${src.slice(slash + 1, dot)}.jpg`;
 }
 
-function sectionBody(project: PortfolioProject, title: string) {
-  return project.overlaySections.find((section) => section.title === title)?.body ?? "";
+/** A section body is prose, or a list when every line starts with "- ". */
+function SectionBody({ body, emphasis }: { body: string; emphasis: boolean }) {
+  const tone = emphasis ? "text-foreground/90" : "text-muted-foreground";
+  const lines = body.split("\n").map((line) => line.trim()).filter(Boolean);
+  if (lines.length > 0 && lines.every((line) => line.startsWith("- "))) {
+    return (
+      <ul className={`max-w-2xl list-disc space-y-1.5 pl-5 text-sm leading-relaxed ${tone}`}>
+        {lines.map((line) => (
+          <li key={line}>{line.slice(2)}</li>
+        ))}
+      </ul>
+    );
+  }
+  return <p className={`max-w-2xl text-sm leading-relaxed ${tone}`}>{body}</p>;
 }
 
 /** A labelled horizontal scroller with arrow buttons and a visible scrollbar,
@@ -216,9 +228,6 @@ function StudyDetail({
   project: PortfolioProject;
   onOpenImage: (index: number) => void;
 }) {
-  const brief = sectionBody(project, "Brief");
-  const system = sectionBody(project, "System Design");
-  const outcome = sectionBody(project, "Outcome");
   const media = project.media ?? [];
   const allImages = media.filter((m) => m.type === "image");
   // A study that leads with a video (Quiver's launch film) features it at full
@@ -252,32 +261,17 @@ function StudyDetail({
       <div className="min-w-0 space-y-6 lg:col-span-3">
         <p className="max-w-2xl leading-relaxed text-foreground/90">{project.fullDescription}</p>
 
-        {brief && (
-          <div>
-            <div className="mb-2 font-mono text-[10px] uppercase tracking-[0.18em] text-accent">
-              Brief
+        {project.overlaySections.map((section) => {
+          const isOutcome = section.title === "Outcome";
+          return (
+            <div key={section.title} className={isOutcome ? "border-l-2 border-accent pl-4" : undefined}>
+              <div className="mb-2 font-mono text-[10px] uppercase tracking-[0.18em] text-accent">
+                {section.title}
+              </div>
+              <SectionBody body={section.body} emphasis={isOutcome} />
             </div>
-            <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">{brief}</p>
-          </div>
-        )}
-
-        {system && (
-          <div>
-            <div className="mb-2 font-mono text-[10px] uppercase tracking-[0.18em] text-accent">
-              System
-            </div>
-            <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">{system}</p>
-          </div>
-        )}
-
-        {outcome && (
-          <div className="border-l-2 border-accent pl-4">
-            <div className="mb-2 font-mono text-[10px] uppercase tracking-[0.18em] text-accent">
-              Outcome
-            </div>
-            <p className="max-w-2xl text-sm leading-relaxed text-foreground/90">{outcome}</p>
-          </div>
-        )}
+          );
+        })}
 
         <div className="flex flex-wrap gap-2 pt-1">
           {[project.role, project.client, project.status].map((chip) => (

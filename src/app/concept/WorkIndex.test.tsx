@@ -119,6 +119,41 @@ describe("WorkIndex", () => {
     expect(cards()[0]).toHaveAccessibleDescription(/Four launch films/);
   });
 
+  it("shows every written section of every study, in order", () => {
+    for (const project of portfolioProjects) {
+      const { unmount } = render(
+        <RouterProvider
+          router={createMemoryRouter([{ path: "/", Component: WorkIndex }], {
+            initialEntries: [`/?study=${project.slug}`],
+          })}
+        />,
+      );
+      const text = screen.getByRole("dialog").textContent ?? "";
+      let from = 0;
+      for (const section of project.overlaySections) {
+        const at = text.indexOf(section.title, from);
+        expect(at, `${project.slug}: ${section.title}`).toBeGreaterThanOrEqual(from);
+        from = at + section.title.length;
+      }
+      unmount();
+    }
+  });
+
+  it("renders a section written as '- ' lines as a list", () => {
+    const project = portfolioProjects.find((p) => p.overlaySections.length > 0)!;
+    const original = project.overlaySections;
+    project.overlaySections = [{ title: "Constraints", body: "- First limit\n- Second limit" }];
+    try {
+      renderAt(`/?study=${project.slug}`);
+      const items = within(screen.getByRole("dialog")).getAllByRole("listitem");
+      expect(items.map((item) => item.textContent)).toEqual(
+        expect.arrayContaining(["First limit", "Second limit"]),
+      );
+    } finally {
+      project.overlaySections = original;
+    }
+  });
+
   it("ignores an unknown study slug", () => {
     renderAt("/?study=not-a-study");
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
