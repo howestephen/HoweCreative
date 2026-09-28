@@ -61,7 +61,7 @@ export const projectEditorial: Record<
     headline: "Live data, designed for a daily deadline.",
     summary:
       "Seven services turned live data into branded media. I built the backend and designed every template, with human approval in Telegram before publication.",
-    cover: "/case-studies/solana-diary/twitter-header.png",
+    cover: "/case-studies/solana-diary/twitter-header.webp",
     fit: "I connect visual systems to real data, APIs and the people responsible for the output.",
     credit:
       "Built for Solana Diary, a UNCX partner: brand assets, template design and engineering. The name and purpose predated my involvement, and the account was banned over the name. Archived.",

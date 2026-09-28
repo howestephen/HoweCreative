@@ -114,7 +114,7 @@ function SolanaLead({ project }: { project: PortfolioProject }) {
     <div className="case-output-lead">
       <div className="case-output-identity">
         <img
-          src="/case-studies/solana-diary/twitter-header.png"
+          src="/case-studies/solana-diary/twitter-header.webp"
           alt="Solana Diary identity"
         />
         <p>
