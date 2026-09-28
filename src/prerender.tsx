@@ -1,7 +1,6 @@
 import { renderToString } from "react-dom/server";
 import { MemoryRouter, Route, Routes } from "react-router";
 import { Layout } from "./app/components/Layout";
-import { Home } from "./app/pages/Home";
 import { Project } from "./app/pages/Project";
 import { Archive } from "./app/pages/Archive";
 import { CV } from "./app/pages/CV";
@@ -48,12 +47,6 @@ function StudyPrerender() {
 export const pages = [
   {
     path: "/",
-    title: "Stephen Howe | Creative Technologist, Design & Code",
-    description:
-      "Stephen Howe, creative technologist in Norwich, UK. Generative film, product design, code, 3D and motion. Explore the work from creative direction to delivery.",
-  },
-  {
-    path: "/study",
     title: "Stephen Howe - Creative Technologist",
     description:
       "Creative technologist Stephen Howe connects art direction, generative production, product design, 3D, motion and code.",
@@ -82,8 +75,7 @@ export function render(path: string) {
     <MemoryRouter initialEntries={[path]}>
       <Routes>
         <Route element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="/study" element={<StudyPrerender />} />
+          <Route index element={<StudyPrerender />} />
           <Route path="/archive" element={<Archive />} />
           <Route path="/work/:slug" element={<Project />} />
         </Route>

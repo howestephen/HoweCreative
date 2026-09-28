@@ -1,9 +1,8 @@
-import { createBrowserRouter } from "react-router";
+import { createBrowserRouter, redirect } from "react-router";
 import { createElement } from "react";
 import { AppErrorBoundary } from "./components/AppErrorBoundary";
 import { CVRoute } from "./cv-route";
 import { Layout } from "./components/Layout";
-import { Home } from "./pages/Home";
 
 const darkRouteFallback = (label: string) => () => createElement("div", {
   role: "status",
@@ -16,9 +15,8 @@ export const router = createBrowserRouter([
     Component: Layout,
     ErrorBoundary: AppErrorBoundary,
     children: [
-      { index: true, Component: Home },
       {
-        path: "study",
+        index: true,
         HydrateFallback: () => createElement("div", {
           role: "status",
           style: { position: "fixed", inset: 0, zIndex: 1000, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 18, background: "#060707", color: "#b7bdb8", fontSize: 11 },
@@ -27,6 +25,8 @@ export const router = createBrowserRouter([
           Component: (await import("./experience/PortraitExperience")).PortraitExperience,
         }),
       },
+      // The portrait experience used to live at /study; keep old links working.
+      { path: "study", loader: () => redirect("/") },
       {
         path: "archive",
         HydrateFallback: darkRouteFallback("Loading archive"),

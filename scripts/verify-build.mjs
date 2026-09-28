@@ -12,7 +12,6 @@ const cv = JSON.parse(
 );
 const routes = [
   "/",
-  "/study",
   "/archive",
   "/cv",
   ...content.caseStudies.projects.map((project) => `/work/${project.slug}`),
@@ -28,7 +27,12 @@ for (const route of routes) {
   );
   assert.equal(
     document.querySelector('link[rel="canonical"]').href,
-    `https://howecreative.co.uk${route}`,
+    `https://particle.howecreative.co.uk${route}`,
+  );
+  assert.equal(
+    document.querySelector('meta[name="robots"]')?.content,
+    "noindex, nofollow",
+    `${route}: the demo site stays out of search results`,
   );
   assert.ok(
     document.querySelector('meta[name="description"]').content.length > 40,
