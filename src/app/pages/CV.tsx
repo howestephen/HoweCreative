@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { withBase } from "../lib/base-path";
 import { Link, useSearchParams } from "react-router";
 import data from "../data/cv.json";
 import "../../styles/cv.css";
@@ -40,7 +41,7 @@ export function CV() {
             ))}
           </select>
         </label>
-        <a href={`/cv/${filename}`} download>
+        <a href={withBase(`/cv/${filename}`)} download>
           Download PDF
         </a>
         <button type="button" onClick={() => window.print()}>
