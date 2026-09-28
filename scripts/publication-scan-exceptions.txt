@@ -1,3 +1,4 @@
 # Reviewed publication-scan exceptions: rule<TAB>path<TAB>sha256<TAB>reason.
 # Entries take effect once they are on the remote default branch.
 contact-email	src/app/pages/CV.tsx	932bbe99f92398ab896f70188cd06ca5eb68d0e71976d63dd42f1d5d32d08e87	CV page is the approved public email exception
+contact-email	src/app/data/cv.json	932bbe99f92398ab896f70188cd06ca5eb68d0e71976d63dd42f1d5d32d08e87	Redesign CV data is the approved public email exception
