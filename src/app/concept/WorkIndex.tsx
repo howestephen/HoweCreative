@@ -515,7 +515,7 @@ function StudyCard({
           className={
             featured
               ? "aspect-video overflow-hidden bg-neutral-900 lg:col-span-3 lg:aspect-auto lg:min-h-[22rem]"
-              : "aspect-square w-24 shrink-0 overflow-hidden bg-neutral-900 sm:aspect-[16/10] sm:w-full"
+              : "aspect-square w-24 shrink-0 self-start overflow-hidden bg-neutral-900 sm:aspect-[16/10] sm:w-full sm:self-auto"
           }
         >
           <CardImage project={project} featured={featured} />

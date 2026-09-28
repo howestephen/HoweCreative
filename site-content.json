@@ -295,7 +295,7 @@
           "Figma",
           "Grok"
         ],
-        "image": "/case-studies/solana-diary/twitter-header.png",
+        "image": "/case-studies/solana-diary/card.webp",
         "media": [
           {
             "type": "image",
@@ -464,7 +464,7 @@
           "Prototyping",
           "Research"
         ],
-        "image": "/case-studies/uncx-menu/menu-components.webp",
+        "image": "/case-studies/uncx-menu/card.webp",
         "media": [
           {
             "type": "image",
@@ -552,7 +552,7 @@
           "Web Design",
           "Art Direction"
         ],
-        "image": "/case-studies/uncx-rebrand/brand-designs.webp",
+        "image": "/case-studies/uncx-rebrand/card.webp",
         "media": [
           {
             "type": "image",
@@ -720,7 +720,7 @@
           "Systems Design",
           "Product"
         ],
-        "image": "/case-studies/badger-club/badger-public-home.webp",
+        "image": "/case-studies/badger-club/card.webp",
         "media": [
           {
             "type": "image",
@@ -851,7 +851,7 @@
           "Motion System",
           "Brand Design"
         ],
-        "image": "/case-studies/uncx-video-system/youtube-thumbnails.webp",
+        "image": "/case-studies/uncx-video-system/card.webp",
         "media": [
           {
             "type": "image",
@@ -978,7 +978,7 @@
           "Content Systems",
           "UI/UX"
         ],
-        "image": "/case-studies/uncx-academy/main-page.webp",
+        "image": "/case-studies/uncx-academy/card.webp",
         "media": [
           {
             "type": "image",
@@ -1112,7 +1112,7 @@
           "Google Auth",
           "Product Design"
         ],
-        "image": "/case-studies/noticia-lingo/noticia-feed-portrait.webp",
+        "image": "/case-studies/noticia-lingo/card.webp",
         "media": [
           {
             "type": "image",
@@ -1197,7 +1197,7 @@
           "Wireframing",
           "Product"
         ],
-        "image": "/case-studies/uncx-app-concepts/launchpad-components.webp",
+        "image": "/case-studies/uncx-app-concepts/card.webp",
         "media": [
           {
             "type": "image",
@@ -1342,7 +1342,7 @@
           "TypeScript",
           "Tailwind"
         ],
-        "image": "",
+        "image": "/case-studies/ai-portfolio-system/card.webp",
         "media": [],
         "gradient": "from-[#ff4466] to-[#4f0012]",
         "role": "Designer & Pipeline Builder",
