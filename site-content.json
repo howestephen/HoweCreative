@@ -462,9 +462,9 @@
         "title": "UNCX Unified Menu",
         "category": "Interface System / Design System",
         "year": "2026",
-        "status": "Design Complete",
+        "status": "Implemented",
         "shortDescription": "Cross-product navigation component system with variable-driven Figma prototypes, research-backed hierarchy, and scalable state logic.",
-        "fullDescription": "One navigation system designed to work across every UNCX Network product. I researched the patterns, set the hierarchy and delivered a variable-driven Figma component ready for development.",
+        "fullDescription": "One navigation system for every UNCX Network product. I researched the patterns, set the hierarchy and delivered a variable-driven Figma component that was signed off and built.",
         "tags": [
           "Figma",
           "Design Systems",
@@ -516,7 +516,7 @@
         "overlaySections": [
           {
             "title": "Context and role",
-            "body": "In-house at UNCX Network. Each product had grown its own menu, so users moving between EVM tools, Solana products, the Academy and the homepage met a different structure every time. I owned the research, hierarchy, component design and implementation specification."
+            "body": "In-house at UNCX Network, where each product had grown its own menu, so users moving between EVM tools, Solana products, the Academy and the homepage met a different structure every time. I owned the research, hierarchy, component design and implementation specification."
           },
           {
             "title": "Problem",
@@ -532,15 +532,15 @@
           },
           {
             "title": "Compromises",
-            "body": "- Non-value-generating menu options were de-prioritised to keep the structure efficient\n- Development is on hold after a shift in priorities, so the system is designed but not yet shipped"
+            "body": "- Non-value-generating menu options were de-prioritised to keep the structure efficient\n- UNCX is a developer-led product organisation, so the design continued to evolve in implementation; the mobile version in particular has since been adapted by the development team"
           },
           {
             "title": "Outcome",
-            "body": "A complete Figma design system with documented states, variables, content slot patterns and implementation specifications, ready for development. It is on hold pending development priorities."
+            "body": "The design was signed off and implemented across the product suite. Elements have since been refined by the development team as the products changed, with the core hierarchy and structure intact."
           },
           {
             "title": "What I learned",
-            "body": "Navigation hierarchy is a business decision as much as a UX one: the menu has to reflect where the value is."
+            "body": "Navigation hierarchy is a business decision as much as a UX one. In a fast-moving, developer-led team, the most durable part of a design is the structure and reasoning behind it, so that is what needs to be clearest in the handoff."
           }
         ]
       },
@@ -551,8 +551,8 @@
         "category": "Brand System / Visual Infrastructure",
         "year": "2022-2024",
         "status": "Complete",
-        "shortDescription": "Two-phase rebrand: a name and logo overhaul in 2022, then a full brand system and website redesign in 2024 - I wrote the brief and spec, an external team delivered the foundations, and I finished the system in-house.",
-        "fullDescription": "A two-phase rebrand of UNCX Network: a name and logo change in 2022, then a full brand system and website redesign in 2024. I wrote the brief and specification, an external team built the foundations, and I finished the system in-house.",
+        "shortDescription": "The rebrand of Unicrypt Network into UNCX Network: a logo, brand, marketing and website rebuild in 2022, then a more modern brand, website and Academy in 2024, directed by me with an outside studio and finished in-house.",
+        "fullDescription": "The rebrand of Unicrypt Network into UNCX Network, in two phases. In 2022 I rebuilt the logo, brand, marketing and website myself; in 2024 an outside studio worked from my direction on a more modern system, and I completed it in-house.",
         "tags": [
           "Figma",
           "Cinema 4D",
@@ -566,6 +566,16 @@
         ],
         "image": "/case-studies/uncx-rebrand/card.webp",
         "media": [
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-rebrand/uncx-logotype.svg",
+            "alt": "UNCX Network logotype"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-rebrand/unicrypt-network-banner.webp",
+            "alt": "The Unicrypt Network brand before the 2022 rebrand"
+          },
           {
             "type": "image",
             "src": "/case-studies/uncx-rebrand/brand-designs.webp",
@@ -688,31 +698,31 @@
         "overlaySections": [
           {
             "title": "Context and role",
-            "body": "In-house at UNCX Network. I led the 2022 rebrand solo. For 2024 I wrote the brief and design specification, an external team delivered the brand system and website foundations in Figma, and I brought the work back in-house to complete content, layout and graphics across 10+ pages."
+            "body": "In-house at UNCX Network, formerly Unicrypt Network. In 2022 I designed the new logo, brand, marketing and website, with a developer implementing the site. In 2024 I directed an outside studio on a branding, marketing and website update, which also introduced the Academy, then finished the website, Academy and brand rollout in-house."
           },
           {
             "title": "Problem",
-            "body": "The brand was inconsistent: different visual treatments per product, no systemised colour or typography, and marketing that did not match the product UI."
+            "body": "The brand had to move from Unicrypt to UNCX, then mature: different visual treatments per product, no systemised colour or typography, and marketing that did not match the product UI."
           },
           {
             "title": "Constraints",
-            "body": "- 2022: a short-notice rebrand with minimal runway\n- 2024: an external team with strong design skills but little domain knowledge of the products\n- Several development subteams had to implement the designs consistently"
+            "body": "- 2022: a short-notice name change with minimal runway\n- 2024: an outside studio without deep knowledge of the brand or products\n- The website, the new Academy and the brand rollout all had to land together\n- Several development subteams had to implement the designs consistently"
           },
           {
             "title": "Key decisions",
-            "body": "- Split the work: an external team for brand foundations, in-house for product-specific execution\n- Take the website designs back in-house rather than keep hand-holding content population, which was not sustainable\n- Specify the system up front so the external team and the developers worked from one source"
+            "body": "- 2022: rebuild the logo, brand, marketing and website myself, with a developer handling implementation, to move quickly\n- 2024: set the direction for a less technical, more modern style, with new fonts, wider bold type and an abstract visual system, and have an outside studio build it\n- Bring the unfinished work back in-house: I completed the website, Academy and brand designs, a developer built the sites, and I added imagery, designed extra pages and tidied the copy"
           },
           {
             "title": "Compromises",
-            "body": "- The 2022 change favoured speed over a full system, which the 2024 phase then had to deliver\n- Getting consistent implementation across subteams took longer than the design work itself"
+            "body": "- The 2022 change favoured speed over a complete system, which the 2024 phase delivered\n- Finishing the studio work in-house added to my own workload\n- Consistent implementation across subteams took longer than the design itself"
           },
           {
             "title": "Outcome",
-            "body": "Brand guidelines, Figma component libraries, website designs across 10+ product pages, marketing templates and motion style references, giving consistent visual output across platforms. The external-foundations, in-house-execution split became the working model."
+            "body": "A brand that moved from Unicrypt to UNCX Network, then to a modern system across the website, Academy and marketing: guidelines, Figma component libraries, 10+ website page designs, marketing templates and motion style references."
           },
           {
             "title": "What I learned",
-            "body": "External teams can build a strong system, but product knowledge decides whether it survives contact with real content."
+            "body": "Scope a studio engagement to a finished deliverable. Studios tend to extend the work rather than close it, and they do not always research the product; waiting on them for copy they could draft themselves stalls a project, so owning the content and the finish in-house was faster."
           }
         ]
       },
@@ -722,9 +732,9 @@
         "title": "Badger Club App",
         "category": "Product System / Operational Platform",
         "year": "2026",
-        "status": "In Beta",
+        "status": "In Development",
         "shortDescription": "Full-stack badge tracking platform with dark/light themes, role-based dashboards, Supabase backend, and Resend email integration.",
-        "fullDescription": "A badge-tracking app for group leaders that I designed and built solo. Leaders manage progress and messages; families see progress and contact the leader without creating an account.",
+        "fullDescription": "A badge-tracking app for group leaders that I am designing and building solo. Leaders manage progress and messages; families see progress and contact the leader without an account.",
         "tags": [
           "React",
           "Next.js",
@@ -845,11 +855,11 @@
           },
           {
             "title": "Outcome",
-            "body": "A working beta covering badge tracking, leader administration and parent communication. Adoption and time savings have not yet been measured."
+            "body": "An earlier version was shown to real users through a contact, with positive responses and clear direction on design improvements. The whole system has since been redesigned and updated, and I am now building the legal and EU regulatory requirements needed before launch."
           },
           {
             "title": "What I learned",
-            "body": "The strongest product decision was removing accounts: fewer barriers for families mattered more than more features."
+            "body": "Removing accounts was the strongest product decision: fewer barriers for families mattered more than more features. The project also sharpened my development process, and its rules and guidance now feed my AI product template for new builds."
           }
         ]
       },
@@ -861,7 +871,7 @@
         "year": "2023",
         "status": "Live",
         "shortDescription": "End-to-end video production pipeline spanning Cinema 4D, After Effects, and Redshift - built for repeatable, high-frequency output.",
-        "fullDescription": "A modular video production system for UNCX Network, built so launches, explainers, tutorials and partner content could ship from one asset library. I ran the pipeline solo in Cinema 4D, Redshift and After Effects.",
+        "fullDescription": "A modular video production system for UNCX Network, built so launches, explainers, tutorials and partner content could ship from one asset library, and now being rebuilt as an automated pipeline in code.",
         "tags": [
           "Cinema 4D",
           "Redshift",
@@ -967,19 +977,19 @@
           },
           {
             "title": "Key decisions",
-            "body": "- Introduce script length limits to keep videos deliverable\n- Replace per-scene custom animation with categorised, reusable templates\n- Build reusable Cinema 4D scenes, camera rigs and Redshift materials so a new product could enter an established visual world"
+            "body": "- Introduce script length limits to keep videos deliverable\n- Replace per-scene custom animation with categorised, reusable templates\n- Build reusable Cinema 4D scenes, camera rigs and Redshift materials so a new product could enter an established visual world\n- Rebuild the pipeline in code: video generation, text inputs and voiceover are automated with ElevenLabs, Remotion and Blender, with the system queuing the 3D work it needs"
           },
           {
             "title": "Compromises",
-            "body": "- Fewer unique scenes per video in exchange for speed and consistency\n- Unnecessary scenes were stripped back from early, over-scoped productions"
+            "body": "- Fewer unique scenes per video in exchange for speed and consistency\n- Unnecessary scenes were stripped back from early, over-scoped productions\n- 3D is the last part of the automated pipeline and still in progress: AI tools are not yet reliable for it, so the plan is to model manually in Blender while the system handles the rest"
           },
           {
             "title": "Outcome",
-            "body": "A production system of Cinema 4D scene templates, After Effects project structures, Redshift material libraries and thumbnail templates, used for 200+ videos at UNCX Network across launches, explainers and Academy content."
+            "body": "A production system of Cinema 4D scene templates, After Effects project structures, Redshift material libraries and thumbnail templates, used for 200+ videos at UNCX Network. Its successor automates generation, text and voiceover, with 3D in progress."
           },
           {
             "title": "What I learned",
-            "body": "At volume, constraints are the system: fewer unique elements made the output faster and more consistent."
+            "body": "Manual 3D design, finding visual analogies for every line of script, is mentally exhausting; on top of building the motion graphics and my other duties, it led to creative burnout. Automating everything around the 3D, and choosing between template libraries, existing assets and 3D generation tools, taught me to spend my creative energy only where it is needed."
           }
         ]
       },
@@ -1112,7 +1122,7 @@
           },
           {
             "title": "Compromises",
-            "body": "- Content-specific design stayed in-house, adding to my workload rather than the external scope"
+            "body": "- Content-specific design stayed in-house, adding to my workload\n- The external team could not deliver the hero concepts I wanted, so the site launched with static images, with the intention that I would design them myself; time never allowed it"
           },
           {
             "title": "Outcome",
@@ -1132,7 +1142,7 @@
         "year": "2026",
         "status": "In Development",
         "shortDescription": "Language learning app with an AI-assisted classroom, real news articles, Google authentication, Supabase backend, and structured quiz flows.",
-        "fullDescription": "A language-learning app that turns real news into Spanish lessons. I am designing and building it solo, with the lesson architecture as the core design problem.",
+        "fullDescription": "A language-learning app that turns real news into lessons, starting with English speakers learning Spanish. I am designing and building it solo, planning early for multiple languages, legal launch and scale.",
         "tags": [
           "React",
           "Next.js",
@@ -1192,23 +1202,23 @@
           },
           {
             "title": "Constraints",
-            "body": "- Lessons have to work against any news article, not fixed question-and-answer pairs\n- Early AI-assisted builds produced oversimplified quizzes instead of the specified puzzle logic\n- Each lesson type will need adapting per language"
+            "body": "- Lessons have to work against any news article, not fixed question-and-answer pairs\n- Each language needs its own grammar and tooling\n- Launching legally in the US and EU requires compliance work before launch\n- Hosting costs need to stay low now and scale later"
           },
           {
             "title": "Key decisions",
-            "body": "- Design lessons as reusable puzzle logic that works against any article\n- Break the roadmap into granular build phases, building each of the 8 to 10 lesson types step by step\n- Keep the scope to Spanish until the lesson architecture is validated"
+            "body": "- Build a multilingual framework from the start, but launch with English to Spanish: later languages then need only per-language grammar and tooling, not a rewrite\n- Design lessons as reusable puzzle logic that works against any article\n- Personalise difficulty with learning levels, and specify personalised news for premium membership\n- Build the legal groundwork for a US and EU launch now, as with Badger Club\n- Move the database from Supabase and Vercel to Neon, and potentially Cloudflare, to cut costs now and at scale"
           },
           {
             "title": "Compromises",
-            "body": "- Multi-language support is deferred\n- Slower progress per lesson type in exchange for control over complexity"
+            "body": "- More complexity and time up front in exchange for a simpler path once there are real users"
           },
           {
             "title": "Outcome",
-            "body": "A working prototype with the reading flow, quiz system, Google authentication and learner dashboard in place. The lesson types are still being refined."
+            "body": "A working app with every lesson type built and working well, learning levels for personalised difficulty, and the multilingual and legal foundations in place. Personalised premium news is being specified and the database migration is under way."
           },
           {
             "title": "What I learned",
-            "body": "Authentication and data were the easy part; the real design work was the structure of a good lesson."
+            "body": "More planning and building now means fewer headaches later. Decisions that are cheap before launch, such as architecture, compliance and hosting, are expensive after it. Like Badger Club, this project feeds my AI product template."
           }
         ]
       },
@@ -1220,7 +1230,7 @@
         "year": "2021-2026",
         "status": "2021-2026",
         "shortDescription": "Rapid prototyping across token minting, launchpad flows, Telegram bots, NFT minting, and full launchpad concepts - from wireframes to interactive concepts.",
-        "fullDescription": "Five years of product concepts for UNCX Network: token minting, launchpads, Telegram bots and NFT tooling, taken from flow diagrams to interactive prototypes before development committed.",
+        "fullDescription": "Five years of product concepts for UNCX Network: token minting, launchpads, Telegram bots and NFT tooling. Much of the value was deciding early whether a product was worth building at all.",
         "tags": [
           "Figma",
           "FigJam",
@@ -1333,31 +1343,31 @@
         "overlaySections": [
           {
             "title": "Context and role",
-            "body": "In-house at UNCX Network, 2021 to 2026. I produced flow diagrams, wireframes and interactive Figma prototypes so features could be validated before build. Some shipped; others stayed as explorations that defined scope."
+            "body": "In-house at UNCX Network, 2021 to 2026. I produced route layouts, flow diagrams, wireframes and interactive Figma prototypes so features could be judged before development committed. Some became real products; others stopped at concept."
           },
           {
             "title": "Problem",
-            "body": "Features were being scoped without visual validation, and developers built from text specifications, so design intent and implementation drifted apart."
+            "body": "In a startup, a prototype is often not about perfecting the journey but about deciding whether a product is worth building, and developers otherwise built from text specifications that drifted from intent."
           },
           {
             "title": "Constraints",
-            "body": "- Requirements arrived gradually as projects developed, often forcing rework\n- Novel product processes with no established UX conventions to reference\n- Development resources had to be committed only once direction was clear"
+            "body": "- Requirements arrived gradually as projects developed\n- Novel DeFi processes with no established UX conventions to reference\n- Every product had unique abilities, so UI could rarely be reused between them\n- Development time had to go to the products most worth it"
           },
           {
             "title": "Key decisions",
-            "body": "- Build from reusable components so shifting requirements did not mean starting over\n- Start every project with FigJam flow diagrams to work out novel interactions from first principles\n- Adopt Figma variables when they arrived to cut component overhead"
+            "body": "- Start every project from the layout of its routes, then work out interactions in FigJam flow diagrams\n- Show stakeholders the limits and depth of a system early, so they understood the build complexity and whether it was worth the time\n- Use wireframing templates for sitemap and interaction planning, then start the real design system from the ground up, or from a fork, once the build was approved\n- Keep a standard base of colours and fonts, but design the UI elements fresh for each product"
           },
           {
             "title": "Compromises",
-            "body": "- Several concepts were never built; their value was in validating or ruling out direction"
+            "body": "- Many projects never started, because concepting showed they would take too much time for a small additional product\n- Approved concepts often had to be rebuilt in a proper design system after the wireframe stage"
           },
           {
             "title": "Outcome",
-            "body": "Figma prototypes across token minting, launchpad components, Telegram bot and app flows, NFT minting, stealth launch admin and launchpad flow diagrams. Token minter flows, launchpad components and Telegram bot interactions shipped."
+            "body": "Figma concepts across token minting, launchpads, Telegram bot and app flows, NFT minting and stealth launch admin. Some shipped as real products, others stopped at concept, and several were ruled out before development time was spent."
           },
           {
             "title": "What I learned",
-            "body": "When requirements keep moving, a component system is what keeps prototyping affordable."
+            "body": "Every project is different. Product design systems only become useful once you know you are building; before that, the job is to show stakeholders the real depth of the work so they can decide whether it is worth it, and accept that it may never leave the first stage."
           }
         ]
       },
@@ -1398,7 +1408,7 @@
           },
           {
             "title": "Key decisions",
-            "body": "- Decompose the roadmap into phases, and phases into atomised tasks with acceptance criteria\n- Gate each step with type checks, tests, lint and a production build\n- Treat the roadmap as the source of truth: plan changes are explicit edits, never silent divergence"
+            "body": "- Decompose the roadmap into phases, and phases into atomised tasks with acceptance criteria\n- Gate each step with type checks, tests, lint and a production build\n- Treat the roadmap as the source of truth: plan changes are explicit edits, never silent divergence\n- Set up cross-project hooks and CI checks that enforce standards and workflow rules, not just describe them"
           },
           {
             "title": "Compromises",
@@ -1410,7 +1420,7 @@
           },
           {
             "title": "What I learned",
-            "body": "AI provides the throughput; the system provides the discipline, and the judgement stays with me."
+            "body": "Written guidance is thorough but not enough on its own. For the most critical parts of development, such as writing up notes, adversarial tests and appropriate wording, hooks and CI checks are what guarantee correctness."
           }
         ]
       }

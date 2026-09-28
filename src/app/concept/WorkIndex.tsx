@@ -18,14 +18,14 @@ const TEASERS: Record<string, string> = {
   "solana-diary":
     "Seven services that turned live Solana data and news into designed posts - every one approved from my phone before it hit X.",
   "uncx-rebrand":
-    "Two-phase rebrand of a multi-chain DeFi protocol - one visual system across 10+ product pages.",
+    "From Unicrypt to UNCX Network in two phases - one visual system across 10+ product pages.",
   "uncx-video-system":
     "The pipeline behind 200+ videos at UNCX - templated 3D and motion production at launch cadence.",
   "badger-club":
-    "A full-stack badge-tracking platform - design to deployed product, solo, AI-assisted.",
+    "A full-stack badge-tracking platform, designed and built solo - now preparing for launch.",
   "ai-portfolio-system": "The agentic build system whose output you're reading right now - spec to phased roadmap to gated build.",
   "uncx-menu":
-    "One navigation system for an entire product suite - researched, variable-driven, ready to build.",
+    "One navigation system for an entire product suite - researched, variable-driven, signed off and built.",
   "uncx-academy": "An education platform's brand and design system, fed by the video pipeline.",
   "uncx-app-concepts":
     "Five years of product concepts - validated visually before a line of code was committed.",
