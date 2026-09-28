@@ -200,40 +200,22 @@ function GalleryStrip({
   );
 }
 
-/** A YouTube item's src may be a full URL or a bare video ID. */
-function youtubeId(src: string) {
-  const match = src.match(/(?:v=|youtu\.be\/|embed\/)([\w-]{11})/);
-  return match ? match[1] : src;
-}
-
 function VideoStrip({ videos }: { videos: ProjectMediaItem[] }) {
   return (
     <ScrollStrip label="Videos" count={videos.length} unit="video">
       <div className="flex w-max gap-2">
-        {videos.map((media) =>
-          media.type === "youtube" ? (
-            <iframe
-              key={media.src}
-              src={`https://www.youtube-nocookie.com/embed/${youtubeId(media.src)}`}
-              title={media.alt ?? "YouTube video"}
-              loading="lazy"
-              allow="encrypted-media; picture-in-picture; fullscreen"
-              allowFullScreen
-              className="aspect-video w-64 shrink-0 snap-start border border-border bg-black sm:w-72"
-            />
-          ) : (
-            <video
-              key={media.src}
-              src={media.src}
-              poster={media.poster}
-              controls
-              preload="none"
-              className="w-64 shrink-0 snap-start border border-border bg-black sm:w-72"
-            >
-              <track kind="captions" />
-            </video>
-          ),
-        )}
+        {videos.map((media) => (
+          <video
+            key={media.src}
+            src={media.src}
+            poster={media.poster}
+            controls
+            preload="none"
+            className="w-64 shrink-0 snap-start border border-border bg-black sm:w-72"
+          >
+            <track kind="captions" />
+          </video>
+        ))}
       </div>
     </ScrollStrip>
   );
@@ -251,7 +233,7 @@ function StudyDetail({
   // A study that leads with a video (Quiver's launch film) features it at full
   // width; the strip below keeps the supporting clips.
   const featured = media[0]?.type === "video" ? media[0] : undefined;
-  const videos = media.filter((m) => (m.type === "video" || m.type === "youtube") && m !== featured);
+  const videos = media.filter((m) => m.type === "video" && m !== featured);
 
   // Pull a brand logo out of the gallery and feature it above, for visual
   // interest. Prefer a wordmark ("logotype"), else the first "logo" asset.

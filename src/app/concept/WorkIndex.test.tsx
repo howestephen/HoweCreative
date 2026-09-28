@@ -154,13 +154,6 @@ describe("WorkIndex", () => {
     }
   });
 
-  it("embeds YouTube items in the video strip with the privacy-enhanced player", () => {
-    renderAt("/?study=uncx-video-system");
-    const frame = screen.getByTitle("Avalanche Summit post-event film");
-    expect(frame.tagName).toBe("IFRAME");
-    expect(frame).toHaveAttribute("src", "https://www.youtube-nocookie.com/embed/Mr_FGdMnPtM");
-  });
-
   it("ignores an unknown study slug", () => {
     renderAt("/?study=not-a-study");
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument();

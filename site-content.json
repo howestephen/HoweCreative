@@ -895,11 +895,6 @@
             "alt": "EthCC 2025 post-event film"
           },
           {
-            "type": "youtube",
-            "src": "https://www.youtube.com/watch?v=Mr_FGdMnPtM",
-            "alt": "Avalanche Summit post-event film"
-          },
-          {
             "type": "video",
             "src": "/case-studies/uncx-video-system/hyperswap-integration.mp4",
             "alt": "HyperSwap Integration video"
@@ -996,7 +991,7 @@
           },
           {
             "title": "Outcome",
-            "body": "A production system of Cinema 4D scene templates, After Effects project structures, Redshift material libraries and thumbnail templates, used for 200+ videos at UNCX Network, including event films for EthCC 2025 and the Avalanche Summit. Its successor automates generation, text and voiceover, with 3D in progress."
+            "body": "A production system of Cinema 4D scene templates, After Effects project structures, Redshift material libraries and thumbnail templates, used for 200+ videos at UNCX Network, including event films such as EthCC 2025. Its successor automates generation, text and voiceover, with 3D in progress."
           },
           {
             "title": "What I learned",
