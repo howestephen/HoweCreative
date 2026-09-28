@@ -218,19 +218,16 @@ export function CV() {
               <li>Designed wireframes and UI concepts for 10+ apps, with 3-4 shipped to production</li>
               <li>Built UNCX Academy end-to-end: brand, site design, assets, and 30+ educational videos</li>
               <li>
-                Produced 200+ tutorials, explainers, and announcement videos, plus the 3D/motion pipeline that makes
-                high-frequency output sustainable
+                Produced 200+ tutorials, explainers and launch videos, and built the 3D and motion template system
+                behind them
+              </li>
+              <li>Created four AI-generated launch films for partner Quiver, rendered locally with Wan 2.2</li>
+              <li>
+                Designed and built Solana Diary for a UNCX partner: a 7-service pipeline posting on-brand X graphics
+                from live Solana data
               </li>
               <li>
-                Created four AI-generated launch films for Quiver, a UNCX partner, from script and art direction to
-                local generation, motion and edit
-              </li>
-              <li>
-                Built an automated marketing pipeline for Solana Diary, a UNCX partner, turning live Solana data into
-                designed, approved posts for X
-              </li>
-              <li>
-                Designed a cross-product navigation design system (variable-driven Figma components) for the full
+                Designed a variable-driven Figma design system for cross-product navigation, now live across the
                 product suite
               </li>
             </ul>
