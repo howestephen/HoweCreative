@@ -50,8 +50,8 @@ function SectionBody({ body, emphasis }: { body: string; emphasis: boolean }) {
   if (lines.length > 0 && lines.every((line) => line.startsWith("- "))) {
     return (
       <ul className={`max-w-2xl list-disc space-y-1.5 pl-5 text-sm leading-relaxed ${tone}`}>
-        {lines.map((line) => (
-          <li key={line}>{line.slice(2)}</li>
+        {lines.map((line, index) => (
+          <li key={index}>{line.slice(2)}</li>
         ))}
       </ul>
     );
