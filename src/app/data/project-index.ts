@@ -111,7 +111,7 @@ export const projectEditorial: Record<
     headline: "Learn a language through the world around you.",
     summary:
       "A working prototype turning news into contextual Spanish lessons, with article reading, quizzes, authentication and a learner dashboard.",
-    cover: "/case-studies/noticia-lingo/signed-out-hero.webp",
+    cover: "/case-studies/noticia-lingo/noticia-feed.webp",
     fit: "I use prototypes to examine the learning experience as well as the technology.",
     credit:
       "Solo product design and AI-assisted development. In development; the lesson architecture is still being refined.",
