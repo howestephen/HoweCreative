@@ -36,7 +36,7 @@ const projectFrames: { slug: string; description: string; icon: typeof Feather; 
   { slug: "uncx-menu", description: "Navigation across a product suite", icon: Network, area: "Product",
     preview: { src: "/case-studies/uncx-menu/menu-open-phone.webp", alt: "The unified UNCX menu open on a phone", fit: "cover", focus: "center top" } },
   { slug: "solana-diary", description: "Automated media with human approval", icon: BookOpen, area: "Systems",
-    preview: { src: "/case-studies/solana-diary/SOLANA_DIARY_LOGO.png", alt: "Solana Diary wordmark", fit: "contain" } },
+    preview: { src: "/case-studies/solana-diary/SOLANA_DIARY_LOGO.webp", alt: "Solana Diary wordmark", fit: "contain" } },
   { slug: "uncx-video-system", description: "Reusable 3D and motion production", icon: Layers3, area: "Motion",
     preview: { src: "/case-studies/uncx-video-system/uncx-lock-2026.webp", alt: "The UNCX glass padlock render from the 3D system", fit: "contain" } },
   { slug: "uncx-rebrand", description: "External collaboration and in-house design", icon: Shapes, area: "Brand",

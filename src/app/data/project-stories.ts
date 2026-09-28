@@ -105,7 +105,7 @@ export const projectStories: Record<string, ProjectStory> = {
     },
   },
   "solana-diary": {
-    lead: "twitter-header.png",
+    lead: "twitter-header.webp",
     chapters: [
       {
         label: "01 / From template to output",
@@ -126,9 +126,9 @@ export const projectStories: Record<string, ProjectStory> = {
           "liquidity_flows_7d__2026-06-16__id7258__render.png",
           "biggest_movers_48h__2026-06-13__id6926__render.png",
           "trending_memecoins_48h__2026-06-12__id6901__POSTED.png",
-          "holder_growth_leaders_7d__2026-06-09__id6817__POSTED.png",
-          "new_launches_48h__2026-06-17__id8695__render.png",
-          "top_trading_apps_fees_30d__2026-06-10__id6852__POSTED.png",
+          "holder_growth_leaders_7d__2026-06-09__id6817__POSTED.webp",
+          "new_launches_48h__2026-06-17__id8695__render.webp",
+          "top_trading_apps_fees_30d__2026-06-10__id6852__POSTED.webp",
         ],
         layout: "mosaic",
         ratio: "square",
