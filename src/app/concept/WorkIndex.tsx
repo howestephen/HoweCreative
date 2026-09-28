@@ -472,7 +472,7 @@ function CardImage({ project, featured }: { project: PortfolioProject; featured:
       alt=""
       loading={featured ? "eager" : "lazy"}
       decoding="async"
-      className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+      className={`${featured ? "h-full" : "aspect-square sm:aspect-auto sm:h-full"} w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]`}
     />
   );
 }
@@ -515,7 +515,9 @@ function StudyCard({
           className={
             featured
               ? "aspect-video overflow-hidden bg-neutral-900 lg:col-span-3 lg:aspect-auto lg:min-h-[22rem]"
-              : "aspect-square w-24 shrink-0 self-start overflow-hidden bg-neutral-900 sm:aspect-[16/10] sm:w-full sm:self-auto"
+              : // On phones the column runs the card's full height in the artwork's own
+              // background, with the square image centred, so no gap shows.
+              "flex w-24 shrink-0 items-center overflow-hidden bg-[#0a0c10] sm:block sm:aspect-[16/10] sm:w-full"
           }
         >
           <CardImage project={project} featured={featured} />
