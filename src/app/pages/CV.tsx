@@ -224,7 +224,7 @@ export function CV() {
               <li>Created four AI-generated launch films for partner Quiver, rendered locally with Wan 2.2</li>
               <li>
                 Designed and built Solana Diary for a UNCX partner: a 7-service pipeline turning live Solana data into
-                on-brand X graphics, with every post gated by Telegram approval
+                on-brand X graphics, with Telegram asset approval gates
               </li>
               <li>
                 Designed a variable-driven Figma design system for cross-product navigation, now live across the
