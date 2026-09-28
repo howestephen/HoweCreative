@@ -750,7 +750,7 @@
           {
             "type": "image",
             "src": "/case-studies/badger-club/badger-thread.webp",
-            "alt": "A parent conversation, answered in the app and continued by email"
+            "alt": "A parent's message in the leader inbox, with the reply box"
           },
           {
             "type": "image",
@@ -1112,7 +1112,7 @@
           "Google Auth",
           "Product Design"
         ],
-        "image": "/case-studies/noticia-lingo/noticia-feed.webp",
+        "image": "/case-studies/noticia-lingo/noticia-feed-portrait.webp",
         "media": [
           {
             "type": "image",
@@ -1132,7 +1132,7 @@
           {
             "type": "image",
             "src": "/case-studies/noticia-lingo/noticia-exercise.webp",
-            "alt": "Comprehension exercise answered from the article"
+            "alt": "Comprehension exercise built from the article"
           },
           {
             "type": "image",
