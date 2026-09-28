@@ -173,6 +173,21 @@ describe("WorkIndex", () => {
 });
 
 describe("case study copy", () => {
+  it("uses the same section structure for every study", () => {
+    const format = [
+      "Context and role",
+      "Problem",
+      "Constraints",
+      "Key decisions",
+      "Compromises",
+      "Outcome",
+      "What I learned",
+    ];
+    for (const project of portfolioProjects) {
+      expect(project.overlaySections.map((s) => s.title), project.slug).toEqual(format);
+    }
+  });
+
   it("contains no em or en dashes", () => {
     const text = JSON.stringify(portfolioProjects);
     const dashes = [0x2013, 0x2014].map((code) => String.fromCharCode(code));
