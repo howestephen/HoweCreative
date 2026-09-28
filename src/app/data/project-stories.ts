@@ -94,7 +94,7 @@ export const projectStories: Record<string, ProjectStory> = {
         layout: "paired",
         ratio: "screen",
         captions: [
-          "A parent conversation in the leader inbox, continued by email.",
+          "A parent's message in the leader inbox. Replies continue by email.",
           "The Supabase data model behind leaders, badges and families.",
         ],
       },
