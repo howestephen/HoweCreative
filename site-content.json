@@ -130,7 +130,7 @@
         "year": "2026",
         "status": "Complete",
         "shortDescription": "Four product launch films developed from a sparse brief: creative direction, constrained generative production, motion design, editing, AI-generated music and reusable production tooling.",
-        "fullDescription": "The brief was simply to make a marketing video. I was given a logo, the existing product and a rough ident reference. From that starting point I wrote the script and developed a near-black visual world, then designed source plates around the limits of generated motion. I ran repeatable image-to-video and first-to-last-frame passes with Wan 2.2 in ComfyUI on a dedicated RTX 4090, using hosted generation for fast exploration. In After Effects I kept footage, mist, typography and product layers independently editable, with AI-assisted scripts creating reusable scene structures, depth controls and impact markers. The four finished films combine generated material with authored communication and deterministic finishing.",
+        "fullDescription": "Four launch films for Quiver, a partner team UNCX worked with, made from a sparse brief. I took it on as a client through that relationship and handled everything from script and art direction to local AI generation, motion, edit and audio.",
         "tags": [
           "Art Direction",
           "Generative AI",
@@ -147,31 +147,35 @@
         "image": "/case-studies/quiver/card.jpg",
         "gradient": "from-[#101113] to-[#44484b]",
         "role": "Creative direction, script, AI imagery and footage, motion, edit and audio",
-        "client": "UNCX Network / Quiver",
+        "client": "Quiver, a UNCX partner",
         "overlaySections": [
           {
-            "title": "Brief",
-            "body": "Create a marketing video from a supplied logo, the existing product and a rough ident reference. There was no developed film treatment. I established the visual direction, wrote the script and shaped the production around a defined art style."
+            "title": "Context and role",
+            "body": "Quiver was a separate team that UNCX partnered with, not part of UNCX. The brief came through that relationship: make a marketing video from a logo, the existing product and a rough ident reference. There was no film treatment. I owned the concept, script, art direction, generation workflow, motion design, edit, audio and production tooling."
           },
           {
-            "title": "Problem Frame",
-            "body": "The creative problem was consistency: the film needed to feel like one intentional world across generated footage, product messages, motion graphics and music. The technical problem was reliable movement. A model can produce a convincing still of an archer and still misinterpret the relationship between the hand, arrow and bowstring when it invents the action between frames."
+            "title": "Problem",
+            "body": "The film had to feel like one intentional world across generated footage, product messages, motion graphics and music. The harder technical problem was movement: a model can render a convincing archer and still get the hand, arrow and bowstring wrong when it invents the action between frames."
           },
           {
-            "title": "System Design",
-            "body": "I combined hosted image exploration with local Wan 2.2 inference in ComfyUI, then assembled and finished the film in After Effects. The scene structure separated footage plates, generated mist, typography and product layers, giving me control over image, readability and motion. AI-assisted production scripts created scene comps, text precomps, impact markers, shared 2.5D depth and camera movement."
+            "title": "Constraints",
+            "body": "- A sparse brief: a logo, the product and a rough ident reference\n- Generated motion that breaks down on fine physical action\n- Local inference on one RTX 4090, with the preparation and storage that brings\n- Product messages had to stay legible over dark, atmospheric footage"
           },
           {
-            "title": "Trade-offs",
-            "body": "I planned start and end moments that kept the action legible and avoided ambiguous transitions that could produce impossible bowstring physics. Planning and testing source assets came before generation and selection. Hosted generation supported fast exploration; local inference required more preparation and storage but made repeated variants possible on owned hardware. In the edit I controlled impact timing, transitions and typography directly."
+            "title": "Key decisions",
+            "body": "- Design the shots around the model, not the other way round: I planned start and end frames that kept the action legible and avoided transitions that invite impossible bowstring physics.\n- Split the tools by job: hosted generation for fast exploration, local Wan 2.2 in ComfyUI for repeatable variants on owned hardware.\n- Keep authored layers out of the model: footage, mist, typography and product layers stayed separate in After Effects, so readability and timing were controlled directly, not generated.\n- Build tooling, not one film: AI-assisted scripts created scene comps, text precomps, impact markers and shared 2.5D depth, so four edits came from one system."
           },
           {
-            "title": "Delivery",
-            "body": "Four finished 16:9 films at 1920 x 1080 and 24 fps: a 42-second basic explanation and a 58-second advanced explanation, each with and without phone imagery, supported by a structured footage library and reusable After Effects production system. The work included concept, script, art direction, source-image direction, local inference workflow, motion design, editing, audio and production tooling. The supplied logo, existing product and rough ident reference were starting materials."
+            "title": "Compromises",
+            "body": "- Shot choices were bounded by what the model could animate reliably, so some actions were staged rather than shown in full\n- Local generation meant more upfront preparation and storage in exchange for control and repeatability"
           },
           {
             "title": "Outcome",
-            "body": "A coherent film treatment carried through four complete edits, and a reusable method for designing inputs, bounding inference, selecting viable movement and finishing the result. The work is approved for public portfolio use. No campaign reach, conversion or commercial performance figures are claimed."
+            "body": "Four finished 16:9 films at 1920 x 1080 and 24 fps: a 42-second basic and a 58-second advanced explanation, each with and without phone imagery, plus a structured footage library and a reusable After Effects production system. The work is approved for public portfolio use. No campaign reach, conversion or commercial figures are claimed."
+          },
+          {
+            "title": "What I learned",
+            "body": "With generated video, the design work moves upstream: planning inputs and bounding what the model is asked to do matters more than the generation itself."
           }
         ],
         "media": [
@@ -282,7 +286,7 @@
         "year": "2026",
         "status": "Archived",
         "shortDescription": "An automated Solana-media pipeline for X: seven services that turned live on-chain data and news into designed, on-brand posts - each one approved by me from Telegram before it published, all running on free-tier APIs.",
-        "fullDescription": "Solana Diary was an automated media pipeline for X. Seven services on Railway pulled live on-chain data and news and rendered it through a template system I designed - but nothing published until I approved it from Telegram. The pipeline ran on its own code, not on AI: I used AI (Claude, Cursor, Codex) to build it, and Grok was an optional, button-triggered assist for news scoring and copy. I designed the brand and the full set of post templates, and engineered the backend - including the rate-limiting system that kept the whole thing running on free APIs.",
+        "fullDescription": "An automated media pipeline for Solana Diary, a UNCX partner project whose name and purpose were set before I joined. I built the system and designed every asset: seven services that turned live on-chain data and news into on-brand posts for X, each approved by me from Telegram before it published.",
         "tags": [
           "Automation",
           "Media Pipeline",
@@ -420,31 +424,35 @@
         ],
         "gradient": "from-[#8b0020] to-[#ff003c]",
         "role": "Solo build - brand, design system & engineering",
-        "client": "Self-initiated",
+        "client": "Solana Diary, a UNCX partner",
         "overlaySections": [
           {
-            "title": "Brief",
-            "body": "Run a Solana-focused media channel on X that publishes designed, on-brand posts every day - both breaking news and on-chain data - without a person doing the daily production, and without ever letting misleading or unsafe information reach the timeline."
+            "title": "Context and role",
+            "body": "Solana Diary was a UNCX partner project aiming to gain traction in Solana marketing on X. The name and intent were established before I came on board. My role was to build the code and graphics systems and design all of the assets: the identity, the post templates, the backend and the approval flow."
           },
           {
-            "title": "Problem Frame",
-            "body": "Daily crypto content is a production line: fresh data every few hours, news breaking constantly, and a hard requirement that nothing dangerous goes out. Doing it by hand doesn't scale; fully automating it risks posting bad data or shilling a token that's about to rug. The system had to produce publishable, on-brand work autonomously while keeping me accountable for every single post."
+            "title": "Problem",
+            "body": "Daily crypto content is a production line: fresh data every few hours, constant news, and a hard requirement that nothing misleading or unsafe goes out. Manual production does not scale; full automation risks posting bad data or promoting a token about to rug."
           },
           {
-            "title": "System Design",
-            "body": "Seven services on Railway, which I architected and built solo - using AI (Claude, Cursor, Codex) as the build tool, not as part of the running system. An hourly CRON scheduler drove everything: at set times it pulled live market and on-chain data from a set of free-tier public APIs and rendered it, in code, through the post templates I'd designed in Figma - every graphic was populated dynamically from the data, not generated by AI. A rate-limiting layer was central to the whole thing: because it ran entirely on free APIs, I chose providers with per-second rather than monthly limits and paced every request, so it could poll all day and stay current without breaching a quota. Roughly three scheduled data posts went out per day - trending memecoins, new launches, holder-growth leaders, liquidity flows, biggest movers, weekly safety report and more - with event-driven alerts in between: Pool Spotlights, Single-Token Spotlights, and Security Alerts. Grok was an optional, built-in assist I triggered by button - it scored and drafted news stories from a shortlist of channels and suggested copy. Nothing ran end-to-end on its own: every asset and story arrived in Telegram for sign-off, and a set of reply-to commands let me edit fields, rewrite copy, or drop dangerous tokens the APIs had surfaced before anything reached X."
+            "title": "Constraints",
+            "body": "- Free-tier APIs only, with no budget for paid data\n- Every post had to be safe to publish, with one accountable person signing off\n- The name and positioning were fixed before I joined\n- X as the single distribution channel"
           },
           {
-            "title": "Trade-offs",
-            "body": "Nothing ran fully unattended - one misleading post about a rugging token is worse than any amount of manual effort - so approval stayed human. The system did all of the gathering, rendering, and drafting; my decision came down to a tap, or a quick reply-to edit, per post. Two constraints shaped the engineering. Cost: the whole thing ran on free APIs, so the rate-limiter - favouring per-second-limited providers and pacing every call - was what made all-day data possible with no paid plan. Safety: the reply-to layer existed specifically to kill bad data before it hit the timeline - low rugcheck scores, mislabelled fields, unsafe tokens. Even the news automation was deliberately capped: most days it was allowed only a handful of automated calls, though it could technically have fired every second. It shipped with a magazine-style web front end that mirrored every post, but that wasn't rebuilt after a later backend rewrite, so the channel became the product."
+            "title": "Key decisions",
+            "body": "- Keep a human veto on every post: the system gathered, rendered and drafted, and publishing waited for a tap or a reply-to edit in Telegram. One misleading post is worse than any amount of manual effort.\n- Graphics from code, not AI: every post was rendered from my Figma templates populated with live data, so output stayed on-brand and factual.\n- Choose APIs by limit type: providers with per-second rather than monthly limits, plus a rate-limiter pacing every call, made all-day data possible with no paid plan.\n- Cap the automation on purpose: news scoring with Grok was an optional, button-triggered assist and limited to a handful of calls a day, though it could have run constantly."
           },
           {
-            "title": "Delivery",
-            "body": "Seven cooperating Railway services; a rate-limited data layer over free-tier public APIs; a code-driven rendering engine that populated my Figma templates from live data; a Telegram bot for approvals and reply-to edits; the X API for publishing; and an optional Grok assist for news scoring and copy. On the design side: a template system of roughly fifteen post families on a shared Space Grotesk / IBM Mono type system, a Solana purple-to-green identity, and per-family accent colours (green for momentum, red for risk, purple for news and data) - logo, banner, and every template designed by me."
+            "title": "Compromises",
+            "body": "- Human approval on every post capped throughput in exchange for safety\n- The magazine-style web front end was not rebuilt after a backend rewrite, so the X channel became the product\n- The name was outside my control, and it became the project's biggest risk"
           },
           {
             "title": "Outcome",
-            "body": "It ran daily and did exactly what it was built to do: a designed, on-brand post every few hours, with a human veto on every one. The project ended when X permanently suspended the account for \"impersonation\" - never specifying the cause, possibly the volume of posted imagery, and declining to reinstate it or explain further. Dead as a product, it's still the most complete system I've shipped solo: seven services, a rate-limited free-API data layer, a code-driven rendering pipeline, a full Telegram approval UX, and a designed template system - proof I can take something from architecture to daily operation on my own, and a sharp lesson that platform risk is a first-class design constraint the moment you automate publishing."
+            "body": "The pipeline ran daily as designed: seven Railway services, a rate-limited data layer, a code-driven rendering engine, a Telegram approval flow and a template system of roughly fifteen post families. X then permanently suspended the account for \"impersonation\", most likely because the name was too close to an established brand. X did not specify the cause or reinstate it."
+          },
+          {
+            "title": "What I learned",
+            "body": "Platform risk is a design constraint from day one. When you automate publishing, the identity you publish under needs the same scrutiny as the code."
           }
         ]
       },
