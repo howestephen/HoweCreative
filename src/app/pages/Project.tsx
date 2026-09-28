@@ -329,8 +329,8 @@ function ProjectStory({ project }: { project: PortfolioProject }) {
               <h3>{section.title}</h3>
               {section.body.split("\n").every((line) => line.startsWith("- ")) ? (
                 <ul>
-                  {section.body.split("\n").map((line) => (
-                    <li key={line}>{line.slice(2)}</li>
+                  {section.body.split("\n").map((line, index) => (
+                    <li key={index}>{line.slice(2)}</li>
                   ))}
                 </ul>
               ) : (
