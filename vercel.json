@@ -12,5 +12,12 @@
       "source": "/cv",
       "destination": "/cv/index.html"
     }
+  ],
+  "redirects": [
+    {
+      "source": "/study",
+      "destination": "/",
+      "permanent": true
+    }
   ]
 }
