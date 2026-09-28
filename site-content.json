@@ -1112,37 +1112,42 @@
           "Google Auth",
           "Product Design"
         ],
-        "image": "/case-studies/noticia-lingo/dashboard.webp",
+        "image": "/case-studies/noticia-lingo/noticia-feed.webp",
         "media": [
           {
             "type": "image",
-            "src": "/case-studies/noticia-lingo/signed-out-hero.webp",
-            "alt": "Signed out hero page"
+            "src": "/case-studies/noticia-lingo/noticia-feed.webp",
+            "alt": "Today's lessons feed, with the daily goal and three news stories at A2"
           },
           {
             "type": "image",
-            "src": "/case-studies/noticia-lingo/homepage-full.webp",
-            "alt": "Full homepage design"
+            "src": "/case-studies/noticia-lingo/noticia-story.webp",
+            "alt": "A news story set as a newspaper page, with a highlighted sentence to learn"
           },
           {
             "type": "image",
-            "src": "/case-studies/noticia-lingo/dashboard.webp",
-            "alt": "User dashboard"
+            "src": "/case-studies/noticia-lingo/noticia-exercise-comprehension.webp",
+            "alt": "Comprehension exercise answered from the article"
           },
           {
             "type": "image",
-            "src": "/case-studies/noticia-lingo/quiz-page.webp",
-            "alt": "Quiz page interface"
+            "src": "/case-studies/noticia-lingo/noticia-exercise-sort.webp",
+            "alt": "Category sort exercise built from words in the article"
           },
           {
             "type": "image",
-            "src": "/case-studies/noticia-lingo/settings-page.webp",
-            "alt": "Settings page"
+            "src": "/case-studies/noticia-lingo/noticia-exercise-pairs.webp",
+            "alt": "Pair match exercise linking article terms to their meanings"
           },
           {
             "type": "image",
-            "src": "/case-studies/noticia-lingo/google-login.webp",
-            "alt": "Google login integration"
+            "src": "/case-studies/noticia-lingo/noticia-friends.webp",
+            "alt": "Friends view with search, requests and streaks"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/noticia-lingo/noticia-settings.webp",
+            "alt": "Settings for reminder time, languages and learning level"
           },
           {
             "type": "image",
