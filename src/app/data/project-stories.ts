@@ -100,8 +100,8 @@ export const projectStories: Record<string, ProjectStory> = {
       },
     ],
     outcome: {
-      title: "A working beta, with a focused scope.",
-      body: "Badge tracking, leader administration and parent communication are implemented. The next measure of success is how the product performs in use; adoption and time savings have not yet been measured.",
+      title: "Redesigned after user feedback, heading for launch.",
+      body: "An earlier version was shown to real users, with positive responses and clear direction on the design. The system has since been redesigned, and I am building the legal and EU regulatory requirements needed before launch.",
     },
   },
   "solana-diary": {
@@ -148,7 +148,7 @@ export const projectStories: Record<string, ProjectStory> = {
     ],
     outcome: {
       title: "Shipped, operated daily, now archived.",
-      body: "The channel published through a human-reviewed production flow until X suspended the account. The project is a complete example of solo design and engineering ownership, and a practical lesson in the platform dependency of a publishing product.",
+      body: "The channel published through a human-reviewed production flow until X suspended the account over its name, which was too close to an established brand. The project is a complete example of solo design and engineering ownership, and a practical lesson in the platform dependency of a publishing product.",
     },
   },
   "uncx-rebrand": {
@@ -159,8 +159,8 @@ export const projectStories: Record<string, ProjectStory> = {
         label: "01 / Direction and collaboration",
         title: "Set the foundations, then connect them to the products.",
         paragraphs: [
-          "I led the initial name and logo change in 2022. For the larger 2024 rebrand, I wrote the brief and design specification for an external team, who developed the brand foundations and initial website designs.",
-          "Their visual direction needed detailed product knowledge to become finished pages. I brought that work in-house, completing the content, layouts and graphics across more than ten pages.",
+          "In 2022 I rebuilt Unicrypt Network as UNCX Network: logo, brand, marketing and website, with a developer implementing the site. For 2024 I directed an outside studio towards a more modern system, with new fonts, wider bold type and an abstract visual language.",
+          "The studio lacked the product knowledge to finish the designs, so I brought the website, Academy and brand rollout in-house. A developer built the sites, and I added imagery, designed extra pages and tidied the copy across more than ten pages.",
         ],
         images: ["chain-based-design.webp", "chains.webp"],
         layout: "paired",
@@ -225,8 +225,8 @@ export const projectStories: Record<string, ProjectStory> = {
       },
     ],
     outcome: {
-      title: "Design complete. Implementation on hold.",
-      body: "The component, prototype states and specifications are ready for the development team. A change in development priorities put implementation on hold.",
+      title: "Signed off and implemented.",
+      body: "The design was signed off and built across the product suite, and has since been refined by the development team as the products changed.",
     },
   },
   "uncx-academy": {
@@ -290,9 +290,9 @@ export const projectStories: Record<string, ProjectStory> = {
       },
       {
         label: "02 / Iteration",
-        title: "Keep the design flexible while the requirements develop.",
+        title: "Decide whether it is worth building.",
         paragraphs: [
-          "Reusable components reduced the work involved when requirements changed. Across token minters, launchpads and NFT tools, I could revise a flow without rebuilding every screen.",
+          "In a startup, a prototype often decides whether a product should be built at all. Showing stakeholders the depth of a system early let them weigh the build against its value, and several concepts stopped there, saving development time for bigger products.",
           "Token-minter flows, launchpad components and Telegram interactions reached production. Stealth-launch, NFT and other concepts remained explorations. The gallery records both stages of work.",
         ],
         images: ["launchpad-components.webp", "nft-minting-wireframes.webp"],
@@ -313,7 +313,7 @@ export const projectStories: Record<string, ProjectStory> = {
         label: "01 / Learning experience",
         title: "Make the article the context for the lesson.",
         paragraphs: [
-          "I designed and built a prototype for practising Spanish through current news. Article reading, quizzes and a learner dashboard connect the learning experience to material from the wider world.",
+          "I designed and built an app for practising Spanish through current news. Article reading, quizzes and a learner dashboard connect the learning experience to material from the wider world.",
         ],
         images: ["noticia-exercise.webp", "noticia-feed-portrait.webp"],
         layout: "paired",
@@ -324,7 +324,7 @@ export const projectStories: Record<string, ProjectStory> = {
         title: "A working quiz is only the start of a useful lesson.",
         paragraphs: [
           "Early AI-assisted builds produced simple questions where I had specified reusable puzzle logic. I broke the lesson architecture into smaller build phases so each type could be developed and reviewed properly.",
-          "The React frontend, Supabase integration and Google authentication provide a working foundation. I am keeping the scope to Spanish while refining the lesson types before considering other languages.",
+          "The framework is multilingual from the start but launches with English to Spanish, so later languages need only their own grammar and tooling rather than a rewrite. Learning levels personalise difficulty for each learner.",
         ],
         images: ["database-schema.webp"],
         layout: "portrait",
@@ -332,8 +332,8 @@ export const projectStories: Record<string, ProjectStory> = {
       },
     ],
     outcome: {
-      title: "A working prototype under active development.",
-      body: "The reading flow, quiz system, authentication and dashboard are implemented. The lesson architecture is still being refined; the prototype is a way to examine the learning experience and direct the next build.",
+      title: "In development, built for launch and scale.",
+      body: "Every lesson type is built and working, with learning levels and the multilingual and legal foundations in place. Personalised premium news is being specified, and the database is moving to Neon to control costs.",
     },
   },
   "ai-portfolio-system": {

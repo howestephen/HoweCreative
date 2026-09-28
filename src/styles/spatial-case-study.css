@@ -38,7 +38,8 @@
 .spatial-case .case-contribution > p,
 .spatial-case .case-chapter-copy p,
 .spatial-case .case-outcome p,
-.spatial-case .case-full-context p { color: #a8b0a9; }
+.spatial-case .case-full-context p,
+.spatial-case .case-full-context li { color: #a8b0a9; }
 .spatial-case .case-tools > span { color: #919a92; }
 .spatial-case .case-chapter { padding-block: 100px; border-color: #c3ccc325; }
 .spatial-case .case-chapter-copy h2 { color: #edeee8; font-weight: 400 !important; }

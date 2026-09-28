@@ -188,8 +188,8 @@ export function QuiverCaseStudy() {
               <div>
                 <dt>Delivery</dt>
                 <dd>
-                  A 68-second launch film and a modular footage and After
-                  Effects system built for further edits.
+                  Four launch films, basic and advanced, each with and without
+                  phone imagery, and a modular footage and After Effects system.
                 </dd>
               </div>
             </dl>
