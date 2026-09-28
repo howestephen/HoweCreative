@@ -155,19 +155,19 @@
           },
           {
             "title": "Problem",
-            "body": "The film had to feel like one intentional world across generated footage, product messages, motion graphics and music. The harder technical problem was movement: a model can render a convincing archer and still get the hand, arrow and bowstring wrong when it invents the action between frames."
+            "body": "The film had to feel like one intentional world across generated footage, product messages, motion graphics and music. The main technical risks were reliability: the bowstring had to make physical sense between frames, and the model kept introducing a face on a character that was meant to stay hidden."
           },
           {
             "title": "Constraints",
-            "body": "- A sparse brief: a logo, the product and a rough ident reference\n- Generated motion that breaks down on fine physical action\n- Local inference on one RTX 4090, with the preparation and storage that brings\n- Product messages had to stay legible over dark, atmospheric footage"
+            "body": "- A sparse brief: a logo, the product and a rough ident reference\n- Many scenes and images, each needing several attempts to get one correct result\n- Cloud generation made that volume of attempts too costly on subscription services\n- Local inference on one RTX 4090, with the preparation and storage that brings\n- Product messages had to stay legible over dark, atmospheric footage"
           },
           {
             "title": "Key decisions",
-            "body": "- Design the shots around the model, not the other way round: I planned start and end frames that kept the action legible and avoided transitions that invite impossible bowstring physics.\n- Split the tools by job: hosted generation for fast exploration, local Wan 2.2 in ComfyUI for repeatable variants on owned hardware.\n- Keep authored layers out of the model: footage, mist, typography and product layers stayed separate in After Effects, so readability and timing were controlled directly, not generated.\n- Build tooling, not one film: AI-assisted scripts created scene comps, text precomps, impact markers and shared 2.5D depth, so four edits came from one system."
+            "body": "- Generate locally: with Wan 2.2 in ComfyUI on my own RTX 4090, the main cost became time rather than money, so I could render 3 to 5 attempts per scene and keep the one that looked right\n- Keep the job simple for the model: the black-and-white style and rendering individual elements separately meant each generation was tightly controlled rather than complex\n- Design the shots around the model: planned start and end frames kept the action legible and avoided transitions that invite impossible bowstring physics\n- Run the pipeline with agents: Claude controlled ComfyUI to queue a variety of scenes while Codex generated the source images in the same project folder\n- Composite rather than bake in: the generated footage, mist and effects stayed as separate layers in After Effects, with typography and product layers authored on top, so timing and readability were controlled in the edit\n- Build tooling, not one film: AI-assisted scripts created scene comps, text precomps, impact markers and shared 2.5D depth, so four edits came from one system"
           },
           {
             "title": "Compromises",
-            "body": "- Shot choices were bounded by what the model could animate reliably, so some actions were staged rather than shown in full\n- Local generation meant more upfront preparation and storage in exchange for control and repeatability"
+            "body": "- Time instead of money: every scene took several local renders to get one usable result\n- Retries for details that were easy to overlook, such as finger position and depth ordering, for example a bowstring starting on one side of a hand and ending on the other because the source images were set up wrong"
           },
           {
             "title": "Outcome",
@@ -175,7 +175,7 @@
           },
           {
             "title": "What I learned",
-            "body": "With generated video, the design work moves upstream: planning inputs and bounding what the model is asked to do matters more than the generation itself."
+            "body": "Where the limits of reliable output sit. Keeping the model's job small and controlled, one element at a time in a black-and-white style, made generation dependable; the failures that remained were specific and predictable, mainly bowstring logic and unwanted faces, so they could be caught and re-rendered."
           }
         ],
         "media": [
@@ -440,15 +440,15 @@
           },
           {
             "title": "Key decisions",
-            "body": "- Keep a human veto on every post: the system gathered, rendered and drafted, and publishing waited for a tap or a reply-to edit in Telegram. One misleading post is worse than any amount of manual effort.\n- Graphics from code, not AI: every post was rendered from my Figma templates populated with live data, so output stayed on-brand and factual.\n- Choose APIs by limit type: providers with per-second rather than monthly limits, plus a rate-limiter pacing every call, made all-day data possible with no paid plan.\n- Cap the automation on purpose: news scoring with Grok was an optional, button-triggered assist and limited to a handful of calls a day, though it could have run constantly."
+            "body": "- Keep a human veto on every post: the system gathered, rendered and drafted, and publishing waited for a tap or a reply-to edit in Telegram. One misleading post is worse than any amount of manual effort.\n- Graphics from code, not AI: every post was rendered from my Figma templates populated with live data, so output stayed on-brand and factual.\n- Choose APIs by limit type: providers with per-second rather than monthly limits, plus a rate-limiter pacing every call, made all-day data possible with no paid plan.\n- Make news volume controllable: a daily limit on automated news attempts could be raised on days with weak data and lowered on busy posting days, and approved news could be scheduled."
           },
           {
             "title": "Compromises",
-            "body": "- Human approval on every post capped throughput in exchange for safety\n- The magazine-style web front end was not rebuilt after a backend rewrite, so the X channel became the product\n- The name was outside my control, and it became the project's biggest risk"
+            "body": "- Human approval on every post capped throughput in exchange for safety\n- The magazine-style web front end was paused: rebuilding it during the backend rewrite would have been wasted work, and the plan was to bring it back once the new backend was in place\n- The name was outside my control, and it is what got the account banned"
           },
           {
             "title": "Outcome",
-            "body": "The pipeline ran daily as designed: seven Railway services, a rate-limited data layer, a code-driven rendering engine, a Telegram approval flow and a template system of roughly fifteen post families. X then permanently suspended the account for \"impersonation\", most likely because the name was too close to an established brand. X did not specify the cause or reinstate it."
+            "body": "The pipeline ran daily as designed: seven Railway services, a rate-limited data layer, a code-driven rendering engine, a Telegram approval flow and a template system of roughly fifteen post families. X then permanently suspended the account for \"impersonation\" because the name was too close to an established brand, and did not reinstate it."
           },
           {
             "title": "What I learned",
