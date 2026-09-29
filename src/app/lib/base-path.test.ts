@@ -11,6 +11,8 @@ describe("base path", () => {
     const { BASE_PATH, withBase } = await import("./base-path");
     expect(BASE_PATH).toBe("/particle-redesign");
     expect(withBase("/cv")).toBe("/particle-redesign/cv");
+    expect(withBase("/")).toBe("/particle-redesign");
+    expect(withBase("/#contact")).toBe("/particle-redesign#contact");
   });
 
   it("leaves links alone at the project's own root address", async () => {
@@ -18,5 +20,6 @@ describe("base path", () => {
     const { BASE_PATH, withBase } = await import("./base-path");
     expect(BASE_PATH).toBe("");
     expect(withBase("/cv")).toBe("/cv");
+    expect(withBase("/#contact")).toBe("/#contact");
   });
 });
