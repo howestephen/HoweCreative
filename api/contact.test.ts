@@ -1,11 +1,11 @@
 // @vitest-environment node
 import { describe, it, expect, beforeEach, vi } from "vitest";
 
-vi.mock("./_lib/rate-limit", () => ({
+vi.mock("./_lib/rate-limit.js", () => ({
   checkRateLimit: vi.fn(),
 }));
 
-import { checkRateLimit } from "./_lib/rate-limit";
+import { checkRateLimit } from "./_lib/rate-limit.js";
 import handler from "./contact";
 
 function makeReq(body: Record<string, unknown> = {}, ip = "1.1.1.1") {

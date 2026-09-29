@@ -1,4 +1,4 @@
-import { checkRateLimit } from "./_lib/rate-limit";
+import { checkRateLimit } from "./_lib/rate-limit.js";
 
 type ContactPayload = {
   name?: string;
