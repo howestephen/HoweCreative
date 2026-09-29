@@ -8,4 +8,9 @@ export const BASE_PATH =
     ? "/particle-redesign"
     : "";
 
-export const withBase = (path: string) => `${BASE_PATH}${path}`;
+// The main site only forwards "/particle-redesign" without a trailing slash,
+// so the home page and its anchors drop the slash under the prefix.
+export const withBase = (path: string) =>
+  BASE_PATH && (path === "/" || path.startsWith("/#"))
+    ? `${BASE_PATH}${path.slice(1)}`
+    : `${BASE_PATH}${path}`;
