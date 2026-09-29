@@ -1,6 +1,6 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 
-import { createContactRequest } from "./contact-request";
+import { createContactRequest, resolvePublicAccessKey } from "./contact-request";
 
 const payload = {
   name: "Ada Lovelace",
@@ -49,5 +49,37 @@ describe("createContactRequest", () => {
     expect(() => createContactRequest("client", "", payload)).toThrow(
       "Contact form is not configured.",
     );
+  });
+});
+
+describe("resolvePublicAccessKey", () => {
+  const okFetch = (body: unknown, ok = true) =>
+    vi.fn(async () => ({ ok, json: async () => body }) as Response) as unknown as typeof fetch;
+
+  it("uses the built-in key without a network request", async () => {
+    const fetchKey = okFetch({ accessKey: "other" });
+    await expect(resolvePublicAccessKey("client", "built-in", fetchKey)).resolves.toBe("built-in");
+    expect(fetchKey).not.toHaveBeenCalled();
+  });
+
+  it("asks the main site for the key when the build has none", async () => {
+    const fetchKey = okFetch({ accessKey: "from-main" });
+    await expect(resolvePublicAccessKey("client", "", fetchKey)).resolves.toBe("from-main");
+    expect(fetchKey).toHaveBeenCalledWith("/api/contact-key", expect.anything());
+  });
+
+  it("stays unconfigured when the key endpoint fails or returns nothing", async () => {
+    await expect(resolvePublicAccessKey("client", "", okFetch({}, false))).resolves.toBeUndefined();
+    await expect(resolvePublicAccessKey("client", "", okFetch({ accessKey: "" }))).resolves.toBeUndefined();
+    const throwing = vi.fn(async () => {
+      throw new Error("offline");
+    }) as unknown as typeof fetch;
+    await expect(resolvePublicAccessKey("client", "", throwing)).resolves.toBeUndefined();
+  });
+
+  it("never fetches a key in server mode", async () => {
+    const fetchKey = okFetch({ accessKey: "from-main" });
+    await expect(resolvePublicAccessKey("server", "", fetchKey)).resolves.toBe("");
+    expect(fetchKey).not.toHaveBeenCalled();
   });
 });

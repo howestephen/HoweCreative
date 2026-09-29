@@ -27,6 +27,9 @@ Contact delivery has two explicit modes:
 
 - `client` (default/free): `EMAIL_ACCESS_KEY` is embedded as Web3Forms' public
   form identifier and the browser submits directly.
+  A build without the key, such as the redesign in its own Vercel project,
+  fetches it from the main site's `api/contact-key.ts`, which reads the same
+  `EMAIL_ACCESS_KEY`.
 - `server` (paid): the browser calls `api/contact.ts`, which reads only
   `WEB3FORMS_SERVER_ACCESS_KEY` and requires provider IP allowlisting.
 
