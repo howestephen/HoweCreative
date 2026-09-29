@@ -3,7 +3,11 @@ import { withBase } from "../lib/base-path";
 import { ArrowUpRight } from "lucide-react";
 
 import { siteProfile } from "../data/portfolio";
-import { createContactRequest, type ContactTransport } from "./contact-request";
+import {
+  createContactRequest,
+  resolvePublicAccessKey,
+  type ContactTransport,
+} from "./contact-request";
 
 type Status = "idle" | "sending" | "success" | "error";
 
@@ -45,7 +49,10 @@ export function ContactFoot({ variant = "editorial", heading = true }: ContactFo
 
     try {
       const transport = (import.meta.env.VITE_CONTACT_TRANSPORT ?? "client") as ContactTransport;
-      const publicAccessKey = import.meta.env.VITE_EMAIL_ACCESS_KEY as string | undefined;
+      const publicAccessKey = await resolvePublicAccessKey(
+        transport,
+        import.meta.env.VITE_EMAIL_ACCESS_KEY as string | undefined,
+      );
       const request = createContactRequest(transport, publicAccessKey, {
         name,
         email,
