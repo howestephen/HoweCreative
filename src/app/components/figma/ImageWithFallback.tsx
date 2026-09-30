@@ -25,9 +25,11 @@ export function ImageWithFallback(
         <img src={ERROR_IMG_SRC} alt="Error loading image" {...rest} data-original-url={src} />
       </div>
     </div>
+  ) : !src ? (
+    <img alt={alt} className={className} style={style} {...rest} onError={handleError} />
   ) : (
     <ResponsiveImage
-      src={src ?? ''}
+      src={src}
       alt={alt}
       className={className}
       style={style}
