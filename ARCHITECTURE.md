@@ -34,6 +34,14 @@ filters are stored in the URL. V7 and the mixed UNCX application concepts are
 not linked from the new public archive; the existing public assets remain an
 open audit item and are not protected by this UI decision.
 
+Case-study and Earlier Work images are served responsively.
+`scripts/build-thumbs.mjs` writes WebP copies at standard widths into each
+folder's `thumbs/` and records every image's size in
+`src/app/data/image-variants.json`. `ResponsiveImage` offers those copies as a
+`srcset` and measures its own box after layout, allowing for `object-fit`, so
+retina screens get enough pixels and phones fetch small copies. Re-run the
+script after adding or replacing an image.
+
 Contact delivery has two explicit modes:
 
 - `client` (default/free): `EMAIL_ACCESS_KEY` is embedded as Web3Forms' public
