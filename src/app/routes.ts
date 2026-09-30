@@ -3,6 +3,7 @@ import { AppErrorBoundary } from "./components/AppErrorBoundary";
 import { CVRoute } from "./cv-route";
 import { Layout } from "./components/Layout";
 import { Home } from "./pages/Home";
+import { Archive } from "./pages/Archive";
 
 export const router = createBrowserRouter([
   {
@@ -10,7 +11,8 @@ export const router = createBrowserRouter([
     Component: Layout,
     ErrorBoundary: AppErrorBoundary,
     children: [
-      { index: true, Component: Home }
+      { index: true, Component: Home },
+      { path: "archive", Component: Archive }
     ]
   },
   {

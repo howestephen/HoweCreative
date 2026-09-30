@@ -10,7 +10,10 @@ const NAV = [
 ] as const;
 
 function jumpTo(target: string) {
-  document.getElementById(target)?.scrollIntoView({ behavior: "smooth", block: "start" });
+  const section = document.getElementById(target);
+  // On a page without that section, such as the archive, go to it on the home page.
+  if (section) section.scrollIntoView({ behavior: "smooth", block: "start" });
+  else window.location.assign(`/#${target}`);
 }
 
 export function Layout() {

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
-import { useLocation, useNavigate, useSearchParams } from "react-router";
+import { Link, useLocation, useNavigate, useSearchParams } from "react-router";
 import { createPortal } from "react-dom";
 import { ArrowUpRight, ChevronLeft, ChevronRight, X } from "lucide-react";
 import { motion } from "motion/react";
@@ -402,18 +402,21 @@ function ZoomableImage({ src, alt, onBackdrop }: { src: string; alt: string; onB
   );
 }
 
-function Lightbox({
-  project,
+/** Full-screen image viewer for a titled set of images. Shared by the study
+ *  overlay and the archive page. */
+export function Lightbox({
+  title,
+  images,
   index,
   onClose,
   onStep,
 }: {
-  project: PortfolioProject;
+  title: string;
+  images: ProjectMediaItem[];
   index: number;
   onClose: () => void;
   onStep: (delta: number) => void;
 }) {
-  const images = (project.media ?? []).filter((m) => m.type === "image");
   const current = images[index];
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -449,7 +452,7 @@ function Lightbox({
       className="fixed inset-0 z-[200] bg-background"
       role="dialog"
       aria-modal="true"
-      aria-label={`${project.title} gallery`}
+      aria-label={`${title} gallery`}
     >
       {/* Full-viewport centering box with padding that reserves room for the
           floating controls: because this box has a definite height (inset-0),
@@ -464,7 +467,7 @@ function Lightbox({
         <ZoomableImage
           key={current.src}
           src={current.src}
-          alt={current.alt ?? project.title}
+          alt={current.alt ?? title}
           onBackdrop={onClose}
         />
       </div>
@@ -472,7 +475,7 @@ function Lightbox({
       {/* Controls float above the image and never affect its layout. */}
       <div className="pointer-events-none absolute inset-x-0 top-0 flex items-start justify-between gap-4 p-3 sm:p-4">
         <span className="pointer-events-auto bg-background/80 px-2.5 py-1.5 font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground sm:text-[11px]">
-          {project.title} / {index + 1} of {images.length}
+          {title} / {index + 1} of {images.length}
         </span>
         <button
           type="button"
@@ -834,6 +837,18 @@ export function WorkIndex() {
             />
           ))}
         </ol>
+
+        <div className="mt-10 flex flex-col gap-3 border-t border-border pt-6 sm:flex-row sm:items-center sm:justify-between">
+          <p className="max-w-xl text-sm leading-relaxed text-muted-foreground">
+            The full archive has every project in one index, with earlier work from 2009 and its original credits.
+          </p>
+          <Link
+            to="/archive"
+            className="inline-flex shrink-0 items-center gap-1.5 self-start border border-foreground/25 px-4 py-2 font-mono text-[10px] uppercase tracking-[0.16em] text-foreground transition-colors hover:border-accent hover:text-accent sm:self-auto"
+          >
+            Full archive <ArrowUpRight className="h-3.5 w-3.5" />
+          </Link>
+        </div>
       </div>
 
       {openProject && (
@@ -852,7 +867,8 @@ export function WorkIndex() {
           animated. */}
       {lightbox && lightboxProject && (
         <Lightbox
-          project={lightboxProject}
+          title={lightboxProject.title}
+          images={(lightboxProject.media ?? []).filter((m) => m.type === "image")}
           index={lightbox.index}
           onClose={closeLightbox}
           onStep={stepLightbox}
