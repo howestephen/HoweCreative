@@ -238,6 +238,31 @@
           },
           {
             "type": "image",
+            "src": "/case-studies/quiver/archer-full-draw-right.webp",
+            "alt": "Quiver film still: the archer at full draw, facing right"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/quiver/archer-aim-upward.webp",
+            "alt": "Quiver film still: the archer aiming upward at full draw"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/quiver/archer-full-draw-close.webp",
+            "alt": "Quiver film still: close on the draw, arrow nocked"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/quiver/archer-reach-for-arrow.webp",
+            "alt": "Quiver film still: the archer reaching back for an arrow"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/quiver/archer-bow-lowered.webp",
+            "alt": "Quiver film still: the archer standing with the bow lowered"
+          },
+          {
+            "type": "image",
             "src": "/case-studies/quiver/buy-enforcement.webp",
             "alt": "Quiver film still: buy-enforcement message within the visual treatment"
           },
