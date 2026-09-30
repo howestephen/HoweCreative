@@ -250,7 +250,6 @@ export const operatorProfileContent = content.operatorProfile;
 export const caseStudiesContent = content.caseStudies;
 export const toolsSkillsContent = content.toolsSkills;
 export const contactContent = content.contact;
-export const archiveContent = content.archive;
 export const footerContent = content.footer;
 
 export const navigationContent = content.navigation;
@@ -270,8 +269,6 @@ export const portfolioTools: PortfolioTool[] = content.toolsSkills.items.map((to
   category: tool.category,
 }));
 
-export const archiveEntries: ArchiveEntry[] = content.archive.entries;
-export const archiveTools = content.archive.tools as readonly string[];
 
 // Map tag names (including aliases) to toolkit icons & colours
 const tagAliases: Record<string, string> = {
