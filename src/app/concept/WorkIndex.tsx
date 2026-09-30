@@ -586,10 +586,10 @@ function StudyCard({
         <div
           className={
             featured
-              ? "aspect-[4/1] overflow-hidden bg-neutral-900 sm:aspect-video lg:col-span-3 lg:aspect-auto lg:min-h-[22rem]"
-              : // A short banner on phones keeps ten studies a quick scroll;
-              // from `sm` up the image takes the card's full 16:10.
-              "aspect-[4/1] w-full overflow-hidden bg-[#0a0c10] sm:aspect-[16/10]"
+              ? "aspect-video overflow-hidden bg-neutral-900 lg:col-span-3 lg:aspect-auto lg:min-h-[22rem]"
+              : // The card art is shown whole at its own 16:10 at every width,
+              // so the UNCX mark stays in its bottom-left corner.
+              "aspect-[16/10] w-full overflow-hidden bg-[#0a0c10]"
           }
         >
           <CardImage project={project} featured={featured} />
