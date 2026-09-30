@@ -206,6 +206,9 @@
   gap: clamp(22px, 4vw, 70px);
 }
 .case-output-samples .case-image {
+  /* A definite width: with a srcset, an image's natural width comes from
+     `sizes`, so a shrink-to-fit figure would shrink with it. */
+  width: 100%;
   max-width: 490px;
   margin-inline: auto;
 }
@@ -353,6 +356,7 @@
   gap: 32px;
 }
 .case-chapter-portrait .case-evidence {
+  width: 100%;
   max-width: 560px;
   justify-self: center;
 }
