@@ -32,17 +32,6 @@ const TEASERS: Record<string, string> = {
   "noticia-lingo": "Language learning driven by live news - lesson types designed as pure functions.",
 };
 
-/** Gallery thumbnails are pre-generated at 480px into a sibling `thumbs/`
- *  folder (see scripts/build-thumbs.mjs). Full-resolution originals are only
- *  fetched when an image is opened in the lightbox, which keeps the expanded
- *  row light on mobile connections. */
-function thumbSrc(src: string): string {
-  const slash = src.lastIndexOf("/");
-  const dot = src.lastIndexOf(".");
-  if (slash === -1 || dot < slash) return src;
-  return `${src.slice(0, slash)}/thumbs/${src.slice(slash + 1, dot)}.jpg`;
-}
-
 /** A section body is prose, or a list when every line starts with "- ". */
 function SectionBody({ body, emphasis }: { body: string; emphasis: boolean }) {
   const tone = emphasis ? "text-foreground/90" : "text-muted-foreground";
@@ -189,7 +178,7 @@ function GalleryStrip({
               className="group/thumb block w-28 shrink-0 snap-start border border-border bg-card transition-colors hover:border-accent sm:w-32"
             >
               <ImageWithFallback
-                src={thumbSrc(media.src)}
+                src={media.src}
                 alt={media.alt ?? project.title}
                 loading="lazy"
                 decoding="async"
@@ -365,6 +354,7 @@ function ZoomableImage({ src, alt }: { src: string; alt: string }) {
       src={src}
       alt={alt}
       draggable={false}
+      zoom={view.scale}
       style={{
         transform: `translate(${view.x}px, ${view.y}px) scale(${view.scale})`,
         touchAction: "none",
@@ -520,9 +510,9 @@ function shortCategory(project: PortfolioProject) {
   return project.category.split("/")[0].trim();
 }
 
-/** Card image. Grid cards use the 480px thumbnail; the featured card is wide
- *  enough to need the original. Projects without an image get a quiet
- *  typographic panel so the grid rhythm holds. */
+/** Card image, served at the size each screen needs (see ResponsiveImage).
+ *  Projects without an image get a quiet typographic panel so the grid
+ *  rhythm holds. */
 function CardImage({ project, featured }: { project: PortfolioProject; featured: boolean }) {
   if (!project.image) {
     return (
@@ -535,7 +525,7 @@ function CardImage({ project, featured }: { project: PortfolioProject; featured:
   }
   return (
     <ImageWithFallback
-      src={featured ? project.image : thumbSrc(project.image)}
+      src={project.image}
       alt=""
       loading={featured ? "eager" : "lazy"}
       decoding="async"
