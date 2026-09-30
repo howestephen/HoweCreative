@@ -1,4 +1,4 @@
-import portraitSource from "../../../docs/reviews/2026-09-07-design-reset/portrait-reference.png";
+import portraitSource from "../../../docs/reviews/2026-09-07-design-reset/portrait-reference-2x.webp";
 
 export { portraitSource };
 // The opening is a depth-mapped point cloud, not a stack of flat cards.
