@@ -14,13 +14,13 @@ describe("responsive images", () => {
   });
 
   it("escapes spaces so srcset candidates parse", () => {
-    const srcSet = srcSetFor("/case-studies/solana-diary/diary weekly schedule.png") ?? "";
+    const srcSet = srcSetFor("/case-studies/solana-diary/diary weekly schedule.webp") ?? "";
     expect(srcSet).toContain("/case-studies/solana-diary/thumbs/diary%20weekly%20schedule-480.webp 480w");
     expect(srcSet.split(", ").every((candidate) => candidate.split(" ").length === 2)).toBe(true);
   });
 
   it("finds images whose paths arrive URL-encoded", () => {
-    expect(imageVariants("/case-studies/solana-diary/diary%20weekly%20schedule.png")?.w).toBe(1764);
+    expect(imageVariants("/case-studies/solana-diary/diary%20weekly%20schedule.webp")?.w).toBe(3528);
   });
 
   it("has no srcset for images without variants", () => {
