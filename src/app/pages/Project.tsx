@@ -108,8 +108,8 @@ function BadgerLead({ project }: { project: PortfolioProject }) {
 
 function SolanaLead({ project }: { project: PortfolioProject }) {
   const filenames = [
-    "liquidity_flows_7d__2026-06-16__id7258__render.png",
-    "news_cards__2026-05-22__id5201__USDF-STABLECOIN-LAUNCHES-ON-SOLANA-WITH-COIN__POSTED.png",
+    "liquidity_flows_7d__2026-06-16__id7258__render.webp",
+    "news_cards__2026-05-22__id5201__USDF-STABLECOIN-LAUNCHES-ON-SOLANA-WITH-COIN__POSTED.webp",
   ];
   return (
     <div className="case-output-lead">
