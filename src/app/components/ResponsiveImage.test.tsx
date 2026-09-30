@@ -53,6 +53,19 @@ describe("ResponsiveImage", () => {
     expect(getByRole("img").getAttribute("sizes")).toBe("240px");
   });
 
+  it("carries the original's dimensions so layout never depends on sizes", () => {
+    layout(300, 113);
+    const { getByRole } = render(<ResponsiveImage src={WIDE} alt="Flow" />);
+    expect(getByRole("img").getAttribute("width")).toBe("4266");
+    expect(getByRole("img").getAttribute("height")).toBe("1598");
+  });
+
+  it("lets callers override the dimensions", () => {
+    layout(300, 113);
+    const { getByRole } = render(<ResponsiveImage src={WIDE} alt="Flow" width="480" height="360" />);
+    expect(getByRole("img").getAttribute("width")).toBe("480");
+  });
+
   it("falls back to a plain image without variants", () => {
     layout(300, 100);
     const { getByRole } = render(<ResponsiveImage src="/case-studies/uncx-rebrand/uncx-logotype.svg" alt="Logo" />);
