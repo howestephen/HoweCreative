@@ -238,16 +238,6 @@
           },
           {
             "type": "image",
-            "src": "/case-studies/quiver/product-introduction.webp",
-            "alt": "Quiver film still: product introduction composed with phone imagery"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/quiver/launch-rules.webp",
-            "alt": "Quiver film still: launch rules, motion typography and product imagery"
-          },
-          {
-            "type": "image",
             "src": "/case-studies/quiver/buy-enforcement.webp",
             "alt": "Quiver film still: buy-enforcement message within the visual treatment"
           },
@@ -255,26 +245,6 @@
             "type": "image",
             "src": "/case-studies/quiver/launch-control.webp",
             "alt": "Quiver film still: launch-control message and art direction"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/quiver/process-impact-start.webp",
-            "alt": "Quiver source still: empty timber target prepared as the beginning of an impact shot"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/quiver/process-impact-end.webp",
-            "alt": "Quiver source still: arrow in the timber target, defining the impact endpoint"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/quiver/process-eye-wide.webp",
-            "alt": "Quiver source still: hooded figure with a glowing eye in a wider composition"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/quiver/process-eye-detail.webp",
-            "alt": "Quiver source still: glowing eye close-up prepared for a cutaway"
           }
         ]
       },
