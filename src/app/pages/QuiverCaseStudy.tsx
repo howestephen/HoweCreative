@@ -8,6 +8,7 @@ import {
   quiverProcess,
 } from "../data/quiver-story";
 import { ProjectGallery } from "../components/ProjectGallery";
+import { ResponsiveImage } from "../components/ResponsiveImage";
 import { ContactFoot } from "../concept/ContactFoot";
 import "../../styles/quiver.css";
 
@@ -52,7 +53,7 @@ export function QuiverCaseStudy() {
     <>
       <article className="quiver-case">
         <header className="quiver-opening">
-          <img
+          <ResponsiveImage
             className="quiver-opening-image"
             src="/case-studies/quiver/hero-poster.jpg"
             alt="A hooded archer emerges from mist in the monochrome world created for Quiver."
@@ -208,7 +209,7 @@ export function QuiverCaseStudy() {
               </p>
             </div>
             <figure className="quiver-direction-image">
-              <img
+              <ResponsiveImage
                 src="/case-studies/quiver/evidence-brand-reference.webp"
                 alt="Approved Quiver banner reference with a hooded archer, a black stone interior and the Quiver mark."
                 loading="lazy"
@@ -241,7 +242,7 @@ export function QuiverCaseStudy() {
                     <span>Start state</span>
                     <span>01</span>
                   </div>
-                  <img
+                  <ResponsiveImage
                     src="/case-studies/quiver/evidence-impact-start.webp"
                     alt="An empty timber post prepared as the exact start state for a generated impact shot."
                     width="1672"
@@ -259,7 +260,7 @@ export function QuiverCaseStudy() {
                     <span>End state</span>
                     <span>02</span>
                   </div>
-                  <img
+                  <ResponsiveImage
                     src="/case-studies/quiver/evidence-impact-end.webp"
                     alt="The same timber post with an arrow embedded, prepared as the end state."
                     width="1672"
@@ -308,7 +309,7 @@ export function QuiverCaseStudy() {
             </div>
             <div className="quiver-inference-evidence">
               <figure className="quiver-source-frame">
-                <img
+                <ResponsiveImage
                   src="/case-studies/quiver/evidence-archer-source.webp"
                   alt="Prepared source frame of a hooded archer viewed from behind with the bow hand and arrow position defined."
                   width="1672"
@@ -347,7 +348,7 @@ export function QuiverCaseStudy() {
                 </p>
               </div>
               <figure className="quiver-rejected-frame">
-                <img
+                <ResponsiveImage
                   src="/case-studies/quiver/evidence-rejected-draw.webp"
                   alt="Rejected full-draw archer frame showing why a continuous bow action was unreliable."
                   width="1672"
@@ -378,7 +379,7 @@ export function QuiverCaseStudy() {
             </div>
             <div className="quiver-assembly-grid">
               <figure className="quiver-edit-frame">
-                <img
+                <ResponsiveImage
                   src="/case-studies/quiver/launch-rules.webp"
                   alt="Finished frame combining the generated world, authored launch-rule typography and product storytelling."
                   width="1920"

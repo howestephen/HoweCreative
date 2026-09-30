@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import type { ProjectMediaItem } from "../data/portfolio";
+import { ResponsiveImage } from "./ResponsiveImage";
 
 const MAX_ZOOM = 4;
 
@@ -30,9 +31,10 @@ function ZoomableImage({ src, alt }: { src: string; alt: string }) {
   };
 
   return (
-    <img
+    <ResponsiveImage
       src={src}
       alt={alt}
+      zoom={view.scale}
       draggable={false}
       style={{
         transform: `translate(${view.x}px, ${view.y}px) scale(${view.scale})`,
@@ -70,12 +72,6 @@ function ZoomableImage({ src, alt }: { src: string; alt: string }) {
       }}
     />
   );
-}
-
-export function thumbnail(src: string) {
-  const slash = src.lastIndexOf("/");
-  const dot = src.lastIndexOf(".");
-  return `${src.slice(0, slash)}/thumbs/${src.slice(slash + 1, dot)}.jpg`;
 }
 
 function ImageDialog({
@@ -229,8 +225,8 @@ function GalleryContent({
                 }}
                 aria-label={`View larger: ${item.alt ?? title}`}
               >
-                <img
-                  src={thumbnail(item.src)}
+                <ResponsiveImage
+                  src={item.src}
                   alt={item.alt ?? title}
                   loading="lazy"
                   decoding="async"

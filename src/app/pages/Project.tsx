@@ -5,6 +5,7 @@ import { projects, projectEditorial } from "../data/project-index";
 import { projectStories, type EvidenceChapter, type FrameRatio } from "../data/project-stories";
 import type { PortfolioProject, ProjectMediaItem } from "../data/portfolio";
 import { ProjectGallery } from "../components/ProjectGallery";
+import { ResponsiveImage } from "../components/ResponsiveImage";
 import { ContactFoot } from "../concept/ContactFoot";
 import { QuiverCaseStudy } from "./QuiverCaseStudy";
 import "../../styles/project-stories.css";
@@ -55,7 +56,7 @@ function EvidenceImage({
       } as CSSProperties}
     >
       <a href={media.src} target="_blank" rel="noreferrer">
-        <img
+        <ResponsiveImage
           src={media.src}
           alt={media.alt ?? "Project image"}
           loading={eager ? "eager" : "lazy"}
@@ -113,7 +114,7 @@ function SolanaLead({ project }: { project: PortfolioProject }) {
   return (
     <div className="case-output-lead">
       <div className="case-output-identity">
-        <img
+        <ResponsiveImage
           src="/case-studies/solana-diary/twitter-header.webp"
           alt="Solana Diary identity"
         />
@@ -250,7 +251,7 @@ function ProjectStory({ project }: { project: PortfolioProject }) {
   return (
     <div className={`spatial-case spatial-case-${project.slug}`}>
       <div className="case-atmosphere" aria-hidden="true">
-        {(editorial.cover || project.image) && <img src={editorial.cover || project.image} alt="" />}
+        {(editorial.cover || project.image) && <ResponsiveImage src={editorial.cover || project.image} alt="" />}
         <span />
       </div>
       <article className={`wrap case-study case-study-${project.slug}`}>

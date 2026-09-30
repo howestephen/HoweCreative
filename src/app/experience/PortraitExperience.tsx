@@ -9,6 +9,7 @@ import {
 import { Link } from "react-router";
 import { useReducedMotion } from "motion/react";
 import { ContactFoot } from "../concept/ContactFoot";
+import { ResponsiveImage } from "../components/ResponsiveImage";
 import { projects as portfolioProjects, projectEditorial } from "../data/project-index";
 import { acceptsPortraitPress, clamp, isPortraitSurface, portraitFraming, portraitSource, scrollState, smooth, type ParticleMotion } from "./portrait-particles";
 import { createPortraitAudio, type PortraitAudio } from "./portrait-audio";
@@ -416,7 +417,7 @@ export function PortraitExperience() {
       <dialog className="spatial-dialog" ref={dialog} aria-labelledby="spatial-dialog-title" onCancel={() => setSelected(null)} onClose={() => setSelected(null)}>
         {selectedProject && <>
           <div className="spatial-dialog-visual" data-fit={selectedProject.preview.fit} style={{ "--card-tint": areaTints[selectedProject.area] ?? "#849589", "--preview-focus": selectedProject.preview.focus } as CSSProperties}>
-            <img src={selectedProject.preview.src} alt={selectedProject.preview.alt} />
+            <ResponsiveImage src={selectedProject.preview.src} alt={selectedProject.preview.alt} />
           </div>
           <div className="spatial-dialog-body">
             <header>

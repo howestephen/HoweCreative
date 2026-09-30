@@ -5,7 +5,7 @@ import { projects, projectEditorial } from "./project-index";
 import { portfolioProjects } from "./portfolio";
 import earlier from "./earlier-work.json";
 import cv from "./cv.json";
-import { thumbnail } from "../components/ProjectGallery";
+import { imageVariants, variantUrl } from "../lib/responsive-image";
 
 describe("portfolio evidence and asset coverage", () => {
   it("shows every current project exactly once", () => {
@@ -18,7 +18,7 @@ describe("portfolio evidence and asset coverage", () => {
     for (const project of projects)
       expect(projectEditorial[project.slug].credit).toBeTruthy();
   });
-  it("has every linked image, thumbnail, video and poster on disk", () => {
+  it("has every linked image, retina variant, video and poster on disk", () => {
     const media = [
       ...projects.flatMap((project) => project.media ?? []),
       ...earlier.flatMap((entry) => entry.media),
@@ -28,11 +28,16 @@ describe("portfolio evidence and asset coverage", () => {
         true,
       );
       expect(item.alt, item.src).toBeTruthy();
-      if (item.type === "image")
-        expect(
-          existsSync(resolve("public", thumbnail(item.src).slice(1))),
-          thumbnail(item.src),
-        ).toBe(true);
+      // SVGs are resolution independent; every raster image needs its variants.
+      if (item.type === "image" && !item.src.endsWith(".svg")) {
+        const variants = imageVariants(item.src);
+        expect(variants, `${item.src} has no responsive variants`).toBeTruthy();
+        for (const width of variants?.v ?? [])
+          expect(
+            existsSync(resolve("public", variantUrl(item.src, width).slice(1))),
+            variantUrl(item.src, width),
+          ).toBe(true);
+      }
       if (item.type === "video")
         expect(
           "poster" in item &&
