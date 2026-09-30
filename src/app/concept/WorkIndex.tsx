@@ -543,7 +543,9 @@ function CardImage({ project, featured }: { project: PortfolioProject; featured:
       alt=""
       loading={featured ? "eager" : "lazy"}
       decoding="async"
-      className={`${featured ? "h-full" : "aspect-square sm:aspect-auto sm:h-full"} w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]`}
+      // Card art is a logo or key image on its own dark ground, so it is
+      // contained and never cropped; the featured film still fills its frame.
+      className={`h-full w-full ${featured ? "object-cover" : "object-contain"} transition-transform duration-500 ease-out group-hover:scale-[1.03]`}
     />
   );
 }
@@ -577,18 +579,17 @@ function StudyCard({
         className={
           featured
             ? "group grid h-full w-full border border-border bg-card text-left transition-colors hover:border-accent lg:grid-cols-5"
-            : // Phones get a compact horizontal card so ten studies stay a
-              // short scroll; from `sm` up the image sits on top.
-              "group flex h-full w-full border border-border bg-card text-left transition-colors hover:border-accent sm:flex-col"
+            : // Every card stacks, image above text, like the featured one.
+              "group flex h-full w-full flex-col border border-border bg-card text-left transition-colors hover:border-accent"
         }
       >
         <div
           className={
             featured
-              ? "aspect-video overflow-hidden bg-neutral-900 lg:col-span-3 lg:aspect-auto lg:min-h-[22rem]"
-              : // On phones the column runs the card's full height in the artwork's own
-              // background, with the square image centred, so no gap shows.
-              "flex w-24 shrink-0 items-center overflow-hidden bg-[#0a0c10] sm:block sm:aspect-[16/10] sm:w-full"
+              ? "aspect-[4/1] overflow-hidden bg-neutral-900 sm:aspect-video lg:col-span-3 lg:aspect-auto lg:min-h-[22rem]"
+              : // A short banner on phones keeps ten studies a quick scroll;
+              // from `sm` up the image takes the card's full 16:10.
+              "aspect-[4/1] w-full overflow-hidden bg-[#0a0c10] sm:aspect-[16/10]"
           }
         >
           <CardImage project={project} featured={featured} />
@@ -597,8 +598,8 @@ function StudyCard({
         <div
           className={
             featured
-              ? "flex flex-col gap-3 p-5 sm:p-7 lg:col-span-2 lg:justify-center"
-              : "flex min-w-0 flex-1 flex-col gap-1.5 p-4 sm:gap-2 sm:p-5"
+              ? "flex flex-col gap-1 px-4 py-3 sm:gap-3 sm:p-7 lg:col-span-2 lg:justify-center"
+              : "flex min-w-0 flex-1 flex-col gap-1 px-4 py-3 sm:gap-2 sm:p-5"
           }
         >
           <div className="flex items-baseline justify-between gap-3 font-mono text-[10px] uppercase tracking-[0.14em]">
@@ -610,7 +611,7 @@ function StudyCard({
           <h3
             className={
               featured
-                ? "text-2xl text-foreground transition-colors group-hover:text-accent md:text-3xl"
+                ? "text-lg leading-snug text-foreground transition-colors group-hover:text-accent sm:text-2xl md:text-3xl"
                 : "text-lg leading-snug text-foreground transition-colors group-hover:text-accent sm:text-xl"
             }
           >
@@ -620,16 +621,16 @@ function StudyCard({
             id={`card-${project.slug}-teaser`}
             className={
               featured
-                ? "text-sm leading-relaxed text-muted-foreground md:text-base"
-                : "line-clamp-2 text-sm leading-relaxed text-muted-foreground sm:line-clamp-3"
+                ? "text-sm leading-snug text-muted-foreground sm:leading-relaxed md:text-base"
+                : "text-sm leading-snug text-muted-foreground sm:leading-relaxed"
             }
           >
             {teaser}
           </p>
           <span
-            className={`mt-auto items-center gap-1.5 pt-2 font-mono text-[10px] uppercase tracking-[0.16em] text-foreground transition-colors group-hover:text-accent ${featured ? "inline-flex" : "hidden sm:inline-flex"}`}
+            className="mt-auto inline-flex items-center gap-1.5 pt-0.5 font-mono text-[10px] uppercase tracking-[0.16em] text-foreground transition-colors group-hover:text-accent sm:pt-2"
           >
-            {featured && project.media?.[0]?.type === "video" ? "Watch the film" : "Open study"}
+            Read more
             <ArrowUpRight className="h-3.5 w-3.5" />
           </span>
         </div>

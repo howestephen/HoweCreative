@@ -22,10 +22,15 @@ describe("WorkIndex", () => {
     renderAt("/");
     expect(cards()).toHaveLength(portfolioProjects.length);
     expect(cards()[0]).toHaveTextContent("Quiver");
-    // Quiver is the featured, full-width card and the only one offering the film.
+    // Quiver is the featured, full-width card.
     expect(cards()[0].closest("li")).toHaveClass("lg:col-span-3");
-    expect(screen.getAllByText("Watch the film")).toHaveLength(1);
-    expect(cards()[0]).toHaveTextContent("Watch the film");
+    // Every card invites the reader in the same way and shows its whole teaser.
+    expect(screen.getAllByText("Read more")).toHaveLength(portfolioProjects.length);
+    expect(screen.queryByText("Watch the film")).not.toBeInTheDocument();
+    for (const card of cards()) {
+      const teaser = document.getElementById(card.getAttribute("aria-describedby")!)!;
+      expect(teaser.className).not.toMatch(/line-clamp/);
+    }
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
   });
 
