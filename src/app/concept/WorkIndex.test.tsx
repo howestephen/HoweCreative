@@ -88,6 +88,18 @@ describe("WorkIndex", () => {
     expect(router.state.historyAction).toBe("REPLACE");
   });
 
+  it("opens the image that was clicked, not one offset by the study's videos", () => {
+    renderAt("/?study=quiver");
+    const thumbs = screen.getAllByRole("button", { name: /view larger/i });
+    for (const thumb of thumbs) {
+      const alt = thumb.getAttribute("aria-label")!.replace(/^View larger: /, "");
+      fireEvent.click(thumb);
+      const lightbox = screen.getByRole("dialog", { name: "Quiver gallery" });
+      expect(within(lightbox).getByRole("img", { name: alt })).toBeInTheDocument();
+      fireEvent.keyDown(window, { key: "Escape" });
+    }
+  });
+
   it("keeps the study open when Escape closes the image lightbox above it", () => {
     renderAt("/?study=quiver");
     fireEvent.click(screen.getAllByRole("button", { name: /view larger/i })[0]);
