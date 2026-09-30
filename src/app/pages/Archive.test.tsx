@@ -1,0 +1,69 @@
+import { existsSync } from "node:fs";
+import { resolve } from "node:path";
+import { fireEvent, render, screen, within } from "@testing-library/react";
+import { createMemoryRouter, RouterProvider } from "react-router";
+import { describe, expect, it } from "vitest";
+
+import earlierWork from "../data/earlier-work.json";
+import { imageVariants, variantUrl } from "../lib/responsive-image";
+import { portfolioProjects } from "../data/portfolio";
+import { WorkIndex } from "../concept/WorkIndex";
+import { Archive } from "./Archive";
+
+function renderAt(url: string) {
+  const router = createMemoryRouter(
+    [
+      { path: "/", Component: WorkIndex },
+      { path: "/archive", Component: Archive },
+    ],
+    { initialEntries: [url] },
+  );
+  render(<RouterProvider router={router} />);
+  return router;
+}
+
+describe("Archive", () => {
+  it("lists every current study and every earlier project", () => {
+    renderAt("/archive");
+    for (const project of portfolioProjects) expect(screen.getByRole("heading", { name: project.title })).toBeInTheDocument();
+    for (const entry of earlierWork) expect(screen.getByRole("heading", { name: entry.title })).toBeInTheDocument();
+  });
+
+  it("links each study to its full case study on the home page", () => {
+    const router = renderAt("/archive");
+    const links = screen.getAllByRole("link", { name: /read the full case study/i });
+    expect(links).toHaveLength(portfolioProjects.length);
+    fireEvent.click(links[0]);
+    expect(router.state.location.pathname).toBe("/");
+    expect(router.state.location.search).toBe(`?study=${portfolioProjects[0].slug}`);
+  });
+
+  it("opens the clicked earlier-work image in the viewer", () => {
+    renderAt("/archive");
+    const entry = earlierWork.find((e) => e.media.some((m) => m.type === "image"))!;
+    const image = entry.media.filter((m) => m.type === "image")[1] ?? entry.media.find((m) => m.type === "image")!;
+    fireEvent.click(screen.getAllByRole("button", { name: `View larger: ${image.alt}` })[0]);
+    const viewer = screen.getByRole("dialog", { name: `${entry.title} gallery` });
+    expect(within(viewer).getByRole("img", { name: image.alt })).toBeInTheDocument();
+  });
+
+  it("is reached from a Full archive link under the selected work", () => {
+    const router = renderAt("/");
+    fireEvent.click(screen.getByRole("link", { name: /full archive/i }));
+    expect(router.state.location.pathname).toBe("/archive");
+  });
+
+  it("has every earlier-work image and its retina sizes on disk", () => {
+    for (const entry of earlierWork)
+      for (const media of entry.media) {
+        expect(existsSync(resolve("public", media.src.slice(1))), media.src).toBe(true);
+        if (media.type !== "image") {
+          if ("poster" in media && media.poster) expect(existsSync(resolve("public", media.poster.slice(1))), media.poster).toBe(true);
+          continue;
+        }
+        for (const width of imageVariants(media.src)?.v ?? [])
+          expect(existsSync(resolve("public", variantUrl(media.src, width).slice(1))), media.src).toBe(true);
+        expect(imageVariants(media.src), media.src).toBeTruthy();
+      }
+  });
+});
