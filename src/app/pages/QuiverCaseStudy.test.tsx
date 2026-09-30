@@ -43,9 +43,10 @@ describe("Quiver case study", () => {
     expect(
       screen.getByText(/buy gate can be disabled permanently/),
     ).toBeInTheDocument();
-    // Five stills: frames that repeat a film or another still stay out.
+    // Ten stills: five archer frames join the originals; frames that repeat a
+    // film or another still stay out.
     expect(
       screen.getAllByRole("button", { name: /^View larger:/ }),
-    ).toHaveLength(5);
+    ).toHaveLength(10);
   });
 });
