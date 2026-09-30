@@ -50,6 +50,16 @@ behaviour, and conversion paths are approved.
 
 ## Production Maintenance
 
+- ✓ Retina image pass, 30 September 2026: cards, study images and gallery
+  thumbnails are served through `ResponsiveImage` from generated WebP sizes,
+  so every one meets retina resolution; 26 originals shrunk by the 2400px cap
+  are restored. Six repeated Quiver stills leave the gallery, the test videos
+  get distinct posters, and gallery thumbnails now open the image clicked.
+- [ ] Recapture the screenshots taken at 1x at 2x: Badger Club and Noticia
+  Lingo (1920px), the UNCX website sections and Academy pages (1440px). They
+  are the images still below retina resolution when shown large.
+- [ ] Decide on the 15 images the September image review marked CUT, listed
+  under the case study audit.
 - ✓ Added Google Search Console HTML ownership verification to the canonical
   production homepage.
 - Branch `feat/quiver-and-work-cards` (awaiting approval): the Quiver launch

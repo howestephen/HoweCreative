@@ -47,6 +47,12 @@ describe("ResponsiveImage", () => {
     expect(getByRole("img").getAttribute("sizes")).toBe("1200px");
   });
 
+  it("starts small, not at full viewport width, when mounted hidden", () => {
+    layout(0, 0);
+    const { getByRole } = render(<ResponsiveImage src={WIDE} alt="Flow" />);
+    expect(getByRole("img").getAttribute("sizes")).toBe("240px");
+  });
+
   it("falls back to a plain image without variants", () => {
     layout(300, 100);
     const { getByRole } = render(<ResponsiveImage src="/case-studies/uncx-rebrand/uncx-logotype.svg" alt="Logo" />);
