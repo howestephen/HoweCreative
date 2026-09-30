@@ -221,21 +221,28 @@ function StudyDetail({
   onOpenImage: (index: number) => void;
 }) {
   const media = project.media ?? [];
-  const allImages = media.filter((m) => m.type === "image");
+  const images = media.filter((m) => m.type === "image");
   // A study that leads with a video (Quiver's launch film) features it at full
   // width; the strip below keeps the supporting clips.
   const featured = media[0]?.type === "video" ? media[0] : undefined;
   const videos = media.filter((m) => m.type === "video" && m !== featured);
 
-  // Pull a brand logo out of the gallery and feature it above, for visual
-  // interest. Prefer a wordmark ("logotype"), else the first "logo" asset.
-  const logo =
-    allImages.find((m) => /logotype/i.test(m.src)) ??
-    allImages.find((m) => /logo/i.test(m.src));
-  const images = allImages.filter((m) => m !== logo);
 
   return (
     <div className="grid min-w-0 grid-cols-[minmax(0,1fr)] gap-10 lg:grid-cols-5">
+      {/* Every study opens on a header: the featured film where there is one,
+          otherwise the card's key image on its own dark ground. It comes
+          first at every width, so phones see it above the text. */}
+      {!featured && project.image && (
+        <div className="flex aspect-[16/10] w-full items-center justify-center overflow-hidden border border-border bg-[#0a0c10] sm:aspect-[5/2] lg:col-span-5 lg:aspect-[3/1]">
+          <ImageWithFallback
+            src={project.image}
+            alt=""
+            decoding="async"
+            className="h-full w-full object-contain"
+          />
+        </div>
+      )}
       {featured && (
         <video
           src={featured.src}
@@ -278,18 +285,6 @@ function StudyDetail({
       </div>
 
       <div className="min-w-0 space-y-6 lg:col-span-2">
-        {logo && (
-          <div className="flex w-full items-center justify-center border border-border bg-neutral-900 px-6 py-8">
-            <ImageWithFallback
-              src={logo.src}
-              alt={logo.alt ?? `${project.title} logo`}
-              loading="lazy"
-              decoding="async"
-              className="h-14 w-auto max-w-full object-contain sm:h-16"
-            />
-          </div>
-        )}
-
         {images.length > 0 && (
           <GalleryStrip project={project} images={images} onOpenImage={onOpenImage} />
         )}

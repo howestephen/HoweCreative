@@ -1,4 +1,4 @@
-import { act, fireEvent, render, screen, within } from "@testing-library/react";
+import { act, cleanup, fireEvent, render, screen, within } from "@testing-library/react";
 import { createMemoryRouter, RouterProvider } from "react-router";
 import { describe, expect, it } from "vitest";
 
@@ -86,6 +86,26 @@ describe("WorkIndex", () => {
     expect(router.state.location.pathname).toBe("/");
     expect(router.state.location.search).toBe("");
     expect(router.state.historyAction).toBe("REPLACE");
+  });
+
+  it("opens every study on its header, above the text", () => {
+    for (const project of portfolioProjects) {
+      renderAt(`/?study=${project.slug}`);
+      const dialog = screen.getByRole("dialog", { name: project.title });
+      const text = within(dialog).getByText(project.fullDescription);
+      const header = project.media?.[0]?.type === "video"
+        ? dialog.querySelector("video")
+        : [...dialog.querySelectorAll("img")].find((img) => img.getAttribute("src") === project.image);
+      expect(header, project.slug).toBeTruthy();
+      // DOCUMENT_POSITION_FOLLOWING: the text comes after the header.
+      expect(header!.compareDocumentPosition(text) & 4, project.slug).toBeTruthy();
+      cleanup();
+    }
+  });
+
+  it("keeps logos in the gallery now the header shows the key image", () => {
+    renderAt("/?study=solana-diary");
+    expect(screen.getByRole("button", { name: "View larger: Solana Diary logo lockup" })).toBeInTheDocument();
   });
 
   it("opens the image that was clicked, not one offset by the study's videos", () => {
