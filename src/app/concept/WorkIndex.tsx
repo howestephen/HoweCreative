@@ -628,7 +628,7 @@ function StudyCard({
             {teaser}
           </p>
           <span
-            className="mt-auto inline-flex items-center gap-1.5 pt-0.5 font-mono text-[10px] uppercase tracking-[0.16em] text-foreground transition-colors group-hover:text-accent sm:pt-2"
+            className="mt-auto inline-flex items-center gap-1.5 self-end pt-0.5 font-mono text-[10px] uppercase tracking-[0.16em] text-foreground transition-colors group-hover:text-accent sm:pt-2"
           >
             Read more
             <ArrowUpRight className="h-3.5 w-3.5" />
