@@ -176,7 +176,10 @@ function GalleryStrip({
           text column. */}
       <div className="grid w-max grid-flow-col grid-rows-2 gap-1.5">
         {images.map((media) => {
-          const galleryIndex = (project.media ?? []).indexOf(media);
+          // The lightbox steps through image media only, so index within those.
+          const galleryIndex = (project.media ?? [])
+            .filter((m) => m.type === "image")
+            .indexOf(media);
           return (
             <button
               key={media.src}
