@@ -326,7 +326,7 @@ const MAX_ZOOM = 4;
 
 /** An image the viewer can pinch to zoom (up to 4x), pan while zoomed and
  *  double-tap to toggle, using a CSS transform instead of page zoom. */
-function ZoomableImage({ src, alt }: { src: string; alt: string }) {
+function ZoomableImage({ src, alt, onBackdrop }: { src: string; alt: string; onBackdrop: () => void }) {
   const [view, setView] = useState({ scale: 1, x: 0, y: 0 });
   const pointers = useRef(new Map<number, { x: number; y: number }>());
   const pinch = useRef<{ distance: number; scale: number } | null>(null);
@@ -359,7 +359,21 @@ function ZoomableImage({ src, alt }: { src: string; alt: string }) {
         transform: `translate(${view.x}px, ${view.y}px) scale(${view.scale})`,
         touchAction: "none",
       }}
-      className="max-h-full max-w-full select-none object-contain"
+      // The image fills the padded stage and letterboxes inside it, so its
+      // box never depends on which responsive copy has loaded.
+      className="h-full w-full select-none object-contain"
+      onClick={(e) => {
+        // A click on the letterbox beside the picture still closes the viewer.
+        const img = e.currentTarget;
+        if (view.scale !== 1 || !img.naturalWidth) return;
+        const box = img.getBoundingClientRect();
+        const scale = Math.min(box.width / img.naturalWidth, box.height / img.naturalHeight);
+        const w = img.naturalWidth * scale;
+        const h = img.naturalHeight * scale;
+        const x = e.clientX - box.left - (box.width - w) / 2;
+        const y = e.clientY - box.top - (box.height - h) / 2;
+        if (x < 0 || y < 0 || x > w || y > h) onBackdrop();
+      }}
       onPointerDown={(e) => {
         e.currentTarget.setPointerCapture?.(e.pointerId);
         pointers.current.set(e.pointerId, { x: e.clientX, y: e.clientY });
@@ -452,7 +466,12 @@ function Lightbox({
           if (e.target === e.currentTarget) onClose();
         }}
       >
-        <ZoomableImage key={current.src} src={current.src} alt={current.alt ?? project.title} />
+        <ZoomableImage
+          key={current.src}
+          src={current.src}
+          alt={current.alt ?? project.title}
+          onBackdrop={onClose}
+        />
       </div>
 
       {/* Controls float above the image and never affect its layout. */}

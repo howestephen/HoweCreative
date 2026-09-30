@@ -66,6 +66,11 @@ export const ResponsiveImage = forwardRef<HTMLImageElement, ResponsiveImageProps
     <img
       ref={setRef}
       src={src}
+      // The original's dimensions keep the layout identical to a plain image
+      // of the original: with a srcset, the browser would otherwise size an
+      // image without CSS dimensions from `sizes` instead.
+      width={meta.w}
+      height={meta.h}
       srcSet={srcSet}
       sizes={measured !== null ? `${measured}px` : (sizesHint ?? UNMEASURED_SIZE)}
       {...rest}
