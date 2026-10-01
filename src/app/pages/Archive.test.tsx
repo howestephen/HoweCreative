@@ -47,6 +47,31 @@ describe("Archive", () => {
     expect(within(viewer).getByRole("img", { name: image.alt })).toBeInTheDocument();
   });
 
+  it("returns focus to the thumbnail when the viewer closes", () => {
+    renderAt("/archive");
+    const entry = earlierWork.find((e) => e.media.some((m) => m.type === "image"))!;
+    const image = entry.media.find((m) => m.type === "image")!;
+    const thumb = screen.getAllByRole("button", { name: `View larger: ${image.alt}` })[0];
+    thumb.focus();
+    fireEvent.click(thumb);
+    expect(document.documentElement.style.overflow).toBe("hidden");
+    fireEvent.keyDown(window, { key: "Escape" });
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+    expect(document.activeElement).toBe(thumb);
+    expect(document.documentElement.style.overflow).toBe("");
+  });
+
+  it("closes a study opened from the archive back to the archive", () => {
+    const router = renderAt("/archive");
+    fireEvent.click(screen.getAllByRole("link", { name: /read the full case study/i })[0]);
+    const study = screen.getByRole("dialog", { name: portfolioProjects[0].title });
+    fireEvent.click(within(study).getAllByRole("button", { name: /^close$/i })[0]);
+    return new Promise<void>((done) => setTimeout(() => {
+      expect(router.state.location.pathname).toBe("/archive");
+      done();
+    }, 0));
+  });
+
   it("is reached from a Full archive link under the selected work", () => {
     const router = renderAt("/");
     fireEvent.click(screen.getByRole("link", { name: /full archive/i }));

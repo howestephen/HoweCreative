@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
 import { ArrowUpRight, Plus } from "lucide-react";
 
@@ -59,14 +59,14 @@ function Thumbs({ title, images, onOpen }: { title: string; images: ProjectMedia
 
 function Row({ year, title, disciplines, children }: { year: string; title: string; disciplines: string; children: React.ReactNode }) {
   return (
-    <details className="group border-t border-border last:border-b">
-      <summary className="grid cursor-pointer list-none grid-cols-[4.5rem_minmax(0,1fr)_auto] items-baseline gap-x-4 gap-y-1 py-5 sm:grid-cols-[6rem_minmax(0,1fr)_minmax(0,1.2fr)_auto] [&::-webkit-details-marker]:hidden">
+    <details className="group/row border-t border-border last:border-b">
+      <summary className="group/summary grid cursor-pointer list-none grid-cols-[4.5rem_minmax(0,1fr)_auto] items-baseline gap-x-4 gap-y-1 py-5 sm:grid-cols-[6rem_minmax(0,1fr)_minmax(0,1.2fr)_auto] [&::-webkit-details-marker]:hidden">
         <span className={`${eyebrow} text-muted-foreground`}>{year}</span>
-        <h3 className="text-lg leading-snug text-foreground transition-colors group-hover:text-accent sm:text-xl">{title}</h3>
+        <h3 className="text-lg leading-snug text-foreground transition-colors group-hover/summary:text-accent sm:text-xl">{title}</h3>
         <span className="col-start-2 text-sm text-muted-foreground sm:col-start-auto">{disciplines}</span>
         <Plus
           aria-hidden="true"
-          className="col-start-3 row-start-1 h-4 w-4 text-muted-foreground transition-transform group-open:rotate-45 sm:col-start-4"
+          className="col-start-3 row-start-1 h-4 w-4 text-muted-foreground transition-transform group-open/row:rotate-45 sm:col-start-4"
         />
       </summary>
       <div className="grid gap-6 pb-8 sm:pl-[7rem] lg:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)]">{children}</div>
@@ -76,6 +76,12 @@ function Row({ year, title, disciplines, children }: { year: string; title: stri
 
 export function Archive() {
   const [viewer, setViewer] = useState<Viewer>(null);
+  // The thumbnail that opened the viewer, so focus returns to it on close.
+  const opener = useRef<HTMLElement | null>(null);
+  const open = useCallback((title: string, images: ProjectMediaItem[], index: number) => {
+    opener.current = document.activeElement as HTMLElement | null;
+    setViewer({ title, images, index });
+  }, []);
 
   useEffect(() => {
     const previous = document.title;
@@ -86,17 +92,24 @@ export function Archive() {
     };
   }, []);
 
-  // The lightbox covers the page, so hold the page still behind it.
+  // The viewer covers the page, so hold the page still behind it. iOS Safari
+  // ignores overflow on body alone, so the root element is locked as well.
+  const isOpen = viewer !== null;
   useEffect(() => {
-    if (!viewer) return;
-    const previous = document.body.style.overflow;
+    if (!isOpen) return;
+    const root = document.documentElement;
+    const previous = [root.style.overflow, document.body.style.overflow];
+    root.style.overflow = "hidden";
     document.body.style.overflow = "hidden";
     return () => {
-      document.body.style.overflow = previous;
+      [root.style.overflow, document.body.style.overflow] = previous;
     };
-  }, [viewer]);
+  }, [isOpen]);
 
-  const close = useCallback(() => setViewer(null), []);
+  const close = useCallback(() => {
+    setViewer(null);
+    opener.current?.focus();
+  }, []);
   const step = useCallback(
     (delta: number) =>
       setViewer((v) => (v ? { ...v, index: (v.index + delta + v.images.length) % v.images.length } : v)),
@@ -138,6 +151,8 @@ export function Archive() {
                   </p>
                   <Link
                     to={`/?study=${project.slug}`}
+                    // Marked as opened from a list, so closing the study returns here.
+                    state={{ studyFromGrid: true }}
                     className={`${eyebrow} inline-flex items-center gap-1.5 text-foreground transition-colors hover:text-accent`}
                   >
                     Read the full case study <ArrowUpRight className="h-3.5 w-3.5" />
@@ -147,7 +162,7 @@ export function Archive() {
                   <Thumbs
                     title={project.title}
                     images={stills}
-                    onOpen={(index) => setViewer({ title: project.title, images: stills, index })}
+                    onOpen={(index) => open(project.title, stills, index)}
                   />
                 )}
               </Row>
@@ -211,7 +226,7 @@ export function Archive() {
                     <Thumbs
                       title={entry.title}
                       images={images}
-                      onOpen={(index) => setViewer({ title: entry.title, images, index })}
+                      onOpen={(index) => open(entry.title, images, index)}
                     />
                   )}
                 </div>
