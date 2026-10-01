@@ -428,8 +428,8 @@ export function Lightbox({
       // The study overlay stays mounted underneath; keep focus up here.
       trapTab(e, containerRef.current);
     };
-    // The lightbox only opens from inside the study overlay, which already
-    // holds the page scroll lock, so it must not release it on close.
+    // Scroll locking belongs to whatever opened the lightbox (the study
+    // overlay or the archive page), so the lightbox never touches it.
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [onClose, onStep]);
