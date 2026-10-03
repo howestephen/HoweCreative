@@ -1,6 +1,31 @@
-import { describe, expect, it, vi } from "vitest";
+import { createElement, forwardRef, useImperativeHandle } from "react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { afterEach, describe, expect, it, vi } from "vitest";
 
-import { createContactRequest, resolvePublicAccessKey } from "./contact-request";
+import { ContactFoot } from "./ContactFoot";
+import {
+  WEB3FORMS_HCAPTCHA_SITEKEY,
+  createContactRequest,
+  resolvePublicAccessKey,
+} from "./contact-request";
+
+// Stand-in for the hCaptcha widget: a button that "solves" it.
+const captchaReset = vi.fn();
+const captchaProps = vi.fn();
+vi.mock("@hcaptcha/react-hcaptcha", () => ({
+  default: forwardRef(function FakeHCaptcha(
+    props: { sitekey: string; onVerify: (token: string) => void },
+    ref,
+  ) {
+    captchaProps(props);
+    useImperativeHandle(ref, () => ({ resetCaptcha: captchaReset }));
+    return createElement(
+      "button",
+      { type: "button", onClick: () => props.onVerify("solved-token") },
+      "Solve captcha",
+    );
+  }),
+}));
 
 const payload = {
   name: "Ada Lovelace",
@@ -8,6 +33,7 @@ const payload = {
   projectType: "Design systems",
   brief: "Please send details.",
   website: "",
+  captchaToken: "captcha-token",
 };
 
 describe("createContactRequest", () => {
@@ -24,6 +50,7 @@ describe("createContactRequest", () => {
     });
     expect(body.subject).toContain(payload.projectType);
     expect(body.message).toContain(payload.brief);
+    expect(body["h-captcha-response"]).toBe("captcha-token");
   });
 
   it("preserves the honeypot signal in direct submissions", () => {
@@ -81,5 +108,64 @@ describe("resolvePublicAccessKey", () => {
     const fetchKey = okFetch({ accessKey: "from-main" });
     await expect(resolvePublicAccessKey("server", "", fetchKey)).resolves.toBe("");
     expect(fetchKey).not.toHaveBeenCalled();
+  });
+});
+
+describe("ContactFoot captcha", () => {
+  afterEach(() => {
+    vi.unstubAllEnvs();
+    vi.unstubAllGlobals();
+    captchaReset.mockClear();
+    captchaProps.mockClear();
+  });
+
+  function fillForm() {
+    fireEvent.change(screen.getByRole("textbox", { name: "Name" }), { target: { value: "Ada" } });
+    fireEvent.change(screen.getByRole("textbox", { name: "Email" }), {
+      target: { value: "ada@example.com" },
+    });
+    fireEvent.change(screen.getByRole("textbox", { name: "Message" }), {
+      target: { value: "Hello" },
+    });
+  }
+
+  it("uses the Web3Forms free-plan site key", () => {
+    render(createElement(ContactFoot));
+    expect(captchaProps).toHaveBeenCalledWith(
+      expect.objectContaining({ sitekey: WEB3FORMS_HCAPTCHA_SITEKEY, reCaptchaCompat: false }),
+    );
+    expect(WEB3FORMS_HCAPTCHA_SITEKEY).toBe("50b2fe65-b00b-4b9e-ad62-3ba471098be2");
+  });
+
+  it("does not send until the captcha is solved", () => {
+    const fetchSpy = vi.fn();
+    vi.stubGlobal("fetch", fetchSpy);
+    render(createElement(ContactFoot));
+    fillForm();
+    fireEvent.click(screen.getByRole("button", { name: "Send message" }));
+
+    expect(screen.getByText("Please complete the captcha.")).toBeInTheDocument();
+    expect(fetchSpy).not.toHaveBeenCalled();
+  });
+
+  it("sends the solved token and resets the widget after a failed send", async () => {
+    vi.stubEnv("VITE_EMAIL_ACCESS_KEY", "public-form-key");
+    const fetchSpy = vi.fn(async () => ({ json: async () => ({ success: false, message: "Rejected" }) }));
+    vi.stubGlobal("fetch", fetchSpy);
+    render(createElement(ContactFoot));
+    fillForm();
+    fireEvent.click(screen.getByRole("button", { name: "Solve captcha" }));
+    fireEvent.click(screen.getByRole("button", { name: "Send message" }));
+
+    await waitFor(() => expect(fetchSpy).toHaveBeenCalledTimes(1));
+    const [, init] = fetchSpy.mock.calls[0] as unknown as [string, RequestInit];
+    expect(JSON.parse(String(init.body))["h-captcha-response"]).toBe("solved-token");
+    expect(await screen.findByText("Rejected")).toBeInTheDocument();
+    expect(captchaReset).toHaveBeenCalled();
+
+    // The used token is cleared, so a second send needs a fresh solve.
+    fireEvent.click(screen.getByRole("button", { name: "Send message" }));
+    expect(screen.getByText("Please complete the captcha.")).toBeInTheDocument();
+    expect(fetchSpy).toHaveBeenCalledTimes(1);
   });
 });

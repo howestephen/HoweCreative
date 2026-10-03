@@ -62,6 +62,7 @@ behaviour, and conversion paths are approved.
 - ✓ Audit fixes, 3 October 2026: `/work/<slug>` links from the CVs redirect
   to the study, crawlers are kept off `/particle-redesign` by `robots.txt`, and
   the two white logotypes are replaced by grounded and black-text versions.
+  The contact form shows an hCaptcha widget and sends its token to Web3Forms.
 - ✓ Retina image pass, 30 September 2026: cards, study images and gallery
   thumbnails are served through `ResponsiveImage` from generated WebP sizes,
   so every one meets retina resolution; 26 originals shrunk by the 2400px cap
