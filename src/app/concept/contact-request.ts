@@ -4,7 +4,13 @@ export type ContactPayload = {
   projectType: string;
   brief: string;
   website: string;
+  captchaToken: string;
 };
+
+// Web3Forms' shared hCaptcha site key for free-plan forms
+// (docs.web3forms.com, Spam protection > hCaptcha). Web3Forms checks the
+// token once hCaptcha is switched on for the form in its dashboard.
+export const WEB3FORMS_HCAPTCHA_SITEKEY = "50b2fe65-b00b-4b9e-ad62-3ba471098be2";
 
 export type ContactTransport = "client" | "server";
 
@@ -13,7 +19,7 @@ export function createContactRequest(
   publicAccessKey: string | undefined,
   payload: ContactPayload,
 ): { url: string; init: RequestInit } {
-  const { name, email, projectType, brief, website } = payload;
+  const { name, email, projectType, brief, website, captchaToken } = payload;
 
   if (transport === "client") {
     if (!publicAccessKey) {
@@ -32,6 +38,7 @@ export function createContactRequest(
           subject: `Portfolio enquiry from ${name}${projectType ? ` - ${projectType}` : ""}`,
           message: `Role or project: ${projectType || "-"}\n\n${brief}`,
           botcheck: website || undefined,
+          "h-captcha-response": captchaToken,
         }),
       },
     };
