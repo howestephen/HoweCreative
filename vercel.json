@@ -8,6 +8,11 @@
       "source": "/work/:slug",
       "destination": "/?study=:slug",
       "permanent": false
+    },
+    {
+      "source": "/work/:slug/",
+      "destination": "/?study=:slug",
+      "permanent": false
     }
   ],
   "rewrites": [
