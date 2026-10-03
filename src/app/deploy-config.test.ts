@@ -18,8 +18,10 @@ const projects = (siteContent as unknown as { caseStudies: { projects: { slug: s
 
 describe("deploy config", () => {
   it("forwards /work/<slug> links to the study on the home page", () => {
-    const redirect = vercel.redirects?.find((r) => r.source === "/work/:slug");
-    expect(redirect).toEqual({ source: "/work/:slug", destination: "/?study=:slug", permanent: false });
+    for (const source of ["/work/:slug", "/work/:slug/"]) {
+      const redirect = vercel.redirects?.find((r) => r.source === source);
+      expect(redirect, source).toEqual({ source, destination: "/?study=:slug", permanent: false });
+    }
   });
 
   it("has a study for every slug the CVs link to", () => {
