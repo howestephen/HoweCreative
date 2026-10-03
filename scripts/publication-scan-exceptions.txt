@@ -2,3 +2,5 @@
 # Entries take effect once they are on the remote default branch.
 contact-email	src/app/pages/CV.tsx	932bbe99f92398ab896f70188cd06ca5eb68d0e71976d63dd42f1d5d32d08e87	CV page is the approved public email exception
 contact-email	src/app/data/cv.json	932bbe99f92398ab896f70188cd06ca5eb68d0e71976d63dd42f1d5d32d08e87	Redesign CV data is the approved public email exception
+assigned-secret	src/app/concept/contact-request.ts	ec2a253b0c35206d9929a3c94cca3a9d5d2504987c51c00e96e7e9883e2eef5c	Web3Forms' public hCaptcha site key for free-plan forms, published in their docs
+assigned-secret	src/app/concept/ContactFoot.test.ts	d3826cf7e570193308f04457a3ee1e4ae22c86c08cf2614c6868ef77cc00f383	Constant name WEB3FORMS_HCAPTCHA_SITEKEY, not a value
