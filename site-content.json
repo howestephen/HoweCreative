@@ -563,7 +563,7 @@
         "media": [
           {
             "type": "image",
-            "src": "/case-studies/uncx-rebrand/uncx-logotype.svg",
+            "src": "/case-studies/uncx-rebrand/uncx-logotype.webp",
             "alt": "UNCX Network logotype"
           },
           {
@@ -1073,8 +1073,8 @@
           },
           {
             "type": "image",
-            "src": "/case-studies/uncx-academy/logotype.webp",
-            "alt": "Academy logotype"
+            "src": "/case-studies/uncx-academy/logotype-black.webp",
+            "alt": "UNCX Academy logotype"
           },
           {
             "type": "video",
