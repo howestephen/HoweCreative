@@ -21,7 +21,7 @@ Stephen Howe’s production portfolio for Creative Technologist, AI Designer, an
 - `ContactFoot` — contact form and conversion links
 - `/cv` — standalone printable CV, loaded as a separate route chunk
 
-The earlier dossier/WebGL implementation remains under `src/app/components/` for reference, but `src/app/pages/Home.tsx` composes the active editorial design from `src/app/concept/`.
+`src/app/pages/Home.tsx` composes the editorial design from `src/app/concept/`.
 
 ## Setup
 
