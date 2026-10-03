@@ -11,18 +11,23 @@ Sites: `main` is production at https://howecreative.co.uk. The redesign branch `
 - 3 October 2026, main: decision 2 taken as option (a). `vercel.json` redirects `/work/:slug` to `/?study=:slug` (temporary), so the CV links already sent out reach the study. WP-1 is done apart from the build check on absolute links.
 - 3 October 2026, main: decision 4 taken as dark-ground and black-text variants. The UNCX Network logotype is grounded on the cards' dark colour (`uncx-rebrand/uncx-logotype.webp`) and the Academy gallery uses the black-text logotype the redesign already had. The white originals are archived. C-1 is fixed.
 - 3 October 2026, main: A-9 is accepted for now. `public/robots.txt` disallows `/particle-redesign`, which also stops `/robots.txt` returning the app shell. B-1's sitemap half remains in WP-7.
+- 3 October 2026: decision 1 taken as option (a), a captcha on the contact form. WP-9 goes ahead on that basis.
+- 3 October 2026: decision 3 taken as no change. Stephen keeps the current home page wording; WP-3 is closed and D-1 is won't-fix.
+- 3 October 2026: decision 5 taken as no captions. C-6 is won't-fix; WP-13 is reduced to removing main's empty captions track.
+- 3 October 2026: decision 6 done. The untracked private files are now under `docs/private/` (git-ignored) on Stephen's Mac. D-2 is fixed.
+- 3 October 2026: decision 7 taken as retire now. A-8 goes ahead in WP-14.
 
 ## Decisions for Stephen
 
 Packages that depend on one of these are marked; everything else can start now.
 
-1. **Contact form abuse control (WP-9; findings B-4, B-8).** (a) Keep the current client transport and turn on a captcha (hCaptcha or Cloudflare Turnstile) in the Web3Forms dashboard, if the current plan allows it, plus the widget in the form. (b) Move to the server transport: the key stays server-side, the API verifies a Turnstile token, and a durable rate limit uses Vercel KV or Upstash (a new service that may cost money and needs your spend approval). Lean: (a), smallest change and no new service. Exploitable detail is in docs/private/2026-10-03-security-notes.md.
-2. **Where case-study links point until the redesign is promoted (WP-1, WP-6; findings A-10, A-9, A-3, B-7).** The three CV PDFs, including copies already sent to employers, link to `https://howecreative.co.uk/work/<slug>`, which production does not serve. (a) Add a temporary redirect on main from `/work/:slug` to `/?study=:slug`: every PDF already in circulation starts working with no regeneration, and `/work/<slug>` becomes native at cut-over. (b) Regenerate the PDFs and the redesign CV page to link to `/particle-redesign/work/<slug>` (the redesign, which is `noindex` and has A-9 and A-3 open). (c) Regenerate them to link to main's `/?study=<slug>`. Lean: (a). Separately: how and when the redesign replaces main (moving the domain to the particle project, or merging into main's project). Agents make no DNS or domain changes.
-3. **Metric wording on main's home page (WP-3; D-1).** "500+ videos across roles", "10+ apps" and "Two full company rebrands, shipped end to end" name no source. Proposed replacements reuse the redesign CV's attributed wording; you confirm the exact text, and whether "shipped end to end" is accurate for the 2024 rebrand that an outside studio carried out under your direction.
-4. **White logotypes on main's cream lightbox (WP-2; C-1).** (a) A dark stage behind images only in the lightbox and thumbnails (main keeps its cream page). (b) Dark-ground variants of the two logotype files. Lean: (a).
-5. **Video captions (WP-13; C-6).** Which films have speech that needs captions or a transcript, and who writes them. Removing main's empty captions track can go ahead regardless. Local, on-device transcription (Whisper) is possible if you approve it.
-6. **Private files in the redesign working tree (WP-14; D-2).** A CV PDF with your personal email address and the `job-applications/` folder are untracked and not ignored in a public repository. Move them into `docs/private/` or add ignore rules; agents will not touch them without your go-ahead. If that PDF is the CV you send out, it needs regenerating without dashes.
-7. **Legacy components on main (WP-14; A-8).** Retire the unmounted legacy components and their three test files now, or at ROADMAP step 6 as planned.
+1. **Decided: (a).** **Contact form abuse control (WP-9; findings B-4, B-8).** (a) Keep the current client transport and turn on a captcha (hCaptcha or Cloudflare Turnstile) in the Web3Forms dashboard, if the current plan allows it, plus the widget in the form. (b) Move to the server transport: the key stays server-side, the API verifies a Turnstile token, and a durable rate limit uses Vercel KV or Upstash (a new service that may cost money and needs your spend approval). Lean: (a), smallest change and no new service. Exploitable detail is in docs/private/2026-10-03-security-notes.md.
+2. **Decided: (a).** **Where case-study links point until the redesign is promoted (WP-1, WP-6; findings A-10, A-9, A-3, B-7).** The three CV PDFs, including copies already sent to employers, link to `https://howecreative.co.uk/work/<slug>`, which production does not serve. (a) Add a temporary redirect on main from `/work/:slug` to `/?study=:slug`: every PDF already in circulation starts working with no regeneration, and `/work/<slug>` becomes native at cut-over. (b) Regenerate the PDFs and the redesign CV page to link to `/particle-redesign/work/<slug>` (the redesign, which is `noindex` and has A-9 and A-3 open). (c) Regenerate them to link to main's `/?study=<slug>`. Lean: (a). Separately: how and when the redesign replaces main (moving the domain to the particle project, or merging into main's project). Agents make no DNS or domain changes.
+3. **Decided: no change.** **Metric wording on main's home page (WP-3; D-1).** Stephen keeps the current wording.
+4. **Decided: (b).** **White logotypes on main's cream lightbox (WP-2; C-1).** (a) A dark stage behind images only in the lightbox and thumbnails (main keeps its cream page). (b) Dark-ground variants of the two logotype files. Lean: (a).
+5. **Decided: no captions.** **Video captions (WP-13; C-6).** No film needs captions. Removing main's empty captions track can still go ahead.
+6. **Done.** **Private files in the redesign working tree (WP-14; D-2).** Moved under `docs/private/` (git-ignored).
+7. **Decided: retire now.** **Legacy components on main (WP-14; A-8).** Retire the unmounted legacy components and their three test files.
 8. **HSTS scope (WP-10; B-3).** `includeSubDomains; preload` commits every subdomain of howecreative.co.uk to HTTPS and preload is slow to undo. Confirm before it is added; the other headers do not need a decision.
 9. **Every push to main** in WP-1, WP-2, WP-3, WP-4, WP-6, WP-7, WP-10, WP-11 and the main halves of WP-8, WP-9, WP-13 and WP-14 needs your permission, per push.
 
@@ -47,20 +52,20 @@ Impact on a hiring manager on a phone first, then SEO and sharing, then hardenin
 
 | Package | Branch | Findings | Theme | Needs decision |
 | --- | --- | --- | --- | --- |
-| WP-1 | main | A-10 | Phone: CV links that work | 2 |
-| WP-2 | main | C-1, A-6, A-1, C-5 | Phone: study viewer | 4 |
-| WP-3 | main | D-1 | Phone: home page claims | 3 |
+| WP-1 | main | A-10 | Phone: CV links that work | settled |
+| WP-2 | main | C-1, A-6, A-1, C-5 | Phone: study viewer | settled |
+| WP-3 | main | D-1 | Phone: home page claims | closed, no change |
 | WP-4 | main | C-4 (main), C-7, C-11 | Phone: tap targets and small text | none |
 | WP-5 | redesign | A-2, C-4 (redesign), C-12 | Phone: redesign navigation and weight | none |
-| WP-6 | main and redesign | A-9, A-3, A-11 + A-14, A-12, B-7 | SEO and sharing: redesign URLs and the proxy | 2 |
+| WP-6 | main and redesign | A-9, A-3, A-11 + A-14, A-12, B-7 | SEO and sharing: redesign URLs and the proxy | settled |
 | WP-7 | main | B-1, B-2, B-10 | SEO and sharing: metadata, robots, sitemap, icons | none |
 | WP-8 | main and redesign | B-6 | Hardening: self-hosted fonts | none |
-| WP-9 | main and redesign | B-4, B-8, A-5, A-7 | Hardening: contact form | 1 |
+| WP-9 | main and redesign | B-4, B-8, A-5, A-7 | Hardening: contact form | settled |
 | WP-10 | main and redesign | B-3, B-5 | Hardening: security and cache headers | 8 |
 | WP-11 | main | C-2 (main), C-3, C-8, C-9 (main), C-10 | Accessibility: keyboard and screen reader | none |
 | WP-12 | redesign | C-2 (redesign), C-9 (redesign), A-13, A-4 | Accessibility and audio | none |
-| WP-13 | main and redesign | C-6 | Accessibility: video captions | 5 |
-| WP-14 | main and redesign | D-3, B-9, B-11, D-2, A-8 | Polish: content and repo hygiene | 6, 7 |
+| WP-13 | main | C-6 | Remove main's empty captions track | settled |
+| WP-14 | main and redesign | D-3, B-9, B-11, D-2, A-8 | Polish: content and repo hygiene | settled |
 
 ---
 
@@ -101,6 +106,8 @@ Impact on a hiring manager on a phone first, then SEO and sharing, then hardenin
 - Depends on: decision 4 (default (a) can proceed). WP-4 and WP-11 edit the same files; do WP-2 first.
 
 ## WP-3: Home page claims name their source (main)
+
+Closed on 3 October 2026: Stephen keeps the current wording (decision 3). Kept for the record; do not action.
 
 - Branch: `main` (push needs permission).
 - Findings: D-1 (P2). `src/app/concept/Masthead.tsx:18` shows "500+ videos across roles" in the stat row under the hero; `src/app/concept/Capabilities.tsx:7` "Two full company rebrands, shipped end to end", `:9` "Product UI from wireframe to production across 10+ apps", `:18` "500+ videos across launches, tutorials, games, and education". The project rule: every stat names the job or project it came from. The 500+ figure adds counts from several jobs.
@@ -226,6 +233,8 @@ Impact on a hiring manager on a phone first, then SEO and sharing, then hardenin
 
 ## WP-13: Video captions (main and redesign)
 
+Reduced on 3 October 2026: no film needs captions (decision 5). The only remaining step is removing main's empty `<track kind="captions" />`.
+
 - Branches: both (main push needs permission).
 - Findings: C-6 (P3): no video on either site has captions; main ships an empty `<track kind="captions" />` on every video (`WorkIndex.tsx:208, 256`); redesign players in `ProjectGallery.tsx:198-205`, `Project.tsx:168-175`, `QuiverCaseStudy.tsx:25-33, 110-117`.
 - Files: those components, `site-content.json` (a `captions` path per video), `.vtt` files placed beside each video in its `public/case-studies/<slug>/` folder.
@@ -237,9 +246,9 @@ Impact on a hiring manager on a phone first, then SEO and sharing, then hardenin
 ## WP-14: Content and repository hygiene (main and redesign)
 
 - Branches: both (main push needs permission).
-- Findings: D-3 (P3): two different images share the alt "Website homepage design (section)" (`/case-studies/uncx-rebrand/website/homepage-section-2.webp` and `-3.webp`), and five alts only restate the filename (`brand-launch-video.mp4`, `database-schema.webp`, `token-minter-prototyping.webp`, `stealth-launch-concepts.webp`, `nft-minting-wireframes.webp`; plus `uncx-academy/about-page.webp` on main); the alt is also the visible caption. B-9 (P3): `site-content.json:16` `repoUrl` points at `howestephen/Figmaportfolio2026`, which redirects to `HoweCreative`. B-11 (P3): four `.DS_Store` files in the redesign's `public/` (`public/`, `public/case-studies/`, `public/case-studies/uncx-video-system/`, `public/models/hero-wire/`) are copied into every local `dist/`; `public/models/hero-wire/` is otherwise empty and main's `/models/:path*` rewrite has no user. D-2 (P3): `docs/Stephen_Howe_CV_2026.pdf` (personal email address) and `job-applications/` are untracked and not ignored in the redesign working tree of a public repository. A-8 (P3): three test files on main exercise components no route mounts (`LoadingScreen.test.tsx`, `MediaGallery.test.tsx`, `OperatorProfilePortrait.test.tsx`).
+- Findings: D-3 (P3): two different images share the alt "Website homepage design (section)" (`/case-studies/uncx-rebrand/website/homepage-section-2.webp` and `-3.webp`), and five alts only restate the filename (`brand-launch-video.mp4`, `database-schema.webp`, `token-minter-prototyping.webp`, `stealth-launch-concepts.webp`, `nft-minting-wireframes.webp`; plus `uncx-academy/about-page.webp` on main); the alt is also the visible caption. B-9 (P3): `site-content.json:16` `repoUrl` points at `howestephen/Figmaportfolio2026`, which redirects to `HoweCreative`. B-11 (P3): four `.DS_Store` files in the redesign's `public/` (`public/`, `public/case-studies/`, `public/case-studies/uncx-video-system/`, `public/models/hero-wire/`) are copied into every local `dist/`; `public/models/hero-wire/` is otherwise empty and main's `/models/:path*` rewrite has no user. D-2 (P3, fixed 3 October): private files were untracked and not ignored in the redesign working tree; they now live under `docs/private/`. A-8 (P3): three test files on main exercise components no route mounts (`LoadingScreen.test.tsx`, `MediaGallery.test.tsx`, `OperatorProfilePortrait.test.tsx`).
 - Files: `site-content.json` (both), `.gitignore` (redesign, only with Stephen's go-ahead), main `vercel.json`, the four `.DS_Store` files, main's three legacy tests and components (decision 7).
-- Steps: write distinct, descriptive alts; set `repoUrl` to `https://github.com/howestephen/HoweCreative`; remove the four `.DS_Store` files (Finder metadata, not media; list them in the commit message) and the empty `public/models/hero-wire/`, and drop main's `/models/:path*` rewrite after confirming nothing references `/models/`; for D-2, wait for decision 6, then move or ignore as Stephen chooses, never delete; for A-8, follow decision 7.
+- Steps: write distinct, descriptive alts; set `repoUrl` to `https://github.com/howestephen/HoweCreative`; remove the four `.DS_Store` files (Finder metadata, not media; list them in the commit message) and the empty `public/models/hero-wire/`, and drop main's `/models/:path*` rewrite after confirming nothing references `/models/`; for A-8, follow decision 7.
 - Tests (fail today): a content test that no two different `src` values share an alt (extend the redesign's `src/app/data/portfolio-content.test.ts`; add one on main); a test that `repoUrl` does not contain `Figmaportfolio2026`.
-- Verify: `curl -s -o /dev/null -w "%{http_code} %{redirect_url}" https://github.com/howestephen/HoweCreative` prints `200` with no redirect; `find public -name .DS_Store` is empty; `git check-ignore docs/Stephen_Howe_CV_2026.pdf job-applications/` prints both paths (or both live under `docs/private/`).
-- Depends on: decisions 6 and 7 for D-2 and A-8 only.
+- Verify: `curl -s -o /dev/null -w "%{http_code} %{redirect_url}" https://github.com/howestephen/HoweCreative` prints `200` with no redirect; `find public -name .DS_Store` is empty.
+- Depends on: nothing (decisions 6 and 7 are settled).
