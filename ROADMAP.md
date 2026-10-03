@@ -54,8 +54,9 @@ behaviour, and conversion paths are approved.
   findings (3 P1, 12 P2, 24 P3) in
   [the audit findings](docs/reviews/2026-10-03-full-audit.md), packaged as
   WP-1 to WP-14 in [the audit work plan](docs/plans/2026-10-03-audit-work-plan.md).
-  Nine decisions for Stephen are listed at the top of the plan; packages that
-  need none can start now.
+  Decisions 1 to 7 were settled on 3 October (captcha on the contact form,
+  home page wording kept, no captions, legacy components retired); only the
+  HSTS scope (decision 8) is open.
 - ✓ Audit fixes, 3 October 2026: `/work/<slug>` links from the CVs redirect
   to the study, crawlers are kept off `/particle-redesign` by `robots.txt`, and
   the two white logotypes are replaced by grounded and black-text versions.
