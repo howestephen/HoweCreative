@@ -1,5 +1,20 @@
 # ROADMAP
 
+## Full audit fixes - 3 October 2026
+
+An audit of both sites found 39 issues. The findings and the work plan live on
+`main`, at `docs/reviews/2026-10-03-full-audit.md` and
+`docs/plans/2026-10-03-audit-work-plan.md`. Read them with
+`git show origin/main:<path>`.
+
+- [ ] WP-5: redesign scroll restoration, tap targets and portrait weight (A-2,
+  C-4, C-12).
+- [ ] WP-6 (redesign half): prefixed prerender links, a not-found page and
+  namespaced assets (A-3, A-11, A-12). The A-9 fix is in main's `vercel.json`.
+- [ ] WP-12: lightbox focus return, landmarks and headings, and suspending
+  audio when sound is off (C-2, C-9, A-13, A-4).
+- [ ] Redesign halves of WP-8, WP-9, WP-10, WP-13 and WP-14.
+
 ## Retina image pass - 30 September 2026
 
 - [x] Serve every case-study and Earlier Work image through `ResponsiveImage`
