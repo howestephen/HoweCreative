@@ -13,7 +13,10 @@ An audit of both sites found 39 issues. The findings and the work plan live on
   namespaced assets (A-3, A-11, A-12). The A-9 fix is in main's `vercel.json`.
 - [ ] WP-12: lightbox focus return, landmarks and headings, and suspending
   audio when sound is off (C-2, C-9, A-13, A-4).
-- [ ] Redesign halves of WP-8, WP-9, WP-10, WP-13 and WP-14.
+- [x] Contact form captcha (decision 1): the hCaptcha widget and token, as on
+  `main`.
+- [ ] Redesign halves of WP-8, WP-9 (beyond the captcha), WP-10 and WP-14.
+  WP-13 is dropped: no film needs captions.
 
 ## Retina image pass - 30 September 2026
 

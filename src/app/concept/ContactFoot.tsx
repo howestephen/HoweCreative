@@ -1,9 +1,11 @@
-import { useState, type FormEvent } from "react";
+import { useRef, useState, type FormEvent } from "react";
+import HCaptcha from "@hcaptcha/react-hcaptcha";
 import { withBase } from "../lib/base-path";
 import { ArrowUpRight } from "lucide-react";
 
 import { siteProfile } from "../data/portfolio";
 import {
+  WEB3FORMS_HCAPTCHA_SITEKEY,
   createContactRequest,
   resolvePublicAccessKey,
   type ContactTransport,
@@ -41,9 +43,16 @@ export function ContactFoot({ variant = "editorial", heading = true }: ContactFo
   const [website, setWebsite] = useState(""); // honeypot - must stay empty
   const [status, setStatus] = useState<Status>("idle");
   const [errorMsg, setErrorMsg] = useState("");
+  const [captchaToken, setCaptchaToken] = useState("");
+  const captchaRef = useRef<HCaptcha>(null);
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
+    if (!captchaToken) {
+      setErrorMsg("Please complete the captcha.");
+      setStatus("error");
+      return;
+    }
     setStatus("sending");
     setErrorMsg("");
 
@@ -59,7 +68,11 @@ export function ContactFoot({ variant = "editorial", heading = true }: ContactFo
         projectType,
         brief,
         website,
+        captchaToken,
       });
+      // A token is single-use, so every attempt needs a fresh solve.
+      captchaRef.current?.resetCaptcha();
+      setCaptchaToken("");
       const res = await fetch(request.url, request.init);
 
       const data = await res.json();
@@ -205,6 +218,18 @@ export function ContactFoot({ variant = "editorial", heading = true }: ContactFo
                   className="hidden"
                   aria-hidden="true"
                 />
+
+                <div className="md:col-span-2">
+                  <HCaptcha
+                    ref={captchaRef}
+                    sitekey={WEB3FORMS_HCAPTCHA_SITEKEY}
+                    reCaptchaCompat={false}
+                    theme={spatial ? "dark" : "light"}
+                    onVerify={setCaptchaToken}
+                    onExpire={() => setCaptchaToken("")}
+                    onError={() => setCaptchaToken("")}
+                  />
+                </div>
 
                 <div className="flex flex-col gap-3 md:col-span-2 md:flex-row md:items-center md:justify-between">
                   <span className={smallClasses}>
