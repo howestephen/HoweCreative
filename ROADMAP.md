@@ -44,8 +44,9 @@ behaviour, and conversion paths are approved.
    requires an SSO-authenticated visit to a preview, or production after merge).
 5. ✓ Bundle composition reviewed: 162 kB gzip main chunk, icons split, CV in
    its own lazy chunk, three.js absent from the editorial build.
-6. Remove deprecated components and dependencies only after the replacement
-   design is approved, so rollback remains simple.
+6. ✓ Deprecated components removed, 3 October 2026: 15 unmounted legacy
+   components, three helpers and their three tests. The built JavaScript is
+   unchanged apart from file hashes; the CSS drops only their unused utilities.
 7. Merge the approved branch to `main` and validate the production deployment.
 
 ## Production Maintenance

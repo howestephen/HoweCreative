@@ -15,7 +15,7 @@ Sites: `main` is production at https://howecreative.co.uk. The redesign branch `
 - 3 October 2026: decision 3 taken as no change. Stephen keeps the current home page wording; WP-3 is closed and D-1 is won't-fix.
 - 3 October 2026: decision 5 taken as no captions. C-6 is won't-fix; WP-13 is reduced to removing main's empty captions track.
 - 3 October 2026: decision 6 done. The untracked private files are now under `docs/private/` (git-ignored) on Stephen's Mac. D-2 is fixed.
-- 3 October 2026: decision 7 taken as retire now. A-8 goes ahead in WP-14.
+- 3 October 2026: decision 7 taken as retire now. A-8 is fixed: the 15 unmounted legacy components, `lib/device.ts`, `lib/theme.ts`, `lib/webgl.ts` and their three tests are removed.
 
 ## Decisions for Stephen
 
