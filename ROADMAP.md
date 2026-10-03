@@ -50,6 +50,12 @@ behaviour, and conversion paths are approved.
 
 ## Production Maintenance
 
+- [ ] Fix the findings of the October 2026 full audit of both sites: 39
+  findings (3 P1, 12 P2, 24 P3) in
+  [the audit findings](docs/reviews/2026-10-03-full-audit.md), packaged as
+  WP-1 to WP-14 in [the audit work plan](docs/plans/2026-10-03-audit-work-plan.md).
+  Nine decisions for Stephen are listed at the top of the plan; packages that
+  need none can start now.
 - ✓ Retina image pass, 30 September 2026: cards, study images and gallery
   thumbnails are served through `ResponsiveImage` from generated WebP sizes,
   so every one meets retina resolution; 26 originals shrunk by the 2400px cap
