@@ -9,7 +9,6 @@ Stephen Howe’s production portfolio for Creative Technologist, AI Designer, an
 - React Router 7
 - Motion for interface animation
 - Canvas 2D for the seeded plotter mark
-- Three.js / React Three Fiber retained for the portfolio’s 3D experiments
 - Web3Forms contact delivery
 - Vercel deployment and serverless fallback
 
