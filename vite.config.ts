@@ -33,7 +33,7 @@ export default defineConfig(({ mode }) => {
       rollupOptions: {
         output: {
           manualChunks: {
-            icons: ['react-icons', 'lucide-react'],
+            icons: ['lucide-react'],
           },
         },
       },
