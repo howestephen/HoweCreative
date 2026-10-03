@@ -6,6 +6,12 @@ Sensitive detail (finding B-4) is kept out of this plan, in `docs/private/2026-1
 
 Sites: `main` is production at https://howecreative.co.uk. The redesign branch `codex/creative-technologist-portfolio` is published at https://howecreative.co.uk/particle-redesign through rewrites in main's `vercel.json` to a separate Vercel project ("the particle project").
 
+## Progress
+
+- 3 October 2026, main: decision 2 taken as option (a). `vercel.json` redirects `/work/:slug` to `/?study=:slug` (temporary), so the CV links already sent out reach the study. WP-1 is done apart from the build check on absolute links.
+- 3 October 2026, main: decision 4 taken as dark-ground and black-text variants. The UNCX Network logotype is grounded on the cards' dark colour (`uncx-rebrand/uncx-logotype.webp`) and the Academy gallery uses the black-text logotype the redesign already had. The white originals are archived. C-1 is fixed.
+- 3 October 2026, main: A-9 is accepted for now. `public/robots.txt` disallows `/particle-redesign`, which also stops `/robots.txt` returning the app shell. B-1's sitemap half remains in WP-7.
+
 ## Decisions for Stephen
 
 Packages that depend on one of these are marked; everything else can start now.
