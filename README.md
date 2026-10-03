@@ -71,7 +71,7 @@ Career dates, titles, and metrics repeated across these files must be reviewed t
 api/                         Vercel contact fallback and rate limiting
 public/                      Fonts, social assets, case-study media
 src/app/concept/             Active editorial homepage
-src/app/components/          Shared and legacy portfolio components
+src/app/components/          Shared components (layout, error boundary, images)
 src/app/data/portfolio.ts    Typed content adapter
 src/app/pages/               Home and standalone CV
 src/app/routes.ts            Route composition and code splitting

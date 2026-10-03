@@ -12,7 +12,6 @@
 - Site content is sourced from `site-content.json` through `src/app/data/portfolio.ts`.
 - `/cv` is a standalone, lazy-loaded, printable route.
 - The contact form uses browser-side Web3Forms delivery on the free plan.
-- The legacy dossier/WebGL components remain in the repository but are not mounted by the active home page.
 
 ## Setup
 
