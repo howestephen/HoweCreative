@@ -20,8 +20,6 @@ Current runtime boundaries:
 
 The CV route is lazy-loaded so its long career-history module does not block the
 homepage. The active editorial homepage uses Canvas 2D for its generative mark.
-The previous WebGL/dossier components are retained but not mounted while the
-replacement design is reviewed.
 
 Case-study images are served responsively. `scripts/build-thumbs.mjs`
 writes WebP copies at standard widths into each folder's `thumbs/` and
