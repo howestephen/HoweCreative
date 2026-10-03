@@ -39,6 +39,12 @@ Contact delivery has two explicit modes:
 - `server` (paid): the browser calls `api/contact.ts`, which reads only
   `WEB3FORMS_SERVER_ACCESS_KEY` and requires provider IP allowlisting.
 
+The form carries an hCaptcha widget with Web3Forms' shared free-plan site key
+(`WEB3FORMS_HCAPTCHA_SITEKEY` in `src/app/concept/contact-request.ts`) and will
+not send until it is solved. The token goes to Web3Forms as
+`h-captcha-response`; Web3Forms enforces it once hCaptcha is switched on for the
+form in its dashboard. The server mode does not forward the token yet.
+
 Career facts have multiple audience-specific presentations. Structured project
 facts live in `site-content.json`; homepage career summaries live in
 `Method.tsx`; the complete application document lives in `CV.tsx`. Repeated
