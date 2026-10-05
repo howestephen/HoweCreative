@@ -77,6 +77,29 @@ describe("project gallery navigation", () => {
     expect(document.body.style.overflow).toBe("");
     expect(trigger).toHaveFocus();
   });
+  it("returns focus to the thumbnail after the dialog has closed", () => {
+    // Chromium's dialog close() runs its own focus steps, which drop focus to
+    // the body when the trigger was focused before close() ran.
+    Object.defineProperty(HTMLDialogElement.prototype, "close", {
+      configurable: true,
+      value: vi.fn(function (this: HTMLDialogElement) {
+        this.removeAttribute("open");
+        (document.activeElement as HTMLElement | null)?.blur();
+      }),
+    });
+    render(<ProjectGallery title="Focus" media={[{ type: "image", src: "/one.webp", alt: "One" }]} />);
+    const trigger = screen.getByRole("button", { name: "View larger: One" });
+    fireEvent.click(trigger);
+    fireEvent.click(screen.getByRole("button", { name: "Close" }));
+    expect(trigger).toHaveFocus();
+  });
+
+  it("does not repeat the visible caption in the thumbnail alt", () => {
+    render(<ProjectGallery title="Alt" media={[{ type: "image", src: "/one.webp", alt: "One" }]} />);
+    const trigger = screen.getByRole("button", { name: "View larger: One" });
+    expect(trigger.querySelector("img")).toHaveAttribute("alt", "");
+  });
+
   it("closes when the browser emits the Escape cancel event", () => {
     render(
       <ProjectGallery
