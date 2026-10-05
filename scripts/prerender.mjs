@@ -6,6 +6,16 @@ import { pathToFileURL } from "node:url";
 
 const root = path.resolve(import.meta.dirname, "..");
 const scratch = path.join(root, ".prerender");
+// The static HTML is served at howecreative.co.uk/particle-redesign, so page
+// links (not assets) need the prefix for no-JS visitors and crawlers. The home
+// page and its anchors are slash-less: "/#work" becomes "/particle-redesign#work".
+const prefixPageLinks = (html) =>
+  html.replace(/href="\/([^"]*)"/g, (match, rest) => {
+    const pathPart = rest.split(/[?#]/)[0];
+    if (/\.[a-z0-9]+$/i.test(pathPart)) return match;
+    return `href="/particle-redesign${rest === "" || rest.startsWith("#") ? "" : "/"}${rest}"`;
+  });
+
 const escape = (value) =>
   value
     .replaceAll("&", "&amp;")
@@ -28,11 +38,11 @@ try {
   const template = await readFile(path.join(root, "dist/index.html"), "utf8");
   const assets = await readdir(path.join(root, "dist/assets"));
   for (const page of pages) {
-    const url = `https://howecreative.co.uk/particle-redesign${page.path === "/" ? "/" : page.path}`;
+    const url = `https://howecreative.co.uk/particle-redesign${page.path === "/" ? "" : page.path}`;
     let html = template
       .replace(
         '<div id="root"></div>',
-        () => `<div id="root">${render(page.path)}</div>`,
+        () => `<div id="root">${prefixPageLinks(render(page.path))}</div>`,
       )
       .replace(
         /<title>.*?<\/title>/s,

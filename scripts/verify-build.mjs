@@ -27,7 +27,9 @@ for (const route of routes) {
   );
   assert.equal(
     document.querySelector('link[rel="canonical"]').href,
-    `https://howecreative.co.uk/particle-redesign${route}`,
+    // The home page is slash-less: main forwards "/particle-redesign" and
+    // "/particle-redesign/" alike, but the slash-less form is the canonical.
+    `https://howecreative.co.uk/particle-redesign${route === "/" ? "" : route}`,
   );
   assert.equal(
     document.querySelector('meta[name="robots"]')?.content,
@@ -55,7 +57,18 @@ for (const route of routes) {
     for (const attribute of ["src", "poster", "href"]) {
       const value = node.getAttribute(attribute);
       if (!value?.startsWith("/")) continue;
-      const target = decodeURIComponent(value.split(/[?#]/)[0]);
+      let target = decodeURIComponent(value.split(/[?#]/)[0]);
+      // Page links (no file extension) must carry the public prefix, or a
+      // no-JS visitor or crawler on howecreative.co.uk lands on the main site.
+      const isPageLink =
+        node.tagName === "A" && !/\.[a-z0-9]+$/i.test(target);
+      if (isPageLink) {
+        assert.ok(
+          target.startsWith("/particle-redesign"),
+          `${route}: page link ${value} lacks the /particle-redesign prefix`,
+        );
+        target = target.slice("/particle-redesign".length) || "/";
+      }
       assert.ok(
         existsSync(path.join(root, "dist", target)) ||
           existsSync(path.join(root, "dist", target, "index.html")),
