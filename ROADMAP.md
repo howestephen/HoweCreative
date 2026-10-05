@@ -71,6 +71,11 @@ behaviour, and conversion paths are approved.
   and the open-to-roles dot stops pulsing under reduced motion.
 - ✓ Audit fixes, 5 October 2026 (WP-13): the empty captions tracks are
   removed from main's study videos; no film has captions.
+- ✓ Audit fixes, 5 October 2026 (WP-11): closing the image gallery returns focus
+  to its thumbnail, contact success and error are announced, form fields keep a
+  focus outline, the study overlay no longer adds a second banner, gallery
+  scrollers are focusable and labelled, the CV controls sit in a nav landmark,
+  Escape works from a video's native controls, and a skip link starts the page.
 - ✓ Retina image pass, 30 September 2026: cards, study images and gallery
   thumbnails are served through `ResponsiveImage` from generated WebP sizes,
   so every one meets retina resolution; 26 originals shrunk by the 2400px cap

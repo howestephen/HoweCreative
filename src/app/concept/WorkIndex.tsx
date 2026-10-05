@@ -142,6 +142,9 @@ function ScrollStrip({
       </div>
       <div
         ref={scrollerRef}
+        role="region"
+        tabIndex={0}
+        aria-label={label}
         className="gallery-scroll -mx-1 snap-x snap-mandatory overflow-x-auto px-1 pb-2"
       >
         {children}
@@ -673,6 +676,7 @@ function StudyOverlay({
   }, [project.slug]);
 
   useEffect(() => {
+    const panel = panelRef.current;
     const onKey = (e: KeyboardEvent) => {
       // The lightbox sits above the overlay and handles its own keys.
       if (lightboxOpen) return;
@@ -683,8 +687,22 @@ function StudyOverlay({
       // Keep keyboard focus inside the dialog.
       trapTab(e, panelRef.current);
     };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
+    // Chromium's native video controls stop keydown before it bubbles to the
+    // window, so Escape is also heard on the panel in the capture phase. The
+    // window listener skips Escape from inside the panel so it fires once.
+    const onPanelCapture = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && !lightboxOpen) onClose();
+    };
+    const onWindow = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && e.target instanceof Node && panel?.contains(e.target)) return;
+      onKey(e);
+    };
+    panel?.addEventListener("keydown", onPanelCapture, true);
+    window.addEventListener("keydown", onWindow);
+    return () => {
+      panel?.removeEventListener("keydown", onPanelCapture, true);
+      window.removeEventListener("keydown", onWindow);
+    };
   }, [lightboxOpen, onClose]);
 
   // Portalled to <body> for the same reason as the lightbox: inside `main`
@@ -713,7 +731,7 @@ function StudyOverlay({
           transition={{ duration: 0.28, ease: [0.25, 0.8, 0.3, 1] }}
           className="relative min-h-screen w-full max-w-5xl border-border bg-background shadow-2xl sm:min-h-0 sm:border"
         >
-          <header className="sticky top-0 z-10 flex items-start justify-between gap-4 border-b border-border bg-background px-5 py-4 sm:px-8">
+          <div className="sticky top-0 z-10 flex items-start justify-between gap-4 border-b border-border bg-background px-5 py-4 sm:px-8">
             <div className="min-w-0">
               <div className="font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.14em] text-accent">
                 {indexLabel(index)} · {shortCategory(project)} · {project.year}
@@ -731,7 +749,7 @@ function StudyOverlay({
               <X className="h-4 w-4" />
               Close
             </button>
-          </header>
+          </div>
           <div className="px-5 py-7 sm:px-8 sm:py-9">
             <StudyDetail project={project} onOpenImage={onOpenImage} />
           </div>
@@ -799,7 +817,16 @@ export function WorkIndex() {
     ? portfolioProjects.find((p) => p.slug === lightbox.slug)
     : undefined;
 
-  const closeLightbox = useCallback(() => setLightbox(null), []);
+  // The thumbnail that opened the gallery, so focus returns to it on close.
+  const lightboxOpener = useRef<HTMLElement | null>(null);
+  const openLightbox = (slug: string, index: number) => {
+    lightboxOpener.current = document.activeElement as HTMLElement | null;
+    setLightbox({ slug, index });
+  };
+  const closeLightbox = useCallback(() => {
+    setLightbox(null);
+    lightboxOpener.current?.focus();
+  }, []);
 
   const stepLightbox = useCallback((delta: number) => {
     setLightbox((prev) => {
@@ -859,7 +886,7 @@ export function WorkIndex() {
           index={openIndex}
           lightboxOpen={lightbox !== null}
           onClose={closeStudy}
-          onOpenImage={(imageIndex) => setLightbox({ slug: openProject.slug, index: imageIndex })}
+          onOpenImage={(imageIndex) => openLightbox(openProject.slug, imageIndex)}
         />
       )}
 
