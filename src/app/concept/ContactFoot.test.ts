@@ -148,6 +148,21 @@ describe("ContactFoot captcha", () => {
     expect(fetchSpy).not.toHaveBeenCalled();
   });
 
+  it("tells the sender where the reply will come from", async () => {
+    vi.stubEnv("VITE_EMAIL_ACCESS_KEY", "public-form-key");
+    vi.stubGlobal("fetch", vi.fn(async () => ({ json: async () => ({ success: true }) })));
+    render(createElement(ContactFoot));
+    fillForm();
+    fireEvent.click(screen.getByRole("button", { name: "Solve captcha" }));
+    fireEvent.click(screen.getByRole("button", { name: "Send message" }));
+
+    expect(
+      await screen.findByText(
+        "My reply comes from a howecreative.co.uk address. If it hasn’t arrived, please check your spam folder.",
+      ),
+    ).toBeInTheDocument();
+  });
+
   it("sends the solved token and resets the widget after a failed send", async () => {
     vi.stubEnv("VITE_EMAIL_ACCESS_KEY", "public-form-key");
     const fetchSpy = vi.fn(async () => ({ json: async () => ({ success: false, message: "Rejected" }) }));
