@@ -42,8 +42,8 @@ export function Masthead() {
         >
           <div className="flex flex-col gap-7">
             <motion.div variants={item}>
-              <span className="inline-flex items-center gap-2 border border-border bg-card px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-accent" />
+              <span className="inline-flex items-center gap-2 border border-border bg-card px-3 py-1.5 font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+                <span className="h-1.5 w-1.5 motion-safe:animate-pulse rounded-full bg-accent" />
                 Open to roles &amp; contracts - remote, UK
               </span>
             </motion.div>
@@ -102,7 +102,7 @@ export function Masthead() {
           <motion.dl variants={item} className="grid grid-cols-2 gap-x-6 gap-y-6 border-t border-border pt-6 sm:grid-cols-4">
             {metrics.map((metric) => (
               <div key={metric.label} className="flex flex-col">
-                <dt className="flex-1 font-mono text-[10px] uppercase leading-tight tracking-[0.16em] text-muted-foreground">
+                <dt className="flex-1 font-mono text-[11px] sm:text-[10px] uppercase leading-tight tracking-[0.16em] text-muted-foreground">
                   {metric.label}
                 </dt>
                 <dd className="headline-font mt-1 whitespace-nowrap text-xl leading-none text-foreground md:text-2xl">

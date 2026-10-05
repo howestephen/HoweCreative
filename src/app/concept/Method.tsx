@@ -103,7 +103,7 @@ export function Method() {
       <div className="mx-auto max-w-6xl px-6 py-20 md:py-24">
         <div className="mb-12 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
           <h2 className="text-3xl md:text-4xl">How I work</h2>
-          <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+          <span className="font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
             the short version
           </span>
         </div>
@@ -129,7 +129,7 @@ export function Method() {
         <div id="experience" className="mt-20 scroll-mt-24 border-t border-border pt-14">
           <div className="mb-8 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
             <h2 className="text-3xl md:text-4xl">Experience</h2>
-            <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-accent">
+            <span className="font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.18em] text-accent">
               2005 to today · {yearsSince(CAREER_START)} years
             </span>
           </div>
@@ -151,7 +151,7 @@ export function Method() {
               type="button"
               onClick={() => setShowAllRoles((value) => !value)}
               aria-expanded={showAllRoles}
-              className="mt-5 inline-flex items-center gap-2 border border-foreground/25 px-4 py-2.5 font-mono text-[10px] uppercase tracking-[0.16em] text-foreground transition-colors hover:border-foreground hover:text-accent"
+              className="mt-5 inline-flex items-center gap-2 border border-foreground/25 px-4 py-2.5 font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.16em] text-foreground transition-colors hover:border-foreground hover:text-accent"
             >
               {showAllRoles ? (
                 <>
@@ -171,7 +171,7 @@ export function Method() {
         <div id="education" className="mt-20 scroll-mt-24 border-t border-border pt-14">
           <div className="mb-8 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
             <h2 className="text-3xl md:text-4xl">Education &amp; recognition</h2>
-            <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+            <span className="font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
               degree · bootcamp · certifications
             </span>
           </div>

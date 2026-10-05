@@ -44,7 +44,7 @@ export function Layout() {
                 window.scrollTo({ top: 0, behavior: "smooth" });
               }
             }}
-            className="font-mono text-[11px] uppercase tracking-[0.2em] text-foreground"
+            className="min-h-11 font-mono text-[11px] uppercase leading-[44px] tracking-[0.2em] text-foreground"
           >
             Stephen Howe
             <span className="hidden text-muted-foreground sm:inline"> - Creative Technologist</span>
@@ -57,7 +57,7 @@ export function Layout() {
                   key={item.target}
                   type="button"
                   onClick={() => jumpTo(item.target)}
-                  className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground transition-colors hover:text-accent"
+                  className="min-h-11 font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground transition-colors hover:text-accent"
                 >
                   {item.label}
                 </button>
@@ -65,14 +65,14 @@ export function Layout() {
             </div>
             <a
               href="/cv"
-              className="hidden border border-foreground/25 px-3.5 py-1.5 text-xs font-medium text-foreground transition-colors hover:border-foreground sm:inline-block"
+              className="hidden min-h-11 items-center border border-foreground/25 px-3.5 py-1.5 text-xs font-medium text-foreground transition-colors hover:border-foreground sm:inline-flex"
             >
               CV
             </a>
             <button
               type="button"
               onClick={() => jumpTo("contact")}
-              className="bg-accent px-3.5 py-1.5 text-xs font-medium text-accent-foreground transition-colors hover:bg-accent-hover"
+              className="min-h-11 bg-accent px-3.5 py-1.5 text-xs font-medium text-accent-foreground transition-colors hover:bg-accent-hover"
             >
               Contact
             </button>

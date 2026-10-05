@@ -178,7 +178,7 @@ export function CV() {
                 rel="noreferrer"
                 className="block border border-neutral-200 px-3 py-2 transition-colors"
               >
-                <span className="block font-mono text-[8px] uppercase tracking-[0.18em] text-neutral-400">
+                <span className="block font-mono text-[10px] uppercase tracking-[0.18em] text-neutral-500">
                   {item.label}
                 </span>
                 <span className="mt-0.5 block break-all text-[11.5px] leading-tight">{item.value}</span>

@@ -15,7 +15,7 @@ type Status = "idle" | "sending" | "success" | "error";
 const inputClasses =
   "w-full border border-border bg-card px-4 py-3 text-sm text-foreground outline-none transition-colors focus:border-accent";
 const labelClasses =
-  "mb-2 block font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground";
+  "mb-2 block font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.16em] text-muted-foreground";
 
 export function ContactFoot() {
   const [name, setName] = useState("");
@@ -85,7 +85,7 @@ export function ContactFoot() {
       <div className="mx-auto max-w-6xl px-6 pb-10 pt-20 md:pt-28">
         <div className="grid gap-12 lg:grid-cols-5">
           <div className="lg:col-span-2">
-            <div className="mb-3 font-mono text-[10px] uppercase tracking-[0.18em] text-accent">
+            <div className="mb-3 font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.18em] text-accent">
               Contact
             </div>
             <h2 className="mb-6 text-4xl md:text-5xl">
@@ -99,7 +99,7 @@ export function ContactFoot() {
             <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
               <a
                 href="/cv"
-                className="inline-flex items-center gap-2 border border-foreground/25 px-5 py-3 text-sm font-medium text-foreground transition-colors hover:border-foreground"
+                className="inline-flex min-h-11 items-center gap-2 border border-foreground/25 px-5 py-3 text-sm font-medium text-foreground transition-colors hover:border-foreground"
               >
                 View CV
               </a>
@@ -113,7 +113,7 @@ export function ContactFoot() {
                   href={link.href}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-1 font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground transition-colors hover:text-accent"
+                  className="inline-flex min-h-11 items-center gap-1 font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground transition-colors hover:text-accent"
                 >
                   {link.label} <ArrowUpRight className="h-3 w-3" />
                 </a>
@@ -124,7 +124,7 @@ export function ContactFoot() {
           <div className="lg:col-span-3">
             {status === "success" ? (
               <div className="flex h-full flex-col justify-center border border-border bg-card p-8">
-                <div className="mb-2 font-mono text-[10px] uppercase tracking-[0.18em] text-accent">
+                <div className="mb-2 font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.18em] text-accent">
                   Message sent
                 </div>
                 <p className="headline-font text-2xl text-foreground">
@@ -137,7 +137,7 @@ export function ContactFoot() {
                 <button
                   type="button"
                   onClick={() => setStatus("idle")}
-                  className="mt-6 w-fit font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground underline underline-offset-4 transition-colors hover:text-accent"
+                  className="-mb-3.5 mt-2.5 inline-flex min-h-11 w-fit items-center font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.16em] text-muted-foreground underline underline-offset-4 transition-colors hover:text-accent"
                 >
                   Send another
                 </button>
@@ -213,7 +213,7 @@ export function ContactFoot() {
                 </div>
 
                 <div className="flex flex-col gap-3 md:col-span-2 md:flex-row md:items-center md:justify-between">
-                  <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
+                  <span className="font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
                     {status === "error" ? (
                       <span className="text-accent">{errorMsg}</span>
                     ) : (
@@ -233,9 +233,9 @@ export function ContactFoot() {
           </div>
         </div>
 
-        <footer className="mt-20 flex flex-col justify-between gap-3 border-t border-border pt-6 pb-2 font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground md:flex-row">
+        <footer className="mt-20 flex flex-col justify-between gap-3 border-t border-border pt-6 pb-2 font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.16em] text-muted-foreground md:flex-row">
           <span>© 2026 Stephen Howe · Norwich, UK - remote worldwide</span>
-          <a href="#work" className="transition-colors hover:text-accent">
+          <a href="#work" className="-my-3 flex min-h-11 items-center transition-colors hover:text-accent">
             This site was built by my agentic pipeline - the case study is above ↑
           </a>
         </footer>
