@@ -79,3 +79,39 @@ describe("contact handler rate limiting", () => {
     );
   });
 });
+
+describe("contact handler input checks", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    vi.mocked(checkRateLimit).mockReturnValue({ allowed: true });
+    process.env.WEB3FORMS_SERVER_ACCESS_KEY = "test-key";
+  });
+
+  it("answers a non-string field with a 400 instead of throwing", async () => {
+    const res = makeRes();
+    await handler(makeReq({ name: 1, email: "ada@example.com", brief: "Hello" }), res);
+    expect(res.status).toHaveBeenCalledWith(400);
+    expect(res.json).toHaveBeenCalledWith(expect.objectContaining({ success: false }));
+  });
+
+  it("rejects an over-long brief or name", async () => {
+    for (const body of [
+      { name: "Ada", email: "ada@example.com", brief: "x".repeat(5001) },
+      { name: "A".repeat(201), email: "ada@example.com", brief: "Hello" },
+    ]) {
+      const res = makeRes();
+      await handler(makeReq(body), res);
+      expect(res.status).toHaveBeenCalledWith(400);
+    }
+  });
+
+  it("keeps newlines in the name out of the email subject", async () => {
+    const fetchSpy = vi.fn(async () => ({ ok: true, json: async () => ({ success: true }) }));
+    vi.stubGlobal("fetch", fetchSpy);
+    const res = makeRes();
+    await handler(makeReq({ name: "Ada\r\nBcc: attacker", email: "ada@example.com", brief: "Hello" }), res);
+    const [, init] = fetchSpy.mock.calls[0] as unknown as [string, RequestInit];
+    expect(JSON.parse(String(init.body)).subject).not.toMatch(/[\r\n]/);
+    vi.unstubAllGlobals();
+  });
+});

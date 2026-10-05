@@ -79,6 +79,20 @@ describe("createContactRequest", () => {
   });
 });
 
+describe("createContactRequest limits", () => {
+  it("gives every request a 15 second timeout", () => {
+    for (const transport of ["client", "server"] as const) {
+      const request = createContactRequest(transport, "public-form-key", payload);
+      expect(request.init.signal).toBeInstanceOf(AbortSignal);
+    }
+  });
+
+  it("keeps newlines in the name out of the subject", () => {
+    const request = createContactRequest("client", "public-form-key", { ...payload, name: "Ada\nBcc: x" });
+    expect(JSON.parse(String(request.init.body)).subject).not.toMatch(/[\r\n]/);
+  });
+});
+
 describe("resolvePublicAccessKey", () => {
   const okFetch = (body: unknown, ok = true) =>
     vi.fn(async () => ({ ok, json: async () => body }) as Response) as unknown as typeof fetch;
@@ -161,6 +175,22 @@ describe("ContactFoot captcha", () => {
         "My reply comes from a howecreative.co.uk address. If it hasn’t arrived, please check your spam folder.",
       ),
     ).toBeInTheDocument();
+  });
+
+  it("caps the name and message lengths in the form", () => {
+    render(createElement(ContactFoot));
+    expect(screen.getByRole("textbox", { name: "Name" })).toHaveAttribute("maxLength", "200");
+    expect(screen.getByRole("textbox", { name: "Message" })).toHaveAttribute("maxLength", "5000");
+  });
+
+  it("says when a send timed out instead of hanging on Sending", async () => {
+    vi.stubEnv("VITE_EMAIL_ACCESS_KEY", "public-form-key");
+    vi.stubGlobal("fetch", vi.fn(async () => { throw new DOMException("timed out", "TimeoutError"); }));
+    render(createElement(ContactFoot));
+    fillForm();
+    fireEvent.click(screen.getByRole("button", { name: "Solve captcha" }));
+    fireEvent.click(screen.getByRole("button", { name: "Send message" }));
+    expect(await screen.findByText("That took too long. Please try again.")).toBeInTheDocument();
   });
 
   it("sends the solved token and resets the widget after a failed send", async () => {

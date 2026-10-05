@@ -82,6 +82,7 @@ behaviour, and conversion paths are approved.
   canonical and Open Graph tags, `trailingSlash` is off, and an Apple touch
   icon, PNG favicon and web manifest are linked. Add a study to the sitemap
   when adding it to `site-content.json` (a test checks).
+- ✓ Audit fixes, 5 October 2026 (WP-9): the contact form and API reject malformed or over-long input with a clear message, and a hung send times out after 15 seconds.
 - ✓ Audit fixes, 5 October 2026 (WP-8): Fraunces, Instrument Sans and IBM Plex Mono
   are bundled from Fontsource packages instead of Google Fonts, with the body and
   headline faces preloaded; no third-party request remains.

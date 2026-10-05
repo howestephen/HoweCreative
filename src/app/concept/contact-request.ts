@@ -14,6 +14,14 @@ export const WEB3FORMS_HCAPTCHA_SITEKEY = "50b2fe65-b00b-4b9e-ad62-3ba471098be2"
 
 export type ContactTransport = "client" | "server";
 
+// A request that hangs longer than this ends in an error, not "Sending..." for ever.
+export const CONTACT_TIMEOUT_MS = 15000;
+export const MAX_NAME_LENGTH = 200;
+export const MAX_BRIEF_LENGTH = 5000;
+
+// Newlines in a subject could smuggle extra mail headers.
+const oneLine = (value: string) => value.replace(/[\r\n]+/g, " ");
+
 export function createContactRequest(
   transport: ContactTransport,
   publicAccessKey: string | undefined,
@@ -31,11 +39,12 @@ export function createContactRequest(
       init: {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
+        signal: AbortSignal.timeout(CONTACT_TIMEOUT_MS),
         body: JSON.stringify({
           access_key: publicAccessKey,
           name,
           email,
-          subject: `Portfolio enquiry from ${name}${projectType ? ` - ${projectType}` : ""}`,
+          subject: `Portfolio enquiry from ${oneLine(name)}${projectType ? ` - ${oneLine(projectType)}` : ""}`,
           message: `Role or project: ${projectType || "-"}\n\n${brief}`,
           botcheck: website || undefined,
           "h-captcha-response": captchaToken,
@@ -48,6 +57,7 @@ export function createContactRequest(
     url: "/api/contact",
     init: {
       method: "POST",
+      signal: AbortSignal.timeout(CONTACT_TIMEOUT_MS),
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
     },
