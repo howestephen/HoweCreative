@@ -7,16 +7,23 @@ An audit of both sites found 39 issues. The findings and the work plan live on
 `docs/plans/2026-10-03-audit-work-plan.md`. Read them with
 `git show origin/main:<path>`.
 
-- [ ] WP-5: redesign scroll restoration, tap targets and portrait weight (A-2,
-  C-4, C-12).
-- [ ] WP-6 (redesign half): prefixed prerender links, a not-found page and
-  namespaced assets (A-3, A-11, A-12). The A-9 fix is in main's `vercel.json`.
-- [ ] WP-12: lightbox focus return, landmarks and headings, and suspending
-  audio when sound is off (C-2, C-9, A-13, A-4).
-- [x] Contact form captcha (decision 1): the hCaptcha widget and token, as on
-  `main`.
-- [ ] Redesign halves of WP-8, WP-9 (beyond the captcha), WP-10 and WP-14.
-  WP-13 is dropped: no film needs captions.
+- [x] WP-5: Back restores the scroll position, header and CV contact links
+  have 44px tap areas, and the portrait plate is a pixel-identical lossless
+  WebP (853 kB to 483 kB) with a 1x/2x reference image (A-2, C-4, C-12).
+- [x] WP-6 (redesign half): page links and the canonical carry the
+  /particle-redesign prefix and the build verifier enforces it; unknown URLs
+  fall back to the app's not-found page (A-9, A-3, A-11). Main archived its
+  colliding Solana thumbnail (A-12).
+- [x] WP-8: Instrument Sans and IBM Plex Mono are self-hosted (B-6).
+- [x] WP-9: captcha, input checks, length caps and a 15 second timeout, as
+  on `main` (A-5, A-7). B-8 waits for `EMAIL_ACCESS_KEY` on this project.
+- [x] WP-12: the gallery returns focus after closing, the archive has one
+  main landmark, the home h1 stays in the accessibility tree, and sound off
+  suspends the AudioContext (C-2, C-9, A-13). A-4 was not reproduced.
+- [x] WP-14 (redesign half): distinct alts for the two homepage sections, the
+  repository link, and the Finder files and empty model folder removed.
+- [ ] WP-10: security and cache headers (follows `main`).
+- WP-13 is dropped: no film needs captions.
 
 ## Retina image pass - 30 September 2026
 
