@@ -12,3 +12,7 @@ docs/private/
 
 # Local asset archive - unused project media kept for future redesigns
 assets-archive/
+
+# Local agent tool state and logs
+.claude/hooks-state/
+.playwright-mcp/
