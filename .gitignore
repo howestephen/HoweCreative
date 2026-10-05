@@ -15,3 +15,7 @@ assets-archive/
 
 # Temporary server bundle for static HTML generation
 .prerender/
+
+# Local agent tool state and logs
+.claude/hooks-state/
+.playwright-mcp/
