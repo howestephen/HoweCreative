@@ -501,7 +501,8 @@
           {
             "type": "video",
             "src": "/case-studies/uncx-rebrand/brand-launch-video.mp4",
-            "alt": "Brand launch video"
+            "alt": "Brand launch video",
+            "poster": "/case-studies/uncx-rebrand/brand-launch-video.poster.jpg"
           },
           {
             "type": "image",
@@ -835,22 +836,26 @@
           {
             "type": "video",
             "src": "/case-studies/uncx-video-system/hyperswap-integration.mp4",
-            "alt": "HyperSwap Integration video"
+            "alt": "HyperSwap Integration video",
+            "poster": "/case-studies/uncx-video-system/hyperswap-integration.poster.jpg"
           },
           {
             "type": "video",
             "src": "/case-studies/uncx-video-system/token-minter-launch.mp4",
-            "alt": "Token Minter Launch Video"
+            "alt": "Token Minter Launch Video",
+            "poster": "/case-studies/uncx-video-system/token-minter-launch.poster.jpg"
           },
           {
             "type": "video",
             "src": "/case-studies/uncx-video-system/vesting-app-release.mp4",
-            "alt": "Vesting App Release Video"
+            "alt": "Vesting App Release Video",
+            "poster": "/case-studies/uncx-video-system/vesting-app-release.poster.jpg"
           },
           {
             "type": "video",
             "src": "/case-studies/uncx-video-system/lock-announcement-rise.mp4",
-            "alt": "Lock Announcement - RISE"
+            "alt": "Lock Announcement - RISE",
+            "poster": "/case-studies/uncx-video-system/lock-announcement-rise.poster.jpg"
           },
           {
             "type": "image",
@@ -971,22 +976,26 @@
           {
             "type": "video",
             "src": "/case-studies/uncx-academy/promo-video.mp4",
-            "alt": "Academy promo video"
+            "alt": "Academy promo video",
+            "poster": "/case-studies/uncx-academy/promo-video.poster.jpg"
           },
           {
             "type": "video",
             "src": "/case-studies/uncx-academy/tutorial-lp-locking.mp4",
-            "alt": "LP Locking tutorial"
+            "alt": "LP Locking tutorial",
+            "poster": "/case-studies/uncx-academy/tutorial-lp-locking.poster.jpg"
           },
           {
             "type": "video",
             "src": "/case-studies/uncx-academy/chain-spotlight-sei.mp4",
-            "alt": "Chain Spotlight - SEI"
+            "alt": "Chain Spotlight - SEI",
+            "poster": "/case-studies/uncx-academy/chain-spotlight-sei.poster.jpg"
           },
           {
             "type": "video",
             "src": "/case-studies/uncx-academy/flash-loans-defi.mp4",
-            "alt": "Flash Loans in DeFi"
+            "alt": "Flash Loans in DeFi",
+            "poster": "/case-studies/uncx-academy/flash-loans-defi.poster.jpg"
           },
           {
             "type": "image",

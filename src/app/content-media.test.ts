@@ -21,3 +21,16 @@ describe("gallery logotypes", () => {
     }
   });
 });
+
+describe("video posters", () => {
+  // A video without a poster renders as a black rectangle until played.
+  it("gives every video a poster that exists on disk", () => {
+    for (const p of projects) {
+      for (const m of (p.media ?? []) as (Media & { poster?: string })[]) {
+        if (m.type !== "video") continue;
+        expect(m.poster, m.src).toBeTruthy();
+        expect(existsSync(resolve(root, "public", m.poster!.slice(1))), m.poster).toBe(true);
+      }
+    }
+  });
+});
