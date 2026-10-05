@@ -49,7 +49,9 @@ describe("security and cache headers (B-3, B-5)", () => {
     expect(all["referrer-policy"]).toBe("strict-origin-when-cross-origin");
     expect(all["x-frame-options"]).toBe("DENY");
     expect(all["permissions-policy"]).toMatch(/camera=\(\)/);
-    const csp = all["content-security-policy-report-only"] ?? all["content-security-policy"];
+    // Enforced, not report-only: a live check found no violations on either site.
+    expect(all["content-security-policy-report-only"]).toBeUndefined();
+    const csp = all["content-security-policy"];
     expect(csp).toMatch(/default-src 'self'/);
     expect(csp).toMatch(/frame-ancestors 'none'/);
     // The contact form's captcha and delivery must stay allowed.
@@ -80,5 +82,15 @@ describe("content (D-3, B-9)", () => {
     expect((siteContent as unknown as { profile: { repoUrl: string } }).profile.repoUrl).toBe(
       "https://github.com/howestephen/HoweCreative",
     );
+  });
+});
+
+describe("HTTPS", () => {
+  it("keeps browsers on HTTPS for two years, subdomains included", () => {
+    const rules = (JSON.parse(readFileSync(resolve(process.cwd(), "vercel.json"), "utf8")) as {
+      headers: { source: string; headers: { key: string; value: string }[] }[];
+    }).headers;
+    const hsts = rules.find((rule) => rule.source === "/(.*)")?.headers.find((h) => h.key === "Strict-Transport-Security");
+    expect(hsts?.value).toBe("max-age=63072000; includeSubDomains");
   });
 });
