@@ -53,3 +53,19 @@ describe("CV lazy route", () => {
     expect(consoleError).toHaveBeenCalled();
   });
 });
+
+describe("unknown pages", () => {
+  it("offer a way back to the portfolio and stay out of search results", async () => {
+    vi.spyOn(console, "error").mockImplementation(() => undefined);
+    vi.spyOn(console, "warn").mockImplementation(() => undefined);
+    const router = createMemoryRouter(
+      [{ path: "/", Component: () => createElement("p", null, "home"), ErrorBoundary: AppErrorBoundary }],
+      { initialEntries: ["/nope"] },
+    );
+    render(createElement(RouterProvider, { router }));
+
+    const link = await screen.findByRole("link", { name: "Back to the portfolio" });
+    expect(link).toHaveAttribute("href", "/");
+    expect(document.head.querySelector('meta[name="robots"]')).toHaveAttribute("content", "noindex");
+  });
+});
