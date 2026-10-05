@@ -2,13 +2,14 @@ import { readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { fireEvent, render, screen, within } from "@testing-library/react";
 import { createMemoryRouter, RouterProvider, type RouteObject } from "react-router";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 
 import { Layout } from "./components/Layout";
 import { ContactFoot } from "./concept/ContactFoot";
 import { Masthead } from "./concept/Masthead";
 import { WorkIndex } from "./concept/WorkIndex";
 import { CV } from "./pages/CV";
+import { Method } from "./concept/Method";
 
 // jsdom has no layout, so the 44px minimum is asserted through the classes that give it.
 const MIN_44 = /(^|\s)(min-h-11|h-11)(\s|$)/;
@@ -34,6 +35,38 @@ describe("tap targets on phones (WP-4)", () => {
     }
     const footer = screen.getByRole("contentinfo");
     for (const link of within(footer).getAllByRole("link")) expect(link.className).toMatch(MIN_44);
+  });
+
+  it("gives the hero links, archive link, roles toggle and Redraw a 44px minimum", () => {
+    vi.stubGlobal(
+      "IntersectionObserver",
+      class {
+        observe() {}
+        unobserve() {}
+        disconnect() {}
+      },
+    );
+    renderRoutes("/", [
+      {
+        path: "/",
+        element: (
+          <>
+            <Masthead />
+            <WorkIndex />
+            <Method />
+          </>
+        ),
+      },
+    ]);
+    const main = document.body;
+    for (const name of [/LinkedIn/, /GitHub/, /Full archive/]) {
+      for (const link of within(main).getAllByRole("link", { name })) expect(link.className, String(name)).toMatch(MIN_44);
+    }
+    expect(screen.getByRole("button", { name: /earlier/ }).className).toMatch(MIN_44);
+    const redraw = screen.getAllByRole("button", { name: /Redraw/ });
+    expect(redraw.length).toBeGreaterThan(0);
+    for (const button of redraw) expect(button.className).toMatch(MIN_44);
+    vi.unstubAllGlobals();
   });
 
   it("gives the gallery strip buttons padding of p-2.5", () => {

@@ -486,7 +486,7 @@ export function PlotterMark() {
         <button
           type="button"
           onClick={() => setDrawing((prev) => nextDrawing(prev.family))}
-          className="inline-flex shrink-0 items-center gap-1.5 text-foreground transition-colors hover:text-accent"
+          className="-my-3 inline-flex min-h-11 shrink-0 items-center gap-1.5 text-foreground transition-colors hover:text-accent"
           title="Draw a new structure"
         >
           <RefreshCw className="h-3 w-3" />

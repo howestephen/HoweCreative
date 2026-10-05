@@ -83,7 +83,7 @@ export function Masthead() {
                   href={siteProfile.linkedinUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-1 font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground transition-colors hover:text-accent"
+                  className="inline-flex min-h-11 items-center gap-1 font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground transition-colors hover:text-accent"
                 >
                   LinkedIn <ArrowUpRight className="h-3 w-3" />
                 </a>
@@ -91,7 +91,7 @@ export function Masthead() {
                   href={siteProfile.githubUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-1 font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground transition-colors hover:text-accent"
+                  className="inline-flex min-h-11 items-center gap-1 font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground transition-colors hover:text-accent"
                 >
                   GitHub <ArrowUpRight className="h-3 w-3" />
                 </a>
