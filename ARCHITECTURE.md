@@ -112,3 +112,14 @@ These boundaries keep:
 - the public portfolio simple
 - the posting pipeline independently deployable
 - operational failures isolated between site and worker systems
+
+## Publishing under /particle-redesign
+
+This branch deploys to its own Vercel project, and the main site proxies it at
+`howecreative.co.uk/particle-redesign`. The prerender writes page links and the
+canonical URL with that prefix (the home page slash-less), and
+`scripts/verify-build.mjs` fails the build if a page link lacks it. The
+project's `vercel.json` serves each known study from its prerendered page and
+sends every other non-asset path to the app, which shows its not-found page.
+When the redesign is promoted, the domain moves to this project; the main site
+never proxies the whole site.

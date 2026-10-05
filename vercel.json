@@ -5,7 +5,7 @@
   "outputDirectory": "dist",
   "rewrites": [
     {
-      "source": "/work/:slug",
+      "source": "/work/:slug(quiver|solana-diary|uncx-menu|uncx-rebrand|badger-club|uncx-video-system|uncx-academy|noticia-lingo|uncx-app-concepts|ai-portfolio-system)",
       "destination": "/work/:slug/index.html"
     },
     {
@@ -14,6 +14,10 @@
     },
     {
       "source": "/study",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/((?!assets/|case-studies/|earlier-work/|portrait/|models/|cv/).*)",
       "destination": "/index.html"
     }
   ]
