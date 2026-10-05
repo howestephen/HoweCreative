@@ -185,10 +185,18 @@ function GalleryContent({
   const videos = media.filter((item) => item.type === "video");
   const [selected, setSelected] = useState<number | null>(null);
   const trigger = useRef<HTMLButtonElement | null>(null);
+  const restoreFocus = useRef(false);
   const close = () => {
+    restoreFocus.current = true;
     setSelected(null);
-    trigger.current?.focus();
   };
+  // Focus the thumbnail only after the dialog's own cleanup has called
+  // close(); focusing earlier lets the browser's close steps drop focus.
+  useEffect(() => {
+    if (selected !== null || !restoreFocus.current) return;
+    restoreFocus.current = false;
+    trigger.current?.focus();
+  }, [selected]);
   return (
     <div className="project-gallery">
       {videos.length > 0 && (
@@ -227,7 +235,8 @@ function GalleryContent({
               >
                 <ResponsiveImage
                   src={item.src}
-                  alt={item.alt ?? title}
+                  // The button's label and the visible caption already name it.
+                  alt=""
                   loading="lazy"
                   decoding="async"
                   width="480"
