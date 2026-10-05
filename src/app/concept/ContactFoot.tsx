@@ -130,6 +130,10 @@ export function ContactFoot() {
                 <p className="headline-font text-2xl text-foreground">
                   Thanks for reaching out. I&rsquo;ll be in touch soon.
                 </p>
+                <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                  My reply comes from a howecreative.co.uk address. If it hasn&rsquo;t arrived,
+                  please check your spam folder.
+                </p>
                 <button
                   type="button"
                   onClick={() => setStatus("idle")}
