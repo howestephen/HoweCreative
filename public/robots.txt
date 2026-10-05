@@ -1,2 +1,5 @@
 User-agent: *
+Allow: /
 Disallow: /particle-redesign
+
+Sitemap: https://howecreative.co.uk/sitemap.xml
