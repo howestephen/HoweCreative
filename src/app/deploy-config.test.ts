@@ -41,3 +41,12 @@ describe("redesign deploy config", () => {
     }
   });
 });
+
+describe("fonts", () => {
+  it("are self-hosted, with no request to Google Fonts", () => {
+    const css = readFileSync(resolve(process.cwd(), "src/styles/fonts.css"), "utf8");
+    expect(css).not.toMatch(/googleapis|gstatic/);
+    expect(css).toMatch(/@fontsource\/instrument-sans/);
+    expect(css).toMatch(/@fontsource\/ibm-plex-mono/);
+  });
+});

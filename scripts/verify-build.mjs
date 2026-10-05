@@ -82,6 +82,13 @@ assert.ok(
   "Private sources must not enter the build",
 );
 for (const asset of readdirSync(path.join(root, "dist/assets"))) {
+  if (asset.endsWith(".css"))
+    assert.ok(
+      !/googleapis|gstatic/.test(
+        readFileSync(path.join(root, "dist/assets", asset), "utf8"),
+      ),
+      `${asset}: fonts are self-hosted`,
+    );
   if (/^CV-/.test(asset)) continue;
   if (asset.endsWith(".js"))
     assert.ok(
