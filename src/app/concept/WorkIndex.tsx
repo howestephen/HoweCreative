@@ -793,6 +793,12 @@ export function WorkIndex() {
     if (slug) cardRefs.current[slug]?.focus({ preventScroll: true });
   }, [openProject]);
 
+  // Back (or the phone's back gesture) closes the study without going through
+  // closeStudy, so drop the gallery whenever no study is open.
+  useEffect(() => {
+    if (!openProject) setLightbox(null);
+  }, [openProject]);
+
   const lightboxProject = lightbox
     ? portfolioProjects.find((p) => p.slug === lightbox.slug)
     : undefined;

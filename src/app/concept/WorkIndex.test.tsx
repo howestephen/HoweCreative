@@ -260,4 +260,21 @@ describe("case study copy", () => {
     const dashes = [0x2013, 0x2014].map((code) => String.fromCharCode(code));
     for (const dash of dashes) expect(text).not.toContain(dash);
   });
+
+  it("closes the gallery too when Back closes the study", async () => {
+    const router = createMemoryRouter([{ path: "/", Component: WorkIndex }], {
+      initialEntries: ["/", "/?study=quiver"],
+      initialIndex: 1,
+    });
+    render(<RouterProvider router={router} />);
+    const dialog = screen.getByRole("dialog", { name: "Quiver" });
+    fireEvent.click(within(dialog).getAllByRole("button", { name: /^View larger/ })[0]);
+    expect(screen.getByRole("dialog", { name: "Quiver gallery" })).toBeInTheDocument();
+
+    await act(async () => {
+      await router.navigate(-1);
+    });
+    expect(screen.queryByRole("dialog", { name: "Quiver gallery" })).not.toBeInTheDocument();
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+  });
 });
