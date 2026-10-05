@@ -204,9 +204,7 @@ function VideoStrip({ videos }: { videos: ProjectMediaItem[] }) {
             controls
             preload="none"
             className="w-64 shrink-0 snap-start border border-border bg-black sm:w-72"
-          >
-            <track kind="captions" />
-          </video>
+          />
         ))}
       </div>
     </ScrollStrip>
@@ -252,9 +250,7 @@ function StudyDetail({
           preload="none"
           aria-label={featured.alt ?? project.title}
           className="aspect-video w-full border border-border bg-black lg:col-span-5"
-        >
-          <track kind="captions" />
-        </video>
+        />
       )}
 
       <div className="min-w-0 space-y-6 lg:col-span-3">
