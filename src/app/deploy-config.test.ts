@@ -85,7 +85,9 @@ describe("security and cache headers (B-3, B-5)", () => {
     expect(all["referrer-policy"]).toBe("strict-origin-when-cross-origin");
     expect(all["x-frame-options"]).toBe("DENY");
     expect(all["permissions-policy"]).toMatch(/camera=\(\)/);
-    const csp = all["content-security-policy-report-only"] ?? all["content-security-policy"];
+    // Enforced, not report-only: a live check found no violations on either site.
+    expect(all["content-security-policy-report-only"]).toBeUndefined();
+    const csp = all["content-security-policy"];
     expect(csp).toMatch(/default-src 'self'/);
     expect(csp).toMatch(/frame-ancestors 'none'/);
     // The contact form's captcha and delivery must stay allowed.
