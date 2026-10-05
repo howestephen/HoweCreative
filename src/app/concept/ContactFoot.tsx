@@ -5,6 +5,8 @@ import { ArrowUpRight } from "lucide-react";
 
 import { siteProfile } from "../data/portfolio";
 import {
+  MAX_BRIEF_LENGTH,
+  MAX_NAME_LENGTH,
   WEB3FORMS_HCAPTCHA_SITEKEY,
   createContactRequest,
   resolvePublicAccessKey,
@@ -92,7 +94,9 @@ export function ContactFoot({ variant = "editorial", heading = true }: ContactFo
       setErrorMsg(
         error instanceof Error && error.message === "Contact form is not configured."
           ? error.message
-          : "Network error. Please try again.",
+          : error instanceof DOMException && error.name === "TimeoutError"
+            ? "That took too long. Please try again."
+            : "Network error. Please try again.",
       );
       setStatus("error");
     }
@@ -173,6 +177,7 @@ export function ContactFoot({ variant = "editorial", heading = true }: ContactFo
                     name="name"
                     autoComplete="name"
                     required
+                    maxLength={MAX_NAME_LENGTH}
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     className={inputClasses}
@@ -207,6 +212,7 @@ export function ContactFoot({ variant = "editorial", heading = true }: ContactFo
                     name="brief"
                     rows={5}
                     required
+                    maxLength={MAX_BRIEF_LENGTH}
                     value={brief}
                     onChange={(e) => setBrief(e.target.value)}
                     className={`${inputClasses} resize-none`}

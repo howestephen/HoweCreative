@@ -9,6 +9,9 @@ type ContactPayload = {
 };
 
 const WEB3FORMS_URL = "https://api.web3forms.com/submit";
+// Kept in step with the form's maxLength attributes.
+const MAX_NAME = 200;
+const MAX_BRIEF = 5000;
 
 function isValidEmail(value: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
@@ -44,12 +47,21 @@ export default async function handler(req: Request, res: Response) {
     return res.status(500).json({ success: false, message: "Email service not configured." });
   }
 
-  const body = (req.body ?? {}) as ContactPayload;
-  const name = (body.name ?? "").trim();
-  const email = (body.email ?? "").trim();
-  const projectType = (body.projectType ?? "").trim();
-  const brief = (body.brief ?? "").trim();
-  const website = (body.website ?? "").trim();
+  const body = (req.body ?? {}) as Record<string, unknown>;
+  const field = (key: keyof ContactPayload) => {
+    const value = body[key];
+    return value === undefined ? "" : typeof value === "string" ? value.trim() : null;
+  };
+  const name = field("name");
+  const email = field("email");
+  const projectType = field("projectType");
+  const brief = field("brief");
+  const website = field("website");
+
+  // A field sent as a number, object or array is a malformed request, not a crash.
+  if (name === null || email === null || projectType === null || brief === null || website === null) {
+    return res.status(400).json({ success: false, message: "Invalid form fields." });
+  }
 
   if (website) {
     // Treat honeypot submissions as successful to avoid signaling bots.
@@ -58,6 +70,10 @@ export default async function handler(req: Request, res: Response) {
 
   if (!name || !email || !brief) {
     return res.status(400).json({ success: false, message: "Missing required fields." });
+  }
+
+  if (name.length > MAX_NAME || brief.length > MAX_BRIEF || projectType.length > MAX_NAME) {
+    return res.status(400).json({ success: false, message: "Message is too long." });
   }
 
   if (!isValidEmail(email)) {
@@ -72,7 +88,8 @@ export default async function handler(req: Request, res: Response) {
         access_key: accessKey,
         name,
         email,
-        subject: `Portfolio enquiry from ${name}${projectType ? ` - ${projectType}` : ""}`,
+        // Newlines in a subject could smuggle extra mail headers.
+        subject: `Portfolio enquiry from ${name.replace(/[\r\n]+/g, " ")}${projectType ? ` - ${projectType.replace(/[\r\n]+/g, " ")}` : ""}`,
         message: `Project type: ${projectType || "-"}\n\n${brief}`,
       }),
     });
