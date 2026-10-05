@@ -13,7 +13,7 @@ import {
 type Status = "idle" | "sending" | "success" | "error";
 
 const inputClasses =
-  "w-full border border-border bg-card px-4 py-3 text-sm text-foreground outline-none transition-colors focus:border-accent";
+  "w-full border border-border bg-card px-4 py-3 text-sm text-foreground transition-colors focus:border-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent";
 const labelClasses =
   "mb-2 block font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.16em] text-muted-foreground";
 
@@ -123,7 +123,7 @@ export function ContactFoot() {
 
           <div className="lg:col-span-3">
             {status === "success" ? (
-              <div className="flex h-full flex-col justify-center border border-border bg-card p-8">
+              <div role="status" className="flex h-full flex-col justify-center border border-border bg-card p-8">
                 <div className="mb-2 font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.18em] text-accent">
                   Message sent
                 </div>
@@ -215,7 +215,7 @@ export function ContactFoot() {
                 <div className="flex flex-col gap-3 md:col-span-2 md:flex-row md:items-center md:justify-between">
                   <span className="font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
                     {status === "error" ? (
-                      <span className="text-accent">{errorMsg}</span>
+                      <span role="alert" className="text-accent">{errorMsg}</span>
                     ) : (
                       "Tell me what you're building"
                     )}

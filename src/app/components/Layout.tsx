@@ -34,6 +34,13 @@ export function Layout() {
         }}
       />
 
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[300] focus:bg-accent focus:px-4 focus:py-3 focus:text-sm focus:font-medium focus:text-accent-foreground"
+      >
+        Skip to main content
+      </a>
+
       <header className="fixed inset-x-0 top-0 z-50 border-b border-border bg-background/85 backdrop-blur-md">
         <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-4 px-6">
           <Link
@@ -80,7 +87,7 @@ export function Layout() {
         </div>
       </header>
 
-      <main className="relative z-10 w-full">
+      <main id="main-content" tabIndex={-1} className="relative z-10 w-full outline-none">
         <Outlet />
       </main>
     </div>

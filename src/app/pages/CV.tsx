@@ -126,7 +126,7 @@ export function CV() {
     <div className="cv-page min-h-screen w-full bg-white text-neutral-900">
       <style>{CV_STYLES}</style>
 
-      <div className="no-print fixed right-4 top-4 z-50 flex gap-2 print:hidden">
+      <nav aria-label="CV actions" className="no-print fixed right-4 top-4 z-50 flex gap-2 print:hidden">
         <button
           type="button"
           onClick={() => window.print()}
@@ -140,7 +140,7 @@ export function CV() {
         >
           ← Back to portfolio
         </Link>
-      </div>
+      </nav>
 
       <main className="mx-auto max-w-[780px] px-6 pb-16 pt-20 sm:pt-14 print:max-w-none print:px-0 print:pb-0 print:pt-0">
         {/* Masthead: name set large in the site's display serif, with a heavy
