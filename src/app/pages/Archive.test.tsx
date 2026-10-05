@@ -1,8 +1,8 @@
 import { existsSync } from "node:fs";
 import { resolve } from "node:path";
-import { fireEvent, render, screen, within } from "@testing-library/react";
+import { act, fireEvent, render, screen, within } from "@testing-library/react";
 import { createMemoryRouter, RouterProvider } from "react-router";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 
 import earlierWork from "../data/earlier-work.json";
 import { imageVariants, variantUrl } from "../lib/responsive-image";
@@ -90,5 +90,22 @@ describe("Archive", () => {
           expect(existsSync(resolve("public", variantUrl(media.src, width).slice(1))), media.src).toBe(true);
         expect(imageVariants(media.src), media.src).toBeTruthy();
       }
+  });
+
+  it("keeps the scroll position when Back returns to the archive", async () => {
+    const router = renderAt("/archive");
+    const scrollTo = vi.spyOn(window, "scrollTo").mockImplementation(() => {});
+    try {
+      await act(async () => {
+        await router.navigate("/?study=quiver");
+      });
+      await act(async () => {
+        await router.navigate(-1);
+      });
+      expect(router.state.location.pathname).toBe("/archive");
+      expect(scrollTo).not.toHaveBeenCalled();
+    } finally {
+      scrollTo.mockRestore();
+    }
   });
 });

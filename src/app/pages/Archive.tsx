@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigationType } from "react-router";
 import { ArrowUpRight, Plus } from "lucide-react";
 
 import earlierWork from "../data/earlier-work.json";
@@ -83,10 +83,16 @@ export function Archive() {
     setViewer({ title, images, index });
   }, []);
 
+  // Back and Forward (POP) restore the position the visitor left; only a fresh
+  // visit starts at the top.
+  const navigationType = useNavigationType();
+  useEffect(() => {
+    if (navigationType !== "POP") window.scrollTo(0, 0);
+  }, [navigationType]);
+
   useEffect(() => {
     const previous = document.title;
     document.title = "Work archive - Stephen Howe";
-    window.scrollTo(0, 0);
     return () => {
       document.title = previous;
     };
