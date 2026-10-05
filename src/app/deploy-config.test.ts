@@ -35,3 +35,34 @@ describe("deploy config", () => {
     expect(robots).toMatch(/^Disallow: \/particle-redesign$/m);
   });
 });
+
+describe("security and cache headers (B-3, B-5)", () => {
+  type HeaderRule = { source: string; headers: { key: string; value: string }[] };
+  const rules = (JSON.parse(readFileSync(resolve(process.cwd(), "vercel.json"), "utf8")) as { headers?: HeaderRule[] })
+    .headers ?? [];
+  const headersFor = (source: string) =>
+    Object.fromEntries((rules.find((rule) => rule.source === source)?.headers ?? []).map((h) => [h.key.toLowerCase(), h.value]));
+
+  it("sends the security headers on every page", () => {
+    const all = headersFor("/(.*)");
+    expect(all["x-content-type-options"]).toBe("nosniff");
+    expect(all["referrer-policy"]).toBe("strict-origin-when-cross-origin");
+    expect(all["x-frame-options"]).toBe("DENY");
+    expect(all["permissions-policy"]).toMatch(/camera=\(\)/);
+    const csp = all["content-security-policy-report-only"] ?? all["content-security-policy"];
+    expect(csp).toMatch(/default-src 'self'/);
+    expect(csp).toMatch(/frame-ancestors 'none'/);
+    // The contact form's captcha and delivery must stay allowed.
+    expect(csp).toMatch(/script-src[^;]*https:\/\/\*\.hcaptcha\.com/);
+    expect(csp).toMatch(/frame-src[^;]*https:\/\/\*\.hcaptcha\.com/);
+    expect(csp).toMatch(/connect-src[^;]*https:\/\/api\.web3forms\.com/);
+    expect(csp).not.toMatch(/unsafe-eval|googleapis|gstatic/);
+  });
+
+  it("caches hashed assets for a year and media for a day", () => {
+    expect(headersFor("/assets/(.*)")["cache-control"]).toBe("public, max-age=31536000, immutable");
+    for (const folder of ["case-studies", "earlier-work", "portrait"]) {
+      expect(headersFor(`/${folder}/(.*)`)["cache-control"]).toBe("public, max-age=86400, stale-while-revalidate=604800");
+    }
+  });
+});
