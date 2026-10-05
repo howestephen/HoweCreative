@@ -846,7 +846,7 @@ export function WorkIndex() {
           </p>
           <Link
             to="/archive"
-            className="inline-flex shrink-0 items-center gap-1.5 self-start border border-foreground/25 px-4 py-2 font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.16em] text-foreground transition-colors hover:border-accent hover:text-accent sm:self-auto"
+            className="inline-flex min-h-11 shrink-0 items-center gap-1.5 self-start border border-foreground/25 px-4 py-2 font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.16em] text-foreground transition-colors hover:border-accent hover:text-accent sm:self-auto"
           >
             Full archive <ArrowUpRight className="h-3.5 w-3.5" />
           </Link>

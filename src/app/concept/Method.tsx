@@ -151,7 +151,7 @@ export function Method() {
               type="button"
               onClick={() => setShowAllRoles((value) => !value)}
               aria-expanded={showAllRoles}
-              className="mt-5 inline-flex items-center gap-2 border border-foreground/25 px-4 py-2.5 font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.16em] text-foreground transition-colors hover:border-foreground hover:text-accent"
+              className="mt-5 inline-flex min-h-11 items-center gap-2 border border-foreground/25 px-4 py-2.5 font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.16em] text-foreground transition-colors hover:border-foreground hover:text-accent"
             >
               {showAllRoles ? (
                 <>
