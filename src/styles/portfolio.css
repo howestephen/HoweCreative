@@ -42,6 +42,10 @@
   display: inline-flex;
   align-items: center;
   gap: 5px;
+  /* 44px touch target without moving the text: the padding grows the hit
+     area and the negative margin gives the space back. */
+  min-height: 44px;
+  margin-block: -12px;
 }
 .site-header nav a:hover {
   text-decoration: underline;
