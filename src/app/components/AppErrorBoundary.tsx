@@ -1,7 +1,19 @@
+import { useEffect } from "react";
 import { isRouteErrorResponse, useRouteError } from "react-router";
 
 export function AppErrorBoundary() {
   const error = useRouteError();
+  const notFound = isRouteErrorResponse(error) && error.status === 404;
+
+  // A missing page should never be indexed as content.
+  useEffect(() => {
+    if (!notFound) return;
+    const meta = document.createElement("meta");
+    meta.name = "robots";
+    meta.content = "noindex";
+    document.head.appendChild(meta);
+    return () => meta.remove();
+  }, [notFound]);
 
   const title = isRouteErrorResponse(error)
     ? `${error.status} ${error.statusText}`
@@ -21,13 +33,22 @@ export function AppErrorBoundary() {
         </div>
         <h1 className="text-3xl text-foreground">{title}</h1>
         <p className="mt-4 font-mono text-sm leading-relaxed text-muted-foreground">{message}</p>
-        <button
-          type="button"
-          onClick={() => window.location.reload()}
-          className="mt-6 border border-accent bg-accent px-4 py-3 font-mono text-[11px] uppercase tracking-[0.18em] text-accent-foreground transition-colors hover:bg-accent-hover"
-        >
-          Reload
-        </button>
+        {notFound ? (
+          <a
+            href="/"
+            className="mt-6 inline-flex min-h-11 items-center border border-accent bg-accent px-4 py-3 font-mono text-[11px] uppercase tracking-[0.18em] text-accent-foreground transition-colors hover:bg-accent-hover"
+          >
+            Back to the portfolio
+          </a>
+        ) : (
+          <button
+            type="button"
+            onClick={() => window.location.reload()}
+            className="mt-6 min-h-11 border border-accent bg-accent px-4 py-3 font-mono text-[11px] uppercase tracking-[0.18em] text-accent-foreground transition-colors hover:bg-accent-hover"
+          >
+            Reload
+          </button>
+        )}
       </div>
     </div>
   );
