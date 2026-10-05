@@ -10,6 +10,7 @@ import {
   type ProjectMediaItem,
 } from "../data/portfolio";
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
+import { usePageMeta } from "../lib/usePageMeta";
 
 /** Outcome-first teasers - the one line a hiring manager reads. */
 const TEASERS: Record<string, string> = {
@@ -657,6 +658,12 @@ function StudyOverlay({
   const panelRef = useRef<HTMLDivElement>(null);
   const scrollerRef = useRef<HTMLDivElement>(null);
   const titleId = `study-${project.slug}-title`;
+
+  usePageMeta({
+    title: `${project.title} - Stephen Howe`,
+    description: TEASERS[project.slug] ?? project.shortDescription,
+    path: `/?study=${project.slug}`,
+  });
 
   // Hold the page still behind the overlay. Restore to the stylesheet default
   // rather than a captured value so a re-run can never leave it locked.

@@ -76,6 +76,12 @@ behaviour, and conversion paths are approved.
   focus outline, the study overlay no longer adds a second banner, gallery
   scrollers are focusable and labelled, the CV controls sit in a nav landmark,
   Escape works from a video's native controls, and a skip link starts the page.
+- ✓ Audit fixes, 5 October 2026 (WP-7): `robots.txt` names a new `sitemap.xml`
+  (home, archive, CV and each study; no redesign URLs), a `usePageMeta` hook
+  gives the archive, CV and each open study their own title, description,
+  canonical and Open Graph tags, `trailingSlash` is off, and an Apple touch
+  icon, PNG favicon and web manifest are linked. Add a study to the sitemap
+  when adding it to `site-content.json` (a test checks).
 - ✓ Retina image pass, 30 September 2026: cards, study images and gallery
   thumbnails are served through `ResponsiveImage` from generated WebP sizes,
   so every one meets retina resolution; 26 originals shrunk by the 2400px cap

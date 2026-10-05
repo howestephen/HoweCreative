@@ -1,5 +1,6 @@
-import { useEffect } from "react";
 import { Link } from "react-router";
+
+import { usePageMeta } from "../lib/usePageMeta";
 
 // Section labels read as editorial rules rather than headings: small mono
 // caps, accent-coloured, with a hairline running to the right margin. Same
@@ -114,13 +115,12 @@ const CV_STYLES = `
 `;
 
 export function CV() {
-  useEffect(() => {
-    const previousTitle = document.title;
-    document.title = "Stephen Howe - CV";
-    return () => {
-      document.title = previousTitle;
-    };
-  }, []);
+  usePageMeta({
+    title: "Stephen Howe - CV",
+    description:
+      "Creative technologist with 20+ years connecting brand, 3D, motion, product design, and front-end code.",
+    path: "/cv",
+  });
 
   return (
     <div className="cv-page min-h-screen w-full bg-white text-neutral-900">

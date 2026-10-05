@@ -7,6 +7,7 @@ import { portfolioProjects, type ProjectMediaItem } from "../data/portfolio";
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 import { Lightbox } from "../concept/WorkIndex";
 import { ContactFoot } from "../concept/ContactFoot";
+import { usePageMeta } from "../lib/usePageMeta";
 
 // A discipline line per study, so the index reads across practices.
 const DISCIPLINES: Record<string, string> = {
@@ -90,13 +91,12 @@ export function Archive() {
     if (navigationType !== "POP") window.scrollTo(0, 0);
   }, [navigationType]);
 
-  useEffect(() => {
-    const previous = document.title;
-    document.title = "Work archive - Stephen Howe";
-    return () => {
-      document.title = previous;
-    };
-  }, []);
+  usePageMeta({
+    title: "Work archive - Stephen Howe",
+    description:
+      "The full archive has every project in one index, with earlier work from 2009 and its original credits.",
+    path: "/archive",
+  });
 
   // The viewer covers the page, so hold the page still behind it. iOS Safari
   // ignores overflow on body alone, so the root element is locked as well.
