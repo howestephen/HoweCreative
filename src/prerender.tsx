@@ -74,7 +74,7 @@ export function render(path: string) {
   return renderToString(
     <MemoryRouter initialEntries={[path]}>
       <Routes>
-        <Route element={<Layout />}>
+        <Route element={<Layout restoreScroll={false} />}>
           <Route index element={<StudyPrerender />} />
           <Route path="/archive" element={<Archive />} />
           <Route path="/work/:slug" element={<Project />} />

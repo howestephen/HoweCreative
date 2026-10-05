@@ -1,14 +1,20 @@
 import { MotionConfig } from "motion/react";
-import { Link, Outlet, useLocation } from "react-router";
+import { Link, Outlet, ScrollRestoration, useLocation, useNavigationType } from "react-router";
 import { useEffect } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { withBase } from "../lib/base-path";
 
-export function Layout() {
+// The static prerender uses a plain MemoryRouter, where ScrollRestoration
+// cannot run, so it switches restoration off.
+export function Layout({ restoreScroll = true }: { restoreScroll?: boolean }) {
   const { pathname, hash } = useLocation();
+  const navigationType = useNavigationType();
   const isPortraitHome = pathname === "/";
   const isSpatialRoute = isPortraitHome || pathname === "/archive" || pathname.startsWith("/work/");
   useEffect(() => {
+    // Back and Forward (POP) are left to ScrollRestoration, which returns the
+    // visitor to where they were.
+    if (navigationType === "POP") return;
     if (hash) {
       const frame = requestAnimationFrame(() =>
         document.getElementById(hash.slice(1))?.scrollIntoView(),
@@ -16,9 +22,10 @@ export function Layout() {
       return () => cancelAnimationFrame(frame);
     }
     window.scrollTo({ top: 0, behavior: "instant" });
-  }, [pathname, hash]);
+  }, [pathname, hash, navigationType]);
   return (
     <MotionConfig reducedMotion="user">
+      {restoreScroll && <ScrollRestoration />}
       <div className={`portfolio-shell${isSpatialRoute ? " spatial-shell" : ""}${isPortraitHome ? " portrait-home" : ""}`}>
         <a href="#main-content" className="skip-link">
           Skip to content
