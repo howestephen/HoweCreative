@@ -18,6 +18,7 @@ Sites: `main` is production at https://howecreative.co.uk. The redesign branch `
 - 3 October 2026: decision 7 taken as retire now. A-8 is fixed: the 15 unmounted legacy components, `lib/device.ts`, `lib/theme.ts`, `lib/webgl.ts` and their three tests are removed.
 - 5 October 2026, main: WP-2 is done locally and awaits a push (needs permission). A-6: the gallery closes whenever no study is open. A-1: the archive scrolls to the top only on a fresh visit, not on Back or Forward. C-5: the nine videos without posters have the redesign's posters copied in and referenced. C-1 was already fixed. Live phone checks remain to be done after the push.
 - 5 October 2026, main: WP-4 is done locally and awaits a push (needs permission). C-4 (main): header, contact and footer links have a 44px minimum height, the gallery strip buttons have `p-2.5` and the lightbox arrows are 44px square. C-7: CV labels are 10px at `neutral-500`, and concept eyebrows are 11px on phones and 10px from `sm` up. C-11: the open-to-roles dot pulses only under `motion-safe`. The tests assert the classes (jsdom has no layout); the 375px bounding-box check and the reduced-motion animation count remain to be run live after the push.
+- 5 October 2026, main: WP-13 is done locally and awaits a push (needs permission). Main's two empty `<track kind="captions" />` elements are removed; a test asserts every rendered `track` has a `src` that exists under `public/`. The redesign half has no captions to add (decision 5).
 
 ## Decisions for Stephen
 
