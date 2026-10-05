@@ -481,7 +481,7 @@ export function PlotterMark() {
           aria-label={`Generative line drawing, seed ${seedLabel}`}
         />
       </div>
-      <figcaption className="flex items-center justify-between gap-3 border-x border-b border-border bg-card px-3 py-2 font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
+      <figcaption className="flex items-center justify-between gap-3 border-x border-b border-border bg-card px-3 py-2 font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
         <span>Generative drawing / seed {seedLabel}</span>
         <button
           type="button"

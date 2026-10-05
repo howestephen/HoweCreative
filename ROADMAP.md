@@ -66,6 +66,9 @@ behaviour, and conversion paths are approved.
 - ✓ Audit fixes, 5 October 2026 (WP-2): Back closes an open gallery with its
   study, Back to the archive keeps the scroll position, and nine study videos
   have posters.
+- ✓ Audit fixes, 5 October 2026 (WP-4): header, contact and footer links and
+  the lightbox arrows reach 44px on phones, CV labels and eyebrows are larger,
+  and the open-to-roles dot stops pulsing under reduced motion.
 - ✓ Retina image pass, 30 September 2026: cards, study images and gallery
   thumbnails are served through `ResponsiveImage` from generated WebP sizes,
   so every one meets retina resolution; 26 originals shrunk by the 2400px cap

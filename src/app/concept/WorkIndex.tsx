@@ -115,9 +115,9 @@ function ScrollStrip({
   return (
     <div>
       <div className="mb-2 flex items-center justify-between gap-3">
-        <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-accent">{label}</span>
+        <span className="font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.18em] text-accent">{label}</span>
         <div className="flex items-center gap-2">
-          <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
+          <span className="font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
             {count} {count === 1 ? unit : `${unit}s`}
           </span>
           <div className="flex gap-1">
@@ -125,7 +125,7 @@ function ScrollStrip({
               type="button"
               onClick={() => scrollByPage(-1)}
               aria-label={`Scroll ${label.toLowerCase()} left`}
-              className="border border-border bg-card p-1 text-foreground transition-colors hover:border-accent hover:text-accent"
+              className="border border-border bg-card p-2.5 text-foreground transition-colors hover:border-accent hover:text-accent"
             >
               <ChevronLeft className="h-3.5 w-3.5" />
             </button>
@@ -133,7 +133,7 @@ function ScrollStrip({
               type="button"
               onClick={() => scrollByPage(1)}
               aria-label={`Scroll ${label.toLowerCase()} right`}
-              className="border border-border bg-card p-1 text-foreground transition-colors hover:border-accent hover:text-accent"
+              className="border border-border bg-card p-2.5 text-foreground transition-colors hover:border-accent hover:text-accent"
             >
               <ChevronRight className="h-3.5 w-3.5" />
             </button>
@@ -264,7 +264,7 @@ function StudyDetail({
           const isOutcome = section.title === "Outcome";
           return (
             <div key={section.title} className={isOutcome ? "border-l-2 border-accent pl-4" : undefined}>
-              <div className="mb-2 font-mono text-[10px] uppercase tracking-[0.18em] text-accent">
+              <div className="mb-2 font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.18em] text-accent">
                 {section.title}
               </div>
               <SectionBody body={section.body} emphasis={isOutcome} />
@@ -276,7 +276,7 @@ function StudyDetail({
           {[project.role, project.client, project.status].map((chip) => (
             <span
               key={chip}
-              className="border border-border bg-card px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground"
+              className="border border-border bg-card px-2.5 py-1 font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.14em] text-muted-foreground"
             >
               {chip}
             </span>
@@ -474,7 +474,7 @@ export function Lightbox({
 
       {/* Controls float above the image and never affect its layout. */}
       <div className="pointer-events-none absolute inset-x-0 top-0 flex items-start justify-between gap-4 p-3 sm:p-4">
-        <span className="pointer-events-auto bg-background/80 px-2.5 py-1.5 font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground sm:text-[11px]">
+        <span className="pointer-events-auto bg-background/80 px-2.5 py-1.5 font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
           {title} / {index + 1} of {images.length}
         </span>
         <button
@@ -494,7 +494,7 @@ export function Lightbox({
             type="button"
             onClick={() => onStep(-1)}
             aria-label="Previous image"
-            className="absolute left-2 top-1/2 -translate-y-1/2 border border-border bg-card/90 p-2 text-foreground shadow-md transition-colors hover:border-accent hover:text-accent sm:left-4"
+            className="absolute left-2 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center border border-border bg-card/90 text-foreground shadow-md transition-colors hover:border-accent hover:text-accent sm:left-4"
           >
             <ChevronLeft className="h-5 w-5" />
           </button>
@@ -502,7 +502,7 @@ export function Lightbox({
             type="button"
             onClick={() => onStep(1)}
             aria-label="Next image"
-            className="absolute right-2 top-1/2 -translate-y-1/2 border border-border bg-card/90 p-2 text-foreground shadow-md transition-colors hover:border-accent hover:text-accent sm:right-4"
+            className="absolute right-2 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center border border-border bg-card/90 text-foreground shadow-md transition-colors hover:border-accent hover:text-accent sm:right-4"
           >
             <ChevronRight className="h-5 w-5" />
           </button>
@@ -534,7 +534,7 @@ function CardImage({ project, featured }: { project: PortfolioProject; featured:
   if (!project.image) {
     return (
       <div className="flex h-full w-full items-end bg-neutral-900 p-4">
-        <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-neutral-400">
+        <span className="font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.18em] text-neutral-400">
           {shortCategory(project)}
         </span>
       </div>
@@ -605,7 +605,7 @@ function StudyCard({
               : "flex min-w-0 flex-1 flex-col gap-1 px-4 py-3 sm:gap-2 sm:p-5"
           }
         >
-          <div className="flex items-baseline justify-between gap-3 font-mono text-[10px] uppercase tracking-[0.14em]">
+          <div className="flex items-baseline justify-between gap-3 font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.14em]">
             <span className="min-w-0 truncate text-accent">
               {indexLabel(index)} · {shortCategory(project)}
             </span>
@@ -631,7 +631,7 @@ function StudyCard({
             {teaser}
           </p>
           <span
-            className="mt-auto inline-flex items-center gap-1.5 self-end pt-0.5 font-mono text-[10px] uppercase tracking-[0.16em] text-foreground transition-colors group-hover:text-accent sm:pt-2"
+            className="mt-auto inline-flex items-center gap-1.5 self-end pt-0.5 font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.16em] text-foreground transition-colors group-hover:text-accent sm:pt-2"
           >
             Read more
             <ArrowUpRight className="h-3.5 w-3.5" />
@@ -719,7 +719,7 @@ function StudyOverlay({
         >
           <header className="sticky top-0 z-10 flex items-start justify-between gap-4 border-b border-border bg-background px-5 py-4 sm:px-8">
             <div className="min-w-0">
-              <div className="font-mono text-[10px] uppercase tracking-[0.14em] text-accent">
+              <div className="font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.14em] text-accent">
                 {indexLabel(index)} · {shortCategory(project)} · {project.year}
               </div>
               <h2 id={titleId} className="mt-1 text-2xl md:text-3xl">
@@ -820,7 +820,7 @@ export function WorkIndex() {
       <div className="mx-auto max-w-6xl px-6 py-20 md:py-24">
         <div className="mb-4 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
           <h2 className="text-3xl md:text-4xl">Selected work</h2>
-          <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+          <span className="font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
             2021-2026 · {portfolioProjects.length} projects
           </span>
         </div>
@@ -850,7 +850,7 @@ export function WorkIndex() {
           </p>
           <Link
             to="/archive"
-            className="inline-flex shrink-0 items-center gap-1.5 self-start border border-foreground/25 px-4 py-2 font-mono text-[10px] uppercase tracking-[0.16em] text-foreground transition-colors hover:border-accent hover:text-accent sm:self-auto"
+            className="inline-flex shrink-0 items-center gap-1.5 self-start border border-foreground/25 px-4 py-2 font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.16em] text-foreground transition-colors hover:border-accent hover:text-accent sm:self-auto"
           >
             Full archive <ArrowUpRight className="h-3.5 w-3.5" />
           </Link>

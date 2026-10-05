@@ -39,7 +39,7 @@ export function Capabilities() {
       <div className="mx-auto max-w-6xl px-6 py-20 md:py-24">
         <div className="mb-4 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
           <h2 className="text-3xl md:text-4xl">What I do</h2>
-          <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+          <span className="font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
             three practices · one mindset
           </span>
         </div>
@@ -77,7 +77,7 @@ export function Capabilities() {
               {/* mt-auto keeps the tools row bottom-aligned across cards; the
                   ul's mb-6 guarantees the divider never crowds the last bullet
                   even in the tallest card, where mt-auto collapses to zero. */}
-              <div className="mt-auto whitespace-nowrap border-t border-border pt-4 font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
+              <div className="mt-auto whitespace-nowrap border-t border-border pt-4 font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
                 {practice.tools}
               </div>
             </motion.div>
