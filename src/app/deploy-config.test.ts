@@ -50,3 +50,24 @@ describe("fonts", () => {
     expect(css).toMatch(/@fontsource\/ibm-plex-mono/);
   });
 });
+
+describe("content", () => {
+  const projects = (siteContent as { caseStudies: { projects: { media?: { src: string; alt?: string }[] }[] } })
+    .caseStudies.projects;
+
+  it("never gives two different images the same alt", () => {
+    const byAlt = new Map<string, Set<string>>();
+    for (const item of projects.flatMap((project) => project.media ?? [])) {
+      if (!item.alt) continue;
+      byAlt.set(item.alt, (byAlt.get(item.alt) ?? new Set()).add(item.src));
+    }
+    const shared = [...byAlt].filter(([, srcs]) => srcs.size > 1).map(([alt]) => alt);
+    expect(shared).toEqual([]);
+  });
+
+  it("links the repository at its current name", () => {
+    expect((siteContent as { profile: { repoUrl: string } }).profile.repoUrl).toBe(
+      "https://github.com/howestephen/HoweCreative",
+    );
+  });
+});
