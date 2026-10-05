@@ -16,6 +16,7 @@ Sites: `main` is production at https://howecreative.co.uk. The redesign branch `
 - 3 October 2026: decision 5 taken as no captions. C-6 is won't-fix; WP-13 is reduced to removing main's empty captions track.
 - 3 October 2026: decision 6 done. The untracked private files are now under `docs/private/` (git-ignored) on Stephen's Mac. D-2 is fixed.
 - 3 October 2026: decision 7 taken as retire now. A-8 is fixed: the 15 unmounted legacy components, `lib/device.ts`, `lib/theme.ts`, `lib/webgl.ts` and their three tests are removed.
+- 5 October 2026, main: WP-2 is done locally and awaits a push (needs permission). A-6: the gallery closes whenever no study is open. A-1: the archive scrolls to the top only on a fresh visit, not on Back or Forward. C-5: the nine videos without posters have the redesign's posters copied in and referenced. C-1 was already fixed. Live phone checks remain to be done after the push.
 
 ## Decisions for Stephen
 
