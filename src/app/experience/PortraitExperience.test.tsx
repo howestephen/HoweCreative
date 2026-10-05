@@ -127,7 +127,13 @@ describe("portrait review experience", () => {
     vi.spyOn(window, "scrollY", "get").mockReturnValue(600);
     const { container } = mount();
     await act(async () => { await new Promise(resolve => setTimeout(resolve, 40)); });
-    expect((container.querySelector(".particle-hero-inner") as HTMLElement).inert).toBe(true);
+    // The faded scroll control leaves the tab order, but the page's only h1
+    // stays in the accessibility tree.
+    expect((container.querySelector(".particle-scroll") as HTMLElement).inert).toBe(true);
+    fireEvent.load(container.querySelector(".portrait-source-crop img")!);
+    await act(async () => { await new Promise(resolve => setTimeout(resolve, 40)); });
+    const heading = screen.getByRole("heading", { level: 1 });
+    expect(heading.closest("[inert]")).toBeNull();
   });
 
   it("serves the reference portrait at 1x and 2x", async () => {
@@ -169,6 +175,9 @@ describe("portrait review experience", () => {
     expect(createAudio).toHaveBeenCalledOnce();
     fireEvent.click(screen.getByRole("button", { name: "Turn sound off" }));
     expect(engine.update).toHaveBeenCalledWith(0, 0, true);
+    // Once the fade is done the engine stops scheduling notes and the
+    // AudioContext suspends, rather than running silently.
+    await vi.waitFor(() => expect(engine.suspend).toHaveBeenCalled(), { timeout: 3000 });
     unmount();
     expect(engine.close).toHaveBeenCalledOnce();
   });

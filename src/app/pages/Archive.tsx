@@ -48,7 +48,7 @@ export function Archive() {
         </div>
       </header>
 
-      <main id="archive-projects" className="archive-main">
+      <div id="archive-projects" className="archive-main">
         <section className="archive-section" aria-labelledby="current-title">
           <div className="archive-section-heading">
             <p>2021 to now</p>
@@ -138,7 +138,7 @@ export function Archive() {
             ))}
           </div>
         </section>
-      </main>
+      </div>
       <div className="spatial-contact"><ContactFoot variant="spatial" /></div>
     </div>
   );

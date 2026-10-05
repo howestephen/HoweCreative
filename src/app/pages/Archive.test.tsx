@@ -9,6 +9,12 @@ afterEach(() => {
 });
 
 describe("work archive", () => {
+  it("adds no second main landmark inside the layout's main", () => {
+    const { container } = render(<MemoryRouter><Archive /></MemoryRouter>);
+    expect(container.querySelectorAll("main")).toHaveLength(0);
+    expect(container.querySelector("#archive-projects")).not.toBeNull();
+  });
+
   it("lists every public project as a collapsed row that opens on demand", () => {
     const { container } = render(<MemoryRouter><Archive /></MemoryRouter>);
 

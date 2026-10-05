@@ -212,7 +212,10 @@ export function PortraitExperience() {
       if (tools) tools.inert = actualY > height * 0.45;
       element.style.setProperty("--pointer-x", String(pointerX));
       element.style.setProperty("--pointer-y", String(pointerY));
-      if (intro) intro.inert = state.intro < 0.05;
+      // Only the faded scroll control leaves the tab order; the h1 stays in
+      // the accessibility tree as the page's only top-level heading.
+      const scrollCue = intro?.querySelector<HTMLElement>(".particle-scroll");
+      if (scrollCue) scrollCue.inert = state.intro < 0.05;
       motion.current.invalidate?.();
       if (!reduced && (Math.abs(actualY - currentY) > 0.1 || motion.current.velocity > 0.001)) frame = requestAnimationFrame(update);
     };
@@ -320,6 +323,11 @@ export function PortraitExperience() {
       soundOn.current = false;
       setSound(false);
       audio.current?.update(0, 0, true);
+      // Let the 0.25s gain fade finish, then stop the note scheduler and
+      // suspend the AudioContext instead of running it silently.
+      window.setTimeout(() => {
+        if (!soundOn.current && alive.current) void audio.current?.suspend();
+      }, 1500);
       return;
     }
     audioPending.current = true;
