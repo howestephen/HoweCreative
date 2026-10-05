@@ -69,6 +69,12 @@
   font-size: 13px;
   line-height: 1.7;
 }
+@media screen {
+  /* Taller tap area on screen; inline padding leaves the line box alone. */
+  .cv-contact a {
+    padding-block: 12px;
+  }
+}
 .cv-document a {
   text-decoration: underline;
   text-underline-offset: 3px;
