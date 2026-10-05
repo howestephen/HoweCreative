@@ -130,6 +130,12 @@ describe("portrait review experience", () => {
     expect((container.querySelector(".particle-hero-inner") as HTMLElement).inert).toBe(true);
   });
 
+  it("serves the reference portrait at 1x and 2x", async () => {
+    const { container } = mount();
+    const img = container.querySelector(".portrait-source-crop img") as HTMLImageElement;
+    expect(img.getAttribute("srcset")).toMatch(/ 1x, .+ 2x$/);
+  });
+
   it("leaves a portrait and usable HTML when the renderer fails", async () => {
     const { container } = mount();
     await screen.findByTestId("test-scene");

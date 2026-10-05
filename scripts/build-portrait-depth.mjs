@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Builds a per-pixel depth map for the homepage particle portrait and packs
-// it beside the colour crop in a single PNG: public/portrait/portrait-source.png.
+// it beside the colour crop in a single lossless WebP: public/portrait/portrait-source.webp.
 //
 // What it does:
 // 1. Loads docs/reviews/2026-09-07-design-reset/portrait-reference.png and
@@ -22,7 +22,7 @@
 //    background masking of the depth channel itself. A small Gaussian blur
 //    (sigma about 1.5px at 700x650) is applied to the depth channel to stop
 //    per-pixel model noise turning into z jitter, then
-//    public/portrait/portrait-source.png is written: 1400x650, 8-bit RGB,
+//    public/portrait/portrait-source.webp is written (lossless): 1400x650, 8-bit RGB,
 //    no alpha. Left half (700x650) is the crop's colour pixels unchanged;
 //    right half (700x650) is the depth as grey (R=G=B=depth).
 // 5. Copies the same image to a review sheet under the OS temp directory
@@ -47,7 +47,7 @@ const SOURCE_IMAGE = path.join(
   REPO_ROOT,
   'docs/reviews/2026-09-07-design-reset/portrait-reference.png',
 );
-const OUTPUT_IMAGE = path.join(REPO_ROOT, 'public/portrait/portrait-source.png');
+const OUTPUT_IMAGE = path.join(REPO_ROOT, 'public/portrait/portrait-source.webp');
 const WORK_DIR = path.join(os.tmpdir(), 'howe-portrait-depth');
 const REVIEW_SHEET = path.join(WORK_DIR, 'depth-review.png');
 
@@ -313,22 +313,22 @@ async function main() {
     }
 
     await sharp(packed, { raw: { width: packedWidth, height: CROP.height, channels: 3 } })
-      .png()
+      .webp({ lossless: true, effort: 6 })
       .toFile(OUTPUT_IMAGE);
     console.log(`Wrote ${OUTPUT_IMAGE}`);
 
     // Review sheet: the packed image is already about 1400x650, so it is
     // copied as-is rather than resized again.
-    await fs.copyFile(OUTPUT_IMAGE, REVIEW_SHEET);
+    await sharp(OUTPUT_IMAGE).png().toFile(REVIEW_SHEET);
     console.log(`Wrote review sheet: ${REVIEW_SHEET}`);
 
-    // Verify the written PNG's dimensions and channel count by reading it back.
+    // Verify the written plate's dimensions and channel count by reading it back.
     const check = await sharp(OUTPUT_IMAGE).metadata();
     console.log(
       `Verification: ${OUTPUT_IMAGE} is ${check.width}x${check.height}, ${check.channels} channels, hasAlpha=${check.hasAlpha}, format=${check.format}`,
     );
     if (check.width !== 1400 || check.height !== 650 || check.channels !== 3 || check.hasAlpha) {
-      throw new Error('Output PNG does not match the required 1400x650, 8-bit RGB, no-alpha spec.');
+      throw new Error('Output plate does not match the required 1400x650, 8-bit RGB, no-alpha spec.');
     }
 
     console.log(`Model used: ${modelId}`);
