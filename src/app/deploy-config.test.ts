@@ -66,3 +66,19 @@ describe("security and cache headers (B-3, B-5)", () => {
     }
   });
 });
+
+describe("content (D-3, B-9)", () => {
+  it("never gives two different images the same alt", () => {
+    const media = (siteContent as unknown as { caseStudies: { projects: { media?: { src: string; alt?: string }[] }[] } })
+      .caseStudies.projects.flatMap((project) => project.media ?? []);
+    const byAlt = new Map<string, Set<string>>();
+    for (const item of media) if (item.alt) byAlt.set(item.alt, (byAlt.get(item.alt) ?? new Set()).add(item.src));
+    expect([...byAlt].filter(([, srcs]) => srcs.size > 1).map(([alt]) => alt)).toEqual([]);
+  });
+
+  it("links the repository at its current name", () => {
+    expect((siteContent as unknown as { profile: { repoUrl: string } }).profile.repoUrl).toBe(
+      "https://github.com/howestephen/HoweCreative",
+    );
+  });
+});
