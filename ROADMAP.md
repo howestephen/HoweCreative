@@ -82,6 +82,9 @@ behaviour, and conversion paths are approved.
   canonical and Open Graph tags, `trailingSlash` is off, and an Apple touch
   icon, PNG favicon and web manifest are linked. Add a study to the sitemap
   when adding it to `site-content.json` (a test checks).
+- ✓ Audit fixes, 5 October 2026 (WP-8): Fraunces, Instrument Sans and IBM Plex Mono
+  are bundled from Fontsource packages instead of Google Fonts, with the body and
+  headline faces preloaded; no third-party request remains.
 - ✓ Retina image pass, 30 September 2026: cards, study images and gallery
   thumbnails are served through `ResponsiveImage` from generated WebP sizes,
   so every one meets retina resolution; 26 originals shrunk by the 2400px cap
