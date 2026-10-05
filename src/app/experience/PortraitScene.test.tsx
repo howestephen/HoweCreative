@@ -577,12 +577,15 @@ describe("portrait plate asset", () => {
   it("ships the packed colour and depth plate the scene fetches at runtime", () => {
     // The scene loads this from public/ with new Image(), which no build
     // check follows, so this is the only gate that notices a missing plate.
-    expect(PORTRAIT_POINTS_SOURCE.endsWith("/portrait/portrait-source.png")).toBe(true);
-    const plate = readFileSync(resolve(process.cwd(), "public/portrait/portrait-source.png"));
-    expect(plate.subarray(1, 4).toString("ascii")).toBe("PNG");
-    expect(plate.readUInt32BE(16)).toBe(PORTRAIT_CROP.width * 2);
-    expect(plate.readUInt32BE(20)).toBe(PORTRAIT_CROP.height);
-    expect(plate[24]).toBe(8);
-    expect(plate[25]).toBe(2);
+    // A lossless WebP (cwebp -lossless -exact) of the original PNG plate:
+    // pixel-identical, about 43% smaller on a phone.
+    expect(PORTRAIT_POINTS_SOURCE.endsWith("/portrait/portrait-source.webp")).toBe(true);
+    const plate = readFileSync(resolve(process.cwd(), "public/portrait/portrait-source.webp"));
+    expect(plate.subarray(0, 4).toString("ascii")).toBe("RIFF");
+    expect(plate.subarray(8, 16).toString("ascii")).toBe("WEBPVP8L");
+    // VP8L header: 14-bit width-1 and height-1 after the 0x2f signature byte.
+    const bits = plate.readUInt32LE(21);
+    expect((bits & 0x3fff) + 1).toBe(PORTRAIT_CROP.width * 2);
+    expect(((bits >> 14) & 0x3fff) + 1).toBe(PORTRAIT_CROP.height);
   });
 });

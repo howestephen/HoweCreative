@@ -1,6 +1,7 @@
 import portraitSource from "../../../docs/reviews/2026-09-07-design-reset/portrait-reference-2x.webp";
+import portraitSource1x from "../../../docs/reviews/2026-09-07-design-reset/portrait-reference-1x.webp";
 
-export { portraitSource };
+export { portraitSource, portraitSource1x };
 // The opening is a depth-mapped point cloud, not a stack of flat cards.
 // The left half of PORTRAIT_POINTS_SOURCE is the approved 2D likeness, cropped
 // exactly as PORTRAIT_CROP describes it; the right half is a per-pixel depth
@@ -14,7 +15,7 @@ export { portraitSource };
 export const PORTRAIT_CROP = { x: 440, y: 8, width: 700, height: 650 };
 // Packed colour + depth plate, 1400x650: colour on the left, depth on the
 // right. Served from public/ so the sampler fetches one image, not two.
-export const PORTRAIT_POINTS_SOURCE = "/portrait/portrait-source.png";
+export const PORTRAIT_POINTS_SOURCE = "/portrait/portrait-source.webp";
 // The hero's physical scroll range and the share of it the release occupies.
 // The work heading reaches the bottom of the viewport at
 // (HERO_HEIGHT - 1) / RELEASE_LENGTH = 0.75 of the release, once the head has

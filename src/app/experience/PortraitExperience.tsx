@@ -11,7 +11,7 @@ import { useReducedMotion } from "motion/react";
 import { ContactFoot } from "../concept/ContactFoot";
 import { ResponsiveImage } from "../components/ResponsiveImage";
 import { projects as portfolioProjects, projectEditorial } from "../data/project-index";
-import { acceptsPortraitPress, clamp, isPortraitSurface, portraitFraming, portraitSource, scrollState, smooth, type ParticleMotion } from "./portrait-particles";
+import { acceptsPortraitPress, clamp, isPortraitSurface, portraitFraming, portraitSource, portraitSource1x, scrollState, smooth, type ParticleMotion } from "./portrait-particles";
 import { createPortraitAudio, type PortraitAudio } from "./portrait-audio";
 import "../../styles/portrait.css";
 
@@ -343,7 +343,7 @@ export function PortraitExperience() {
     <div className="particle-experience" ref={root} inert={loading} aria-busy={loading} data-motion={reduced ? "reduced" : "full"} data-renderer={failed ? "fallback" : ready && !reduced ? "ready" : "poster"}>
       <div className="particle-environment" aria-hidden="true">
         <div className="particle-fallback">
-          <div className="portrait-source-crop"><img src={portraitSource} alt="" width="1536" height="1024" fetchPriority="high" onLoad={() => setPosterReady(true)} onError={() => setPosterFailed(true)} /></div>
+          <div className="portrait-source-crop"><img src={portraitSource} srcSet={`${portraitSource1x} 1x, ${portraitSource} 2x`} alt="" width="1536" height="1024" fetchPriority="high" onLoad={() => setPosterReady(true)} onError={() => setPosterFailed(true)} /></div>
         </div>
         {mounted && !reduced && !failed && (
           <PortraitBoundary onFailure={onUnavailable}>
