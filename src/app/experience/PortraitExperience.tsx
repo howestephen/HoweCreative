@@ -28,8 +28,7 @@ const areaTints: Record<string, string> = {
 };
 // Each preview shows the project's identity, whole and centred on one plain
 // panel: a wordmark, a mark, a rendered asset or a screen. Only Quiver's
-// poster and the menu's phone view fill the panel; everything else is
-// shown whole.
+// poster fills the panel; everything else is shown whole.
 type Preview = { src: string; alt: string; fit: "contain" | "cover"; focus?: string };
 const projectFrames: { slug: string; description: string; icon: typeof Feather; area: string; preview: Preview }[] = [
   { slug: "quiver", description: "Art direction and generative film", icon: Feather, area: "Film",

@@ -80,7 +80,9 @@ An audit of both sites found 39 issues. The findings and the work plan live on
   source file. 35 originals shrunk by the 2400px cap are restored.
 - [x] Remove six repeated Quiver stills from the gallery and give the Quiver
   test videos and three Academy videos posters that show their subject.
-- [ ] Recapture the screenshots taken at 1x at 2x: Badger Club and Noticia
+- [x] Done: Badger Club and Noticia Lingo were recaptured at 2x on 30 September
+  (commit 555c853), and the UNCX website sections and Academy pages on
+  6 October. Original item: Recapture the screenshots taken at 1x at 2x: Badger Club and Noticia
   Lingo (1920px), the UNCX website sections and Academy pages (1440px). They
   are the images still below retina resolution when shown large.
 - [ ] Decide on the 15 images the September image review marked CUT, listed
@@ -246,7 +248,9 @@ Severity 1, disclosure and accuracy:
 Severity 2, evidence quality:
 
 - [ ] Apply the [image review](docs/reviews/2026-09-18-case-study-image-review.md) verdicts to what is actually served. `src/app/pages/Project.tsx:239` builds "The complete collection" from the whole `project.media` array, so fifteen images marked CUT are still published: six on UNCX Video, three on Rebrand, three on Menu, two on Badger Club, one on Noticia Lingo. Four are also still inside curated chapters: `youtube-thumbnails.webp`, `after-effects-ui.webp`, `research.webp`, `variables-setup.webp` and `database-schema.webp` (used twice). Curate the collection rather than rendering every file.
-- [ ] Correct or remove the caption at `src/app/data/project-stories.ts:58`, which describes `youtube-thumbnails.webp` as published output in one visual language. The file is an asset-browser panel of unreadable icons.
+- [x] Resolved 6 October 2026: the finding misdescribed the image. It is a board
+  of UNCX Academy YouTube thumbnails, so the caption stands. Original item:
+  Correct or remove the caption at `src/app/data/project-stories.ts:58`, which describes `youtube-thumbnails.webp` as published output in one visual language. The file is an asset-browser panel of unreadable icons.
 - [ ] Give `/work/ai-portfolio-system` visual evidence. It renders zero images, so the two-column chapter layout collapses into an off-centre text column, and its heading claims a demonstrable process with nothing beneath it. At minimum: a scoped task or spec, a review or diff, and a before and after.
 - [ ] Source three or four finished output frames for UNCX Video and 3D. One rendered asset exists; everything else is software chrome. Until then the case cannot carry its own page.
 - [ ] Resolve Noticia Lingo's light screens against the dark system. Seven white captures on `#060707` with no framing device read as pasted in. The product is genuinely light mode, so this is a frame or card treatment, not a recapture.
