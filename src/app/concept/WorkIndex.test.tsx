@@ -45,14 +45,15 @@ describe("WorkIndex", () => {
     expect(within(dialog).getByRole("button", { name: "Close" })).toHaveFocus();
   });
 
-  it("features the Quiver advanced film at the top of its study", () => {
+  it("features the Quiver advanced film with the phone at the top of its study", () => {
     renderAt("/?study=quiver");
     const dialog = screen.getByRole("dialog", { name: "Quiver" });
     const featured = dialog.querySelector("video.aspect-video");
-    expect(featured).toHaveAttribute("src", "/case-studies/quiver/advanced.mp4");
+    // The edits with the phone are the primary films; the plain cuts are secondary.
+    expect(featured).toHaveAttribute("src", "/case-studies/quiver/advanced-with-phone.mp4");
     // Featured once, not repeated in the strip: the other three finals plus
     // three process clips.
-    expect(dialog.querySelectorAll('video[src$="/advanced.mp4"]')).toHaveLength(1);
+    expect(dialog.querySelectorAll('video[src$="/advanced-with-phone.mp4"]')).toHaveLength(1);
     expect(dialog.querySelectorAll("video")).toHaveLength(7);
   });
 

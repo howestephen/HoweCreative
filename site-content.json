@@ -73,18 +73,6 @@
         "media": [
           {
             "type": "video",
-            "src": "/case-studies/quiver/advanced.mp4",
-            "poster": "/case-studies/quiver/advanced.poster.jpg",
-            "alt": "Quiver advanced film without phone imagery, 58 seconds, including AI-generated music"
-          },
-          {
-            "type": "video",
-            "src": "/case-studies/quiver/basic.mp4",
-            "poster": "/case-studies/quiver/basic.poster.jpg",
-            "alt": "Quiver basic film without phone imagery, 42 seconds, including AI-generated music"
-          },
-          {
-            "type": "video",
             "src": "/case-studies/quiver/advanced-with-phone.mp4",
             "poster": "/case-studies/quiver/advanced-with-phone.poster.jpg",
             "alt": "Quiver advanced film with phone imagery, 58 seconds, including AI-generated music"
@@ -94,6 +82,18 @@
             "src": "/case-studies/quiver/basic-with-phone.mp4",
             "poster": "/case-studies/quiver/basic-with-phone.poster.jpg",
             "alt": "Quiver basic film with phone imagery, 42 seconds, including AI-generated music"
+          },
+          {
+            "type": "video",
+            "src": "/case-studies/quiver/advanced.mp4",
+            "poster": "/case-studies/quiver/advanced.poster.jpg",
+            "alt": "Quiver advanced film without phone imagery, 58 seconds, including AI-generated music"
+          },
+          {
+            "type": "video",
+            "src": "/case-studies/quiver/basic.mp4",
+            "poster": "/case-studies/quiver/basic.poster.jpg",
+            "alt": "Quiver basic film without phone imagery, 42 seconds, including AI-generated music"
           },
           {
             "type": "video",

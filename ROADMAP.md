@@ -70,6 +70,8 @@ behaviour, and conversion paths are approved.
   wide and 1 MB. Every Figma page and frame is archived in the git-ignored
   `assets-archive/UNCX Archive/screenshots/`; replaced originals are in
   `assets-archive/replaced-by-figma-exports-2026-10-06/`.
+- ✓ Quiver, 6 October 2026: the study features the advanced film with the
+  phone; the edits without the phone follow as secondary films.
 - ✓ Audit fixes, 3 October 2026: `/work/<slug>` links from the CVs redirect
   to the study, crawlers are kept off `/particle-redesign` by `robots.txt`, and
   the two white logotypes are replaced by grounded and black-text versions.
