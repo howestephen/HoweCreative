@@ -17,6 +17,10 @@
   the Meteora, Solana Lockers and Robinhood Chain launch films added.
 - [x] The rebrand case study opens on the same card, not the launch film,
   which moves to the collection.
+- [x] Rebrand website sections recaptured whole from uncx.network at 2x: the
+  earlier crops were fixed slices that cut through sections. The agency's
+  concept directions are removed, since not all were used. Replaced files are
+  in `assets-archive/replaced-2026-10-06-section-recrops/`.
 - Replaced files are in `assets-archive/replaced-2026-10-06-media-pass/`.
 
 ## Figma source exports - 6 October 2026
