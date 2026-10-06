@@ -1,4 +1,6 @@
 import { act, cleanup, fireEvent, render, screen } from "@testing-library/react";
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
 import { MemoryRouter } from "react-router";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { acceptsHeroPageDown, PortraitExperience } from "./PortraitExperience";
@@ -194,6 +196,30 @@ describe("portrait review experience", () => {
     fireEvent.click(screen.getByRole("button", { name: "Close preview" }));
     expect(document.body.style.overflow).toBe("auto");
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+  });
+
+  it("shows every preview whole except Quiver's poster, and opens the rebrand on its old-to-new card", async () => {
+    mount();
+    await screen.findByTestId("test-scene");
+    fireEvent.click(screen.getByRole('button', { name: 'Scene ready', hidden: true }));
+    const preview = (name: string) => {
+      fireEvent.click(screen.getByRole("button", { name: `Open ${name} preview` }));
+      const visual = document.querySelector(".spatial-dialog-visual") as HTMLElement;
+      const result = { fit: visual.dataset.fit, src: (visual.querySelector("img") as HTMLImageElement).getAttribute("src") };
+      fireEvent.click(screen.getByRole("button", { name: "Close preview" }));
+      return result;
+    };
+    expect(preview("Quiver").fit).toBe("cover");
+    expect(preview("UNCX Unified Menu")).toEqual({ fit: "contain", src: "/case-studies/uncx-menu/menu-open-phone.webp" });
+    expect(preview("UNCX Company Rebrand")).toEqual({ fit: "contain", src: "/case-studies/uncx-rebrand/card.webp" });
+  });
+
+  it("pins the case-study button to the bottom of the preview on phones only", () => {
+    const css = readFileSync(resolve("src/styles/portrait.css"), "utf8");
+    const phone = css.slice(css.indexOf("@media (max-width: 650px)"), css.indexOf("@media (prefers-reduced-motion"));
+    const rule = (source: string) => [...source.matchAll(/\.spatial-dialog-cta \{([^}]*)\}/g)].map((m) => m[1]);
+    expect(rule(phone).join(";")).toMatch(/position: sticky;\s*bottom: 0/);
+    expect(rule(css.replace(phone, "")).join(";")).not.toMatch(/sticky/);
   });
 
   it("covers the page until the first rendered frame, even after the source image loads", async () => {
