@@ -300,6 +300,11 @@
           },
           {
             "type": "image",
+            "src": "/case-studies/solana-diary/layout-approaches.webp",
+            "alt": "Four layout approaches explored for the ranked data posts"
+          },
+          {
+            "type": "image",
             "src": "/case-studies/solana-diary/diary weekly schedule.webp",
             "alt": "Automated weekly posting schedule across three daily slots"
           },
@@ -1266,6 +1271,11 @@
           },
           {
             "type": "image",
+            "src": "/case-studies/uncx-app-concepts/blueprint-desktop-token-basics.webp",
+            "alt": "Blueprint minter desktop concept - token basics step"
+          },
+          {
+            "type": "image",
             "src": "/case-studies/uncx-app-concepts/stealth-launch-concepts.webp",
             "alt": "Stealth launch concepts"
           },
@@ -1286,13 +1296,18 @@
           },
           {
             "type": "image",
-            "src": "/case-studies/uncx-app-concepts/nft-minting-wireframes.webp",
-            "alt": "NFT minting wireframes"
+            "src": "/case-studies/uncx-app-concepts/nft-minter-trait-preview.webp",
+            "alt": "NFT minter trait preview step"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-app-concepts/vesting-flow-wireframes.webp",
+            "alt": "Token vesting flow wireframes"
           },
           {
             "type": "image",
             "src": "/case-studies/uncx-app-concepts/wireframing-v3-lockers.webp",
-            "alt": "V3 lockers wireframing"
+            "alt": "LP locker and token vesting lock and withdraw flows"
           },
           {
             "type": "image",
