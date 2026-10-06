@@ -124,7 +124,9 @@ behaviour, and conversion paths are approved.
   so every one meets retina resolution; 26 originals shrunk by the 2400px cap
   are restored. Six repeated Quiver stills leave the gallery, the test videos
   get distinct posters, and gallery thumbnails now open the image clicked.
-- [ ] Recapture the screenshots taken at 1x at 2x: Badger Club and Noticia
+- [x] Done: Badger Club and Noticia Lingo were recaptured at 2x on 30 September
+  (commit 555c853), and the UNCX website sections and Academy pages on
+  6 October. Original item: Recapture the screenshots taken at 1x at 2x: Badger Club and Noticia
   Lingo (1920px), the UNCX website sections and Academy pages (1440px). They
   are the images still below retina resolution when shown large.
 - [ ] Decide on the 15 images the September image review marked CUT, listed
