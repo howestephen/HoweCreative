@@ -22,7 +22,7 @@ behaviour, and conversion paths are approved.
 - ✓ Employer-focused positioning and light-first editorial art direction.
 - ✓ Outcome-first index for nine case studies.
 - ✓ Solana Diary and agentic portfolio case studies.
-- ✓ Full 2005–present career history.
+- ✓ Full 2005-present career history.
 - ✓ Standalone `/cv` route with print / save-as-PDF control.
 - ✓ Contact form replacing the public email address.
 - ✓ SEO, social metadata, favicon, and structured person data.
@@ -57,8 +57,8 @@ behaviour, and conversion paths are approved.
   [the audit findings](docs/reviews/2026-10-03-full-audit.md), packaged as
   WP-1 to WP-14 in [the audit work plan](docs/plans/2026-10-03-audit-work-plan.md).
   Decisions 1 to 7 were settled on 3 October (captcha on the contact form,
-  home page wording kept, no captions, legacy components retired); only the
-  HSTS scope (decision 8) is open.
+  home page wording kept, no captions, legacy components retired); decision 8
+  settled on HSTS with `includeSubDomains`.
 - ✓ Figma source exports, 6 October 2026: 18 App Prototyping, Unified Menu
   and Solana Diary gallery images, which were canvas screenshots at mostly 0.2
   to 0.9 pixels per canvas pixel, are re-exported from Figma at their original

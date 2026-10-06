@@ -36,7 +36,7 @@ Packages that depend on one of these are marked; everything else can start now.
 5. **Decided: no captions.** **Video captions (WP-13; C-6).** No film needs captions. Removing main's empty captions track can still go ahead.
 6. **Done.** **Private files in the redesign working tree (WP-14; D-2).** Moved under `docs/private/` (git-ignored).
 7. **Decided: retire now.** **Legacy components on main (WP-14; A-8).** Retire the unmounted legacy components and their three test files.
-8. **HSTS scope (WP-10; B-3).** `includeSubDomains; preload` commits every subdomain of howecreative.co.uk to HTTPS and preload is slow to undo. Confirm before it is added; the other headers do not need a decision.
+8. **Decided: `includeSubDomains`, no preload.** **HSTS scope (WP-10; B-3).** `includeSubDomains; preload` commits every subdomain of howecreative.co.uk to HTTPS and preload is slow to undo. Main sends `max-age=63072000; includeSubDomains`; preload was not added.
 9. **Every push to main** in WP-1, WP-2, WP-3, WP-4, WP-6, WP-7, WP-10, WP-11 and the main halves of WP-8, WP-9, WP-13 and WP-14 needs your permission, per push.
 
 ## Rules for every package
