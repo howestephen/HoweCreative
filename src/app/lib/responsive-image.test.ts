@@ -8,7 +8,7 @@ describe("responsive images", () => {
     expect(srcSet).toBe(
       [480, 960, 1440, 1920, 2560]
         .map((w) => `/case-studies/uncx-app-concepts/thumbs/tg-bot-flow-${w}.webp ${w}w`)
-        .concat("/case-studies/uncx-app-concepts/tg-bot-flow.webp 4266w")
+        .concat("/case-studies/uncx-app-concepts/tg-bot-flow.webp 4096w")
         .join(", "),
     );
   });

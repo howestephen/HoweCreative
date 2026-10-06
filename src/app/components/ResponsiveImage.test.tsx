@@ -3,7 +3,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { ResponsiveImage } from "./ResponsiveImage";
 
-const WIDE = "/case-studies/uncx-app-concepts/tg-bot-flow.webp"; // 4266 x 1598
+const WIDE = "/case-studies/uncx-app-concepts/tg-bot-flow.webp"; // 4096 x 1318
 
 function layout(width: number, height: number, fit = "fill") {
   vi.spyOn(HTMLElement.prototype, "offsetWidth", "get").mockReturnValue(width);
@@ -22,15 +22,15 @@ describe("ResponsiveImage", () => {
     layout(300, 113);
     const { getByRole } = render(<ResponsiveImage src={WIDE} alt="Flow" />);
     const img = getByRole("img");
-    expect(img.getAttribute("srcset")).toContain("4266w");
+    expect(img.getAttribute("srcset")).toContain("4096w");
     expect(img.getAttribute("sizes")).toBe("300px");
   });
 
   it("allows for cropping when the image covers its box", () => {
     layout(128, 128, "cover");
     const { getByRole } = render(<ResponsiveImage src={WIDE} alt="Flow" />);
-    // 128px tall at 4266:1598 is 342px wide once cropped to the square.
-    expect(getByRole("img").getAttribute("sizes")).toBe("342px");
+    // 128px tall at 4096:1318 is 398px wide once cropped to the square.
+    expect(getByRole("img").getAttribute("sizes")).toBe("398px");
   });
 
   it("asks for a sharper copy while zoomed", () => {
@@ -56,8 +56,8 @@ describe("ResponsiveImage", () => {
   it("carries the original's dimensions so layout never depends on sizes", () => {
     layout(300, 113);
     const { getByRole } = render(<ResponsiveImage src={WIDE} alt="Flow" />);
-    expect(getByRole("img").getAttribute("width")).toBe("4266");
-    expect(getByRole("img").getAttribute("height")).toBe("1598");
+    expect(getByRole("img").getAttribute("width")).toBe("4096");
+    expect(getByRole("img").getAttribute("height")).toBe("1318");
   });
 
   it("lets callers override the dimensions", () => {

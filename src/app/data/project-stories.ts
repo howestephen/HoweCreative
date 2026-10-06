@@ -295,7 +295,7 @@ export const projectStories: Record<string, ProjectStory> = {
           "In a startup, a prototype often decides whether a product should be built at all. Showing stakeholders the depth of a system early let them weigh the build against its value, and several concepts stopped there, saving development time for bigger products.",
           "Token-minter flows, launchpad components and Telegram interactions reached production. Stealth-launch, NFT and other concepts remained explorations. The gallery records both stages of work.",
         ],
-        images: ["launchpad-components.webp", "nft-minting-wireframes.webp"],
+        images: ["launchpad-components.webp", "nft-minting-designs.webp"],
         layout: "paired",
         ratio: "screen",
       },
