@@ -74,6 +74,17 @@ behaviour, and conversion paths are approved.
   height. Videos sit at its foot, each at its own shape, level with the end of
   the text; the gallery fills the space above as a stacked grid and only scrolls
   sideways when even small tiles would not fit. Phones keep the swipe strips.
+- ✓ Media pass, 6 October 2026: nine UNCX films were H.265, which only plays
+  where the device decodes it; they are re-encoded to H.264 (VMAF 97.4 to
+  98.9; 268 MB to 120 MB), with a test that rejects H.265 and late indexes.
+  Rebrand: the old Unicrypt banner is gone and the card shows the Unicrypt mark
+  becoming the UNCX mark; brand
+  colours, YouTube cover and launch banner added. Academy: its card carries the
+  UNCX corner mark, and five live-site captures sit beside their Figma designs
+  in place of fifteen Figma-only page shots; three explainer films added. Video
+  and 3D System: eight 3D renders (2x upscaled with UltraSharp) and three launch
+  films added. Replaced files are in
+  `assets-archive/replaced-2026-10-06-media-pass/`.
 - ✓ Quiver, 6 October 2026: the study features the advanced film with the
   phone; the edits without the phone follow as secondary films.
 - ✓ Audit fixes, 3 October 2026: `/work/<slug>` links from the CVs redirect

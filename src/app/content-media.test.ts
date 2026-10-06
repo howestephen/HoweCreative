@@ -1,9 +1,10 @@
-import { existsSync, statSync } from "node:fs";
+import { existsSync, readFileSync, statSync } from "node:fs";
 import { resolve } from "node:path";
 import sharp from "sharp";
 import { describe, expect, it } from "vitest";
 
 import siteContent from "../../site-content.json";
+import earlierWork from "./data/earlier-work.json";
 import { imageVariants, variantUrl } from "./lib/responsive-image";
 
 const root = resolve(__dirname, "../..");
@@ -67,6 +68,30 @@ describe("gallery images", () => {
     for (const { src } of images) {
       expect(imageVariants(src)?.w ?? Infinity, src).toBeLessThanOrEqual(4096);
       expect(statSync(resolve(root, "public", src.slice(1))).size, src).toBeLessThanOrEqual(1024 * 1024);
+    }
+  });
+});
+
+describe("study videos", () => {
+  const videos = [
+    ...projects.flatMap((p) => p.media ?? []),
+    ...(earlierWork as { media: Media[] }[]).flatMap((entry) => entry.media),
+  ].filter((m) => m.type === "video");
+
+  // H.265 plays only where the device decodes it (Safari, and Chrome on most
+  // Macs); H.264 plays in every browser. The index (moov) must come before the
+  // media data so a film starts streaming at once.
+  it("encodes every video as H.264 with its index at the front", () => {
+    expect(videos.length).toBeGreaterThan(0);
+    for (const { src } of videos) {
+      const file = readFileSync(resolve(root, "public", src.slice(1)));
+      const head = file.subarray(0, Math.min(file.length, 4 * 1024 * 1024));
+      expect(head.includes("avc1"), `${src} is not H.264`).toBe(true);
+      expect(head.includes("hvc1") || head.includes("hev1"), `${src} is H.265`).toBe(false);
+      const moov = file.indexOf("moov");
+      const mdat = file.indexOf("mdat");
+      expect(moov, `${src} has no index`).toBeGreaterThan(-1);
+      expect(moov < mdat, `${src} keeps its index after the media`).toBe(true);
     }
   });
 });
