@@ -11,9 +11,16 @@ import { QuiverCaseStudy } from "./QuiverCaseStudy";
 import "../../styles/project-stories.css";
 import "../../styles/spatial-case-study.css";
 
-function findMedia(project: PortfolioProject, filename?: string) {
-  return filename
-    ? project.media?.find((item) => item.src.endsWith(`/${filename}`))
+// A story may lead on the project's card image, which is not in its media.
+function findMedia(
+  project: PortfolioProject,
+  filename?: string,
+): ProjectMediaItem | undefined {
+  if (!filename) return undefined;
+  const item = project.media?.find((media) => media.src.endsWith(`/${filename}`));
+  if (item) return item;
+  return project.image?.endsWith(`/${filename}`)
+    ? { type: "image", src: project.image, alt: project.title }
     : undefined;
 }
 

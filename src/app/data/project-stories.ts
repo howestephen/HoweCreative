@@ -152,8 +152,9 @@ export const projectStories: Record<string, ProjectStory> = {
     },
   },
   "uncx-rebrand": {
-    lead: "brand-launch-video.mp4",
-    leadCaption: "The UNCX brand in motion. Brand launch film.",
+    lead: "card.webp",
+    leadCaption: "From the Unicrypt mark to the UNCX mark.",
+    leadRatio: "screen",
     chapters: [
       {
         label: "01 / Direction and collaboration",
