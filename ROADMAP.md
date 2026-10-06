@@ -1,5 +1,10 @@
 # ROADMAP
 
+## Media pass - 6 October 2026
+
+- [x] Gallery films keep their own shape, read from the poster; square films
+  match a 16:9 neighbour's height instead of sitting letterboxed.
+
 ## Figma source exports - 6 October 2026
 
 The UNCX Figma files are leaving Stephen's access, so every page was captured

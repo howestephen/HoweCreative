@@ -633,9 +633,12 @@ html {
 .video-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
   gap: 30px;
   margin-bottom: 60px;
 }
+/* Each film keeps its own shape (set inline from its poster); 16:9 is the
+   fallback. Narrower films match a 16:9 tile's height. */
 .video-grid video {
   width: 100%;
   aspect-ratio: 16/9;
