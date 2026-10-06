@@ -633,11 +633,6 @@
             "type": "image",
             "src": "/case-studies/uncx-rebrand/website/uncx-token-section-2.webp",
             "alt": "Website UNCX token page (section)"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-rebrand/rebrand-concepts.webp",
-            "alt": "Rebrand concept directions"
           }
         ],
         "gradient": "from-[#ffffff] to-[#780015]",
