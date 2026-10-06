@@ -15,6 +15,8 @@ describe("Quiver case study", () => {
     );
     const master = screen.getByLabelText(quiverFilm.title);
     expect(master).toHaveAttribute("src", quiverFilm.src);
+    // The edits with the phone are the primary films; the plain cuts are secondary.
+    expect(quiverFilm.src).toBe("/case-studies/quiver/advanced-with-phone.mp4");
     expect(master).toHaveAttribute("controls");
     expect(master).not.toHaveAttribute("autoplay");
     expect(master).not.toHaveAttribute("muted");
