@@ -18,6 +18,8 @@ at 1x and every design frame at 2x into the git-ignored
   Solana Diary layout approaches.
 - [x] Originals cap at 4096px wide and 1 MB, saved as WebP q85; tests enforce
   the budget and that every story image resolves to its gallery.
+- [x] Quiver leads with the advanced film with the phone; the edits without
+  the phone follow it as secondary films.
 - Kept: images showing prototype states or wires (open menu, token minter
   prototyping), the phone mockup slides, and images from Figma files outside
   this set. Replaced originals are in `assets-archive/replaced-by-figma-exports-2026-10-06/`.

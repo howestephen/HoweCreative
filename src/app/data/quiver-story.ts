@@ -1,7 +1,7 @@
 export const quiverFilm = {
   title: "Quiver launch film",
-  src: "/case-studies/quiver/advanced.mp4",
-  poster: "/case-studies/quiver/advanced.poster.jpg",
+  src: "/case-studies/quiver/advanced-with-phone.mp4",
+  poster: "/case-studies/quiver/advanced-with-phone.poster.jpg",
   duration: "0:58",
   format: "1920 x 1080 / 24 fps",
   description:
