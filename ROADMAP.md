@@ -78,7 +78,7 @@ behaviour, and conversion paths are approved.
   where the device decodes it; they are re-encoded to H.264 (VMAF 97.4 to
   98.9; 268 MB to 120 MB), with a test that rejects H.265 and late indexes.
   Rebrand: the old Unicrypt banner is gone and the card shows the Unicrypt mark
-  becoming the UNCX mark; brand
+  becoming the UNCX mark, both in the cut-out style; brand
   colours, YouTube cover and launch banner added. Academy: its card carries the
   UNCX corner mark, and five live-site captures sit beside their Figma designs
   in place of fifteen Figma-only page shots; three explainer films added. Video
