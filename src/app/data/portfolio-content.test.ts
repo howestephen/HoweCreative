@@ -58,10 +58,17 @@ describe("portfolio evidence and asset coverage", () => {
       const names = [story.lead, ...story.chapters.flatMap((chapter) => chapter.images)];
       for (const name of names.filter(Boolean))
         expect(
-          project?.media?.some((item) => item.src.endsWith(`/${name}`)),
+          project?.media?.some((item) => item.src.endsWith(`/${name}`)) ||
+            (name === story.lead && project?.image.endsWith(`/${name}`)),
           `${slug}: ${name}`,
         ).toBe(true);
     }
+  });
+  it("leads the rebrand on the card that shows the old mark becoming the new", () => {
+    expect(projectStories["uncx-rebrand"].lead).toBe("card.webp");
+    expect(projects.find((item) => item.slug === "uncx-rebrand")?.image).toBe(
+      "/case-studies/uncx-rebrand/card.webp",
+    );
   });
   it("records each image's real pixel size in the manifest", async () => {
     // The srcset and the budget below read sizes from the manifest, so it must

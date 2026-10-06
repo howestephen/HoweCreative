@@ -15,6 +15,8 @@
   the live site; three explainer films added.
 - [x] Video and 3D System: eight 3D renders (2x upscaled with UltraSharp) and
   the Meteora, Solana Lockers and Robinhood Chain launch films added.
+- [x] The rebrand case study opens on the same card, not the launch film,
+  which moves to the collection.
 - Replaced files are in `assets-archive/replaced-2026-10-06-media-pass/`.
 
 ## Figma source exports - 6 October 2026
