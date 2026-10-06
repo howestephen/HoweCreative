@@ -1,5 +1,27 @@
 # ROADMAP
 
+## Figma source exports - 6 October 2026
+
+The UNCX Figma files are leaving Stephen's access, so every page was captured
+at 1x and every design frame at 2x into the git-ignored
+`assets-archive/UNCX Archive/screenshots/` (index in its README).
+
+- [x] Replace 18 gallery images with clean Figma exports, matched to their
+  original framing by feature matching: App Prototyping (Blueprint, ILO, NFT,
+  Telegram and bot flows, vesting and locker wireframes), Unified Menu
+  (components, research, concepting, contents, closed prototype) and the Solana
+  Diary component library. Most were screenshots at 0.2 to 0.9 pixels per
+  canvas pixel; the replacements are sharp at up to 4096px wide.
+- [x] `nft-minting-wireframes` was the vesting flow wireframes. It is renamed
+  `vesting-flow-wireframes`, and its chapter slot now shows the NFT designs.
+- [x] Add the Blueprint desktop concept, the NFT minter trait preview and the
+  Solana Diary layout approaches.
+- [x] Originals cap at 4096px wide and 1 MB, saved as WebP q85; tests enforce
+  the budget and that every story image resolves to its gallery.
+- Kept: images showing prototype states or wires (open menu, token minter
+  prototyping), the phone mockup slides, and images from Figma files outside
+  this set. Replaced originals are in `assets-archive/replaced-by-figma-exports-2026-10-06/`.
+
 ## Full audit fixes - 3 October 2026
 
 An audit of both sites found 39 issues. The findings and the work plan live on
@@ -22,7 +44,7 @@ An audit of both sites found 39 issues. The findings and the work plan live on
   suspends the AudioContext (C-2, C-9, A-13). A-4 was not reproduced.
 - [x] WP-14 (redesign half): distinct alts for the two homepage sections, the
   repository link, and the Finder files and empty model folder removed.
-- [ ] WP-10: security and cache headers (follows `main`).
+- [x] WP-10: security and cache headers, with the CSP enforced (follows `main`).
 - WP-13 is dropped: no film needs captions.
 
 ## Retina image pass - 30 September 2026
