@@ -10,6 +10,7 @@ import {
   type ProjectMediaItem,
 } from "../data/portfolio";
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
+import { imageVariants } from "../lib/responsive-image";
 import { usePageMeta } from "../lib/usePageMeta";
 
 /** Outcome-first teasers - the one line a hiring manager reads. */
@@ -55,11 +56,14 @@ function ScrollStrip({
   label,
   count,
   unit,
+  scrollable = true,
   children,
 }: {
   label: string;
   count: number;
   unit: string;
+  /** False when everything fits: the arrows and the scroll region are dropped. */
+  scrollable?: boolean;
   children: ReactNode;
 }) {
   const scrollerRef = useRef<HTMLDivElement>(null);
@@ -115,13 +119,13 @@ function ScrollStrip({
 
   return (
     <div>
-      <div className="mb-2 flex items-center justify-between gap-3">
+      <div className="mb-2 flex h-9 items-center justify-between gap-3">
         <span className="font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.18em] text-accent">{label}</span>
         <div className="flex items-center gap-2">
           <span className="font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
             {count} {count === 1 ? unit : `${unit}s`}
           </span>
-          <div className="flex gap-1">
+          <div className={scrollable ? "flex gap-1" : "hidden"}>
             <button
               type="button"
               onClick={() => scrollByPage(-1)}
@@ -141,33 +145,129 @@ function ScrollStrip({
           </div>
         </div>
       </div>
-      <div
-        ref={scrollerRef}
-        role="region"
-        tabIndex={0}
-        aria-label={label}
-        className="gallery-scroll -mx-1 snap-x snap-mandatory overflow-x-auto px-1 pb-2"
-      >
-        {children}
-      </div>
+      {scrollable ? (
+        <div
+          ref={scrollerRef}
+          role="region"
+          tabIndex={0}
+          aria-label={label}
+          className="gallery-scroll -mx-1 snap-x snap-mandatory overflow-x-auto px-1 pb-2"
+        >
+          {children}
+        </div>
+      ) : (
+        <div aria-label={label} role="group">
+          {children}
+        </div>
+      )}
     </div>
   );
+}
+
+/** Desktop gallery sizing: the smallest thumbnail worth stacking, the width
+ *  scrolled thumbnails use, and the gap between them. */
+const THUMB_MIN = 104;
+const THUMB_TARGET = 140;
+const THUMB_GAP = 6;
+/** The strip header (h-9) and its margin (mb-2), plus the scroller's pb-2. */
+const STRIP_CHROME = 36 + 8 + 8;
+
+type Box = { width: number; height: number };
+
+/** The size of an element at desktop widths, or null on phones and where
+ *  there is no layout (tests): callers then keep the swipe strip. */
+function useDesktopBox(ref: React.RefObject<HTMLElement | null>): Box | null {
+  const [box, setBox] = useState<Box | null>(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || typeof ResizeObserver === "undefined") return;
+    const desktop = window.matchMedia("(min-width: 1024px)");
+    const measure = () => {
+      const { width, height } = el.getBoundingClientRect();
+      setBox(desktop.matches && width > 0 && height > 0 ? { width, height } : null);
+    };
+    const observer = new ResizeObserver(measure);
+    observer.observe(el);
+    desktop.addEventListener("change", measure);
+    measure();
+    return () => {
+      observer.disconnect();
+      desktop.removeEventListener("change", measure);
+    };
+  }, [ref]);
+  return box;
+}
+
+/** Tile shapes the stacked gallery may use, as width over height. */
+const TILE_FLATTEST = 1.8;
+const TILE_TALLEST = 0.8;
+
+/** How the gallery fits its box. It stacks with the fewest columns (so the
+ *  largest tiles) whose rows exactly fill the height the text gives it, with
+ *  tiles no flatter or taller than the limits above; a short gallery stops at
+ *  the tallest tile instead of stretching. Only when even the narrowest tiles
+ *  would be too flat does it become a side scroller of square tiles, filling
+ *  that height with as many rows as it can. */
+export function galleryLayout(count: number, box: Box) {
+  // Never below one small tile, so a squeezed box cannot yield a negative size.
+  const available = Math.max(THUMB_MIN, box.height - STRIP_CHROME);
+  const widthFor = (columns: number) => (box.width - (columns - 1) * THUMB_GAP) / columns;
+  for (let columns = 1; widthFor(columns) >= THUMB_MIN; columns++) {
+    const width = widthFor(columns);
+    const rows = Math.ceil(count / columns);
+    const fill = (available - (rows - 1) * THUMB_GAP) / rows;
+    if (fill <= 0 || width / fill > TILE_FLATTEST) continue;
+    return { mode: "stack" as const, columns, width, height: Math.min(fill, width / TILE_TALLEST) };
+  }
+  const columns = Math.max(2, Math.floor((box.width + THUMB_GAP) / (THUMB_TARGET + THUMB_GAP)));
+  const rows = Math.max(1, Math.floor((available + THUMB_GAP) / (widthFor(columns) + THUMB_GAP)));
+  // A single row shrinks its tiles to the height there is, rather than overflow it.
+  const size = rows === 1 ? Math.min(widthFor(columns), available) : widthFor(columns);
+  return { mode: "scroll" as const, rows, size };
 }
 
 function GalleryStrip({
   project,
   images,
   onOpenImage,
+  box,
 }: {
   project: PortfolioProject;
   images: ProjectMediaItem[];
   onOpenImage: (index: number) => void;
+  /** The space the text column leaves for the gallery on desktop. */
+  box: Box | null;
 }) {
+  const layout = box ? galleryLayout(images.length, box) : null;
+  const gridStyle =
+    layout?.mode === "stack"
+      ? {
+          gridTemplateColumns: `repeat(${layout.columns}, minmax(0, 1fr))`,
+          gridAutoRows: `${layout.height}px`,
+          gap: THUMB_GAP,
+        }
+      : layout?.mode === "scroll"
+        ? {
+            gridTemplateRows: `repeat(${layout.rows}, ${layout.size}px)`,
+            gridAutoColumns: `${layout.size}px`,
+            gap: THUMB_GAP,
+          }
+        : undefined;
+  const gridClass =
+    layout?.mode === "stack"
+      ? "grid"
+      : layout?.mode === "scroll"
+        ? "grid w-max grid-flow-col"
+        : // Phones: two rows scrolling sideways.
+          "grid w-max grid-flow-col grid-rows-2 gap-1.5";
   return (
-    <ScrollStrip label="Gallery" count={images.length} unit="image">
-      {/* Two rows scrolling sideways so the gallery stays the height of the
-          text column. */}
-      <div className="grid w-max grid-flow-col grid-rows-2 gap-1.5">
+    <ScrollStrip
+      label="Gallery"
+      count={images.length}
+      unit="image"
+      scrollable={layout?.mode !== "stack"}
+    >
+      <div className={gridClass} style={gridStyle}>
         {images.map((media) => {
           // The lightbox steps through image media only, so index within those.
           const galleryIndex = (project.media ?? [])
@@ -179,14 +279,19 @@ function GalleryStrip({
               type="button"
               onClick={() => onOpenImage(galleryIndex)}
               aria-label={`View larger: ${media.alt ?? project.title}`}
-              className="group/thumb block w-28 shrink-0 snap-start border border-border bg-card transition-colors hover:border-accent sm:w-32"
+              className={`group/thumb block shrink-0 snap-start border border-border bg-card transition-colors hover:border-accent ${
+                layout ? "w-full" : "w-28 sm:w-32"
+              }`}
             >
               <ImageWithFallback
                 src={media.src}
                 alt={media.alt ?? project.title}
                 loading="lazy"
                 decoding="async"
-                className="aspect-square w-full object-cover transition-opacity group-hover/thumb:opacity-85"
+                // Top-anchored: tall page captures show their header, not their middle.
+                className={`w-full object-cover object-top transition-opacity group-hover/thumb:opacity-85 ${
+                  layout?.mode === "stack" ? "h-full" : "aspect-square"
+                }`}
               />
             </button>
           );
@@ -196,10 +301,18 @@ function GalleryStrip({
   );
 }
 
+/** A video's width over height, read from its poster (posters are frames
+ *  of the film, so they share its shape). Falls back to 16:9. */
+export function videoRatio(media: ProjectMediaItem): number {
+  const size = media.poster ? imageVariants(media.poster) : undefined;
+  return size ? size.w / size.h : 16 / 9;
+}
+
 function VideoStrip({ videos }: { videos: ProjectMediaItem[] }) {
   return (
     <ScrollStrip label="Videos" count={videos.length} unit="video">
-      <div className="flex w-max gap-2">
+      {/* One height for the row; each film keeps its own shape. */}
+      <div className="flex w-max items-start gap-2">
         {videos.map((media) => (
           <video
             key={media.src}
@@ -207,7 +320,8 @@ function VideoStrip({ videos }: { videos: ProjectMediaItem[] }) {
             poster={media.poster}
             controls
             preload="none"
-            className="w-64 shrink-0 snap-start border border-border bg-black sm:w-72"
+            style={{ aspectRatio: String(videoRatio(media)) }}
+            className="h-40 w-auto shrink-0 snap-start border border-border bg-black object-contain sm:h-44"
           />
         ))}
       </div>
@@ -228,6 +342,8 @@ function StudyDetail({
   // width; the strip below keeps the supporting clips.
   const featured = media[0]?.type === "video" ? media[0] : undefined;
   const videos = media.filter((m) => m.type === "video" && m !== featured);
+  const galleryRef = useRef<HTMLDivElement>(null);
+  const galleryBox = useDesktopBox(galleryRef);
 
 
   return (
@@ -284,12 +400,23 @@ function StudyDetail({
         </div>
       </div>
 
-      <div className="min-w-0 space-y-6 lg:col-span-2">
-        {images.length > 0 && (
-          <GalleryStrip project={project} images={images} onOpenImage={onOpenImage} />
-        )}
+      {/* On desktop the text sets the height: this column is laid over it
+          (absolute) so it never stretches the row. Videos sit at the foot,
+          level with the end of the text; the gallery fills the space above. */}
+      <div className="relative min-w-0 lg:col-span-2 lg:min-h-[28rem]">
+        <div className="space-y-6 lg:absolute lg:inset-0 lg:flex lg:flex-col lg:gap-6 lg:space-y-0">
+          {images.length > 0 && (
+            <div ref={galleryRef} className="min-w-0 lg:min-h-0 lg:flex-1">
+              <GalleryStrip project={project} images={images} onOpenImage={onOpenImage} box={galleryBox} />
+            </div>
+          )}
 
-        {videos.length > 0 && <VideoStrip videos={videos} />}
+          {videos.length > 0 && (
+            <div className="min-w-0 lg:shrink-0">
+              <VideoStrip videos={videos} />
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
