@@ -873,11 +873,6 @@
             "type": "image",
             "src": "/case-studies/badger-club/database-schema.webp",
             "alt": "Database schema design"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/badger-club/resend-email-setup.webp",
-            "alt": "Resend email integration setup"
           }
         ],
         "gradient": "from-[#ff4466] to-[#4f0012]",
@@ -1008,11 +1003,6 @@
             "type": "image",
             "src": "/case-studies/uncx-video-system/c4d-ui-rigging.webp",
             "alt": "Cinema 4D rigging setup"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-video-system/c4d-ui-takes.webp",
-            "alt": "Cinema 4D takes system"
           },
           {
             "type": "image",
