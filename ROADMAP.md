@@ -59,6 +59,17 @@ behaviour, and conversion paths are approved.
   Decisions 1 to 7 were settled on 3 October (captcha on the contact form,
   home page wording kept, no captions, legacy components retired); only the
   HSTS scope (decision 8) is open.
+- ✓ Figma source exports, 6 October 2026: 18 App Prototyping, Unified Menu
+  and Solana Diary gallery images, which were canvas screenshots at mostly 0.2
+  to 0.9 pixels per canvas pixel, are re-exported from Figma at their original
+  framing, up to 4096px wide as WebP q85, with regenerated retina variants.
+  `nft-minting-wireframes` showed the vesting flows and is now
+  `vesting-flow-wireframes`. Added: the Blueprint desktop concept, the NFT
+  minter trait preview and the Solana Diary layout approaches. Tests now check
+  every gallery image and variant exists and that originals stay within 4096px
+  wide and 1 MB. Every Figma page and frame is archived in the git-ignored
+  `assets-archive/UNCX Archive/screenshots/`; replaced originals are in
+  `assets-archive/replaced-by-figma-exports-2026-10-06/`.
 - ✓ Audit fixes, 3 October 2026: `/work/<slug>` links from the CVs redirect
   to the study, crawlers are kept off `/particle-redesign` by `robots.txt`, and
   the two white logotypes are replaced by grounded and black-text versions.
