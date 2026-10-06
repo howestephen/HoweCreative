@@ -85,6 +85,11 @@ behaviour, and conversion paths are approved.
   and 3D System: eight 3D renders (2x upscaled with UltraSharp) and three launch
   films added. Replaced files are in
   `assets-archive/replaced-2026-10-06-media-pass/`.
+- ✓ Rebrand website sections, 6 October 2026: recaptured whole from
+  uncx.network at 2x, since the earlier crops were fixed slices that cut
+  through sections. The agency's concept directions are removed, since not
+  all were used. Replaced files are in
+  `assets-archive/replaced-2026-10-06-section-recrops/`.
 - ✓ Quiver, 6 October 2026: the study features the advanced film with the
   phone; the edits without the phone follow as secondary films.
 - ✓ Audit fixes, 3 October 2026: `/work/<slug>` links from the CVs redirect
