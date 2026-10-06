@@ -8,7 +8,7 @@
 - [x] Gallery films keep their own shape, read from the poster; square films
   match a 16:9 neighbour's height instead of sitting letterboxed.
 - [x] Rebrand: the old Unicrypt banner is gone; the card, and the project
-  cover, show the Unicrypt mark becoming the UNCX mark. Brand colours, the
+  cover, show the Unicrypt mark becoming the UNCX mark, both as cut-outs. Brand colours, the
   YouTube cover and the launch banner are added from the brand archive.
 - [x] Academy: the card carries the UNCX corner mark; five images pair each
   Figma design with its live page, and the story crops are recaptured from
