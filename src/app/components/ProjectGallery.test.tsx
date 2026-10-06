@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { ProjectGallery } from "./ProjectGallery";
+import { ProjectGallery, videoRatio } from "./ProjectGallery";
 
 describe("project gallery navigation", () => {
   beforeEach(() => {
@@ -168,5 +168,24 @@ describe("project gallery navigation", () => {
     expect(document.body.style.overflow).toBe("hidden");
     unmount();
     expect(document.body.style.overflow).toBe("");
+  });
+  it("shows each film in its own shape, narrow films at a 16:9 tile's height", () => {
+    render(
+      <ProjectGallery
+        title="Films"
+        media={[
+          { type: "video", src: "/wide.mp4", poster: "/case-studies/uncx-video-system/ethcc-2025.poster.jpg", alt: "Wide" },
+          { type: "video", src: "/square.mp4", poster: "/case-studies/uncx-video-system/lock-announcement-rise.poster.jpg", alt: "Square" },
+        ]}
+      />,
+    );
+    const wide = screen.getByLabelText("Wide") as HTMLVideoElement;
+    const square = screen.getByLabelText("Square") as HTMLVideoElement;
+    // jsdom cannot hold aspect-ratio, so check the ratio the component uses
+    // and the width that follows from it.
+    expect(videoRatio({ type: "video", src: "/wide.mp4", poster: "/case-studies/uncx-video-system/ethcc-2025.poster.jpg" })).toBeCloseTo(16 / 9, 2);
+    expect(videoRatio({ type: "video", src: "/square.mp4", poster: "/case-studies/uncx-video-system/lock-announcement-rise.poster.jpg" })).toBe(1);
+    expect(wide.style.width).toBe("100%");
+    expect(square.style.width).toBe("56.25%");
   });
 });

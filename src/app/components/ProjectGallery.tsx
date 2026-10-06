@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import type { ProjectMediaItem } from "../data/portfolio";
 import { ResponsiveImage } from "./ResponsiveImage";
+import { imageVariants } from "../lib/responsive-image";
 
 const MAX_ZOOM = 4;
 
@@ -155,6 +156,13 @@ function ImageDialog({
   );
 }
 
+/** A film's width over height, read from its poster (posters are frames of
+ *  the film, so they share its shape). Falls back to 16:9. */
+export function videoRatio(video: ProjectMediaItem): number {
+  const size = video.poster ? imageVariants(video.poster) : undefined;
+  return size ? size.w / size.h : 16 / 9;
+}
+
 export function ProjectGallery({
   media,
   title,
@@ -210,6 +218,11 @@ function GalleryContent({
                 playsInline
                 poster={video.poster}
                 aria-label={video.alt ?? title}
+                // Narrower films get the same height as a 16:9 neighbour.
+                style={{
+                  aspectRatio: String(videoRatio(video)),
+                  width: `${Math.min(1, (videoRatio(video) * 9) / 16) * 100}%`,
+                }}
               />
               <figcaption>{video.alt ?? title}</figcaption>
             </figure>
