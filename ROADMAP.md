@@ -264,7 +264,8 @@ Severity 3, craft:
 - [x] Done 6 October 2026: the menu phone now shows whole (contain), and the
   rebrand preview shows the old-to-new mark card. Fix the `uncx-menu` preview crop, which cuts mid-sentence through "Reward your community with cross-chain token distribution" and leaves a partial row below.
 - [ ] Settle one status vocabulary across the cards. They currently mix Complete, Design Complete, Archived, Live, Complete and In Development, describing the design, the deployment and the archive state interchangeably.
-- [ ] Reduce the Solana Diary page weight. It loads 5.3MB against 0.29MB to 1.40MB elsewhere, with the weight in what loads immediately rather than the 37 lazy images.
+- [x] Resolved 6 October 2026: measured at 544 KB on first load (21 requests)
+  after the responsive image variants. Reduce the Solana Diary page weight. It loads 5.3MB against 0.29MB to 1.40MB elsewhere, with the weight in what loads immediately rather than the 37 lazy images.
 - [x] Decided 6 October 2026: the "200+ videos" figure is Stephen's and stays.
   Original item: Source or remove the claim at `src/app/data/project-stories.ts:68`, "200+ videos produced at UNCX Network." It is attributed but unsourced, and the Quiver case deliberately makes no clip count claim because its manifests do not reconcile.
 - [ ] Add test coverage for `src/app/pages/Project.tsx` and the preview card. `src/app/pages/QuiverCaseStudy.test.tsx` covers Quiver only, so nothing in the suite would catch a regression in any finding above.
