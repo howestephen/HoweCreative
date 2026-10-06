@@ -2,8 +2,20 @@
 
 ## Media pass - 6 October 2026
 
+- [x] Nine UNCX films were H.265, which only plays where the device decodes
+  it. They are re-encoded to H.264 (VMAF 97.4 to 98.9, 268 MB to 120 MB) so
+  they play in every browser; a test rejects H.265 and late indexes.
 - [x] Gallery films keep their own shape, read from the poster; square films
   match a 16:9 neighbour's height instead of sitting letterboxed.
+- [x] Rebrand: the old Unicrypt banner is gone; the card, and the project
+  cover, show the Unicrypt mark becoming the UNCX mark. Brand colours, the
+  YouTube cover and the launch banner are added from the brand archive.
+- [x] Academy: the card carries the UNCX corner mark; five images pair each
+  Figma design with its live page, and the story crops are recaptured from
+  the live site; three explainer films added.
+- [x] Video and 3D System: eight 3D renders (2x upscaled with UltraSharp) and
+  the Meteora, Solana Lockers and Robinhood Chain launch films added.
+- Replaced files are in `assets-archive/replaced-2026-10-06-media-pass/`.
 
 ## Figma source exports - 6 October 2026
 
@@ -229,7 +241,7 @@ Severity 2, evidence quality:
 - [ ] Give `/work/ai-portfolio-system` visual evidence. It renders zero images, so the two-column chapter layout collapses into an off-centre text column, and its heading claims a demonstrable process with nothing beneath it. At minimum: a scoped task or spec, a review or diff, and a before and after.
 - [ ] Source three or four finished output frames for UNCX Video and 3D. One rendered asset exists; everything else is software chrome. Until then the case cannot carry its own page.
 - [ ] Resolve Noticia Lingo's light screens against the dark system. Seven white captures on `#060707` with no framing device read as pasted in. The product is genuinely light mode, so this is a frame or card treatment, not a recapture.
-- [ ] Replace the Academy `video-page-hero.webp` tile. Its lower two thirds is an unloaded video player, so at thumbnail size it reads as a failed export.
+- [x] Replace the Academy `video-page-hero.webp` tile. Its lower two thirds is an unloaded video player, so at thumbnail size it reads as a failed export. Removed on 6 October 2026; the Academy now pairs each Figma design with its live page.
 - [ ] Recapture the evidence carried over from the image review: a Solana Diary post in real feed context with no follower count visible.
 
 Severity 3, craft:

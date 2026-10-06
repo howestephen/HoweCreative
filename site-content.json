@@ -573,11 +573,6 @@
           },
           {
             "type": "image",
-            "src": "/case-studies/uncx-rebrand/unicrypt-network-banner.webp",
-            "alt": "The Unicrypt Network brand before the 2022 rebrand"
-          },
-          {
-            "type": "image",
             "src": "/case-studies/uncx-rebrand/brand-designs.webp",
             "alt": "Brand design explorations"
           },
@@ -590,6 +585,21 @@
             "type": "image",
             "src": "/case-studies/uncx-rebrand/logo-square.webp",
             "alt": "UNCX logo square mark"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-rebrand/brand-colours.webp",
+            "alt": "UNCX brand colours: the primary palette and a colour for each service"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-rebrand/youtube-cover.webp",
+            "alt": "UNCX Network YouTube cover with the new logo and 3D artwork"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-rebrand/welcome-banner.webp",
+            "alt": "Launch banner: Welcome to the new UNCX Network"
           },
           {
             "type": "image",
@@ -931,44 +941,48 @@
         "media": [
           {
             "type": "image",
+            "src": "/case-studies/uncx-video-system/render-chain-lock-templates.webp",
+            "alt": "One lock scene rendered for Arbitrum, Ethereum and Solana from a single chain template"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-video-system/render-onchain-exchange.webp",
+            "alt": "3D render: an on-chain exchange"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-video-system/render-impermanent-loss-pool.webp",
+            "alt": "3D render: a liquidity pool of tokens"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-video-system/render-smart-contract-stamp.webp",
+            "alt": "3D render: a smart contract stamped audited"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-video-system/render-fundraising-laptop.webp",
+            "alt": "3D render: the future of fundraising on a laptop"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-video-system/render-electric-city.webp",
+            "alt": "3D render: a layer 2 city"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-video-system/render-slippage-swap.webp",
+            "alt": "3D render: a swap with its slippage"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-video-system/render-token-tower.webp",
+            "alt": "3D render: a tower of UNCX tokens"
+          },
+          {
+            "type": "image",
             "src": "/case-studies/uncx-video-system/youtube-thumbnails.webp",
             "alt": "YouTube thumbnail designs"
-          },
-          {
-            "type": "video",
-            "src": "/case-studies/uncx-video-system/ethcc-2025.mp4",
-            "poster": "/case-studies/uncx-video-system/ethcc-2025.poster.jpg",
-            "alt": "EthCC 2025 post-event film"
-          },
-          {
-            "type": "video",
-            "src": "/case-studies/uncx-video-system/avalanche-summit.mp4",
-            "poster": "/case-studies/uncx-video-system/avalanche-summit.poster.jpg",
-            "alt": "Avalanche Summit post-event film"
-          },
-          {
-            "type": "video",
-            "src": "/case-studies/uncx-video-system/hyperswap-integration.mp4",
-            "alt": "HyperSwap Integration video",
-            "poster": "/case-studies/uncx-video-system/hyperswap-integration.poster.jpg"
-          },
-          {
-            "type": "video",
-            "src": "/case-studies/uncx-video-system/token-minter-launch.mp4",
-            "alt": "Token Minter Launch Video",
-            "poster": "/case-studies/uncx-video-system/token-minter-launch.poster.jpg"
-          },
-          {
-            "type": "video",
-            "src": "/case-studies/uncx-video-system/vesting-app-release.mp4",
-            "alt": "Vesting App Release Video",
-            "poster": "/case-studies/uncx-video-system/vesting-app-release.poster.jpg"
-          },
-          {
-            "type": "video",
-            "src": "/case-studies/uncx-video-system/lock-announcement-rise.mp4",
-            "alt": "Lock Announcement - RISE",
-            "poster": "/case-studies/uncx-video-system/lock-announcement-rise.poster.jpg"
           },
           {
             "type": "image",
@@ -1019,6 +1033,60 @@
             "type": "image",
             "src": "/case-studies/uncx-video-system/video-files.webp",
             "alt": "Video file management"
+          },
+          {
+            "type": "video",
+            "src": "/case-studies/uncx-video-system/ethcc-2025.mp4",
+            "poster": "/case-studies/uncx-video-system/ethcc-2025.poster.jpg",
+            "alt": "EthCC 2025 post-event film"
+          },
+          {
+            "type": "video",
+            "src": "/case-studies/uncx-video-system/avalanche-summit.mp4",
+            "poster": "/case-studies/uncx-video-system/avalanche-summit.poster.jpg",
+            "alt": "Avalanche Summit post-event film"
+          },
+          {
+            "type": "video",
+            "src": "/case-studies/uncx-video-system/meteora-launch.mp4",
+            "poster": "/case-studies/uncx-video-system/meteora-launch.poster.jpg",
+            "alt": "Meteora launch film"
+          },
+          {
+            "type": "video",
+            "src": "/case-studies/uncx-video-system/hyperswap-integration.mp4",
+            "alt": "HyperSwap Integration video",
+            "poster": "/case-studies/uncx-video-system/hyperswap-integration.poster.jpg"
+          },
+          {
+            "type": "video",
+            "src": "/case-studies/uncx-video-system/token-minter-launch.mp4",
+            "alt": "Token Minter Launch Video",
+            "poster": "/case-studies/uncx-video-system/token-minter-launch.poster.jpg"
+          },
+          {
+            "type": "video",
+            "src": "/case-studies/uncx-video-system/vesting-app-release.mp4",
+            "alt": "Vesting App Release Video",
+            "poster": "/case-studies/uncx-video-system/vesting-app-release.poster.jpg"
+          },
+          {
+            "type": "video",
+            "src": "/case-studies/uncx-video-system/solana-locks-launch.mp4",
+            "poster": "/case-studies/uncx-video-system/solana-locks-launch.poster.jpg",
+            "alt": "Solana Lockers launch, square format"
+          },
+          {
+            "type": "video",
+            "src": "/case-studies/uncx-video-system/robinhood-chain-launch.mp4",
+            "poster": "/case-studies/uncx-video-system/robinhood-chain-launch.poster.jpg",
+            "alt": "Robinhood Chain launch, square format"
+          },
+          {
+            "type": "video",
+            "src": "/case-studies/uncx-video-system/lock-announcement-rise.mp4",
+            "alt": "Lock Announcement - RISE",
+            "poster": "/case-studies/uncx-video-system/lock-announcement-rise.poster.jpg"
           }
         ],
         "gradient": "from-[#8b0020] to-[#ff003c]",
@@ -1078,13 +1146,68 @@
         "media": [
           {
             "type": "image",
+            "src": "/case-studies/uncx-academy/logotype-black.webp",
+            "alt": "UNCX Academy logotype"
+          },
+          {
+            "type": "image",
             "src": "/case-studies/uncx-academy/logo-design.webp",
             "alt": "Logo design process"
           },
           {
             "type": "image",
-            "src": "/case-studies/uncx-academy/logotype-black.webp",
-            "alt": "UNCX Academy logotype"
+            "src": "/case-studies/uncx-academy/main-page-comparison.webp",
+            "alt": "Academy home page: the Figma design beside the live site"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-academy/articles-home-comparison.webp",
+            "alt": "Articles page: the Figma design beside the live site"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-academy/article-page-comparison.webp",
+            "alt": "Article page: the Figma design beside the live site"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-academy/videos-home-comparison.webp",
+            "alt": "Videos page: the Figma design beside the live site"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-academy/glossary-home-comparison.webp",
+            "alt": "Glossary page: the Figma design beside the live site"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-academy/articles-home-hero.webp",
+            "alt": "Articles page on the live site"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-academy/glossary-home-hero.webp",
+            "alt": "Glossary page on the live site"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-academy/videos-home-hero.webp",
+            "alt": "Videos page on the live site"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-academy/article-page-hero.webp",
+            "alt": "An article page on the live site"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-academy/articles-overview.webp",
+            "alt": "Articles overview page"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-academy/components.webp",
+            "alt": "Component library"
           },
           {
             "type": "video",
@@ -1094,9 +1217,27 @@
           },
           {
             "type": "video",
-            "src": "/case-studies/uncx-academy/tutorial-lp-locking.mp4",
-            "alt": "LP Locking tutorial",
-            "poster": "/case-studies/uncx-academy/tutorial-lp-locking.poster.jpg"
+            "src": "/case-studies/uncx-academy/blockchains-explained-ethereum.mp4",
+            "poster": "/case-studies/uncx-academy/blockchains-explained-ethereum.poster.jpg",
+            "alt": "Blockchains Explained: Ethereum, one of an eleven-chain series"
+          },
+          {
+            "type": "video",
+            "src": "/case-studies/uncx-academy/impermanent-loss.mp4",
+            "poster": "/case-studies/uncx-academy/impermanent-loss.poster.jpg",
+            "alt": "Impermanent Loss explainer"
+          },
+          {
+            "type": "video",
+            "src": "/case-studies/uncx-academy/slippage-in-defi.mp4",
+            "poster": "/case-studies/uncx-academy/slippage-in-defi.poster.jpg",
+            "alt": "What Is Slippage in DeFi explainer"
+          },
+          {
+            "type": "video",
+            "src": "/case-studies/uncx-academy/flash-loans-defi.mp4",
+            "alt": "Flash Loans in DeFi",
+            "poster": "/case-studies/uncx-academy/flash-loans-defi.poster.jpg"
           },
           {
             "type": "video",
@@ -1106,59 +1247,9 @@
           },
           {
             "type": "video",
-            "src": "/case-studies/uncx-academy/flash-loans-defi.mp4",
-            "alt": "Flash Loans in DeFi",
-            "poster": "/case-studies/uncx-academy/flash-loans-defi.poster.jpg"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-academy/main-page-hero.webp",
-            "alt": "Academy home page, above the fold"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-academy/articles-overview.webp",
-            "alt": "Articles overview page"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-academy/articles-home-hero.webp",
-            "alt": "Articles section landing page"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-academy/article-page-hero.webp",
-            "alt": "Individual article page with its banner"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-academy/about-page-hero.webp",
-            "alt": "About page"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-academy/videos-home-hero.webp",
-            "alt": "Video courses landing page"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-academy/video-page-hero.webp",
-            "alt": "Individual video lesson page"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-academy/glossary-home-hero.webp",
-            "alt": "Glossary section landing page"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-academy/integrations-hero.webp",
-            "alt": "Partner integrations page"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-academy/components.webp",
-            "alt": "Component library"
+            "src": "/case-studies/uncx-academy/tutorial-lp-locking.mp4",
+            "alt": "LP Locking tutorial",
+            "poster": "/case-studies/uncx-academy/tutorial-lp-locking.poster.jpg"
           }
         ],
         "gradient": "from-[#ffa2b5] to-[#520012]",
