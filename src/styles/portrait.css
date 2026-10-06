@@ -141,7 +141,7 @@ html:has(.portrait-home) { scrollbar-gutter: stable; }
   .particle-ending-inner > p { font-size: 13px; }
   .particle-tools { right: 22px; top: 150px; gap: 16px; }
   .spatial-dialog { width: calc(100% - 24px); height: calc(100svh - 32px); border-radius: 14px; }
-  .spatial-dialog[open] { grid-template-columns: 1fr; grid-template-rows: 38% minmax(0, 1fr); }
+  .spatial-dialog[open] { grid-template-columns: 1fr; grid-template-rows: 34% minmax(0, 1fr); }
   .spatial-dialog-visual { padding: 26px; border-right: 0; border-bottom: 1px solid #d4dbce1f; }
   .spatial-dialog-body { padding: 16px 20px 18px; }
   .spatial-dialog-body header { margin-bottom: 12px; }
@@ -150,7 +150,8 @@ html:has(.portrait-home) { scrollbar-gutter: stable; }
   .spatial-dialog-summary { font-size: 13.5px; line-height: 1.6; }
   .spatial-dialog-facts { grid-template-columns: 1fr 1fr; gap: 10px 16px; padding-top: 14px; }
   .spatial-dialog-facts > div:first-child { grid-column: 1 / -1; }
-  .spatial-dialog-cta { margin-top: 16px; padding: 13px 16px; }
+  /* Long previews scroll; the way into the case study stays in view. */
+  .spatial-dialog-cta { position: sticky; bottom: 0; flex-shrink: 0; margin-top: 16px; padding: 13px 16px; box-shadow: 0 -12px 14px 2px #101515; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
