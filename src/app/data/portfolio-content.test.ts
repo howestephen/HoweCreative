@@ -90,6 +90,25 @@ describe("portfolio evidence and asset coverage", () => {
       );
     }
   });
+  it("encodes every video as H.264 with its index at the front", () => {
+    // H.265 plays only where the device decodes it (Safari, and Chrome on most
+    // Macs); H.264 plays in every browser. The index (moov) must come before
+    // the media data so a film starts streaming at once.
+    const videos = [
+      ...projects.flatMap((project) => project.media ?? []),
+      ...earlier.flatMap((entry) => entry.media),
+    ].filter((item) => item.type === "video");
+    expect(videos.length).toBeGreaterThan(0);
+    for (const { src } of videos) {
+      const file = readFileSync(resolve("public", src.slice(1)));
+      const head = file.subarray(0, Math.min(file.length, 4 * 1024 * 1024));
+      expect(head.includes("avc1"), `${src} is not H.264`).toBe(true);
+      expect(head.includes("hvc1") || head.includes("hev1"), `${src} is H.265`).toBe(false);
+      const moov = file.indexOf("moov");
+      expect(moov, `${src} has no index`).toBeGreaterThan(-1);
+      expect(moov < file.indexOf("mdat"), `${src} keeps its index after the media`).toBe(true);
+    }
+  });
   it("preserves archive credits and keeps restricted work out of the public archive", () => {
     expect(
       earlier.find((entry) => entry.slug === "burger-theory")?.credit,

@@ -71,7 +71,7 @@ export const projectEditorial: Record<
     headline: "One identity across a growing ecosystem.",
     summary:
       "Unicrypt Network became UNCX Network in 2022, then moved to a more modern brand, website and Academy in 2024, across 10+ pages.",
-    cover: "/case-studies/uncx-rebrand/chain-based-design.webp",
+    cover: "/case-studies/uncx-rebrand/card.webp",
     fit: "I connect a brand's direction to the detail of its products, pages and media.",
     credit:
       "In 2022 I rebuilt the logo, brand, marketing and website, with a developer implementing the site. For 2024 an outside studio built a more modern system from my direction; I finished the website, Academy and brand rollout in-house.",
