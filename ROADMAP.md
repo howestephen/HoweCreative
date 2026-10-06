@@ -261,7 +261,8 @@ Severity 3, craft:
 - [x] Done 6 October 2026: on phones the card's image row is 34% and the
   case-study button is pinned to the bottom of the text, so it is fully visible on
   every preview at 390x740 (measured). Fit the preview card at 390x740. The dialog fits the viewport, but the body scrolls: Quiver overflows by 46px and UNCX Company Rebrand by 16px, and on Quiver the "Read the full case study" button is cut in half with its label invisible. This supersedes the earlier note describing it as the last few pixels.
-- [ ] Fix the `uncx-menu` preview crop, which cuts mid-sentence through "Reward your community with cross-chain token distribution" and leaves a partial row below.
+- [x] Done 6 October 2026: the menu phone now shows whole (contain), and the
+  rebrand preview shows the old-to-new mark card. Fix the `uncx-menu` preview crop, which cuts mid-sentence through "Reward your community with cross-chain token distribution" and leaves a partial row below.
 - [ ] Settle one status vocabulary across the cards. They currently mix Complete, Design Complete, Archived, Live, Complete and In Development, describing the design, the deployment and the archive state interchangeably.
 - [ ] Reduce the Solana Diary page weight. It loads 5.3MB against 0.29MB to 1.40MB elsewhere, with the weight in what loads immediately rather than the 37 lazy images.
 - [x] Decided 6 October 2026: the "200+ videos" figure is Stephen's and stays.
