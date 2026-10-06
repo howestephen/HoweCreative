@@ -70,6 +70,10 @@ behaviour, and conversion paths are approved.
   wide and 1 MB. Every Figma page and frame is archived in the git-ignored
   `assets-archive/UNCX Archive/screenshots/`; replaced originals are in
   `assets-archive/replaced-by-figma-exports-2026-10-06/`.
+- ✓ Study layout, 6 October 2026: on desktop the text column sets the study's
+  height. Videos sit at its foot, each at its own shape, level with the end of
+  the text; the gallery fills the space above as a stacked grid and only scrolls
+  sideways when even small tiles would not fit. Phones keep the swipe strips.
 - ✓ Quiver, 6 October 2026: the study features the advanced film with the
   phone; the edits without the phone follow as secondary films.
 - ✓ Audit fixes, 3 October 2026: `/work/<slug>` links from the CVs redirect
