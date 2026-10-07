@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import { existsSync, readFileSync, statSync } from "node:fs";
 import { resolve } from "node:path";
 import sharp from "sharp";
@@ -68,6 +69,23 @@ describe("gallery images", () => {
     for (const { src } of images) {
       expect(imageVariants(src)?.w ?? Infinity, src).toBeLessThanOrEqual(4096);
       expect(statSync(resolve(root, "public", src.slice(1))).size, src).toBeLessThanOrEqual(1024 * 1024);
+    }
+  });
+});
+
+describe("updated UNCX study banners", () => {
+  it("versions the card and banner URLs against their actual pixels", () => {
+    for (const slug of ["uncx-rebrand", "uncx-academy"]) {
+      const project = (siteContent as { caseStudies: { projects: { slug: string; image: string }[] } })
+        .caseStudies.projects.find((item) => item.slug === slug);
+      expect(project, slug).toBeTruthy();
+      const [path, version] = project!.image.split("?v=");
+      const bytes = readFileSync(resolve(root, "public", path.slice(1)));
+      expect(version, slug).toBe(createHash("sha256").update(bytes).digest("hex").slice(0, 8));
+      expect(imageVariants(project!.image)?.w, slug).toBeGreaterThanOrEqual(1600);
+      for (const width of imageVariants(project!.image)?.v ?? []) {
+        expect(existsSync(resolve(root, "public", variantUrl(project!.image, width).split("?")[0].slice(1))), slug).toBe(true);
+      }
     }
   });
 });
