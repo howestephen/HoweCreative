@@ -20,9 +20,12 @@ function safeDecode(value: string) {
 
 /** URL of the `width`-wide copy of `src` in its sibling `thumbs/` folder. */
 export function variantUrl(src: string, width: number) {
-  const slash = src.lastIndexOf("/");
-  const dot = src.lastIndexOf(".");
-  return `${src.slice(0, slash)}/thumbs/${src.slice(slash + 1, dot)}-${width}.webp`;
+  const suffixIndex = src.search(/[?#]/);
+  const path = suffixIndex < 0 ? src : src.slice(0, suffixIndex);
+  const suffix = suffixIndex < 0 ? "" : src.slice(suffixIndex);
+  const slash = path.lastIndexOf("/");
+  const dot = path.lastIndexOf(".");
+  return `${path.slice(0, slash)}/thumbs/${path.slice(slash + 1, dot)}-${width}.webp${suffix}`;
 }
 
 // srcset separates candidates with spaces and commas, so file names that

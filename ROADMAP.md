@@ -52,6 +52,11 @@ behaviour, and conversion paths are approved.
 
 ## Production Maintenance
 
+- ✓ UNCX Rebrand and Academy study banners, 7 October 2026: the card and
+  full-width study header share an image, but browsers could keep an older
+  full-size copy while fetching new thumbnails. Both image URLs now carry a
+  content-hash version, including every responsive WebP candidate, so the
+  current Rebrand marks and Academy corner logo appear consistently.
 - [ ] Fix the findings of the October 2026 full audit of both sites: 39
   findings (3 P1, 12 P2, 24 P3) in
   [the audit findings](docs/reviews/2026-10-03-full-audit.md), packaged as

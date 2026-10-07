@@ -31,6 +31,17 @@ describe("responsive images", () => {
     expect(variantUrl("/earlier-work/qtac/homepage.webp", 960)).toBe("/earlier-work/qtac/thumbs/homepage-960.webp");
   });
 
+  it("keeps an image version on every retina candidate", () => {
+    const src = "/case-studies/uncx-rebrand/card.webp?v=7838be0d";
+    expect(imageVariants(src)?.w).toBe(1600);
+    expect(variantUrl(src, 960)).toBe("/case-studies/uncx-rebrand/thumbs/card-960.webp?v=7838be0d");
+    expect(srcSetFor(src)).toBe([
+      "/case-studies/uncx-rebrand/thumbs/card-480.webp?v=7838be0d 480w",
+      "/case-studies/uncx-rebrand/thumbs/card-960.webp?v=7838be0d 960w",
+      `${src} 1600w`,
+    ].join(", "));
+  });
+
   it("asks for the cropped width when a wide image covers a square", () => {
     expect(neededWidth({ width: 128, height: 128 }, { w: 4000, h: 1000 }, "cover")).toBe(512);
     expect(neededWidth({ width: 400, height: 100 }, { w: 1000, h: 1000 }, "cover")).toBe(400);
