@@ -22,3 +22,24 @@ scratch/
 
 # the kit's procedure: read it from _projects-admin, never commit a copy
 /RETROFIT.md
+
+# house kit entries
+!.env.template
+.vscode/
+.idea/
+*.swp
+*.swo
+.cursor/
+build/
+.next/
+out/
+coverage/
+.turbo/
+.parcel-cache/
+.venv/
+__pycache__/
+*.py[cod]
+*.log
+logs/
+tmp/
+.cache/

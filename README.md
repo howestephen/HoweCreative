@@ -1,4 +1,10 @@
-# Howe Creative — Portfolio v2.0
+---
+status: active
+author: stephen+claude
+updated: 2026-10-12
+---
+
+# Howe Creative - Portfolio v2.0
 
 Stephen Howe’s production portfolio for Creative Technologist, AI Designer, and Design Engineer roles. The active experience is a light-first editorial system that foregrounds shipped outcomes, career evidence, and automated creative pipelines.
 
@@ -14,12 +20,12 @@ Stephen Howe’s production portfolio for Creative Technologist, AI Designer, an
 
 ## Active experience
 
-- `Masthead` — positioning, proof metrics, primary actions, and generative plotter mark
+- `Masthead` - positioning, proof metrics, primary actions, and generative plotter mark
 - `WorkIndex` - ten outcome-first case studies as a card grid (Quiver featured full width); each opens in an overlay addressable as `/?study=<slug>`
-- `Capabilities` — role and service fit
-- `Method` — working principles and full 2005–present career history
-- `ContactFoot` — contact form and conversion links
-- `/cv` — standalone printable CV, loaded as a separate route chunk
+- `Capabilities` - role and service fit
+- `Method` - working principles and full 2005–present career history
+- `ContactFoot` - contact form and conversion links
+- `/cv` - standalone printable CV, loaded as a separate route chunk
 
 `src/app/pages/Home.tsx` composes the editorial design from `src/app/concept/`.
 
@@ -31,7 +37,7 @@ cp .env.example .env.local
 npm run dev
 ```
 
-Vite runs at `http://localhost:5173`.
+The registered preview runs at `http://localhost:5175` (see CLAUDE.md).
 
 Set the existing Web3Forms form identifier:
 

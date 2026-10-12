@@ -1,3 +1,9 @@
+---
+status: active
+author: stephen+claude
+updated: 2026-10-12
+---
+
 # ROADMAP
 
 ## Current Milestone
@@ -7,6 +13,18 @@
 The work is happening on `claude/concept-editorial`. This branch is intended to
 replace the current production design on `main` once its content, CV, responsive
 behaviour, and conversion paths are approved.
+
+## House kit retrofit (2026-10-12)
+
+Brought in line with the `ai-product-base` kit on `chore/october-rules`:
+autonomy, read order, audit and handoff rules in CLAUDE.md; house frontmatter
+on every document; `scripts/validate.py`, `bootstrap.sh` and the structure
+config; Vercel builds main only; CI made read-only with a timeout. Probes in a
+disposable copy confirmed commits refuse an unlisted document, a credential,
+quoted private conversation and a personal email, and pre-push refuses a
+credential added and removed across two commits. Open: no project level is
+declared (main needs approval per push), and the GitHub publication check
+needs a `PUBLICATION_KIT_TOKEN` secret before it can be added.
 
 ## Goal
 
