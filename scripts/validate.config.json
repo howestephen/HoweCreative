@@ -36,7 +36,8 @@
     "^\\.claude/",
     "^dist/",
     "^assets-archive/",
-    "^docs/private/"
+    "^docs/private/",
+    "^docs/reviews/2026-09-07-design-reset/"
   ],
   "top_dirs": [
     ".claude",
