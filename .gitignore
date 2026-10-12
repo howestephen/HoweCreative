@@ -7,7 +7,7 @@ dist
 .env.*
 !.env.example
 
-# Private source material — never publish
+# Private source material - never publish
 docs/private/
 
 # Local asset archive - unused project media kept for future redesigns
@@ -19,3 +19,30 @@ assets-archive/
 # Local agent tool state and logs
 .claude/hooks-state/
 .playwright-mcp/
+
+# agent scratch space: hook 8 ignores leftovers here; empty it when done
+scratch/
+
+# the kit's procedure: read it from _projects-admin, never commit a copy
+/RETROFIT.md
+
+# house kit entries
+!.env.template
+.vscode/
+.idea/
+*.swp
+*.swo
+.cursor/
+build/
+.next/
+out/
+coverage/
+.turbo/
+.parcel-cache/
+.venv/
+__pycache__/
+*.py[cod]
+*.log
+logs/
+tmp/
+.cache/

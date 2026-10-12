@@ -1,3 +1,9 @@
+---
+status: active
+author: stephen+claude
+updated: 2026-10-12
+---
+
 # Portfolio reset: market and positioning
 
 Research checked 7 September 2026. Recommendations below are an interpretation of employer requirements and Stephen's documented work, not an explanation for previous hiring decisions. Public claims are grounded in `src/app/data/cv.json`; private career history was used for context only. This complements the [original role review](2026-09-07-role-evidence-research.md).

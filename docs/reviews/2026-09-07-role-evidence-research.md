@@ -1,3 +1,9 @@
+---
+status: active
+author: stephen+claude
+updated: 2026-10-12
+---
+
 # Target-role evidence research
 
 Checked 7 September 2026. Research only. Stephen's verified evidence comes from `2026-09-07-portfolio-positioning.md`, `src/app/data/cv.json` and the current white `/cv` page source. This is an evidence-gap assessment, not a prediction of hiring outcomes.

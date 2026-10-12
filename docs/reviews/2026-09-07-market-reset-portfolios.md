@@ -1,3 +1,9 @@
+---
+status: active
+author: stephen+claude
+updated: 2026-10-12
+---
+
 # Portfolio market reset: practitioner evidence
 
 Research date: 7 September 2026. These are primary website texts and creator-authored making-of accounts, not live browser observations or screenshot assessments. Interaction behaviour below is source-described. Professional implications and limitations are my assessment. Current roles and publication establish relevant practice; none establishes that a website caused a hire or commission.

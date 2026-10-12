@@ -1,3 +1,9 @@
+---
+status: active
+author: stephen+claude
+updated: 2026-10-12
+---
+
 # Homepage concepts from award-winning precedents
 
 Research date: 26 September 2026. Each concept below is derived from named

@@ -1,3 +1,10 @@
+---
+status: active
+author: stephen+claude
+project_kind: product
+updated: 2026-10-12
+---
+
 # ONBOARDING
 
 ## Project
@@ -35,7 +42,7 @@ The contact form requires an `EMAIL_ACCESS_KEY` to send mail via Web3Forms.
    EMAIL_ACCESS_KEY=your_key_here
    ```
 
-3. `.env.local` is gitignored — never commit it.
+3. `.env.local` is gitignored - never commit it.
 
 The default `CONTACT_TRANSPORT=client` flow treats this access key as a public
 form identifier. `vite.config.ts` maps `EMAIL_ACCESS_KEY` into the browser

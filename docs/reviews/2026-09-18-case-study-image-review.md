@@ -1,3 +1,9 @@
+---
+status: active
+author: stephen+claude
+updated: 2026-10-12
+---
+
 # Portfolio image review - contact sheet triage
 
 Reviewed against the Quiver benchmark. Dark site (#060707), silver/warm-white type, cinematic and restrained. Targeting Creative Technologist / Design Engineer roles at serious international firms.

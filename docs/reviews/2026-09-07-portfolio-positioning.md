@@ -1,3 +1,9 @@
+---
+status: active
+author: stephen+claude
+updated: 2026-10-12
+---
+
 # Portfolio and CV review
 
 Reviewed 7 September 2026. Branch: `codex/creative-technologist-portfolio`.

@@ -1,3 +1,9 @@
+---
+status: active
+author: stephen+claude
+updated: 2026-10-12
+---
+
 # Case study, card and disclosure audit - 20 September 2026
 
 Branch `codex/creative-technologist-portfolio`, audited at commit `5e9812f`. The

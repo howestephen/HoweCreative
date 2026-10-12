@@ -1,3 +1,9 @@
+---
+status: active
+author: stephen+claude
+updated: 2026-10-12
+---
+
 # Interactive portfolio: implementation and review
 
 Built on `codex/creative-technologist-portfolio`, 7 September 2026. Local preview: port 5174. No production deployment is included.
