@@ -1,3 +1,9 @@
+---
+status: draft
+author: stephen+claude
+updated: 2026-10-12
+---
+
 # Telegram Bot Setup
 
 This document covers the minimum setup required for the planned `solana-diary-poster` service to send approval messages and receive operator actions.

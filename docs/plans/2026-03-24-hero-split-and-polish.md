@@ -1,3 +1,9 @@
+---
+status: archived
+author: stephen+claude
+updated: 2026-10-12
+---
+
 # Hero Code-Split, Shell Cleanup, and Accessibility Polish
 
 > Historical plan for the previous portfolio. The replacement editorial
@@ -7,7 +13,7 @@
 
 **Goal:** Lazy-load the Three.js hero to reduce initial bundle, delete dead components, harden loading-screen accessibility, and do a readability pass.
 
-**Architecture:** `MatrixRainHero` (Three.js + @react-three/fiber + GLTFLoader + 7 GLTF models) is statically imported by `Home.tsx` today, so it lands in the initial bundle. Converting it to `React.lazy` + `Suspense` lets Vite split the Three.js graph into a separate async chunk. The `LoadingScreen` already covers z-index 200 during boot so the `Suspense` fallback is invisible — no UX change. Dead components (`Navigation.tsx`, `CyberHero.tsx`, `Hero3D.tsx`) are never imported and can be deleted outright. Accessibility fixes are non-visual: `aria-live` log region, `prefers-reduced-motion` shortcut, and focus restoration on loader dismiss.
+**Architecture:** `MatrixRainHero` (Three.js + @react-three/fiber + GLTFLoader + 7 GLTF models) is statically imported by `Home.tsx` today, so it lands in the initial bundle. Converting it to `React.lazy` + `Suspense` lets Vite split the Three.js graph into a separate async chunk. The `LoadingScreen` already covers z-index 200 during boot so the `Suspense` fallback is invisible - no UX change. Dead components (`Navigation.tsx`, `CyberHero.tsx`, `Hero3D.tsx`) are never imported and can be deleted outright. Accessibility fixes are non-visual: `aria-live` log region, `prefers-reduced-motion` shortcut, and focus restoration on loader dismiss.
 
 **Tech Stack:** React 19 lazy/Suspense, Vite dynamic import, Vitest, ARIA
 
@@ -50,9 +56,9 @@ Wrap the usage in `Home.tsx` JSX:
 </Suspense>
 ```
 
-The `fallback={null}` is correct — the `LoadingScreen` (z-index 200) covers the viewport during initial render, so there is nothing to show while the chunk loads.
+The `fallback={null}` is correct - the `LoadingScreen` (z-index 200) covers the viewport during initial render, so there is nothing to show while the chunk loads.
 
-**Step 1.3: Run typecheck — must pass**
+**Step 1.3: Run typecheck - must pass**
 ```bash
 npm run typecheck
 ```
@@ -62,9 +68,9 @@ Expected: exit 0.
 ```bash
 npm run build 2>&1 | grep -E "\.js"
 ```
-Expected: you should now see at least two substantial JS chunks — one smaller initial chunk and one (or more) async chunks containing Three.js / @react-three. The initial chunk should be noticeably smaller than before.
+Expected: you should now see at least two substantial JS chunks - one smaller initial chunk and one (or more) async chunks containing Three.js / @react-three. The initial chunk should be noticeably smaller than before.
 
-**Step 1.5: Run tests — all 8 must pass**
+**Step 1.5: Run tests - all 8 must pass**
 ```bash
 npm test
 ```
@@ -80,7 +86,7 @@ git commit -m "perf: lazy-load MatrixRainHero to split Three.js into async chunk
 
 ## Task 2: Delete dead components
 
-**Goal:** Remove `Navigation.tsx`, `CyberHero.tsx`, and `Hero3D.tsx` — all three are defined but never imported anywhere in the codebase.
+**Goal:** Remove `Navigation.tsx`, `CyberHero.tsx`, and `Hero3D.tsx` - all three are defined but never imported anywhere in the codebase.
 
 **Files:**
 - Delete: `src/app/components/Navigation.tsx`
@@ -92,7 +98,7 @@ git commit -m "perf: lazy-load MatrixRainHero to split Three.js into async chunk
 ```bash
 grep -rn "Navigation\|CyberHero\|Hero3D" src --include="*.tsx" --include="*.ts" | grep -v "^src/app/components/Navigation\|^src/app/components/CyberHero\|^src/app/components/Hero3D"
 ```
-Expected: no output. If any imports are found, **stop and report** — do not delete.
+Expected: no output. If any imports are found, **stop and report** - do not delete.
 
 **Step 2.2: Delete the three files**
 ```bash
@@ -158,8 +164,8 @@ git commit -m "chore: delete dead components Navigation, CyberHero, Hero3D; mark
 **Accessibility requirements:**
 1. The overlay should be `role="status"` so screen readers announce it as a live region
 2. The log lines region should be `aria-live="polite"` so each new line is announced
-3. There should be a visually-hidden label describing what's happening: "Loading portfolio — please wait"
-4. When `prefers-reduced-motion: reduce` is set, skip the animation entirely — call `onComplete` immediately (or with a minimal 100ms delay so React has time to render)
+3. There should be a visually-hidden label describing what's happening: "Loading portfolio - please wait"
+4. When `prefers-reduced-motion: reduce` is set, skip the animation entirely - call `onComplete` immediately (or with a minimal 100ms delay so React has time to render)
 5. The progress bar segments should have `role="progressbar"` with `aria-valuenow`, `aria-valuemin="0"`, `aria-valuemax="100"`
 
 **Step 3.1: Write failing tests first**
@@ -268,7 +274,7 @@ export default defineConfig({
 });
 ```
 
-**Step 3.5: Run tests — confirm new tests FAIL**
+**Step 3.5: Run tests - confirm new tests FAIL**
 ```bash
 npm test
 ```
@@ -278,7 +284,7 @@ Expected: LoadingScreen tests fail (missing aria attributes).
 
 Changes to make:
 
-1. **Visually-hidden label** — add as the first child inside the motion.div:
+1. **Visually-hidden label** - add as the first child inside the motion.div:
 ```tsx
 <span className="sr-only">Loading portfolio — please wait</span>
 ```
@@ -289,20 +295,20 @@ Add the sr-only utility to your global CSS if not present, or use inline style:
 </span>
 ```
 
-2. **role="status" on the overlay** — add to the `motion.div`:
+2. **role="status" on the overlay** - add to the `motion.div`:
 ```tsx
 role="status"
 aria-label="Loading portfolio"
 ```
 
-3. **aria-live on the log lines div** — wrap the log lines `div` with:
+3. **aria-live on the log lines div** - wrap the log lines `div` with:
 ```tsx
 <div aria-live="polite" aria-atomic="false">
   {/* existing log lines map */}
 </div>
 ```
 
-4. **progressbar role** — wrap the progress segments in a single container div:
+4. **progressbar role** - wrap the progress segments in a single container div:
 ```tsx
 <div
   role="progressbar"
@@ -317,7 +323,7 @@ aria-label="Loading portfolio"
 ```
 Remove the inner `<div className="flex gap-[3px]">` that currently wraps segments.
 
-5. **prefers-reduced-motion** — add at the top of the component function, before any other logic:
+5. **prefers-reduced-motion** - add at the top of the component function, before any other logic:
 ```typescript
 const prefersReducedMotion =
   typeof window !== "undefined" &&
@@ -333,9 +339,9 @@ useEffect(() => {
 }, [prefersReducedMotion, onComplete]);
 ```
 
-When `prefersReducedMotion` is true, the other `useEffect` timers still run but `onComplete` will be called at 100ms regardless — so the screen exits almost immediately.
+When `prefersReducedMotion` is true, the other `useEffect` timers still run but `onComplete` will be called at 100ms regardless - so the screen exits almost immediately.
 
-**Step 3.7: Run tests — all must pass**
+**Step 3.7: Run tests - all must pass**
 ```bash
 npm test
 ```
@@ -349,7 +355,7 @@ Expected: both exit 0.
 
 **Step 3.9: Update ROADMAP.md**
 
-Mark under 2.3: `✓ loading sequence accessibility — aria-live, progressbar role, reduced-motion support added`.
+Mark under 2.3: `✓ loading sequence accessibility - aria-live, progressbar role, reduced-motion support added`.
 
 **Step 3.10: Commit**
 ```bash
@@ -361,7 +367,7 @@ git commit -m "feat: loading screen accessibility — aria-live, progressbar, re
 
 ## Task 4: Section readability pass
 
-**Goal:** Opportunistic improvements to heading hierarchy, spacing, and readability across sections. No tests needed — visual/structural audit.
+**Goal:** Opportunistic improvements to heading hierarchy, spacing, and readability across sections. No tests needed - visual/structural audit.
 
 **Files to review:**
 - `src/app/components/OperatorProfile.tsx`
@@ -371,7 +377,7 @@ git commit -m "feat: loading screen accessibility — aria-live, progressbar, re
 
 **Step 4.1: Read each file and audit for**
 - Missing or skipped heading levels (h1 → h3 without h2, etc.)
-- Section `id` attributes for nav anchor links — do they match `SideNav`'s `navItems`?
+- Section `id` attributes for nav anchor links - do they match `SideNav`'s `navItems`?
 - Contrast: text colours against backgrounds (can eyeball from class names)
 - Any obviously broken layout classes
 

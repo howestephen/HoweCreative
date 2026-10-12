@@ -1,3 +1,9 @@
+---
+status: archived
+author: stephen+claude
+updated: 2026-10-12
+---
+
 # Roadmap Tasks 2.1–2.4 Implementation Plan
 
 > Historical implementation record for the previous portfolio. These tasks are
@@ -9,8 +15,8 @@
 **Goal:** Complete roadmap milestones 2.1 (rate limiting), 2.2 (ui/* purge), and 2.4 (lint/typecheck/CI) in sequence.
 
 **Architecture:**
-- Rate limiting uses an in-memory sliding-window store in the Vercel serverless function (no external deps — appropriate for a low-traffic personal portfolio; resets on cold start which is acceptable).
-- UI purge removes the entire `src/app/components/ui/` directory and all associated Radix/shadcn packages — nothing outside that directory imports from it.
+- Rate limiting uses an in-memory sliding-window store in the Vercel serverless function (no external deps - appropriate for a low-traffic personal portfolio; resets on cold start which is acceptable).
+- UI purge removes the entire `src/app/components/ui/` directory and all associated Radix/shadcn packages - nothing outside that directory imports from it.
 - Lint/typecheck adds `tsconfig.json` (strict), ESLint with `@typescript-eslint`, npm scripts, and a GitHub Actions CI workflow.
 
 **Tech Stack:** Vitest (tests), TypeScript strict (typecheck), ESLint + @typescript-eslint (lint), GitHub Actions (CI), Vercel serverless (API)
@@ -23,7 +29,7 @@
 - API handler: `api/contact.ts` (Vercel serverless, Node.js)
 - Already has: honeypot field, email validation, `EMAIL_ACCESS_KEY` env secret
 - Missing: IP-based rate limiting
-- No test framework exists yet — install Vitest first
+- No test framework exists yet - install Vitest first
 
 **Files:**
 - Create: `api/_lib/rate-limit.ts`
@@ -95,7 +101,7 @@ describe("checkRateLimit", () => {
 ```bash
 npm test
 ```
-Expected: FAIL — `checkRateLimit` not found.
+Expected: FAIL - `checkRateLimit` not found.
 
 ### Step 1.5: Implement the rate limiter
 
@@ -187,7 +193,7 @@ describe("contact handler rate limiting", () => {
 ```bash
 npm test api/contact.test.ts
 ```
-Expected: FAIL — handler doesn't call `checkRateLimit`.
+Expected: FAIL - handler doesn't call `checkRateLimit`.
 
 ### Step 1.9: Integrate rate limiting into `api/contact.ts`
 
@@ -207,7 +213,7 @@ if (!limit.allowed) {
 }
 ```
 
-### Step 1.10: Run all tests — confirm pass
+### Step 1.10: Run all tests - confirm pass
 
 ```bash
 npm test
@@ -231,9 +237,9 @@ git commit -m "feat: add IP rate limiting to /api/contact with Vitest tests"
 
 ### Codebase context
 - `src/app/components/ui/` contains 50 files (shadcn/Radix generated components)
-- **Zero imports** from this directory exist outside of it — confirmed by grep
-- `lucide-react` IS used outside ui/ — keep it
-- `clsx`, `tailwind-merge`, `class-variance-authority` are ONLY used inside ui/ — remove
+- **Zero imports** from this directory exist outside of it - confirmed by grep
+- `lucide-react` IS used outside ui/ - keep it
+- `clsx`, `tailwind-merge`, `class-variance-authority` are ONLY used inside ui/ - remove
 
 **Packages to remove** (all only referenced from ui/):
 ```
@@ -290,7 +296,7 @@ rm -rf src/app/components/ui/
 
 ### Step 2.2: Remove packages from `package.json`
 
-Edit `package.json` dependencies — remove all packages listed above.
+Edit `package.json` dependencies - remove all packages listed above.
 
 ### Step 2.3: Reinstall
 
@@ -328,11 +334,11 @@ git commit -m "chore: remove all unused ui/* shadcn components and 37 related pa
 ## Task 3: Lint / Typecheck Pipeline
 
 ### Codebase context
-- No `tsconfig.json` — Vite infers types but there's no strict checking
+- No `tsconfig.json` - Vite infers types but there's no strict checking
 - No ESLint config
 - No `.github/` directory
-- `ONBOARDING.md` exists — document local dev there
-- `vercel.json` exists — reference it
+- `ONBOARDING.md` exists - document local dev there
+- `vercel.json` exists - reference it
 
 **Files:**
 - Create: `tsconfig.json`
@@ -451,7 +457,7 @@ Add to `package.json` scripts:
 ```bash
 npm run lint
 ```
-Fix reported issues. Note any `no-explicit-any` warnings in api/contact.ts — replace handler `req: any, res: any` with typed interfaces.
+Fix reported issues. Note any `no-explicit-any` warnings in api/contact.ts - replace handler `req: any, res: any` with typed interfaces.
 
 ### Step 3.9: Create `.github/workflows/ci.yml`
 
@@ -485,7 +491,7 @@ jobs:
 Add a "Local Development" section covering:
 - `npm run dev` for frontend
 - `vercel dev` for full stack (frontend + API routes together)
-- Required env vars: `EMAIL_ACCESS_KEY` — copy from Vercel dashboard or create `.env.local`
+- Required env vars: `EMAIL_ACCESS_KEY` - copy from Vercel dashboard or create `.env.local`
 - `.env.local` format: `EMAIL_ACCESS_KEY=your_key_here`
 - Note: never commit `.env.local`
 

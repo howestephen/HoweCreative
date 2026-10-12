@@ -1,3 +1,9 @@
+---
+status: draft
+author: stephen+claude
+updated: 2026-10-12
+---
+
 # Posting Pipeline Design
 
 **Date:** 2026-03-24
