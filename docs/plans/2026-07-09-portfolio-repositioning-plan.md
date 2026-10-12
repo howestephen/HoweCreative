@@ -30,7 +30,7 @@ dual-theme concept with a light-first editorial system - the current roadmap in
 ### What is costing interviews
 
 **A. The visual language is a genre, not a brand.**
-Matrix rain (1999), katakana glyphs, wireframe VHS tape, Tron "END OF LINE", "© 1984", operator dossier files, scanlines. Every reference is 25–40 years old. For an AI-era role the site should feel like 2026, not an homage. A reviewer spending 30 seconds pattern-matches this to "hobbyist hacker aesthetic" before reading a word. The user-stated fear ("dark and a bit retro") is exactly what a first-time visitor perceives.
+Matrix rain (1999), katakana glyphs, wireframe VHS tape, Tron "END OF LINE", "© 1984", operator dossier files, scanlines. Every reference is 25-40 years old. For an AI-era role the site should feel like 2026, not an homage. A reviewer spending 30 seconds pattern-matches this to "hobbyist hacker aesthetic" before reading a word. The user-stated fear ("dark and a bit retro") is exactly what a first-time visitor perceives.
 
 **B. The persona conceit creates distance.**
 "Operator Profile", "the operator managed…", "Site Navigation Matrix", "Selected demonstrative artefacts", "Operator interface relay active: Awaiting input". Employers hire a person. Third-person in-world voice (a) obscures ownership of achievements, (b) adds cognitive load, (c) reads as designed for the author's enjoyment rather than the reader's decision. This is the "personalised to my desires" problem, self-diagnosed correctly.
@@ -57,7 +57,7 @@ Case study covers are uniform red/black. The actual output - colourful UNCX bran
 - The newest, most relevant project (Solana monitor → dataset → rendered assets → scheduled X posts with Telegram approval loop) is not in the portfolio at all.
 
 **F. The CV likely fails automated screening - this is probably the "fast rejections."**
-Fast rejections (hours–days) at larger firms usually mean ATS/recruiter-screen failure, not considered human judgement. The current CV:
+Fast rejections (hours-days) at larger firms usually mean ATS/recruiter-screen failure, not considered human judgement. The current CV:
 - Uses letter-spaced display text that extracts as broken tokens ("ST EPH EN_HOW E", "C R E A T I V E T E C H N O L O G I S T") - keyword matching on "Creative Technologist" fails.
 - Uses a pixel font that renders "SKILLS" as "SHILLS" to human eyes.
 - Is dark-themed: prints black, photocopies illegibly, and re-renders unpredictably in ATS viewers.
@@ -147,7 +147,7 @@ Off-white/paper base, engineering-drawing grid, one accent, dark mode as the sec
 - Reorder for the target role: 1) **NEW: Autonomous asset pipeline** 2) UNCX Rebrand (visual impact) 3) Video & 3D System 4) Badger Club (full-stack proof) 5) Unified Menu 6) Academy 7) App Prototyping 8) Noticia Lingo.
 - Give every study a **quantified outcome line** at the top: production time cut (%, or hrs→hrs), videos shipped, pages designed, games live. Estimate honestly where exact numbers don't exist ("~70% faster per video after templating" style).
 - Replace uniform red covers with real artwork per project (you have the assets in `public/case-studies/`).
-- Rename statuses: "On-Hold" → "Design complete - build paused"; "Late Stage" → "In beta"; "Various" → "2021–2026".
+- Rename statuses: "On-Hold" → "Design complete - build paused"; "Late Stage" → "In beta"; "Various" → "2021-2026".
 
 ### New flagship case study: the Solana → X pipeline
 
@@ -162,7 +162,7 @@ Structure (existing skeleton fits perfectly):
 ### New sections
 
 - **Services/Roles block:** "I take on: Creative Technologist / Design Engineer roles (permanent) · brand & motion systems, product design sprints, AI pipeline builds (contract)." Explicit availability, timezone (UK, overlaps US-East mornings), remote track record.
-- **Social proof:** UNCX + Switch Studios + client logos; 2–3 one-line testimonials (request them now - ex-colleagues, UNCX leadership, freelance clients).
+- **Social proof:** UNCX + Switch Studios + client logos; 2-3 one-line testimonials (request them now - ex-colleagues, UNCX leadership, freelance clients).
 - **/cv route:** clean HTML CV (printable, ATS-linkable) + PDF download.
 
 ### SEO/meta (index.html)
@@ -199,7 +199,7 @@ This is entirely a personal decision and there are good reasons on both sides. T
 - **LinkedIn alignment:** headline = the spine; About = first-person summary; Featured = flagship study + X pipeline; role keywords in headline (recruiters search titles, not prose).
 - **X as living portfolio:** pin a thread explaining the pipeline; the account itself becomes a demo.
 - **Target categories** (verify current openings rather than assuming): exchanges and wallets; L1/L2 foundations; web3 infra; digital/creative agencies with creative-tech teams (Monks, Instrument, Active Theory class); AI product companies hiring design engineers; fintech.
-- **Contract in parallel:** the services block + day-rate-ready positioning covers income risk while hunting the staff role. Rough sanity check (verify against current market): senior creative technologist perm roles in UK/EU-remote commonly land ~£70–110k+, US-remote higher; contract day rates for this stack commonly £400–650+. Lead with the AI-pipeline capability to justify the top of the band.
+- **Contract in parallel:** the services block + day-rate-ready positioning covers income risk while hunting the staff role. Rough sanity check (verify against current market): senior creative technologist perm roles in UK/EU-remote commonly land ~£70-110k+, US-remote higher; contract day rates for this stack commonly £400-650+. Lead with the AI-pipeline capability to justify the top of the band.
 
 ---
 
@@ -219,14 +219,14 @@ This is entirely a personal decision and there are good reasons on both sides. T
 - [x] Printable/exportable `/cv` route; services/availability block
 - Acceptance: a stranger can answer "who, what, for whom, hire how?" from the first viewport.
 
-### Phase 2 - Proof of the AI claim (1–2 weeks)
+### Phase 2 - Proof of the AI claim (1-2 weeks)
 - [x] Flagship case study: Solana → X pipeline with real production media
 - [x] "How this site builds itself" represented as the AI Portfolio System case study
 - [ ] Testimonials + logos (request this week)
 - [x] ATS-clean HTML CV shipped; final cross-browser PDF-export QA remains
 - Acceptance: an "AI Designer" JD's keywords all appear, truthfully, on site and CV.
 
-### Phase 3 - The re-skin (2–4 weeks)
+### Phase 3 - The re-skin (2-4 weeks)
 - [x] Light-first editorial palette and type ramp (dual theme intentionally superseded)
 - [x] Generative plotter masthead and outcome-first project index (cover-art grid intentionally superseded)
 - [ ] Contrast/a11y pass (AA), performance pass (lazy-load galleries, cap WebGL)
