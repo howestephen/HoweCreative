@@ -1,4 +1,10 @@
-# Howe Creative — Portfolio v2.0
+---
+status: active
+author: stephen+claude
+updated: 2026-10-12
+---
+
+# Howe Creative - Portfolio v2.0
 
 Stephen Howe’s production portfolio for Creative Technologist, AI Designer, and Design Engineer roles. The active experience is a light-first editorial system that foregrounds shipped outcomes, career evidence, and automated creative pipelines.
 
@@ -30,10 +36,12 @@ Stephen Howe’s production portfolio for Creative Technologist, AI Designer, an
 ```bash
 npm install
 cp .env.example .env.local
-npm run dev
+npm run build
 ```
 
-Vite runs at `http://localhost:5173`.
+The site is previewed through the house preview controller, which serves the
+built `dist` with `vite preview` on port 5175 and reports the Tailscale link to
+share in `status` (see CLAUDE.md). Rebuild to see changes.
 
 Set the existing Web3Forms form identifier:
 

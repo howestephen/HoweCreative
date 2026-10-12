@@ -1,4 +1,21 @@
+---
+status: active
+author: stephen+claude
+updated: 2026-10-12
+word_budget_override: 6500
+word_budget_reason: the redesign branch keeps its full media and audit history; trim only with Stephen's approval
+---
+
 # ROADMAP
+
+## House rules in step with main - 12 October 2026
+
+This branch carries the same agent guidance as `main`: CLAUDE.md,
+CONVENTIONS.md, AGENTS.md, ONBOARDING.md, handoffs/TEMPLATE.md, the
+`scripts/validate*` kit and `.claude/launch.json`. A change to one is made on
+both in the same task. This branch stays live as the demonstration site
+(`howecreative-particle`) and keeps building on push: never carry main's
+Vercel main-only `git` setting here (decided by Stephen, 12 October 2026).
 
 ## Media pass - 6 October 2026
 

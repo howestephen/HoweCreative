@@ -1,3 +1,9 @@
+---
+status: active
+author: stephen+claude
+updated: 2026-10-12
+---
+
 # ARCHITECTURE
 
 ## Current Repo
