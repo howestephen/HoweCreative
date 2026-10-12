@@ -10,10 +10,9 @@ word_budget_reason: the redesign branch keeps its full media and audit history; 
 
 ## House rules in step with main - 12 October 2026
 
-This branch carries the same agent guidance as `main`: CLAUDE.md,
-CONVENTIONS.md, AGENTS.md, ONBOARDING.md, handoffs/TEMPLATE.md, the
-`scripts/validate*` kit and `.claude/launch.json`. A change to one is made on
-both in the same task. This branch stays live as the demonstration site
+This branch carries the same agent guidance as `main` (listed under Branches
+in CLAUDE.md); ONBOARDING.md matches bar one project line for this branch. A
+change to one is made on both in the same task. This branch stays live as the demonstration site
 (`howecreative-particle`) and keeps building on push: never carry main's
 Vercel main-only `git` setting here (decided by Stephen, 12 October 2026).
 
