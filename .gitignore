@@ -19,3 +19,6 @@ assets-archive/
 
 # agent scratch space: hook 8 ignores leftovers here; empty it when done
 scratch/
+
+# the kit's procedure: read it from _projects-admin, never commit a copy
+/RETROFIT.md
