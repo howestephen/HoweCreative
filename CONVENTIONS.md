@@ -34,7 +34,7 @@ Installed gates refuse rather than warn. A refusal is the answer, not an obstacl
 
 - Create new top-level folders: no
 
-- **Clean up after yourself: mess is yours, whoever made it.** Scratch files, temporary scripts, logs, failed or superseded output, duplicate checkouts and stray build artefacts are agent output. Remove them without asking, in this turn or a later one; another session having made them is no reason to leave them. Content is different: ask before removing anything published, anything Stephen supplied, installed skills or tools, roadmap-linked items, or tracked files outside your change. Archive creative and media assets, never delete them. Bulk deletes, renames and moves list the exact files and their references first. Finish with `git status` showing only intended changes.
+- **Clean up after yourself: mess is yours, whoever made it.** Scratch files, temporary scripts, logs, failed or superseded output, duplicate checkouts and stray build artefacts are agent output. Remove them without asking, in this turn or a later one; another session having made them is no reason to leave them. Never remove a checkout or branch holding uncommitted or unpushed work, and archive creative and media assets rather than deleting them. Content is different: ask before removing anything published, anything Stephen supplied, installed skills or tools, roadmap-linked items, or tracked files outside your change. Bulk deletes, renames and moves list the exact files and their references first. Finish with `git status` showing only intended changes.
 
 - One subagent at a time, never at your own tier or above
 
