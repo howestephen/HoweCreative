@@ -32,10 +32,9 @@ independent audit followed and its findings were fixed. Open:
   the demonstration site (`howecreative-particle`), so it must keep building
   on push (decided 2026-10-12). Dashboard, CLI and deploy-hook routes are not
   yet inventoried.
-- Both long-lived branches carry the same agent guidance: CLAUDE.md,
-  CONVENTIONS.md, AGENTS.md, ONBOARDING.md, handoffs/TEMPLATE.md, the
-  `scripts/validate*` kit and `.claude/launch.json`. A change to one is made
-  on both in the same task.
+- Both long-lived branches carry the same agent guidance (listed under
+  Branches in CLAUDE.md). ONBOARDING.md matches bar one redesign-specific
+  project line.
 - The GitHub publication check needs a `PUBLICATION_KIT_TOKEN` secret first.
 - CI runtime was 52s to 62s on the last three PR runs; dated account headroom, actionlint
   and hosted acceptance are not yet recorded.
