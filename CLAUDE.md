@@ -2,6 +2,11 @@
 
 These are standing instructions from Stephen. They are not suggestions.
 
+Read [CONVENTIONS.md](CONVENTIONS.md) on every task: it holds the house
+standards from the `ai-product-base` kit (Git, clean-up, audit, code
+baseline). This file wins where they differ. No level is declared, so every
+main merge or push needs Stephen's approval.
+
 ## Copy
 
 - **Never use em-dashes (—) or en-dashes (–)** in site copy, UI strings, the CV,
