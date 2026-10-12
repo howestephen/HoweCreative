@@ -33,7 +33,7 @@ independent audit followed and its findings were fixed. Open:
   before its next push. Dashboard, CLI and deploy-hook routes are not yet
   inventoried.
 - The GitHub publication check needs a `PUBLICATION_KIT_TOKEN` secret first.
-- CI runtime is about one minute per run; dated account headroom, actionlint
+- CI runtime was 52s to 62s on the last three PR runs; dated account headroom, actionlint
   and hosted acceptance are not yet recorded.
 - Codex and Cursor wiring, and which agent-host events fire, are unverified.
 - `.claude/settings.local.json` is tracked and holds machine paths.

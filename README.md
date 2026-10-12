@@ -38,8 +38,8 @@ npm run build
 ```
 
 The site is previewed through the house preview controller, which serves the
-built `dist` with `vite preview` on port 5175 and prints the Tailscale link to
-share (see CLAUDE.md). Rebuild to see changes.
+built `dist` with `vite preview` on port 5175 and reports the Tailscale link to
+share in `status` (see CLAUDE.md). Rebuild to see changes.
 
 Set the existing Web3Forms form identifier:
 

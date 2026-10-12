@@ -81,6 +81,6 @@ Round 3 escalates to Stephen.
 - Before any commit: `npm run typecheck && npm test && npm run lint && npm run build`.
 - The preview runs through the house preview controller (`vite preview` of
   `dist` on port 5175): `python3.13 <repos>/_projects-admin/scripts/project_control.py start`
-  from this repository, after `npm run build`. Share the Tailscale link it
-  prints. `.claude/launch.json` only attaches to that server; never start a
+  from this repository, after `npm run build`. Share the Tailscale link its
+  `status` reports. `.claude/launch.json` only attaches to that server; never start a
   second one on a guessed port.
