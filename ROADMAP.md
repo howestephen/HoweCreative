@@ -22,9 +22,21 @@ on every document; `scripts/validate.py`, `bootstrap.sh` and the structure
 config; Vercel builds main only; CI made read-only with a timeout. Probes in a
 disposable copy confirmed commits refuse an unlisted document, a credential,
 quoted private conversation and a personal email, and pre-push refuses a
-credential added and removed across two commits. Open: no project level is
-declared (main needs approval per push), and the GitHub publication check
-needs a `PUBLICATION_KIT_TOKEN` secret before it can be added.
+credential added and removed across two commits (run 2026-10-12 against hook
+release 29d88e8; a quoted-attribution commit body was refused too). An
+independent audit followed and its findings were fixed. Open:
+
+- No project level is declared, so every main merge or push needs approval.
+- Vercel main-only protects nothing until this branch merges: `main` still
+  allows `preview/**`, and `codex/creative-technologist-portfolio` has no
+  `git` setting, so it builds on every push. Carry the setting to that branch
+  before its next push. Dashboard, CLI and deploy-hook routes are not yet
+  inventoried.
+- The GitHub publication check needs a `PUBLICATION_KIT_TOKEN` secret first.
+- CI runtime is about one minute per run; dated account headroom, actionlint
+  and hosted acceptance are not yet recorded.
+- Codex and Cursor wiring, and which agent-host events fire, are unverified.
+- `.claude/settings.local.json` is tracked and holds machine paths.
 
 ## Goal
 
