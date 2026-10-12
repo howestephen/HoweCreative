@@ -34,10 +34,12 @@ Stephen Howe’s production portfolio for Creative Technologist, AI Designer, an
 ```bash
 npm install
 cp .env.example .env.local
-npm run dev
+npm run build
 ```
 
-The registered preview runs at `http://localhost:5175` (see CLAUDE.md).
+The site is previewed through the house preview controller, which serves the
+built `dist` with `vite preview` on port 5175 and prints the Tailscale link to
+share (see CLAUDE.md). Rebuild to see changes.
 
 Set the existing Web3Forms form identifier:
 
