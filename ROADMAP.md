@@ -27,11 +27,15 @@ release 29d88e8; a quoted-attribution commit body was refused too). An
 independent audit followed and its findings were fixed. Open:
 
 - No project level is declared, so every main merge or push needs approval.
-- Vercel main-only protects nothing until this branch merges: `main` still
-  allows `preview/**`, and `codex/creative-technologist-portfolio` has no
-  `git` setting, so it builds on every push. Carry the setting to that branch
-  before its next push. Dashboard, CLI and deploy-hook routes are not yet
-  inventoried.
+- Vercel main-only now applies to `main`. Do not carry it to
+  `codex/creative-technologist-portfolio`: Stephen keeps that branch live as
+  the demonstration site (`howecreative-particle`), so it must keep building
+  on push (decided 2026-10-12). Dashboard, CLI and deploy-hook routes are not
+  yet inventoried.
+- Both long-lived branches carry the same agent guidance: CLAUDE.md,
+  CONVENTIONS.md, AGENTS.md, ONBOARDING.md, handoffs/TEMPLATE.md, the
+  `scripts/validate*` kit and `.claude/launch.json`. A change to one is made
+  on both in the same task.
 - The GitHub publication check needs a `PUBLICATION_KIT_TOKEN` secret first.
 - CI runtime was 52s to 62s on the last three PR runs; dated account headroom, actionlint
   and hosted acceptance are not yet recorded.
