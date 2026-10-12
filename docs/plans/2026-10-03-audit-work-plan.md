@@ -1,3 +1,9 @@
+---
+status: active
+author: stephen+claude
+updated: 2026-10-12
+---
+
 # Work plan: fixes from the October 2026 site audit
 
 Fourteen self-contained work packages (WP-1 to WP-14) built from audit passes A to D. The consolidated findings are in `docs/reviews/2026-10-03-full-audit.md`. Finding IDs (A-n, B-n, C-n, D-n) refer to the pass reports, which hold the full evidence and are kept privately on Stephen's Mac at `docs/private/2026-10-03-audit/` (git-ignored). Each package repeats what a fixer needs, so it can be picked up without those reports or this conversation; where a package needs evidence, it gives the command to reproduce it.

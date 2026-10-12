@@ -1,3 +1,9 @@
+---
+status: active
+author: stephen+claude
+updated: 2026-10-12
+---
+
 # Consolidated audit findings (passes A to D)
 
 Date: 3 October 2026. Targets: `main` (production, https://howecreative.co.uk, audited at `origin/main` `8a5cbf4`) and the redesign branch `codex/creative-technologist-portfolio` (https://howecreative.co.uk/particle-redesign, audited at `d531010`). Passes: A code correctness, B live site and security, C accessibility, responsive layout and performance, D content and copy. The pass reports with full evidence are kept privately at `docs/private/2026-10-03-audit/` (git-ignored). Fixes are packaged in [the audit work plan](../plans/2026-10-03-audit-work-plan.md).
