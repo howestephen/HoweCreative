@@ -14,6 +14,14 @@ The work is happening on `claude/concept-editorial`. This branch is intended to
 replace the current production design on `main` once its content, CV, responsive
 behaviour, and conversion paths are approved.
 
+## CI scope (2026-10-13)
+
+CI skips documentation-only changes (no check reads Markdown) and a pull
+request runs only the Vitest files related to what it changed
+(`vitest --changed`); the merge to main still runs every test. Locally,
+`src/app/fonts.test.ts` fails until `npm install` adds the missing
+`@fontsource-variable/fraunces`; CI installs fresh.
+
 ## House kit retrofit (2026-10-12)
 
 Brought in line with the `ai-product-base` kit on `chore/october-rules`:
