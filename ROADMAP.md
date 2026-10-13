@@ -27,7 +27,9 @@ touched.
 
 CI skips documentation-only changes (no check reads Markdown) and a pull
 request runs only the Vitest files related to what it changed
-(`vitest --changed`); the merge to main still runs every test. Locally,
+(`vitest --changed`); changes to files tests read from disk (`public/`,
+`vercel.json`, `index.html`, `src/styles/`, the lockfile) run every test,
+as does the merge to main. Locally,
 `src/app/fonts.test.ts` fails until `npm install` adds the missing
 `@fontsource-variable/fraunces`; CI installs fresh.
 
