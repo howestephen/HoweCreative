@@ -1,7 +1,7 @@
 ---
 status: active
 author: stephen+claude
-updated: 2026-10-12
+updated: 2026-10-13
 ---
 
 # ROADMAP
@@ -13,6 +13,15 @@ updated: 2026-10-12
 The work is happening on `claude/concept-editorial`. This branch is intended to
 replace the current production design on `main` once its content, CV, responsive
 behaviour, and conversion paths are approved.
+
+## Accessibility and layout refinements (2026-10-13)
+
+Approved by Stephen, open. A review of live main at 390, 768, 834, 1024, 1280
+and 1440 found one WCAG A failure (no captions on narrated video), four tablet
+layout faults and eight small refinements. Full brief, source locations and
+acceptance: [handoffs/2026-10-13-a11y-and-layout-refinements.md](handoffs/2026-10-13-a11y-and-layout-refinements.md).
+Work on `fix/a11y-layout-refinements`; main only, the redesign branch is not
+touched.
 
 ## House kit retrofit (2026-10-12)
 
