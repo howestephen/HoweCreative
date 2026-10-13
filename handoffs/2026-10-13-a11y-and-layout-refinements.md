@@ -32,7 +32,7 @@ below. Read CLAUDE.md and CONVENTIONS.md first; these points matter most here:
   only what an item names.
 - **Main only.** Do not touch `codex/creative-technologist-portfolio`; it stays
   as it is as the live demonstration site.
-- Work on this branch, `fix/a11y-layout-refinements`, and push it. Merging or
+- Create `fix/a11y-layout-refinements` from `main`, work there and push it. Merging or
   pushing to `main` needs Stephen's approval at that moment.
 - Never delete or overwrite media; archive under `assets-archive/` if anything
   is replaced. No em-dashes or en-dashes in site copy.
@@ -186,4 +186,4 @@ Playwright. Keep such scripts in `scratch/` or a temp folder, never commit them.
 ## Log
 - 2026-10-13 claude: reviewed live main at six widths with axe-core, keyboard
   checks and measured layout. Recorded 15 approved items with source locations
-  and handed over for implementation on `fix/a11y-layout-refinements`.
+  and handed over on `main`; implementation goes on `fix/a11y-layout-refinements`.

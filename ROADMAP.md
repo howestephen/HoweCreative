@@ -20,7 +20,7 @@ Approved by Stephen, open. A review of live main at 390, 768, 834, 1024, 1280
 and 1440 found one WCAG A failure (no captions on narrated video), four tablet
 layout faults and eight small refinements. Full brief, source locations and
 acceptance: [handoffs/2026-10-13-a11y-and-layout-refinements.md](handoffs/2026-10-13-a11y-and-layout-refinements.md).
-Work on `fix/a11y-layout-refinements`; main only, the redesign branch is not
+Implement on a `fix/a11y-layout-refinements` branch from main; main only, the redesign branch is not
 touched.
 
 ## House kit retrofit (2026-10-12)
