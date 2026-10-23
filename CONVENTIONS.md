@@ -12,7 +12,16 @@ updated: 2026-10-12
 House defaults from the `ai-product-base` kit, verbatim for `retrofit-check.py`.
 CLAUDE.md's own rules win where they differ, stated explicitly.
 
-- **Free-only CI policy.** Read `_projects-admin/RULES.md` section 2.14 before changing workflows; shared gates enforce it: main/PR/manual triggers only, read-only tokens, job timeouts within 10 combined minutes, no schedules, matrices, services, artifact uploads or paid capacity, reviewed setup actions only, and Stop usage: Yes. Browser, coverage and mutation checks stay local. At 80% of the shared allowance, stop adding hosted work and report.
+- **Free-only CI policy.** Read `_projects-admin/RULES.md` section 2.14 before
+  changing CI; shared gates enforce it. Local first: lint, typecheck and
+  changed tests run at pre-push. Code projects run their full, integration and
+  browser suites on CircleCI from the house config, copied unchanged except
+  the `cimg/node` version, adapting through `ci:pr` and `ci:main` scripts.
+  GitHub Actions keeps the publication scan: main/PR/manual triggers only,
+  read-only tokens, job timeouts within 10 combined minutes, no schedules,
+  matrices, services, artifact uploads or paid capacity, reviewed setup
+  actions only, and Stop usage: Yes. Mutation checks stay local. At 80% of
+  either shared allowance, stop adding hosted work and report.
 
 - **CI budget and pushes.** Run local validation before pushing, through the machine's shared hooks, never project copies. Automatic CI runs on PRs to main and pushes to main only. Batch finished work into planned pushes after the first branch backup, and re-run only failed jobs after diagnosis. Never silently disable CI or bypass a gate.
 
