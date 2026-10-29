@@ -39,7 +39,7 @@ export function Capabilities() {
       <div className="mx-auto max-w-6xl px-6 py-20 md:py-24">
         <div className="mb-4 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
           <h2 className="text-3xl md:text-4xl">What I do</h2>
-          <span className="font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+          <span className="label-mono text-muted-foreground">
             three practices · one mindset
           </span>
         </div>
@@ -48,7 +48,7 @@ export function Capabilities() {
           outputs - then build the repeatable machine.
         </p>
 
-        <div className="grid gap-px border border-border bg-border md:grid-cols-3">
+        <div className="grid gap-px border border-border bg-border lg:grid-cols-3">
           {PRACTICES.map((practice, i) => (
             <motion.div
               key={practice.title}
@@ -61,9 +61,9 @@ export function Capabilities() {
               {/* Red accent bar replaces the index number; it also gives every
                   card an identical top element so the titles line up. */}
               <span className="mb-5 block h-1 w-8 shrink-0 bg-accent" aria-hidden />
-              {/* Reserve two lines so bullet lists start at the same level in
-                  every card regardless of how the title wraps. */}
-              <h3 className="mb-5 flex min-h-[2.75em] items-start text-2xl leading-snug">
+              {/* When the cards sit side by side, reserve two lines so bullet
+                  lists start at the same level however the title wraps. */}
+              <h3 className="mb-5 flex items-start lg:min-h-[2.75em] text-2xl leading-snug">
                 {practice.title}
               </h3>
               <ul className="mb-6 space-y-2.5">
@@ -77,7 +77,7 @@ export function Capabilities() {
               {/* mt-auto keeps the tools row bottom-aligned across cards; the
                   ul's mb-6 guarantees the divider never crowds the last bullet
                   even in the tallest card, where mt-auto collapses to zero. */}
-              <div className="mt-auto whitespace-nowrap border-t border-border pt-4 font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
+              <div className="mt-auto border-t border-border pt-4 meta-mono text-muted-foreground">
                 {practice.tools}
               </div>
             </motion.div>
