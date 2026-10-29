@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
+import { useCallback, useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { Link, useLocation, useNavigate, useSearchParams } from "react-router";
 import { createPortal } from "react-dom";
 import { ArrowUpRight, ChevronLeft, ChevronRight, X } from "lucide-react";
@@ -120,9 +120,9 @@ function ScrollStrip({
   return (
     <div>
       <div className="mb-2 flex h-9 items-center justify-between gap-3">
-        <span className="font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.18em] text-accent">{label}</span>
+        <span className="label-mono text-accent">{label}</span>
         <div className="flex items-center gap-2">
-          <span className="font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
+          <span className="meta-mono text-muted-foreground">
             {count} {count === 1 ? unit : `${unit}s`}
           </span>
           <div className={scrollable ? "flex gap-1" : "hidden"}>
@@ -351,16 +351,7 @@ function StudyDetail({
       {/* Every study opens on a header: the featured film where there is one,
           otherwise the card's key image on its own dark ground. It comes
           first at every width, so phones see it above the text. */}
-      {!featured && project.image && (
-        <div className="flex aspect-[16/10] w-full items-center justify-center overflow-hidden border border-border bg-[#0a0c10] sm:aspect-[5/2] lg:col-span-5 lg:aspect-[3/1]">
-          <ImageWithFallback
-            src={project.image}
-            alt=""
-            decoding="async"
-            className="h-full w-full object-contain"
-          />
-        </div>
-      )}
+      {!featured && project.image && <StudyBanner src={project.image} />}
       {featured && (
         <video
           src={featured.src}
@@ -380,7 +371,7 @@ function StudyDetail({
           const isOutcome = section.title === "Outcome";
           return (
             <div key={section.title} className={isOutcome ? "border-l-2 border-accent pl-4" : undefined}>
-              <div className="mb-2 font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.18em] text-accent">
+              <div className="mb-2 label-mono text-accent">
                 {section.title}
               </div>
               <SectionBody body={section.body} emphasis={isOutcome} />
@@ -392,7 +383,7 @@ function StudyDetail({
           {[project.role, project.client, project.status].map((chip) => (
             <span
               key={chip}
-              className="border border-border bg-card px-2.5 py-1 font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.14em] text-muted-foreground"
+              className="border border-border bg-card px-2.5 py-1 meta-mono text-muted-foreground"
             >
               {chip}
             </span>
@@ -601,7 +592,7 @@ export function Lightbox({
 
       {/* Controls float above the image and never affect its layout. */}
       <div className="pointer-events-none absolute inset-x-0 top-0 flex items-start justify-between gap-4 p-3 sm:p-4">
-        <span className="pointer-events-auto bg-background/80 px-2.5 py-1.5 font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
+        <span className="pointer-events-auto bg-background/80 px-2.5 py-1.5 meta-mono text-muted-foreground">
           {title} / {index + 1} of {images.length}
         </span>
         <button
@@ -661,7 +652,7 @@ function CardImage({ project, featured }: { project: PortfolioProject; featured:
   if (!project.image) {
     return (
       <div className="flex h-full w-full items-end bg-neutral-900 p-4">
-        <span className="font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.18em] text-neutral-400">
+        <span className="label-mono text-neutral-400">
           {shortCategory(project)}
         </span>
       </div>
@@ -684,19 +675,21 @@ function StudyCard({
   project,
   index,
   featured,
+  spanTablet = false,
   onOpen,
   cardRef,
 }: {
   project: PortfolioProject;
   index: number;
   featured: boolean;
+  spanTablet?: boolean;
   onOpen: () => void;
   cardRef: (el: HTMLButtonElement | null) => void;
 }) {
   const teaser = TEASERS[project.slug] ?? project.shortDescription;
 
   return (
-    <li className={featured ? "sm:col-span-2 lg:col-span-3" : undefined}>
+    <li className={featured ? "sm:col-span-2 lg:col-span-3" : spanTablet ? "sm:col-span-2 lg:col-span-1" : undefined}>
       <button
         ref={cardRef}
         type="button"
@@ -709,8 +702,12 @@ function StudyCard({
         className={
           featured
             ? "group grid h-full w-full border border-border bg-card text-left transition-colors hover:border-accent lg:grid-cols-5"
-            : // Every card stacks, image above text, like the featured one.
-              "group flex h-full w-full flex-col border border-border bg-card text-left transition-colors hover:border-accent"
+            : spanTablet
+              ? // Side by side like the featured card while it spans two
+                // columns, then stacked like the rest on desktop.
+                "group flex h-full w-full flex-col border border-border bg-card text-left transition-colors hover:border-accent sm:grid sm:grid-cols-5 lg:flex"
+              : // Every card stacks, image above text, like the featured one.
+                "group flex h-full w-full flex-col border border-border bg-card text-left transition-colors hover:border-accent"
         }
       >
         <div
@@ -719,7 +716,7 @@ function StudyCard({
               ? "aspect-video overflow-hidden bg-neutral-900 lg:col-span-3 lg:aspect-auto lg:min-h-[22rem]"
               : // The card art is shown whole at its own 16:10 at every width,
               // so the UNCX mark stays in its bottom-left corner.
-              "aspect-[16/10] w-full overflow-hidden bg-[#0a0c10]"
+              `aspect-[16/10] w-full overflow-hidden bg-[#0a0c10]${spanTablet ? " sm:col-span-3 sm:self-center lg:self-auto" : ""}`
           }
         >
           <CardImage project={project} featured={featured} />
@@ -729,10 +726,10 @@ function StudyCard({
           className={
             featured
               ? "flex flex-col gap-1 px-4 py-3 sm:gap-3 sm:p-7 lg:col-span-2 lg:justify-center"
-              : "flex min-w-0 flex-1 flex-col gap-1 px-4 py-3 sm:gap-2 sm:p-5"
+              : `flex min-w-0 flex-1 flex-col gap-1 px-4 py-3 sm:gap-2 sm:p-5${spanTablet ? " sm:col-span-2 sm:justify-center lg:justify-start" : ""}`
           }
         >
-          <div className="flex items-baseline justify-between gap-3 font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.14em]">
+          <div className="flex items-baseline justify-between gap-3 meta-mono">
             <span className="min-w-0 truncate text-accent">
               {indexLabel(index)} · {shortCategory(project)}
             </span>
@@ -758,7 +755,7 @@ function StudyCard({
             {teaser}
           </p>
           <span
-            className="mt-auto inline-flex items-center gap-1.5 self-end pt-0.5 font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.16em] text-foreground transition-colors group-hover:text-accent sm:pt-2"
+            className="mt-auto inline-flex items-center gap-1.5 self-end pt-0.5 label-mono text-foreground transition-colors group-hover:text-accent sm:pt-2"
           >
             Read more
             <ArrowUpRight className="h-3.5 w-3.5" />
@@ -766,6 +763,35 @@ function StudyCard({
         </div>
       </button>
     </li>
+  );
+}
+
+/** Lead image of a study without a film. When its size is known the banner
+ * takes the image's own ratio, capped at the old banner height and centred,
+ * so marks drawn into a corner of the art stay in the banner's corner. */
+function StudyBanner({ src }: { src: string }) {
+  const meta = imageVariants(src);
+  if (!meta) {
+    return (
+      <div className="flex aspect-[16/10] w-full items-center justify-center overflow-hidden border border-border bg-[#0a0c10] sm:aspect-[5/2] lg:col-span-5 lg:aspect-[3/1]">
+        <ImageWithFallback src={src} alt="" decoding="async" className="h-full w-full object-contain" />
+      </div>
+    );
+  }
+  const style: CSSProperties & { "--banner-ratio": number } = {
+    aspectRatio: `${meta.w} / ${meta.h}`,
+    "--banner-ratio": meta.w / meta.h,
+  };
+  return (
+    <div className="lg:col-span-5">
+      <div
+        data-testid="study-banner"
+        style={style}
+        className="mx-auto w-full max-w-[calc(100%*var(--banner-ratio)/1.6)] overflow-hidden border border-border bg-[#0a0c10] sm:max-w-[calc(100%*var(--banner-ratio)/2.5)] lg:max-w-[calc(100%*var(--banner-ratio)/3)]"
+      >
+        <ImageWithFallback src={src} alt="" decoding="async" className="h-full w-full object-contain" />
+      </div>
+    </div>
   );
 }
 
@@ -867,7 +893,7 @@ function StudyOverlay({
         >
           <div className="sticky top-0 z-10 flex items-start justify-between gap-4 border-b border-border bg-background px-5 py-4 sm:px-8">
             <div className="min-w-0">
-              <div className="font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.14em] text-accent">
+              <div className="meta-mono text-accent">
                 {indexLabel(index)} · {shortCategory(project)} · {project.year}
               </div>
               <h2 id={titleId} className="mt-1 text-2xl md:text-3xl">
@@ -977,11 +1003,11 @@ export function WorkIndex() {
       <div className="mx-auto max-w-6xl px-6 py-20 md:py-24">
         <div className="mb-4 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
           <h2 className="text-3xl md:text-4xl">Selected work</h2>
-          <span className="font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+          <span className="label-mono text-muted-foreground">
             2021-2026 · {portfolioProjects.length} projects
           </span>
         </div>
-        <p className="mb-10 max-w-xl text-sm leading-relaxed text-muted-foreground">
+        <p className="mb-12 max-w-xl text-sm leading-relaxed text-muted-foreground">
           Every project is shown as a system - the brief, the machinery, the outcome. Open a
           study for the working detail.
         </p>
@@ -993,6 +1019,9 @@ export function WorkIndex() {
               project={project}
               index={index}
               featured={index === 0}
+              // Between 640 and 1023 the grid has two columns under the
+              // full-width featured card; an odd card out spans both.
+              spanTablet={index > 0 && index === portfolioProjects.length - 1 && index % 2 === 1}
               onOpen={() => openStudy(project.slug)}
               cardRef={(el) => {
                 cardRefs.current[project.slug] = el;
@@ -1007,7 +1036,7 @@ export function WorkIndex() {
           </p>
           <Link
             to="/archive"
-            className="inline-flex min-h-11 shrink-0 items-center gap-1.5 self-start border border-foreground/25 px-4 py-2 font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.16em] text-foreground transition-colors hover:border-accent hover:text-accent sm:self-auto"
+            className="inline-flex min-h-11 shrink-0 items-center gap-1.5 self-start border border-foreground/25 px-4 py-2 label-mono text-foreground transition-colors hover:border-accent hover:text-accent sm:self-auto"
           >
             Full archive <ArrowUpRight className="h-3.5 w-3.5" />
           </Link>
