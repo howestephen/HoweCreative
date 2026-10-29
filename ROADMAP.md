@@ -23,6 +23,16 @@ acceptance: [handoffs/2026-10-13-a11y-and-layout-refinements.md](handoffs/2026-1
 Implement on a `fix/a11y-layout-refinements` branch from main; main only, the redesign branch is not
 touched.
 
+## CI scope (2026-10-13)
+
+CI skips documentation-only changes (no check reads Markdown) and a pull
+request runs only the Vitest files related to what it changed
+(`vitest --changed`); changes to files tests read from disk (`public/`,
+`vercel.json`, `index.html`, `src/styles/`, the lockfile) run every test,
+as does the merge to main. Locally,
+`src/app/fonts.test.ts` fails until `npm install` adds the missing
+`@fontsource-variable/fraunces`; CI installs fresh.
+
 ## House kit retrofit (2026-10-12)
 
 Brought in line with the `ai-product-base` kit on `chore/october-rules`:
