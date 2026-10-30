@@ -1,29 +1,51 @@
 ---
 status: active
 author: stephen+claude
-updated: 2026-10-13
+updated: 2026-10-30
 ---
 
 # ROADMAP
 
 ## Current Milestone
 
-`3.0 Validate and ship the career-focused editorial redesign`
+`3.1 Maintain the live editorial site`
 
-The work is happening on `claude/concept-editorial`. This branch is intended to
-replace the current production design on `main` once its content, CV, responsive
-behaviour, and conversion paths are approved.
+Milestone 3.0, the career-focused editorial redesign, shipped to `main` on
+19 July 2026 (merge 85dd2c7). Work now goes to `main` as maintenance.
+`codex/creative-technologist-portfolio` stays a separate, live demonstration
+site and is not merged.
+
+Open:
+
+- Captions for the 11 narrated videos (A1 below) wait for Stephen's proofread
+  on `fix/video-captions`.
+- Decide on the 15 images the September image review marked CUT.
+- Send a test message through the production contact form.
+- Print preview `/cv` in Chromium and Safari.
+- At 320px the hCaptcha widget (a fixed 302px) makes the page scroll
+  sideways; hCaptcha's compact size would fit.
+- At 320px the two CV buttons (about 290px) overflow the 272px column to
+  the left, as they did before. Below the masthead the CV controls are out
+  of view; they no longer follow the scroll, so they never cover the dates.
 
 ## Accessibility and layout refinements (2026-10-13)
 
-Approved by Stephen, open. A review of live main at 390, 768, 834, 1024, 1280
-and 1440 found one WCAG A failure (no captions on narrated video), four tablet
-layout faults and eight small refinements. Full brief, source locations and
-acceptance: [handoffs/2026-10-13-a11y-and-layout-refinements.md](handoffs/2026-10-13-a11y-and-layout-refinements.md).
-Implement on a `fix/a11y-layout-refinements` branch from main; main only, the redesign branch is not
-touched.
+A review of live main at 390, 768, 834, 1024, 1280 and 1440 found one WCAG A
+failure (no captions on narrated video), four tablet layout faults and eight
+small refinements. Brief, measurements and log:
+[handoffs/2026-10-13-a11y-and-layout-refinements.md](handoffs/2026-10-13-a11y-and-layout-refinements.md).
 
-## CI scope (2026-10-13)
+- ✓ 30 October 2026: A2, A3, L1 to L4 and R1 to R8 are merged to main. One
+  keyboard focus ring site-wide; no on-screen text below 11px; mono text uses
+  two shared styles, `label-mono` and `meta-mono` in `src/styles/theme.css`;
+  the hero stats, header, What I do and work grid hold their layout from 640
+  to 1279; the study banner takes its image's ratio; the CV controls sit on
+  the CV column. `src/app/refinements.test.tsx` covers each item.
+- [ ] A1: Whisper transcripts, corrected, for the 11 narrated videos are on
+  `fix/video-captions`, waiting for Stephen's proofread. The other 11 videos
+  with an audio track carry music only.
+
+## CI scope (merged 2026-10-30)
 
 CI skips documentation-only changes (no check reads Markdown) and a pull
 request runs only the Vitest files related to what it changed
@@ -58,7 +80,7 @@ independent audit followed and its findings were fixed. Open:
 - CI runtime was 52s to 62s on the last three PR runs; dated account headroom, actionlint
   and hosted acceptance are not yet recorded.
 - Codex and Cursor wiring, and which agent-host events fire, are unverified.
-- `.claude/settings.local.json` is tracked and holds machine paths.
+- ✓ `.claude/settings.local.json` is no longer tracked (merged 30 October 2026).
 
 ## Goal
 
@@ -69,7 +91,7 @@ independent audit followed and its findings were fixed. Open:
 - Keep the work visually distinctive through a restrained editorial system and
   the generative plotter mark.
 
-## Completed on the redesign branch
+## Completed in the editorial redesign
 
 - ✓ Employer-focused positioning and light-first editorial art direction.
 - ✓ Outcome-first index for nine case studies.
@@ -81,7 +103,7 @@ independent audit followed and its findings were fixed. Open:
 - ✓ Browser-compatible Web3Forms free-plan submission.
 - ✓ Lazy-load the standalone CV route.
 
-## Current Next Steps
+## Redesign launch checks
 
 1. ✓ Responsive and accessibility QA of the editorial homepage (a11y audit
    clean; no overflow at 375/768/1280; reduced-motion honoured site-wide via
@@ -100,7 +122,7 @@ independent audit followed and its findings were fixed. Open:
    components, three helpers and their three tests, then the three.js and
    React Three Fiber packages only they used. The built JavaScript is
    unchanged apart from file hashes; the CSS drops only their unused utilities.
-7. Merge the approved branch to `main` and validate the production deployment.
+7. ✓ Merged to `main` on 19 July 2026 (85dd2c7).
 
 ## Production Maintenance
 
@@ -109,13 +131,14 @@ independent audit followed and its findings were fixed. Open:
   full-size copy while fetching new thumbnails. Both image URLs now carry a
   content-hash version, including every responsive WebP candidate, so the
   current Rebrand marks and Academy corner logo appear consistently.
-- [ ] Fix the findings of the October 2026 full audit of both sites: 39
+- [x] Fix the findings of the October 2026 full audit of both sites: 39
   findings (3 P1, 12 P2, 24 P3) in
   [the audit findings](docs/reviews/2026-10-03-full-audit.md), packaged as
   WP-1 to WP-14 in [the audit work plan](docs/plans/2026-10-03-audit-work-plan.md).
-  Decisions 1 to 7 were settled on 3 October (captcha on the contact form,
-  home page wording kept, no captions, legacy components retired); decision 8
-  settled on HSTS with `includeSubDomains`.
+  Done for main, including the enforced CSP and HSTS headers in `vercel.json`.
+  Deferred: WP-5, WP-6 and WP-12 belong to the redesign branch, which Stephen
+  keeps separate (owner: Stephen). Decision 5 (no captions) was reversed on
+  13 October; see A1.
 - ✓ Figma source exports, 6 October 2026: 18 App Prototyping, Unified Menu
   and Solana Diary gallery images, which were canvas screenshots at mostly 0.2
   to 0.9 pixels per canvas pixel, are re-exported from Figma at their original
@@ -187,15 +210,15 @@ independent audit followed and its findings were fixed. Open:
   Lingo (1920px), the UNCX website sections and Academy pages (1440px). They
   are the images still below retina resolution when shown large.
 - [ ] Decide on the 15 images the September image review marked CUT, listed
-  under the case study audit.
+  under the case study audit. Stephen's decision.
 - ✓ Added Google Search Console HTML ownership verification to the canonical
   production homepage.
-- Branch `feat/quiver-and-work-cards` (awaiting approval): the Quiver launch
-  film case study is ported from the redesign branch as the featured first
-  study, and Selected work becomes a card grid (three wide on desktop, compact
-  cards on phones) whose studies open in an overlay. The open study is kept in
-  the URL (`/?study=quiver`) so it can be shared directly. Close and Escape
-  always return to the grid; Back does too when the study was opened from it.
+- ✓ Quiver and the work card grid, September 2026: the Quiver launch film is
+  the featured first study, and Selected work is a card grid (three wide on
+  desktop, compact cards on phones) whose studies open in an overlay. The open
+  study is kept in the URL (`/?study=quiver`) so it can be shared directly. Close and
+  Escape always return to the grid; Back does too when the study was opened
+  from it.
 
 ## Acceptance Criteria
 
