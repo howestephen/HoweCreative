@@ -107,7 +107,7 @@ export function ContactFoot() {
               >
                 View CV
               </a>
-              <div className="flex items-center gap-x-6">
+              <div className="flex items-center gap-x-4 sm:gap-x-6">
                 {[
                   { label: "LinkedIn", href: siteProfile.linkedinUrl },
                   { label: "GitHub", href: siteProfile.githubUrl },

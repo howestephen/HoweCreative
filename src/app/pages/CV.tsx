@@ -123,14 +123,14 @@ export function CV() {
   });
 
   return (
-    <div className="cv-page min-h-screen w-full bg-white text-neutral-900">
+    <div className="cv-page relative min-h-screen w-full bg-white text-neutral-900">
       <style>{CV_STYLES}</style>
 
-      {/* Pinned to the right edge of the 780px CV column, never closer than
-          1rem to the window edge. */}
+      {/* Set on the right edge of the CV column, above the masthead, so the
+          controls scroll with the page and never cover the CV's dates. */}
       <nav
         aria-label="CV actions"
-        className="no-print fixed right-[max(1rem,calc((100%-780px)/2+1.5rem))] top-4 z-50 flex gap-2 print:hidden"
+        className="no-print absolute inset-x-0 top-4 z-50 mx-auto flex max-w-[780px] justify-end gap-2 px-6 print:hidden"
       >
         <button
           type="button"
