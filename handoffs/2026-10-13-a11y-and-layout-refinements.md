@@ -3,11 +3,11 @@ status: active
 author: stephen+claude
 type: handoff
 task: Fix the accessibility and layout findings from the 13 October review of the main site
-owner: claude
-state: needs-work
-round: 1
+owner: stephen
+state: blocked
+round: 2
 created: 2026-10-13
-updated: 2026-10-13
+updated: 2026-10-30
 generated_by: claude
 generated_at: 2026-10-13T16:21Z
 generated_from: conversation
@@ -161,6 +161,39 @@ Playwright. Keep such scripts in `scratch/` or a temp folder, never commit them.
 ## Done
 
 - Review completed and findings recorded here (13 October 2026).
+- A2, A3, L1 to L4 and R1 to R8 merged to main on 30 October 2026. Measured
+  with Playwright at 390, 768, 834, 1024, 1280 and 1440 after scrolling the
+  page, against the live site before and the build after:
+  - L1: "4 yrs 10 mos" was 138px in a 119px cell at 1024; cells are now
+    263 to 300px from 1024 to 1279 (two columns in the `lg` band), and four
+    columns from `xl` with a 16px gap leave it 6px of room.
+  - L2: the brand text was 57px (two lines) at 768 and 834; it is 13px, one
+    line, at every width, and the header link stays 44px.
+  - L3: the tool line overflowed by up to 91px at 768 and 6px at 1024; 0 at
+    every width. It may now wrap, since "Cinema 4D · Redshift · After
+    Effects" is wider than a card at 1024.
+  - L4: the last row was 49% full at 768 and 834; 100% now. Desktop rows are
+    unchanged.
+  - A2: keyboard focus shows a 2px solid ink ring, offset 2px. A3: the
+    smallest on-screen text is 11px at every width (was 10px). The CV keeps
+    10px in print only.
+  - R4: at 390 the headline ends "ship the work." and the tag "remote, UK"
+    (was "work." and "UK" alone). R5: the hero links start at the column
+    edge on phone (was 8px in); the contact links share one row at 390 and
+    1024 (was two). R7: the banner box now matches the image ratio (1.600)
+    at every width. R8: the CV controls end on the CV column's right edge
+    (1086px at 1440, both measured) and sit above the masthead, scrolling
+    with the page; when fixed they covered the right-aligned dates.
+  - axe-core 4.10.2 on the five baseline pages at 390 and 1440: 0
+    violations. No horizontal scroll from 390 to 1440. At 320 the fixed
+    302px hCaptcha widget still overflows, as it does on live (live also
+    overflowed from the What I do cards, now fixed).
+- Independent audit: the first pass found the fixed CV controls covering
+  dates, a tight contact row at 320, 1px of room for a hero stat at 1280
+  and weak tests; all fixed in 881492e and re-audited.
+- R1 settled on two styles: `label-mono` (11px, 0.18em) for section tags,
+  categories and controls, and `meta-mono` (11px, 0.14em) for dates, counts,
+  captions and secondary links.
 
 ## Acceptance
 
@@ -183,7 +216,30 @@ Playwright. Keep such scripts in `scratch/` or a temp folder, never commit them.
   independent audit finds no open issue.
 - `ROADMAP.md` updated; `main` merged only with Stephen's approval.
 
+## Outstanding for Stephen
+
+- **A1 proofread.** Branch `fix/video-captions` carries one WebVTT file
+  beside each of the 11 narrated videos, wired as caption tracks. Read each
+  file, correct it, and approve; captions go live only after that. Whisper
+  terms corrected by judgement, to confirm: Sei (heard "say"), AMMs ("MMs"),
+  laddering ("lathering"), Hyperliquid, Hyperlane ("Hyper-A"), BNB Chain,
+  Arbitrum, Unichain, dApps, Token Minter ("token mint", "token mentor"),
+  no-code ("NOCO"), Withdraw ("with draw", "Draw"), on-chain ("on shame").
+  Least certain: "Every transaction is on-chain" (Ethereum), "Web3 is
+  evolving fast" (promo), "specify your lock amount" (LP tutorial), "you
+  mint a token across multiple chains" (Token Minter), "existing stream"
+  (Vesting V2).
+- Music only, checked by transcription: the four Quiver films, the brand
+  launch video, avalanche-summit, ethcc-2025, lock-announcement-rise,
+  robinhood-chain-launch, solana-locks-launch, and chalet-chardons
+  chef-training (Whisper heard no words).
+
 ## Log
 - 2026-10-13 claude: reviewed live main at six widths with axe-core, keyboard
   checks and measured layout. Recorded 15 approved items with source locations
   and handed over on `main`; implementation goes on `fix/a11y-layout-refinements`.
+- 2026-10-29 claude: fixed A2, A3, L1 to L4 and R1 to R8 on
+  `fix/a11y-layout-refinements` with tests in `src/app/refinements.test.tsx`,
+  measured against live, audited twice, merged to main on 30 October. Transcribed all 22 videos
+  with an audio track; 11 are narrated and their captions are on
+  `fix/video-captions` for proofreading. Owner to Stephen.

@@ -99,7 +99,7 @@ export function Masthead() {
             </motion.div>
           </div>
 
-          <motion.dl variants={item} className="grid grid-cols-2 gap-x-6 gap-y-6 border-t border-border pt-6 sm:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4">
+          <motion.dl variants={item} className="grid grid-cols-2 gap-x-6 gap-y-6 border-t border-border pt-6 sm:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4 xl:gap-x-4">
             {metrics.map((metric) => (
               <div key={metric.label} className="flex flex-col">
                 <dt className="flex-1 label-mono leading-tight text-muted-foreground">

@@ -17,7 +17,7 @@ function CVRouteFallback() {
     },
     createElement(
       "p",
-      { className: "font-mono text-xs uppercase tracking-[0.16em]", role: "status" },
+      { className: "label-mono", role: "status" },
       "Loading CV…",
     ),
   );
