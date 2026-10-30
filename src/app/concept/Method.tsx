@@ -103,7 +103,7 @@ export function Method() {
       <div className="mx-auto max-w-6xl px-6 py-20 md:py-24">
         <div className="mb-12 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
           <h2 className="text-3xl md:text-4xl">How I work</h2>
-          <span className="font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+          <span className="label-mono text-muted-foreground">
             the short version
           </span>
         </div>
@@ -117,7 +117,7 @@ export function Method() {
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.45, delay: i * 0.08 }}
             >
-              <div className="mb-3 font-mono text-[11px] tracking-[0.18em] text-accent">
+              <div className="mb-3 label-mono text-accent">
                 {principle.index}
               </div>
               <h3 className="mb-3 text-xl">{principle.title}</h3>
@@ -129,7 +129,7 @@ export function Method() {
         <div id="experience" className="mt-20 scroll-mt-24 border-t border-border pt-14">
           <div className="mb-8 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
             <h2 className="text-3xl md:text-4xl">Experience</h2>
-            <span className="font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.18em] text-accent">
+            <span className="label-mono text-accent">
               2005 to today · {yearsSince(CAREER_START)} years
             </span>
           </div>
@@ -139,7 +139,7 @@ export function Method() {
                 key={entry.role}
                 className="grid gap-1 border-b border-border py-4 md:grid-cols-[7rem_1fr_1fr] md:gap-6"
               >
-                <span className="font-mono text-[11px] text-muted-foreground">{entry.years}</span>
+                <span className="meta-mono text-muted-foreground">{entry.years}</span>
                 <span className="font-medium text-foreground">{entry.role}</span>
                 <span className="text-sm text-muted-foreground">{entry.note}</span>
               </div>
@@ -151,7 +151,7 @@ export function Method() {
               type="button"
               onClick={() => setShowAllRoles((value) => !value)}
               aria-expanded={showAllRoles}
-              className="mt-5 inline-flex min-h-11 items-center gap-2 border border-foreground/25 px-4 py-2.5 font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.16em] text-foreground transition-colors hover:border-foreground hover:text-accent"
+              className="mt-5 inline-flex min-h-11 items-center gap-2 border border-foreground/25 px-4 py-2.5 label-mono text-foreground transition-colors hover:border-foreground hover:text-accent"
             >
               {showAllRoles ? (
                 <>
@@ -171,7 +171,7 @@ export function Method() {
         <div id="education" className="mt-20 scroll-mt-24 border-t border-border pt-14">
           <div className="mb-8 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
             <h2 className="text-3xl md:text-4xl">Education &amp; recognition</h2>
-            <span className="font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+            <span className="label-mono text-muted-foreground">
               degree · bootcamp · certifications
             </span>
           </div>
@@ -181,11 +181,11 @@ export function Method() {
               <div key={item.title} className="border-l-2 border-accent pl-4">
                 <div className="flex items-baseline justify-between gap-3">
                   <h3 className="text-lg leading-snug text-foreground">{item.title}</h3>
-                  <span className="shrink-0 font-mono text-[11px] text-muted-foreground">
+                  <span className="shrink-0 meta-mono text-muted-foreground">
                     {item.year}
                   </span>
                 </div>
-                <p className="mt-1 text-sm text-muted-foreground">{item.institution}</p>
+                <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{item.institution}</p>
                 <p className="mt-2 text-sm leading-relaxed text-foreground/90">{item.detail}</p>
               </div>
             ))}

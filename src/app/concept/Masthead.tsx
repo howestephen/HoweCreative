@@ -42,9 +42,9 @@ export function Masthead() {
         >
           <div className="flex flex-col gap-7">
             <motion.div variants={item}>
-              <span className="inline-flex items-center gap-2 border border-border bg-card px-3 py-1.5 font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+              <span className="inline-flex items-center gap-2 border border-border bg-card px-3 py-1.5 label-mono text-muted-foreground">
                 <span className="h-1.5 w-1.5 motion-safe:animate-pulse rounded-full bg-accent" />
-                Open to roles &amp; contracts - remote, UK
+                Open to roles &amp; contracts - remote,&nbsp;UK
               </span>
             </motion.div>
 
@@ -78,12 +78,12 @@ export function Masthead() {
               >
                 View CV
               </a>
-              <span className="flex items-center gap-4 pl-2">
+              <span className="flex items-center gap-4 sm:pl-2">
                 <a
                   href={siteProfile.linkedinUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex min-h-11 items-center gap-1 font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground transition-colors hover:text-accent"
+                  className="inline-flex min-h-11 items-center gap-1 meta-mono text-muted-foreground transition-colors hover:text-accent"
                 >
                   LinkedIn <ArrowUpRight className="h-3 w-3" />
                 </a>
@@ -91,7 +91,7 @@ export function Masthead() {
                   href={siteProfile.githubUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex min-h-11 items-center gap-1 font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground transition-colors hover:text-accent"
+                  className="inline-flex min-h-11 items-center gap-1 meta-mono text-muted-foreground transition-colors hover:text-accent"
                 >
                   GitHub <ArrowUpRight className="h-3 w-3" />
                 </a>
@@ -99,10 +99,10 @@ export function Masthead() {
             </motion.div>
           </div>
 
-          <motion.dl variants={item} className="grid grid-cols-2 gap-x-6 gap-y-6 border-t border-border pt-6 sm:grid-cols-4">
+          <motion.dl variants={item} className="grid grid-cols-2 gap-x-6 gap-y-6 border-t border-border pt-6 sm:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4 xl:gap-x-4">
             {metrics.map((metric) => (
               <div key={metric.label} className="flex flex-col">
-                <dt className="flex-1 font-mono text-[11px] sm:text-[10px] uppercase leading-tight tracking-[0.16em] text-muted-foreground">
+                <dt className="flex-1 label-mono leading-tight text-muted-foreground">
                   {metric.label}
                 </dt>
                 <dd className="headline-font mt-1 whitespace-nowrap text-xl leading-none text-foreground md:text-2xl">

@@ -32,7 +32,7 @@ const PROFILE = [
 
 type Viewer = { title: string; images: ProjectMediaItem[]; index: number } | null;
 
-const eyebrow = "font-mono text-[10px] uppercase tracking-[0.18em]";
+const eyebrow = "label-mono";
 
 function Thumbs({ title, images, onOpen }: { title: string; images: ProjectMediaItem[]; onOpen: (index: number) => void }) {
   return (
