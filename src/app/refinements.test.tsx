@@ -24,7 +24,7 @@ function sources(dir: string): string[] {
   return readdirSync(dir).flatMap((name) => {
     const path = join(dir, name);
     if (statSync(path).isDirectory()) return sources(path);
-    return /\.tsx$/.test(name) && !/\.test\./.test(name) ? [path] : [];
+    return /\.(tsx?|css)$/.test(name) && !/\.test\./.test(name) ? [path] : [];
   });
 }
 
@@ -58,7 +58,12 @@ describe("accessibility refinements", () => {
     for (const file of sources(SRC)) {
       const text = readFileSync(file, "utf8");
       expect(text, file).not.toMatch(/(?<!print:)text-\[(?:[0-9]|10)(?:\.\d+)?px\]/);
+      expect(text, file).not.toMatch(/font-size:\s*(?:[0-9]|10)(?:\.\d+)?px/);
+      expect(text, file).not.toMatch(/fontSize:\s*["']?(?:[0-9]|10)(?:\.\d+)?(?:px)?\b/);
     }
+    // The CV's print output keeps its 10px labels.
+    const cv = readFileSync(join(SRC, "app/pages/CV.tsx"), "utf8");
+    expect(cv.match(/text-\[11px\] uppercase print:text-\[10px\]/g)).toHaveLength(3);
     expect(THEME).toMatch(/@utility label-mono \{[^}]*font-size:\s*11px/);
     expect(THEME).toMatch(/@utility meta-mono \{[^}]*font-size:\s*11px/);
   });
@@ -68,11 +73,16 @@ describe("label styles (R1)", () => {
   it("defines the label and meta styles once and uses no other mono tracking on the site", () => {
     expect(THEME.match(/@utility label-mono/g)).toHaveLength(1);
     expect(THEME.match(/@utility meta-mono/g)).toHaveLength(1);
+    let uses = 0;
     for (const file of sources(SRC)) {
       // The CV is a print document with its own type scale.
       if (file.endsWith("pages/CV.tsx")) continue;
-      expect(readFileSync(file, "utf8"), file).not.toMatch(/tracking-\[/);
+      const text = readFileSync(file, "utf8");
+      expect(text, file).not.toMatch(/tracking-\[/);
+      expect(text, file).not.toMatch(/font-mono text-\[/);
+      uses += (text.match(/(^|[\s"'`])(label|meta)-mono(?=[\s"'`])/g) ?? []).length;
     }
+    expect(uses).toBeGreaterThanOrEqual(30);
   });
 });
 
@@ -80,7 +90,8 @@ describe("tablet layout", () => {
   it("L1: puts the hero stats in two columns in the lg band and four from xl", () => {
     renderRoutes("/", [{ path: "/", Component: Masthead }]);
     const dl = document.querySelector("#top dl")!;
-    for (const cls of ["grid-cols-2", "sm:grid-cols-4", "lg:grid-cols-2", "xl:grid-cols-4"]) {
+    // xl:gap-x-4 leaves the widest value 6px of room in its 1280px cell.
+    for (const cls of ["grid-cols-2", "sm:grid-cols-4", "lg:grid-cols-2", "xl:grid-cols-4", "xl:gap-x-4"]) {
       expect(dl.className).toMatch(has(cls));
     }
   });
@@ -116,7 +127,17 @@ describe("tablet layout", () => {
     expect(spanning).toEqual(oddTail ? [last] : []);
     if (oddTail) {
       expect(last.className).toMatch(has("sm:col-span-2"));
-      expect(last.querySelector("button")!.className).toMatch(has("sm:grid-cols-5"));
+      const button = last.querySelector("button")!;
+      // Side by side in the tablet band, back to a stacked card on desktop.
+      for (const cls of ["flex", "flex-col", "sm:grid", "sm:grid-cols-5", "lg:flex"]) {
+        expect(button.className, cls).toMatch(has(cls));
+      }
+      const [image, text] = [...button.children];
+      expect(image!.className).toMatch(has("sm:col-span-3"));
+      expect(text!.className).toMatch(has("sm:col-span-2"));
+    }
+    for (const li of cards.slice(1, -1)) {
+      expect(li.querySelector("button")!.className).not.toMatch(/(^|\s)sm:grid/);
     }
   });
 });
@@ -157,6 +178,9 @@ describe("refinements", () => {
     const parent = links[0]!.parentElement!;
     for (const link of links) expect(link.parentElement).toBe(parent);
     expect(parent.className).not.toMatch(has("flex-wrap"));
+    // 24px gaps overflow a 320px phone; 16px fits.
+    expect(parent.className).toMatch(has("gap-x-4"));
+    expect(parent.className).toMatch(has("sm:gap-x-6"));
     expect(parent.querySelector('a[href="/cv"]')).toBeNull();
   });
 
@@ -169,14 +193,28 @@ describe("refinements", () => {
     expect(banner.style.aspectRatio).toBe(`${meta.w} / ${meta.h}`);
     expect(banner.style.getPropertyValue("--banner-ratio")).toBe(String(meta.w / meta.h));
     expect(banner.className).not.toMatch(/aspect-\[/);
+    // Never taller than the old banner: 16:10, 5:2 and 3:1 of the column.
+    for (const cls of [
+      "max-w-[calc(100%*var(--banner-ratio)/1.6)]",
+      "sm:max-w-[calc(100%*var(--banner-ratio)/2.5)]",
+      "lg:max-w-[calc(100%*var(--banner-ratio)/3)]",
+      "mx-auto",
+    ]) {
+      expect(banner.className, cls).toMatch(has(cls));
+    }
   });
 
-  it("R8: pins the CV actions to the CV column and keeps them out of print", () => {
+  it("R8: sets the CV actions on the CV column, scrolling with it, and keeps them out of print", () => {
     renderRoutes("/cv", [{ path: "/cv", Component: CV }]);
     const nav = screen.getByRole("navigation", { name: "CV actions" });
-    expect(nav.className).toMatch(has("right-[max(1rem,calc((100%-780px)/2+1.5rem))]"));
-    expect(nav.className).toMatch(has("print:hidden"));
-    expect(nav.className).not.toMatch(has("right-4"));
-    expect(document.querySelector(".cv-page main")!.className).toMatch(has("max-w-[780px]"));
+    const main = document.querySelector(".cv-page main")!;
+    // Same width and padding as the column, so the buttons end on its edge.
+    for (const cls of ["absolute", "inset-x-0", "mx-auto", "max-w-[780px]", "px-6", "justify-end", "print:hidden"]) {
+      expect(nav.className, cls).toMatch(has(cls));
+    }
+    for (const cls of ["max-w-[780px]", "px-6", "mx-auto"]) expect(main.className, cls).toMatch(has(cls));
+    // Fixed controls covered the CV's right-aligned dates when scrolled.
+    expect(nav.className).not.toMatch(has("fixed"));
+    expect(nav.parentElement!.className).toMatch(has("relative"));
   });
 });
