@@ -88,6 +88,13 @@
     @apply border-border outline-ring/50;
   }
 
+  /* One keyboard focus ring site-wide. :focus-visible leaves mouse focus
+     unmarked; the contact inputs keep their accent ring at the same size. */
+  :focus-visible {
+    outline: 2px solid var(--foreground);
+    outline-offset: 2px;
+  }
+
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-body);
@@ -115,6 +122,11 @@
 
   html {
     font-size: var(--font-size);
+  }
+
+  h1,
+  h2 {
+    text-wrap: balance;
   }
 
   h1 {
@@ -199,6 +211,20 @@
   .technical-font {
     font-family: var(--font-technical) !important;
   }
+}
+
+/* The two mono text styles: label for section tags, categories and controls,
+   meta for dates, counts and secondary links. Colour stays with each use. */
+@utility label-mono {
+  @apply font-mono uppercase;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+}
+
+@utility meta-mono {
+  @apply font-mono uppercase;
+  font-size: 11px;
+  letter-spacing: 0.14em;
 }
 
 /* Always-visible thin scrollbar for the case-study galleries, so trackpad and

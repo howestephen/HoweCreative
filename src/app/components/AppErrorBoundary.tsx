@@ -28,7 +28,7 @@ export function AppErrorBoundary() {
   return (
     <div className="min-h-screen bg-background px-6 py-16 text-foreground/90">
       <div className="mx-auto max-w-3xl border border-accent/38 bg-card/95 p-8">
-        <div className="mb-4 font-mono text-[10px] uppercase tracking-[0.22em] text-accent">
+        <div className="mb-4 label-mono text-accent">
           Interface Recovery
         </div>
         <h1 className="text-3xl text-foreground">{title}</h1>
@@ -36,7 +36,7 @@ export function AppErrorBoundary() {
         {notFound ? (
           <a
             href="/"
-            className="mt-6 inline-flex min-h-11 items-center border border-accent bg-accent px-4 py-3 font-mono text-[11px] uppercase tracking-[0.18em] text-accent-foreground transition-colors hover:bg-accent-hover"
+            className="mt-6 inline-flex min-h-11 items-center border border-accent bg-accent px-4 py-3 label-mono text-accent-foreground transition-colors hover:bg-accent-hover"
           >
             Back to the portfolio
           </a>
@@ -44,7 +44,7 @@ export function AppErrorBoundary() {
           <button
             type="button"
             onClick={() => window.location.reload()}
-            className="mt-6 min-h-11 border border-accent bg-accent px-4 py-3 font-mono text-[11px] uppercase tracking-[0.18em] text-accent-foreground transition-colors hover:bg-accent-hover"
+            className="mt-6 min-h-11 border border-accent bg-accent px-4 py-3 label-mono text-accent-foreground transition-colors hover:bg-accent-hover"
           >
             Reload
           </button>

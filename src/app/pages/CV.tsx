@@ -6,7 +6,7 @@ import { usePageMeta } from "../lib/usePageMeta";
 // caps, accent-coloured, with a hairline running to the right margin. Same
 // device as the site, so the CV and the portfolio look like one system.
 const SECTION_HEADING =
-  "flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.2em] text-[#d90429] after:h-px after:flex-1 after:bg-[#d90429]/25";
+  "flex items-center gap-3 font-mono text-[11px] uppercase print:text-[10px] tracking-[0.2em] text-[#d90429] after:h-px after:flex-1 after:bg-[#d90429]/25";
 const BULLET_LIST = "mt-1.5 space-y-1 text-[13px] leading-snug text-neutral-700 cv-bullets";
 const ENTRY_META = "whitespace-nowrap font-mono text-[11px] text-neutral-500";
 
@@ -123,10 +123,15 @@ export function CV() {
   });
 
   return (
-    <div className="cv-page min-h-screen w-full bg-white text-neutral-900">
+    <div className="cv-page relative min-h-screen w-full bg-white text-neutral-900">
       <style>{CV_STYLES}</style>
 
-      <nav aria-label="CV actions" className="no-print fixed right-4 top-4 z-50 flex gap-2 print:hidden">
+      {/* Set on the right edge of the CV column, above the masthead, so the
+          controls scroll with the page and never cover the CV's dates. */}
+      <nav
+        aria-label="CV actions"
+        className="no-print absolute inset-x-0 top-4 z-50 mx-auto flex max-w-[780px] justify-end gap-2 px-6 print:hidden"
+      >
         <button
           type="button"
           onClick={() => window.print()}
@@ -153,7 +158,7 @@ export function CV() {
                 Creative Technologist
               </p>
             </div>
-            <p className="font-mono text-[10px] uppercase leading-relaxed tracking-[0.14em] text-neutral-500">
+            <p className="font-mono text-[11px] uppercase print:text-[10px] leading-relaxed tracking-[0.14em] text-neutral-500">
               Norwich, UK
               <br />
               Remote: UK / EU / US-East
@@ -178,7 +183,7 @@ export function CV() {
                 rel="noreferrer"
                 className="block border border-neutral-200 px-3 py-2 transition-colors"
               >
-                <span className="block font-mono text-[10px] uppercase tracking-[0.18em] text-neutral-500">
+                <span className="block font-mono text-[11px] uppercase print:text-[10px] tracking-[0.18em] text-neutral-500">
                   {item.label}
                 </span>
                 <span className="mt-0.5 block break-all text-[11.5px] leading-tight">{item.value}</span>

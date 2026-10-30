@@ -51,10 +51,10 @@ export function Layout() {
                 window.scrollTo({ top: 0, behavior: "smooth" });
               }
             }}
-            className="min-h-11 font-mono text-[11px] uppercase leading-[44px] tracking-[0.2em] text-foreground"
+            className="min-h-11 label-mono leading-[44px] text-foreground"
           >
             Stephen Howe
-            <span className="hidden text-muted-foreground sm:inline"> - Creative Technologist</span>
+            <span className="hidden text-muted-foreground lg:inline"> - Creative Technologist</span>
           </Link>
 
           <nav className="flex items-center gap-5">
@@ -64,7 +64,7 @@ export function Layout() {
                   key={item.target}
                   type="button"
                   onClick={() => jumpTo(item.target)}
-                  className="min-h-11 font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground transition-colors hover:text-accent"
+                  className="min-h-11 label-mono text-muted-foreground transition-colors hover:text-accent"
                 >
                   {item.label}
                 </button>
