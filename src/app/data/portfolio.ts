@@ -12,6 +12,8 @@ export type ProjectMediaItem = {
   alt?: string;
   /** Optional poster frame for video type */
   poster?: string;
+  /** WebVTT captions for a narrated video, next to the video in public/ */
+  captions?: string;
 };
 
 export type PortfolioProject = {

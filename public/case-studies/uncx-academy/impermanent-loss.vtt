@@ -1,0 +1,49 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:16.360
+In DeFi, liquidity providers earn trading fees, but not all returns are guaranteed.
+
+00:00:16.360 --> 00:00:23.040
+When prices move, your deposited tokens may lose value, that's impermanent loss.
+
+00:00:23.040 --> 00:00:27.000
+Impermanent loss happens when the value of one token in a pair rises or falls relative
+
+00:00:27.000 --> 00:00:28.000
+to the other.
+
+00:00:28.000 --> 00:00:33.640
+AMMs rebalance your assets automatically, sometimes against your favour.
+
+00:00:33.640 --> 00:00:38.640
+You added 1 ETH and 1,000 USDC when ETH was $1,000.
+
+00:00:38.640 --> 00:00:45.680
+ETH jumps to $1,500, but your LP position rebalances to less ETH and more USDC.
+
+00:00:45.680 --> 00:00:48.280
+You miss out on growth.
+
+00:00:48.280 --> 00:00:53.880
+High volatility, shallow liquidity and low trading volume amplify impermanent loss.
+
+00:00:53.880 --> 00:00:57.920
+The greater the price divergence, the higher the impact.
+
+00:00:57.920 --> 00:01:03.160
+Reduce risk by using stablecoin pairs, choosing high volume pools and leveraging tools like
+
+00:01:03.160 --> 00:01:04.720
+concentrated liquidity.
+
+00:01:04.720 --> 00:01:07.920
+Incentives can help offset the loss too.
+
+00:01:07.920 --> 00:01:10.320
+Impermanent loss is a part of LP life.
+
+00:01:10.320 --> 00:01:14.040
+With the right strategy, your rewards can still outweigh the risk.
+
+00:01:14.040 --> 00:01:16.880
+Understanding it is the first step to long-term gains.

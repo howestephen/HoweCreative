@@ -936,24 +936,28 @@
           {
             "type": "video",
             "src": "/case-studies/uncx-video-system/meteora-launch.mp4",
+            "captions": "/case-studies/uncx-video-system/meteora-launch.vtt",
             "poster": "/case-studies/uncx-video-system/meteora-launch.poster.jpg",
             "alt": "Meteora launch film"
           },
           {
             "type": "video",
             "src": "/case-studies/uncx-video-system/hyperswap-integration.mp4",
+            "captions": "/case-studies/uncx-video-system/hyperswap-integration.vtt",
             "alt": "HyperSwap Integration video",
             "poster": "/case-studies/uncx-video-system/hyperswap-integration.poster.jpg"
           },
           {
             "type": "video",
             "src": "/case-studies/uncx-video-system/token-minter-launch.mp4",
+            "captions": "/case-studies/uncx-video-system/token-minter-launch.vtt",
             "alt": "Token Minter Launch Video",
             "poster": "/case-studies/uncx-video-system/token-minter-launch.poster.jpg"
           },
           {
             "type": "video",
             "src": "/case-studies/uncx-video-system/vesting-app-release.mp4",
+            "captions": "/case-studies/uncx-video-system/vesting-app-release.vtt",
             "alt": "Vesting App Release Video",
             "poster": "/case-studies/uncx-video-system/vesting-app-release.poster.jpg"
           },
@@ -1079,42 +1083,49 @@
           {
             "type": "video",
             "src": "/case-studies/uncx-academy/promo-video.mp4",
+            "captions": "/case-studies/uncx-academy/promo-video.vtt",
             "alt": "Academy promo video",
             "poster": "/case-studies/uncx-academy/promo-video.poster.jpg"
           },
           {
             "type": "video",
             "src": "/case-studies/uncx-academy/blockchains-explained-ethereum.mp4",
+            "captions": "/case-studies/uncx-academy/blockchains-explained-ethereum.vtt",
             "poster": "/case-studies/uncx-academy/blockchains-explained-ethereum.poster.jpg",
             "alt": "Blockchains Explained: Ethereum, one of an eleven-chain series"
           },
           {
             "type": "video",
             "src": "/case-studies/uncx-academy/impermanent-loss.mp4",
+            "captions": "/case-studies/uncx-academy/impermanent-loss.vtt",
             "poster": "/case-studies/uncx-academy/impermanent-loss.poster.jpg",
             "alt": "Impermanent Loss explainer"
           },
           {
             "type": "video",
             "src": "/case-studies/uncx-academy/slippage-in-defi.mp4",
+            "captions": "/case-studies/uncx-academy/slippage-in-defi.vtt",
             "poster": "/case-studies/uncx-academy/slippage-in-defi.poster.jpg",
             "alt": "What Is Slippage in DeFi explainer"
           },
           {
             "type": "video",
             "src": "/case-studies/uncx-academy/flash-loans-defi.mp4",
+            "captions": "/case-studies/uncx-academy/flash-loans-defi.vtt",
             "alt": "Flash Loans in DeFi",
             "poster": "/case-studies/uncx-academy/flash-loans-defi.poster.jpg"
           },
           {
             "type": "video",
             "src": "/case-studies/uncx-academy/chain-spotlight-sei.mp4",
+            "captions": "/case-studies/uncx-academy/chain-spotlight-sei.vtt",
             "alt": "Chain Spotlight - SEI",
             "poster": "/case-studies/uncx-academy/chain-spotlight-sei.poster.jpg"
           },
           {
             "type": "video",
             "src": "/case-studies/uncx-academy/tutorial-lp-locking.mp4",
+            "captions": "/case-studies/uncx-academy/tutorial-lp-locking.vtt",
             "alt": "LP Locking tutorial",
             "poster": "/case-studies/uncx-academy/tutorial-lp-locking.poster.jpg"
           }

@@ -1,0 +1,28 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:15.280
+Imagine borrowing millions of dollars with no collateral, just for a few seconds. In
+
+00:00:15.280 --> 00:00:22.440
+DeFi that's possible with flash loans. Flash loans happen in a single blockchain transaction.
+
+00:00:22.440 --> 00:00:26.800
+If everything succeeds, including repayment, it's confirmed. If not, it's like it never
+
+00:00:26.800 --> 00:00:33.680
+happened. Why use a flash loan? To profit from price differences, refinance DeFi debt, or
+
+00:00:33.680 --> 00:00:39.280
+liquidate positions without fronting capital? But flash loans can be used to attack poorly
+
+00:00:39.280 --> 00:00:44.640
+secured protocols, manipulating prices, draining liquidity, and exploiting smart contracts.
+
+00:00:46.240 --> 00:00:51.600
+That's why protocols now use audits, price oracles, and real-time monitoring to catch suspicious
+
+00:00:51.600 --> 00:00:58.560
+behaviour before it spreads. Flash loans unlock capital-free strategies and real-time automation.
+
+00:00:58.560 --> 00:01:03.040
+For developers, they're a tool. For DeFi, they're a revolution.

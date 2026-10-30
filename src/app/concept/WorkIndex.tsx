@@ -322,7 +322,9 @@ function VideoStrip({ videos }: { videos: ProjectMediaItem[] }) {
             preload="none"
             style={{ aspectRatio: String(videoRatio(media)) }}
             className="h-40 w-auto shrink-0 snap-start border border-border bg-black object-contain sm:h-44"
-          />
+          >
+            <Captions src={media.captions} />
+          </video>
         ))}
       </div>
     </ScrollStrip>
@@ -361,7 +363,9 @@ function StudyDetail({
           preload="none"
           aria-label={featured.alt ?? project.title}
           className="aspect-video w-full border border-border bg-black lg:col-span-5"
-        />
+        >
+          <Captions src={featured.captions} />
+        </video>
       )}
 
       <div className="min-w-0 space-y-6 lg:col-span-3">
@@ -764,6 +768,11 @@ function StudyCard({
       </button>
     </li>
   );
+}
+
+/** English captions for a narrated video; music-only videos have none. */
+function Captions({ src }: { src: string | undefined }) {
+  return src ? <track kind="captions" src={src} srcLang="en" label="English" default /> : null;
 }
 
 /** Lead image of a study without a film. When its size is known the banner
