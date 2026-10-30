@@ -1,0 +1,64 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:09.820
+What is slippage?
+
+00:00:09.820 --> 00:00:15.080
+In DeFi, slippage happens when the final price of your trade is different from what you expected.
+
+00:00:15.080 --> 00:00:19.000
+This can be for a variety of reasons, all of which relate to the underlying mechanics
+
+00:00:19.000 --> 00:00:22.120
+of blockchain technology.
+
+00:00:22.120 --> 00:00:25.400
+Why it happens
+
+00:00:25.400 --> 00:00:28.440
+Slippage is driven by three main factors.
+
+00:00:28.440 --> 00:00:32.840
+Low liquidity, high volatility and network congestion.
+
+00:00:32.840 --> 00:00:38.520
+In short, if your trade is too big or the market moves too fast, prices may shift before final
+
+00:00:38.520 --> 00:00:41.600
+transaction confirmation.
+
+00:00:41.600 --> 00:00:44.920
+How to reduce slippage?
+
+00:00:44.920 --> 00:00:48.200
+You can't eliminate slippage, but you can manage it.
+
+00:00:48.200 --> 00:00:53.840
+Use low slippage tolerance, trade in deep pools and avoid volatile times.
+
+00:00:53.840 --> 00:00:56.340
+Tools for smart trading.
+
+00:00:56.340 --> 00:01:01.240
+Some platforms offer limit orders, slippage warnings and real-time previews.
+
+00:01:01.240 --> 00:01:07.320
+Layer twos and dynamic AMMs also help reduce execution delays.
+
+00:01:07.320 --> 00:01:10.640
+Slippage as strategy.
+
+00:01:10.640 --> 00:01:14.640
+Advanced traders use slippage for arbitrage or laddering orders.
+
+00:01:14.640 --> 00:01:19.720
+If used well, it can be a tool, not just a risk.
+
+00:01:19.720 --> 00:01:22.920
+Know the gap.
+
+00:01:22.920 --> 00:01:28.040
+Slippage is part of every DeFi trade. Mastering it means smarter execution, less risk and
+
+00:01:28.040 --> 00:01:28.960
+better outcomes.
