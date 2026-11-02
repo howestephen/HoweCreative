@@ -2,7 +2,7 @@
 status: active
 author: stephen+claude
 created: 2026-10-12
-updated: 2026-10-12
+updated: 2026-11-02
 ---
 
 # CONVENTIONS
@@ -31,7 +31,7 @@ CLAUDE.md's own rules win where they differ, stated explicitly.
 
 - **Spending money needs approval, per service, per session.** Paid APIs, generation, hosted inference and purchases prompt first; never route around a prompt with another tool or an unlisted endpoint.
 
-- Push without asking: yes on a branch. For main, read the level in `ONBOARDING.md`: at L0/L1 prefer a branch per piece of work, then merge and push main without asking once checks pass (a plain commit or push to main needs no prompt); from L2 every main merge or push needs Stephen's approval. Force, chained, multi-refspec and delete pushes always ask.
+- Push without asking: yes on a branch. For main, read the level in `ONBOARDING.md`: at L0 to L2 (lifecycle levels, no real users; L0/L1 on a project not yet remapped) prefer a branch per piece of work, then merge and push main without asking once every gate passes and tell Stephen afterwards (a plain commit or push to main needs no prompt); from L3 (live, real users) every main merge or push needs Stephen's approval. Force, chained, multi-refspec and delete pushes always ask.
 
 Installed gates refuse rather than warn: a refusal is the answer. If a gate is genuinely wrong, say so and stop; the bypass is Stephen's. Verify enforcement per client and machine; documentation is not proof.
 
@@ -55,7 +55,7 @@ Installed gates refuse rather than warn: a refusal is the answer. If a gate is g
 
 - **End replies where Stephen will see them.** Short replies; anything he must answer or do goes last, on its own, and the last line names what is still running (task id) or says nothing is. Never claim work is under way that nothing is running.
 
-- **Keep the machine responsive.** Tests and builds use one or two workers, niced on the Mac; test, build, mutation and coverage jobs never overlap, an auditor's included. Run relevant checks while working and full suites once changes settle. One checkout per repository unless the desktop app or Stephen made the worktree.
+- **Keep the machine responsive.** Tests and builds use one or two workers, niced on the Mac; test, build, mutation and coverage jobs never overlap, an auditor's included. For application work, run relevant checks while working and full suites once changes settle. Hook maintenance is individual: audit, test and install only the changed hook on the receiving machine; preserve completed installs. Full hook suites require an explicit owner request. One checkout per repository unless the desktop app or Stephen made the worktree.
 
 - **Do it yourself; research before asking.** Run what you can instead of handing it to Stephen, and validate any command you give him. Check docs, records and earlier decisions first, and ask only for decisions genuinely his. A request to fix or pick up work is a request to do it.
 
