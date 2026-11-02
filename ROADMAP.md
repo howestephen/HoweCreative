@@ -129,6 +129,10 @@ independent audit followed and its findings were fixed. Open:
 
 ## Production Maintenance
 
+- [x] CV aligned across main and the redesign branch, 2 November 2026: month
+  dates, the full list of earlier roles, a Selected Projects section and grouped
+  skills covering local AI, testing, CI and data. Main's print CV fills two A4
+  pages; the contact boxes size to their text.
 - [x] CV summary, 2 November 2026: the UNCX tenure line read "the last four
   years"; it now reads five years, matching November 2021 to November 2026. The homepage UNCX stat now
   stops at that end date and reads 5 yrs; the CV role dates read 2021 - 2026.
