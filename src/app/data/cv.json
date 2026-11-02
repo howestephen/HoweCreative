@@ -1,6 +1,6 @@
 {
   "name": "Stephen Howe",
-  "location": "Norwich, UK | Remote | Permanent or contract",
+  "location": "Norwich, UK | Remote: UK, EU and US-East | Permanent or contract",
   "email": "contact@howecreative.co.uk",
   "website": "https://howecreative.co.uk",
   "linkedin": "https://www.linkedin.com/in/howestephen",
@@ -69,7 +69,7 @@
       "context": "Remote | Multi-chain decentralised finance (DeFi) products",
       "bullets": [
         "Sole in-house designer across brand, product, 3D, motion and marketing, working with developers and external creative partners.",
-        "Led the 2022 rebrand from Unicrypt Network to UNCX Network, then directed an outside studio on the 2024 rebrand and completed the website, Academy and 10+ pages in-house.",
+        "Led the 2022 rebrand from Unicrypt to UNCX Network, directed an outside studio on the 2024 rebrand and completed the website, Academy and 10+ pages in-house; designed 5+ sub-brands.",
         "Designed wireframes and UI concepts for 10+ applications, with 3-4 shipped to production; mapped token-tool and Telegram workflows in FigJam and Figma.",
         "Designed a variable-driven Figma design system for cross-product navigation, now live across the product suite.",
         "Produced 200+ tutorials, explainers and launch videos, including 30+ for UNCX Academy, and built the 3D and motion template system behind them.",
@@ -94,7 +94,7 @@
       "dates": "May 2016 - August 2018",
       "context": "International clients | Video, animation and web",
       "bullets": [
-        "Delivered video, motion graphics and web projects, including 140+ videos for one corporate-learning client by January 2018.",
+        "Delivered video, motion graphics and web projects, including 130+ videos for one corporate-learning client by January 2018.",
         "Filmed, edited and delivered a 6.5-hour chef-training course and website for Chalet Chardons; recipes and operational content by head chef Maciek Dolasinski.",
         "Produced music videos and explainers with rotoscoping and colour grading; improved website UI, content and SEO for international leisure clients."
       ]
@@ -118,7 +118,7 @@
       "title": "Badger Club",
       "dates": "2026 | Personal project | In development",
       "slug": "badger-club",
-      "body": "Designed and built a badge-tracking product for youth leaders with React, Supabase, Google authentication and Resend, owning the UI, database design with row-level security, and CI security and regression suites."
+      "body": "Designed and built a badge-tracking product for youth leaders with Next.js, Supabase, Google authentication and Resend, owning the UI, database design with row-level security, and CI security and regression suites."
     },
     "academy": {
       "title": "UNCX Academy",
