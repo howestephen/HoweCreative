@@ -10,6 +10,107 @@ const SECTION_HEADING =
 const BULLET_LIST = "mt-1.5 space-y-1 text-[13px] leading-snug text-neutral-700 cv-bullets";
 const ENTRY_META = "whitespace-nowrap font-mono text-[11px] text-neutral-500";
 
+// The CV content, kept as data so the redesign branch's cv.json can carry the
+// same wording. Plain text and standard section names keep it readable by
+// applicant tracking systems.
+const EXPERIENCE = [
+  {
+    title: "Lead Designer",
+    company: "UNCX Network",
+    sector: "multi-chain DeFi protocol",
+    dates: "Nov 2021 - Nov 2026 | Remote",
+    context: "The only designer in the company, owning all creative output from brand to product.",
+    bullets: [
+      "Led the 2022 rebrand from Unicrypt Network to UNCX Network, then directed an outside studio on the 2024 rebrand and completed the website, Academy and 10+ pages in-house; designed 5+ sub-brands for new products",
+      "Designed wireframes and UI concepts for 10+ applications, with 3-4 shipped to production; mapped token-tool and Telegram workflows in FigJam and Figma",
+      "Designed a variable-driven Figma design system for cross-product navigation, now live across the product suite",
+      "Led UNCX Academy: wrote the brief, completed page designs and graphics, and produced 30+ educational videos with external designers and the in-house developer",
+      "Produced 200+ tutorials, explainers and launch videos, and built the reusable Cinema 4D, Redshift and After Effects template system behind them",
+      "Created four AI-generated launch films for partner Quiver from a sparse brief, rendered locally with Wan 2.2 in ComfyUI",
+      "Designed and built Solana Diary for a UNCX partner: a 7-service pipeline turning live Solana data into on-brand X graphics, with human approval before every post",
+    ],
+  },
+  {
+    title: "Designer",
+    company: "Switch Studios",
+    sector: "HTML5 casino games",
+    dates: "Jul 2018 - Jun 2021 | Ipswich",
+    context: "Embedded designer in a development team shipping HTML5 casino games to market.",
+    bullets: [
+      "Delivered design and production assets for 30 shipped games, 20+ still live in market",
+      "Created graphics, animation, 3D and launch marketing packs, 50+ videos in total",
+      "Prepared and compressed assets, built sprite sheets and committed work directly through Git and SVN",
+      "Supported localisation into multiple languages, accessibility adaptations and asset QA across concurrent releases",
+    ],
+  },
+  {
+    title: "Designer & Animator",
+    company: "Howe Creative",
+    sector: "freelance",
+    dates: "May 2016 - Aug 2018",
+    context: "Ran my own studio, delivering video, animation and web projects for international clients.",
+    bullets: [
+      "Produced 140+ videos for one corporate-learning client",
+      "Sole creator of a 6.5-hour video training course for chefs at a French Alps chalet company: filming, editing, motion graphics and website",
+      "Music videos and explainers with rotoscoping and colour grading; website UI, content and SEO for international clients",
+    ],
+  },
+] as const;
+
+const PROJECTS = [
+  {
+    title: "AI-assisted development system",
+    dates: "2026 | Personal",
+    body: "Built the workflow I develop with across two machines: Claude Code, Codex and Cursor agents working to shared rules, with commit and publication gates, independent audit agents, CI on GitHub Actions and CircleCI, and bulk work routed to local models in LM Studio.",
+  },
+  {
+    title: "Badger Club",
+    dates: "2026 | Personal | In development",
+    body: "Designed and built a badge-tracking product with React, Supabase, Google authentication and Resend. Owned UI, database structure with row-level security, and implementation, with security and regression suites in CI.",
+  },
+  {
+    title: "Noticia Lingo",
+    dates: "2026 | Personal | In development",
+    body: "Designed and built a language-learning app from news articles with Next.js, Supabase and Google sign-in. Every lesson type is built, with learning levels, a multilingual framework, Playwright and accessibility tests, and Sentry monitoring.",
+  },
+  {
+    title: "howecreative.co.uk",
+    dates: "2026 | Personal | Live",
+    body: "Designed and built this portfolio and CV in React, TypeScript and Tailwind: generative hero, case-study video, spam-protected contact form, automated tests in CI and axe accessibility audits.",
+  },
+] as const;
+
+const SKILLS = [
+  {
+    title: "AI-assisted development",
+    body: "Claude Code, Codex, Cursor, OpenCode, agentic build workflows, multi-agent review and audit gates, prompt and guidance systems",
+  },
+  {
+    title: "Local and generative AI",
+    body: "LM Studio, Hermes and other local LLMs, ComfyUI (image, video and audio), Wan 2.2, ElevenLabs, AI music generation, automated publishing with approval gates, API integration",
+  },
+  {
+    title: "Development",
+    body: "React, Next.js, TypeScript, JavaScript, HTML, CSS, Tailwind CSS, Node.js, Three.js / React Three Fiber, GSAP, Git, Bash, Vercel",
+  },
+  {
+    title: "Testing, data and CI",
+    body: "Vitest, Jest, Playwright, accessibility testing (axe), property-based and mutation testing, GitHub Actions, CircleCI, Supabase, PostgreSQL, row-level security, Google OAuth, Sentry",
+  },
+  {
+    title: "Product design",
+    body: "UI/UX, user flows, wireframing, prototyping, Figma, FigJam, design systems, component libraries, developer handoff",
+  },
+  {
+    title: "Creative production",
+    body: "Art direction, brand identity, 3D, motion design, video editing, Cinema 4D, Redshift, X-Particles, After Effects, Premiere Pro, Photoshop, Illustrator",
+  },
+  {
+    title: "Audio and delivery",
+    body: "Ableton Live, Audition, Serum, Agile / Scrum, cross-functional collaboration",
+  },
+] as const;
+
 // Scoped, page-local style overrides.
 //
 // The global stylesheet (src/styles/theme.css) forces h1-h6 onto the dark
@@ -169,148 +270,95 @@ export function CV() {
 
           <div className="mt-3 h-[3px] w-full bg-[#d90429]" />
 
-          <div className="cv-contact mt-4 grid grid-cols-2 gap-2 sm:grid-cols-4">
+          {/* Flex rather than a fixed grid: each box sizes to its own text and
+              the boxes grow to share the row, so the email never wraps. */}
+          <div className="cv-contact mt-4 flex flex-wrap gap-2">
             {[
               { label: "Email", value: "contact@howecreative.co.uk", href: "mailto:contact@howecreative.co.uk" },
               { label: "Web", value: "howecreative.co.uk", href: "https://howecreative.co.uk" },
-              { label: "LinkedIn", value: "in/howestephen", href: "https://www.linkedin.com/in/howestephen" },
-              { label: "GitHub", value: "howestephen", href: "https://github.com/howestephen" },
+              { label: "LinkedIn", value: "linkedin.com/in/howestephen", href: "https://www.linkedin.com/in/howestephen" },
+              { label: "GitHub", value: "github.com/howestephen", href: "https://github.com/howestephen" },
             ].map((item) => (
               <a
                 key={item.label}
                 href={item.href}
                 target={item.href.startsWith("mailto") ? undefined : "_blank"}
                 rel="noreferrer"
-                className="block border border-neutral-200 px-3 py-2 transition-colors"
+                className="block flex-auto border border-neutral-200 px-3 py-2 text-left transition-colors"
               >
                 <span className="block font-mono text-[11px] uppercase print:text-[10px] tracking-[0.18em] text-neutral-500">
                   {item.label}
                 </span>
-                <span className="mt-0.5 block break-all text-[11.5px] leading-tight">{item.value}</span>
+                <span className="mt-0.5 block whitespace-nowrap text-[11.5px] leading-tight">{item.value}</span>
               </a>
             ))}
           </div>
         </header>
 
-        <p className="mb-5 border-l-2 border-[#d90429] pl-4 text-[14px] leading-relaxed text-neutral-800">
-          Creative technologist with 20+ years connecting brand, 3D, motion, product design, and front-end code. For
-          the last five years I've been the sole designer at a multi-chain DeFi protocol, owning everything from
-          company rebrands to shipped product UIs. I design and build systems rather than one-off artefacts:
-          AI-assisted build loops for development, template and guidance systems for video and 3D, and automated
-          publishing systems with human approval gates. Systems thinker with natural strengths in pattern
-          recognition, deep-focus problem solving, and forward planning in cross-functional teams.
+        <p className="mb-6 border-l-2 border-[#d90429] pl-4 text-[14px] leading-relaxed text-neutral-800">
+          Creative technologist with 20+ years connecting brand, 3D, motion, product design and front-end
+          development. For the last five years I've been the sole designer at a multi-chain DeFi protocol, owning
+          everything from company rebrands to shipped product UIs. I design and build systems rather than one-off
+          artefacts: AI-assisted development workflows with automated testing and review gates, generative video
+          and audio production with local and cloud models, reusable 3D and motion template systems, and automated
+          publishing with human approval.
         </p>
 
-        <section className="mb-5">
+        <section className="mb-6">
           <h2 className={SECTION_HEADING}>Experience</h2>
 
-          <article className="mt-5 break-inside-avoid">
-            <div className="flex flex-wrap items-baseline justify-between gap-x-4">
-              <h3 className="text-base">
-                Lead Designer - UNCX Network{" "}
-                <span className="font-normal text-neutral-600">(multi-chain DeFi protocol)</span>
-              </h3>
-              <p className={ENTRY_META}>2021 - 2026 | Remote</p>
-            </div>
-            <p className="mt-1 text-sm italic text-neutral-600">
-              The only designer in the company, owning all creative output from brand to product.
-            </p>
-            <ul className={BULLET_LIST}>
-              <li>
-                Led two full company rebrands - logo, homepage, 3D assets, and identity - and designed 5+ sub-brands
-                for new products
-              </li>
-              <li>Designed wireframes and UI concepts for 10+ apps, with 3-4 shipped to production</li>
-              <li>Built UNCX Academy end-to-end: brand, site design, assets, and 30+ educational videos</li>
-              <li>
-                Produced 200+ tutorials, explainers and launch videos, and built the 3D and motion template system
-                behind them
-              </li>
-              <li>Created four AI-generated launch films for partner Quiver, rendered locally with Wan 2.2</li>
-              <li>
-                Designed and built Solana Diary for a UNCX partner: a 7-service pipeline turning live Solana data into
-                on-brand X graphics, with Telegram asset approval gates
-              </li>
-              <li>
-                Designed a variable-driven Figma design system for cross-product navigation, now live across the
-                product suite
-              </li>
-            </ul>
-          </article>
+          {EXPERIENCE.map((job) => (
+            <article key={job.company} className="mt-5 break-inside-avoid">
+              <div className="flex flex-wrap items-baseline justify-between gap-x-4">
+                <h3 className="text-base">
+                  {job.title} - {job.company}{" "}
+                  <span className="font-normal text-neutral-600">({job.sector})</span>
+                </h3>
+                <p className={ENTRY_META}>{job.dates}</p>
+              </div>
+              <p className="mt-1 text-sm italic text-neutral-600">{job.context}</p>
+              <ul className={BULLET_LIST}>
+                {job.bullets.map((bullet) => (
+                  <li key={bullet}>{bullet}</li>
+                ))}
+              </ul>
+            </article>
+          ))}
 
-          <article className="mt-5 break-inside-avoid">
-            <div className="flex flex-wrap items-baseline justify-between gap-x-4">
-              <h3 className="text-base">
-                Designer - Switch Studios <span className="font-normal text-neutral-600">(HTML5 casino games)</span>
-              </h3>
-              <p className={ENTRY_META}>2018-2021</p>
-            </div>
-            <p className="mt-1 text-sm italic text-neutral-600">
-              Embedded designer in a development team shipping HTML5 casino games to market.
-            </p>
-            <ul className={BULLET_LIST}>
-              <li>Shipped 30 games, 20+ currently live in market</li>
-              <li>Created bespoke video and marketing packs for each game, 50+ videos in total</li>
-              <li>Only designer in a dev team - committed work directly to the codebase</li>
-              <li>Localised games for accessibility and multiple languages</li>
-            </ul>
-          </article>
-
-          <article className="mt-5 break-inside-avoid">
-            <div className="flex flex-wrap items-baseline justify-between gap-x-4">
-              <h3 className="text-base">
-                Designer &amp; Animator - howecreative.co.uk{" "}
-                <span className="font-normal text-neutral-600">(freelance)</span>
-              </h3>
-              <p className={ENTRY_META}>2016-2018</p>
-            </div>
-            <p className="mt-1 text-sm italic text-neutral-600">
-              Ran my own studio, delivering video, animation, and web projects for international clients.
-            </p>
-            <ul className={BULLET_LIST}>
-              <li>Produced 150+ videos for the largest client across two years</li>
-              <li>
-                Sole creator of a 6.5-hour video training course for chefs at a French Alps chalet company -
-                filming, editing, motion graphics, and website
-              </li>
-              <li>Music videos, animated explainers, rotoscoping, and colour grading</li>
-              <li>UI improvements, site management, and SEO for international clients</li>
-            </ul>
-          </article>
-
-          <p className="mt-4 text-[12.5px] leading-relaxed text-neutral-600">
-            Earlier roles from 2005 to 2016 span support and database work at the BBC and Qtac, plus
-            brand, web, and events management across several companies.{" "}
-            <a href="https://www.linkedin.com/in/howestephen" target="_blank" rel="noreferrer">
-              See LinkedIn for my full career history
-            </a>
-            .
+          <p className="mt-5 text-[12.5px] leading-relaxed text-neutral-600">
+            Earlier experience: Qtac Solutions, 2nd Line Support Technician and website redesign (2014 - 2016);
+            Burger Theory, Web &amp; Social Media Manager (2012 - 2016); Hot Biscuit, Venue &amp; Promotions Manager
+            (2011 - 2012); 412 Promotions, Brand Manager (2009 - 2011); Right Click Computers, Junior Helpdesk
+            Technician (2008 - 2009); BBC, Database Technician (2007 - 2008); Good Salon Guide, Web Manager &amp;
+            Graphic Designer (2005 - 2006).
           </p>
         </section>
 
-        <section className="mb-5">
-          <h2 className={SECTION_HEADING}>Core Skills</h2>
+        <section className="mb-6">
+          <h2 className={SECTION_HEADING}>Selected Projects</h2>
+          {PROJECTS.map((project) => (
+            <article key={project.title} className="mt-3 break-inside-avoid">
+              <div className="flex flex-wrap items-baseline justify-between gap-x-4">
+                <h3 className="text-[15px]">{project.title}</h3>
+                <p className={ENTRY_META}>{project.dates}</p>
+              </div>
+              <p className="mt-1 text-[13px] leading-snug text-neutral-700">{project.body}</p>
+            </article>
+          ))}
+        </section>
+
+        <section className="mb-6 break-inside-avoid">
+          <h2 className={SECTION_HEADING}>Skills</h2>
           <div className="mt-3 space-y-1.5 text-[12.5px] leading-snug text-neutral-700">
-            <p>
-              <span className="font-semibold text-neutral-900">AI &amp; automation:</span> Claude Code, Codex,
-              agentic build pipelines, ComfyUI, prompt systems, automated publishing (Telegram to X)
-            </p>
-            <p>
-              <span className="font-semibold text-neutral-900">Design &amp; motion:</span> Figma, UI/UX, brand and
-              design systems, Photoshop, Illustrator, After Effects, Premiere, Cinema 4D, Redshift, X-Particles
-            </p>
-            <p>
-              <span className="font-semibold text-neutral-900">Development:</span> React, Next.js, TypeScript,
-              Tailwind, Three.js / R3F, GSAP, Node.js, Supabase, PostgreSQL, Vercel, Git
-            </p>
-            <p>
-              <span className="font-semibold text-neutral-900">Audio &amp; delivery:</span> Ableton Live, Audition,
-              Serum, Agile / Scrum
-            </p>
+            {SKILLS.map((group) => (
+              <p key={group.title}>
+                <span className="font-semibold text-neutral-900">{group.title}:</span> {group.body}
+              </p>
+            ))}
           </div>
         </section>
 
-        <section className="mb-5">
+        <section className="mb-6 break-inside-avoid">
           <h2 className={SECTION_HEADING}>Education &amp; Certifications</h2>
           <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-snug text-neutral-700">
             <li>
@@ -322,8 +370,8 @@ export function CV() {
               </span>
             </li>
             <li>
-              Full Stack Coding Bootcamp - Tech Educators, 2024 (12 weeks: React, Next.js, Node.js, PostgreSQL,
-              Supabase)
+              <span className="font-medium text-neutral-900">Full Stack Coding Bootcamp</span> - Tech Educators,
+              March 2024. 12-week intensive covering React, Next.js, Node.js, PostgreSQL and Supabase.
             </li>
           </ul>
         </section>
