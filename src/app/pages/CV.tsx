@@ -21,7 +21,7 @@ const EXPERIENCE = [
     dates: "November 2021 - November 2026 | Remote",
     context: "The only designer in the company, owning all creative output from brand to product.",
     bullets: [
-      "Led the 2022 rebrand from Unicrypt Network to UNCX Network, then directed an outside studio on the 2024 rebrand and completed the website, Academy and 10+ pages in-house; designed 5+ sub-brands for new products",
+      "Led the 2022 rebrand from Unicrypt to UNCX Network, directed an outside studio on the 2024 rebrand and completed the website, Academy and 10+ pages in-house; designed 5+ sub-brands",
       "Designed wireframes and UI concepts for 10+ applications, with 3-4 shipped to production; mapped token-tool and Telegram workflows in FigJam and Figma",
       "Designed a variable-driven Figma design system for cross-product navigation, now live across the product suite",
       "Produced 200+ tutorials, explainers and launch videos, including 30+ for UNCX Academy, and built the 3D and motion template system behind them",
