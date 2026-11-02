@@ -8,7 +8,7 @@
   "variants": {
     "creative-technologist": {
       "title": "Creative Technologist",
-      "summary": "Creative technologist and hands-on creative lead with 20+ years across design, media and technology. Lead Designer at UNCX Network since December 2021, spanning brand, product interfaces, 3D and motion. I develop concepts into finished work: generative image/video and audio production in ComfyUI, complete brand films, reusable production systems and React-based prototypes. My practice connects art direction and storytelling with the technical judgement needed to make the work hold together.",
+      "summary": "Creative technologist and hands-on creative lead with 20+ years across design, media and technology. Lead Designer at UNCX Network from November 2021 to November 2026, spanning brand, product interfaces, 3D and motion. I develop concepts into finished work: generative image/video and audio production in ComfyUI, complete brand films, reusable production systems and React-based prototypes. My practice connects art direction and storytelling with the technical judgement needed to make the work hold together.",
       "projectOrder": [
         "quiver",
         "motion",
@@ -17,15 +17,16 @@
       ],
       "skillOrder": [
         "creative",
-        "automation",
+        "genai",
+        "aidev",
         "development",
-        "product",
-        "audio"
+        "quality",
+        "product"
       ]
     },
     "design-engineer": {
       "title": "Design Engineer",
-      "summary": "Designer and hands-on builder combining product and interaction design with React, TypeScript and full-stack personal projects. Lead Designer at UNCX Network since December 2021, with 20+ years across design and technology. I turn complex requirements into user flows, reusable components and working interfaces, using AI-assisted development, scoped implementation and verification. Background in 3D and motion brings an additional focus on visual craft and interaction detail.",
+      "summary": "Designer and hands-on builder combining product and interaction design with React, TypeScript and full-stack personal projects. Lead Designer at UNCX Network from November 2021 to November 2026, with 20+ years across design and technology. I turn complex requirements into user flows, reusable components and working interfaces, using AI-assisted development (Claude Code, Codex, Cursor), automated testing and CI. Background in 3D and motion brings an additional focus on visual craft and interaction detail.",
       "projectOrder": [
         "badger",
         "solana",
@@ -34,15 +35,16 @@
       ],
       "skillOrder": [
         "development",
+        "aidev",
+        "quality",
         "product",
-        "automation",
-        "creative",
-        "audio"
+        "genai",
+        "creative"
       ]
     },
     "product-designer": {
       "title": "Product Designer",
-      "summary": "Product designer with deep technical and creative-production fluency. Lead Designer at UNCX Network since December 2021, designing product flows, interfaces, design systems and educational experiences. I combine user experience and visual design with hands-on React prototyping and first-hand generative video and audio production. Comfortable moving from ambiguous requirements to implementation detail, collaborating with engineers and creative partners.",
+      "summary": "Product designer with deep technical and creative-production fluency. Lead Designer at UNCX Network from November 2021 to November 2026, designing product flows, interfaces, design systems and educational experiences. I combine user experience and visual design with hands-on React prototyping and first-hand generative video and audio production. Comfortable moving from ambiguous requirements to implementation detail, collaborating with engineers and creative partners.",
       "projectOrder": [
         "menu",
         "badger",
@@ -52,9 +54,10 @@
       "skillOrder": [
         "product",
         "development",
+        "aidev",
         "creative",
-        "automation",
-        "audio"
+        "genai",
+        "quality"
       ]
     }
   },
@@ -62,16 +65,16 @@
     {
       "title": "Lead Designer",
       "company": "UNCX Network (SDDTech OÜ)",
-      "dates": "December 2021 - Present",
+      "dates": "November 2021 - November 2026",
       "context": "Remote | Multi-chain decentralised finance (DeFi) products",
       "bullets": [
-        "Sole in-house designer across brand, product interfaces, 3D, motion and marketing, working with developers, marketing and external creative partners.",
-        "Designed wireframes and UI concepts for 10+ applications, with 3-4 shipped to production; mapped unfamiliar token-tool and Telegram workflows in FigJam and Figma.",
+        "Sole in-house designer across brand, product, 3D, motion and marketing, working with developers and external creative partners.",
         "Led the 2022 rebrand from Unicrypt Network to UNCX Network, then directed an outside studio on the 2024 rebrand and completed the website, Academy and 10+ pages in-house.",
+        "Designed wireframes and UI concepts for 10+ applications, with 3-4 shipped to production; mapped token-tool and Telegram workflows in FigJam and Figma.",
+        "Designed a variable-driven Figma design system for cross-product navigation, now live across the product suite.",
         "Produced 200+ tutorials, explainers and launch videos, including 30+ for UNCX Academy, and built the 3D and motion template system behind them.",
-        "Created four AI-generated launch films for partner Quiver, rendered locally with Wan 2.2.",
-        "Designed and built Solana Diary for a UNCX partner: a 7-service pipeline turning live Solana data into on-brand X graphics, with Telegram asset approval gates.",
-        "Designed a variable-driven Figma design system for cross-product navigation, now live across the product suite."
+        "Created four AI-generated launch films for partner Quiver, rendered locally with Wan 2.2 in ComfyUI.",
+        "Designed and built Solana Diary for a UNCX partner: a 7-service pipeline turning live Solana data into on-brand X graphics, with human approval before every post."
       ]
     },
     {
@@ -80,9 +83,9 @@
       "dates": "July 2018 - June 2021",
       "context": "Ipswich, UK | HTML5 casino games",
       "bullets": [
-        "Delivered design and production assets for 30 shipped games, working within the Art Lead's direction as an embedded member of the development team.",
-        "Created graphics, animation, 3D and launch marketing packs; prepared and compressed assets, built sprite sheets and committed work directly through Git and SVN.",
-        "Supported game localisation, accessibility adaptations and asset QA across concurrent releases."
+        "Delivered design and production assets for 30 shipped games, 20+ still live in market, as an embedded member of the development team.",
+        "Created graphics, animation, 3D and launch marketing packs (50+ videos); built sprite sheets and committed work directly through Git and SVN.",
+        "Supported localisation into multiple languages, accessibility adaptations and asset QA across concurrent releases."
       ]
     },
     {
@@ -92,7 +95,7 @@
       "context": "International clients | Video, animation and web",
       "bullets": [
         "Delivered video, motion graphics and web projects, including 140+ videos for one corporate-learning client by January 2018.",
-        "Filmed, edited and delivered a digital chef-training course and website for Chalet Chardons; recipes and operational content by head chef Maciek Dolasinski.",
+        "Filmed, edited and delivered a 6.5-hour chef-training course and website for Chalet Chardons; recipes and operational content by head chef Maciek Dolasinski.",
         "Produced music videos and explainers with rotoscoping and colour grading; improved website UI, content and SEO for international leisure clients."
       ]
     }
@@ -115,7 +118,7 @@
       "title": "Badger Club",
       "dates": "2026 | Personal project | In development",
       "slug": "badger-club",
-      "body": "Designed and built a badge-tracking product with React, Supabase, Google authentication and Resend. Scoped the product to leader-only accounts with parent communication without sign-up. Owned UI, database structure and implementation using AI-assisted development."
+      "body": "Designed and built a badge-tracking product for youth leaders with React, Supabase, Google authentication and Resend, owning the UI, database design with row-level security, and CI security and regression suites."
     },
     "academy": {
       "title": "UNCX Academy",
@@ -133,7 +136,7 @@
       "title": "Noticia Lingo",
       "dates": "2026 | Personal project | In development",
       "slug": "noticia-lingo",
-      "body": "Designed and built a language-learning app from news articles with React, Supabase and Google authentication. Every lesson type is built, with learning levels, a multilingual framework and legal groundwork for a US and EU launch."
+      "body": "Designed and built a language-learning app from news articles with Next.js, Supabase and Google authentication: learning levels, a multilingual framework, Playwright and accessibility tests, and Sentry monitoring."
     },
     "quiver": {
       "title": "Quiver: Generative Launch Films",
@@ -145,33 +148,37 @@
   "skills": {
     "creative": {
       "title": "Creative production",
-      "body": "Art direction, brand systems, 3D, motion design, video editing, Cinema 4D, Redshift, X-Particles, After Effects, Premiere Pro, Photoshop, Illustrator, Adobe Animate."
+      "body": "Art direction, brand identity, 3D, motion design, Cinema 4D, Redshift, X-Particles, After Effects, Premiere Pro, Photoshop, Illustrator, Ableton Live, Audition."
     },
     "product": {
       "title": "Product and interaction design",
-      "body": "UI/UX, user flows, wireframing, rapid prototyping, Figma, FigJam, design systems, component libraries, variable-driven prototypes, developer handoff."
+      "body": "UI/UX, user flows, wireframing, rapid prototyping, Figma, FigJam, design systems, component libraries, developer handoff, Agile and Scrum."
     },
     "development": {
       "title": "Development",
-      "body": "React, Next.js, JavaScript, TypeScript, HTML, CSS, Tailwind CSS, Node.js, Supabase, PostgreSQL, Three.js / React Three Fiber, GSAP, Git, Bash, Vercel."
+      "body": "React, Next.js, TypeScript, JavaScript, HTML, CSS, Tailwind CSS, Node.js, Three.js / React Three Fiber, GSAP, Git, Bash, Vercel."
     },
-    "automation": {
-      "title": "Generative AI and automation",
-      "body": "ComfyUI (video and audio), ChatGPT image generation, Claude / Claude Code, Codex, Cursor, shot planning, image-led generation, iteration and selection, production scripting, API integration, code-driven media rendering, Railway, Telegram approval flows."
+    "aidev": {
+      "title": "AI-assisted development",
+      "body": "Claude Code, Codex, Cursor, OpenCode, agentic build workflows, multi-agent review and audit gates, prompt and guidance systems."
     },
-    "audio": {
-      "title": "Audio and delivery",
-      "body": "AI-generated music production (ComfyUI), Ableton Live, Audition, Serum, audio production, Agile and Scrum practices, cross-functional collaboration."
+    "genai": {
+      "title": "Local and generative AI",
+      "body": "LM Studio, Hermes and other local LLMs, ComfyUI (image, video and audio), Wan 2.2, ElevenLabs, AI music generation, automated publishing with approval gates, API integration."
+    },
+    "quality": {
+      "title": "Testing, data and CI",
+      "body": "Vitest, Jest, Playwright, accessibility testing (axe), property-based and mutation testing, GitHub Actions, CircleCI, Supabase, PostgreSQL, row-level security, Google OAuth, Sentry."
     }
   },
   "education": [
     {
       "title": "BSc (Hons) Entertainment Technology, First Class",
-      "detail": "University of Portsmouth | 2007. IBM Prize for Best Creative Technologies Project. Dissertation: 90%."
+      "detail": "University of Portsmouth | 2007. IBM Prize for Best Creative Technologies Project. Dissertation: 90%, highest in the department."
     },
     {
       "title": "Full Stack Coding Bootcamp",
-      "detail": "Tech Educators | March 2024. 12-week intensive covering React, Next.js, Node.js, PostgreSQL and Supabase."
+      "detail": "Tech Educators | March 2024. 12-week intensive: React, Next.js, Node.js, PostgreSQL and Supabase."
     }
   ],
   "languages": "English: native. Spanish: working proficiency."
