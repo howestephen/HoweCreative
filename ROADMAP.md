@@ -15,8 +15,8 @@ generated_from: conversation
 
 Milestone 3.0, the career-focused editorial redesign, shipped to `main` on
 19 July 2026 (merge 85dd2c7). Work now goes to `main` as maintenance.
-`codex/creative-technologist-portfolio` stays a separate, live demonstration
-site and is not merged.
+`codex/creative-technologist-portfolio` stays a separate branch for further
+work; it is not merged and, since 2 November 2026, not deployed.
 
 Open:
 
@@ -71,10 +71,9 @@ release 29d88e8; a quoted-attribution commit body was refused too). An
 independent audit followed and its findings were fixed. Open:
 
 - No project level is declared, so every main merge or push needs approval.
-- Vercel main-only now applies to `main`. Do not carry it to
-  `codex/creative-technologist-portfolio`: Stephen keeps that branch live as
-  the demonstration site (`howecreative-particle`), so it must keep building
-  on push (decided 2026-10-12). Dashboard, CLI and deploy-hook routes are not
+- Vercel main-only now applies to `main`. The redesign branch's
+  `howecreative-particle` project was disconnected from Git on 2 November 2026
+  and has no deployments; it no longer builds on push. Dashboard, CLI and deploy-hook routes are not
   yet inventoried.
 - Both long-lived branches carry the same agent guidance (listed under
   Branches in CLAUDE.md). ONBOARDING.md matches bar one redesign-specific
@@ -128,6 +127,13 @@ independent audit followed and its findings were fixed. Open:
 7. ✓ Merged to `main` on 19 July 2026 (85dd2c7).
 
 ## Production Maintenance
+
+- [x] Vercel storage, 2 November 2026: the team hit its 10 GB deployment
+  storage limit. Each deployment carries about 415 MB of case-study media, and
+  every old one was kept. The redesign's site is taken offline (all its
+  deployments removed, project disconnected from Git), main keeps only its live
+  deployment, and main's `vercel.json` no longer routes any path to the
+  redesign's project; a test keeps rewrites local.
 
 - [x] CV aligned across main and the redesign branch, 2 November 2026: month
   dates, the full list of earlier roles, a Selected Projects section and grouped
