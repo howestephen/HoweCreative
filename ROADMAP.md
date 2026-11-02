@@ -3,7 +3,7 @@ status: active
 author: stephen+claude
 updated: 2026-10-30
 generated_by: claude-opus-5-5
-generated_at: 2026-11-02T17:40Z
+generated_at: 2026-11-02T23:38Z
 generated_from: conversation
 ---
 
@@ -83,6 +83,9 @@ independent audit followed and its findings were fixed. Open:
   and hosted acceptance are not yet recorded.
 - Codex and Cursor wiring, and which agent-host events fire, are unverified.
 - ✓ `.claude/settings.local.json` is no longer tracked (merged 30 October 2026).
+- ✓ Kit update, 2 November 2026 (kit 5840adc): `retrofit-check.py` clean on
+  both branches after the main-push and machine-load rules were refreshed in
+  CONVENTIONS.md and a stale untracked RETROFIT.md copy was removed.
 
 ## Goal
 
