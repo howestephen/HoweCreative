@@ -73,8 +73,8 @@ independent audit followed and its findings were fixed. Open:
 - No project level is declared, so every main merge or push needs approval.
 - Vercel main-only now applies to `main`. The redesign branch's
   `howecreative-particle` project was disconnected from Git on 2 November 2026
-  and has no deployments; it no longer builds on push. Dashboard, CLI and deploy-hook routes are not
-  yet inventoried.
+  and has no deployments (checked with `vercel list`); it no longer builds on
+  push. Dashboard, CLI and deploy-hook routes are not yet inventoried.
 - Both long-lived branches carry the same agent guidance (listed under
   Branches in CLAUDE.md). ONBOARDING.md matches bar one redesign-specific
   project line.
@@ -132,7 +132,7 @@ independent audit followed and its findings were fixed. Open:
   storage limit. Each deployment carries about 415 MB of case-study media, and
   every old one was kept. The redesign's site is taken offline (all its
   deployments removed, project disconnected from Git), main keeps only its live
-  deployment, and main's `vercel.json` no longer routes any path to the
+  deployment (both checked with `vercel list`), and main's `vercel.json` no longer routes any path to the
   redesign's project; a test keeps rewrites local.
 
 - [x] CV aligned across main and the redesign branch, 2 November 2026: month
