@@ -74,10 +74,10 @@ Round 3 escalates to Stephen.
 - Keep exactly two long-lived branches: `main` and the single active redesign
   branch. Retire merged or superseded branches immediately; tag anything worth
   keeping instead of leaving a branch.
-- Both stay live. `codex/creative-technologist-portfolio` is the demonstration
-  site (`howecreative-particle`) and builds on every push: the one exception to
-  the Vercel build policy in CONVENTIONS.md. Never give it main's `git`
-  build setting.
+- Only `main` is live. `codex/creative-technologist-portfolio` is kept for
+  further work but not deployed: the `howecreative-particle` Vercel project is
+  disconnected from Git (2 November 2026), and main does not route any path to
+  it. Reconnecting it is Stephen's call.
 - Both branches carry the same agent guidance (this file, CONVENTIONS.md,
   AGENTS.md, handoffs/TEMPLATE.md, `scripts/validate*`, `.claude/launch.json`).
   Change it on both in the same task.
