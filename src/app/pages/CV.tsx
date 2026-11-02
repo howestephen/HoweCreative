@@ -289,7 +289,7 @@ export function CV() {
           </div>
         </header>
 
-        <h2 className={`${SECTION_HEADING} mb-3`}>Summary</h2>
+        <h2 className={`${SECTION_HEADING} mb-3`}>Professional Summary</h2>
         <p className="mb-6 border-l-2 border-[#d90429] pl-4 text-[14px] leading-relaxed text-neutral-800">
           Creative technologist with 20+ years connecting brand, 3D, motion, product design and front-end
           development. For the last five years I've been the sole designer at a multi-chain DeFi protocol, owning
