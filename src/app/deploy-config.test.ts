@@ -33,7 +33,7 @@ describe("deploy config", () => {
     const rewrites = (JSON.parse(readFileSync(resolve(root, "vercel.json"), "utf8")) as {
       rewrites?: { source: string; destination: string }[];
     }).rewrites ?? [];
-    for (const rewrite of rewrites) expect(rewrite.destination, rewrite.source).toMatch(/^\//);
+    for (const rewrite of rewrites) expect(rewrite.destination, rewrite.source).toMatch(/^\/(?!\/)/);
   });
 
   it("keeps crawlers out of the redesign preview", () => {
