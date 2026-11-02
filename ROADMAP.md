@@ -2,6 +2,9 @@
 status: active
 author: stephen+claude
 updated: 2026-10-30
+generated_by: claude-opus-5-5
+generated_at: 2026-11-02T17:40Z
+generated_from: conversation
 ---
 
 # ROADMAP
@@ -126,6 +129,8 @@ independent audit followed and its findings were fixed. Open:
 
 ## Production Maintenance
 
+- [x] CV summary, 2 November 2026: the UNCX tenure line read "the last four
+  years"; it now reads five years, matching December 2021 to late 2026.
 - ✓ UNCX Rebrand and Academy study banners, 7 October 2026: the card and
   full-width study header share an image, but browsers could keep an older
   full-size copy while fetching new thumbnails. Both image URLs now carry a

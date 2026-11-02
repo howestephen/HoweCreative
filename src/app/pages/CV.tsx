@@ -194,7 +194,7 @@ export function CV() {
 
         <p className="mb-5 border-l-2 border-[#d90429] pl-4 text-[14px] leading-relaxed text-neutral-800">
           Creative technologist with 20+ years connecting brand, 3D, motion, product design, and front-end code. For
-          the last four years I've been the sole designer at a multi-chain DeFi protocol, owning everything from
+          the last five years I've been the sole designer at a multi-chain DeFi protocol, owning everything from
           company rebrands to shipped product UIs. I design and build systems rather than one-off artefacts:
           AI-assisted build loops for development, template and guidance systems for video and 3D, and automated
           publishing systems with human approval gates. Systems thinker with natural strengths in pattern
