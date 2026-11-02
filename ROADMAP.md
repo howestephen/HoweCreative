@@ -132,8 +132,9 @@ independent audit followed and its findings were fixed. Open:
   storage limit. Each deployment carries about 415 MB of case-study media, and
   every old one was kept. The redesign's site is taken offline (all its
   deployments removed, project disconnected from Git), main keeps only its live
-  deployment (both checked with `vercel list`), and main's `vercel.json` no longer routes any path to the
-  redesign's project; a test keeps rewrites local.
+  deployment (both checked with `vercel list`), and main's `vercel.json` no
+  longer routes any path to the redesign's project; a test keeps rewrites
+  local.
 
 - [x] CV aligned across main and the redesign branch, 2 November 2026: month
   dates, the full list of earlier roles, a Selected Projects section and grouped
