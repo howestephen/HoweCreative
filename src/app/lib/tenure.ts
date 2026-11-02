@@ -1,6 +1,7 @@
 /** Career dates live here so no figure on the site has to be hand-updated. */
 export const CAREER_START = new Date(2005, 4, 1); // May 2005, Good Salon Guide
-export const UNCX_START = new Date(2021, 11, 1); // 1 December 2021, UNCX Network
+export const UNCX_START = new Date(2021, 10, 1); // November 2021, UNCX Network
+export const UNCX_END = new Date(2026, 10, 1); // November 2026, role ended
 
 /** Whole months elapsed between two dates, not counting a partial final month. */
 export function monthsBetween(start: Date, end: Date): number {

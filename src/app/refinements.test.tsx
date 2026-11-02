@@ -1,6 +1,6 @@
 import { readdirSync, readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
-import { render, screen } from "@testing-library/react";
+import { cleanup, render, screen } from "@testing-library/react";
 import { createMemoryRouter, RouterProvider, type RouteObject } from "react-router";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
@@ -93,6 +93,21 @@ describe("tablet layout", () => {
     // xl:gap-x-4 leaves the widest value 6px of room in its 1280px cell.
     for (const cls of ["grid-cols-2", "sm:grid-cols-4", "lg:grid-cols-2", "xl:grid-cols-4", "xl:gap-x-4"]) {
       expect(dl.className).toMatch(has(cls));
+    }
+  });
+
+  it("shows the UNCX stat as 5 yrs, fixed at the role's end date", () => {
+    vi.useFakeTimers({ toFake: ["Date"] });
+    try {
+      for (const now of ["2026-11-02", "2031-06-15"]) {
+        vi.setSystemTime(new Date(now));
+        renderRoutes("/", [{ path: "/", Component: Masthead }]);
+        const label = screen.getByText("lead designer, UNCX");
+        expect(label.nextElementSibling!.textContent).toBe("5 yrs");
+        cleanup();
+      }
+    } finally {
+      vi.useRealTimers();
     }
   });
 

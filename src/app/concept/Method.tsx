@@ -24,7 +24,7 @@ const PRINCIPLES = [
 
 const EXPERIENCE = [
   {
-    years: "2021 -",
+    years: "2021-26",
     role: "Lead Designer, UNCX Network",
     note: "Sole designer at a multi-chain DeFi protocol - brand to product.",
   },
