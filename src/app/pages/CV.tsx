@@ -48,7 +48,7 @@ const EXPERIENCE = [
     dates: "May 2016 - August 2018",
     context: "Ran my own studio, delivering video, animation and web projects for international clients.",
     bullets: [
-      "Delivered video, motion graphics and web projects, including 130+ videos for one corporate-learning client by January 2018",
+      "Delivered video, motion graphics and web projects, including 150+ videos for one corporate-learning client by January 2018",
       "Filmed, edited and delivered a 6.5-hour chef-training course and website for Chalet Chardons; recipes and operational content by head chef Maciek Dolasinski",
       "Produced music videos and explainers with rotoscoping and colour grading; improved website UI, content and SEO for international leisure clients",
     ],
