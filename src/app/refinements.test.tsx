@@ -113,7 +113,7 @@ describe("tablet layout", () => {
 
   it("dates the ended UNCX role 2021 - 2026 on the CV", () => {
     renderRoutes("/cv", [{ path: "/cv", Component: CV }]);
-    expect(screen.getByText(/Nov 2021 - Nov 2026 \| Remote/)).toBeTruthy();
+    expect(screen.getByText(/November 2021 - November 2026 \| Remote/)).toBeTruthy();
     expect(document.body.textContent).not.toMatch(/Present/);
   });
 
