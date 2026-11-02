@@ -8,6 +8,13 @@ word_budget_reason: the redesign branch keeps its full media and audit history; 
 
 # ROADMAP
 
+## CV aligned with main - 2 November 2026
+
+- [x] `cv.json` shares main's CV wording: UNCX dated November 2021 to
+  November 2026, skills regrouped to cover AI-assisted development, local and
+  generative AI, testing, data and CI. The three PDFs were rebuilt with
+  `scripts/build-cv.py` and each is two pages.
+
 ## House rules in step with main - 12 October 2026
 
 This branch carries the same agent guidance as `main` (listed under Branches
