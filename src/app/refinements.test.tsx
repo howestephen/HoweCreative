@@ -111,6 +111,12 @@ describe("tablet layout", () => {
     }
   });
 
+  it("dates the ended UNCX role 2021 - 2026 on the CV", () => {
+    renderRoutes("/cv", [{ path: "/cv", Component: CV }]);
+    expect(screen.getByText(/2021 - 2026 \| Remote/)).toBeTruthy();
+    expect(document.body.textContent).not.toMatch(/Present/);
+  });
+
   it("L2: shows the header brand suffix only from lg", () => {
     renderRoutes("/", [{ path: "/", Component: Layout, children: [{ index: true, element: null }] }]);
     const suffix = screen.getByText(/- Creative Technologist/);

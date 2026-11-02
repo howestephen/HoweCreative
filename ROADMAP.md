@@ -131,7 +131,7 @@ independent audit followed and its findings were fixed. Open:
 
 - [x] CV summary, 2 November 2026: the UNCX tenure line read "the last four
   years"; it now reads five years, matching November 2021 to November 2026. The homepage UNCX stat now
-  stops at that end date and reads 5 yrs.
+  stops at that end date and reads 5 yrs; the CV role dates read 2021 - 2026.
 - ✓ UNCX Rebrand and Academy study banners, 7 October 2026: the card and
   full-width study header share an image, but browsers could keep an older
   full-size copy while fetching new thumbnails. Both image URLs now carry a
