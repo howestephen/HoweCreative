@@ -210,7 +210,7 @@ export function CV() {
                 Lead Designer - UNCX Network{" "}
                 <span className="font-normal text-neutral-600">(multi-chain DeFi protocol)</span>
               </h3>
-              <p className={ENTRY_META}>2021 - Present | Remote</p>
+              <p className={ENTRY_META}>2021 - 2026 | Remote</p>
             </div>
             <p className="mt-1 text-sm italic text-neutral-600">
               The only designer in the company, owning all creative output from brand to product.
