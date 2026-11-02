@@ -18,15 +18,14 @@ const EXPERIENCE = [
     title: "Lead Designer",
     company: "UNCX Network",
     sector: "multi-chain DeFi protocol",
-    dates: "Nov 2021 - Nov 2026 | Remote",
+    dates: "November 2021 - November 2026 | Remote",
     context: "The only designer in the company, owning all creative output from brand to product.",
     bullets: [
       "Led the 2022 rebrand from Unicrypt Network to UNCX Network, then directed an outside studio on the 2024 rebrand and completed the website, Academy and 10+ pages in-house; designed 5+ sub-brands for new products",
       "Designed wireframes and UI concepts for 10+ applications, with 3-4 shipped to production; mapped token-tool and Telegram workflows in FigJam and Figma",
       "Designed a variable-driven Figma design system for cross-product navigation, now live across the product suite",
-      "Led UNCX Academy: wrote the brief, completed page designs and graphics, and produced 30+ educational videos with external designers and the in-house developer",
-      "Produced 200+ tutorials, explainers and launch videos, and built the reusable Cinema 4D, Redshift and After Effects template system behind them",
-      "Created four AI-generated launch films for partner Quiver from a sparse brief, rendered locally with Wan 2.2 in ComfyUI",
+      "Produced 200+ tutorials, explainers and launch videos, including 30+ for UNCX Academy, and built the 3D and motion template system behind them",
+      "Created four AI-generated launch films for partner Quiver, rendered locally with Wan 2.2 in ComfyUI",
       "Designed and built Solana Diary for a UNCX partner: a 7-service pipeline turning live Solana data into on-brand X graphics, with human approval before every post",
     ],
   },
@@ -34,12 +33,11 @@ const EXPERIENCE = [
     title: "Designer",
     company: "Switch Studios",
     sector: "HTML5 casino games",
-    dates: "Jul 2018 - Jun 2021 | Ipswich",
+    dates: "July 2018 - June 2021 | Ipswich",
     context: "Embedded designer in a development team shipping HTML5 casino games to market.",
     bullets: [
-      "Delivered design and production assets for 30 shipped games, 20+ still live in market",
-      "Created graphics, animation, 3D and launch marketing packs, 50+ videos in total",
-      "Prepared and compressed assets, built sprite sheets and committed work directly through Git and SVN",
+      "Delivered design and production assets for 30 shipped games, 20+ still live in market, as an embedded member of the development team",
+      "Created graphics, animation, 3D and launch marketing packs (50+ videos); built sprite sheets and committed work directly through Git and SVN",
       "Supported localisation into multiple languages, accessibility adaptations and asset QA across concurrent releases",
     ],
   },
@@ -47,12 +45,12 @@ const EXPERIENCE = [
     title: "Designer & Animator",
     company: "Howe Creative",
     sector: "freelance",
-    dates: "May 2016 - Aug 2018",
+    dates: "May 2016 - August 2018",
     context: "Ran my own studio, delivering video, animation and web projects for international clients.",
     bullets: [
-      "Produced 140+ videos for one corporate-learning client",
-      "Sole creator of a 6.5-hour video training course for chefs at a French Alps chalet company: filming, editing, motion graphics and website",
-      "Music videos and explainers with rotoscoping and colour grading; website UI, content and SEO for international clients",
+      "Delivered video, motion graphics and web projects, including 130+ videos for one corporate-learning client by January 2018",
+      "Filmed, edited and delivered a 6.5-hour chef-training course and website for Chalet Chardons; recipes and operational content by head chef Maciek Dolasinski",
+      "Produced music videos and explainers with rotoscoping and colour grading; improved website UI, content and SEO for international leisure clients",
     ],
   },
 ] as const;
@@ -60,23 +58,23 @@ const EXPERIENCE = [
 const PROJECTS = [
   {
     title: "AI-assisted development system",
-    dates: "2026 | Personal",
+    dates: "2026 | Personal project",
     body: "Built the workflow I develop with across two machines: Claude Code, Codex and Cursor agents working to shared rules, with commit and publication gates, independent audit agents, CI on GitHub Actions and CircleCI, and bulk work routed to local models in LM Studio.",
   },
   {
     title: "Badger Club",
-    dates: "2026 | Personal | In development",
-    body: "Designed and built a badge-tracking product with React, Supabase, Google authentication and Resend. Owned UI, database structure with row-level security, and implementation, with security and regression suites in CI.",
+    dates: "2026 | Personal project | In development",
+    body: "Designed and built a badge-tracking product for youth leaders with Next.js, Supabase, Google authentication and Resend, owning the UI, database design with row-level security, and CI security and regression suites.",
   },
   {
     title: "Noticia Lingo",
-    dates: "2026 | Personal | In development",
-    body: "Designed and built a language-learning app from news articles with Next.js, Supabase and Google sign-in. Every lesson type is built, with learning levels, a multilingual framework, Playwright and accessibility tests, and Sentry monitoring.",
+    dates: "2026 | Personal project | In development",
+    body: "Designed and built a language-learning app from news articles with Next.js, Supabase and Google authentication: learning levels, a multilingual framework, Playwright and accessibility tests, and Sentry monitoring.",
   },
   {
     title: "howecreative.co.uk",
-    dates: "2026 | Personal | Live",
-    body: "Designed and built this portfolio and CV in React, TypeScript and Tailwind: generative hero, case-study video, spam-protected contact form, automated tests in CI and axe accessibility audits.",
+    dates: "2026 | Personal project | Live",
+    body: "Designed and built this portfolio and CV in React, TypeScript and Tailwind: generative hero, case-study video, spam-protected contact form, automated tests in CI and axe accessibility audits of the live site.",
   },
 ] as const;
 
@@ -98,16 +96,12 @@ const SKILLS = [
     body: "Vitest, Jest, Playwright, accessibility testing (axe), property-based and mutation testing, GitHub Actions, CircleCI, Supabase, PostgreSQL, row-level security, Google OAuth, Sentry",
   },
   {
-    title: "Product design",
-    body: "UI/UX, user flows, wireframing, prototyping, Figma, FigJam, design systems, component libraries, developer handoff",
+    title: "Product and interaction design",
+    body: "UI/UX, user flows, wireframing, rapid prototyping, Figma, FigJam, design systems, component libraries, developer handoff, Agile and Scrum",
   },
   {
     title: "Creative production",
-    body: "Art direction, brand identity, 3D, motion design, video editing, Cinema 4D, Redshift, X-Particles, After Effects, Premiere Pro, Photoshop, Illustrator",
-  },
-  {
-    title: "Audio and delivery",
-    body: "Ableton Live, Audition, Serum, Agile / Scrum, cross-functional collaboration",
+    body: "Art direction, brand identity, 3D, motion design, Cinema 4D, Redshift, X-Particles, After Effects, Premiere Pro, Photoshop, Illustrator, Ableton Live, Audition",
   },
 ] as const;
 
@@ -219,7 +213,7 @@ export function CV() {
   usePageMeta({
     title: "Stephen Howe - CV",
     description:
-      "Creative technologist with 20+ years connecting brand, 3D, motion, product design, and front-end code.",
+      "Creative technologist with 20+ years connecting brand, 3D, motion, product design and front-end development.",
     path: "/cv",
   });
 
@@ -295,6 +289,7 @@ export function CV() {
           </div>
         </header>
 
+        <h2 className={`${SECTION_HEADING} mb-3`}>Summary</h2>
         <p className="mb-6 border-l-2 border-[#d90429] pl-4 text-[14px] leading-relaxed text-neutral-800">
           Creative technologist with 20+ years connecting brand, 3D, motion, product design and front-end
           development. For the last five years I've been the sole designer at a multi-chain DeFi protocol, owning
@@ -327,7 +322,7 @@ export function CV() {
 
           <p className="mt-5 text-[12.5px] leading-relaxed text-neutral-600">
             Earlier experience: Qtac Solutions, 2nd Line Support Technician and website redesign (2014 - 2016);
-            Burger Theory, Web &amp; Social Media Manager (2012 - 2016); Hot Biscuit, Venue &amp; Promotions Manager
+            Burger Theory, Web &amp; Social Media Manager (2012 - 2016, concurrent); Hot Biscuit, Venue &amp; Promotions Manager
             (2011 - 2012); 412 Promotions, Brand Manager (2009 - 2011); Right Click Computers, Junior Helpdesk
             Technician (2008 - 2009); BBC, Database Technician (2007 - 2008); Good Salon Guide, Web Manager &amp;
             Graphic Designer (2005 - 2006).
@@ -378,7 +373,7 @@ export function CV() {
 
         <section className="break-inside-avoid">
           <h2 className={SECTION_HEADING}>Languages</h2>
-          <p className="mt-3 text-sm text-neutral-700">English (native) · Spanish (working proficiency)</p>
+          <p className="mt-3 text-sm text-neutral-700">English: native. Spanish: working proficiency.</p>
         </section>
       </main>
     </div>
