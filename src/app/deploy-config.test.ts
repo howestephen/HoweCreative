@@ -29,6 +29,13 @@ describe("deploy config", () => {
     for (const slug of CV_LINKED_SLUGS) expect(slugs, slug).toContain(slug);
   });
 
+  it("serves everything from this deployment, with no rewrites to another site", () => {
+    const rewrites = (JSON.parse(readFileSync(resolve(root, "vercel.json"), "utf8")) as {
+      rewrites?: { source: string; destination: string }[];
+    }).rewrites ?? [];
+    for (const rewrite of rewrites) expect(rewrite.destination, rewrite.source).toMatch(/^\//);
+  });
+
   it("keeps crawlers out of the redesign preview", () => {
     const robots = readFileSync(resolve(root, "public/robots.txt"), "utf8");
     expect(robots).toMatch(/^User-agent: \*$/m);
