@@ -22,9 +22,9 @@ const EXPERIENCE = [
     context: "The only designer in the company, owning all creative output from brand to product.",
     bullets: [
       "Led the 2022 rebrand from Unicrypt to UNCX Network, directed an outside studio on the 2024 rebrand and completed the website, Academy and 10+ pages in-house; designed 5+ sub-brands",
-      "Designed wireframes and UI concepts for 10+ applications, with 3-4 shipped to production; mapped token-tool and Telegram workflows in FigJam and Figma",
-      "Designed a variable-driven Figma design system for cross-product navigation, now live across the product suite",
-      "Produced 200+ tutorials, explainers and launch videos, including 30+ for UNCX Academy, and built the 3D and motion template system behind them",
+      "Designed wireframes and UI concepts for 10+ applications, 3-4 shipped to production; mapped token-tool and Telegram workflows in FigJam and Figma",
+      "Designed a variable-driven Figma design system for cross-product navigation, live across the product suite",
+      "Produced 200+ tutorials, explainers and launch videos, 30+ of them for UNCX Academy, on a 3D and motion template system I built",
     ],
   },
   {
@@ -34,9 +34,9 @@ const EXPERIENCE = [
     dates: "July 2018 - June 2021 | Ipswich",
     context: "Embedded designer in a development team shipping HTML5 casino games to market.",
     bullets: [
-      "Delivered design and production assets for 30 shipped games, 20+ still live in market, as an embedded member of the development team",
-      "Created graphics, animation, 3D and launch marketing packs (50+ videos); built sprite sheets and committed work directly through Git and SVN",
-      "Supported localisation into multiple languages, accessibility adaptations and asset QA across concurrent releases",
+      "Delivered design and production assets for 30 shipped games, 20+ still live in market",
+      "Created graphics, animation, 3D and launch marketing packs (50+ videos); built sprite sheets and committed work through Git and SVN",
+      "Supported localisation, accessibility adaptations and asset QA across concurrent releases",
     ],
   },
   {
@@ -47,8 +47,7 @@ const EXPERIENCE = [
     context: "Ran my own studio, delivering video, animation and web projects for international clients.",
     bullets: [
       "Delivered video, motion graphics and web projects, including 150+ videos for one corporate-learning client by January 2018",
-      "Filmed, edited and delivered a 6.5-hour chef-training course and website for Chalet Chardons; recipes and operational content by head chef Maciek Dolasinski",
-      "Produced music videos and explainers with rotoscoping and colour grading; improved website UI, content and SEO for international leisure clients",
+      "Filmed and edited a 6.5-hour chef-training course (content by the head chef) and built its website for Chalet Chardons; produced music videos and explainers with rotoscoping and colour grading",
     ],
   },
 ] as const;
@@ -59,23 +58,24 @@ const PROJECTS = [
   {
     title: "Quiver launch films",
     dates: "2026 | Client work for a UNCX partner",
-    body: "Four launch films from a sparse brief, owning script, art direction, generation, motion, edit and audio. Generated locally with Wan 2.2 in ComfyUI on an RTX 4090, with Claude controlling ComfyUI to queue scenes while Codex produced the source images; composited in After Effects with AI-assisted scripts that built scene comps, text precomps and shared 2.5D depth, so all four edits came from one reusable system.",
+    body: "Four launch films from a sparse brief; I owned script, art direction, generation, motion, edit and audio. Generated locally with Wan 2.2 in ComfyUI on an RTX 4090, Claude controlling the ComfyUI queue while Codex produced the source images; AI-assisted After Effects scripts built the scene comps, text precomps and 2.5D depth, so all four edits came from one reusable system.",
   },
   {
     title: "Solana Diary",
     dates: "2026 | Solo build for a UNCX partner",
-    body: "Designed the identity and built the pipeline: seven Railway services turning live on-chain data and news into on-brand posts for X. A rate-limited data layer on free-tier APIs, a rendering engine filling about fifteen Figma-designed post families with live data, and a Telegram flow where I approved or edited every post before it published.",
+    body: "Designed the identity and built the pipeline for an X account: seven Railway services turning live on-chain data and news into on-brand posts, a rate-limited data layer on free-tier APIs, a renderer filling about fifteen Figma-designed post families, and a Telegram flow where I approved or edited every post before it published.",
   },
   {
     title: "AI development framework",
     dates: "2026 | Own tooling",
-    body: "The system I build with on Mac and Windows: Claude Code, Codex, Cursor and OpenCode working to one shared rule set. Two project templates (product and creative) with lifecycle levels and retrofit procedures. A suite of 48 hooks, from Claude Code PreToolUse hooks to Git pre-commit, commit-msg and pre-push hooks, running secret and publication scans, main-branch push guards and roadmap and mutation-test checks; each is pinned and self-tested on install and switchable per rule from a dashboard. Independent audit agents review every change, with CI on GitHub Actions and CircleCI.",
+    body: "The rule set I build with on Mac and Windows across Claude Code, Codex, Cursor and OpenCode: two project templates with lifecycle levels and retrofit procedures, and 48 Claude Code and Git hooks, from PreToolUse to pre-commit, commit-msg and pre-push, running secret and publication scans, main-branch push guards and roadmap checks, each self-tested on install and switchable from a dashboard. Audit agents review every change; CI on GitHub Actions and CircleCI.",
   },
 ] as const;
 
 // Earlier roles, newest first. Set as a titled list rather than a run-on
-// sentence so the block reads as its own entry on screen and after a print
-// page break.
+// sentence so the block reads as its own entry. Two columns on screen; one
+// column in print, where full titles would otherwise wrap and push the block
+// off page one.
 const EARLIER_EXPERIENCE = [
   { role: "2nd Line Support Technician & website redesign", company: "Qtac Solutions", dates: "2014 - 2016" },
   { role: "Web & Social Media Manager (concurrent)", company: "Burger Theory", dates: "2012 - 2016" },
@@ -89,7 +89,7 @@ const EARLIER_EXPERIENCE = [
 const SKILLS = [
   {
     title: "AI-assisted development",
-    body: "Claude Code, Codex, Cursor, OpenCode, agentic build workflows, Claude Code hooks (PreToolUse, PostToolUse, SessionStart, Stop), Git hooks (pre-commit, commit-msg, pre-push), multi-agent review and audit, CLAUDE.md and AGENTS.md rule systems, skills and subagents",
+    body: "Claude Code, Codex, Cursor, OpenCode; Claude Code hooks (PreToolUse, PostToolUse, SessionStart, Stop) and Git hooks (pre-commit, commit-msg, pre-push); multi-agent review and audit; CLAUDE.md and AGENTS.md rule systems, skills and subagents",
   },
   {
     title: "Local and generative AI",
@@ -298,13 +298,11 @@ export function CV() {
         </header>
 
         <h2 className={`${SECTION_HEADING} mb-3`}>Professional Summary</h2>
-        <p className="mb-6 border-l-2 border-[#d90429] pl-4 text-[14px] leading-relaxed text-neutral-800">
-          Creative technologist with 20+ years connecting brand, 3D, motion, product design and front-end
-          development. For the last five years I've been the sole designer at a multi-chain DeFi protocol, owning
-          everything from company rebrands to shipped product UIs. I design and build systems rather than one-off
-          artefacts: AI-assisted development workflows enforced by agent and Git hooks, automated testing and CI, generative video
-          and audio production with local and cloud models, reusable 3D and motion template systems, and automated
-          publishing with human approval.
+        <p className="mb-6 border-l-2 border-[#d90429] pl-4 text-[14px] print:mb-5 leading-relaxed text-neutral-800">
+          Creative technologist with 20+ years across brand, 3D, motion, product design and front-end development.
+          Since 2021 I've been the sole designer at a multi-chain DeFi protocol, from rebrands to shipped product
+          UIs. I build systems, not one-offs: AI-assisted development enforced by agent and Git hooks,
+          local and cloud generative video and audio, 3D and motion templates, and human-approved automated publishing.
         </p>
 
         <section className="mb-6">
@@ -333,16 +331,16 @@ export function CV() {
               <h3 className="text-base">Earlier Experience</h3>
               <p className={ENTRY_META}>2005 - 2016</p>
             </div>
-            <ul className="mt-1.5 grid gap-x-6 text-[12.5px] leading-snug text-neutral-700 sm:grid-cols-2 print:grid-cols-2">
+            <ul className="mt-1.5 grid gap-x-6 text-[12.5px] leading-snug text-neutral-700 sm:grid-cols-2 print:grid-cols-1 print:text-[12px] print:leading-tight">
               {EARLIER_EXPERIENCE.map((item) => (
                 <li
                   key={item.company}
-                  className="flex items-baseline justify-between gap-3 border-b border-neutral-100 py-1"
+                  className="flex items-baseline justify-between gap-3 border-b border-neutral-100 py-1 print:py-0"
                 >
                   <span>
                     <span className="font-medium text-neutral-900">{item.company}</span> - {item.role}
                   </span>
-                  <span className={ENTRY_META}>{item.dates}</span>
+                  <span className={`${ENTRY_META} print:text-[10px]`}>{item.dates}</span>
                 </li>
               ))}
             </ul>
@@ -378,15 +376,12 @@ export function CV() {
           <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-snug text-neutral-700">
             <li>
               <span className="font-medium text-neutral-900">BSc (Hons) Entertainment Technology, First Class</span>
-              {" "}- University of Portsmouth, 2007.
-              <span className="mt-1 block text-neutral-600">
-                Only First Class Honours on the course; IBM Prize for Best Creative Technologies Project;
-                dissertation graded 90% - highest in the department that year.
-              </span>
+              {" "}- University of Portsmouth, 2007. The only First Class degree on the course; IBM Prize for Best
+              Creative Technologies Project; dissertation graded 90%, the department's highest that year.
             </li>
             <li>
               <span className="font-medium text-neutral-900">Full Stack Coding Bootcamp</span> - Tech Educators,
-              March 2024. 12-week intensive covering React, Next.js, Node.js, PostgreSQL and Supabase.
+              March 2024. 12 weeks covering React, Next.js, Node.js, PostgreSQL and Supabase.
             </li>
           </ul>
         </section>

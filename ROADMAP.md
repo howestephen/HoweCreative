@@ -1,9 +1,9 @@
 ---
 status: active
 author: stephen+claude
-updated: 2026-10-30
-generated_by: claude
-generated_at: 2026-11-07T19:48Z
+updated: 2026-11-07
+generated_by: claude-opus-5-5
+generated_at: 2026-11-07T20:41Z
 generated_from: conversation
 ---
 
@@ -143,6 +143,18 @@ independent audit followed and its findings were fixed. Open:
   dates, the full list of earlier roles, a Selected Projects section and grouped
   skills covering local AI, testing, CI and data. Main's print CV fills two A4
   pages; the contact boxes size to their text.
+- [x] CV back to two print pages, 7 November 2026 (`fix/cv-two-pages`): the
+  change below printed to three A4 pages, with Earlier Experience unable to
+  split and so leaving 45mm of page one blank. The summary, the UNCX, Switch
+  Studios and Howe Creative bullets, the three project bodies, the AI skills
+  line and the education block are shorter; the earlier roles keep their full
+  titles and print as one column (two on screen) so the block fits page one.
+  Measured by rendering `dist` to A4 PDF headlessly (Playwright request
+  interception, no server): page one ends after Earlier Experience with 8mm
+  spare, page two ends after Languages with 47mm spare. The independent audit's
+  findings (earlier job titles and action verbs cut in the first pass) were
+  fixed. Not
+  previewed in a browser: Tailscale was still stopped.
 - [x] CV projects and earlier roles, 7 November 2026 (`fix/cv-projects`):
   Earlier Experience is a titled entry with a dated two-column list instead of
   a grey run-on paragraph. Selected Projects is Quiver, Solana Diary and the
