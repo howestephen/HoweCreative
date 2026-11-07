@@ -2,8 +2,8 @@
 status: active
 author: stephen+claude
 updated: 2026-10-30
-generated_by: claude-opus-5-5
-generated_at: 2026-11-02T23:40Z
+generated_by: claude
+generated_at: 2026-11-07T19:48Z
 generated_from: conversation
 ---
 
@@ -143,6 +143,17 @@ independent audit followed and its findings were fixed. Open:
   dates, the full list of earlier roles, a Selected Projects section and grouped
   skills covering local AI, testing, CI and data. Main's print CV fills two A4
   pages; the contact boxes size to their text.
+- [x] CV projects and earlier roles, 7 November 2026 (`fix/cv-projects`):
+  Earlier Experience is a titled entry with a dated two-column list instead of
+  a grey run-on paragraph. Selected Projects is Quiver, Solana Diary and the
+  AI development framework (hooks, templates, audit agents, CI), taken from
+  the case studies and `_projects-admin`; the two UNCX bullets they repeated
+  are removed. Dev-workflow "gates" wording now names the hooks. The skills
+  list keeps Supabase, row-level security, OAuth, Sentry, Playwright and
+  Next.js; the Badger Club and Noticia Lingo studies evidence them, though no
+  CV project line now does. Not yet previewed or printed: Tailscale was
+  stopped, so the preview controller was unreachable, and the two-page print
+  length above is unconfirmed. The redesign branch's CV is not updated.
 - [x] CV summary, 2 November 2026: the UNCX tenure line read "the last four
   years"; it now reads five years, matching November 2021 to November 2026. The homepage UNCX stat now
   stops at that end date and reads 5 yrs; the CV role dates read 2021 - 2026.

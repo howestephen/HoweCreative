@@ -25,8 +25,6 @@ const EXPERIENCE = [
       "Designed wireframes and UI concepts for 10+ applications, with 3-4 shipped to production; mapped token-tool and Telegram workflows in FigJam and Figma",
       "Designed a variable-driven Figma design system for cross-product navigation, now live across the product suite",
       "Produced 200+ tutorials, explainers and launch videos, including 30+ for UNCX Academy, and built the 3D and motion template system behind them",
-      "Created four AI-generated launch films for partner Quiver, rendered locally with Wan 2.2 in ComfyUI",
-      "Designed and built Solana Diary for a UNCX partner: a 7-service pipeline turning live Solana data into on-brand X graphics, with human approval before every post",
     ],
   },
   {
@@ -55,37 +53,47 @@ const EXPERIENCE = [
   },
 ] as const;
 
+// Wording follows the Quiver and Solana Diary case studies in
+// site-content.json, and the hook suite and templates in _projects-admin.
 const PROJECTS = [
   {
-    title: "AI-assisted development system",
-    dates: "2026 | Personal project",
-    body: "Built the workflow I develop with across two machines: Claude Code, Codex and Cursor agents working to shared rules, with commit and publication gates, independent audit agents, CI on GitHub Actions and CircleCI, and bulk work routed to local models in LM Studio.",
+    title: "Quiver launch films",
+    dates: "2026 | Client work for a UNCX partner",
+    body: "Four launch films from a sparse brief, owning script, art direction, generation, motion, edit and audio. Generated locally with Wan 2.2 in ComfyUI on an RTX 4090, with Claude controlling ComfyUI to queue scenes while Codex produced the source images; composited in After Effects with AI-assisted scripts that built scene comps, text precomps and shared 2.5D depth, so all four edits came from one reusable system.",
   },
   {
-    title: "Badger Club",
-    dates: "2026 | Personal project | In development",
-    body: "Designed and built a badge-tracking product for youth leaders with Next.js, Supabase, Google authentication and Resend, owning the UI, database design with row-level security, and CI security and regression suites.",
+    title: "Solana Diary",
+    dates: "2026 | Solo build for a UNCX partner",
+    body: "Designed the identity and built the pipeline: seven Railway services turning live on-chain data and news into on-brand posts for X. A rate-limited data layer on free-tier APIs, a rendering engine filling about fifteen Figma-designed post families with live data, and a Telegram flow where I approved or edited every post before it published.",
   },
   {
-    title: "Noticia Lingo",
-    dates: "2026 | Personal project | In development",
-    body: "Designed and built a language-learning app from news articles with Next.js, Supabase and Google authentication: learning levels, a multilingual framework, Playwright and accessibility tests, and Sentry monitoring.",
+    title: "AI development framework",
+    dates: "2026 | Own tooling",
+    body: "The system I build with on Mac and Windows: Claude Code, Codex, Cursor and OpenCode working to one shared rule set. Two project templates (product and creative) with lifecycle levels and retrofit procedures. A suite of 48 hooks, from Claude Code PreToolUse hooks to Git pre-commit, commit-msg and pre-push hooks, running secret and publication scans, main-branch push guards and roadmap and mutation-test checks; each is pinned and self-tested on install and switchable per rule from a dashboard. Independent audit agents review every change, with CI on GitHub Actions and CircleCI.",
   },
-  {
-    title: "howecreative.co.uk",
-    dates: "2026 | Personal project | Live",
-    body: "Designed and built this portfolio and CV in React, TypeScript and Tailwind: generative hero, case-study video, spam-protected contact form, automated tests in CI and axe accessibility audits of the live site.",
-  },
+] as const;
+
+// Earlier roles, newest first. Set as a titled list rather than a run-on
+// sentence so the block reads as its own entry on screen and after a print
+// page break.
+const EARLIER_EXPERIENCE = [
+  { role: "2nd Line Support Technician & website redesign", company: "Qtac Solutions", dates: "2014 - 2016" },
+  { role: "Web & Social Media Manager (concurrent)", company: "Burger Theory", dates: "2012 - 2016" },
+  { role: "Venue & Promotions Manager", company: "Hot Biscuit", dates: "2011 - 2012" },
+  { role: "Brand Manager", company: "412 Promotions", dates: "2009 - 2011" },
+  { role: "Junior Helpdesk Technician", company: "Right Click Computers", dates: "2008 - 2009" },
+  { role: "Database Technician", company: "BBC", dates: "2007 - 2008" },
+  { role: "Web Manager & Graphic Designer", company: "Good Salon Guide", dates: "2005 - 2006" },
 ] as const;
 
 const SKILLS = [
   {
     title: "AI-assisted development",
-    body: "Claude Code, Codex, Cursor, OpenCode, agentic build workflows, multi-agent review and audit gates, prompt and guidance systems",
+    body: "Claude Code, Codex, Cursor, OpenCode, agentic build workflows, Claude Code hooks (PreToolUse, PostToolUse, SessionStart, Stop), Git hooks (pre-commit, commit-msg, pre-push), multi-agent review and audit, CLAUDE.md and AGENTS.md rule systems, skills and subagents",
   },
   {
     title: "Local and generative AI",
-    body: "LM Studio, Hermes and other local LLMs, ComfyUI (image, video and audio), Wan 2.2, ElevenLabs, AI music generation, automated publishing with approval gates, API integration",
+    body: "LM Studio, Hermes and other local LLMs, ComfyUI (image, video and audio), Wan 2.2, ElevenLabs, AI music generation, automated publishing with human-in-the-loop approval, API integration",
   },
   {
     title: "Development",
@@ -294,7 +302,7 @@ export function CV() {
           Creative technologist with 20+ years connecting brand, 3D, motion, product design and front-end
           development. For the last five years I've been the sole designer at a multi-chain DeFi protocol, owning
           everything from company rebrands to shipped product UIs. I design and build systems rather than one-off
-          artefacts: AI-assisted development workflows with automated testing and review gates, generative video
+          artefacts: AI-assisted development workflows enforced by agent and Git hooks, automated testing and CI, generative video
           and audio production with local and cloud models, reusable 3D and motion template systems, and automated
           publishing with human approval.
         </p>
@@ -320,13 +328,25 @@ export function CV() {
             </article>
           ))}
 
-          <p className="mt-5 text-[12.5px] leading-relaxed text-neutral-600">
-            Earlier experience: Qtac Solutions, 2nd Line Support Technician and website redesign (2014 - 2016);
-            Burger Theory, Web &amp; Social Media Manager (2012 - 2016, concurrent); Hot Biscuit, Venue &amp; Promotions Manager
-            (2011 - 2012); 412 Promotions, Brand Manager (2009 - 2011); Right Click Computers, Junior Helpdesk
-            Technician (2008 - 2009); BBC, Database Technician (2007 - 2008); Good Salon Guide, Web Manager &amp;
-            Graphic Designer (2005 - 2006).
-          </p>
+          <article className="mt-5 break-inside-avoid">
+            <div className="flex flex-wrap items-baseline justify-between gap-x-4">
+              <h3 className="text-base">Earlier Experience</h3>
+              <p className={ENTRY_META}>2005 - 2016</p>
+            </div>
+            <ul className="mt-1.5 grid gap-x-6 text-[12.5px] leading-snug text-neutral-700 sm:grid-cols-2 print:grid-cols-2">
+              {EARLIER_EXPERIENCE.map((item) => (
+                <li
+                  key={item.company}
+                  className="flex items-baseline justify-between gap-3 border-b border-neutral-100 py-1"
+                >
+                  <span>
+                    <span className="font-medium text-neutral-900">{item.company}</span> - {item.role}
+                  </span>
+                  <span className={ENTRY_META}>{item.dates}</span>
+                </li>
+              ))}
+            </ul>
+          </article>
         </section>
 
         <section className="mb-6">
