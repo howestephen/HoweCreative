@@ -7,8 +7,8 @@ import { CAREER_START, yearsSince } from "../lib/tenure";
 const PRINCIPLES = [
   {
     index: "01",
-    title: "Systems over surfaces",
-    body: "I don't hand over artefacts - I hand over the machine that makes them: templates, tokens, pipelines, and the documentation to run them without me.",
+    title: "Explore, then make",
+    body: "I work from the brief through concepts and experiments to a prototype or finished piece. Making ideas tangible helps people judge what is worth taking further.",
   },
   {
     index: "02",
@@ -17,8 +17,8 @@ const PRINCIPLES = [
   },
   {
     index: "03",
-    title: "Judgement where it pays",
-    body: "Automate production ruthlessly; keep taste and accountability human. One tap of approval should replace a day of production - never the other way round.",
+    title: "Tools serve the idea",
+    body: "I build templates, tools and automation where they make the work easier to produce. Creative direction, judgement and approval stay with me.",
   },
 ] as const;
 

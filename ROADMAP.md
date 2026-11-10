@@ -131,6 +131,18 @@ independent audit followed and its findings were fixed. Open:
 
 ## Production Maintenance
 
+- [x] Website positioning, 10 November 2026 (`codex/creative-positioning`):
+  homepage and search descriptions lead with creative briefs, concepts and
+  prototypes. Systems and automation support that work. Badger Club and
+  Noticia Lingo are labelled personal projects in development in cards and
+  studies; the UNCX app claim distinguishes 10+ concepts from 3-4 shipped
+  apps, matching the CV. Delivered UNCX videos remain separate from the
+  unfinished automation successor. Design, project order and CV unchanged.
+  Rebrand ownership credits the outside studio; the video metric names UNCX.
+  Verified: 157 tests, typecheck, lint and production build pass; independent
+  audit and re-audit complete. Browser visual review not run. Implementation
+  on a feature branch; main merge pending review.
+
 - [x] Vercel storage, 2 November 2026: the team hit its 10 GB deployment
   storage limit. Each deployment carries about 415 MB of case-study media, and
   every old one was kept. The redesign's site is taken offline (all its

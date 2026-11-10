@@ -168,8 +168,8 @@ describe("refinements", () => {
     render(<Capabilities />);
     renderRoutes("/", [{ path: "/", Component: WorkIndex }]);
     const intros = [
-      screen.getByText(/Different outputs, same approach/),
-      screen.getByText(/Every project is shown as a system/),
+      screen.getByText(/Start with the brief/),
+      screen.getByText(/Delivered work for employers and clients/),
     ];
     for (const p of intros) expect(p.className).toMatch(has("mb-12"));
   });

@@ -16,7 +16,7 @@ import { usePageMeta } from "../lib/usePageMeta";
 /** Outcome-first teasers - the one line a hiring manager reads. */
 const TEASERS: Record<string, string> = {
   quiver:
-    "Four launch films from a sparse brief - generated locally with Wan 2.2 on an RTX 4090, finished as a modular motion system.",
+    "Four client launch films from a sparse brief - concept, art direction, generative experimentation and final edit.",
   "solana-diary":
     "Seven services that turned live Solana data and news into designed posts - every one approved from my phone before it hit X.",
   "uncx-rebrand":
@@ -24,14 +24,14 @@ const TEASERS: Record<string, string> = {
   "uncx-video-system":
     "The pipeline behind 200+ videos at UNCX - templated 3D and motion production at launch cadence.",
   "badger-club":
-    "A full-stack badge-tracking platform, designed and built solo - now preparing for launch.",
-  "ai-portfolio-system": "The agentic build system whose output you're reading right now - spec to phased roadmap to gated build.",
+    "Personal project in development: a badge-tracking app I am designing and building with AI-assisted tools.",
+  "ai-portfolio-system": "This live portfolio: a self-initiated design and AI-assisted build, with my direction and review throughout.",
   "uncx-menu":
     "One navigation system for an entire product suite - researched, variable-driven, signed off and built.",
   "uncx-academy": "An education platform's brand and design system, fed by the video pipeline.",
   "uncx-app-concepts":
-    "Five years of product concepts - validated visually before a line of code was committed.",
-  "noticia-lingo": "Language learning driven by live news - lesson types designed as pure functions.",
+    "Product concepts and interactive prototypes at UNCX - helping the team decide what was worth building.",
+  "noticia-lingo": "Personal project in development: a language-learning app that turns real news into interactive lessons.",
 };
 
 /** A section body is prose, or a list when every line starts with "- ". */
@@ -1008,8 +1008,8 @@ export function WorkIndex() {
           </span>
         </div>
         <p className="mb-12 max-w-xl text-sm leading-relaxed text-muted-foreground">
-          Every project is shown as a system - the brief, the machinery, the outcome. Open a
-          study for the working detail.
+          Delivered work for employers and clients, alongside personal projects in development.
+          Open a study for the brief, creative decisions and current outcome.
         </p>
 
         <ol className="grid grid-cols-[minmax(0,1fr)] gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">

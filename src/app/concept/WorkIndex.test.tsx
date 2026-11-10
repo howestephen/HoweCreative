@@ -184,7 +184,7 @@ describe("WorkIndex", () => {
   it("gives each card a short accessible name with the teaser as its description", () => {
     renderAt("/");
     expect(cards()[0]).toHaveAccessibleName("Quiver, Creative Direction, 2026");
-    expect(cards()[0]).toHaveAccessibleDescription(/Four launch films/);
+    expect(cards()[0]).toHaveAccessibleDescription(/Four client launch films/);
   });
 
   it("shows every written section of every study, in order", () => {
