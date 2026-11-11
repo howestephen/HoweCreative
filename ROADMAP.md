@@ -3,7 +3,7 @@ status: active
 author: stephen+claude
 updated: 2026-10-30
 generated_by: claude
-generated_at: 2026-11-11T20:01Z
+generated_at: 2026-11-11T20:07Z
 generated_from: conversation
 ---
 
@@ -71,6 +71,13 @@ release 29d88e8; a quoted-attribution commit body was refused too). An
 independent audit followed and its findings were fixed. Open:
 
 - No project level is declared, so every main merge or push needs approval.
+- ✓ 11 November 2026: the shared pre-push runner refused every push of site
+  source, because no suite covered it. `scripts/selftest_site_checks.py` now
+  covers every pushed file and runs typecheck, lint and the whole Vitest
+  suite. Checked by hand: it passes on a clean tree and refuses a failing
+  test, a type error, a lint error and a missing npm. The kit's stricter
+  compiler and lint settings (its `check` script) are not adopted: the
+  current code raises about 58 compiler errors under them.
 - Vercel main-only now applies to `main`. The redesign branch's
   `howecreative-particle` project was disconnected from Git on 2 November 2026
   and has no deployments (checked with `vercel list`); it no longer builds on
