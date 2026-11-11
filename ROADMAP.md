@@ -3,7 +3,7 @@ status: active
 author: stephen+claude
 updated: 2026-10-30
 generated_by: claude
-generated_at: 2026-11-07T19:48Z
+generated_at: 2026-11-11T20:01Z
 generated_from: conversation
 ---
 
@@ -140,8 +140,8 @@ independent audit followed and its findings were fixed. Open:
   unfinished automation successor. Design, project order and CV unchanged.
   Rebrand ownership credits the outside studio; the video metric names UNCX.
   Verified: 157 tests, typecheck, lint and production build pass; independent
-  audit and re-audit complete. Browser visual review not run. Implementation
-  on a feature branch; main merge pending review.
+  audit and re-audit complete. Browser visual review not run. Merged to main
+  on 11 November 2026 at Stephen's request.
 
 - [x] Vercel storage, 2 November 2026: the team hit its 10 GB deployment
   storage limit. Each deployment carries about 415 MB of case-study media, and
