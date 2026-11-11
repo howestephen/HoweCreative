@@ -20,6 +20,8 @@ work; it is not merged and, since 2 November 2026, not deployed.
 
 Open:
 
+- **Next:** the CV prints on three pages, not two, and the redesign waits for
+  a direction: [handoff](handoffs/2026-11-11-cv-two-pages-and-redesign.md).
 - Captions for the 11 narrated videos (A1 below) wait for Stephen's proofread
   on `fix/video-captions`.
 - Decide on the 15 images the September image review marked CUT.
