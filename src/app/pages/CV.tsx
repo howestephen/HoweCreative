@@ -74,8 +74,8 @@ const PROJECTS = [
 ] as const;
 
 // Earlier roles, newest first. Set as a titled list rather than a run-on
-// sentence so the block reads as its own entry on screen and after a print
-// page break.
+// sentence so the block reads as its own entry. Two columns on screen, one
+// in print, where the full titles would otherwise wrap.
 const EARLIER_EXPERIENCE = [
   { role: "2nd Line Support Technician & website redesign", company: "Qtac Solutions", dates: "2014 - 2016" },
   { role: "Web & Social Media Manager (concurrent)", company: "Burger Theory", dates: "2012 - 2016" },
