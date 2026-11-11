@@ -15,7 +15,7 @@ function buildMetrics() {
     { value: `${yearsSince(CAREER_START, now)} yrs`, label: "in design & tech" },
     { value: tenureSince(UNCX_START, UNCX_END), label: "lead designer, UNCX" },
     { value: "30", label: "games at Switch Studios" },
-    { value: "500+", label: "videos across roles" },
+    { value: "200+", label: "videos at UNCX" },
   ] as const;
 }
 
@@ -52,13 +52,13 @@ export function Masthead() {
               variants={item}
               className="max-w-[14ch] text-[clamp(2.6rem,6.4vw,5rem)] leading-[1.04]"
             >
-              I build the <em className="italic text-accent">systems</em> that ship the work
+              I turn complex briefs into <em className="italic text-accent">creative work</em>
               <span className="text-accent">.</span>
             </motion.h1>
 
             <motion.p variants={item} className="max-w-xl text-lg leading-relaxed text-muted-foreground">
-              Stephen Howe - Creative Technologist. Two decades across branding, 3D, motion,
-              product, and code. Currently focused on automated AI production pipelines.
+              Stephen Howe - Creative Technologist. I combine design, motion, 3D and
+              AI-assisted development to explore ideas, build prototypes and bring them to life.
             </motion.p>
 
             <motion.div variants={item} className="flex flex-wrap items-center gap-3">

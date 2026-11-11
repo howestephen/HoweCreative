@@ -1,9 +1,9 @@
 ---
 status: active
 author: stephen+claude
-updated: 2026-11-07
-generated_by: claude-opus-5-5
-generated_at: 2026-11-07T20:41Z
+updated: 2026-11-11
+generated_by: claude
+generated_at: 2026-11-11T20:22Z
 generated_from: conversation
 ---
 
@@ -71,6 +71,13 @@ release 29d88e8; a quoted-attribution commit body was refused too). An
 independent audit followed and its findings were fixed. Open:
 
 - No project level is declared, so every main merge or push needs approval.
+- ✓ 11 November 2026: the shared pre-push runner refused every push of site
+  source, because no suite covered it. `scripts/selftest_site_checks.py` now
+  covers every pushed file and runs typecheck, lint and the whole Vitest
+  suite. Checked by hand: it passes on a clean tree and refuses a failing
+  test, a type error, a lint error and a missing npm. The kit's stricter
+  compiler and lint settings (its `check` script) are not adopted: the
+  current code raises about 58 compiler errors under them.
 - Vercel main-only now applies to `main`. The redesign branch's
   `howecreative-particle` project was disconnected from Git on 2 November 2026
   and has no deployments (checked with `vercel list`); it no longer builds on
@@ -130,6 +137,18 @@ independent audit followed and its findings were fixed. Open:
 7. ✓ Merged to `main` on 19 July 2026 (85dd2c7).
 
 ## Production Maintenance
+
+- [x] Website positioning, 10 November 2026 (`codex/creative-positioning`):
+  homepage and search descriptions lead with creative briefs, concepts and
+  prototypes. Systems and automation support that work. Badger Club and
+  Noticia Lingo are labelled personal projects in development in cards and
+  studies; the UNCX app claim distinguishes 10+ concepts from 3-4 shipped
+  apps, matching the CV. Delivered UNCX videos remain separate from the
+  unfinished automation successor. Design, project order and CV unchanged.
+  Rebrand ownership credits the outside studio; the video metric names UNCX.
+  Verified: 157 tests, typecheck, lint and production build pass; independent
+  audit and re-audit complete. Browser visual review not run. Merged to main
+  on 11 November 2026 at Stephen's request.
 
 - [x] Vercel storage, 2 November 2026: the team hit its 10 GB deployment
   storage limit. Each deployment carries about 415 MB of case-study media, and

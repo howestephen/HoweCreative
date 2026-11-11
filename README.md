@@ -6,7 +6,7 @@ updated: 2026-10-12
 
 # Howe Creative - Portfolio v2.0
 
-Stephen Howe’s production portfolio for Creative Technologist, AI Designer, and Design Engineer roles. The active experience is a light-first editorial system that foregrounds shipped outcomes, career evidence, and automated creative pipelines.
+Stephen Howe’s production portfolio for Creative Technologist, AI Designer, and Design Engineer roles. The active experience is a light-first editorial system that foregrounds creative problem-solving, prototypes and delivered work, with systems and automation as supporting strengths. Personal apps in development are identified separately from employer and client work.
 
 ## Stack
 
