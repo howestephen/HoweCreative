@@ -3,7 +3,7 @@ status: active
 author: stephen+claude
 updated: 2026-11-11
 generated_by: claude
-generated_at: 2026-11-11T20:22Z
+generated_at: 2026-11-11T20:45Z
 generated_from: conversation
 ---
 
@@ -20,8 +20,8 @@ work; it is not merged and, since 2 November 2026, not deployed.
 
 Open:
 
-- **Next:** the CV prints on three pages, not two, and the redesign waits for
-  a direction: [handoff](handoffs/2026-11-11-cv-two-pages-and-redesign.md).
+- **Next:** the redesign waits for Stephen's decision on a direction:
+  [handoff](handoffs/2026-11-11-cv-two-pages-and-redesign.md).
 - Captions for the 11 narrated videos (A1 below) wait for Stephen's proofread
   on `fix/video-captions`.
 - Decide on the 15 images the September image review marked CUT.
@@ -164,7 +164,22 @@ independent audit followed and its findings were fixed. Open:
   dates, the full list of earlier roles, a Selected Projects section and grouped
   skills covering local AI, testing, CI and data. Main's print CV fills two A4
   pages; the contact boxes size to their text.
-- [x] CV back to two print pages, 7 November 2026 (`fix/cv-two-pages`): the
+- [x] CV prints on two pages on A4 and US Letter, 11 November 2026
+  (`fix/cv-two-pages`): the 7 November entry below measured A4 only. Chrome's
+  command-line print defaults to Letter, 18mm shorter, where that change still
+  printed three pages, and it was never merged, so the live CV printed three.
+  Print-only changes in `CV.tsx`, no wording or facts touched: tighter print
+  spacing, `@page` size A4, a page break before Selected Projects so its
+  heading cannot strand at the foot of page one, and a white page so the site
+  background no longer prints below the CV. Measured with headless Chrome
+  against the preview of `dist`, every page looked at (Letter before the A4
+  size was set, since Chrome then always saves A4; Letter matters only where
+  a browser ignores the size): page one ends after
+  Earlier Experience with about 11mm spare on Letter and 29mm on A4; page two
+  ends after Languages with about 42mm spare on Letter and 55mm on A4. Safari's
+  print cannot be driven from the command line and is not checked.
+- [x] CV back to two print pages, 7 November 2026 (`fix/cv-two-pages`;
+  superseded by the 11 November entry above, which found it held on A4 only): the
   change below printed to three A4 pages, with Earlier Experience unable to
   split and so leaving 45mm of page one blank. The summary, the UNCX, Switch
   Studios and Howe Creative bullets, the three project bodies, the AI skills

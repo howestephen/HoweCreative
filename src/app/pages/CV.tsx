@@ -197,9 +197,16 @@ const CV_STYLES = `
   }
 
   @media print {
+    /* The site's page colour would otherwise print below the CV. */
+    html,
+    body,
+    #root {
+      background: #fff !important;
+    }
     .cv-page {
       background: #fff !important;
       color: #171717 !important;
+      min-height: 0 !important;
     }
     .cv-page .no-print {
       display: none !important;
@@ -212,7 +219,11 @@ const CV_STYLES = `
     }
   }
 
+  /* A4, so a saved PDF is the same from every Chromium browser. The print
+     spacing is tight enough that it also fits two US Letter pages, which
+     are 18mm shorter, where a browser ignores the size. */
   @page {
+    size: A4;
     margin: 12mm;
   }
 `;
@@ -253,10 +264,10 @@ export function CV() {
       <main className="mx-auto max-w-[780px] px-6 pb-16 pt-20 sm:pt-14 print:max-w-none print:px-0 print:pb-0 print:pt-0">
         {/* Masthead: name set large in the site's display serif, with a heavy
             accent rule beneath it. One strong graphic gesture, no ornament. */}
-        <header className="mb-5 break-inside-avoid">
+        <header className="mb-5 break-inside-avoid print:mb-3">
           <div className="flex flex-wrap items-end justify-between gap-x-6 gap-y-2">
             <div>
-              <h1 className="text-[2.6rem] leading-[1.05] sm:text-5xl">Stephen Howe</h1>
+              <h1 className="text-[2.6rem] leading-[1.05] sm:text-5xl print:text-[2.5rem]">Stephen Howe</h1>
               <p className="mt-2.5 font-mono text-[11px] uppercase tracking-[0.22em] text-[#d90429]">
                 Creative Technologist
               </p>
@@ -274,7 +285,7 @@ export function CV() {
 
           {/* Flex rather than a fixed grid: each box sizes to its own text and
               the boxes grow to share the row, so the email never wraps. */}
-          <div className="cv-contact mt-4 flex flex-wrap gap-2">
+          <div className="cv-contact mt-4 flex flex-wrap gap-2 print:mt-3">
             {[
               { label: "Email", value: "contact@howecreative.co.uk", href: "mailto:contact@howecreative.co.uk" },
               { label: "Web", value: "howecreative.co.uk", href: "https://howecreative.co.uk" },
@@ -286,7 +297,7 @@ export function CV() {
                 href={item.href}
                 target={item.href.startsWith("mailto") ? undefined : "_blank"}
                 rel="noreferrer"
-                className="block flex-auto border border-neutral-200 px-3 py-2 text-left transition-colors"
+                className="block flex-auto border border-neutral-200 px-3 py-2 text-left transition-colors print:py-1.5"
               >
                 <span className="block font-mono text-[11px] uppercase print:text-[10px] tracking-[0.18em] text-neutral-500">
                   {item.label}
@@ -297,19 +308,19 @@ export function CV() {
           </div>
         </header>
 
-        <h2 className={`${SECTION_HEADING} mb-3`}>Professional Summary</h2>
-        <p className="mb-6 border-l-2 border-[#d90429] pl-4 text-[14px] print:mb-5 leading-relaxed text-neutral-800">
+        <h2 className={`${SECTION_HEADING} mb-3 print:mb-2`}>Professional Summary</h2>
+        <p className="mb-6 border-l-2 border-[#d90429] pl-4 text-[14px] leading-relaxed text-neutral-800 print:mb-4 print:leading-snug">
           Creative technologist with 20+ years across brand, 3D, motion, product design and front-end development.
           Since 2021 I've been the sole designer at a multi-chain DeFi protocol, from rebrands to shipped product
           UIs. I build systems, not one-offs: AI-assisted development enforced by agent and Git hooks,
           local and cloud generative video and audio, 3D and motion templates, and human-approved automated publishing.
         </p>
 
-        <section className="mb-6">
+        <section className="mb-6 print:mb-4">
           <h2 className={SECTION_HEADING}>Experience</h2>
 
           {EXPERIENCE.map((job) => (
-            <article key={job.company} className="mt-5 break-inside-avoid">
+            <article key={job.company} className="mt-5 break-inside-avoid print:mt-3">
               <div className="flex flex-wrap items-baseline justify-between gap-x-4">
                 <h3 className="text-base">
                   {job.title} - {job.company}{" "}
@@ -326,7 +337,7 @@ export function CV() {
             </article>
           ))}
 
-          <article className="mt-5 break-inside-avoid">
+          <article className="mt-5 break-inside-avoid print:mt-3">
             <div className="flex flex-wrap items-baseline justify-between gap-x-4">
               <h3 className="text-base">Earlier Experience</h3>
               <p className={ENTRY_META}>2005 - 2016</p>
@@ -347,7 +358,9 @@ export function CV() {
           </article>
         </section>
 
-        <section className="mb-6">
+        {/* Page two starts here in print, so the heading never strands at the
+            foot of page one. */}
+        <section className="mb-6 print:mb-4 print:break-before-page">
           <h2 className={SECTION_HEADING}>Selected Projects</h2>
           {PROJECTS.map((project) => (
             <article key={project.title} className="mt-3 break-inside-avoid">
@@ -360,7 +373,7 @@ export function CV() {
           ))}
         </section>
 
-        <section className="mb-6 break-inside-avoid">
+        <section className="mb-6 break-inside-avoid print:mb-4">
           <h2 className={SECTION_HEADING}>Skills</h2>
           <div className="mt-3 space-y-1.5 text-[12.5px] leading-snug text-neutral-700">
             {SKILLS.map((group) => (
@@ -371,9 +384,9 @@ export function CV() {
           </div>
         </section>
 
-        <section className="mb-6 break-inside-avoid">
+        <section className="mb-6 break-inside-avoid print:mb-4">
           <h2 className={SECTION_HEADING}>Education &amp; Certifications</h2>
-          <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-snug text-neutral-700">
+          <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-snug text-neutral-700 print:space-y-1">
             <li>
               <span className="font-medium text-neutral-900">BSc (Hons) Entertainment Technology, First Class</span>
               {" "}- University of Portsmouth, 2007. The only First Class degree on the course; IBM Prize for Best
