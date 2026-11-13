@@ -37,9 +37,8 @@ Open:
 
 - [S] Delete the old publication-scan token secret under Actions in the GitHub
   repository settings (the hosted publication scan no longer exists).
-- [S] Reconnect the Vercel project to this repository (Vercel, Settings, Git):
-  the repository was recreated on 13 November 2026, so pushes to main do not
-  build until it is connected.
+- [x] Reconnect the Vercel project to this repository: done through the
+  Vercel CLI on 13 November 2026, after the repository was recreated.
 - [S] Complete the shared allowance record (the kit's COST_CONTROLS.md), then
   connect the project in CircleCI: GitHub App, triggers "Pushes to default
   branch" and "Pushes to open non-draft PRs", auto-cancel on.
