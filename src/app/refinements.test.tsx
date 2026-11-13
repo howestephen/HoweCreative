@@ -1,6 +1,6 @@
 import { readdirSync, readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
-import { render, screen } from "@testing-library/react";
+import { cleanup, render, screen } from "@testing-library/react";
 import { createMemoryRouter, RouterProvider, type RouteObject } from "react-router";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
@@ -96,6 +96,27 @@ describe("tablet layout", () => {
     }
   });
 
+  it("shows the UNCX stat as 5 yrs, fixed at the role's end date", () => {
+    vi.useFakeTimers({ toFake: ["Date"] });
+    try {
+      for (const now of ["2026-11-02", "2031-06-15"]) {
+        vi.setSystemTime(new Date(now));
+        renderRoutes("/", [{ path: "/", Component: Masthead }]);
+        const label = screen.getByText("lead designer, UNCX");
+        expect(label.nextElementSibling!.textContent).toBe("5 yrs");
+        cleanup();
+      }
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
+  it("dates the ended UNCX role 2021 - 2026 on the CV", () => {
+    renderRoutes("/cv", [{ path: "/cv", Component: CV }]);
+    expect(screen.getByText(/November 2021 - November 2026 \| Remote/)).toBeTruthy();
+    expect(document.body.textContent).not.toMatch(/Present/);
+  });
+
   it("L2: shows the header brand suffix only from lg", () => {
     renderRoutes("/", [{ path: "/", Component: Layout, children: [{ index: true, element: null }] }]);
     const suffix = screen.getByText(/- Creative Technologist/);
@@ -147,8 +168,8 @@ describe("refinements", () => {
     render(<Capabilities />);
     renderRoutes("/", [{ path: "/", Component: WorkIndex }]);
     const intros = [
-      screen.getByText(/Different outputs, same approach/),
-      screen.getByText(/Every project is shown as a system/),
+      screen.getByText(/Start with the brief/),
+      screen.getByText(/Delivered work for employers and clients/),
     ];
     for (const p of intros) expect(p.className).toMatch(has("mb-12"));
   });

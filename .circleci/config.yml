@@ -1,0 +1,54 @@
+# House CircleCI config (RULES.md 2.14, specs/2026-10-22-circleci-free-tier-handoff.md).
+# Shared hook 30 accepts only approved house configs: change it in
+# _projects-admin, never in a project. Projects adapt through package scripts:
+#   ci:pr    full unit suite, typecheck, lint and production build
+#   ci:main  ci:pr plus the suites that run in a plain Node container (browser and
+#            Docker suites stay local)
+# Lint, typecheck and changed tests already ran at pre-push on the machine.
+# Only the cimg/node version may differ per project.
+# pr-suite runs on medium (10 November 2026; the house CircleCI spec, section 6).
+version: 2.1
+
+jobs:
+  pr-suite:
+    docker:
+      - image: cimg/node:24.22.0
+    resource_class: medium
+    steps:
+      - checkout
+      - run:
+          name: Install
+          command: timeout -k 10s 4m npm ci --no-audit --no-fund
+          no_output_timeout: 4m
+      - run:
+          name: PR suite
+          command: timeout -k 10s 6m npm run ci:pr
+          no_output_timeout: 5m
+
+  main-suite:
+    docker:
+      - image: cimg/node:24.22.0-browsers
+    resource_class: medium
+    steps:
+      - checkout
+      - run:
+          name: Install
+          command: timeout -k 10s 4m npm ci --no-audit --no-fund
+          no_output_timeout: 4m
+      - run:
+          name: Main suite
+          command: timeout -k 10s 16m npm run ci:main
+          no_output_timeout: 5m
+
+workflows:
+  pull-request:
+    when:
+      not:
+        equal: [main, << pipeline.git.branch >>]
+    jobs:
+      - pr-suite
+  main:
+    when:
+      equal: [main, << pipeline.git.branch >>]
+    jobs:
+      - main-suite

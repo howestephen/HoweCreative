@@ -1,0 +1,37 @@
+{
+  "permissions": {
+    "deny": [
+      "mcp__0b48f370-14b7-4679-9834-7c9436240990__*",
+      "mcp__192da12b-97d1-4a34-a6c7-bd2c492c0a13__*",
+      "mcp__1a59c906-04da-521d-bda7-7f71b9f9e01c__*",
+      "mcp__21e8f0e7-e53b-4b3c-bd79-b1e088841746__*",
+      "mcp__59549773-59fa-4914-af4e-e3c20b1c9c4e__*",
+      "mcp__82a6133e-f777-4cfb-81f8-65ff31595783__*",
+      "mcp__833c00f4-8294-4082-942b-6655f77ccb60__*",
+      "mcp__88658ed5-3f0d-43c9-9ab2-2b954fb8fe14__*",
+      "mcp__92b80e76-92cf-45e7-951b-bae3457b8652__*",
+      "mcp__Affinity__*",
+      "mcp__Apify__*",
+      "mcp__Blender__*",
+      "mcp__Claude_Code_iOS_Simulator__*",
+      "mcp__Control_Chrome__*",
+      "mcp__Control_your_Mac__*",
+      "mcp__ElevenLabs_Agents_MCP_App__*",
+      "mcp__Read_and_Write_Apple_Notes__*",
+      "mcp__Shadcn_UI__*",
+      "mcp__a2e96072-779d-47be-bd77-d8dfc226cc0f__*",
+      "mcp__aba78a4f-f07f-43ad-a27a-0251acf89961__*",
+      "mcp__b4f26039-351c-432f-9a36-aba54389d5d3__*",
+      "mcp__bace16ee-7e10-4fe2-8980-0de6cacef27b__*",
+      "mcp__computer-use__*",
+      "mcp__de738926-03f3-4f74-aa82-bc53e64101aa__*",
+      "mcp__e07a3a2e-f512-4b9e-b908-51e1440c54f0__*",
+      "mcp__e3d0f960-4a29-4469-af05-26cc65eac13f__*",
+      "mcp__fa583a6a-0e0e-4ae8-8c5c-0d44ab26b685__*",
+      "mcp__plugin_huggingface-skills_huggingface-skills__*",
+      "mcp__plugin_supabase_supabase__*",
+      "mcp__vercel__*",
+      "mcp__vp0__*"
+    ]
+  }
+}

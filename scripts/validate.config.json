@@ -40,8 +40,8 @@
     "^docs/reviews/2026-09-07-design-reset/"
   ],
   "top_dirs": [
+    ".circleci",
     ".claude",
-    ".github",
     "_archive",
     "api",
     "docs",
@@ -49,5 +49,65 @@
     "public",
     "scripts",
     "src"
-  ]
+  ],
+  "deliverables": {
+    "always_allowed": [
+      "ROADMAP.md",
+      "package-lock.json",
+      "pnpm-lock.yaml"
+    ]
+  },
+  "code_checks": {
+    "checks": {
+      "typecheck-lint": {
+        "command": [
+          "npm",
+          "run",
+          "check"
+        ],
+        "covers": [
+          "src/**",
+          "api/**",
+          "vite.config.ts",
+          "vitest.config.ts"
+        ],
+        "config": [
+          "tsconfig*.json",
+          "eslint.config.*",
+          "package.json"
+        ],
+        "runtime": [
+          "node"
+        ],
+        "required": true
+      },
+      "tests": {
+        "command": [
+          "npm",
+          "test",
+          "--",
+          "--maxWorkers=2"
+        ],
+        "covers": [
+          "src/**",
+          "api/**",
+          "public/**",
+          "site-content.json",
+          "index.html",
+          "vercel.json",
+          "vite.config.ts",
+          "vitest.config.ts"
+        ],
+        "config": [
+          "tsconfig*.json",
+          "eslint.config.*",
+          "package.json"
+        ],
+        "runtime": [
+          "node"
+        ],
+        "required": true
+      }
+    }
+  }
 }

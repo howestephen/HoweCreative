@@ -2,20 +2,20 @@ import { ArrowUpRight } from "lucide-react";
 import { motion } from "motion/react";
 
 import { siteProfile } from "../data/portfolio";
-import { CAREER_START, UNCX_START, tenureSince, yearsSince } from "../lib/tenure";
+import { CAREER_START, UNCX_END, UNCX_START, tenureSince, yearsSince } from "../lib/tenure";
 import { PlotterMark } from "./PlotterMark";
 
 // Every figure names where it came from: a stat with no employer attached
 // reads like current work, which is misleading across a 21-year career.
-// The two duration figures are computed from real start dates so they stay
-// correct without anyone editing this file.
+// The two duration figures are computed from real dates: the career figure
+// keeps counting, the UNCX one is fixed by the role's end date.
 function buildMetrics() {
   const now = new Date();
   return [
     { value: `${yearsSince(CAREER_START, now)} yrs`, label: "in design & tech" },
-    { value: tenureSince(UNCX_START, now), label: "lead designer, UNCX" },
+    { value: tenureSince(UNCX_START, UNCX_END), label: "lead designer, UNCX" },
     { value: "30", label: "games at Switch Studios" },
-    { value: "500+", label: "videos across roles" },
+    { value: "200+", label: "videos at UNCX" },
   ] as const;
 }
 
@@ -52,13 +52,13 @@ export function Masthead() {
               variants={item}
               className="max-w-[14ch] text-[clamp(2.6rem,6.4vw,5rem)] leading-[1.04]"
             >
-              I build the <em className="italic text-accent">systems</em> that ship the work
+              I turn complex briefs into <em className="italic text-accent">creative work</em>
               <span className="text-accent">.</span>
             </motion.h1>
 
             <motion.p variants={item} className="max-w-xl text-lg leading-relaxed text-muted-foreground">
-              Stephen Howe - Creative Technologist. Two decades across branding, 3D, motion,
-              product, and code. Currently focused on automated AI production pipelines.
+              Stephen Howe - Creative Technologist. I combine design, motion, 3D and
+              AI-assisted development to explore ideas, build prototypes and bring them to life.
             </motion.p>
 
             <motion.div variants={item} className="flex flex-wrap items-center gap-3">

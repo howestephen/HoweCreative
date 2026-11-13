@@ -15,6 +15,10 @@ assets-archive/
 
 # Local agent tool state and logs
 .claude/hooks-state/
+**/.claude/scheduled_tasks.lock
+**/.claude/worktrees/
+.remember/
+**/.codex/config.toml
 .playwright-mcp/
 
 # agent scratch space: hook 8 ignores leftovers here; empty it when done

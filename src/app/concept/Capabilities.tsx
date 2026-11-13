@@ -2,32 +2,32 @@ import { motion } from "motion/react";
 
 const PRACTICES = [
   {
-    title: "Brand & product systems",
+    title: "Brand & product design",
     points: [
-      "Two full company rebrands, shipped end to end",
+      "UNCX: designed the 2022 rebrand; directed a studio on the 2024 update",
       "Design systems with variable-driven Figma components",
-      "Product UI from wireframe to production across 10+ apps",
-      "Prototypes that close the gap between spec and build",
+      "Wireframes and UI concepts for 10+ UNCX apps; 3-4 shipped",
+      "Interactive prototypes to evaluate ideas before development",
     ],
     tools: "Figma · Prototyping · UI/UX",
   },
   {
-    title: "3D, motion & media pipelines",
+    title: "3D, motion & art direction",
     points: [
-      "Templated Cinema 4D, Redshift and After Effects production",
-      "500+ videos across launches, tutorials, games, and education",
+      "Quiver launch films from script and art direction to final edit",
+      "200+ videos at UNCX across launches, explainers and education",
       "Reusable scene, camera, and material libraries",
-      "Launch-cadence output without brand drift",
+      "Experimentation with generative imagery, compositing and sound",
     ],
     tools: "Cinema 4D · Redshift · After Effects",
   },
   {
-    title: "Automation & AI-assisted builds",
+    title: "Prototypes & creative tools",
     points: [
-      "Automated media pipelines: live data to templated render to human approval to X",
-      "Rate-limited data layers that run all day on free-tier APIs",
-      "Telegram approval flows that cut a post to one tap or a quick edit",
-      "AI-assisted build loops: spec, phased roadmap, build and QA gates",
+      "Personal apps in development: Badger Club and Noticia Lingo",
+      "Product design and working builds using AI-assisted development",
+      "Solana Diary: designed posts from live data, approved by me before publishing",
+      "Reusable tools and automation that support the creative work",
     ],
     tools: "Claude Code · Codex · Node.js",
   },
@@ -44,8 +44,8 @@ export function Capabilities() {
           </span>
         </div>
         <p className="mb-12 max-w-xl text-sm leading-relaxed text-muted-foreground">
-          Different outputs, same approach: reduce the problem to inputs, constraints, and
-          outputs - then build the repeatable machine.
+          Start with the brief, explore what could work, then make it tangible.
+          Design, motion, 3D and code give me different ways to solve the problem.
         </p>
 
         <div className="grid gap-px border border-border bg-border lg:grid-cols-3">

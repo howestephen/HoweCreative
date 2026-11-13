@@ -2,13 +2,14 @@
 status: active
 author: stephen+claude
 project_kind: product
-updated: 2026-10-12
+updated: 2026-11-13
 ---
 
 # ONBOARDING
 
 ## Project
 
+- **Current Level:** L2 (public portfolio; no accounts or billing)
 - Name: `HoweCreative`
 - Type: Vite + React single-page portfolio with Vercel serverless contact endpoint
 - Origin: initially pulled from a generic Figma export, then progressively refactored into a real production portfolio
@@ -61,6 +62,9 @@ use the server-only variable in client mode.
 | `npm run build` | Production build (output to `dist/`) |
 | `npm run typecheck` | TypeScript strict check (no emit) |
 | `npm run lint` | ESLint check across `src/` and `api/` |
+| `npm run check` | Typecheck then lint (the commit gate's code check) |
+| `npm run ci:pr` | Typecheck, lint, tests and build (CircleCI on pull requests) |
+| `npm run ci:main` | Same as `ci:pr` (CircleCI on main) |
 | `npm test` | Run Vitest tests |
 
 ## Active Content Areas
@@ -79,6 +83,7 @@ use the server-only variable in client mode.
 
 - Primary content source: `site-content.json`
 - Local media source: `/public/case-studies/*`
-- Deployment target: Vercel (`vercel.json` with `dist` output)
+- Deployment target: Vercel (`vercel.json` with `dist` output); only `main` builds (`git.deploymentEnabled`)
+- Code checks: declared as `code_checks` in `scripts/validate.config.json`; the project keeps its own `tsconfig.json` and `eslint.config.js`, not the kit's stricter ones (ROADMAP, retrofit entry)
 - `docs/plans/` records design history; `ROADMAP.md` is the current queue
 - README documents ownership for career facts repeated across JSON, homepage, and CV copy

@@ -180,7 +180,7 @@ export function ContactFoot() {
                   <input
                     type="text"
                     name="projectType"
-                    placeholder="e.g. Creative technologist role, brand system, pipeline build"
+                    placeholder="e.g. Creative technologist role, product concept, motion project"
                     value={projectType}
                     onChange={(e) => setProjectType(e.target.value)}
                     className={`${inputClasses} placeholder:text-muted-foreground/60`}
@@ -244,7 +244,7 @@ export function ContactFoot() {
         <footer className="mt-20 flex flex-col justify-between gap-3 border-t border-border pt-6 pb-2 meta-mono text-muted-foreground md:flex-row">
           <span>© 2026 Stephen Howe · Norwich, UK - remote worldwide</span>
           <a href="#work" className="-my-3 flex min-h-11 items-center transition-colors hover:text-accent">
-            This site was built by my agentic pipeline - the case study is above ↑
+            I designed and built this site with AI-assisted tools - read the case study ↑
           </a>
         </footer>
       </div>

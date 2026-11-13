@@ -13,6 +13,11 @@ indent_size = 2
 [*.py]
 indent_size = 4
 
+[*.ps1]
+# Windows PowerShell 5.1 reads a UTF-8 script without a BOM as ANSI
+# (the Windows machine profile, BOM rules).
+charset = utf-8-bom
+
 [*.md]
 # Markdown uses trailing double-space for hard breaks
 trim_trailing_whitespace = false

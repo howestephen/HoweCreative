@@ -1,7 +1,10 @@
 ---
 status: active
 author: stephen+claude
-updated: 2026-10-30
+updated: 2026-11-13
+generated_by: claude
+generated_at: 2026-11-11T21:30Z
+generated_from: conversation
 ---
 
 # ROADMAP
@@ -12,11 +15,13 @@ updated: 2026-10-30
 
 Milestone 3.0, the career-focused editorial redesign, shipped to `main` on
 19 July 2026 (merge 85dd2c7). Work now goes to `main` as maintenance.
-`codex/creative-technologist-portfolio` stays a separate, live demonstration
-site and is not merged.
+`codex/creative-technologist-portfolio` stays a separate branch for further
+work; it is not merged and, since 2 November 2026, not deployed.
 
 Open:
 
+- **Next:** the redesign waits for Stephen's decision on a direction:
+  [handoff](handoffs/2026-11-11-cv-two-pages-and-redesign.md).
 - Captions for the 11 narrated videos (A1 below) wait for Stephen's proofread
   on `fix/video-captions`.
 - Decide on the 15 images the September image review marked CUT.
@@ -27,6 +32,18 @@ Open:
 - At 320px the two CV buttons (about 290px) overflow the 272px column to
   the left, as they did before. Below the masthead the CV controls are out
   of view; they no longer follow the scroll, so they never cover the dates.
+
+## Stephen
+
+- [x] Approve merging `chore/retrofit-2026-11-13` into main. Approved in conversation and merged 13 November.
+- [S] Delete the old publication-scan token secret under Actions in the GitHub
+  repository settings (the hosted publication scan no longer exists).
+- [S] Complete the shared allowance record (the kit's COST_CONTROLS.md), then
+  connect the project in CircleCI: GitHub App, triggers "Pushes to default
+  branch" and "Pushes to open non-draft PRs", auto-cancel on.
+- [S] Enable Dependabot alerts on the repository (the project is at L2).
+- [S] Check the Vercel dashboard for Git settings, deploy hooks and CLI routes
+  and list them in this entry.
 
 ## Accessibility and layout refinements (2026-10-13)
 
@@ -45,42 +62,51 @@ small refinements. Brief, measurements and log:
   `fix/video-captions`, waiting for Stephen's proofread. The other 11 videos
   with an audio track carry music only.
 
-## CI scope (merged 2026-10-30)
+## House kit retrofit (13 November 2026)
 
-CI skips documentation-only changes (no check reads Markdown) and a pull
-request runs only the Vitest files related to what it changed
-(`vitest --changed`); changes to files tests read from disk (`public/`,
-`vercel.json`, `index.html`, `src/styles/`, the lockfile) run every test,
-as does the merge to main. Locally,
-`src/app/fonts.test.ts` fails until `npm install` adds the missing
-`@fontsource-variable/fraunces`; CI installs fresh.
+Branch `chore/retrofit-2026-11-13`, cut from main (0e525fa), kit source commit
+a82c9a8. The earlier CI-scope and October retrofit notes are in
+[_archive/2026-11-13-roadmap-ci-and-october-retrofit.md](_archive/2026-11-13-roadmap-ci-and-october-retrofit.md).
 
-## House kit retrofit (2026-10-12)
-
-Brought in line with the `ai-product-base` kit on `chore/october-rules`:
-autonomy, read order, audit and handoff rules in CLAUDE.md; house frontmatter
-on every document; `scripts/validate.py`, `bootstrap.sh` and the structure
-config; Vercel builds main only; CI made read-only with a timeout. Probes in a
-disposable copy confirmed commits refuse an unlisted document, a credential,
-quoted private conversation and a personal email, and pre-push refuses a
-credential added and removed across two commits (run 2026-10-12 against hook
-release 29d88e8; a quoted-attribution commit body was refused too). An
-independent audit followed and its findings were fixed. Open:
-
-- No project level is declared, so every main merge or push needs approval.
-- Vercel main-only now applies to `main`. Do not carry it to
-  `codex/creative-technologist-portfolio`: Stephen keeps that branch live as
-  the demonstration site (`howecreative-particle`), so it must keep building
-  on push (decided 2026-10-12). Dashboard, CLI and deploy-hook routes are not
-  yet inventoried.
-- Both long-lived branches carry the same agent guidance (listed under
-  Branches in CLAUDE.md). ONBOARDING.md matches bar one redesign-specific
-  project line.
-- The GitHub publication check needs a `PUBLICATION_KIT_TOKEN` secret first.
-- CI runtime was 52s to 62s on the last three PR runs; dated account headroom, actionlint
-  and hosted acceptance are not yet recorded.
-- Codex and Cursor wiring, and which agent-host events fire, are unverified.
-- ✓ `.claude/settings.local.json` is no longer tracked (merged 30 October 2026).
+- Rules: CLAUDE.md keeps its local rules and adds the canonical autonomy lines;
+  CONVENTIONS.md is the kit's current text; ONBOARDING.md declares L2 (live
+  portfolio, no accounts or billing). Deliverables and `code_checks` are
+  declared in `scripts/validate.config.json`.
+- Code tooling: `check`, `ci:pr` and `ci:main` scripts, the kit's
+  `.circleci/config.yml` unchanged, `selftest_code_quality.py` and the evidence
+  gate. `.github/workflows/ci.yml` (the old GitHub Actions copy of the same
+  checks) and `scripts/selftest_site_checks.py` (the old pre-push suite) are
+  replaced by them. Until CircleCI is connected, pull requests have no hosted
+  check; the commit gate's evidence is the only automatic one.
+- Vercel: main's `vercel.json` already held `git.deploymentEnabled`
+  `{"**": false, "main": true}` (the only consumed config); `.vercel/` holds
+  the project link only. Hosted acceptance is not observed. Dashboard, CLI and
+  deploy-hook routes are not inventoried.
+- Justified exceptions: the project keeps its own `tsconfig.json`,
+  `eslint.config.js` and dependency ranges. The kit's compiler and lint
+  settings (`noUncheckedIndexedAccess`, `exactOptionalPropertyTypes`,
+  `skipLibCheck: false`, `strictTypeChecked`, arrow-only functions) were tried
+  on a disposable copy and the code raises 74 compiler errors and about 300
+  lint errors (non-null assertions, `func-style`, unsafe `any` from JSON), so
+  `check` runs the project's own typecheck and lint; no existing check was
+  weakened; `no-explicit-any` is now an error (it was a warning, and the
+  code has no violations).
+- [ ] Bring the code to the kit's strict settings and swap the kit's
+  `tsconfig.json`, `eslint.config.mjs` and `check-code-quality.mjs` in.
+- [ ] Heavy media (rule 5a, no file over 5 MB under `public/`): 19 tracked
+  files, about 300 MB, all MP4s under `public/case-studies/` (uncx-academy 8,
+  uncx-video-system 6, quiver 4, uncx-rebrand 1; largest 31 MB). Move them to
+  object storage or a media host and reference by URL; never delete them.
+- [ ] Open from before: CI runtime headroom and hosted acceptance are not
+  recorded; Codex and Cursor wiring and which agent-host events fire are
+  unverified.
+- Live branches that still have to merge main: `claude/brief-machine`,
+  `claude/showreel-redesign`, `codex/creative-technologist-portfolio`,
+  `fix/video-captions`. Once Stephen approves merging
+  `chore/retrofit-2026-11-13` into main, each live branch runs
+  `git pull --no-rebase origin main` before its next commit, resolves
+  conflicts (likely in ROADMAP.md, CLAUDE.md and `scripts/validate.config.json`)
+  and runs `python3.13 scripts/validate.py`.
 
 ## Goal
 
@@ -126,6 +152,55 @@ independent audit followed and its findings were fixed. Open:
 
 ## Production Maintenance
 
+- [x] Website positioning, 10 November 2026 (`codex/creative-positioning`):
+  homepage and search descriptions lead with creative briefs, concepts and
+  prototypes. Systems and automation support that work. Badger Club and
+  Noticia Lingo are labelled personal projects in development in cards and
+  studies; the UNCX app claim distinguishes 10+ concepts from 3-4 shipped
+  apps, matching the CV. Delivered UNCX videos remain separate from the
+  unfinished automation successor. Design, project order and CV unchanged.
+  Rebrand ownership credits the outside studio; the video metric names UNCX.
+  Verified: 157 tests, typecheck, lint and production build pass; independent
+  audit and re-audit complete. Browser visual review not run. Merged to main
+  on 11 November 2026 at Stephen's request.
+
+- [x] Vercel storage, 2 November 2026: the team hit its 10 GB deployment
+  storage limit. Each deployment carries about 415 MB of case-study media, and
+  every old one was kept. The redesign's site is taken offline (all its
+  deployments removed, project disconnected from Git), main keeps only its live
+  deployment (both checked with `vercel list`), and main's `vercel.json` no
+  longer routes any path to the redesign's project; a test keeps rewrites
+  local.
+
+- [x] CV aligned across main and the redesign branch, 2 November 2026: month
+  dates, the full list of earlier roles, a Selected Projects section and grouped
+  skills covering local AI, testing, CI and data. Main's print CV fills two A4
+  pages; the contact boxes size to their text.
+- [x] CV fills two A4 pages, ordered for the target roles, 11 November 2026
+  (`fix/cv-layout`). Two earlier attempts fitted two pages by removing things:
+  7 November condensed the wording, and the first 11 November fix forced a
+  page break that left 29mm and 55mm blank. The cause was order, not length:
+  the earlier-roles block cannot split and sat on the page boundary. Now page
+  one is summary, Selected Projects and Skills (the evidence for the creative
+  technologist title); page two is Experience, Education and Languages. The
+  full wording from before 7 November is back. Measured from a Chrome A4 PDF,
+  both pages looked at: about 12mm spare at the foot of each. `@page` is A4;
+  a browser that ignores it and prints US Letter would run to a third page.
+  Safari's print is not checked.
+- [x] CV projects and earlier roles, 7 November 2026 (`fix/cv-projects`):
+  Earlier Experience is a titled entry with a dated two-column list instead of
+  a grey run-on paragraph. Selected Projects is Quiver, Solana Diary and the
+  AI development framework (hooks, templates, audit agents, CI), taken from
+  the case studies and `_projects-admin`; the two UNCX bullets they repeated
+  are removed. Dev-workflow "gates" wording now names the hooks. The skills
+  list keeps Supabase, row-level security, OAuth, Sentry, Playwright and
+  Next.js; the Badger Club and Noticia Lingo studies evidence them, though no
+  CV project line now does. Not yet previewed or printed: Tailscale was
+  stopped, so the preview controller was unreachable, and the two-page print
+  length above is unconfirmed. The redesign branch's CV is not updated.
+- [x] CV summary, 2 November 2026: the UNCX tenure line read "the last four
+  years"; it now reads five years, matching November 2021 to November 2026. The homepage UNCX stat now
+  stops at that end date and reads 5 yrs; the CV role dates read 2021 - 2026.
 - ✓ UNCX Rebrand and Academy study banners, 7 October 2026: the card and
   full-width study header share an image, but browsers could keep an older
   full-size copy while fetching new thumbnails. Both image URLs now carry a

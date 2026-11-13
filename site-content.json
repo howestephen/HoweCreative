@@ -4,7 +4,7 @@
     "brandPrefix": "HOWE",
     "brandSuffix": "_CREATIVE",
     "role": "Creative Technologist",
-    "headline": "I design brand, product, and 3D systems - and build the AI pipelines that produce them at scale.",
+    "headline": "I turn complex briefs into prototypes and creative work, combining design, motion, 3D and AI-assisted development.",
     "summary": "This portfolio was designed and built with Figma Make, Codex, and Claude Code - driven by a custom prompt system that walks a phased roadmap, executing build and QA tasks in an iterative loop.",
     "navVersion": "v2.0",
     "githubUrl": "https://github.com/howestephen",
@@ -676,8 +676,8 @@
         "category": "Product System / Operational Platform",
         "year": "2026",
         "status": "In Development",
-        "shortDescription": "Full-stack badge tracking platform with dark/light themes, role-based dashboards, Supabase backend, and Resend email integration.",
-        "fullDescription": "A badge-tracking app for group leaders that I am designing and building solo. Leaders manage progress and messages; families see progress and contact the leader without an account.",
+        "shortDescription": "Personal project in development: a badge-tracking app for group leaders, designed and built with AI-assisted tools.",
+        "fullDescription": "A personal project in development: a badge-tracking app for group leaders that I am designing and building with AI-assisted tools. Leaders manage progress and messages; families see progress and contact the leader without an account.",
         "tags": [
           "React",
           "Next.js",
@@ -778,7 +778,7 @@
         "overlaySections": [
           {
             "title": "Context and role",
-            "body": "A personal product, designed and built end to end: product design, React frontend, Supabase data model, Google authentication, Resend email and Cloudflare security, using AI-assisted development tools."
+            "body": "A personal product still in development, covering: product design, React frontend, Supabase data model, Google authentication, Resend email and Cloudflare security, using AI-assisted development tools."
           },
           {
             "title": "Problem",
@@ -1006,7 +1006,7 @@
           },
           {
             "title": "Outcome",
-            "body": "A production system of Cinema 4D scene templates, After Effects project structures, Redshift material libraries and thumbnail templates, used for 200+ videos at UNCX Network, including event films such as EthCC 2025 and Avalanche Summit. Its successor automates generation, text and voiceover, with 3D in progress."
+            "body": "A production system of Cinema 4D scene templates, After Effects project structures, Redshift material libraries and thumbnail templates, used for 200+ videos at UNCX Network, including event films such as EthCC 2025 and Avalanche Summit. A separate automation successor is still in development; it is not the system used to deliver those videos."
           },
           {
             "title": "What I learned",
@@ -1171,8 +1171,8 @@
         "category": "Product System / Operational Platform",
         "year": "2026",
         "status": "In Development",
-        "shortDescription": "Language learning app with an AI-assisted classroom, real news articles, Google authentication, Supabase backend, and structured quiz flows.",
-        "fullDescription": "A language-learning app that turns real news into lessons, starting with English speakers learning Spanish. I am designing and building it solo, planning early for multiple languages, legal launch and scale.",
+        "shortDescription": "Personal project in development: a language-learning app that turns real news into interactive lessons, designed and built with AI-assisted tools.",
+        "fullDescription": "A personal project in development: a language-learning app that turns real news into lessons, starting with English speakers learning Spanish. I am designing and building it solo, planning early for multiple languages, legal launch and scale.",
         "tags": [
           "React",
           "Next.js",

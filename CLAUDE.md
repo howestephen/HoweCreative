@@ -1,27 +1,37 @@
 ---
 status: active
 author: stephen+claude
-updated: 2026-10-12
+updated: 2026-11-13
 ---
 
 # Project rules for AI agents
 
 These are standing instructions from Stephen. They are not suggestions.
 
-Read [CONVENTIONS.md](CONVENTIONS.md) on every task: it holds the house
-standards from the `ai-product-base` kit (Git, clean-up, audit, code
-baseline). This file wins where they differ. No level is declared, so every
-main merge or push needs Stephen's approval.
+Read [CONVENTIONS.md](CONVENTIONS.md) on every task, documentation-only work
+included: it holds the house standards from the `ai-product-base` kit (Git,
+clean-up, rigour, code baseline, CI). This file wins where they differ, and
+each difference is stated here. `CLAUDE.md` governs every agent; `AGENTS.md`
+is a pointer only, never another rules file.
 
 ## Autonomy
 
-The house defaults (commits, folders, deletion, subagents) are in
-CONVENTIONS.md. These lines tighten them here:
+The house defaults (commits, folders, deletion, spending, previews) are in
+CONVENTIONS.md. These lines tighten or add to them here:
 
-- Main: no level is declared, so every main merge or push needs Stephen's
-  approval, per instance. Work on a feature branch and push it immediately.
+- Level: L2, declared in ONBOARDING.md (live portfolio, no accounts or
+  billing). Every main merge or push needs Stephen's approval, per instance,
+  through the client's approve prompt. Work on a feature branch and push it
+  immediately.
 - The folder lock is `top_dirs` in `scripts/validate.config.json`.
 - Media is archived, never deleted (see Assets).
+- Subagents run in combination, capped by tier: one top-tier, two Opus, four
+  Sonnet or below. Use the cheapest tier that fits and never delegate work a
+  command or direct read can do. Follow RULES 2.1 and the installed guard.
+- `ROADMAP.md` carries the `## Stephen` list of `[S]` owner actions; every
+  task ends by bringing it up to date (CONVENTIONS.md, owner-action list).
+- Defects met on the way in this project's code are fixed in the same work;
+  a defect in the house hooks or kit goes to `_projects-admin`.
 
 ## Read in this order
 
@@ -33,9 +43,9 @@ CONVENTIONS.md. These lines tighten them here:
 
 ## Done means audited
 
-Before a task is called done, an independent agent audits the change
-adversarially for bugs, broken code and overclaims; fix its findings and
-re-audit.
+This project tightens CONVENTIONS.md's rigour tiers: before a task is called
+done, an independent agent audits the change adversarially for bugs, broken
+code and overclaims, whatever its size. Fix its findings and re-audit.
 
 ## Handoffs
 
@@ -74,10 +84,10 @@ Round 3 escalates to Stephen.
 - Keep exactly two long-lived branches: `main` and the single active redesign
   branch. Retire merged or superseded branches immediately; tag anything worth
   keeping instead of leaving a branch.
-- Both stay live. `codex/creative-technologist-portfolio` is the demonstration
-  site (`howecreative-particle`) and builds on every push: the one exception to
-  the Vercel build policy in CONVENTIONS.md. Never give it main's `git`
-  build setting.
+- Only `main` is live. `codex/creative-technologist-portfolio` is kept for
+  further work but not deployed: the `howecreative-particle` Vercel project is
+  disconnected from Git (2 November 2026), and main does not route any path to
+  it. Reconnecting it is Stephen's call.
 - Both branches carry the same agent guidance (this file, CONVENTIONS.md,
   AGENTS.md, handoffs/TEMPLATE.md, `scripts/validate*`, `.claude/launch.json`).
   Change it on both in the same task.
@@ -85,6 +95,11 @@ Round 3 escalates to Stephen.
 ## Verification
 
 - Before any commit: `npm run typecheck && npm test && npm run lint && npm run build`.
+- The commit gate reads evidence for the `code_checks` in
+  `scripts/validate.config.json` (typecheck and lint, tests). Run
+  `python3.13 scripts/selftest_code_quality.py --evidence` before committing
+  code; matching evidence is reused. CircleCI runs `npm run ci:pr` on pull
+  requests and `npm run ci:main` on main once Stephen connects it (ROADMAP).
 - The preview runs through the house preview controller (`vite preview` of
   `dist` on port 5175): `python3.13 <repos>/_projects-admin/scripts/project_control.py start`
   from this repository, after `npm run build`. Share the Tailscale link its
