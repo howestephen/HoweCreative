@@ -43,6 +43,8 @@ Open:
 - [S] Enable Dependabot alerts on the repository (the project is at L2).
 - [S] Check the Vercel dashboard for Git settings, deploy hooks and CLI routes
   and list them in this entry.
+- [S] Decide the future of `codex/creative-technologist-portfolio`: retire
+  or tag it, or have its agent guidance brought up to main's.
 
 ## Accessibility and layout refinements (2026-10-13)
 
@@ -100,9 +102,12 @@ a82c9a8; merged to main on 13 November 2026 with Stephen's approval
 - [ ] Open from before: CI runtime headroom and hosted acceptance are not
   recorded; Codex and Cursor wiring and which agent-host events fire are
   unverified.
-- Live branches that still have to merge main: none. Each one ran
-  `git pull --no-rebase origin main` on 13 November 2026, resolved its
-  conflicts and passed `python3.13 scripts/validate.py`.
+- Live branches merged with main on 13 November 2026 and validated:
+  `claude/brief-machine`, `claude/showreel-redesign` (both local only) and
+  `fix/video-captions`. Not merged: `codex/creative-technologist-portfolio`
+  is a separate site (142 commits ahead, 161 behind) and the merge raises
+  40 conflicts, most in site source; it waits for Stephen's redesign
+  decision.
 
 ## Goal
 
