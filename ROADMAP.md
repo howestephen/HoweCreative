@@ -1,7 +1,7 @@
 ---
 status: active
 author: stephen+claude
-updated: 2026-11-11
+updated: 2026-11-13
 generated_by: claude
 generated_at: 2026-11-11T21:30Z
 generated_from: conversation
@@ -33,6 +33,18 @@ Open:
   the left, as they did before. Below the masthead the CV controls are out
   of view; they no longer follow the scroll, so they never cover the dates.
 
+## Stephen
+
+- [S] Approve merging `chore/retrofit-2026-11-13` into main.
+- [S] Delete the old publication-scan token secret under Actions in the GitHub
+  repository settings (the hosted publication scan no longer exists).
+- [S] Complete the shared allowance record (the kit's COST_CONTROLS.md), then
+  connect the project in CircleCI: GitHub App, triggers "Pushes to default
+  branch" and "Pushes to open non-draft PRs", auto-cancel on.
+- [S] Enable Dependabot alerts on the repository (the project is at L2).
+- [S] Check the Vercel dashboard for Git settings, deploy hooks and CLI routes
+  and list them in this entry.
+
 ## Accessibility and layout refinements (2026-10-13)
 
 A review of live main at 390, 768, 834, 1024, 1280 and 1440 found one WCAG A
@@ -50,51 +62,50 @@ small refinements. Brief, measurements and log:
   `fix/video-captions`, waiting for Stephen's proofread. The other 11 videos
   with an audio track carry music only.
 
-## CI scope (merged 2026-10-30)
+## House kit retrofit (13 November 2026)
 
-CI skips documentation-only changes (no check reads Markdown) and a pull
-request runs only the Vitest files related to what it changed
-(`vitest --changed`); changes to files tests read from disk (`public/`,
-`vercel.json`, `index.html`, `src/styles/`, the lockfile) run every test,
-as does the merge to main. Locally,
-`src/app/fonts.test.ts` fails until `npm install` adds the missing
-`@fontsource-variable/fraunces`; CI installs fresh.
+Branch `chore/retrofit-2026-11-13`, cut from main (0e525fa), kit source commit
+a82c9a8. The earlier CI-scope and October retrofit notes are in
+[_archive/2026-11-13-roadmap-ci-and-october-retrofit.md](_archive/2026-11-13-roadmap-ci-and-october-retrofit.md).
 
-## House kit retrofit (2026-10-12)
-
-Brought in line with the `ai-product-base` kit on `chore/october-rules`:
-autonomy, read order, audit and handoff rules in CLAUDE.md; house frontmatter
-on every document; `scripts/validate.py`, `bootstrap.sh` and the structure
-config; Vercel builds main only; CI made read-only with a timeout. Probes in a
-disposable copy confirmed commits refuse an unlisted document, a credential,
-quoted private conversation and a personal email, and pre-push refuses a
-credential added and removed across two commits (run 2026-10-12 against hook
-release 29d88e8; a quoted-attribution commit body was refused too). An
-independent audit followed and its findings were fixed. Open:
-
-- No project level is declared, so every main merge or push needs approval.
-- ✓ 11 November 2026: the shared pre-push runner refused every push of site
-  source, because no suite covered it. `scripts/selftest_site_checks.py` now
-  covers every pushed file and runs typecheck, lint and the whole Vitest
-  suite. Checked by hand: it passes on a clean tree and refuses a failing
-  test, a type error, a lint error and a missing npm. The kit's stricter
-  compiler and lint settings (its `check` script) are not adopted: the
-  current code raises about 58 compiler errors under them.
-- Vercel main-only now applies to `main`. The redesign branch's
-  `howecreative-particle` project was disconnected from Git on 2 November 2026
-  and has no deployments (checked with `vercel list`); it no longer builds on
-  push. Dashboard, CLI and deploy-hook routes are not yet inventoried.
-- Both long-lived branches carry the same agent guidance (listed under
-  Branches in CLAUDE.md). ONBOARDING.md matches bar one redesign-specific
-  project line.
-- The GitHub publication check needs a `PUBLICATION_KIT_TOKEN` secret first.
-- CI runtime was 52s to 62s on the last three PR runs; dated account headroom, actionlint
-  and hosted acceptance are not yet recorded.
-- Codex and Cursor wiring, and which agent-host events fire, are unverified.
-- ✓ `.claude/settings.local.json` is no longer tracked (merged 30 October 2026).
-- ✓ Kit update, 2 November 2026 (kit 5840adc): `retrofit-check.py` clean on
-  main, and the redesign branch's CONVENTIONS.md is identical, after the main-push and machine-load rules were refreshed in
-  CONVENTIONS.md and a stale untracked RETROFIT.md copy was removed.
+- Rules: CLAUDE.md keeps its local rules and adds the canonical autonomy lines;
+  CONVENTIONS.md is the kit's current text; ONBOARDING.md declares L2 (live
+  portfolio, no accounts or billing). Deliverables and `code_checks` are
+  declared in `scripts/validate.config.json`.
+- Code tooling: `check`, `ci:pr` and `ci:main` scripts, the kit's
+  `.circleci/config.yml` unchanged, `selftest_code_quality.py` and the evidence
+  gate. `.github/workflows/ci.yml` (the old GitHub Actions copy of the same
+  checks) and `scripts/selftest_site_checks.py` (the old pre-push suite) are
+  replaced by them. Until CircleCI is connected, pull requests have no hosted
+  check; the commit gate's evidence is the only automatic one.
+- Vercel: main's `vercel.json` already held `git.deploymentEnabled`
+  `{"**": false, "main": true}` (the only consumed config); `.vercel/` holds
+  the project link only. Hosted acceptance is not observed. Dashboard, CLI and
+  deploy-hook routes are not inventoried.
+- Justified exceptions: the project keeps its own `tsconfig.json`,
+  `eslint.config.js` and dependency ranges. The kit's compiler and lint
+  settings (`noUncheckedIndexedAccess`, `exactOptionalPropertyTypes`,
+  `skipLibCheck: false`, `strictTypeChecked`, arrow-only functions) were tried
+  on a disposable copy and the code raises 74 compiler errors and about 300
+  lint errors (non-null assertions, `func-style`, unsafe `any` from JSON), so
+  `check` runs the project's own typecheck and lint; no existing check was
+  weakened.
+- [ ] Bring the code to the kit's strict settings and swap the kit's
+  `tsconfig.json`, `eslint.config.mjs` and `check-code-quality.mjs` in.
+- [ ] Heavy media (rule 5a, no file over 5 MB under `public/`): 19 tracked
+  files, about 300 MB, all MP4s under `public/case-studies/` (uncx-academy 8,
+  uncx-video-system 6, quiver 4, uncx-rebrand 1; largest 31 MB). Move them to
+  object storage or a media host and reference by URL; never delete them.
+- [ ] Open from before: CI runtime headroom and hosted acceptance are not
+  recorded; Codex and Cursor wiring and which agent-host events fire are
+  unverified.
+- Live branches that still have to merge main: `claude/brief-machine`,
+  `claude/showreel-redesign`, `codex/creative-technologist-portfolio`,
+  `fix/video-captions`. Once Stephen approves merging
+  `chore/retrofit-2026-11-13` into main, each live branch runs
+  `git pull --no-rebase origin main` before its next commit, resolves
+  conflicts (likely in ROADMAP.md, CLAUDE.md and `scripts/validate.config.json`)
+  and runs `python3.13 scripts/validate.py`.
 
 ## Goal
 
