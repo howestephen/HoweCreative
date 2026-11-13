@@ -34,7 +34,9 @@ export default defineConfig(({ mode, isSsrBuild }) => {
     },
     assetsInclude: ['**/*.svg', '**/*.csv'],
     preview: {
-      allowedHosts: ['localhost'],
+      // Any tailnet host, so the built preview can be reviewed from another
+      // device; no machine's own name is written here.
+      allowedHosts: ['localhost', '.ts.net'],
     },
     build: {
       rollupOptions: {

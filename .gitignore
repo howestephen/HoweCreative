@@ -10,6 +10,15 @@ dist
 # Private source material - never publish
 docs/private/
 
+# Internal working notes stay local only; the repository is public.
+/handoffs/*
+!/handoffs/TEMPLATE.md
+/_archive/
+/docs/plans/
+/docs/reviews/
+/docs/telegram-bot-setup.md
+/CLAUDE.local.md
+
 # Local asset archive - unused project media kept for future redesigns
 assets-archive/
 
