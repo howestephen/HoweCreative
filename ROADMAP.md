@@ -89,7 +89,8 @@ a82c9a8. The earlier CI-scope and October retrofit notes are in
   on a disposable copy and the code raises 74 compiler errors and about 300
   lint errors (non-null assertions, `func-style`, unsafe `any` from JSON), so
   `check` runs the project's own typecheck and lint; no existing check was
-  weakened.
+  weakened; `no-explicit-any` is now an error (it was a warning, and the
+  code has no violations).
 - [ ] Bring the code to the kit's strict settings and swap the kit's
   `tsconfig.json`, `eslint.config.mjs` and `check-code-quality.mjs` in.
 - [ ] Heavy media (rule 5a, no file over 5 MB under `public/`): 19 tracked
