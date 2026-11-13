@@ -8,7 +8,10 @@
     "dev": "vite",
     "lint": "eslint src api",
     "test": "vitest run",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "check": "npm run typecheck && npm run lint",
+    "ci:pr": "npm run typecheck && npm run lint && npm test && npm run build",
+    "ci:main": "npm run ci:pr"
   },
   "dependencies": {
     "@hcaptcha/react-hcaptcha": "^2.2.0",
