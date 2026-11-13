@@ -63,7 +63,8 @@ Round 3 escalates to Stephen.
   built *with* AI tools. Grok was an optional, button-triggered assist.
 - Never invent or aggregate metrics without attribution. Every stat must name
   the job or project it came from (e.g. "30 games shipped at Switch Studios").
-- Do not claim audience/follower numbers for Solana Diary - the reason is in the local rules.
+- Do not claim audience/follower numbers for Solana Diary; the reason is in
+  `CLAUDE.local.md`.
 
 ## Assets
 
