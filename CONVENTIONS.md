@@ -41,7 +41,7 @@ CLAUDE.md's own rules win where they differ, stated explicitly.
 
 - **Spending money needs approval, as an allowance for the job.** Agree the budget with Stephen, then open the allowance with the command the spend gate prints, which he approves; paid operations inside it run without further prompts. When it is used up, stop and report; do not keep retrying poor results. Free services with limits never ask. Never route around the gate with another tool or an unlisted endpoint.
 
-- Push without asking: yes on a branch. Main is signed-off work at every level: every push or merge into main needs Stephen's approval, given through the client's own approve prompt. Where no prompt can appear, ask him in the conversation and stop. From L3 a release to live needs its own approval. Forced pushes, and deleting or overwriting main, are refused.
+- Push without asking: yes on a branch. Below L3, merge and push to main without asking once the project's checks pass. From L3 (Live), every push or merge into main needs Stephen's approval, given through the client's own approve prompt, and every release to live needs its own approval. Where no prompt can appear, ask him in the conversation and stop. Forced pushes, and deleting or overwriting main, are refused at every level.
 
 - **Gate refusals.** Installed gates refuse rather than warn. Take the way through the refusal names; if the refusal is wrong for this input, carry on with other work and report it with its reproduction to _projects-admin's inbox (`<python> "<repos>/_projects-admin/scripts/file_request.py"`). Never disable or route around a gate; a bypass is Stephen's. Verify enforcement per client and machine; documentation is not proof.
 
@@ -74,6 +74,8 @@ CLAUDE.md's own rules win where they differ, stated explicitly.
 - **Shared server controller.** Previews start, stop and report only through `<python> "<repos>/_projects-admin/scripts/project_control.py" status|start|stop` (append the project ID outside its checkout); start reuses the running server and never picks another port. Never launch dev servers, kill listeners or edit Tailscale routes yourself, or add project hooks. Register a new preview's unique ports through the admin workflow first.
 
 - **One live address.** Give Stephen only this project's registered Tailscale link, never localhost or a port you picked; never start a second server or move ports. A server already on the registered port is the live one: use it or restart it on the same port. Creating a project does not register it.
+
+- **Product platform.** A product hosts on Cloudflare (Workers, R2, Hyperdrive) and keeps its data in Neon Postgres, both on paid plans. Vercel and Supabase are not used for products: they stay only for the portfolio and non-commercial tools (Stephen, 13 November 2026).
 
 - **Vercel build policy.** Only main builds automatically; keep the deny-all default, and previews need Stephen's explicit request per branch, never wildcards. Apply `scripts/vercel-main-only.json` before connecting or pushing, as the kit's RETROFIT.md describes, and record exceptions in DECISIONS.md. CLI, API and deploy-hook builds need separate deployment authority.
 
