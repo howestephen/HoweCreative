@@ -21,8 +21,9 @@ CONVENTIONS.md. These lines tighten or add to them here:
 
 - Level: L2, declared in ONBOARDING.md (live portfolio, no accounts or
   billing). Every main merge or push needs Stephen's approval, per instance,
-  through the client's approve prompt. Work on a feature branch and push it
-  immediately.
+  through the client's approve prompt (tighter than the house default for
+  L2). Work on a feature branch; push it only after the Privacy check below
+  shows the push carries website files only.
 - The folder lock is `top_dirs` in `scripts/validate.config.json`.
 - Media is archived, never deleted (see Assets).
 - Subagents run in combination, capped by tier: one top-tier, two Opus, four
