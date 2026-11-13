@@ -14,7 +14,7 @@ docs/private/
 assets-archive/
 
 # Local agent tool state and logs
-.claude/hooks-state/
+**/.claude/hooks-state/
 **/.claude/scheduled_tasks.lock
 **/.claude/worktrees/
 .remember/
@@ -48,3 +48,11 @@ logs/
 tmp/
 .cache/
 .claude/settings.local.json
+
+# Internal working notes stay local only; the repository is public.
+/handoffs/*
+!/handoffs/TEMPLATE.md
+/_archive/
+/docs/plans/
+/docs/reviews/
+/docs/telegram-bot-setup.md

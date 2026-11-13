@@ -75,9 +75,9 @@ That planned service is intended to run separately on Railway and integrate with
 
 Relevant historical planning docs:
 
-- [posting pipeline design](docs/plans/2026-03-24-posting-pipeline-design.md)
-- [posting pipeline implementation](docs/plans/2026-03-24-posting-pipeline-impl.md)
-- [Telegram setup](docs/telegram-bot-setup.md)
+- posting pipeline design (`docs/plans/2026-03-24-posting-pipeline-design.md`, local only)
+- posting pipeline implementation (`docs/plans/2026-03-24-posting-pipeline-impl.md`, local only)
+- Telegram setup (`docs/telegram-bot-setup.md`, local only)
 
 ## Architectural Boundary
 

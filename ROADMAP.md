@@ -21,7 +21,7 @@ work; it is not merged and, since 2 November 2026, not deployed.
 Open:
 
 - **Next:** the redesign waits for Stephen's decision on a direction:
-  [handoff](handoffs/2026-11-11-cv-two-pages-and-redesign.md).
+  handoff (`handoffs/2026-11-11-cv-two-pages-and-redesign.md`, local only).
 - Captions for the 11 narrated videos (A1 below) wait for Stephen's proofread
   on `fix/video-captions`.
 - Decide on the 15 images the September image review marked CUT.
@@ -35,7 +35,6 @@ Open:
 
 ## Stephen
 
-- [x] Approve merging `chore/retrofit-2026-11-13` into main. Approved in conversation and merged 13 November.
 - [S] Delete the old publication-scan token secret under Actions in the GitHub
   repository settings (the hosted publication scan no longer exists).
 - [S] Complete the shared allowance record (the kit's COST_CONTROLS.md), then
@@ -44,13 +43,15 @@ Open:
 - [S] Enable Dependabot alerts on the repository (the project is at L2).
 - [S] Check the Vercel dashboard for Git settings, deploy hooks and CLI routes
   and list them in this entry.
+- [S] Decide the future of `codex/creative-technologist-portfolio`: retire
+  or tag it, or have its agent guidance brought up to main's.
 
 ## Accessibility and layout refinements (2026-10-13)
 
 A review of live main at 390, 768, 834, 1024, 1280 and 1440 found one WCAG A
 failure (no captions on narrated video), four tablet layout faults and eight
 small refinements. Brief, measurements and log:
-[handoffs/2026-10-13-a11y-and-layout-refinements.md](handoffs/2026-10-13-a11y-and-layout-refinements.md).
+`handoffs/2026-10-13-a11y-and-layout-refinements.md` (local only).
 
 - ✓ 30 October 2026: A2, A3, L1 to L4 and R1 to R8 are merged to main. One
   keyboard focus ring site-wide; no on-screen text below 11px; mono text uses
@@ -65,8 +66,9 @@ small refinements. Brief, measurements and log:
 ## House kit retrofit (13 November 2026)
 
 Branch `chore/retrofit-2026-11-13`, cut from main (0e525fa), kit source commit
-a82c9a8. The earlier CI-scope and October retrofit notes are in
-[_archive/2026-11-13-roadmap-ci-and-october-retrofit.md](_archive/2026-11-13-roadmap-ci-and-october-retrofit.md).
+a82c9a8; merged to main on 13 November 2026 with Stephen's approval
+(4e462b6). The earlier CI-scope and October retrofit notes are in
+`_archive/2026-11-13-roadmap-ci-and-october-retrofit.md` (local only).
 
 - Rules: CLAUDE.md keeps its local rules and adds the canonical autonomy lines;
   CONVENTIONS.md is the kit's current text; ONBOARDING.md declares L2 (live
@@ -76,7 +78,7 @@ a82c9a8. The earlier CI-scope and October retrofit notes are in
   `.circleci/config.yml` unchanged, `selftest_code_quality.py` and the evidence
   gate. `.github/workflows/ci.yml` (the old GitHub Actions copy of the same
   checks) and `scripts/selftest_site_checks.py` (the old pre-push suite) are
-  replaced by them. Until CircleCI is connected, pull requests have no hosted
+  replaced by them and removed. Until CircleCI is connected, pull requests have no hosted
   check; the commit gate's evidence is the only automatic one.
 - Vercel: main's `vercel.json` already held `git.deploymentEnabled`
   `{"**": false, "main": true}` (the only consumed config); `.vercel/` holds
@@ -100,13 +102,12 @@ a82c9a8. The earlier CI-scope and October retrofit notes are in
 - [ ] Open from before: CI runtime headroom and hosted acceptance are not
   recorded; Codex and Cursor wiring and which agent-host events fire are
   unverified.
-- Live branches that still have to merge main: `claude/brief-machine`,
-  `claude/showreel-redesign`, `codex/creative-technologist-portfolio`,
-  `fix/video-captions`. Once Stephen approves merging
-  `chore/retrofit-2026-11-13` into main, each live branch runs
-  `git pull --no-rebase origin main` before its next commit, resolves
-  conflicts (likely in ROADMAP.md, CLAUDE.md and `scripts/validate.config.json`)
-  and runs `python3.13 scripts/validate.py`.
+- Live branches merged with main on 13 November 2026 and validated:
+  `claude/brief-machine`, `claude/showreel-redesign` (both local only) and
+  `fix/video-captions`. Not merged: `codex/creative-technologist-portfolio`
+  is a separate site (142 commits ahead, 161 behind) and the merge raises
+  40 conflicts, most in site source; it waits for Stephen's redesign
+  decision.
 
 ## Goal
 
@@ -208,8 +209,8 @@ a82c9a8. The earlier CI-scope and October retrofit notes are in
   current Rebrand marks and Academy corner logo appear consistently.
 - [x] Fix the findings of the October 2026 full audit of both sites: 39
   findings (3 P1, 12 P2, 24 P3) in
-  [the audit findings](docs/reviews/2026-10-03-full-audit.md), packaged as
-  WP-1 to WP-14 in [the audit work plan](docs/plans/2026-10-03-audit-work-plan.md).
+  the audit findings (`docs/reviews/2026-10-03-full-audit.md`, local only), packaged as
+  WP-1 to WP-14 in the audit work plan (`docs/plans/2026-10-03-audit-work-plan.md`, local only).
   Done for main, including the enforced CSP and HSTS headers in `vercel.json`.
   Deferred: WP-5, WP-6 and WP-12 belong to the redesign branch, which Stephen
   keeps separate (owner: Stephen). Decision 5 (no captions) was reversed on
