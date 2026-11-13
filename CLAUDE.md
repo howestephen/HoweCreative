@@ -78,6 +78,11 @@ Round 3 escalates to Stephen.
   metadata, or structured data. Contact goes through the form. The `/cv` page
   is the one deliberate exception (email only).
 - `docs/private/` is git-ignored source material. Never commit or publish it.
+- The GitHub repository is public and holds the website only. Internal
+  working notes stay local and git-ignored (Stephen, 13 November 2026):
+  handoffs (all but `handoffs/TEMPLATE.md`), `docs/plans/`, `docs/reviews/`,
+  `_archive/` and setup notes for other systems. Never commit or push them;
+  check `gh repo view --json visibility` before any push.
 
 ## Branches
 

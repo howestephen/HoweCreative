@@ -21,7 +21,7 @@ work; it is not merged and, since 2 November 2026, not deployed.
 Open:
 
 - **Next:** the redesign waits for Stephen's decision on a direction:
-  [handoff](handoffs/2026-11-11-cv-two-pages-and-redesign.md).
+  handoff (`handoffs/2026-11-11-cv-two-pages-and-redesign.md`, local only).
 - Captions for the 11 narrated videos (A1 below) wait for Stephen's proofread
   on `fix/video-captions`.
 - Decide on the 15 images the September image review marked CUT.
@@ -51,7 +51,7 @@ Open:
 A review of live main at 390, 768, 834, 1024, 1280 and 1440 found one WCAG A
 failure (no captions on narrated video), four tablet layout faults and eight
 small refinements. Brief, measurements and log:
-[handoffs/2026-10-13-a11y-and-layout-refinements.md](handoffs/2026-10-13-a11y-and-layout-refinements.md).
+`handoffs/2026-10-13-a11y-and-layout-refinements.md` (local only).
 
 - ✓ 30 October 2026: A2, A3, L1 to L4 and R1 to R8 are merged to main. One
   keyboard focus ring site-wide; no on-screen text below 11px; mono text uses
@@ -68,7 +68,7 @@ small refinements. Brief, measurements and log:
 Branch `chore/retrofit-2026-11-13`, cut from main (0e525fa), kit source commit
 a82c9a8; merged to main on 13 November 2026 with Stephen's approval
 (4e462b6). The earlier CI-scope and October retrofit notes are in
-[_archive/2026-11-13-roadmap-ci-and-october-retrofit.md](_archive/2026-11-13-roadmap-ci-and-october-retrofit.md).
+`_archive/2026-11-13-roadmap-ci-and-october-retrofit.md` (local only).
 
 - Rules: CLAUDE.md keeps its local rules and adds the canonical autonomy lines;
   CONVENTIONS.md is the kit's current text; ONBOARDING.md declares L2 (live
@@ -209,8 +209,8 @@ a82c9a8; merged to main on 13 November 2026 with Stephen's approval
   current Rebrand marks and Academy corner logo appear consistently.
 - [x] Fix the findings of the October 2026 full audit of both sites: 39
   findings (3 P1, 12 P2, 24 P3) in
-  [the audit findings](docs/reviews/2026-10-03-full-audit.md), packaged as
-  WP-1 to WP-14 in [the audit work plan](docs/plans/2026-10-03-audit-work-plan.md).
+  the audit findings (`docs/reviews/2026-10-03-full-audit.md`, local only), packaged as
+  WP-1 to WP-14 in the audit work plan (`docs/plans/2026-10-03-audit-work-plan.md`, local only).
   Done for main, including the enforced CSP and HSTS headers in `vercel.json`.
   Deferred: WP-5, WP-6 and WP-12 belong to the redesign branch, which Stephen
   keeps separate (owner: Stephen). Decision 5 (no captions) was reversed on
