@@ -1,28 +1,37 @@
-import portraitSource from "../../../docs/reviews/2026-09-07-design-reset/portrait-reference-2x.webp";
-import portraitSource1x from "../../../docs/reviews/2026-09-07-design-reset/portrait-reference-1x.webp";
-
-export { portraitSource, portraitSource1x };
-// The opening is a depth-mapped point cloud, not a stack of flat cards.
+// The portrait is a depth-mapped point cloud that erodes into a flow field.
 // The left half of PORTRAIT_POINTS_SOURCE is the approved 2D likeness, cropped
 // exactly as PORTRAIT_CROP describes it; the right half is a per-pixel depth
-// estimate written by scripts/build-portrait-depth.mjs. Every point therefore
-// carries its own relief, so the head shows real parallax when it turns and
-// the camera can travel into the cloud.
+// estimate written by scripts/build-portrait-depth.mjs. Every point carries
+// its own relief, so the head shows real parallax when the lens moves.
 // The depth map is a monocular estimate from the 2D reference. It is
 // art-directed relief, not measured geometry or a claim to reconstruct
 // Stephen's actual facial geometry.
+//
+// Everything a point does is a closed-form function of scroll and time: there
+// is no simulation state, so the journey runs backwards exactly as it ran
+// forwards and the head re-forms from the same dust at the end of the page.
+
+// The static portrait shown without WebGL, with reduced motion and while the
+// renderer starts. Served from public/ like the plate below.
+export const portraitSource = "/portrait/portrait-reference-2x.webp";
+export const portraitSource1x = "/portrait/portrait-reference-1x.webp";
 // This crop deliberately stops above the navigation baked into the concept.
+// It is measured in the 1x reference; the plate holds it at PLATE_SCALE.
 export const PORTRAIT_CROP = { x: 440, y: 8, width: 700, height: 650 };
-// Packed colour + depth plate, 1400x650: colour on the left, depth on the
+export const PLATE_SCALE = 2;
+// Packed colour + depth plate, 2800x1300: colour on the left, depth on the
 // right. Served from public/ so the sampler fetches one image, not two.
 export const PORTRAIT_POINTS_SOURCE = "/portrait/portrait-source.webp";
 // The hero's physical scroll range and the share of it the release occupies.
 // The work heading reaches the bottom of the viewport at
 // (HERO_HEIGHT - 1) / RELEASE_LENGTH = 0.75 of the release, once the head has
-// stopped reading as a head, and the release completes with the heading in the
-// middle of the screen. There is never a screen of particles alone.
+// stopped reading as a head. There is never a screen of particles alone.
 export const HERO_HEIGHT = 2.2;
 export const RELEASE_LENGTH = 1.6;
+// World height of the plate, and the opening lens distance and field of view.
+export const PLATE_HEIGHT = 4.6;
+export const LENS_DISTANCE = 6;
+export const LENS_FOV = 40;
 export const clamp = (value: number) => Math.min(1, Math.max(0, value));
 export const smooth = (start: number, end: number, value: number) => {
   const t = clamp((value - start) / (end - start));
@@ -41,14 +50,16 @@ export const portraitFraming = (width: number, height: number) => {
 };
 
 // Release begins with the first scroll and stays linear across the hero. The
-// scroll follower in PortraitExperience already damps input, so easing here as
-// well held the face together for too long before the separation became visible.
+// scroll follower in PortraitExperience already damps input. Drift is the
+// page travel in viewport heights: the released field moves with the page
+// for as long as the page moves.
 export const scrollState = (y: number, height: number, workTop: number, endTop: number) => {
   const releaseEnd = Math.max(height * RELEASE_LENGTH, 1);
   const endingStart = Math.max(releaseEnd, endTop - height * 0.7);
   return {
     release: clamp(y / releaseEnd),
     travel: smooth(Math.max(releaseEnd, workTop - height * 0.4), Math.max(releaseEnd + height, endTop), y),
+    drift: Math.max(0, y) / Math.max(1, height),
     ending: smooth(endingStart, Math.max(endingStart + 1, endTop + height * 0.12), y),
     intro: 1 - smooth(height * 0.06, height * 0.45, y),
   };
@@ -64,30 +75,21 @@ const random = (seed: number) => {
 // at or behind 0.45 flattens to the back plane; 1.0 is the nearest point.
 export const portraitRelief = (raw: number) => clamp((raw - 0.45) / 0.55);
 
-// Four overlapping movements, all driven by one scroll position.
-// Separate pushes the plate's vertical slices apart along depth and deepens
-// the relief; it is invisible from the opening lens and is revealed by the
-// turn and the dolly, which is what makes it read as a solid object rather
-// than as an image sliding. Loosen and disperse are linear: each point's own
-// release order (hair and the back of the head first, the features last)
-// shapes them in the shader, so the head comes apart steadily and the last
-// features are still sweeping into the ring as the release ends.
-export const portraitPhases = (progress: number) => ({
-  separate: smooth(0, 0.7, progress),
-  turn: smooth(0, 0.95, progress),
-  loosen: clamp(progress),
-  disperse: clamp(progress),
-});
-
-// The lens tracks across and dollies in over the whole release. Near points
-// cross in front of it and swell, far ones stay fine: the size change and the
-// parallax against the separated slices are the depth cues.
-export const portraitCamera = (release: number, aspect: number) => {
-  const advance = smooth(0.02, 1, release);
+// The lens orbits the head and closes on it over the release, so the relief
+// and the dust lifting towards the lens read as parallax; it returns to the
+// opening eye as the page ends and the head re-forms. `yaw` is the orbit
+// angle about the head, `distance` the lens distance from it.
+export const portraitCamera = (release: number, aspect: number, ending = 0) => {
+  const advance = smooth(0.02, 1, release) * (1 - smooth(0, 1, ending));
+  const wide = aspect > 1.1;
+  const yaw = advance * (wide ? 0.34 : 0.2);
+  const distance = LENS_DISTANCE - advance * 1.15;
   return {
-    x: advance * (aspect > 1.1 ? 0.55 : 0.2),
-    y: -advance * 0.12,
-    z: 6 - advance * 1.1,
+    x: Math.sin(yaw) * distance,
+    y: -advance * 0.1,
+    z: Math.cos(yaw) * distance,
+    yaw,
+    distance,
   };
 };
 
@@ -99,48 +101,67 @@ export const acceptsPortraitPress = (pointerType: string, button: number, releas
   pointerType === 'mouse' && button === 0 && release < 0.18 && !paused;
 
 // Match the sRGB plate, including its shadow toe. A plain power of 2.2
-// crushed the neck's dark tones before the shader converted back to sRGB.
+// crushed the neck's dark tones before the output pass converted back.
 export const portraitLinearColour = (value: number) => value <= 0.04045
   ? value / 12.92
   : Math.pow((value + 0.055) / 1.055, 2.4);
 
 export const samplePortrait = (pixels: Uint8ClampedArray, depthPixels: Uint8ClampedArray, width: number, height: number) => {
-  const positions: number[] = [];
-  const colours: number[] = [];
-  const seeds: number[] = [];
-  const depths: number[] = [];
+  // Two passes: count, then fill fixed buffers. At desktop density this is
+  // over 300,000 points, too many to grow as plain arrays.
+  const keep = new Uint8Array(width * height);
+  let count = 0;
   for (let y = 0; y < height; y++) {
     for (let x = 0; x < width; x++) {
-      const i = (y * width + x) * 4;
-      const light = (pixels[i] * 0.2126 + pixels[i + 1] * 0.7152 + pixels[i + 2] * 0.0722) / 255;
+      const p = y * width + x;
+      const i = p * 4;
+      const light = ((pixels[i] ?? 0) * 0.2126 + (pixels[i + 1] ?? 0) * 0.7152 + (pixels[i + 2] ?? 0) * 0.0722) / 255;
       const u = x / (width - 1);
       const v = y / (height - 1);
       const edge = smooth(0, 0.035, u) * (1 - smooth(0.965, 1, u)) * (1 - smooth(0.85, 1, v));
-      if (light < 0.027 || edge < 0.005 || pixels[i + 3] === 0) continue;
+      if (light < 0.027 || edge < 0.005 || (pixels[i + 3] ?? 0) === 0) continue;
+      keep[p] = 1;
+      count++;
+    }
+  }
+  const positions = new Float32Array(count * 3);
+  const colours = new Float32Array(count * 3);
+  const seeds = new Float32Array(count * 4);
+  const depths = new Float32Array(count);
+  let n = 0;
+  for (let y = 0; y < height; y++) {
+    for (let x = 0; x < width; x++) {
       const seed = y * width + x;
+      if (!keep[seed]) continue;
+      const i = seed * 4;
+      const u = x / (width - 1);
+      const v = y / (height - 1);
+      const edge = smooth(0, 0.035, u) * (1 - smooth(0.965, 1, u)) * (1 - smooth(0.85, 1, v));
       const r = random(seed);
       // Jitter is less than half a source pixel; tonal detail stays resolved.
-      const px = (u - 0.5 + (r - 0.5) / width * 0.65) * (700 / 650) * 4.6;
-      const py = (0.5 - v + (random(seed + 2) - 0.5) / height * 0.65) * 4.6;
-      positions.push(px, py, 0);
-      colours.push(
-        portraitLinearColour(pixels[i] / 255) * edge,
-        portraitLinearColour(pixels[i + 1] / 255) * edge,
-        portraitLinearColour(pixels[i + 2] / 255) * edge,
-      );
-      seeds.push(r, random(seed + 17), random(seed + 71), u);
+      positions[n * 3] = (u - 0.5 + (r - 0.5) / width * 0.65) * (700 / 650) * PLATE_HEIGHT;
+      positions[n * 3 + 1] = (0.5 - v + (random(seed + 2) - 0.5) / height * 0.65) * PLATE_HEIGHT;
+      colours[n * 3] = portraitLinearColour((pixels[i] ?? 0) / 255) * edge;
+      colours[n * 3 + 1] = portraitLinearColour((pixels[i + 1] ?? 0) / 255) * edge;
+      colours[n * 3 + 2] = portraitLinearColour((pixels[i + 2] ?? 0) / 255) * edge;
+      seeds[n * 4] = r;
+      seeds[n * 4 + 1] = random(seed + 17);
+      seeds[n * 4 + 2] = random(seed + 71);
+      seeds[n * 4 + 3] = u;
       // Depth is read from the matching pixel of the depth half, never from
       // the portrait's own brightness: a bright cheek and a bright collar are
       // not at the same distance.
-      depths.push(portraitRelief(depthPixels[i] / 255));
+      depths[n] = portraitRelief((depthPixels[i] ?? 0) / 255);
+      n++;
     }
   }
-  return { positions: new Float32Array(positions), colours: new Float32Array(colours), seeds: new Float32Array(seeds), depths: new Float32Array(depths) };
+  return { positions, colours, seeds, depths };
 };
 
 export type ParticleMotion = {
   release: number;
   travel: number;
+  drift?: number;
   ending: number;
   pointerX: number;
   pointerY: number;
@@ -151,82 +172,50 @@ export type ParticleMotion = {
   invalidate?: () => void;
 };
 
-// The plate as a solid: thirteen vertical slices at their own depths, feathered
-// into one corrugated sheet so nothing tears open between neighbours, with the
-// per-point relief on top. Both offsets run along each point's own view ray
-// from the opening lens, so the opening frame is unchanged by construction and
-// the depth only appears as the head turns and the lens moves. Scalar inputs:
-// column (0..13), aDepth, uSeparate, uScale. The block is also executed as JS
-// by the regression test, so it stays free of vector types.
-export const portraitSliceShader = /* glsl */ `
-    float index = floor(column);
-    float within = column - index;
-    float sliceNear = sin(index * 1.9 + 0.6) * 0.55 + sin(index * 0.7 + 2.0) * 0.45;
-    float sliceNext = sin((index + 1.0) * 1.9 + 0.6) * 0.55 + sin((index + 1.0) * 0.7 + 2.0) * 0.45;
-    float slice = mix(sliceNear, sliceNext, smoothstep(0.7, 1.0, within));
-    float relief = (aDepth - 0.5) * 1.8 * uScale * (1.0 + uSeparate * 0.5)
-      + slice * uSeparate * 1.25 * uScale;
+// When a point lets go. The erosion front crosses the plate from the back of
+// the head to the face (u runs 0 at the left edge to 1 at the right), led by
+// the far relief, and a low-frequency grain keeps it ragged, so the head
+// comes apart in strands and never along a straight edge. `age` is how long
+// ago, in release units, the front passed this point; it is zero while the
+// point is still part of the head. A slow breath lets the loosest fringe lift
+// and settle at rest. The ending takes the release back to zero, which walks
+// every point home along the path it left by. Scalar inputs: u, aDepth,
+// grain (-1..1), r, uRelease, uEnding, uTime, press. The block is also
+// executed as JS by the regression test, so it stays free of vector types.
+export const portraitAgeShader = /* glsl */ `
+    float order = u * 0.9 + aDepth * 0.14 + grain * 0.10 + r * 0.06;
+    float breath = 0.17 + 0.05 * sin(uTime * 0.45 + grain * 3.0);
+    float released = uRelease * (1.0 - uEnding);
+    float age = max(0.0, released * 1.62 + breath * (1.0 - uEnding * 0.6) - order - 0.07) + press * 0.22;
 `;
 
-// When a point lets go and when it flies are keyed to its own relief: aDepth is
-// 1 at the nearest surface, so hair and the back of the head release first and
-// the features hold longest. A per-point seed and a low ripple keep the front
-// from travelling as one straight edge. Scalar inputs: aDepth, s, ripple,
-// uLoosen, uDisperse.
-export const portraitOrderShader = /* glsl */ `
-    float order = aDepth * 0.55 + s * 0.3 + ripple * 0.15;
-    float loose = smoothstep(0.0, 0.5, uLoosen * 1.15 - order * 0.55);
-    float flight = smoothstep(0.0, 0.45, uDisperse * 1.3 - 0.35 - order * 0.5);
+// Where the page has taken a released point since. `total` is its age plus
+// the page travel after the release has finished, so the field goes on
+// dispersing as the page moves on; `rise` is the page travel since this
+// point's own release (drift is 1.6 viewports per unit of release), so a
+// point starts to climb from where it let go and never jumps. Both vanish
+// with `loose`, so the ending still walks every point home; the rise also
+// needs the release itself, so the fringe that only breathes at rest, or at
+// the end of a long page, is never carried off. Scalar inputs: age, loose,
+// order, uDrift, uRelease, uEnding.
+export const portraitJourneyShader = /* glsl */ `
+    float onward = max(0.0, uDrift - 1.6) * 1.5 * (1.0 - uEnding);
+    float total = age + onward * loose;
+    float letGo = clamp((order + 0.07) / 1.62, 0.0, 1.0) * 1.6;
+    float rise = max(0.0, uDrift - letGo) * loose * smoothstep(0.0, 0.08, uRelease * (1.0 - uEnding));
 `;
 
-// The inverse of the basis at the end of particleFlowShader: a world point
-// (liftedX, liftedY, liftedZ) expressed in the ring's own frame as a radius,
-// an angle and a height, so the route in can spiral about the ring's axis.
-// Scalar inputs: liftedX, liftedY, liftedZ, uAspect, uEnding. The regression
-// test round-trips this through the flow block at e = 0.
-export const particleFrameShader = /* glsl */ `
-    float relX = (liftedX - (uAspect > 1.1 ? 0.48 : 0.2)) / min(1.0, uAspect * 0.75);
-    float relY = (liftedY - mix(-0.05, -0.4, uEnding)) / mix(0.62, 1.0, smoothstep(0.55, 1.1, uAspect));
-    float untiltX = cos(-0.24) * relX - sin(-0.24) * liftedZ;
-    float untiltZ = sin(-0.24) * relX + cos(-0.24) * liftedZ;
-    float liftedLocalY = cos(0.66) * relY + sin(0.66) * untiltZ;
-    float rL = sqrt(untiltX * untiltX + liftedLocalY * liftedLocalY);
-    float aL = atan(liftedLocalY, untiltX);
-    float zL = -sin(0.66) * relY + cos(0.66) * untiltZ;
-`;
-
-// One angular coordinate and one fixed basis for the whole released cloud.
-// Each point's angle is where it left the head, spread by its seed, so the
-// ring is swept out of the head rather than assembled from random positions.
-// Scroll gathers the cross-section and lowers the centre to the closing text;
-// it never changes particle correspondence or rotates the basis. Scalar
-// inputs: angle, s, t, e (flight), rL, aL, zL, uTime, uEnding, uAspect. Keep
-// this block shared with the numerical regression test of the actual shader.
-export const particleFlowShader = /* glsl */ `
-    float orbit = angle * TAU + uTime * 0.075;
-    float crossSection = fract(s * 73.13 + t * 29.7) * TAU;
-    float radius = 1.55 + t * 0.38 + sin(orbit * 3.0) * 0.14;
-    float tube = mix(0.36, 0.12, uEnding);
-    float radial = radius + cos(crossSection) * tube;
-    float settleZ = sin(crossSection) * tube + (t - 0.5) * 0.8 * (1.0 - uEnding);
-    // The route in is a spiral about the ring's axis: from where the point
-    // left the head (rL, aL, zL in the ring's own frame) its radius and height
-    // ease onto the ring while its angle turns the short way round to its own
-    // place. At e = 1 this is exactly the ring; at e = 0 it is the lifted
-    // point, so mid-flight the cloud is already a visible vortex.
-    float turnTo = mod(orbit - aL + PI, TAU) - PI;
-    float pathAngle = aL + turnTo * e;
-    float pathRadial = mix(rL, radial, e);
-    float localX = cos(pathAngle) * pathRadial;
-    float localY = sin(pathAngle) * pathRadial;
-    float localZ = mix(zL, settleZ, e);
-    float tiltedY = cos(0.66) * localY - sin(0.66) * localZ;
-    float tiltedZ = sin(0.66) * localY + cos(0.66) * localZ;
-    float flowX = (cos(-0.24) * localX + sin(-0.24) * tiltedZ)
-      * min(1.0, uAspect * 0.75) + (uAspect > 1.1 ? 0.48 : 0.2);
-    float flowY = tiltedY * mix(0.62, 1.0, smoothstep(0.55, 1.1, uAspect))
-      + mix(-0.05, -0.4, uEnding);
-    float flowZ = -sin(-0.24) * localX + cos(-0.24) * tiltedZ;
+// How far a released point has travelled, and how far it has left the head
+// behind. `reach` drives the flow-field walk: slow at lift-off, then quick.
+// `spread` is the share of its own place in the wide field a point has taken
+// up; `loose` is how far it has stopped being part of the photograph. The
+// walk saturates, so a point far down the page is carried by the page and
+// the field's own turning, not thrown about by every pixel of scroll. Scalar
+// inputs: total, s. `loose` comes from the age block's own age.
+export const portraitTravelShader = /* glsl */ `
+    float walk = 1.5 * (1.0 - exp(-total / 1.5));
+    float reach = walk * (0.3 + walk) * (0.55 + s * 0.9);
+    float spread = smoothstep(0.45, 1.6, total);
 `;
 
 export const vertexShader = /* glsl */ `
@@ -234,183 +223,164 @@ export const vertexShader = /* glsl */ `
   attribute vec4 aSeed;
   attribute float aDepth;
   uniform float uRelease;
-  uniform float uTurn;
-  uniform float uSeparate;
-  uniform float uLoosen;
-  uniform float uDisperse;
+  uniform float uDrift;
   uniform float uEnding;
   uniform float uTime;
   uniform float uDpr;
   uniform float uScale;
   uniform float uAspect;
-  uniform float uPixel;
+  uniform float uProj;
+  uniform float uCell;
   uniform float uFocus;
+  uniform float uAperture;
   uniform vec2 uPointer;
   uniform float uPress;
+  uniform vec3 uHome;
+  uniform float uHomeDim;
   varying vec3 vColour;
   varying float vOpacity;
   varying float vBlur;
+  varying float vAdd;
   const float TAU = 6.28318530718;
-  const float PI = 3.14159265359;
   const vec3 LUMA = vec3(0.2126, 0.7152, 0.0722);
-  float hash2(vec2 value) {
-    return fract(sin(dot(value, vec2(12.9898, 78.233))) * 43758.5453);
-  }
-  vec3 rotateY(vec3 value, float angle) {
-    float c = cos(angle);
-    float s = sin(angle);
-    return vec3(c * value.x + s * value.z, value.y, -s * value.x + c * value.z);
+  // The wide field is a box about the lens that points wrap around, so the
+  // dust never runs out however far the page travels.
+  const vec3 FIELD_CENTRE = vec3(0.0, 0.0, -1.2);
+  const vec3 FIELD_HALF = vec3(12.0, 8.0, 7.2);
+  // Two octaves of an Arnold-Beltrami-Childress flow. Each component is
+  // independent of its own coordinate, so the field is divergence-free: dust
+  // carried by it curls and folds like smoke and never bunches or thins.
+  vec3 flow(vec3 p, float t) {
+    vec3 a = vec3(
+      sin(p.z + t) + cos(p.y - t * 0.7),
+      sin(p.x + t * 0.8) + cos(p.z + t * 0.5),
+      sin(p.y - t * 0.6) + cos(p.x + t * 0.9)
+    );
+    vec3 q = p * 2.3 + 1.7;
+    vec3 b = vec3(
+      sin(q.z - t) + cos(q.y + t * 0.6),
+      sin(q.x + t * 0.7) + cos(q.z - t * 0.4),
+      sin(q.y + t * 0.5) + cos(q.x - t * 0.8)
+    );
+    return a + b * 0.45;
   }
   void main() {
     float r = aSeed.x;
     float s = aSeed.y;
     float t = aSeed.z;
+    float u = aSeed.w;
     float light = dot(aColour, LUMA);
-    // The image reduces to a stipple. About a fifth of the points survive the
-    // flight (the band runs 0.12 to 0.52, weighted towards the bright ones)
-    // and the rest fade out as they let go. The survivors grow to hold the
-    // coverage the others gave up, and they are the points that reach the ring.
-    // The weighting reads perceptual tone, not linear light: aColour is stored
-    // linear and this portrait is dark, so nine points in ten sit below 0.1
-    // there and weighting on it keeps a flat tenth of the image everywhere.
-    float tone = pow(light, 0.4545);
-    float keep = step(r, 0.12 + tone * 0.40);
-    float ripple = (sin(position.y * 2.6 + aSeed.w * 5.0) + 1.0) * 0.5;
-    ${portraitOrderShader}
-    // The relief and the slices are unprojected, not extruded: each point is
-    // pushed along its own view ray from the opening lens, so the cloud
-    // carries true depth and still projects exactly as the flat plate did.
-    vec3 plate = position * uScale;
-    vec2 framing = vec2(uAspect > 1.1 ? 0.32 : -0.7 * uScale, 0.06);
-    plate.xy += framing;
-    float baseYaw = -0.13;
-    vec3 original = rotateY(plate, baseYaw);
+    // The relief is unprojected, not extruded: each point is pushed along its
+    // own view ray from the opening lens, so the cloud carries true depth and
+    // still projects exactly as the flat plate did.
+    float homeScale = uScale * uHome.z;
+    vec3 plate = vec3(position.xy * homeScale + uHome.xy, 0.0);
     vec3 eye = vec3(0.0, 0.0, 6.0);
-    float reach = 6.0 - original.z;
-    float column = aSeed.w * 13.0;
-    ${portraitSliceShader}
-    float rest = reach - relief;
-    vec3 surface = eye + (original - eye) * (rest / reach);
-    // Lift-off: a released point eases off the surface towards the lens and
-    // up to the left, against the lens's own travel, along one low-frequency
-    // field that varies with where the point sits on the plate. Neighbours
-    // therefore leave together, so the head smears into sheets that keep
-    // their parallax rather than into an even cloud. The per-point reach
-    // thickens each sheet into a volume; a slow sway keeps it alive at rest.
-    vec3 lift = normalize(vec3(-0.3, 0.22, 0.9));
-    vec3 wave = vec3(
-      sin(position.y * 1.1 + aSeed.w * 2.0) * 0.35,
-      cos(position.x * 0.9 + 1.0) * 0.25,
-      sin(position.x * 0.7 + position.y * 0.8) * 0.35
-    );
-    vec3 sway = vec3(
-      sin(uTime * 0.5 + s * TAU),
-      cos(uTime * 0.37 + r * TAU),
-      sin(uTime * 0.43 + t * TAU)
-    ) * 0.07;
-    // How far a point lifts varies smoothly across the plate, with only a
-    // little per-point randomness: a random reach along one shared direction
-    // extruded neighbouring points into perspective streaks that read as a
-    // web of lines in the fine-toned hair.
-    float reachField = 0.5 + 0.5 * sin(position.x * 6.3 + position.y * 4.7 + aSeed.w * 3.0);
-    float reachOut = (0.35 + mix(reachField, t, 0.3) * 0.75) * mix(1.0, 0.7, aDepth);
-    vec3 wander = ((lift + wave) * reachOut * uScale + sway) * loose;
-    // The yaw pivots about the face, not the head's centre. Pivoting at the
-    // centre swings the face forward by most of a unit, so the lens passes it
-    // while it is still the subject and is left looking at the dark back of
-    // the head. Pivoting at the face holds it at its own depth and swings the
-    // back of the head away instead, which opens the slices and the relief to
-    // the lens.
-    vec3 pivot = vec3(1.75 * uScale + framing.x, 0.0, 0.0);
-    vec3 lifted = rotateY(surface + wander - pivot, -uTurn) + pivot;
-    // The released particles follow the same circle behind work and around
-    // the closing text. Each takes the ring angle nearest to where it left the
-    // head, spread by its seed so no sector is empty. There is no second
-    // destination. The lifted point is expressed in the ring's own frame
-    // (the inverse of the basis at the end of the flow block) so the route in
-    // can be a spiral about the ring's axis.
-    vec2 fromCentre = original.xy - vec2(uAspect > 1.1 ? 0.48 : 0.2, -0.05);
-    float angle = atan(fromCentre.y, fromCentre.x) / TAU + (s - 0.5) * 0.7;
-    float near = 1.0 - smoothstep(0.0, 0.07, t);
-    float far = smoothstep(0.3, 0.6, t);
-    float scatter = hash2(vec2(r, s));
-    float liftedX = lifted.x;
-    float liftedY = lifted.y;
-    float liftedZ = lifted.z;
-    ${particleFrameShader}
-    float e = flight;
-    ${particleFlowShader}
-    vec3 p = vec3(flowX, flowY, flowZ);
-    // Only a held press parts the points. Pointer movement does nothing.
-    p.x += uPointer.x * (p.z + 0.3) * 0.11 * flight;
-    p.y += uPointer.y * (p.z + 0.3) * 0.08 * flight;
-    vec2 plane = vec2(2.18382 * uAspect, 2.18382) * ((6.0 - original.z) / 6.0);
-    float interactive = 1.0 - smoothstep(0.08, 0.4, uRelease);
-    vec2 away = original.xy - uPointer * plane;
-    float influence = 1.0 - smoothstep(0.0, 0.62 * uScale, length(away * vec2(0.82, 1.15)));
-    float pressure = influence * uPress * interactive;
-    p.xy += normalize(away + vec2(0.001)) * pressure * 0.055 * uScale;
-    p.z -= pressure * 0.08 * uScale;
-    vec4 mv = modelViewMatrix * vec4(p, 1.0);
-    float depth = -mv.z;
-    // The focal plane follows the lens to the face, so the separated slices
-    // and the lifted sheets go soft in front of and behind it.
-    float focus = abs(depth - uFocus);
-    // Geometric growth alone is not enough: uPixel is about 2px on a 1280x800
-    // desktop. A real lens turns a near point into a soft disc well beyond its
-    // geometric size, so the last stretch in front of the camera adds a swell.
-    // It is inert beyond 2.4 units, so the opening frame is untouched.
-    float grow = rest / max(0.3, depth);
-    float swell = 1.0 + (1.0 - smoothstep(0.3, 2.4, depth)) * 1.6;
-    float settled = flight * flight;
-    float opticalSpread = loose * 0.35 + settled * 0.65;
-    vBlur = smoothstep(0.9, 3.6, focus) * opticalSpread;
-    vBlur = max(vBlur, near * settled * 0.7);
-    // Close to the lens a point is past the focal plane: it grows, softens and
-    // goes out rather than popping as it passes the camera.
-    vBlur = max(vBlur, 1.0 - smoothstep(0.4, 1.6, depth));
-    // Thin early in the flight, so the vortex is drawn by the survivors and
-    // the frame never fills with photographic sampling density in transit.
-    // The intact opening is unaffected.
-    float thinning = smoothstep(0.1, 0.6, flight);
-    float cloudAlpha = mix(0.97, 0.48 + r * 0.42, smoothstep(0.08, 0.82, flight));
-    float emberAlpha = keep * mix(0.88, 0.55, near) * (0.55 + r * 0.45) * mix(1.0, 0.72, far);
-    vOpacity = mix(cloudAlpha, emberAlpha, thinning) * smoothstep(0.12, 0.7, depth);
-    vOpacity *= mix(1.0, 0.62, uEnding);
-    // The released field keeps its light: a point's brightness no longer
-    // depends on how dark its source pixel was, and the nearer it is to the
-    // lens the brighter it is, in step with its size and softness.
-    // Silver only: no warm or coloured tint anywhere in the released field.
-    vec3 silver = vec3(0.78, 0.8, 0.82);
-    float lensNear = 1.0 - smoothstep(2.0, 6.0, depth);
-    vec3 ember = silver * (0.78 + light * 0.5 + r * 0.3) * (0.9 + lensNear * 0.35);
-    vColour = mix(aColour, ember, smoothstep(0.1, 0.9, flight));
-    // Preserve the photographic opening, then introduce a broad, biased size
-    // range as the surface separates. Most points become fine dust, a smaller
-    // group stays mid-sized and only a few become large near-lens particles.
-    // Deliberate small, medium and large populations make the depth layers
-    // legible without enlarging the whole cloud together.
-    float sizeVariation = scatter < 0.72
-      ? mix(0.24, 0.62, scatter / 0.72)
-      : (scatter < 0.95
-        ? mix(0.85, 1.55, (scatter - 0.72) / 0.23)
-        : mix(2.0, 3.1, (scatter - 0.95) / 0.05));
-    float separatedSize = mix(1.0, sizeVariation, smoothstep(0.08, 0.78, flight));
-    float portraitSize = uPixel * 6.0 / (6.0 - original.z) * grow * swell + vBlur * 3.0;
-    portraitSize *= separatedSize;
-    float emberSize = mix(mix(0.008, 0.004, far), 0.036, near)
-      * 1250.0 / max(0.5, depth) * sizeVariation;
-    float dropped = (1.0 - keep) * thinning;
-    gl_PointSize = min(48.0, mix(portraitSize, emberSize + vBlur * 3.5, smoothstep(0.0, 1.0, flight))) * uDpr * (1.0 - dropped);
-    // The same optical treatment follows the released points all the way
-    // down the page. It never switches at work or at the closing section.
-    float volume = smoothstep(0.3, 0.95, flight);
-    if (volume > 0.0) {
-      float opticalSize = (1.9 + lensNear * 2.2) * sizeVariation * 5.5 / max(0.7, depth);
-      float opticalBlur = smoothstep(0.8, 3.8, abs(depth - 5.0));
-      vBlur = mix(vBlur, opticalBlur, volume);
-      gl_PointSize = mix(gl_PointSize, min(30.0, opticalSize + opticalBlur * 4.0) * uDpr * (1.0 - dropped), volume);
+    float relief = (aDepth - 0.45) * 1.9 * homeScale;
+    vec3 home = eye + (plate - eye) * ((6.0 - relief) / 6.0);
+    // A held press loosens the surface under the pointer.
+    vec2 plane = vec2(2.18382 * uAspect, 2.18382);
+    vec2 away = home.xy - uPointer * plane;
+    float press = (1.0 - smoothstep(0.0, 0.7 * uScale, length(away))) * uPress;
+    float grain = sin(position.x * 1.9 + position.y * 2.7) * 0.5
+      + sin(position.x * 4.3 - position.y * 3.1 + 1.3) * 0.3
+      + sin(position.y * 8.7 + position.x * 7.1) * 0.2;
+    ${portraitAgeShader}
+    float loose = smoothstep(0.0, 0.28, age);
+    ${portraitJourneyShader}
+    ${portraitTravelShader}
+    // Lift-off and flight: five steps through the flow field with a steady
+    // wind off the back of the head, up and towards the lens. Neighbours
+    // start together and are carried apart by the field, so the head leaves
+    // as strands and veils. The field itself turns slowly, so released dust
+    // keeps moving while the page is still.
+    vec3 p = home;
+    float sheet = 0.0;
+    float lanes = 1.0;
+    if (age > 0.0) {
+      vec3 wind = vec3(-0.82, 0.34, 0.14);
+      float h = reach * 0.44;
+      for (int i = 0; i < 5; i++) {
+        p += (flow(p * 0.62, uTime * 0.11) * 0.5 + wind) * h;
+      }
+      // Each strand thickens into a volume as it travels.
+      p += (vec3(r, s, t) - 0.5) * reach * 0.8;
+      // Its own place in the wide field, taken up gradually. The field is
+      // two rolling sheets of dust, one above the other, with a thin scatter
+      // of strays between them: surfaces that recede to a horizon, so the
+      // page travels through layers and not through even static.
+      vec2 across = vec2(fract(r * 61.7 + s * 13.3), fract(t * 83.3 + r * 17.9)) - 0.5;
+      vec3 place = FIELD_CENTRE + vec3(across.x, 0.0, across.y) * FIELD_HALF * 2.0;
+      float swell = sin(place.x * 0.33 + place.z * 0.21 + uTime * 0.07) * 1.1
+        + sin(place.x * 0.12 - place.z * 0.37 + 2.0 - uTime * 0.05) * 0.8
+        + sin(place.x * 0.9 + place.z * 0.7 + uTime * 0.11) * 0.18;
+      float thick = fract(s * 47.9 + t * 29.1) - 0.5;
+      float stray = step(0.9, fract(t * 19.7 + s * 3.1));
+      float layer = step(0.5, fract(s * 7.31 + r * 3.7)) - 0.5;
+      place.y = layer * FIELD_HALF.y * 2.0 * 0.5 + swell + thick * abs(thick) * mix(2.2, 30.0, stray);
+      sheet = 1.0 - stray;
+      // The sheets are not even: slow currents gather the dust into lanes
+      // and leave dark water between them.
+      float current = sin(place.x * 0.7 + sin(place.z * 0.55 + 1.3) * 1.6 + uTime * 0.03)
+        * sin(place.z * 0.43 - place.x * 0.21 + 0.7);
+      lanes = mix(1.0, 0.05 + 0.95 * smoothstep(-0.2, 0.5, current), sheet);
+      p = mix(p, place, spread);
+      // The released field travels with the page, and once it has dispersed
+      // it drifts on its own. Only dispersed points drift: time has no bound,
+      // so a point that is merely breathing must not be given it.
+      p.y += rise * 2.6 + uTime * 0.05 * spread;
+      p.x -= uTime * 0.025 * spread;
     }
+    vec3 local = mod(p - FIELD_CENTRE + FIELD_HALF, FIELD_HALF * 2.0) - FIELD_HALF;
+    vec3 rim = 1.0 - smoothstep(vec3(0.8), vec3(1.0), abs(local) / FIELD_HALF);
+    float inside = rim.x * rim.z * mix(1.0, rim.y, 1.0 - sheet);
+    p = FIELD_CENTRE + local;
+    vec4 mv = modelViewMatrix * vec4(p, 1.0);
+    float depth = max(0.05, -mv.z);
+    // Optics. A point in the plane of focus is its true size; either side of
+    // it the point opens into a disc that carries the same light over a wider
+    // area. Dust near the lens is therefore large, soft and faint, far dust
+    // fine and sharp: the size and softness are the depth.
+    float cell = uCell * uHome.z * uProj / depth * 1.28;
+    float mote = mix(0.005, 0.016, t * t * t) + step(0.988, r) * 0.03;
+    float fine = mote * uProj / depth;
+    float core = max(0.4, mix(cell, fine, loose));
+    // Beyond the plane of focus the blur is held back, so the far field stays
+    // a fine glitter and the soft discs belong to the foreground.
+    float beyond = mix(1.0, 0.35, step(uFocus, depth));
+    float coc = abs(depth - uFocus) / depth * uAperture * uProj * (0.12 + 0.88 * loose) * beyond;
+    float size = min(core + coc, 72.0);
+    float shown = max(size, 1.0);
+    vBlur = clamp(coc / max(core, 1.0) * 0.5, 0.0, 1.0);
+    float energy = pow(clamp(core / shown, 0.0, 1.0), 2.0);
+    // Under a third of the points carry on into the wide field; the rest
+    // go out gradually as they disperse, so text over the field stays clear.
+    float carried = (1.0 - spread * smoothstep(0.24, 0.34, r)) * mix(1.0, lanes, spread);
+    float fog = mix(1.0, 0.22, smoothstep(5.0, 15.0, depth));
+    // Dust close to the lens goes out before it can fill the frame.
+    float nearLens = smoothstep(0.5, 3.0, depth);
+    // Just released, the dust is as dense as the photograph and its light
+    // adds up, so each point carries little; it carries more as it thins.
+    float share = mix(0.97, mix(0.09, 0.6, spread), loose);
+    vOpacity = share * energy * carried * fog * nearLens * inside;
+    vOpacity *= mix(1.0, uHomeDim, uEnding * (1.0 - loose));
+    // Silver only: no warm or coloured tint anywhere in the released field.
+    // The erosion front burns brightest, then the dust settles to the tone of
+    // the pixel it came from and is lit again as it crosses a lane.
+    vec3 silver = vec3(0.8, 0.83, 0.86);
+    float front = smoothstep(0.0, 0.05, age) * (1.0 - smoothstep(0.05, 0.5, age));
+    // The plate's feathered border stays feathered once it is dust.
+    float v = 0.5 - position.y / 4.6;
+    float border = smoothstep(0.0, 0.035, u) * (1.0 - smoothstep(0.965, 1.0, u)) * (1.0 - smoothstep(0.85, 1.0, v));
+    float tone = pow(light, 0.4545);
+    // Fresh dust keeps the tone of the pixel it came from, so the head's own
+    // light smears into the strands; far down the page it is evenly lit.
+    float lit = mix(tone, 0.5 + r * 0.3 + step(0.97, s) * 1.6, spread);
+    vec3 dust = silver * (0.05 + lit * (1.05 + r * 0.3)) * mix(border, 1.0, spread);
+    vColour = mix(aColour, dust, loose) + silver * front * (0.15 + tone) * 0.9 * border;
+    // The photograph is opaque; released dust adds its light.
+    vAdd = loose;
+    gl_PointSize = shown * uDpr;
     gl_Position = projectionMatrix * mv;
   }
 `;
@@ -419,13 +389,16 @@ export const fragmentShader = /* glsl */ `
   varying vec3 vColour;
   varying float vOpacity;
   varying float vBlur;
+  varying float vAdd;
   void main() {
     float d = length(gl_PointCoord - 0.5) * 2.0;
     if (d > 1.0) discard;
-    float sharp = 1.0 - smoothstep(0.65, 1.0, d);
-    float soft = exp(-d * d * 5.0) * 0.5;
-    float alpha = mix(sharp, soft, vBlur) * vOpacity;
-    gl_FragColor = vec4(vColour, alpha);
-    #include <colorspace_fragment>
+    float sharp = 1.0 - smoothstep(0.62, 1.0, d);
+    // An out-of-focus point is a disc with a slightly brighter rim.
+    float disc = (1.0 - smoothstep(0.86, 1.0, d)) * (0.72 + 0.28 * smoothstep(0.45, 0.92, d));
+    float alpha = mix(sharp, disc, vBlur) * vOpacity;
+    // Premultiplied: vAdd = 0 lays the point over what is behind it, vAdd = 1
+    // adds its light to it.
+    gl_FragColor = vec4(vColour * alpha, alpha * (1.0 - vAdd));
   }
 `;

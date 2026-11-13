@@ -1,11 +1,8 @@
 import {
   Component, lazy, Suspense, useCallback, useEffect, useRef, useState,
-  type CSSProperties, type ReactNode,
+  type CSSProperties, type PointerEvent as ReactPointerEvent, type ReactNode,
 } from "react";
-import {
-  ArrowDown, ArrowUp, ArrowUpRight, BookOpen, Feather, Hexagon,
-  Layers3, Network, Pause, Play, Shapes, Volume2, VolumeX, X,
-} from "lucide-react";
+import { ArrowDown, ArrowUp, ArrowUpRight, Pause, Play, Volume2, VolumeX, X } from "lucide-react";
 import { Link } from "react-router";
 import { useReducedMotion } from "motion/react";
 import { ContactFoot } from "../concept/ContactFoot";
@@ -29,21 +26,59 @@ const areaTints: Record<string, string> = {
 // Each preview shows the project's identity, whole and centred on one plain
 // panel: a wordmark, a mark, a rendered asset or a screen. Only Quiver's
 // poster fills the panel; everything else is shown whole.
-type Preview = { src: string; alt: string; fit: "contain" | "cover"; focus?: string };
-const projectFrames: { slug: string; description: string; icon: typeof Feather; area: string; preview: Preview }[] = [
-  { slug: "quiver", description: "Art direction and generative film", icon: Feather, area: "Film",
-    preview: { src: "/case-studies/quiver/hero-poster.jpg", alt: "A hooded archer in mist, from the Quiver launch film", fit: "cover", focus: "right center" } },
-  { slug: "uncx-menu", description: "Navigation across a product suite", icon: Network, area: "Product",
-    preview: { src: "/case-studies/uncx-menu/menu-open-phone.webp", alt: "The unified UNCX menu open on a phone", fit: "contain" } },
-  { slug: "solana-diary", description: "Automated media with human approval", icon: BookOpen, area: "Systems",
-    preview: { src: "/case-studies/solana-diary/SOLANA_DIARY_LOGO.webp", alt: "Solana Diary wordmark", fit: "contain" } },
-  { slug: "uncx-video-system", description: "Reusable 3D and motion production", icon: Layers3, area: "Motion",
+// `span` is the card's width in the six-column work grid: 4+2, 2+4, 3+3, so
+// the collection reads as a composed wall, not six equal boxes.
+// `onBlack` marks an image supplied on a black ground: the card shows its
+// light only, so the mark sits in the glass without a box round it.
+// `peek` marks a tall phone screen: the card shows its top at reading size.
+type Preview = { src: string; alt: string; fit: "contain" | "cover"; focus?: string; onBlack?: true; peek?: true; enlarge?: true };
+const projectFrames: { slug: string; description: string; area: string; span: 2 | 3 | 4; preview: Preview }[] = [
+  { slug: "quiver", description: "Art direction and generative film", area: "Film", span: 4,
+    preview: { src: "/case-studies/quiver/hero-poster.jpg", alt: "A hooded archer in mist, from the Quiver launch film", fit: "cover", focus: "right 18%" } },
+  { slug: "uncx-menu", description: "Navigation across a product suite", area: "Product", span: 2,
+    preview: { src: "/case-studies/uncx-menu/menu-open-phone.webp", alt: "The unified UNCX menu open on a phone", fit: "contain", peek: true } },
+  { slug: "solana-diary", description: "Automated media with human approval", area: "Systems", span: 2,
+    preview: { src: "/case-studies/solana-diary/SOLANA_DIARY_LOGO.webp", alt: "Solana Diary wordmark", fit: "contain", onBlack: true } },
+  { slug: "uncx-video-system", description: "Reusable 3D and motion production", area: "Motion", span: 4,
     preview: { src: "/case-studies/uncx-video-system/uncx-lock-2026.webp", alt: "The UNCX glass padlock render from the 3D system", fit: "contain" } },
-  { slug: "uncx-rebrand", description: "External collaboration and in-house design", icon: Shapes, area: "Brand",
-    preview: { src: "/case-studies/uncx-rebrand/card.webp", alt: "The Unicrypt mark becoming the UNCX mark", fit: "contain" } },
-  { slug: "noticia-lingo", description: "Product design through implementation", icon: Hexagon, area: "Product",
-    preview: { src: "/case-studies/noticia-lingo/noticia-feed-phone.webp", alt: "The Noticia Lingo reading feed on a phone", fit: "contain" } },
+  { slug: "uncx-rebrand", description: "External collaboration and in-house design", area: "Brand", span: 3,
+    preview: { src: "/case-studies/uncx-rebrand/card.webp", alt: "The Unicrypt mark becoming the UNCX mark", fit: "contain", onBlack: true, enlarge: true } },
+  { slug: "noticia-lingo", description: "Product design through implementation", area: "Product", span: 3,
+    preview: { src: "/case-studies/noticia-lingo/noticia-feed-phone.webp", alt: "The Noticia Lingo reading feed on a phone", fit: "contain", peek: true } },
 ];
+// The practice section repeats the CV's own summary and roles. They are
+// written out here, not imported: cv.json carries the email address, which
+// must stay in the lazy CV bundle. A test holds these to cv.json word for word.
+export const practice = "Creative technologist and hands-on creative lead with 20+ years across design, media and technology. Lead Designer at UNCX Network from November 2021 to November 2026, spanning brand, product interfaces, 3D and motion. I develop concepts into finished work: generative image/video and audio production in ComfyUI, complete brand films, reusable production systems and React-based prototypes. My practice connects art direction and storytelling with the technical judgement needed to make the work hold together.";
+export const roles = [
+  { title: "Lead Designer", company: "UNCX Network (SDDTech OÜ)", dates: "November 2021 - November 2026" },
+  { title: "Designer", company: "Switch Studios", dates: "July 2018 - June 2021" },
+  { title: "Designer and Animator", company: "Howe Creative (Freelance)", dates: "May 2016 - August 2018" },
+];
+
+// A mouse over a glass panel moves a soft highlight across it and leans it a
+// few degrees towards the pointer. Touch and reduced motion leave it flat.
+const leanGlass = (event: ReactPointerEvent<HTMLElement>) => {
+  if (event.pointerType !== "mouse") return;
+  const panel = event.target instanceof Element ? event.target.closest<HTMLElement>(".glass") : null;
+  for (const lit of event.currentTarget.querySelectorAll<HTMLElement>(".glass[data-lit]")) {
+    if (lit !== panel) { lit.removeAttribute("data-lit"); lit.style.removeProperty("--lean-x"); lit.style.removeProperty("--lean-y"); }
+  }
+  if (!panel) return;
+  const box = panel.getBoundingClientRect();
+  const x = (event.clientX - box.left) / Math.max(1, box.width);
+  const y = (event.clientY - box.top) / Math.max(1, box.height);
+  panel.dataset.lit = "";
+  panel.style.setProperty("--light-x", `${(x * 100).toFixed(1)}%`);
+  panel.style.setProperty("--light-y", `${(y * 100).toFixed(1)}%`);
+  panel.style.setProperty("--lean-x", `${((0.5 - y) * 5).toFixed(2)}deg`);
+  panel.style.setProperty("--lean-y", `${((x - 0.5) * 5).toFixed(2)}deg`);
+};
+const restGlass = (event: ReactPointerEvent<HTMLElement>) => {
+  for (const lit of event.currentTarget.querySelectorAll<HTMLElement>(".glass[data-lit]")) {
+    lit.removeAttribute("data-lit"); lit.style.removeProperty("--lean-x"); lit.style.removeProperty("--lean-y");
+  }
+};
 
 const selectedProjects = projectFrames.map((frame) => {
   const project = portfolioProjects.find((item) => item.slug === frame.slug);
@@ -192,6 +227,7 @@ export function PortraitExperience() {
       const state = scrollState(currentY, height, workTop, endTop);
       motion.current.release = reduced ? (actualY > height * 0.4 ? 1 : 0) : state.release;
       motion.current.travel = state.travel;
+      motion.current.drift = state.drift;
       motion.current.ending = state.ending;
       motion.current.paused = reduced || activeDialog.current;
       motion.current.pointerX = reduced || activeDialog.current ? 0 : pointerX;
@@ -377,26 +413,48 @@ export function PortraitExperience() {
           <h2 id="spatial-work-title">Selected work</h2>
           <Link to="/archive">Full archive <ArrowUpRight size={15} /></Link>
         </div>
-        <div className="spatial-grid">
+        <div className="spatial-grid" onPointerMove={reduced ? undefined : leanGlass} onPointerLeave={restGlass}>
           {selectedProjects.map((item, index) => (
-            <button className="spatial-card" key={item.slug} onClick={() => setSelected(index)} aria-label={`Open ${item.project.title} preview`} style={{ "--card-order": index, "--card-tint": areaTints[item.area] ?? "#849589" } as CSSProperties}>
-              <span className="spatial-card-top">
-                <span className="spatial-card-area">{item.area}</span>
-                <span className="spatial-card-year">{item.project.year}</span>
+            <button className="spatial-card glass" key={item.slug} data-span={item.span} onClick={() => setSelected(index)} aria-label={`Open ${item.project.title} preview`} style={{ "--card-order": index } as CSSProperties}>
+              <span className="spatial-card-media" data-fit={item.preview.fit} data-blend={item.preview.onBlack ? "" : undefined} data-crop={item.preview.peek ? "peek" : undefined} data-fill={item.preview.enlarge ? "" : undefined} style={{ "--preview-focus": item.preview.focus } as CSSProperties} aria-hidden="true">
+                <ResponsiveImage src={item.preview.src} alt="" loading="lazy" />
               </span>
-              <span className="spatial-card-icon" aria-hidden="true">
-                <item.icon size={22} strokeWidth={1.3} />
-              </span>
-              <h3>{item.project.title}</h3>
-              <p>{item.description}</p>
-              <span className="spatial-card-foot">
-                <span>{item.project.status}</span>
-                <ArrowUpRight size={19} strokeWidth={1.3} />
+              <span className="spatial-card-body">
+                <span className="spatial-card-top">
+                  <span className="spatial-card-area">{item.area}</span>
+                  <span className="spatial-card-year">{item.project.year}</span>
+                </span>
+                <h3>{item.project.title}</h3>
+                <p>{item.description}</p>
+                <span className="spatial-card-foot">
+                  <span>{item.project.status}</span>
+                  <ArrowUpRight size={19} strokeWidth={1.3} />
+                </span>
               </span>
             </button>
           ))}
         </div>
         <p className="spatial-preview-note">Six projects across creative direction, product, motion and systems. The complete archive contains the wider practice.</p>
+      </section>
+
+      <section className="spatial-practice" id="practice" aria-labelledby="spatial-practice-title" onPointerMove={reduced ? undefined : leanGlass} onPointerLeave={restGlass}>
+        <div className="spatial-practice-statement">
+          <h2 id="spatial-practice-title">Practice</h2>
+          <p>{practice}</p>
+        </div>
+        <div className="spatial-practice-roles glass">
+          <h3>Experience</h3>
+          <ol>
+            {roles.map((role) => (
+              <li key={role.company}>
+                <span className="spatial-role-title">{role.title}</span>
+                <span className="spatial-role-company">{role.company}</span>
+                <span className="spatial-role-dates">{role.dates}</span>
+              </li>
+            ))}
+          </ol>
+          <Link to="/cv">Full CV <ArrowUpRight size={15} /></Link>
+        </div>
       </section>
 
       <section className="particle-ending" id="ending" ref={ending} aria-labelledby="particle-ending-title">

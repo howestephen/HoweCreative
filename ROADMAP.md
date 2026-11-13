@@ -8,6 +8,42 @@ word_budget_reason: the redesign branch keeps its full media and audit history; 
 
 # ROADMAP
 
+## Stephen
+
+- [S] Review the rebuilt particle home page on the preview and say what
+  still falls short of the picture: the dissolution, the dust field down
+  the page, the glass panels and the page structure.
+- [S] Decide whether the practice section (the CV summary and roles) stays
+  on the home page.
+
+## Particle home rebuilt - 13 November 2026
+
+The home page's particle portrait was rebuilt against five stated faults:
+the way the head came apart, the way the particles travelled down the page,
+the lack of depth, an empty page and flat transparent boxes.
+
+- [x] The head erodes from the back of the hair to the face along a ragged
+  front and is carried off by a flow field as strands of dust. The old
+  slices and the ring are gone. Most points still go out, but gradually, as
+  the dust disperses, not as they leave the head.
+- [x] The dust becomes two rolling sheets that recede to a horizon and
+  travel with the page, with soft discs near the lens, a fine far field and
+  glow on the brightest light. At the end of the page the same dust walks
+  home and the head re-forms beside the closing words.
+- [x] About 730,000 points on a desktop and 187,000 on a phone, from a 2x
+  plate (`npm run build:portrait-depth`), at 60 frames a second in headless
+  Chrome on the MacBook Pro's GPU. Not measured on a phone or a slower
+  laptop; the scene drops the glow, then resolution, if frames run slow.
+- [x] Selected work is a composed wall of glass panels with each project's
+  work inside its card; a practice section repeats the CV's summary and
+  roles; the preview is glass over a blurred page.
+- [x] The static portrait is served from `public/portrait/`. It was imported
+  from `docs/reviews/`, which the public repository no longer carries, so
+  the branch had stopped building.
+- Checked in headless Chrome at 1440x900 and 390x844, with reduced motion,
+  the open preview and hover. Not checked in Safari or Firefox, or on a
+  physical phone.
+
 ## CV aligned with main - 2 November 2026
 
 - [x] `cv.json` shares main's CV wording: UNCX dated November 2021 to
@@ -117,7 +153,7 @@ An audit of both sites found 39 issues. The findings and the work plan live on
 
 Stephen asked for concepts derived from award-winning precedents, with their
 implementation problems researched, each built on its own branch. See
-[the concept research](docs/reviews/2026-09-26-concept-research.md).
+the concept research (a local working note).
 
 - [x] Research precedents and their build accounts; write three concepts.
 - [ ] `concept/index-preview`: editorial work index with a cursor-following
@@ -220,7 +256,7 @@ changing either site.
 
 ## Current design checkpoint - 17 September 2026
 
-Current work is on `codex/creative-technologist-portfolio`. Stephen's latest direction is a full-screen particle portrait, scroll-driven evaporation through 3D space, then a separate screen of five or six icon-and-text project cards. Each opens a substantial frosted-glass case study, with particles and other projects blurred behind it. Page Down from the opening should advance to the showcase. The complete filtered archive stays directly accessible. See the [current plan and revision record](docs/reviews/2026-09-07-design-reset/plan.md) and [three-state storyboard](docs/reviews/2026-09-07-design-reset/spatial-sequence.png).
+Current work is on `codex/creative-technologist-portfolio`. Stephen's latest direction is a full-screen particle portrait, scroll-driven evaporation through 3D space, then a separate screen of five or six icon-and-text project cards. Each opens a substantial frosted-glass case study, with particles and other projects blurred behind it. Page Down from the opening should advance to the showcase. The complete filtered archive stays directly accessible. See the current plan and revision record (a local working note) and three-state storyboard (kept locally).
 
 - [x] Record the confirmed portrait source, corrected sequence, card/detail distinction, depth/audio requirements and proposed six-project evidence roles.
 - [x] Stephen approved building the portrait sequence as a review prototype, with final showcase content deferred.
@@ -229,7 +265,7 @@ Current work is on `codex/creative-technologist-portfolio`. Stephen's latest dir
 - [x] Rebuild the Quiver case study from its curated evidence pack: lead with the 68-second launch master, prove the constrained-shot and local-inference method with source plates and clips, show a rejected direction, and distinguish generative, authored and production layers.
 - [x] Extend the approved portrait direction into a reviewable site system: connect all six selected-work cards to real project data and full case studies; restyle the shared case-study template; add `/archive` with discipline/software filters, nine public current projects, an earlier-work timeline and explicit restricted-work treatment; add the contact section and route navigation in the same visual language.
 - [x] Soften the opening after Stephen's 17 September review: hold the intact portrait longer, shear feathered pillars instead of slicing, dissolve in a spatial wave from the back of the head to the features, fade most released points as vapour and carry embers into a stratified depth field. Lift the type floor, unify the contact form with the dark system and remove the study label.
-- [x] Reorganise the case studies so they read like Quiver: one aspect ratio per chapter with real frames, curated imagery in place of software-panel screenshots, and above-the-fold crops replacing the unreadable full-page Academy captures. See the [image review](docs/reviews/2026-09-18-case-study-image-review.md).
+- [x] Reorganise the case studies so they read like Quiver: one aspect ratio per chapter with real frames, curated imagery in place of software-panel screenshots, and above-the-fold crops replacing the unreadable full-page Academy captures. See the image review (a local working note).
 - [x] Audit the dark case-study routes for editorial light-theme styling still leaking through, and replace the UNCX App Concepts lead, which was a prototype screen still carrying Lorem ipsum placeholder copy.
 - [x] Rebuild the selected-work preview card after Stephen's review: it now fits inside the viewport at laptop and phone sizes with no internal scrolling, leads with each project's identity artwork (wordmark, mark, rendered asset or poster) instead of a cropped screenshot, and carries a title, one-line headline, two-sentence summary, role/context/status and one link onward. The breadcrumb, tag pills, fit line and credit paragraph are gone; that detail lives in the full case study.
 - [x] Second pass on the preview card after review: one fixed size for all six at every width, one plain image panel, identity artwork whole and centred (brand SVG for UNCX, crest cut out, menu as its phone view), Quiver's poster justified right. A 740px-tall phone still scrolls the last few pixels of the two longest cards.
@@ -252,11 +288,11 @@ Current work is on `codex/creative-technologist-portfolio`. Stephen's latest dir
 - [ ] Review the integrated `/study`, `/archive` and case-study treatment with Stephen before promoting the particle experience to the root homepage. The six-project selection and remaining case-study evidence are provisional.
 - [ ] Finalise five or six primary projects after source review; keep archive coverage, discipline/software filters and private V7 requirements intact.
 
-The integrated review version runs at `/study`, separate from the existing root homepage. `/archive` carries the filterable work index and earlier-work timeline; the selected cards now open evidence-based previews and link to full cases. The Quiver evidence-led case study is available at `/work/quiver`; the remaining public cases use the shared spatial template and still need project-by-project evidence review before their content is considered final. Browser checks cover desktop and mobile archive, selected work, glass preview and a representative case study. Physical mobile-device testing and listening to the sound mix remain outstanding. V7 remains excluded from the new public archive while the existing mixed prototype material is audited; no protected employer area exists yet. No production deployment or Figma design changed at this checkpoint. The [agent handoff](docs/reviews/2026-09-07-design-reset/plan.md#agent-handoff---17-september-2026) records the branch, preview routes, code map, verification and exact next task. The editorial milestone below is historical.
+The integrated review version runs at `/study`, separate from the existing root homepage. `/archive` carries the filterable work index and earlier-work timeline; the selected cards now open evidence-based previews and link to full cases. The Quiver evidence-led case study is available at `/work/quiver`; the remaining public cases use the shared spatial template and still need project-by-project evidence review before their content is considered final. Browser checks cover desktop and mobile archive, selected work, glass preview and a representative case study. Physical mobile-device testing and listening to the sound mix remain outstanding. V7 remains excluded from the new public archive while the existing mixed prototype material is audited; no protected employer area exists yet. No production deployment or Figma design changed at this checkpoint. The agent handoff (a local working note) records the branch, preview routes, code map, verification and exact next task. The editorial milestone below is historical.
 
 ## Case study and disclosure audit - 20 September 2026
 
-An audit of all ten `/work/:slug` routes, the selected-work cards and the preview card, covering delivered material, layout, copy claims and public exposure. Method, evidence and per-finding detail are in the [audit record](docs/reviews/2026-09-20-case-study-audit.md); each item below names the file to change. Severity 1 is publication-blocking and should be cleared before the site is shown to anyone. The items are independent of each other and can be taken in any order within a severity band. Verified as passing at the time of the audit, so treat a regression in any of these as a new fault: no broken images, no console errors, no horizontal overflow on any route at 1440px or 390px; all 142 media entries resolving with alt text; uniform card heights at every width; preview dialogs inside the viewport at every width; typecheck, 83 tests and build all green.
+An audit of all ten `/work/:slug` routes, the selected-work cards and the preview card, covering delivered material, layout, copy claims and public exposure. Method, evidence and per-finding detail are in the audit record (a local working note); each item below names the file to change. Severity 1 is publication-blocking and should be cleared before the site is shown to anyone. The items are independent of each other and can be taken in any order within a severity band. Verified as passing at the time of the audit, so treat a regression in any of these as a new fault: no broken images, no console errors, no horizontal overflow on any route at 1440px or 390px; all 142 media entries resolving with alt text; uniform card heights at every width; preview dialogs inside the viewport at every width; typecheck, 83 tests and build all green.
 
 Severity 1, disclosure and accuracy:
 
@@ -271,7 +307,7 @@ Severity 1, disclosure and accuracy:
 
 Severity 2, evidence quality:
 
-- [ ] Apply the [image review](docs/reviews/2026-09-18-case-study-image-review.md) verdicts to what is actually served. `src/app/pages/Project.tsx:239` builds "The complete collection" from the whole `project.media` array, so fifteen images marked CUT are still published: six on UNCX Video, three on Rebrand, three on Menu, two on Badger Club, one on Noticia Lingo. Four are also still inside curated chapters: `youtube-thumbnails.webp`, `after-effects-ui.webp`, `research.webp`, `variables-setup.webp` and `database-schema.webp` (used twice). Curate the collection rather than rendering every file.
+- [ ] Apply the image review (a local working note) verdicts to what is actually served. `src/app/pages/Project.tsx:239` builds "The complete collection" from the whole `project.media` array, so fifteen images marked CUT are still published: six on UNCX Video, three on Rebrand, three on Menu, two on Badger Club, one on Noticia Lingo. Four are also still inside curated chapters: `youtube-thumbnails.webp`, `after-effects-ui.webp`, `research.webp`, `variables-setup.webp` and `database-schema.webp` (used twice). Curate the collection rather than rendering every file.
 - [x] Resolved 6 October 2026: the finding misdescribed the image. It is a board
   of UNCX Academy YouTube thumbnails, so the caption stands. Original item:
   Correct or remove the caption at `src/app/data/project-stories.ts:58`, which describes `youtube-thumbnails.webp` as published output in one visual language. The file is an asset-browser panel of unreadable icons.
@@ -299,7 +335,7 @@ Not covered by this audit and still open: colour contrast ratios, keyboard and s
 
 ## Parallel backlog - Figma archive and interactive showcases, 15 September 2026
 
-Stephen requested a review of every Figma export, organised presentation copies and appropriate public/private treatment. On 16 September he limited Figma to three active files with no paid subscription, provisionally two public showcases and private V7; the final selection and split are deferred. Other projects should use screenshots/recordings, with suitable projects across the archive considered for live coded demos. The [Figma register and workflow](docs/reviews/2026-09-07-design-reset/plan.md#figma-archive-and-interactive-showcases---15-september-2026) is the single working record, including all 12 Design and 4 FigJam files, backup naming, branding/access decisions, delivery formats and verification.
+Stephen requested a review of every Figma export, organised presentation copies and appropriate public/private treatment. On 16 September he limited Figma to three active files with no paid subscription, provisionally two public showcases and private V7; the final selection and split are deferred. Other projects should use screenshots/recordings, with suitable projects across the archive considered for live coded demos. The Figma register and workflow (a local working note) is the single working record, including all 12 Design and 4 FigJam files, backup naming, branding/access decisions, delivery formats and verification.
 
 - [x] Record the complete source inventory and preparation/integration workflow.
 - [x] Record Stephen's correction: New Menu System is live in production. The existing public case-study status is stale and still needs updating.

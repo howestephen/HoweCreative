@@ -1,15 +1,16 @@
 #!/usr/bin/env node
 // Builds a per-pixel depth map for the homepage particle portrait and packs
-// it beside the colour crop in a single lossless WebP: public/portrait/portrait-source.webp.
+// it beside the colour crop in a single WebP: public/portrait/portrait-source.webp.
 //
 // What it does:
-// 1. Loads docs/reviews/2026-09-07-design-reset/portrait-reference.png and
-//    crops it to PORTRAIT_CROP below, which must match PORTRAIT_CROP in
-//    src/app/experience/portrait-particles.ts.
-// 2. Upscales the crop so its long side is at least 1036px, then runs
+// 1. Loads public/portrait/portrait-reference-2x.webp, the 2x reference the
+//    site also serves as its static portrait, and crops it to CROP below:
+//    PORTRAIT_CROP in src/app/experience/portrait-particles.ts, multiplied
+//    by its PLATE_SCALE of 2.
+// 2. Resizes the crop so its long side is 1036px, then runs
 //    monocular depth estimation on it with @huggingface/transformers
 //    (Depth Anything V2, small variant, ONNX, CPU).
-// 3. Resizes the predicted depth back down to the crop's native 700x650
+// 3. Resizes the predicted depth to the crop's 1400x1300
 //    with bilinear filtering, then normalises it to 0..255 using the 1st and
 //    99th percentiles of the raw depth, computed only over pixels whose crop
 //    luma is >= BACKGROUND_LUMA_THRESHOLD (that threshold only ever chooses
@@ -20,11 +21,11 @@
 //    map is inverted if the nose does not come out nearer.
 // 4. Every pixel of the crop gets a written depth value; there is no
 //    background masking of the depth channel itself. A small Gaussian blur
-//    (sigma about 1.5px at 700x650) is applied to the depth channel to stop
+//    (sigma about 3px at 1400x1300) is applied to the depth channel to stop
 //    per-pixel model noise turning into z jitter, then
-//    public/portrait/portrait-source.webp is written (lossless): 1400x650, 8-bit RGB,
-//    no alpha. Left half (700x650) is the crop's colour pixels unchanged;
-//    right half (700x650) is the depth as grey (R=G=B=depth).
+//    public/portrait/portrait-source.webp is written (quality 90): 2800x1300,
+//    8-bit RGB, no alpha. Left half (1400x1300) is the crop's colour pixels;
+//    right half (1400x1300) is the depth as grey (R=G=B=depth).
 // 5. Copies the same image to a review sheet under the OS temp directory
 //    (printed at the end) for a human to check.
 //
@@ -43,21 +44,19 @@ import { fileURLToPath } from 'node:url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, '..');
 
-const SOURCE_IMAGE = path.join(
-  REPO_ROOT,
-  'docs/reviews/2026-09-07-design-reset/portrait-reference.png',
-);
+const SOURCE_IMAGE = path.join(REPO_ROOT, 'public/portrait/portrait-reference-2x.webp');
 const OUTPUT_IMAGE = path.join(REPO_ROOT, 'public/portrait/portrait-source.webp');
 const WORK_DIR = path.join(os.tmpdir(), 'howe-portrait-depth');
 const REVIEW_SHEET = path.join(WORK_DIR, 'depth-review.png');
 
-// Must match PORTRAIT_CROP in src/app/experience/portrait-particles.ts.
-const CROP = { x: 440, y: 8, width: 700, height: 650 };
+// PORTRAIT_CROP in src/app/experience/portrait-particles.ts, multiplied by
+// its PLATE_SCALE of 2: the source is the 2x reference.
+const CROP = { x: 880, y: 16, width: 1400, height: 1300 };
 
 // Rec.709 luma, 0..1. Pixels below this are treated as background.
 const BACKGROUND_LUMA_THRESHOLD = 0.027;
 
-// Upscale target (long side, px) fed to the model so facial relief resolves.
+// Long side, in px, of the copy fed to the model so facial relief resolves.
 const MIN_LONG_SIDE = 1036;
 
 // Percentile range used to normalise raw depth to 0..255.
@@ -65,14 +64,14 @@ const LOW_PERCENTILE = 1;
 const HIGH_PERCENTILE = 99;
 
 // Gaussian blur applied to the depth channel before writing, in px, at the
-// crop's native 700x650 resolution.
-const DEPTH_BLUR_SIGMA = 1.5;
+// crop's 1400x1300 resolution.
+const DEPTH_BLUR_SIGMA = 3;
 
-// Verification boxes, in crop-local pixel coordinates (0..700, 0..650).
+// Verification boxes, in crop-local pixel coordinates (0..1400, 0..1300).
 // Nose/cheek: the most forward-facing point on this right-facing profile.
-const NOSE_BOX = { x: 560, y: 260, width: 90, height: 110 };
+const NOSE_BOX = { x: 1120, y: 520, width: 180, height: 220 };
 // Hair at the top/back of the head: the furthest-back point in this crop.
-const HAIR_BOX = { x: 360, y: 15, width: 120, height: 80 };
+const HAIR_BOX = { x: 720, y: 30, width: 240, height: 160 };
 
 // Depth Anything V2, small. There is deliberately no fallback: an older
 // model loading silently would make the documented provenance false.
@@ -182,7 +181,7 @@ async function main() {
     `Portrait pixels: ${portraitPixelCount} / ${CROP.width * CROP.height} (luma >= ${BACKGROUND_LUMA_THRESHOLD})`,
   );
 
-  // Upscale the crop for the model so facial relief is resolved.
+  // Resize the crop for the model so facial relief is resolved.
   const scale = MIN_LONG_SIDE / Math.max(CROP.width, CROP.height);
   const upWidth = Math.round(CROP.width * scale);
   const upHeight = Math.round(CROP.height * scale);
@@ -195,7 +194,7 @@ async function main() {
 
   const upscaledTmpPath = path.join(path.dirname(REVIEW_SHEET), 'portrait-upscaled-for-model.png');
   await fs.writeFile(upscaledTmpPath, upscaledPngBuffer);
-  console.log(`Upscaled crop for the model: ${upWidth}x${upHeight} -> ${upscaledTmpPath}`);
+  console.log(`Resized crop for the model:${upWidth}x${upHeight} -> ${upscaledTmpPath}`);
 
   try {
     const { estimator, modelId } = await loadDepthEstimator();
@@ -313,12 +312,11 @@ async function main() {
     }
 
     await sharp(packed, { raw: { width: packedWidth, height: CROP.height, channels: 3 } })
-      .webp({ lossless: true, effort: 6 })
+      .webp({ quality: 90, effort: 6 })
       .toFile(OUTPUT_IMAGE);
     console.log(`Wrote ${OUTPUT_IMAGE}`);
 
-    // Review sheet: the packed image is already about 1400x650, so it is
-    // copied as-is rather than resized again.
+    // Review sheet: the packed image, copied as it is.
     await sharp(OUTPUT_IMAGE).png().toFile(REVIEW_SHEET);
     console.log(`Wrote review sheet: ${REVIEW_SHEET}`);
 
@@ -327,8 +325,8 @@ async function main() {
     console.log(
       `Verification: ${OUTPUT_IMAGE} is ${check.width}x${check.height}, ${check.channels} channels, hasAlpha=${check.hasAlpha}, format=${check.format}`,
     );
-    if (check.width !== 1400 || check.height !== 650 || check.channels !== 3 || check.hasAlpha) {
-      throw new Error('Output plate does not match the required 1400x650, 8-bit RGB, no-alpha spec.');
+    if (check.width !== CROP.width * 2 || check.height !== CROP.height || check.channels !== 3 || check.hasAlpha) {
+      throw new Error('Output plate does not match the required 2800x1300, 8-bit RGB, no-alpha spec.');
     }
 
     console.log(`Model used: ${modelId}`);

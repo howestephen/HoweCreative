@@ -32,9 +32,32 @@ homepage. The active editorial homepage uses Canvas 2D for its generative mark.
 The previous WebGL/dossier components are retained but not mounted while the
 replacement design is reviewed.
 
-On `codex/creative-technologist-portfolio`, the review experience is kept at
-`/study` so it can be tested without changing the production root route. The
-Three.js portrait chunk is lazy-loaded. The archive and case-study routes use
+On `codex/creative-technologist-portfolio`, the portrait experience is the
+root route; `/study` redirects to it. The Three.js portrait chunk is
+lazy-loaded.
+
+The portrait is one draw call of points sampled from
+`public/portrait/portrait-source.webp`: colour on the left half, a monocular
+depth estimate on the right, written by `scripts/build-portrait-depth.mjs`
+from the 2x reference in the same folder. `portrait-particles.ts` holds the
+sampler and the shaders. A point's whole path is a closed-form function of
+scroll and time, with no simulation state: the erosion front, a five-step
+walk through a divergence-free flow field, its place in a wrapped field of
+two dust sheets, and the walk home at the end of the page. The scalar blocks
+of the vertex shader are exported and run as JavaScript by
+`PortraitScene.test.tsx`, so the tests execute the shader's own arithmetic.
+`PortraitScene.tsx` owns the renderer, the lens and the frame loop;
+`portrait-post.ts` draws into a half-float buffer and adds bloom, and is the
+one module the scene tests replace. Without WebGL, with reduced motion or
+when the glow chain cannot be built, the page shows the static portrait.
+
+Glass panels are HTML over the canvas: a backdrop blur, a gradient rim and a
+pointer-led highlight in `portrait.css`. The practice section's copy is
+written out in `PortraitExperience.tsx` and held to `cv.json` by a test,
+because `cv.json` carries the email address and must stay in the lazy CV
+bundle (`scripts/verify-build.mjs` enforces that).
+
+The archive and case-study routes use
 HTML-first content, route-specific CSS and the same dark spatial shell. Archive
 filters are stored in the URL. V7 and the mixed UNCX application concepts are
 not linked from the new public archive; the existing public assets remain an
@@ -88,9 +111,8 @@ That planned service is intended to run separately on Railway and integrate with
 
 Relevant historical planning docs:
 
-- [posting pipeline design](docs/plans/2026-03-24-posting-pipeline-design.md)
-- [posting pipeline implementation](docs/plans/2026-03-24-posting-pipeline-impl.md)
-- [Telegram setup](docs/telegram-bot-setup.md)
+- posting pipeline design, posting pipeline implementation and Telegram
+  setup: local working notes, not in this repository
 
 ## Architectural Boundary
 

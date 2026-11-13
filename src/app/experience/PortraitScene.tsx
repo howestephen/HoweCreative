@@ -1,12 +1,14 @@
 import { useEffect, useRef, type RefObject } from "react";
 import {
-  BufferGeometry, Float32BufferAttribute, NoToneMapping, PerspectiveCamera,
-  Points, Scene, ShaderMaterial, Vector2, WebGLRenderer,
+  BufferGeometry, Color, Float32BufferAttribute, NoToneMapping, NormalBlending, PerspectiveCamera,
+  Points, Scene, ShaderMaterial, Vector2, Vector3, WebGLRenderer,
 } from "three";
 import {
-  fragmentShader, PORTRAIT_CROP, PORTRAIT_POINTS_SOURCE, portraitCamera, portraitFraming, portraitPhases, samplePortrait, vertexShader,
+  fragmentShader, LENS_DISTANCE, LENS_FOV, PLATE_HEIGHT, PLATE_SCALE, PORTRAIT_CROP, PORTRAIT_POINTS_SOURCE,
+  portraitCamera, portraitFraming, samplePortrait, smooth, vertexShader,
   type ParticleMotion,
 } from "./portrait-particles";
+import { createPortraitPost, type PortraitPost } from "./portrait-post";
 
 type Props = {
   motion: RefObject<ParticleMotion>;
@@ -19,45 +21,59 @@ export default function PortraitScene({ motion, onReady, onUnavailable }: Props)
   useEffect(() => {
     const element = host.current;
     if (!element) return;
+    let created: WebGLRenderer | undefined;
     let renderer: WebGLRenderer;
+    let post: PortraitPost;
+    const scene = new Scene();
+    scene.background = new Color(0x060707);
+    const camera = new PerspectiveCamera(LENS_FOV, 1, 0.1, 60);
+    camera.position.z = LENS_DISTANCE;
     try {
-      renderer = new WebGLRenderer({ alpha: false, antialias: false, powerPreference: "high-performance" });
+      renderer = created = new WebGLRenderer({ alpha: false, antialias: false, powerPreference: "high-performance" });
+      post = createPortraitPost(renderer, scene, camera);
     } catch {
+      // A renderer that exists but cannot glow still holds a live context:
+      // give it back, or a few failed mounts exhaust the browser's allowance.
+      created?.dispose();
+      created?.forceContextLoss();
       onUnavailable();
       return;
     }
     const canvas = renderer.domElement;
     element.appendChild(canvas);
-    renderer.setClearColor(0x060707, 1);
     renderer.toneMapping = NoToneMapping;
-    const scene = new Scene();
-    const camera = new PerspectiveCamera(40, 1, 0.1, 40);
-    camera.position.z = 6;
     const geometry = new BufferGeometry();
     const uniforms = {
-      uRelease: { value: 0 }, uEnding: { value: 0 },
+      uRelease: { value: 0 }, uDrift: { value: 0 }, uEnding: { value: 0 },
       uTime: { value: 0 }, uDpr: { value: 1 }, uScale: { value: 1 },
-      uAspect: { value: 1 }, uPixel: { value: 2 }, uPointer: { value: new Vector2() },
-      uTurn: { value: 0 }, uSeparate: { value: 0 }, uLoosen: { value: 0 }, uDisperse: { value: 0 }, uFocus: { value: 6 },
-      uPress: { value: 0 },
+      uAspect: { value: 1 }, uProj: { value: 1000 }, uCell: { value: 0.004 },
+      uFocus: { value: LENS_DISTANCE }, uAperture: { value: 0.015 },
+      uPointer: { value: new Vector2() }, uPress: { value: 0 },
+      uHome: { value: new Vector3(0, 0.06, 1) }, uHomeDim: { value: 0.5 },
     };
     const material = new ShaderMaterial({
       uniforms, vertexShader, fragmentShader, transparent: true,
+      // Premultiplied, so one draw call lays the photograph over the dark and
+      // adds the released dust's light to it (see the fragment shader).
+      blending: NormalBlending, premultipliedAlpha: true,
       // A translucent cloud, not an opaque surface. Depth-writing cores made
       // neighbouring samples switch occlusion as soon as the relief moved.
       depthWrite: false, depthTest: false,
     });
     const points = new Points(geometry, material);
-    points.renderOrder = 1;
     const pointer = new Vector2();
+    const eased = new Vector2();
+    const target = new Vector3();
+    const offset = new Vector3();
     points.frustumCulled = false;
     scene.add(points);
     let disposed = false;
     let loaded = false;
     let frame = 0;
     let previous = 0;
-    let sampleHeight = 594;
+    let sampleHeight = 1300;
     let quality = window.innerWidth < 700 ? 1.35 : 1.75;
+    let glow = true;
     let slowFrames = 0;
     let measuredFrames = 0;
     let totalFrameTime = 0;
@@ -82,10 +98,10 @@ export default function PortraitScene({ motion, onReady, onUnavailable }: Props)
       if (!width || !height) return false;
       sizeDirty = false;
       const ratio = Math.min(window.devicePixelRatio || 1, quality);
-      // Three clears the drawing buffer even for an unchanged setSize call.
+      // Resizing clears the drawing buffer even when nothing changed.
       // Allocate only when necessary, and only immediately BEFORE painting.
       if (width !== drawnWidth || height !== drawnHeight || ratio !== drawnRatio) {
-        renderer.setDrawingBufferSize(width, height, ratio);
+        post.setSize(width, height, ratio);
         drawnWidth = width;
         drawnHeight = height;
         drawnRatio = ratio;
@@ -98,7 +114,11 @@ export default function PortraitScene({ motion, onReady, onUnavailable }: Props)
       // Fit the physical head (source u=0.29..0.99) on tall, narrow screens.
       // The peripheral constellation may extend off-screen; the face may not.
       uniforms.uScale.value = framing.scale;
-      uniforms.uPixel.value = Math.max(1.25, framing.pixelHeight / sampleHeight * 1.8);
+      // CSS pixels per world unit at a distance of one unit, and the world
+      // size of one sampled cell: together they size a point exactly, at any
+      // lens distance.
+      uniforms.uProj.value = height / (2 * Math.tan(LENS_FOV * Math.PI / 360));
+      uniforms.uCell.value = PLATE_HEIGHT * framing.scale / sampleHeight;
       return true;
     };
     const render = (now: number) => {
@@ -108,38 +128,56 @@ export default function PortraitScene({ motion, onReady, onUnavailable }: Props)
       const dt = Math.min(elapsed, 0.05);
       previous = now;
       slowFrames = dt > 0.032 ? slowFrames + 1 : Math.max(0, slowFrames - 1);
-      if (slowFrames > 45 && quality > 1) {
-        quality = 1;
-        sizeDirty = true;
+      // Under sustained slow frames give up the glow first, then resolution.
+      if (slowFrames > 45 && (glow || quality > 1)) {
+        if (glow) { glow = false; post.setGlow(false); }
+        else { quality = 1; sizeDirty = true; }
         slowFrames = 0;
       }
       if (!applySize()) return; // Wait for a measurable ResizeObserver update.
       const state = motion.current;
+      const wide = camera.aspect > 1.1;
+      const closing = smooth(0, 1, state.ending);
       uniforms.uRelease.value = state.release;
-      const phase = portraitPhases(state.release);
-      // The portrait turns on its own axis. It stays exactly where it is in
-      // frame, so nothing can slide out of a narrow viewport, and the total
-      // angle stays well short of showing the relief edge-on. The turn and the
-      // dolly are what make the slices and relief read as parallax.
-      uniforms.uTurn.value = phase.turn * 0.62;
-      uniforms.uSeparate.value = phase.separate;
-      uniforms.uLoosen.value = phase.loosen;
-      uniforms.uDisperse.value = phase.disperse;
+      uniforms.uDrift.value = state.drift ?? 0;
       uniforms.uEnding.value = state.ending;
-      // The opening camera settles once. Page travel does not add another
-      // movement while the circle gathers around the closing text.
-      const cameraPosition = portraitCamera(state.release, camera.aspect);
-      camera.position.set(cameraPosition.x, cameraPosition.y, cameraPosition.z);
-      // The focal plane sits at the face pivot (z = 0) throughout the dolly.
-      uniforms.uFocus.value = cameraPosition.z;
+      // The head stands where it opened; at the end of the page it re-forms
+      // smaller and to one side, dimmed behind the closing words.
+      const scale = uniforms.uScale.value;
+      const homeX = wide ? 0.32 : -0.7 * scale;
+      uniforms.uHome.value.set(
+        homeX + ((wide ? 1.95 : 0.25 * scale) - homeX) * closing,
+        0.06 - (wide ? 0.3 : 0.55) * closing,
+        1 - (wide ? 0.24 : 0.3) * closing,
+      );
+      uniforms.uHomeDim.value = wide ? 0.42 : 0.32;
+      // The lens orbits the head about its own axis and closes on it. The
+      // opening frame is the flat plate exactly; the orbit and the dolly are
+      // what make the relief and the lifting dust read as depth. A resting
+      // pointer leans the lens a little, so the relief answers the hand.
+      const lens = portraitCamera(state.release, camera.aspect, state.ending);
+      eased.lerp(pointer.set(state.pointerX, state.pointerY), 1 - Math.exp(-dt * 3));
+      const cos = Math.cos(lens.yaw);
+      const sin = Math.sin(lens.yaw);
+      const reach = lens.distance / LENS_DISTANCE;
+      // Opening pose (0, 0, 6) looking at the origin, turned about the head.
+      target.set(homeX - homeX * cos, lens.y * 0.4, homeX * sin);
+      offset.set(sin * LENS_DISTANCE, 0, cos * LENS_DISTANCE).multiplyScalar(reach);
+      camera.position.copy(target).add(offset);
+      camera.position.x += eased.x * 0.22 * cos;
+      camera.position.z -= eased.x * 0.22 * sin;
+      camera.position.y += lens.y + eased.y * 0.14;
+      camera.lookAt(target);
+      // The plane of focus stays on the head, so dust lifting towards the
+      // lens opens into soft discs in front of it.
+      uniforms.uFocus.value = lens.distance;
       if (!state.paused) uniforms.uTime.value += dt;
-      pointer.set(state.pointerX, state.pointerY);
       const pressTarget = state.pressed && !state.paused && state.release < 0.18 ? 1 : 0;
       if (pressTarget && !wasPressed) uniforms.uPointer.value.copy(pointer);
       else uniforms.uPointer.value.lerp(pointer, 1 - Math.exp(-dt * 10));
       wasPressed = Boolean(pressTarget);
-      uniforms.uPress.value += (pressTarget - uniforms.uPress.value) * (1 - Math.exp(-dt * 10));
-      renderer.render(scene, camera);
+      uniforms.uPress.value += (pressTarget - uniforms.uPress.value) * (1 - Math.exp(-dt * 6));
+      post.render();
       if (!loaded) return; // A shader error can occur synchronously in render.
       if (!ready) {
         paintedFrames++;
@@ -161,11 +199,10 @@ export default function PortraitScene({ motion, onReady, onUnavailable }: Props)
         totalFrameTime = 0;
       }
       warmFrames = Math.max(0, warmFrames - 1);
-      if (!ready
-        || warmFrames > 0
-        || (!state.paused && state.release > 0.001)
-        || Math.abs(pressTarget - uniforms.uPress.value) > 0.001
-        || uniforms.uPointer.value.distanceToSquared(pointer) > 0.00001) {
+      // The field is alive at rest: the fringe breathes and the dust drifts.
+      // Only a pause (an open preview) lets the loop go idle.
+      if (!ready || warmFrames > 0 || !state.paused
+        || Math.abs(pressTarget - uniforms.uPress.value) > 0.001) {
         frame = requestAnimationFrame(render);
       }
     };
@@ -204,9 +241,12 @@ export default function PortraitScene({ motion, onReady, onUnavailable }: Props)
     image.onload = () => {
       if (disposed) return;
       try {
-        const width = window.innerWidth < 700 ? 400 : 640;
-        sampleHeight = Math.round(width * PORTRAIT_CROP.height / PORTRAIT_CROP.width);
-        const { width: cropWidth, height: cropHeight } = PORTRAIT_CROP;
+        const cropWidth = PORTRAIT_CROP.width * PLATE_SCALE;
+        const cropHeight = PORTRAIT_CROP.height * PLATE_SCALE;
+        // Every plate pixel is a point on a desktop; a phone takes every
+        // second one, which still outresolves its screen.
+        const width = window.innerWidth < 700 ? cropWidth / 2 : cropWidth;
+        sampleHeight = Math.round(width * cropHeight / cropWidth);
         // The plate must be colour and depth side by side, or the depth
         // half would be sampled from the wrong region without complaint.
         if (image.naturalWidth !== cropWidth * 2 || image.naturalHeight !== cropHeight) {
@@ -231,6 +271,7 @@ export default function PortraitScene({ motion, onReady, onUnavailable }: Props)
         geometry.setAttribute("aDepth", new Float32BufferAttribute(data.depths, 1));
         canvas.dataset.particles = String(data.positions.length / 3);
         loaded = true;
+        sizeDirty = true;
         resize();
         wake();
       } catch { fail(); }
@@ -247,6 +288,7 @@ export default function PortraitScene({ motion, onReady, onUnavailable }: Props)
       canvas.removeEventListener("webglcontextlost", contextLost);
       geometry.dispose();
       material.dispose();
+      post.dispose();
       if (motion.current.invalidate === wake) delete motion.current.invalidate;
       renderer.dispose();
       renderer.forceContextLoss();

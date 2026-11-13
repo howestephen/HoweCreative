@@ -3,7 +3,7 @@ import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { MemoryRouter } from "react-router";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { acceptsHeroPageDown, PortraitExperience } from "./PortraitExperience";
+import { acceptsHeroPageDown, PortraitExperience, practice, roles } from "./PortraitExperience";
 import { RELEASE_LENGTH } from "./portrait-particles";
 import type { ParticleMotion } from './portrait-particles';
 
@@ -122,6 +122,92 @@ describe("portrait review experience", () => {
     expect(screen.getAllByRole("button", { name: /^Open .* preview$/ })).toHaveLength(6);
     expect(screen.getByRole("link", { name: "Full archive" })).toHaveAttribute("href", "/archive");
     expect(createAudio).not.toHaveBeenCalled();
+  });
+
+  it("shows each project's work inside its card, composed as a wall", () => {
+    const { container } = mount();
+    const cards = [...container.querySelectorAll<HTMLElement>(".spatial-card")];
+    expect(cards.map(card => card.dataset.span)).toEqual(["4", "2", "2", "4", "3", "3"]);
+    for (const card of cards) {
+      expect(card).toHaveClass("glass");
+      const media = card.querySelector(".spatial-card-media")!;
+      // Decorative here: the card's own label names it and the preview
+      // carries the image's description.
+      expect(media).toHaveAttribute("aria-hidden", "true");
+      expect(media.querySelector("img")).toHaveAttribute("alt", "");
+      expect(media.querySelector("img")?.getAttribute("src")).toMatch(/^\/case-studies\//);
+    }
+    // One photograph fills its panel; phone screens show their top; marks
+    // supplied on a dark ground lose their box.
+    const kinds = cards.map(card => {
+      const media = card.querySelector<HTMLElement>(".spatial-card-media")!;
+      return [media.dataset.fit, media.dataset.crop, "blend" in media.dataset ? "blend" : ""].filter(Boolean).join(" ");
+    });
+    expect(kinds).toEqual(["cover", "contain peek", "contain blend", "contain", "contain blend", "contain peek"]);
+  });
+
+  it("repeats the CV's own summary and roles in the practice section", () => {
+    const cv = JSON.parse(readFileSync(resolve("src/app/data/cv.json"), "utf8")) as {
+      variants: Record<string, { summary: string }>;
+      experience: { title: string; company: string; dates: string }[];
+    };
+    expect(practice).toBe(cv.variants["creative-technologist"]?.summary);
+    expect(roles).toEqual(cv.experience.map(({ title, company, dates }) => ({ title, company, dates })));
+    const { container } = mount();
+    const section = container.querySelector(".spatial-practice")!;
+    expect(section.querySelector("h2")).toHaveTextContent("Practice");
+    expect(section).toHaveTextContent(practice);
+    expect(section.querySelectorAll("ol > li")).toHaveLength(cv.experience.length);
+    expect(section.querySelector("a")).toHaveAttribute("href", "/cv");
+    // cv.json carries the email address: the home page must never import it.
+    const source = readFileSync(resolve("src/app/experience/PortraitExperience.tsx"), "utf8");
+    expect(source).not.toMatch(/from ["'][^"']*cv\.json["']/);
+    // The work, then the practice, then the closing words.
+    expect(container.querySelector(".spatial-work")!.nextElementSibling).toBe(section);
+    expect(section.nextElementSibling).toHaveClass("particle-ending");
+  });
+
+  it("leans and lights a glass panel under a mouse, and leaves touch and reduced motion flat", () => {
+    const { container, unmount } = mount();
+    const grid = container.querySelector<HTMLElement>(".spatial-grid")!;
+    const [first, second] = [...grid.querySelectorAll<HTMLElement>(".spatial-card")] as [HTMLElement, HTMLElement];
+    vi.spyOn(first, "getBoundingClientRect").mockReturnValue({ left: 100, top: 200, width: 400, height: 200 } as DOMRect);
+    vi.spyOn(second, "getBoundingClientRect").mockReturnValue({ left: 600, top: 200, width: 200, height: 200 } as DOMRect);
+    fireEvent.pointerMove(first.querySelector("h3")!, { pointerType: "touch", clientX: 200, clientY: 250 });
+    expect(first.dataset.lit).toBeUndefined();
+    fireEvent.pointerMove(first.querySelector("h3")!, { pointerType: "mouse", clientX: 200, clientY: 250 });
+    expect(first.dataset.lit).toBe("");
+    expect(first.style.getPropertyValue("--light-x")).toBe("25.0%");
+    expect(first.style.getPropertyValue("--light-y")).toBe("25.0%");
+    // Towards the pointer, and never more than a few degrees.
+    expect(first.style.getPropertyValue("--lean-x")).toBe("1.25deg");
+    expect(first.style.getPropertyValue("--lean-y")).toBe("-1.25deg");
+    fireEvent.pointerMove(second, { pointerType: "mouse", clientX: 800, clientY: 400 });
+    expect(first.dataset.lit).toBeUndefined();
+    expect(first.style.getPropertyValue("--lean-x")).toBe("");
+    expect(second.style.getPropertyValue("--lean-x")).toBe("-2.50deg");
+    expect(second.style.getPropertyValue("--lean-y")).toBe("2.50deg");
+    fireEvent.pointerLeave(grid);
+    expect(second.dataset.lit).toBeUndefined();
+    expect(second.style.getPropertyValue("--lean-y")).toBe("");
+    unmount();
+    preferences.reduced = true;
+    const still = mount().container.querySelector<HTMLElement>(".spatial-card")!;
+    fireEvent.pointerMove(still, { pointerType: "mouse", clientX: 10, clientY: 10 });
+    expect(still.dataset.lit).toBeUndefined();
+  });
+
+  it("frosts every panel and keeps the entrance motion out of reduced motion", () => {
+    const css = readFileSync(resolve("src/styles/portrait.css"), "utf8");
+    const glass = css.slice(css.indexOf("\n.glass {"), css.indexOf("\n.glass::before"));
+    expect(glass).toMatch(/backdrop-filter: blur\(\d+px\)/);
+    expect(glass).toContain("-webkit-backdrop-filter");
+    // Panels only rise into place where the visitor allows motion and the
+    // browser can tie the animation to scroll; otherwise they are simply there.
+    const arrival = css.slice(css.indexOf("@supports (animation-timeline: view())"));
+    expect(arrival.slice(0, arrival.indexOf("\n}"))).not.toMatch(/^\s*\.spatial/m);
+    expect(arrival).toContain("[data-motion='full'] .spatial-card");
+    expect(css).not.toMatch(/\.spatial-card[^{]*\{[^}]*opacity: 0/);
   });
 
   it("makes the faded opening inert in reduced motion", async () => {
