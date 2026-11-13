@@ -48,3 +48,11 @@ logs/
 tmp/
 .cache/
 .claude/settings.local.json
+
+# Internal working notes stay local only; the repository is public.
+/handoffs/*
+!/handoffs/TEMPLATE.md
+/_archive/
+/docs/plans/
+/docs/reviews/
+/docs/telegram-bot-setup.md
