@@ -31,9 +31,7 @@
 .spatial-case .case-screen-controls button[aria-pressed='true'] { color: #eceee8; border-bottom-color: #a7b6aa; }
 .spatial-case .case-screen-controls button[aria-pressed='true'] > span { color: #bac6bc; }
 .spatial-case .case-facts { margin-top: 24px; padding: 28px 30px; border: 1px solid #c5cec526; border-radius: 10px; background: linear-gradient(120deg, #d9e1da0b, #ffffff03), #0c100fcc; }
-.spatial-case .case-facts dt { color: #8e978f; }
 .spatial-case .case-facts dd { color: #d1d6d0; }
-.spatial-case .case-context { padding-block: 105px; }
 .spatial-case .case-context h2 { color: #e2e5df; }
 .spatial-case .case-contribution > p,
 .spatial-case .case-chapter-copy p,
@@ -41,9 +39,7 @@
 .spatial-case .case-full-context p,
 .spatial-case .case-full-context li { color: #a8b0a9; }
 .spatial-case .case-tools > span { color: #919a92; }
-.spatial-case .case-chapter { padding-block: 100px; border-color: #c3ccc325; }
 .spatial-case .case-chapter-copy h2 { color: #edeee8; font-weight: 400 !important; }
-.spatial-case .case-evidence { gap: 30px; }
 .spatial-case .case-image > a { overflow: hidden; border: 1px solid #c0c9c026; border-radius: 6px; box-shadow: 0 24px 60px #00000052; }
 .spatial-case .case-image-expand { border-color: #dfe6dc48; background: #08100bcc; }
 /* The gallery thumbnail background is set on the image itself in the editorial
@@ -63,22 +59,79 @@
 .spatial-case .case-workflow { color: #f0f1eb; }
 .spatial-case .case-workflow .eyebrow { color: #b5c0b6; }
 .spatial-case .case-workflow p { color: #aeb6af; }
-.spatial-case .case-outcome { padding-block: 90px; border-color: #c3ccc325; }
 .spatial-case .case-outcome h2 { color: #edf0e9; }
 .spatial-case .case-full-context { padding-top: 16px; border-color: #c3ccc325; }
 .spatial-case .case-full-context > summary { color: #d4d9d3; }
 .spatial-case .case-full-context h3 { color: #e2e6e0; }
 .spatial-case .case-collection { padding-top: 50px; }
 .spatial-case .case-collection-intro p { color: #929a93; }
-.spatial-case .gallery-grid button { background: #111513; }
 .spatial-case .gallery-grid button > span,
 .spatial-case .gallery-heading { color: #a5ada6; }
 .spatial-case .next-project { border-color: #c3ccc32c; color: #e5e8e2; }
 .spatial-case .next-project:hover { background: #c7d0c70a; }
 .spatial-case .case-next strong { font-weight: 400 !important; }
 
+/* One quiet system for every case study, shared with the home page.
+   Labels are plain small text, not capital monospace. Facts are a ruled line,
+   not a box. Every chapter has the same shape: its heading on the left, its
+   words on the right and its evidence across the full width beneath, in one
+   even row. Frames share one corner and one hairline. */
+.spatial-case .eyebrow,
+.spatial-case .case-tools > span { font-family: inherit; font-size: 13px; letter-spacing: 0; text-transform: none; }
+.spatial-case .case-study { width: min(1180px, calc(100% - 120px)); }
+.spatial-case .case-heading h1 { max-width: 980px; font-size: clamp(46px, 5.6vw, 84px); line-height: 1; letter-spacing: -.055em; text-wrap: balance; }
+.spatial-case .case-film-lead,
+.spatial-case .case-art-lead,
+.spatial-case .case-product-lead,
+.spatial-case .case-output-lead,
+.spatial-case .case-workflow { overflow: hidden; border-color: #ffffff1f; border-radius: 18px; }
+/* The caption sits inside the rounded frame, clear of its corners. */
+.spatial-case .case-film-lead figcaption,
+.spatial-case .case-art-lead figcaption { padding: 0 20px 16px; }
+.spatial-case .case-facts { margin-top: 34px; padding: 26px 0; border: 0; border-block: 1px solid #ffffff1a; border-radius: 0; background: none; }
+.spatial-case .case-facts dt { font: inherit; font-size: 13px; letter-spacing: 0; text-transform: none; color: #a3aaa5; margin-bottom: 6px; }
+.spatial-case .case-facts dd { font-size: 14px; }
+.spatial-case .case-tools { gap: 2px 0; }
+.spatial-case .case-tools > span:not(:last-child)::after { content: ","; margin-right: .45em; }
+.spatial-case .case-context { padding-block: 96px; }
+.spatial-case .case-chapter,
+.spatial-case .case-chapter-paired,
+.spatial-case .case-chapter-text { grid-template-columns: minmax(0, 1fr); gap: 52px; padding-block: 96px; border-color: #ffffff1a; }
+.spatial-case .case-chapter .case-chapter-copy { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 0 clamp(40px, 7vw, 110px); max-width: none; margin-inline: 0; }
+.spatial-case .case-chapter .case-chapter-copy > .eyebrow { grid-column: 1 / -1; grid-row: 1; }
+.spatial-case .case-chapter .case-chapter-copy h2 { grid-column: 1; grid-row: 2 / span 12; max-width: 520px; margin-block: 18px 0; font-size: clamp(28px, 2.9vw, 42px); }
+.spatial-case .case-chapter .case-chapter-copy p { grid-column: 2; grid-row: auto; margin-top: 0; font-size: 15px; line-height: 1.75; }
+.spatial-case .case-chapter .case-chapter-copy p:first-of-type { margin-top: 24px; }
+.spatial-case .case-chapter .case-chapter-copy p + p { margin-top: 16px; }
+.spatial-case .case-chapter .case-evidence { width: 100%; max-width: none; justify-self: stretch; gap: 26px; }
+.spatial-case .case-chapter .case-evidence-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.spatial-case .case-chapter .case-evidence-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.spatial-case .case-chapter .case-evidence-3 > :first-child { grid-column: auto; }
+.spatial-case .case-chapter-portrait .case-evidence-1 { max-width: 620px; justify-self: center; }
+.spatial-case .case-image > a { border-color: #ffffff1f; border-radius: 14px; }
+.spatial-case .case-image figcaption { margin-top: 12px; font-size: 13px; }
+.spatial-case .case-outcome { padding-block: 96px; border-color: #ffffff1a; }
+.spatial-case .case-full-context { border-color: #ffffff1a; }
+/* The collection: films three to a row, each centred in its column at the
+   height of a 16:9 neighbour, so the wall reads as a grid. */
+.spatial-case .case-collection { padding-top: 70px; }
+.spatial-case .case-collection .video-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 26px 22px; }
+.spatial-case .video-grid figure { margin: 0; }
+.spatial-case .video-grid video { display: block; margin-inline: auto; border-radius: 12px; background: #0a0d0d; outline: 1px solid #ffffff1a; outline-offset: -1px; }
+.spatial-case .video-grid figcaption { margin-top: 10px; font-size: 13px; color: #a3aaa5; }
+.spatial-case .case-collection .gallery-heading { border-color: #ffffff1a; }
+.spatial-case .case-collection .gallery-heading h2 { font-size: 13px; font-weight: 400; letter-spacing: 0; color: #a3aaa5; }
+.spatial-case .gallery-grid img,
+.spatial-case .case-collection .gallery-grid img { border-color: #ffffff1a; border-radius: 12px; }
+.spatial-case .gallery-grid button { background: none; }
+.spatial-case .next-project { border-color: #ffffff1a; }
+
 @media (max-width: 900px) {
   .spatial-case .case-study { width: calc(100% - 48px); }
+  .spatial-case .case-chapter .case-chapter-copy { grid-template-columns: minmax(0, 1fr); }
+  .spatial-case .case-chapter .case-chapter-copy h2,
+  .spatial-case .case-chapter .case-chapter-copy p { grid-column: 1; grid-row: auto; }
+  .spatial-case .case-collection .video-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 700px) {
   .spatial-case { padding-top: 125px; }
@@ -86,8 +139,12 @@
   .spatial-case .case-breadcrumb { margin-bottom: 42px; }
   .spatial-case .case-heading h1 { font-size: clamp(44px, 13vw, 68px); }
   .spatial-case .case-heading-bottom { margin-block: 28px 36px; }
-  .spatial-case .case-facts { padding: 22px; }
+  .spatial-case .case-facts { padding: 22px 0; }
   .spatial-case .case-context,
   .spatial-case .case-chapter { padding-block: 62px; }
   .spatial-case .case-outcome { padding-block: 58px; }
+  .spatial-case .case-chapter { gap: 34px; }
+  .spatial-case .case-chapter .case-evidence-2,
+  .spatial-case .case-chapter .case-evidence-3,
+  .spatial-case .case-collection .video-grid { grid-template-columns: minmax(0, 1fr); }
 }

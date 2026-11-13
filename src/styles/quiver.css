@@ -1,6 +1,8 @@
 .quiver-case {
-  --quiver-paper: #efeee9;
-  --quiver-ink: #151615;
+  /* The production sections were a pale paper band between black ones. They
+     now share the site's dark ground, so the page reads as one piece. */
+  --quiver-paper: #060707;
+  --quiver-ink: #edece7;
   background: #080909;
   color: #f1f0eb;
 }
@@ -15,13 +17,12 @@
   outline-offset: 6px;
 }
 
+/* Plain small text, as on every other case study: capital monospace labels
+   on every block made the page read as busy. */
 .quiver-label {
   display: block;
-  font-family: var(--font-technical);
-  font-size: 11px;
-  letter-spacing: 0.055em;
+  font-size: 13px;
   line-height: 1.6;
-  text-transform: uppercase;
 }
 
 .quiver-opening {
@@ -264,7 +265,7 @@
 }
 
 .quiver-production .quiver-label {
-  color: #62665e;
+  color: #a3aaa5;
 }
 
 .quiver-brief {
@@ -293,7 +294,7 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 50px;
   padding-top: 26px;
-  border-top: 1px solid #15161535;
+  border-top: 1px solid #ffffff24;
 }
 
 .quiver-credits dt,
@@ -302,14 +303,14 @@
   font-family: var(--font-technical);
   font-size: 11px;
   letter-spacing: 0.04em;
-  color: #62665e;
+  color: #a3aaa5;
   text-transform: uppercase;
 }
 
 .quiver-credits dd {
   font-size: 14px;
   line-height: 1.75;
-  color: #4f544c;
+  color: #b9c0ba;
 }
 
 .quiver-direction,
@@ -327,15 +328,15 @@
 
 .quiver-production .quiver-chapter-copy > p,
 .quiver-production .quiver-section-intro > p {
-  color: #555a51;
+  color: #b6bdb6;
 }
 
 .quiver-chapter-copy > .quiver-principle {
   padding-top: 28px;
   margin-top: 28px;
-  border-top: 1px solid #15161535;
+  border-top: 1px solid #ffffff24;
   font-size: 13px;
-  color: #272a25;
+  color: #e2e5df;
 }
 
 .quiver-direction-image img,
@@ -358,12 +359,12 @@
   margin-top: 12px;
   font-size: 12px;
   line-height: 1.6;
-  color: #62665e;
+  color: #a3aaa5;
 }
 
 .quiver-shot-section,
 .quiver-control {
-  background: #141615;
+  background: #0b0e0e;
   color: #eeeee8;
 }
 
@@ -460,7 +461,7 @@
 .quiver-tools {
   padding-top: 20px;
   margin-top: 32px;
-  border-top: 1px solid #15161535;
+  border-top: 1px solid #ffffff24;
 }
 
 .quiver-tools > div {
@@ -524,14 +525,14 @@
 
 .quiver-authorship > div {
   padding-top: 22px;
-  border-top: 1px solid #15161535;
+  border-top: 1px solid #ffffff24;
 }
 
 .quiver-authorship p {
   margin-top: 14px;
   font-size: 14px;
   line-height: 1.75;
-  color: #555a51;
+  color: #b6bdb6;
 }
 
 .quiver-outcome {
@@ -540,7 +541,7 @@
   gap: 50px;
   align-items: start;
   padding-block: 80px;
-  border-top: 1px solid #15161535;
+  border-top: 1px solid #ffffff24;
 }
 
 .quiver-outcome h2 {
@@ -550,7 +551,7 @@
 .quiver-outcome > p {
   font-size: 15px;
   line-height: 1.8;
-  color: #555a51;
+  color: #b6bdb6;
 }
 
 .quiver-collection {
@@ -559,7 +560,7 @@
 
 .quiver-collection .gallery-heading {
   margin-bottom: 35px;
-  border-top-color: #15161535;
+  border-top-color: #ffffff24;
 }
 
 .quiver-collection .gallery-heading h2 {
@@ -578,7 +579,7 @@
 }
 
 .quiver-collection .gallery-grid button > span {
-  color: #555a51;
+  color: #b6bdb6;
 }
 
 .quiver-next {
@@ -689,10 +690,6 @@
   .quiver-title-block h1 {
     margin-block: 24px;
     font-size: clamp(88px, 24vw, 180px);
-  }
-
-  .quiver-title-block > .quiver-label {
-    font-size: 10px;
   }
 
   .quiver-deck {

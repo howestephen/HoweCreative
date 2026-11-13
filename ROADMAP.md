@@ -40,6 +40,11 @@ the lack of depth, an empty page and flat transparent boxes.
 - [x] The static portrait is served from `public/portrait/`. It was imported
   from `docs/reviews/`, which the public repository no longer carries, so
   the branch had stopped building.
+- [x] Case study pages calmed into the same system: plain small labels in
+  place of capital monospace, facts as a ruled line, one chapter layout
+  (heading left, words right, evidence in one even row beneath), one frame
+  corner, films three to a row, the project counter removed, and Quiver's
+  pale bands taken to the site's dark ground. No copy or media changed.
 - Checked in headless Chrome at 1440x900 and 390x844, with reduced motion,
   the open preview and hover. Not checked in Safari or Firefox, or on a
   physical phone.

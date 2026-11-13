@@ -266,10 +266,6 @@ function ProjectStory({ project }: { project: PortfolioProject }) {
           <Link to="/#work">
             <ArrowLeft size={15} /> Selected work
           </Link>
-          <span className="eyebrow">
-            {String(projects.indexOf(project) + 1).padStart(2, "0")} /{" "}
-            {String(projects.length).padStart(2, "0")}
-          </span>
         </div>
         <header className="case-heading">
           <p className="eyebrow">
