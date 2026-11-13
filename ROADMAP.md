@@ -35,7 +35,7 @@ Open:
 
 ## Stephen
 
-- [S] Approve merging `chore/retrofit-2026-11-13` into main.
+- [x] Approve merging `chore/retrofit-2026-11-13` into main. Approved in conversation and merged 13 November.
 - [S] Delete the old publication-scan token secret under Actions in the GitHub
   repository settings (the hosted publication scan no longer exists).
 - [S] Complete the shared allowance record (the kit's COST_CONTROLS.md), then
