@@ -14,7 +14,7 @@ docs/private/
 assets-archive/
 
 # Local agent tool state and logs
-.claude/hooks-state/
+**/.claude/hooks-state/
 **/.claude/scheduled_tasks.lock
 **/.claude/worktrees/
 .remember/

@@ -84,6 +84,11 @@ Round 3 escalates to Stephen.
 - Keep exactly two long-lived branches: `main` and the single active redesign
   branch. Retire merged or superseded branches immediately; tag anything worth
   keeping instead of leaving a branch.
+- Exception, 13 November 2026, until Stephen decides the redesign direction:
+  `fix/video-captions` waits for his proofread, and two concept branches
+  stay local only, never pushed: `claude/showreel-redesign` (rejected
+  11 November) and `claude/brief-machine` (the paused blank-page concepts).
+  Retiring or tagging them is his call.
 - Only `main` is live. `codex/creative-technologist-portfolio` is kept for
   further work but not deployed: the `howecreative-particle` Vercel project is
   disconnected from Git (2 November 2026), and main does not route any path to
@@ -94,7 +99,8 @@ Round 3 escalates to Stephen.
 
 ## Verification
 
-- Before any commit: `npm run typecheck && npm test && npm run lint && npm run build`.
+- Before a merge to main: `npm run ci:pr` (typecheck, lint, all tests and
+  the production build), as CONVENTIONS.md sets for the complete suite.
 - The commit gate reads evidence for the `code_checks` in
   `scripts/validate.config.json` (typecheck and lint, tests). Run
   `python3.13 scripts/selftest_code_quality.py --evidence` before committing
