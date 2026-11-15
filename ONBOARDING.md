@@ -2,13 +2,15 @@
 status: active
 author: stephen+claude
 project_kind: product
-updated: 2026-10-12
+updated: 2026-11-15
 ---
 
 # ONBOARDING
 
 ## Project
 
+- **Current Level:** L2 (public portfolio; no accounts or billing)
+- **Active Domains:** none (static portfolio site; no addendum in `domains/` applies)
 - Name: `HoweCreative`
 - Type: Vite + React single-page portfolio with Vercel serverless contact endpoint
 - Origin: initially pulled from a generic Figma export, then progressively refactored into a real production portfolio
@@ -22,6 +24,12 @@ updated: 2026-10-12
 - The legacy dossier/WebGL components remain in the repository but are not mounted by the active home page.
 
 ## Setup
+
+### Activate the gates (once, after cloning)
+
+```bash
+sh scripts/bootstrap.sh   # checks the machine hook kit covers this repo
+```
 
 ### Install
 
@@ -62,6 +70,9 @@ use the server-only variable in client mode.
 | `npm run build` | Production build (output to `dist/`) |
 | `npm run typecheck` | TypeScript strict check (no emit) |
 | `npm run lint` | ESLint check across `src/` and `api/` |
+| `npm run check` | Typecheck then lint (the commit gate's code check) |
+| `npm run ci:pr` | Typecheck, lint, tests and build (CircleCI on pull requests) |
+| `npm run ci:main` | Same as `ci:pr` (CircleCI on main) |
 | `npm test` | Run Vitest tests |
 
 ## Active Content Areas
@@ -80,6 +91,7 @@ use the server-only variable in client mode.
 
 - Primary content source: `site-content.json`
 - Local media source: `/public/case-studies/*`
-- Deployment target: Vercel (`vercel.json` with `dist` output)
+- Deployment target: Vercel (`vercel.json` with `dist` output); this branch is not deployed (its Vercel project is disconnected from Git)
+- Code checks: declared as `code_checks` in `scripts/validate.config.json`; the project keeps its own `tsconfig.json` and `eslint.config.js` with the kit's strictness except the deferrals listed in CONVENTIONS.md (ROADMAP, alignment entry)
 - `docs/plans/` records design history; `ROADMAP.md` is the current queue
 - README documents ownership for career facts repeated across JSON, homepage, and CV copy

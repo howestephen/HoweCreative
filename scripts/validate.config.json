@@ -10,9 +10,46 @@
     "ROADMAP.md",
     "ARCHITECTURE.md",
     "CONVENTIONS.md",
-    "handoffs/TEMPLATE.md"
+    "handoffs/TEMPLATE.md",
+    "DECISIONS.md",
+    "SPEC.md",
+    "LEVELS.md",
+    "GOVERNANCE.md",
+    "PLAN.md",
+    "REVIEW.md",
+    "QUALITY.md",
+    "ENGINEERING.md",
+    "DESIGN.md",
+    "TAXONOMY.md",
+    "METRICS.md",
+    "DISCOVERY.md",
+    "RELEASE.md",
+    "SAFETY.md",
+    "EVALS.md",
+    "ACCESSIBILITY.md",
+    "COMPLIANCE.md",
+    "AI_COMPLIANCE.md",
+    "LEGAL.md",
+    "COST_CONTROLS.md",
+    "INCIDENT_RESPONSE.md",
+    "MARKET_MATRIX.md",
+    "PROMPT_ASSETS.md",
+    "CONTRIBUTING.md",
+    "domains/DOMAIN_GAMES.md",
+    "domains/DOMAIN_MEDIA_PIPELINE.md",
+    "domains/DOMAIN_MARKETPLACE.md",
+    "domains/DOMAIN_CONSUMER.md",
+    "domains/DOMAIN_HEALTH.md",
+    "domains/DOMAIN_B2B_SAAS.md",
+    "domains/DOMAIN_BLOCKCHAIN.md",
+    "domains/DOMAIN_FINTECH.md",
+    "security/SECURITY.md"
   ],
   "growable": [
+    {
+      "dir": "specs/",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}-[a-z0-9-]+\\.md$"
+    },
     {
       "dir": "handoffs/",
       "pattern": "^\\d{4}-\\d{2}-\\d{2}-[a-z0-9-]+\\.md$"
@@ -39,15 +76,83 @@
     "^docs/private/",
     "^docs/reviews/2026-09-07-design-reset/"
   ],
+  "extra_statuses": [
+    "dormant"
+  ],
   "top_dirs": [
+    ".circleci",
     ".claude",
+    ".codex",
     ".github",
     "_archive",
     "api",
     "docs",
+    "domains",
     "handoffs",
     "public",
     "scripts",
+    "security",
+    "specs",
     "src"
-  ]
+  ],
+  "deliverables": {
+    "always_allowed": [
+      "ROADMAP.md",
+      "package-lock.json",
+      "pnpm-lock.yaml"
+    ]
+  },
+  "code_checks": {
+    "checks": {
+      "typecheck-lint": {
+        "command": [
+          "npm",
+          "run",
+          "check"
+        ],
+        "covers": [
+          "src/**",
+          "api/**",
+          "vite.config.ts",
+          "vitest.config.ts"
+        ],
+        "config": [
+          "tsconfig*.json",
+          "eslint.config.*",
+          "package.json"
+        ],
+        "runtime": [
+          "node"
+        ],
+        "required": true
+      },
+      "tests": {
+        "command": [
+          "npm",
+          "test",
+          "--",
+          "--maxWorkers=2"
+        ],
+        "covers": [
+          "src/**",
+          "api/**",
+          "public/**",
+          "site-content.json",
+          "index.html",
+          "vercel.json",
+          "vite.config.ts",
+          "vitest.config.ts"
+        ],
+        "config": [
+          "tsconfig*.json",
+          "eslint.config.*",
+          "package.json"
+        ],
+        "runtime": [
+          "node"
+        ],
+        "required": true
+      }
+    }
+  }
 }

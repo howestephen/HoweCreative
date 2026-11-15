@@ -1,4 +1,4 @@
-# House editor defaults. Stops formatting churn between machines.
+# House editor defaults. Stops formatting churn between the MacBook and seneca.
 # Copied into a project, or symlinked from ai-standards.
 root = true
 
@@ -12,6 +12,11 @@ indent_size = 2
 
 [*.py]
 indent_size = 4
+
+[*.ps1]
+# Windows PowerShell 5.1 reads a UTF-8 script without a BOM as ANSI
+# (machines/seneca.md, BOM rules).
+charset = utf-8-bom
 
 [*.md]
 # Markdown uses trailing double-space for hard breaks

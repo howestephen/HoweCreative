@@ -55,3 +55,13 @@ __pycache__/
 logs/
 tmp/
 .cache/
+
+# house kit entries (kit spellings and agent state)
+node_modules/
+dist/
+**/.claude/hooks-state/
+**/.claude/settings.local.json
+**/.claude/scheduled_tasks.lock
+**/.claude/worktrees/
+.remember/
+**/.codex/config.toml

@@ -17,6 +17,8 @@ ROOT="$(CDPATH= cd "$SCRIPT_PARENT/.." && pwd)" || {
     exit 1
 }
 [ -e "$ROOT/.git" ] || git -C "$ROOT" init -q -b main
+git -C "$ROOT" config init.defaultBranch main 2>/dev/null \
+    || echo "warning: could not set init.defaultBranch main in $ROOT" >&2
 BR="$(git -C "$ROOT" symbolic-ref --short HEAD 2>/dev/null || true)"
 [ "$BR" = "master" ] && git -C "$ROOT" branch -m master main && echo "renamed master -> main (house rule)"
 [ -f "$ROOT/gitignore" ] && [ ! -f "$ROOT/.gitignore" ] && mv "$ROOT/gitignore" "$ROOT/.gitignore"
@@ -27,12 +29,12 @@ KIT="$(git config --global --get core.hooksPath || true)"
 if [ -n "$KIT" ] && [ -x "$KIT/pre-commit" ] && [ -x "$KIT/commit-msg" ] \
         && [ -x "$KIT/pre-push" ] && [ -f "$KIT/publication_scan.py" ] \
         && [ -f "$KIT/secret_scan.py" ] && [ -f "$KIT/lib/find_python.sh" ] \
-        && [ -f "$KIT/ci_policy.py" ] && [ -f "$KIT/lib/comment_hygiene.py" ] \
-        && [ -f "$KIT/lib/publication_exceptions.py" ]; then
-    : # Required installed files exist; runtime validation follows.
+        && [ -f "$KIT/ci_policy.py" ]; then
+    : # Entry points exist; their helpers live in pinned releases (14 November
+    : # 2026), so the runtime check below proves the rest.
 else
     echo "ERROR: no hook kit is installed on this machine, so NOTHING gates this" >&2
-    echo "  project: staged content, commit metadata and outgoing history are unguarded." >&2
+    echo "  project: staged content and commit metadata are unguarded." >&2
     echo "  Fix, once per machine:" >&2
     echo "    <machine-python> <repos>/_projects-admin/scripts/install_global_hooks.py --apply" >&2
     exit 1

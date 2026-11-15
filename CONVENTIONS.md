@@ -2,38 +2,55 @@
 status: active
 author: stephen+claude
 created: 2026-10-12
-updated: 2026-11-02
+level: ALL
+updated: 2026-11-15
 ---
 
 # CONVENTIONS
+
+Project gotchas and hard-won facts agents must not rediscover. One bullet
+each, added the moment something bites twice. (Proven pattern: Blender
+gotchas recurred in 6 of 28 sessions until written down - zero after.)
+
+- `.npmrc` sets `legacy-peer-deps=true`, which React 19 peer ranges need; CI installs with it too.
+- Adding a study to `site-content.json` also needs a `sitemap.xml` entry; a test checks.
+- **Override of Product platform: this site stays on Vercel.** It is the portfolio, not a product that moves to Cloudflare and Neon; Vercel is its deliberate host (CLAUDE.md, Branches). The Vercel build policy below applies in full through `scripts/vercel-main-only.json`.
+- **Override of the Code baseline, deferred strictness (15 November 2026).** The kit's strictest settings are present in `tsconfig.json` and `eslint.config.js` except these, which the existing code does not yet meet and which stay relaxed rather than being mass-edited: `noUncheckedIndexedAccess` (48 errors), `exactOptionalPropertyTypes` (21), `skipLibCheck: false` (55), and the lint rules switched off in the relaxations block of `eslint.config.js` (about 290 violations on this branch, per-rule counts there). One inline `eslint-disable` remains in `api/contact.test.ts`, so `noInlineConfig` is off. Retire each by fixing its violations and deleting the relaxation. `scripts/check-code-quality.mjs` is the kit's file but cannot run here: it reads `eslint.config.mjs` and requires those options. This project's `check` script runs `tsc` and `eslint` directly, and `code_checks` names it.
+
+## Preservation review
+
+When a commit removes a large share of a document, or an open roadmap task
+disappears, the pre-commit preservation check refuses it until a separate
+reviewing agent, never the editor, has compared the before and after
+versions. Run `preservation_check.py review-brief` from the machine's hook
+kit: it prints both hashes, the views to compare and the exact `record`
+command. The reviewer checks that meaning, requirements, decisions and open
+work survive, and that every change serves the recorded request, then
+records `preserved` or `lost`. A loss needs a recorded owner decision. Any
+later edit voids the record.
+
+## Admin inbox
+
+- File inbox entries only with `<python> "<repos>/_projects-admin/scripts/file_request.py" --fact` (or `--finding` for several observations), never by hand. `--verified` (what you ran and saw) is required; `--category` optionally proposes one of five routes (`--help` lists them).
 
 ## Canonical house standards
 
 House defaults from the `ai-product-base` kit, verbatim for `retrofit-check.py`.
 CLAUDE.md's own rules win where they differ, stated explicitly.
 
-- **Free-only CI policy.** Read `_projects-admin/RULES.md` section 2.14 before
-  changing CI; shared gates enforce it. Local first: lint, typecheck and
-  changed tests run at pre-push. Code projects run their full, integration and
-  browser suites on CircleCI from the house config, copied unchanged except
-  the `cimg/node` version, adapting through `ci:pr` and `ci:main` scripts.
-  GitHub Actions keeps the publication scan: main/PR/manual triggers only,
-  read-only tokens, job timeouts within 10 combined minutes, no schedules,
-  matrices, services, artifact uploads or paid capacity, reviewed setup
-  actions only, and Stop usage: Yes. Mutation checks stay local. At 80% of
-  either shared allowance, stop adding hosted work and report.
+- **Free-only CI policy.** Read `_projects-admin/RULES.md` section 2.14 before changing CI; shared gates enforce it. Local first: where a project declares `code_checks`, lint, typecheck and the affected tests need passing evidence at commit; CI runs the full suite on a ready pull request, and nothing repeats the local suite at push. Code projects run their full, integration and browser suites on CircleCI from the house config, copied unchanged except the `cimg/node` version, adapting through `ci:pr` and `ci:main` scripts. Publication and secret checks run once, at local commit; nothing is rescanned on GitHub. Any GitHub Actions workflow keeps main/PR/manual triggers only, read-only tokens, job timeouts within 10 combined minutes, no schedules, matrices, services, artifact uploads or paid capacity, reviewed setup actions only, and Stop usage: Yes. Mutation checks stay local. At 80% of either shared allowance, stop adding hosted work and report.
 
-- **CI budget and pushes.** Run local validation before pushing, through the machine's shared hooks, never project copies. Automatic CI runs on PRs to main and pushes to main only. Batch finished work into planned pushes after the first branch backup, and re-run only failed jobs after diagnosis. Never silently disable CI or bypass a gate.
+- **CI budget and pushes.** Local validation runs at commit through the machine's shared hooks, never project copies. Automatic CI runs on PRs to main and pushes to main only. Batch finished work into planned pushes after the first branch backup, and re-run only failed jobs after diagnosis. Never silently disable CI or bypass a gate.
 
 - **Publication false positives.** Stop and file the rule, path and a safe description in `_projects-admin/REQUESTS.md`, never the suspected secret; never rename code to dodge a heuristic. No blanket email-domain or dotted-string exemptions and no agent-approved exceptions.
 
 - **Global rules and machine profiles are read-only here.** `~/.claude/*.md`, the Codex aliases and `_projects-admin/machines/` belong to `_projects-admin`; propose changes in its REQUESTS.md. Never write them by shell instead (redirects, `sed -i`, `tee`, `cp`, `mv` and `rm` included).
 
-- **Spending money needs approval, per service, per session.** Paid APIs, generation, hosted inference and purchases prompt first; never route around a prompt with another tool or an unlisted endpoint.
+- **Spending money needs approval, as an allowance for the job.** Agree the budget with Stephen, then open the allowance with the command the spend gate prints, which he approves; paid operations inside it run without further prompts. When it is used up, stop and report; do not keep retrying poor results. Free services with limits never ask. Never route around the gate with another tool or an unlisted endpoint.
 
-- Push without asking: yes on a branch. For main, read the level in `ONBOARDING.md`: at L0 to L2 (lifecycle levels, no real users; L0/L1 on a project not yet remapped) prefer a branch per piece of work, then merge and push main without asking once every gate passes and tell Stephen afterwards (a plain commit or push to main needs no prompt); from L3 (live, real users) every main merge or push needs Stephen's approval. Force, chained, multi-refspec and delete pushes always ask.
+- Push without asking: yes on a branch. Below L3, merge and push to main without asking once the project's checks pass. From L3 (Live), every push or merge into main needs Stephen's approval, given through the client's own approve prompt, and every release to live needs its own approval. Where no prompt can appear, ask him in the conversation and stop. Forced pushes, and deleting or overwriting main, are refused at every level.
 
-Installed gates refuse rather than warn: a refusal is the answer. If a gate is genuinely wrong, say so and stop; the bypass is Stephen's. Verify enforcement per client and machine; documentation is not proof.
+- **Gate refusals.** Installed gates refuse rather than warn. Take the way through the refusal names; if the refusal is wrong for this input, carry on with other work and report it with its reproduction to _projects-admin's inbox (`<python> "<repos>/_projects-admin/scripts/file_request.py"`). Never disable or route around a gate; a bypass is Stephen's. Verify enforcement per client and machine; documentation is not proof.
 
 - Default branch is always `main`, never `master`
 
@@ -45,17 +62,19 @@ Installed gates refuse rather than warn: a refusal is the answer. If a gate is g
 
 - **Commit only this project's own work.** The kit's procedure (`RETROFIT.md`), global rules and other repositories' files are read where they live, never copied or committed here. Stage named paths when untracked files are not yours.
 
-- One subagent at a time, never at your own tier or above
+- Follow the subagent tier caps and installed guard guidance in CLAUDE.md.
 
 - **Never hack around a problem.** `any`, a cast, a suppression, a TODO, a second tool or a quieter check that hides a failure is cheating; if the real fix is blocked, stop and say so.
 
-- An independent agent audits changes for bugs, broken code and overclaims before completion. Fix the findings and have the fixes re-audited before claiming done.
+- **Rigour follows risk.** Code that can block work, delete, publish, push or deploy, or that handles secrets, sign-in, payments, personal data or migrations gets focused tests with a forbidden twin, a mutation check of the new tests and one independent adversarial audit. Ordinary code gets tests for the changed behaviour, and an independent audit only past about 300 changed lines or on request. Text and configuration get neither; the structural gates still run. An audit is one round: fix every bug it finds, fix low polish if quick, and re-audit only the fix of a high finding. A defect met on the way in code this project owns is fixed in the same work, never filed or left; a defect in the house hooks or kit is reported to admin.
 
 - When work passes between tools or sessions, use a work-item file in `handoffs/` copied from `handoffs/TEMPLATE.md`. The `owner` field is whose turn it is.
 
-- **End replies where Stephen will see them.** Short replies; anything he must answer or do goes last, on its own, and the last line names what is still running (task id) or says nothing is. Never claim work is under way that nothing is running.
+- **Owner-action list.** `ROADMAP.md` carries a `## Stephen` list of `[S]` items: actions only the owner can take: a merge or push into main from L3 (a creative project is treated as below L3 and follows its declared Git policy), a release to live, an allowance for a paid service, connecting a service or account, a login, a purchase, an approval the rules reserve to him. At the end of every task, milestone or piece of ad-hoc work, add what he must now do and remove what is done, in the same change as the work; the Dashboard reads these lines.
 
-- **Keep the machine responsive.** Tests and builds use one or two workers, niced on the Mac; test, build, mutation and coverage jobs never overlap, an auditor's included. For application work, run relevant checks while working and full suites once changes settle. Hook maintenance is individual: audit, test and install only the changed hook on the receiving machine; preserve completed installs. Full hook suites require an explicit owner request. One checkout per repository unless the desktop app or Stephen made the worktree.
+- **End replies where Stephen will see them.** Short replies; anything he must answer or do goes last, on its own, and nothing is repeated: the Stop hook already shows what is still running under every reply, so do not add a line for it. Never claim work is under way that nothing is running.
+
+- **Keep the machine responsive, and yourself.** Run tests, builds, installs and any command that can take more than a few seconds in the background, and answer a message from Stephen before waiting on any of them: never sit blocked on a run. Stop each background job and its waiter once its purpose is served; rely on the job's own completion notice, never a `pgrep -f` poll by name (it matches the waiters). Before reporting done, list the session's running processes by parent, not by known names. Tests, builds, coverage and mutation runs go through `<python> "<repos>/_projects-admin/scripts/heavy.py" run -- <command>`: three slots per machine, one or two workers each, niced; one long job (`--long`, past 20 minutes) at a time; lint and typecheck need no slot. For application work, run the tests for the files changed while working; passing evidence for lint, typecheck and the affected tests before a commit, reused while its inputs are unchanged; and the complete suite once before a merge to main or on CI, never per commit. Hook maintenance is individual: audit, test and install only the changed hook on the receiving machine; preserve completed installs. Full hook suites require an explicit owner request. One checkout per repository unless the desktop app or Stephen made the worktree.
 
 - **Do it yourself; research before asking.** Run what you can instead of handing it to Stephen, and validate any command you give him. Check docs, records and earlier decisions first, and ask only for decisions genuinely his. A request to fix or pick up work is a request to do it.
 
@@ -63,9 +82,36 @@ Installed gates refuse rather than warn: a refusal is the answer. If a gate is g
 
 - **One live address.** Give Stephen only this project's registered Tailscale link, never localhost or a port you picked; never start a second server or move ports. A server already on the registered port is the live one: use it or restart it on the same port. Creating a project does not register it.
 
+- **Product platform.** A product that will go public hosts on Cloudflare (Workers, R2, Hyperdrive) and keeps its data in Neon Postgres, both on paid plans, before it leaves L1; an L0 idea or L1 first build may sit on Vercel until then. Personal, local and never-public work stays on Vercel and Supabase (Stephen, 13 and 14 November 2026).
+- **Email, billing and account lifecycle.** One process for every product, ready for the UK, EU and US from launch; hosted pieces first, custom code only where no provider offers the function. Hosted: Stripe's customer portal for card changes, invoices and cancellation at period end; Stripe's billing emails for trial and renewal reminders (timing checked against the California auto-renewal law and the UK DMCC subscription rules); Resend Broadcasts, its hosted unsubscribe page (`{{{RESEND_UNSUBSCRIBE_URL}}}`) and Topics for marketing, and any per-account marketing email sent with its topic so an unsubscribe applies. Built in the app, and nothing else: a withdrawal function ("withdraw from contract here", a confirm step, an acknowledgement email) that cancels at once and refunds through Stripe's Refunds API, less a proportionate charge where the user asked for service to start within 14 days (UK Consumer Contracts Regulations 2013, EU Consumer Rights Directive Article 11a from 19 June 2026); a log of that request and of marketing consent with date and wording; an unticked marketing consent box at sign-up whose answer goes to Resend; in-app account deletion that also deletes the person from Resend (`DELETE /contacts`), Stripe and every other processor, keeping only records the law requires (Apple 5.1.1(v); Google Play also needs a public web page for deletion requests); a self-serve export in JSON or CSV where the product holds personal data beyond sign-in (UK and EU GDPR Article 20); a cookie banner for non-essential cookies, honouring Global Privacy Control; a postal address and sender identity in marketing email (CAN-SPAM, CASL). Before EU sales: an EU representative named in the privacy notice and a lawyer's check of the withdrawal rules. Custom code duplicating a hosted piece is archived (Stephen, 15 November 2026).
+- **One lock-page PIN.** A closed staging or pre-launch lock page on Cloudflare uses Stephen's one shared PIN. A setup script never generates a PIN: it reads it from a private file named on the command line. The PIN is never stored in Git, memory or project files, and never printed (Stephen, 13 November 2026).
 - **Vercel build policy.** Only main builds automatically; keep the deny-all default, and previews need Stephen's explicit request per branch, never wildcards. Apply `scripts/vercel-main-only.json` before connecting or pushing, as the kit's RETROFIT.md describes, and record exceptions in DECISIONS.md. CLI, API and deploy-hook builds need separate deployment authority.
 
 - **Publication-safe records.** Everything tracked, commit metadata included, is fit to disclose: neutral decisions, no private conversation, profanity or emotional delivery; no credentials, contact details or machine paths (fixtures too); no em-dashes in public copy.
+
+## Declare what you deliver
+
+The commit is checked against a declaration, never a description. `<tool>`
+below is `<python> "<repos>/_projects-admin/hooks/deliverables_check.py"`.
+
+1. Before the first commit: `<tool> declare --work "<short name>" FILE...`
+   (files, folders ending `/`, or globs; `--as markdown|json|python|media|removed`
+   adds a type check).
+2. Commit as often as needed. Every staged file is declared (`<tool> add`) or
+   matches `deliverables.always_allowed` in `scripts/validate.config.json`.
+3. Before the last commit: `<tool> close --work "<short name>"`. That commit
+   is refused unless every declared file is committed, and `close` refuses
+   while a file the work created has no disposition: `add` it, `keep` it with
+   `--why "<reason>"`, or `scratch` it (removes it).
+
+`<tool> show` lists open declarations (per checkout and branch); `remove`
+takes a file out or, with no file, drops the work. Merges and reverts are not
+checked.
+
+A request to a generative model goes through the generation pre-flight first
+(`<python> "<repos>/_projects-admin/scripts/generation_preflight.py" check
+<request.json>`, stating `written_for`); model names live only in the
+`model_config.files` paths.
 
 ## Code baseline
 
@@ -74,10 +120,11 @@ Installed gates refuse rather than warn: a refusal is the answer. If a gate is g
 - TypeScript runs with `strict: true` plus `noImplicitAny`, `noUncheckedIndexedAccess`, `exactOptionalPropertyTypes` and `useUnknownInCatchVariables`; never turn one off to pass.
 
 - Python runs with `mypy` strict. Do not weaken project-wide strictness for one module.
+- Apply QUALITY §9 feature triggers in the introducing change. Record the actual test boundary and failing control, and use the shared heavy runner for the required test lanes.
 
 - Never use `any` or `Any`. Prefer `unknown` and narrow it. No `@ts-ignore`.
 
-- Typecheck, lint, and the project's tests must pass before that code is called done. Say exactly what did not run.
+- Typecheck, lint and the tests for the changed behaviour must pass before that code is called done; the complete suite runs once before a merge to main or on CI. Say exactly what did not run.
 
 - When Stephen must apply SQL by hand, hand over every pending change for the task once, as one complete, idempotent script, never a change per turn or partial snippets.
 
@@ -96,3 +143,13 @@ Installed gates refuse rather than warn: a refusal is the answer. If a gate is g
 - Prefer small modules with explicit inputs and outputs. Treat type, schema, and security warnings as real defects.
 
 - Fail fast on invalid config, data, auth and permissions. Least privilege for credentials, APIs, storage and deployment.
+
+## Code enforcement acceptance
+
+These rules are requirements, not a bundled toolchain. Record the real stack,
+config paths and validation command in ONBOARDING.md; media-only projects mark
+application checks N/A. One local command runs the compiler, linter and tests
+and fails on any failure; the linter rejects explicit `any`/`Any`, and database
+queries are parameterised. Shared Git hooks do not run application checks:
+verify the route and never claim automatic enforcement. The acceptance probes
+are in the kit's RETROFIT.md.

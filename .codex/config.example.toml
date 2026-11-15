@@ -1,0 +1,26 @@
+# Copy this to `.codex/config.toml` inside a trusted project when you want
+# project-scoped Codex behavior rather than relying only on global config.
+
+# Recommended default for normal local work:
+approval_policy = "on-request"
+sandbox_mode = "workspace-write"
+
+# Optional hardening for shell-based tools.
+allow_login_shell = false
+
+[sandbox_workspace_write]
+network_access = true
+
+# Example MCP server patterns:
+#
+# [mcp_servers.openai_docs]
+# url = "https://developers.openai.com/mcp"
+#
+# [mcp_servers.project_docs]
+# command = "npx"
+# args = ["-y", "@upstash/context7-mcp"]
+#
+# [mcp_servers.internal_tools]
+# url = "https://example.internal/mcp"
+# enabled_tools = ["search_docs", "list_projects"]
+# disabled_tools = ["delete_project"]

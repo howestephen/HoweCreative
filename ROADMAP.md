@@ -1,7 +1,7 @@
 ---
 status: active
 author: stephen+claude
-updated: 2026-10-12
+updated: 2026-11-15
 word_budget_override: 6500
 word_budget_reason: the redesign branch keeps its full media and audit history; trim only with Stephen's approval
 ---
@@ -15,6 +15,26 @@ word_budget_reason: the redesign branch keeps its full media and audit history; 
   the page, the glass panels and the page structure.
 - [S] Decide whether the practice section (the CV summary and roles) stays
   on the home page.
+- [S] Decide whether this branch's `vercel.json` takes main's main-only
+  `git.deploymentEnabled` setting (the kit's Vercel policy; the 12 October
+  entry below says never to carry it here, but the Vercel project has been
+  disconnected from Git since 2 November). Left unchanged.
+- [S] Push this branch's kit alignment (committed locally, not pushed); main's
+  alignment needs your approval to merge.
+
+## Kit alignment (15 November 2026, MacBook Pro)
+
+Carried by hand from `main` (the lines stay separate; main is not merged
+here). All kit documents, machinery and `.claude/settings.json` are current,
+CLAUDE.md and CONVENTIONS.md match main's, `check`, `ci:pr` and `ci:main`
+scripts and the kit's `.circleci/config.yml` are added, the old
+`.github/workflows/ci.yml` is removed, and `tsconfig.json` and
+`eslint.config.js` carry the kit's strictness except the deferrals in
+CONVENTIONS.md (measured on this branch's code). Three `override` modifiers
+in `PortraitExperience.tsx` were the only source edits.
+
+- [ ] Retire the deferrals one by one; when none is left,
+  `check-code-quality.mjs` can replace the `check` script.
 
 ## Particle home rebuilt - 13 November 2026
 

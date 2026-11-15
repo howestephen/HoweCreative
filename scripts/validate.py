@@ -31,13 +31,9 @@ def kit_dir() -> Path:
     raise SystemExit(2)
 
 
-sys.path.insert(0, str(kit_dir()))
-import structure_gate  # noqa: E402
-
-
 if __name__ == "__main__":
     argv = sys.argv[1:]
     if "--index" not in argv and "--worktree" not in argv:
         argv.append("--worktree")
     argv = [a for a in argv if a != "--index"]
-    sys.exit(structure_gate.main(argv, label="validate"))
+    sys.exit(subprocess.call([sys.executable, str(kit_dir() / "structure_gate.py"), *argv]))
