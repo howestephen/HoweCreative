@@ -141,7 +141,7 @@ Keep different kinds of review output in the right places:
 - cross-cutting quality bar: `QUALITY.md`
 - AI grading logic and canonical cases: `EVALS.md`
 - milestone execution state: `ROADMAP.md`
-- live integration trust decisions: the spend gate config for CLIs (an MCP server, if one returns: `_archive/MCP_TRUST_MATRIX.md`)
+- live integration trust decisions: the spend gate config for CLIs (an MCP server, if one returns: `_projects-admin/templates/ai-product-base/_archive/MCP_TRUST_MATRIX.md`)
 - formal review outcome, decision, and accepted risk: `REVIEW.md`
 
 Do not force all review context into a roadmap item if it is really a broader decision record.

@@ -94,7 +94,7 @@ coordinate substantial work.
 
 Prefer lower-risk Codex operating modes: `workspace-write` plus `on-request` for normal local implementation, `read-only` plus `on-request` for audit or research, `workspace-write` plus `untrusted` when stricter auto-read is needed. Avoid `danger-full-access` plus `never` unless the task truly requires it and the risk is understood.
 
-Reach external services through their CLI: command allowlists, the spend gate and release approval cover CLI commands, and nothing is designed around MCP tool permissions. MCP servers are not used for now; the trust matrix is archived at `_archive/MCP_TRUST_MATRIX.md` and comes back, project-scoped, scoped or read-only, if a project brings one back.
+Reach external services through their CLI: command allowlists, the spend gate and release approval cover CLI commands, and nothing is designed around MCP tool permissions. MCP servers are not used for now; the trust matrix is archived at `_projects-admin/templates/ai-product-base/_archive/MCP_TRUST_MATRIX.md` and comes back, project-scoped, scoped or read-only, if a project brings one back.
 
 ## 4B. Skills To Reach For
 
