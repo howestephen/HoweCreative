@@ -67,6 +67,7 @@ CLAUDE.md's own rules win where they differ, stated explicitly.
 - **Never hack around a problem.** `any`, a cast, a suppression, a TODO, a second tool or a quieter check that hides a failure is cheating; if the real fix is blocked, stop and say so.
 
 - **Rigour follows risk.** Code that can block work, delete, publish, push or deploy, or that handles secrets, sign-in, payments, personal data or migrations gets focused tests with a forbidden twin, a mutation check of the new tests and one independent adversarial audit. Ordinary code gets tests for the changed behaviour, and an independent audit only past about 300 changed lines or on request. Text and configuration get neither; the structural gates still run. An audit is one round: fix every bug it finds, fix low polish if quick, and re-audit only the fix of a high finding. A defect met on the way in code this project owns is fixed in the same work, never filed or left; a defect in the house hooks or kit is reported to admin.
+- **An audit only finds.** The auditing agent is read-only: it cites `file:line`, tags each finding BLOCKING, SHOULD-FIX or NIT and changes nothing. A different agent fixes, and each finding is closed by a fix or a reasoned rejection.
 
 - When work passes between tools or sessions, use a work-item file in `handoffs/` copied from `handoffs/TEMPLATE.md`. The `owner` field is whose turn it is.
 
@@ -141,6 +142,10 @@ A request to a generative model goes through the generation pre-flight first
 - No `@ts-ignore`, and no suppressions without reasons: `@ts-expect-error` with an inline reason is the only one, and only when the platform types are wrong.
 
 - A new dependency is recorded in the spec or a decision record before it is added: what it is, why it is preferred, its licence and its risk.
+
+- Every function and feature is covered by tests: 100% coverage of the code that ships, enforced by a coverage check in the project's gate and never lowered to pass. Where a project is below it, the gap is ROADMAP debt with the measured figure.
+
+- A source file stays under 300 lines and a test file under 1,500, enforced by lint (`max-lines`); split a longer one first. Generated files are exempt.
 
 - Prefer small modules with explicit inputs and outputs. Treat type, schema, and security warnings as real defects.
 
