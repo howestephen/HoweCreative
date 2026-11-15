@@ -22,9 +22,7 @@ A project may tighten or loosen these defaults, never silently.
 
 Git workflow: CONVENTIONS.md (main needs Stephen's approval from L3; paid services run inside an approved allowance). Gates and milestone
 review always apply.
-- Subagents run in combination, capped by tier: one top-tier, two Opus, four
-  Sonnet or below. Use the cheapest tier that fits and never delegate work a
-  command or direct read can do. Follow RULES 2.1 and the installed guard.
+- Subagents run in combination, capped by tier: one top-tier, two Opus, four Sonnet or below. Specs, reviews and audits go to the most capable model available, and a serious audit to the other model family (Astra for Claude's work, Fable for Astra's); implementation on a written brief goes to the cheapest tier that fits. Never delegate work a command or direct read can do. Follow RULES 2.1 and the installed guard.
 - This repository is public: before any push, run the Privacy check below.
 
 ## 1. Start-Up Loop
