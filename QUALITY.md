@@ -1,5 +1,5 @@
 ---
-status: dormant
+status: active
 author: stephen+claude
 activates: when L2 consolidation begins, or when the project needs a shared cross-cutting quality bar
 level: L2
@@ -175,6 +175,11 @@ For each item, capture:
 - expiry or revisit trigger:
 
 Do not hide recurring quality failures inside roadmap notes if they are really cross-cutting debt. A defect found on the way is fixed in the same work (CONVENTIONS, rigour rule); one that belongs to another owner is recorded here and reported to that owner.
+
+Measured against the house bar (zero lint and type findings, 100% coverage enforced by the gate); each is a ROADMAP task, not an accepted gap:
+
+- **Lint and type settings not yet met (15 November 2026).** The kit's strictest settings are present in `tsconfig.json` and `eslint.config.js` except these, which the existing code does not yet meet and which stay relaxed rather than being mass-edited: `noUncheckedIndexedAccess` (48 errors), `exactOptionalPropertyTypes` (21), `skipLibCheck: false` (55), and the lint rules switched off in the relaxations block of `eslint.config.js` (about 290 violations on this branch, per-rule counts there). One inline `eslint-disable` remains in `api/contact.test.ts`, so `noInlineConfig` is off. Retire each by fixing its violations and deleting the relaxation. `scripts/check-code-quality.mjs` is the kit's file but cannot run here: it reads `eslint.config.mjs` and requires those options. This project's `check` script runs `tsc` and `eslint` directly, and `code_checks` names it. The house rule is zero findings: clearing this is an open ROADMAP task (local work item `handoffs/2026-11-15-zero-lint-and-type-findings.md`).
+- **Test coverage below the house bar.** The house rule is 100% coverage, enforced by the gate. State: not measurable on 15 November 2026: no coverage provider is installed (`@vitest/coverage-v8`) and `vitest.config.ts` has no coverage block; no gate runs coverage. Clearing it is an open task (local work item `handoffs/2026-11-15-test-coverage-to-100.md`).
 
 ## 9. Change Triggers
 
