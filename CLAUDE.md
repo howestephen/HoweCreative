@@ -124,7 +124,7 @@ When a change affects behaviour, architecture, workflow, or priorities, update [
 
 Stop and fix on: failing validation caused by your changes, contradictory roadmap assumptions, unclear data model or security rules, missing environment requirements that invalidate the task, or hidden coupling that makes the change unsafe.
 
-Never hack around a problem (QUALITY.md §8). A TODO is allowed only when Stephen explicitly accepts the risk, with a roadmap reference on the same line. A missing tool, approval or sandbox limit is recorded, not improvised around.
+Never hack around a problem (CONVENTIONS.md). A TODO is allowed only when Stephen explicitly accepts the risk, with a roadmap reference on the same line. A missing tool, approval or sandbox limit is recorded, not improvised around.
 
 ## 9. Definition Of Done
 
