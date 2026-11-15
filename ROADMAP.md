@@ -19,6 +19,8 @@ word_budget_reason: the redesign branch keeps its full media and audit history; 
   `git.deploymentEnabled` setting (the kit's Vercel policy; the 12 October
   entry below says never to carry it here, but the Vercel project has been
   disconnected from Git since 2 November). Left unchanged.
+- [S] Approve the Argos account and GitHub App access when the programme reaches
+  visual checks.
 - [S] Push this branch's kit alignment (committed locally, not pushed); main's
   alignment needs your approval to merge.
 
@@ -26,13 +28,12 @@ word_budget_reason: the redesign branch keeps its full media and audit history; 
 
 Source kit commit: `83681f9b`.
 
-Carried by hand from `main` (the lines stay separate; main is not merged
-here). All kit documents, machinery and `.claude/settings.json` are current,
-CLAUDE.md and CONVENTIONS.md match main's, `check`, `ci:pr` and `ci:main`
-scripts and the kit's `.circleci/config.yml` are added, the old
-`.github/workflows/ci.yml` is removed, and `tsconfig.json` and
-`eslint.config.js` carry the kit's strictness. Three `override` modifiers
-in `PortraitExperience.tsx` were the only source edits.
+Carried by hand from `main` (separate lines, no merge). Kit documents,
+machinery and `.claude/settings.json` are current, CLAUDE.md and
+CONVENTIONS.md match main's, `check`, `ci:pr`, `ci:main` and the kit's
+`.circleci/config.yml` are added, the old `.github/workflows/ci.yml` is gone,
+and `tsconfig.json` and `eslint.config.js` carry the kit's strictness. Three
+`override` modifiers in `PortraitExperience.tsx` were the only source edits.
 
 - [ ] **Next.** Retire the deferrals one by one; when none is left,
   `check-code-quality.mjs` can replace the `check` script. First: the `any` in
@@ -40,6 +41,8 @@ in `PortraitExperience.tsx` were the only source edits.
   (288 lint findings, 124 type errors, 5 files over 300 lines).
 - [ ] **Then.** 100% test coverage, enforced in the gate; not measurable today:
   `specs/2026-11-15-test-coverage-to-100.md`.
+- [ ] **After that.** Testing, security and quality programme:
+  `specs/2026-11-15-testing-security-quality-programme.md`.
 - [ ] Heavy media (rule 5a, no file over 5 MB under `public/`): 26 tracked
   video files, 19 over 5 MB (322 MB); move them to object storage or a media host, never delete.
 
