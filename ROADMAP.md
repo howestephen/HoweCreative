@@ -120,7 +120,8 @@ the kit's text with the project's own rules kept under headed sections, and
 deferrals in CONVENTIONS.md.
 
 - [ ] Retire the deferrals one by one; when none is left,
-  `check-code-quality.mjs` can replace the project's `check` script.
+  `check-code-quality.mjs` can replace the project's `check` script. First: the `any` in
+  `api/contact.test.ts`.
 - Still to merge main for this: `fix/video-captions`; `claude/brief-machine`
   and `claude/showreel-redesign` (local only).
 
