@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# selftest-covers: *
 """The project's code checks, and the evidence the commit gate reads.
 
     selftest_code_quality.py [--python-only | --python-coverage]
@@ -149,9 +148,12 @@ def check_python(root: Path, sources: list[str], coverage: bool = False) -> int:
     return 0
 
 
+# L0 (Explore) requires no lanes, feature lanes included; the baseline and
+# feature triggers apply from L1 (Stephen, 14 November 2026).
+BASELINE = ("static", "locked-dependencies", "secrets", "boundary-tests")
 LEVEL_LANES = (
-    ("static", "locked-dependencies", "secrets", "boundary-tests"),
-    ("regression", "integration"),
+    (),
+    BASELINE + ("regression", "integration"),
     ("critical-journeys", "accessibility", "visual", "migration",
      "security", "mutation", "performance"),
     ("privacy-lifecycle", "operational-recovery"),
@@ -192,14 +194,14 @@ def assurance_errors(root: Path, document: object) -> list[str]:
     if not isinstance(lanes, dict) or not isinstance(revision, str) or not revision.strip() or type(dirty) is not bool:
         return ["lanes, the intended revision and dirty state are required"]
     required = {name for floor in LEVEL_LANES[:level + 1] for name in floor} if has_code else set()
-    triggered = {FEATURE_LANES[name] for name in features}
+    triggered = {FEATURE_LANES[name] for name in features} if level else set()
     errors = []
     for name in sorted(required | triggered):
         receipt = lanes.get(name)
         if not isinstance(receipt, dict):
             errors.append(f"{name}: missing receipt")
             continue
-        if receipt.get("status") == "not-applicable" and name not in triggered and name not in LEVEL_LANES[0]:
+        if receipt.get("status") == "not-applicable" and name not in triggered and name not in BASELINE:
             reason = receipt.get("reason")
             if isinstance(reason, str) and reason.strip():
                 continue
@@ -383,6 +385,27 @@ def evidence(root: Path, names: list[str], rerun: bool, skip: bool, why: str) ->
     return worst
 
 
+def javascript_lane(root: Path) -> int | None:
+    """The JavaScript lane of a bare run. A project without the kit's ESLint
+    script (one that lints with oxlint, say) runs the checks it declares under
+    `code_checks`, through the same path as --evidence; with none declared the
+    lane is skipped (None)."""
+    script = root / "scripts" / "check-code-quality.mjs"
+    if script.is_file():
+        return run(root, ["node", str(script)])
+    try:
+        config = json.loads((root / "scripts" / "validate.config.json").read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        config = {}
+    declared = config.get("code_checks") if isinstance(config, dict) else None
+    checks = declared.get("checks") if isinstance(declared, dict) else None
+    if not checks:
+        print("code-quality: JavaScript lane skipped - scripts/check-code-quality.mjs is absent and "
+              "scripts/validate.config.json declares no code_checks.")
+        return None
+    return evidence(root, [], False, False, "")
+
+
 def main() -> int:
     root = Path(__file__).resolve().parents[1]
     argv = sys.argv[1:]
@@ -407,16 +430,17 @@ def main() -> int:
         return 2
     try:
         sources, has_js = source_lanes(root)
-        js_result = 0
+        js_result: int | None = 0
         if not python_only and has_js:
-            js_result = run(root, ["node", str(root / "scripts" / "check-code-quality.mjs")])
+            js_result = javascript_lane(root)
         python_result = check_python(root, sources, coverage=argv == ["--python-coverage"])
     except (OSError, ValueError) as error:
         print(f"code-quality: BLOCKED - {error}", file=sys.stderr)
         return 1
-    result = js_result or python_result
+    result = (js_result or 0) or python_result
     if not result:
-        outcome = "passed" if sources or (has_js and not python_only) else "not-applicable"
+        ran_js = has_js and not python_only and js_result is not None
+        outcome = "passed" if sources or ran_js else "not-applicable"
         print(f"selftest-outcome: {outcome}")
     return result
 

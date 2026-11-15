@@ -29,9 +29,9 @@ KIT="$(git config --global --get core.hooksPath || true)"
 if [ -n "$KIT" ] && [ -x "$KIT/pre-commit" ] && [ -x "$KIT/commit-msg" ] \
         && [ -x "$KIT/pre-push" ] && [ -f "$KIT/publication_scan.py" ] \
         && [ -f "$KIT/secret_scan.py" ] && [ -f "$KIT/lib/find_python.sh" ] \
-        && [ -f "$KIT/ci_policy.py" ] && [ -f "$KIT/lib/comment_hygiene.py" ] \
-        && [ -f "$KIT/lib/publication_exceptions.py" ]; then
-    : # Required installed files exist; runtime validation follows.
+        && [ -f "$KIT/ci_policy.py" ]; then
+    : # Entry points exist; their helpers live in pinned releases (14 November
+    : # 2026), so the runtime check below proves the rest.
 else
     echo "ERROR: no hook kit is installed on this machine, so NOTHING gates this" >&2
     echo "  project: staged content and commit metadata are unguarded." >&2

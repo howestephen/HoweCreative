@@ -2,7 +2,7 @@
 status: active
 author: stephen+claude
 project_kind: product
-updated: 2026-11-13
+updated: 2026-11-15
 ---
 
 # ONBOARDING
@@ -10,6 +10,7 @@ updated: 2026-11-13
 ## Project
 
 - **Current Level:** L2 (public portfolio; no accounts or billing)
+- **Active Domains:** none (static portfolio site; no addendum in `domains/` applies)
 - Name: `HoweCreative`
 - Type: Vite + React single-page portfolio with Vercel serverless contact endpoint
 - Origin: initially pulled from a generic Figma export, then progressively refactored into a real production portfolio
@@ -22,6 +23,12 @@ updated: 2026-11-13
 - The contact form uses browser-side Web3Forms delivery on the free plan, behind an hCaptcha widget.
 
 ## Setup
+
+### Activate the gates (once, after cloning)
+
+```bash
+sh scripts/bootstrap.sh   # checks the machine hook kit covers this repo
+```
 
 ### Install
 
@@ -84,6 +91,6 @@ use the server-only variable in client mode.
 - Primary content source: `site-content.json`
 - Local media source: `/public/case-studies/*`
 - Deployment target: Vercel (`vercel.json` with `dist` output); only `main` builds (`git.deploymentEnabled`)
-- Code checks: declared as `code_checks` in `scripts/validate.config.json`; the project keeps its own `tsconfig.json` and `eslint.config.js`, not the kit's stricter ones (ROADMAP, retrofit entry)
+- Code checks: declared as `code_checks` in `scripts/validate.config.json`; the project keeps its own `tsconfig.json` and `eslint.config.js` with the kit's strictness except the deferrals listed in CONVENTIONS.md (ROADMAP, alignment entry)
 - `docs/plans/` records design history; `ROADMAP.md` is the current queue
 - README documents ownership for career facts repeated across JSON, homepage, and CV copy

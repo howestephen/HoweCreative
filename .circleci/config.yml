@@ -1,10 +1,11 @@
 # House CircleCI config (RULES.md 2.14, specs/2026-10-22-circleci-free-tier-handoff.md).
-# Shared hook 30 accepts only approved house configs: change it in
-# _projects-admin, never in a project. Projects adapt through package scripts:
+# The shared CI policy gate (hook 30) accepts only approved house configs:
+# change it in _projects-admin, never in a project. Projects adapt through package scripts:
 #   ci:pr    full unit suite, typecheck, lint and production build
 #   ci:main  ci:pr plus the suites that run in a plain Node container (browser and
 #            Docker suites stay local)
-# Lint, typecheck and changed tests already ran at pre-push on the machine.
+# Cheap checks (lint, typecheck, changed tests) carry passing evidence at commit;
+# nothing runs at push. CircleCI takes the heavy suites.
 # Only the cimg/node version may differ per project.
 # pr-suite runs on medium (10 November 2026; the house CircleCI spec, section 6).
 version: 2.1

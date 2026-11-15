@@ -57,3 +57,8 @@ tmp/
 /docs/reviews/
 /docs/telegram-bot-setup.md
 /CLAUDE.local.md
+
+# house kit entries (build and local settings, kit spellings)
+node_modules/
+dist/
+**/.claude/settings.local.json

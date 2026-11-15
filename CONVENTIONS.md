@@ -2,7 +2,8 @@
 status: active
 author: stephen+claude
 created: 2026-10-12
-updated: 2026-11-13
+level: ALL
+updated: 2026-11-15
 ---
 
 # CONVENTIONS
@@ -13,6 +14,8 @@ gotchas recurred in 6 of 28 sessions until written down - zero after.)
 
 - `.npmrc` sets `legacy-peer-deps=true`, which React 19 peer ranges need; CI installs with it too.
 - Adding a study to `site-content.json` also needs a `sitemap.xml` entry; a test checks.
+- **Override of Product platform: this site stays on Vercel.** It is the portfolio, not a product that moves to Cloudflare and Neon; Vercel is its deliberate host (CLAUDE.md, Branches). The Vercel build policy below applies in full through `scripts/vercel-main-only.json`.
+- **Override of the Code baseline, deferred strictness (15 November 2026).** The kit's strictest settings are present in `tsconfig.json` and `eslint.config.js` except these, which the existing code does not yet meet and which stay relaxed rather than being mass-edited: `noUncheckedIndexedAccess` (56 errors), `exactOptionalPropertyTypes` (1), `skipLibCheck: false` (2), and the lint rules switched off in the relaxations block of `eslint.config.js` (about 290 violations, per-rule counts there). One inline `eslint-disable` remains in `api/contact.test.ts`, so `noInlineConfig` is off. Retire each by fixing its violations and deleting the relaxation. `scripts/check-code-quality.mjs` is the kit's file but cannot run here: it reads `eslint.config.mjs` and requires those options. This project's `check` script runs `tsc` and `eslint` directly, and `code_checks` names it.
 
 ## Preservation review
 
@@ -25,6 +28,10 @@ command. The reviewer checks that meaning, requirements, decisions and open
 work survive, and that every change serves the recorded request, then
 records `preserved` or `lost`. A loss needs a recorded owner decision. Any
 later edit voids the record.
+
+## Admin inbox
+
+- File inbox entries only with `<python> "<repos>/_projects-admin/scripts/file_request.py" --fact` (or `--finding` for several observations), never by hand. `--verified` (what you ran and saw) is required; `--category` optionally proposes one of five routes (`--help` lists them).
 
 ## Canonical house standards
 
@@ -63,11 +70,11 @@ CLAUDE.md's own rules win where they differ, stated explicitly.
 
 - When work passes between tools or sessions, use a work-item file in `handoffs/` copied from `handoffs/TEMPLATE.md`. The `owner` field is whose turn it is.
 
-- **Owner-action list.** `ROADMAP.md` carries a `## Stephen` list of `[S]` items: actions only the owner can take: any merge or push into main, a release to live, an allowance for a paid service, connecting a service or account, a login, a purchase, an approval the rules reserve to him. At the end of every task, milestone or piece of ad-hoc work, add what he must now do and remove what is done, in the same change as the work; the Dashboard reads these lines.
+- **Owner-action list.** `ROADMAP.md` carries a `## Stephen` list of `[S]` items: actions only the owner can take: a merge or push into main from L3 (a creative project is treated as below L3 and follows its declared Git policy), a release to live, an allowance for a paid service, connecting a service or account, a login, a purchase, an approval the rules reserve to him. At the end of every task, milestone or piece of ad-hoc work, add what he must now do and remove what is done, in the same change as the work; the Dashboard reads these lines.
 
 - **End replies where Stephen will see them.** Short replies; anything he must answer or do goes last, on its own, and nothing is repeated: the Stop hook already shows what is still running under every reply, so do not add a line for it. Never claim work is under way that nothing is running.
 
-- **Keep the machine responsive, and yourself.** Run tests, builds, installs and any command that can take more than a few seconds in the background, and answer a message from Stephen before waiting on any of them: never sit blocked on a run. Tests, builds, coverage and mutation runs go through `<python> "<repos>/_projects-admin/scripts/heavy.py" run -- <command>`: three slots per machine, one or two workers each, niced; one long job (`--long`, past 20 minutes) at a time; lint and typecheck need no slot. For application work, run the tests for the files changed while working; passing evidence for lint, typecheck and the affected tests before a commit, reused while its inputs are unchanged; and the complete suite once before a merge to main or on CI, never per commit. Hook maintenance is individual: audit, test and install only the changed hook on the receiving machine; preserve completed installs. Full hook suites require an explicit owner request. One checkout per repository unless the desktop app or Stephen made the worktree.
+- **Keep the machine responsive, and yourself.** Run tests, builds, installs and any command that can take more than a few seconds in the background, and answer a message from Stephen before waiting on any of them: never sit blocked on a run. Stop each background job and its waiter once its purpose is served; rely on the job's own completion notice, never a `pgrep -f` poll by name (it matches the waiters). Before reporting done, list the session's running processes by parent, not by known names. Tests, builds, coverage and mutation runs go through `<python> "<repos>/_projects-admin/scripts/heavy.py" run -- <command>`: three slots per machine, one or two workers each, niced; one long job (`--long`, past 20 minutes) at a time; lint and typecheck need no slot. For application work, run the tests for the files changed while working; passing evidence for lint, typecheck and the affected tests before a commit, reused while its inputs are unchanged; and the complete suite once before a merge to main or on CI, never per commit. Hook maintenance is individual: audit, test and install only the changed hook on the receiving machine; preserve completed installs. Full hook suites require an explicit owner request. One checkout per repository unless the desktop app or Stephen made the worktree.
 
 - **Do it yourself; research before asking.** Run what you can instead of handing it to Stephen, and validate any command you give him. Check docs, records and earlier decisions first, and ask only for decisions genuinely his. A request to fix or pick up work is a request to do it.
 
@@ -75,8 +82,9 @@ CLAUDE.md's own rules win where they differ, stated explicitly.
 
 - **One live address.** Give Stephen only this project's registered Tailscale link, never localhost or a port you picked; never start a second server or move ports. A server already on the registered port is the live one: use it or restart it on the same port. Creating a project does not register it.
 
-- **Product platform.** A product hosts on Cloudflare (Workers, R2, Hyperdrive) and keeps its data in Neon Postgres, both on paid plans. Vercel and Supabase are not used for products: they stay only for the portfolio and non-commercial tools (Stephen, 13 November 2026).
-
+- **Product platform.** A product that will go public hosts on Cloudflare (Workers, R2, Hyperdrive) and keeps its data in Neon Postgres, both on paid plans, before it leaves L1; an L0 idea or L1 first build may sit on Vercel until then. Personal, local and never-public work stays on Vercel and Supabase (Stephen, 13 and 14 November 2026).
+- **Email, billing and account lifecycle.** One process for every product, ready for the UK, EU and US from launch; hosted pieces first, custom code only where no provider offers the function. Hosted: Stripe's customer portal for card changes, invoices and cancellation at period end; Stripe's billing emails for trial and renewal reminders (timing checked against the California auto-renewal law and the UK DMCC subscription rules); Resend Broadcasts, its hosted unsubscribe page (`{{{RESEND_UNSUBSCRIBE_URL}}}`) and Topics for marketing, and any per-account marketing email sent with its topic so an unsubscribe applies. Built in the app, and nothing else: a withdrawal function ("withdraw from contract here", a confirm step, an acknowledgement email) that cancels at once and refunds through Stripe's Refunds API, less a proportionate charge where the user asked for service to start within 14 days (UK Consumer Contracts Regulations 2013, EU Consumer Rights Directive Article 11a from 19 June 2026); a log of that request and of marketing consent with date and wording; an unticked marketing consent box at sign-up whose answer goes to Resend; in-app account deletion that also deletes the person from Resend (`DELETE /contacts`), Stripe and every other processor, keeping only records the law requires (Apple 5.1.1(v); Google Play also needs a public web page for deletion requests); a self-serve export in JSON or CSV where the product holds personal data beyond sign-in (UK and EU GDPR Article 20); a cookie banner for non-essential cookies, honouring Global Privacy Control; a postal address and sender identity in marketing email (CAN-SPAM, CASL). Before EU sales: an EU representative named in the privacy notice and a lawyer's check of the withdrawal rules. Custom code duplicating a hosted piece is archived (Stephen, 15 November 2026).
+- **One lock-page PIN.** A closed staging or pre-launch lock page on Cloudflare uses Stephen's one shared PIN. A setup script never generates a PIN: it reads it from a private file named on the command line. The PIN is never stored in Git, memory or project files, and never printed (Stephen, 13 November 2026).
 - **Vercel build policy.** Only main builds automatically; keep the deny-all default, and previews need Stephen's explicit request per branch, never wildcards. Apply `scripts/vercel-main-only.json` before connecting or pushing, as the kit's RETROFIT.md describes, and record exceptions in DECISIONS.md. CLI, API and deploy-hook builds need separate deployment authority.
 
 - **Publication-safe records.** Everything tracked, commit metadata included, is fit to disclose: neutral decisions, no private conversation, profanity or emotional delivery; no credentials, contact details or machine paths (fixtures too); no em-dashes in public copy.

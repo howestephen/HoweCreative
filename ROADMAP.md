@@ -1,7 +1,7 @@
 ---
 status: active
 author: stephen+claude
-updated: 2026-11-13
+updated: 2026-11-15
 generated_by: claude
 generated_at: 2026-11-11T21:30Z
 generated_from: conversation
@@ -45,8 +45,10 @@ Open:
 - [S] Enable Dependabot alerts on the repository (the project is at L2).
 - [S] Check the Vercel dashboard for Git settings, deploy hooks and CLI routes
   and list them in this entry.
-- [S] Decide the future of `codex/creative-technologist-portfolio`: retire
-  or tag it, or have its agent guidance brought up to main's.
+- [S] Approve the kit alignment into `main`; the same alignment is committed
+  locally, unpushed, on `codex/creative-technologist-portfolio`.
+- [S] Decide the future of `codex/creative-technologist-portfolio`: retire,
+  tag or keep it (its agent guidance now matches main's).
 
 ## Accessibility and layout refinements (2026-10-13)
 
@@ -73,9 +75,8 @@ a82c9a8; merged to main on 13 November 2026 with Stephen's approval
 `_archive/2026-11-13-roadmap-ci-and-october-retrofit.md` (local only).
 
 - Rules: CLAUDE.md keeps its local rules and adds the canonical autonomy lines;
-  CONVENTIONS.md is the kit's current text; ONBOARDING.md declares L2 (live
-  portfolio, no accounts or billing). Deliverables and `code_checks` are
-  declared in `scripts/validate.config.json`.
+  CONVENTIONS.md is the kit's current text; ONBOARDING.md declares L2.
+  Deliverables and `code_checks` are declared in `scripts/validate.config.json`.
 - Code tooling: `check`, `ci:pr` and `ci:main` scripts, the kit's
   `.circleci/config.yml` unchanged, `selftest_code_quality.py` and the evidence
   gate. `.github/workflows/ci.yml` (the old GitHub Actions copy of the same
@@ -86,15 +87,11 @@ a82c9a8; merged to main on 13 November 2026 with Stephen's approval
   `{"**": false, "main": true}` (the only consumed config); `.vercel/` holds
   the project link only. Hosted acceptance is not observed. Dashboard, CLI and
   deploy-hook routes are not inventoried.
-- Justified exceptions: the project keeps its own `tsconfig.json`,
-  `eslint.config.js` and dependency ranges. The kit's compiler and lint
-  settings (`noUncheckedIndexedAccess`, `exactOptionalPropertyTypes`,
-  `skipLibCheck: false`, `strictTypeChecked`, arrow-only functions) were tried
-  on a disposable copy and the code raises 74 compiler errors and about 300
-  lint errors (non-null assertions, `func-style`, unsafe `any` from JSON), so
-  `check` runs the project's own typecheck and lint; no existing check was
-  weakened; `no-explicit-any` is now an error (it was a warning, and the
-  code has no violations).
+- Justified exceptions (superseded by the 15 November alignment below, which
+  carries the kit's strictness except the deferrals in CONVENTIONS.md): the
+  kit's strict compiler and lint settings raised 74 compiler errors and about
+  300 lint errors on the code, so `check` runs the project's own typecheck
+  and lint; no existing check was weakened.
 - [ ] Bring the code to the kit's strict settings and swap the kit's
   `tsconfig.json`, `eslint.config.mjs` and `check-code-quality.mjs` in.
 - [ ] Heavy media (rule 5a, no file over 5 MB under `public/`): 19 tracked
@@ -110,6 +107,20 @@ a82c9a8; merged to main on 13 November 2026 with Stephen's approval
   is a separate site (142 commits ahead, 161 behind) and the merge raises
   40 conflicts, most in site source; it waits for Stephen's redesign
   decision.
+
+## Kit alignment (15 November 2026, MacBook Pro)
+
+On `main`, then carried by hand onto `codex/creative-technologist-portfolio`
+(separate lines; main is not merged into it). All kit documents, machinery
+and `.claude/settings.json` are current, CLAUDE.md and CONVENTIONS.md carry
+the kit's text with the project's own rules kept under headed sections, and
+`tsconfig.json` and `eslint.config.js` carry the kit's strictness except the
+deferrals in CONVENTIONS.md.
+
+- [ ] Retire the deferrals one by one; when none is left,
+  `check-code-quality.mjs` can replace the project's `check` script.
+- Still to merge main for this: `fix/video-captions`; `claude/brief-machine`
+  and `claude/showreel-redesign` (local only).
 
 ## Goal
 

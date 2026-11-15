@@ -1,6 +1,4 @@
 #!/usr/bin/env python3
-# selftest-covers: .claude/settings.json .gitignore .claude/hooks-state .claude/hooks-state/ .claude/settings.local.json
-# selftest-nocache
 """Check the project's Claude settings file and the ignore rules around it.
 
 `.claude/settings.json` carries the house MCP deny list (tools this kind of
@@ -9,7 +7,7 @@ map, 10 November 2026). The house keeps hook definitions in the machine
 kit to avoid duplicate handlers when Claude Code merges settings. This
 check validates deny rule syntax and uniqueness, confirms Git tracks the
 settings without an ignore rule, and checks that Claude's local state is
-ignored. Stdlib only; run it with the project's checks before pushing.
+ignored. Stdlib only; run it with the project's checks before committing.
 """
 from collections import Counter
 from pathlib import Path

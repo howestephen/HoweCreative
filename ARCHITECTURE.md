@@ -1,10 +1,49 @@
 ---
 status: active
 author: stephen+claude
-updated: 2026-10-12
+level: L2+
+updated: 2026-11-15
 ---
 
 # ARCHITECTURE
+
+How the project is shaped: the answer to the question most expensive for an
+agent to reconstruct from code. Activates at L2 (first real implementation).
+Keep it current in the same commit as any structural change.
+
+## System shape
+
+A static Vite + React single-page site served from Vercel. Content comes from
+`site-content.json` through a typed adapter; the only server code is the
+optional contact functions in `api/`. The browser talks to Web3Forms for
+contact delivery, either directly or through `api/contact.ts`. The detail is
+under Current Repo below.
+
+## Services / components
+
+| Component | Runs where | Talks to | Notes |
+|---|---|---|---|
+| Single-page site (`src/app/`) | Browser, built to `dist` | Web3Forms, hCaptcha | Homepage in `src/app/concept/`, CV in `src/app/pages/CV.tsx` |
+| `api/contact.ts` | Vercel serverless function | Web3Forms | Server delivery mode; paid-plan fallback |
+| `api/contact-key.ts` | Vercel serverless function | none | Returns the public form identifier to builds without the key |
+| `scripts/build-thumbs.mjs` | Local, before commit | `public/` images | Writes responsive copies and `image-variants.json` |
+
+## Data
+
+No database. Content lives in `site-content.json` (structured project facts),
+`src/app/data/image-variants.json` (generated image sizes) and the components
+named under Current Repo. Only a code change writes them; nothing writes at
+runtime.
+
+## External integrations
+
+- Web3Forms: contact delivery. Auth is the `EMAIL_ACCESS_KEY` environment
+  variable (public form identifier, client mode) or
+  `WEB3FORMS_SERVER_ACCESS_KEY` (server mode, with provider IP allowlisting).
+  If delivery fails the form reports the error and sends nothing.
+- hCaptcha: Web3Forms' shared free-plan site key; the form will not send until
+  solved.
+- Vercel: hosting and the serverless functions; only `main` builds.
 
 ## Current Repo
 
