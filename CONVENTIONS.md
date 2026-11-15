@@ -15,7 +15,7 @@ gotchas recurred in 6 of 28 sessions until written down - zero after.)
 - `.npmrc` sets `legacy-peer-deps=true`, which React 19 peer ranges need; CI installs with it too.
 - Adding a study to `site-content.json` also needs a `sitemap.xml` entry; a test checks.
 - **Override of Product platform: this site stays on Vercel.** It is the portfolio, not a product that moves to Cloudflare and Neon; Vercel is its deliberate host (CLAUDE.md, Hosting). The Vercel build policy below applies in full through `scripts/vercel-main-only.json`.
-- **Override of the Code baseline, deferred strictness (15 November 2026).** The kit's strictest settings are present in `tsconfig.json` and `eslint.config.js` except these, which the existing code does not yet meet and which stay relaxed rather than being mass-edited: `noUncheckedIndexedAccess` (48 errors), `exactOptionalPropertyTypes` (21), `skipLibCheck: false` (55), and the lint rules switched off in the relaxations block of `eslint.config.js` (about 290 violations on this branch, per-rule counts there). One inline `eslint-disable` remains in `api/contact.test.ts`, so `noInlineConfig` is off. Retire each by fixing its violations and deleting the relaxation. `scripts/check-code-quality.mjs` is the kit's file but cannot run here: it reads `eslint.config.mjs` and requires those options. This project's `check` script runs `tsc` and `eslint` directly, and `code_checks` names it.
+- **Code-baseline debt, not an exception, deferred strictness (15 November 2026).** The kit's strictest settings are present in `tsconfig.json` and `eslint.config.js` except these, which the existing code does not yet meet and which stay relaxed rather than being mass-edited: `noUncheckedIndexedAccess` (48 errors), `exactOptionalPropertyTypes` (21), `skipLibCheck: false` (55), and the lint rules switched off in the relaxations block of `eslint.config.js` (about 290 violations on this branch, per-rule counts there). One inline `eslint-disable` remains in `api/contact.test.ts`, so `noInlineConfig` is off. Retire each by fixing its violations and deleting the relaxation. `scripts/check-code-quality.mjs` is the kit's file but cannot run here: it reads `eslint.config.mjs` and requires those options. This project's `check` script runs `tsc` and `eslint` directly, and `code_checks` names it. The house rule is zero findings: clearing this is an open ROADMAP task (local work item `handoffs/2026-11-15-zero-lint-and-type-findings.md`).
 
 ## Preservation review
 
@@ -124,7 +124,7 @@ A request to a generative model goes through the generation pre-flight first
 
 - Never use `any` or `Any`. Prefer `unknown` and narrow it. No `@ts-ignore`.
 
-- Typecheck, lint and the tests for the changed behaviour must pass before that code is called done; the complete suite runs once before a merge to main or on CI. Say exactly what did not run.
+- Typecheck, lint and the tests for the changed behaviour must pass before that code is called done; the complete suite runs once before a merge to main or on CI. Say exactly what did not run. Lint and typecheck report nothing, with no rule switched off to get there: a kit setting the existing code fails is debt with a ROADMAP task to clear it, never a standing exception.
 
 - When Stephen must apply SQL by hand, hand over every pending change for the task once, as one complete, idempotent script, never a change per turn or partial snippets.
 
@@ -139,6 +139,8 @@ A request to a generative model goes through the generation pre-flight first
 - No unsafe raw-HTML injection without sanitisation and justification.
 
 - No `@ts-ignore`, and no suppressions without reasons: `@ts-expect-error` with an inline reason is the only one, and only when the platform types are wrong.
+
+- A new dependency is recorded in the spec or a decision record before it is added: what it is, why it is preferred, its licence and its risk.
 
 - Prefer small modules with explicit inputs and outputs. Treat type, schema, and security warnings as real defects.
 
