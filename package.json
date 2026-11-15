@@ -11,8 +11,12 @@
     "test": "vitest run",
     "typecheck": "tsc --noEmit",
     "check": "npm run typecheck && npm run lint",
-    "ci:pr": "npm run typecheck && npm run lint && npm test && npm run build",
-    "ci:main": "npm run ci:pr"
+    "ci:select": "node scripts/ci-select.mjs gate",
+    "ci:pr": "node scripts/ci-select.mjs pr",
+    "ci:pr:full": "npm run typecheck && npm run lint && npm test && npm run build",
+    "ci:changed": "vitest related --run --passWithNoTests",
+    "ci:main": "node scripts/ci-select.mjs main",
+    "ci:main:full": "npm run ci:pr:full"
   },
   "engines": {
     "node": "^22.14.0 || >=24.0.0"
