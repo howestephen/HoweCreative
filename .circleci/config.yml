@@ -1,9 +1,10 @@
 # House CircleCI config (RULES.md 2.14, specs/2026-10-22-circleci-free-tier-handoff.md).
 # The shared CI policy gate (hook 30) accepts only approved house configs:
 # change it in _projects-admin, never in a project. Projects adapt through package scripts:
-#   ci:pr    full unit suite, typecheck, lint and production build
-#   ci:main  ci:pr plus the suites that run in a plain Node container (browser and
-#            Docker suites stay local)
+#   ci:select, ci:pr and ci:main call scripts/ci-select.mjs, which tests only what changed:
+#   a documents-only push runs nothing; a push of source files runs the related tests
+#   (ci:changed); a configuration, dependency or CI change runs the whole suite
+#   (ci:pr:full); every push to main runs the whole suite (ci:main:full).
 # Cheap checks (lint, typecheck, changed tests) carry passing evidence at commit;
 # nothing runs at push. CircleCI takes the heavy suites.
 # Only the cimg/node version may differ per project.
@@ -18,12 +19,16 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Select
+          command: timeout -k 10s 1m npm run ci:select
+          no_output_timeout: 1m
+      - run:
           name: Install
           command: timeout -k 10s 4m npm ci --no-audit --no-fund
           no_output_timeout: 4m
       - run:
           name: PR suite
-          command: timeout -k 10s 6m npm run ci:pr
+          command: timeout -k 10s 5m npm run ci:pr
           no_output_timeout: 5m
 
   main-suite:
@@ -33,12 +38,16 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Select
+          command: timeout -k 10s 1m npm run ci:select
+          no_output_timeout: 1m
+      - run:
           name: Install
           command: timeout -k 10s 4m npm ci --no-audit --no-fund
           no_output_timeout: 4m
       - run:
           name: Main suite
-          command: timeout -k 10s 16m npm run ci:main
+          command: timeout -k 10s 15m npm run ci:main
           no_output_timeout: 5m
 
 workflows:
