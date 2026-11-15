@@ -24,6 +24,8 @@ word_budget_reason: the redesign branch keeps its full media and audit history; 
 
 ## Kit alignment (15 November 2026, MacBook Pro)
 
+Source kit commit: `83681f9b`.
+
 Carried by hand from `main` (the lines stay separate; main is not merged
 here). All kit documents, machinery and `.claude/settings.json` are current,
 CLAUDE.md and CONVENTIONS.md match main's, `check`, `ci:pr` and `ci:main`
