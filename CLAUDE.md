@@ -25,11 +25,7 @@ review always apply.
 - Subagents run in combination, capped by tier: one top-tier, two Opus, four
   Sonnet or below. Use the cheapest tier that fits and never delegate work a
   command or direct read can do. Follow RULES 2.1 and the installed guard.
-- Project override, tighter than the default: this project is L2 (live
-  portfolio, no accounts or billing, declared in ONBOARDING.md), yet every
-  main merge or push needs Stephen's approval, per instance, through the
-  client's approve prompt. Work on a feature branch; push it only after the
-  Privacy check below shows the push carries website files only.
+- This repository is public: before any push, run the Privacy check below.
 - The folder lock is `top_dirs` in `scripts/validate.config.json`.
 
 ## 1. Start-Up Loop
@@ -169,12 +165,6 @@ it says so.
 Vercel is this project's deliberate host: it is the portfolio, so CONVENTIONS.md's
 product-platform rule (Cloudflare and Neon) does not apply, and
 `scripts/vercel-main-only.json` stays. The default stack in §4 otherwise holds.
-
-### Done means audited
-
-This project tightens CONVENTIONS.md's rigour tiers: before a task is called
-done, an independent agent audits the change adversarially for bugs, broken
-code and overclaims, whatever its size. Fix its findings and re-audit.
 
 ### Copy
 
