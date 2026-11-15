@@ -92,6 +92,6 @@ use the server-only variable in client mode.
 - Primary content source: `site-content.json`
 - Local media source: `/public/case-studies/*`
 - Deployment target: Vercel (`vercel.json` with `dist` output); this branch is not deployed (its Vercel project is disconnected from Git)
-- Code checks: declared as `code_checks` in `scripts/validate.config.json`; the project keeps its own `tsconfig.json` and `eslint.config.js` with the kit's strictness except the deferrals listed in CONVENTIONS.md (ROADMAP, alignment entry)
+- Code checks: declared as `code_checks` in `scripts/validate.config.json`; the project keeps its own `tsconfig.json` and `eslint.config.js`; matching the kit's strictness is the first open ROADMAP item
 - `docs/plans/` records design history; `ROADMAP.md` is the current queue
 - README documents ownership for career facts repeated across JSON, homepage, and CV copy

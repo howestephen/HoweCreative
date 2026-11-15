@@ -31,13 +31,17 @@ here). All kit documents, machinery and `.claude/settings.json` are current,
 CLAUDE.md and CONVENTIONS.md match main's, `check`, `ci:pr` and `ci:main`
 scripts and the kit's `.circleci/config.yml` are added, the old
 `.github/workflows/ci.yml` is removed, and `tsconfig.json` and
-`eslint.config.js` carry the kit's strictness except the deferrals in
-CONVENTIONS.md (measured on this branch's code). Three `override` modifiers
+`eslint.config.js` carry the kit's strictness. Three `override` modifiers
 in `PortraitExperience.tsx` were the only source edits.
 
-- [ ] Retire the deferrals one by one; when none is left,
+- [ ] **Next.** Retire the deferrals one by one; when none is left,
   `check-code-quality.mjs` can replace the `check` script. First: the `any` in
-  `api/contact.test.ts`.
+  `api/contact.test.ts`. Spec: `specs/2026-11-15-zero-lint-and-type-findings.md`
+  (288 lint findings, 124 type errors, 5 files over 300 lines).
+- [ ] **Then.** 100% test coverage, enforced in the gate; not measurable today:
+  `specs/2026-11-15-test-coverage-to-100.md`.
+- [ ] Heavy media (rule 5a, no file over 5 MB under `public/`): 26 tracked
+  video files, 19 over 5 MB (322 MB); move them to object storage or a media host, never delete.
 
 ## Particle home rebuilt - 13 November 2026
 
@@ -320,7 +324,7 @@ The integrated review version runs at `/study`, separate from the existing root 
 
 ## Case study and disclosure audit - 20 September 2026
 
-An audit of all ten `/work/:slug` routes, the selected-work cards and the preview card, covering delivered material, layout, copy claims and public exposure. Method, evidence and per-finding detail are in the audit record (a local working note); each item below names the file to change. Severity 1 is publication-blocking and should be cleared before the site is shown to anyone. The items are independent of each other and can be taken in any order within a severity band. Verified as passing at the time of the audit, so treat a regression in any of these as a new fault: no broken images, no console errors, no horizontal overflow on any route at 1440px or 390px; all 142 media entries resolving with alt text; uniform card heights at every width; preview dialogs inside the viewport at every width; typecheck, 83 tests and build all green.
+An audit of all ten `/work/:slug` routes, the selected-work cards and the preview card (delivered material, layout, copy claims, public exposure); detail is in the audit record (a local working note). Severity 1 is publication-blocking. The items are independent. At the time of the audit there were no broken images, console errors or horizontal overflow at 1440px or 390px; all 142 media entries resolved with alt text; typecheck, 83 tests and build were green, so a regression in any is a new fault.
 
 Severity 1, disclosure and accuracy:
 
