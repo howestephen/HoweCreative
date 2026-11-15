@@ -88,7 +88,7 @@ a82c9a8; merged to main on 13 November 2026 with Stephen's approval
   the project link only. Hosted acceptance is not observed. Dashboard, CLI and
   deploy-hook routes are not inventoried.
 - Justified exceptions (superseded by the 15 November alignment below, which
-  carries the kit's strictness except the deferrals in CONVENTIONS.md): the
+  carries the kit's strictness except QUALITY.md §8): the
   kit's strict compiler and lint settings raised 74 compiler errors and about
   300 lint errors on the code, so `check` runs the project's own typecheck
   and lint; no existing check was weakened.
@@ -117,7 +117,7 @@ On `main`, then carried by hand onto `codex/creative-technologist-portfolio`
 and `.claude/settings.json` are current, CLAUDE.md and CONVENTIONS.md carry
 the kit's text with the project's own rules kept under headed sections, and
 `tsconfig.json` and `eslint.config.js` carry the kit's strictness except the
-deferrals in CONVENTIONS.md.
+QUALITY.md §8.
 
 - [ ] Retire the deferrals one by one; when none is left,
   `check-code-quality.mjs` can replace the project's `check` script. First: the `any` in
