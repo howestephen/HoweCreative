@@ -244,3 +244,8 @@ file in `handoffs/` named `YYYY-MM-DD-topic.md`, copied from
 `handoffs/TEMPLATE.md`. The `owner` field is whose turn it is; the receiver
 acts on the file alone, writes back, flips `owner`, bumps `round`. `state` is one of: needs-work | in-progress | blocked | done. Round 3
 escalates to Stephen. Automation over this is optional, later.
+
+Hand-overs and `_archive/` are working state and stay local: both are
+gitignored, and only `handoffs/TEMPLATE.md` is tracked. Current cross-session
+state is a work item in `handoffs/`, never a root file. What must outlast the
+work goes in ROADMAP.md, the spec or a decision record.
