@@ -110,6 +110,8 @@ a82c9a8; merged to main on 13 November 2026 with Stephen's approval
 
 ## Kit alignment (15 November 2026, MacBook Pro)
 
+Source kit commit: `83681f9b`.
+
 On `main`, then carried by hand onto `codex/creative-technologist-portfolio`
 (separate lines; main is not merged into it). All kit documents, machinery
 and `.claude/settings.json` are current, CLAUDE.md and CONVENTIONS.md carry

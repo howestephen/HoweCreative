@@ -14,7 +14,7 @@ gotchas recurred in 6 of 28 sessions until written down - zero after.)
 
 - `.npmrc` sets `legacy-peer-deps=true`, which React 19 peer ranges need; CI installs with it too.
 - Adding a study to `site-content.json` also needs a `sitemap.xml` entry; a test checks.
-- **Override of Product platform: this site stays on Vercel.** It is the portfolio, not a product that moves to Cloudflare and Neon; Vercel is its deliberate host (CLAUDE.md, Branches). The Vercel build policy below applies in full through `scripts/vercel-main-only.json`.
+- **Override of Product platform: this site stays on Vercel.** It is the portfolio, not a product that moves to Cloudflare and Neon; Vercel is its deliberate host (CLAUDE.md, Hosting). The Vercel build policy below applies in full through `scripts/vercel-main-only.json`.
 - **Override of the Code baseline, deferred strictness (15 November 2026).** The kit's strictest settings are present in `tsconfig.json` and `eslint.config.js` except these, which the existing code does not yet meet and which stay relaxed rather than being mass-edited: `noUncheckedIndexedAccess` (56 errors), `exactOptionalPropertyTypes` (1), `skipLibCheck: false` (2), and the lint rules switched off in the relaxations block of `eslint.config.js` (about 290 violations, per-rule counts there). One inline `eslint-disable` remains in `api/contact.test.ts`, so `noInlineConfig` is off. Retire each by fixing its violations and deleting the relaxation. `scripts/check-code-quality.mjs` is the kit's file but cannot run here: it reads `eslint.config.mjs` and requires those options. This project's `check` script runs `tsc` and `eslint` directly, and `code_checks` names it.
 
 ## Preservation review
