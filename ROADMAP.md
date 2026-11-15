@@ -36,7 +36,8 @@ CONVENTIONS.md (measured on this branch's code). Three `override` modifiers
 in `PortraitExperience.tsx` were the only source edits.
 
 - [ ] Retire the deferrals one by one; when none is left,
-  `check-code-quality.mjs` can replace the `check` script.
+  `check-code-quality.mjs` can replace the `check` script. First: the `any` in
+  `api/contact.test.ts`.
 
 ## Particle home rebuilt - 13 November 2026
 
