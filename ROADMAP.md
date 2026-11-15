@@ -26,6 +26,8 @@ Open:
   (about 290 lint findings, 59 type errors, 3 files over 300 lines).
 - [ ] **Then.** 100% test coverage, enforced in the gate; not measurable today:
   `specs/2026-11-15-test-coverage-to-100.md`.
+- [ ] **After that.** Testing, security and quality programme:
+  `specs/2026-11-15-testing-security-quality-programme.md`.
 - Redesign: waits for Stephen's decision on a direction; handoff (`handoffs/2026-11-11-cv-two-pages-and-redesign.md`, local only).
 - Captions for the 11 narrated videos (A1 below) wait for Stephen's proofread
   on `fix/video-captions`.
@@ -48,6 +50,8 @@ Open:
   connect the project in CircleCI: GitHub App, triggers "Pushes to default
   branch" and "Pushes to open non-draft PRs", auto-cancel on.
 - [S] Enable Dependabot alerts on the repository (the project is at L2).
+- [S] Approve the Argos account and GitHub App access when the programme reaches
+  visual checks.
 - [S] Check the Vercel dashboard for Git settings, deploy hooks and CLI routes
   and list them in this entry.
 - [S] Approve the kit alignment into `main`; the same alignment is committed
@@ -88,10 +92,9 @@ a82c9a8; merged to main on 13 November 2026 with Stephen's approval
   checks) and `scripts/selftest_site_checks.py` (the old pre-push suite) are
   replaced by them and removed. Until CircleCI is connected, pull requests have no hosted
   check; the commit gate's evidence is the only automatic one.
-- Vercel: main's `vercel.json` already held `git.deploymentEnabled`
-  `{"**": false, "main": true}` (the only consumed config); `.vercel/` holds
-  the project link only. Hosted acceptance is not observed. Dashboard, CLI and
-  deploy-hook routes are not inventoried.
+- Vercel: `vercel.json` holds `git.deploymentEnabled`
+  `{"**": false, "main": true}`; `.vercel/` is the project link only. Hosted
+  acceptance, dashboard, CLI and deploy-hook routes are not inventoried.
 - [ ] Bring the code to the kit's strict settings and swap the kit's
   `tsconfig.json`, `eslint.config.mjs` and `check-code-quality.mjs` in: the
   first open item.
@@ -102,12 +105,10 @@ a82c9a8; merged to main on 13 November 2026 with Stephen's approval
 - [ ] Open from before: CI runtime headroom and hosted acceptance are not
   recorded; Codex and Cursor wiring and which agent-host events fire are
   unverified.
-- Live branches merged with main on 13 November 2026 and validated:
-  `claude/brief-machine`, `claude/showreel-redesign` (both local only) and
-  `fix/video-captions`. Not merged: `codex/creative-technologist-portfolio`
-  is a separate site (142 commits ahead, 161 behind) and the merge raises
-  40 conflicts, most in site source; it waits for Stephen's redesign
-  decision.
+- Merged with main on 13 November 2026: `claude/brief-machine`,
+  `claude/showreel-redesign` (local only) and `fix/video-captions`. Not
+  merged: `codex/creative-technologist-portfolio`, a separate site (40
+  conflicts); it waits for Stephen's redesign decision.
 
 ## Kit alignment (15 November 2026, MacBook Pro)
 
