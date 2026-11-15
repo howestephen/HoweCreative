@@ -26,7 +26,6 @@ review always apply.
   Sonnet or below. Use the cheapest tier that fits and never delegate work a
   command or direct read can do. Follow RULES 2.1 and the installed guard.
 - This repository is public: before any push, run the Privacy check below.
-- The folder lock is `top_dirs` in `scripts/validate.config.json`.
 
 ## 1. Start-Up Loop
 
@@ -90,7 +89,7 @@ coordinate substantial work.
 
 Prefer lower-risk Codex operating modes: `workspace-write` plus `on-request` for normal local implementation, `read-only` plus `on-request` for audit or research, `workspace-write` plus `untrusted` when stricter auto-read is needed. Avoid `danger-full-access` plus `never` unless the task truly requires it and the risk is understood.
 
-Reach external services through their CLI: command allowlists, the spend gate and release approval cover CLI commands, and nothing is designed around MCP tool permissions. MCP servers are not used for now; the trust matrix is archived at `_projects-admin/templates/ai-product-base/_archive/MCP_TRUST_MATRIX.md` and comes back, project-scoped, scoped or read-only, if a project brings one back.
+Reach external services through their CLI: command allowlists, the spend gate and release approval cover CLI commands, and nothing is designed around MCP tool permissions. MCP servers are not used, bar the two deliberate ones (Context7 and vp0); the trust matrix is archived at `_projects-admin/templates/ai-product-base/_archive/MCP_TRUST_MATRIX.md` and comes back, project-scoped, scoped or read-only, if a project brings one back.
 
 ## 4B. Skills To Reach For
 
@@ -131,7 +130,7 @@ Never hack around a problem (CONVENTIONS.md). A TODO is allowed only when Stephe
 
 ## 9. Definition Of Done
 
-Done requires implementation complete, tests added or updated, validation run, docs and roadmap updated, remaining risks documented. Substantial tasks also: linked `PLAN.md` content updated or marked obsolete; any required review outcome current, any accepted risk explicit.
+Done requires implementation complete, tests added or updated where the change's rigour tier calls for them, validation run, docs and roadmap updated, remaining risks documented. Substantial tasks also: linked `PLAN.md` content updated or marked obsolete; any required review outcome current, any accepted risk explicit.
 
 ## 10. Roadmap Update Rules
 
@@ -168,8 +167,8 @@ product-platform rule (Cloudflare and Neon) does not apply, and
 
 ### Copy
 
-- **Never use em-dashes (—) or en-dashes (–)** in site copy, UI strings, the CV,
-  or any user-facing text. Use a plain hyphen "-" instead. No exceptions, ever.
+- Site copy, UI strings and the CV use no en-dashes; use a plain hyphen "-"
+  instead.
 - Never describe Solana Diary (or similar work) as "autonomous" or as "an AI
   system". It was an automated media pipeline with human Telegram approval,
   built *with* AI tools. Grok was an optional, button-triggered assist.
@@ -180,10 +179,9 @@ product-platform rule (Cloudflare and Neon) does not apply, and
 
 ### Assets
 
-- **Never delete project images, screenshots, or media.** If an asset is no
-  longer used on the site, move it to `assets-archive/` (git-ignored, stays on
-  Stephen's machine) so future redesigns can reuse it. All project screenshots
-  live in this repo.
+- An asset no longer used on the site moves to `assets-archive/` (git-ignored,
+  stays on Stephen's machine) for reuse in future redesigns. All project
+  screenshots live in this repo.
 
 ### Privacy
 

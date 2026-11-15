@@ -154,5 +154,17 @@
         "required": true
       }
     }
+  },
+  "word_overrides": {
+    "CONVENTIONS.md": {
+      "warn_words": 3000,
+      "fail_words": 3600,
+      "reason": "Set 2026-11-15. The kit's canonical house standards are about 2,600 words on their own and must be carried verbatim; the room above that is for the project section."
+    },
+    "ENGINEERING.md": {
+      "warn_words": 2500,
+      "fail_words": 3500,
+      "reason": "Set 2026-11-15. The kit's engineering baseline is about 2,100 words before a project adds its own part."
+    }
   }
 }
