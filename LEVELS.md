@@ -69,7 +69,7 @@ Empty cells mean no **new** constraint at that level; previous constraints still
 ### L1: Build
 
 - **Entry:** everything becomes formal. Specs, tests, quality gates and the development pipeline apply; populate `ONBOARDING.md` (snapshot, primary user, target markets, active domains).
-- **Once code exists:** apply the executable baseline in ENGINEERING §4 and QUALITY §9. Feature triggers apply at introduction.
+- **Once code exists:** apply the executable baseline in ENGINEERING (§3.8 for TypeScript, §4 for Python) and QUALITY §9. Feature triggers apply at introduction.
 - **Constraints:** strict typing, runtime validation at boundaries, small modules, no secrets in code, basic lint/typecheck/build, external services reached by CLI (an MCP server, if one returns, is recorded in the archived `_archive/MCP_TRUST_MATRIX.md`). Docs per `GOVERNANCE.md` §7.
 - **Dependabot alerts:** on from L2 (Stephen, 2026-11-09; `_projects-admin/RULES.md` 2.14), so they work before the serious work of L3; a project below L2 keeps whatever it has. Alerts only; update pull requests are a separate decision.
 - **Trigger to leave L1:** work on accounts, billing or launch begins, or drift starts to hurt.
