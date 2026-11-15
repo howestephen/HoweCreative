@@ -20,8 +20,13 @@ work; it is not merged and, since 2 November 2026, not deployed.
 
 Open:
 
-- **Next:** the redesign waits for Stephen's decision on a direction:
-  handoff (`handoffs/2026-11-11-cv-two-pages-and-redesign.md`, local only).
+- [ ] **Next.** Retire the deferrals one by one; when none is left,
+  `check-code-quality.mjs` can replace the project's `check` script. First: the `any` in
+  `api/contact.test.ts`. Spec: `specs/2026-11-15-zero-lint-and-type-findings.md`
+  (about 290 lint findings, 59 type errors, 3 files over 300 lines).
+- [ ] **Then.** 100% test coverage, enforced in the gate; not measurable today:
+  `specs/2026-11-15-test-coverage-to-100.md`.
+- Redesign: waits for Stephen's decision on a direction; handoff (`handoffs/2026-11-11-cv-two-pages-and-redesign.md`, local only).
 - Captions for the 11 narrated videos (A1 below) wait for Stephen's proofread
   on `fix/video-captions`.
 - Decide on the 15 images the September image review marked CUT.
@@ -87,13 +92,9 @@ a82c9a8; merged to main on 13 November 2026 with Stephen's approval
   `{"**": false, "main": true}` (the only consumed config); `.vercel/` holds
   the project link only. Hosted acceptance is not observed. Dashboard, CLI and
   deploy-hook routes are not inventoried.
-- Justified exceptions (superseded by the 15 November alignment below, which
-  carries the kit's strictness except QUALITY.md §8): the
-  kit's strict compiler and lint settings raised 74 compiler errors and about
-  300 lint errors on the code, so `check` runs the project's own typecheck
-  and lint; no existing check was weakened.
 - [ ] Bring the code to the kit's strict settings and swap the kit's
-  `tsconfig.json`, `eslint.config.mjs` and `check-code-quality.mjs` in.
+  `tsconfig.json`, `eslint.config.mjs` and `check-code-quality.mjs` in: the
+  first open item.
 - [ ] Heavy media (rule 5a, no file over 5 MB under `public/`): 19 tracked
   files, about 300 MB, all MP4s under `public/case-studies/` (uncx-academy 8,
   uncx-video-system 6, quiver 4, uncx-rebrand 1; largest 31 MB). Move them to
@@ -115,13 +116,8 @@ Source kit commit: `83681f9b`.
 On `main`, then carried by hand onto `codex/creative-technologist-portfolio`
 (separate lines; main is not merged into it). All kit documents, machinery
 and `.claude/settings.json` are current, CLAUDE.md and CONVENTIONS.md carry
-the kit's text with the project's own rules kept under headed sections, and
-`tsconfig.json` and `eslint.config.js` carry the kit's strictness except the
-QUALITY.md §8.
+the kit's text with the project's own rules kept under headed sections.
 
-- [ ] Retire the deferrals one by one; when none is left,
-  `check-code-quality.mjs` can replace the project's `check` script. First: the `any` in
-  `api/contact.test.ts`.
 - Still to merge main for this: `fix/video-captions`; `claude/brief-machine`
   and `claude/showreel-redesign` (local only).
 

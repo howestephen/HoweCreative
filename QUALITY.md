@@ -161,25 +161,9 @@ State only what matters for the product:
 
 If the project is not yet at a release stage, say so explicitly.
 
-## 8. Known Quality Debt
+## 8. No Quality Debt
 
-Use this section to track accepted quality gaps that are real enough to matter.
-
-For each item, capture:
-
-- gap:
-- why it is being accepted:
-- user or system risk:
-- owner:
-- follow-up milestone:
-- expiry or revisit trigger:
-
-Do not hide recurring quality failures inside roadmap notes if they are really cross-cutting debt. A defect found on the way is fixed in the same work (CONVENTIONS, rigour rule); one that belongs to another owner is recorded here and reported to that owner.
-
-Measured against the house bar (zero lint and type findings, 100% coverage enforced by the gate); each is a ROADMAP task, not an accepted gap:
-
-- **Lint and type settings not yet met (15 November 2026).** The kit's strictest settings are present in `tsconfig.json` and `eslint.config.js` except these, which the existing code does not yet meet and which stay relaxed rather than being mass-edited: `noUncheckedIndexedAccess` (56 errors), `exactOptionalPropertyTypes` (1), `skipLibCheck: false` (2), and the lint rules switched off in the relaxations block of `eslint.config.js` (about 290 violations, per-rule counts there). One inline `eslint-disable` remains in `api/contact.test.ts`, so `noInlineConfig` is off. Retire each by fixing its violations and deleting the relaxation. `scripts/check-code-quality.mjs` is the kit's file but cannot run here: it reads `eslint.config.mjs` and requires those options. This project's `check` script runs `tsc` and `eslint` directly, and `code_checks` names it. The house rule is zero findings: clearing this is an open ROADMAP task (local work item `handoffs/2026-11-15-zero-lint-and-type-findings.md`).
-- **Test coverage below the house bar.** The house rule is 100% coverage, enforced by the gate. State: not measurable on 15 November 2026: no coverage provider is installed (`@vitest/coverage-v8`) and `vitest.config.ts` has no coverage block; no gate runs coverage. Clearing it is an open task (local work item `handoffs/2026-11-15-test-coverage-to-100.md`).
+There is no debt register. A quality gap, bug, security issue or missing test is fixed in the same work or becomes the next ROADMAP item, with a spec where the work needs one (CONVENTIONS.md, no parked problems). Nothing is recorded here as accepted or known debt; a defect in another owner's code is reported to that owner.
 
 ## 9. Change Triggers
 

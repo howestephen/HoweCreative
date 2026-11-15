@@ -63,6 +63,7 @@ CLAUDE.md's own rules win where they differ, stated explicitly.
 - Follow the subagent tier caps and installed guard guidance in CLAUDE.md.
 
 - **Never hack around a problem.** `any`, a cast, a suppression, a TODO, a second tool or a quieter check that hides a failure is cheating; if the real fix is blocked, stop and say so.
+- **No debt, no parked problems.** A bug, security issue, code-health problem or missing test is fixed in the same work or becomes the next ROADMAP item, with a spec where the work needs one. It is never recorded as a note or "known debt" in a long-term document.
 
 - **Rigour follows risk.** Code that can block work, delete, publish, push or deploy, or that handles secrets, sign-in, payments, personal data or migrations gets focused tests with a forbidden twin, a mutation check of the new tests and one independent adversarial audit. Ordinary code gets tests for the changed behaviour, and an independent audit only past about 300 changed lines or on request. Text and configuration get neither; the structural gates still run. An audit is one round: fix every bug it finds, fix low polish if quick, and re-audit only the fix of a high finding. A defect met on the way in code this project owns is fixed in the same work, never filed or left; a defect in the house hooks or kit is reported to admin.
 - **An audit only finds.** The auditing agent is read-only: it cites `file:line`, tags each finding BLOCKING, SHOULD-FIX or NIT and changes nothing. A different agent fixes, and each finding is closed by a fix or a reasoned rejection.
@@ -123,7 +124,7 @@ A request to a generative model goes through the generation pre-flight first
 
 - Never use `any` or `Any`. Prefer `unknown` and narrow it. No `@ts-ignore`.
 
-- Typecheck, lint and the tests for the changed behaviour must pass before that code is called done; the complete suite runs once before a merge to main or on CI. Say exactly what did not run. Lint and typecheck report nothing, with no rule switched off to get there: a kit setting the existing code fails is debt with a ROADMAP task to clear it, never a standing exception.
+- Typecheck, lint and the tests for the changed behaviour must pass before that code is called done; the complete suite runs once before a merge to main or on CI. Say exactly what did not run. Lint and typecheck report nothing, with no rule switched off to get there: a kit setting the existing code fails is the next ROADMAP item, never a standing exception.
 
 - When Stephen must apply SQL by hand, hand over every pending change for the task once, as one complete, idempotent script, never a change per turn or partial snippets.
 
@@ -141,7 +142,7 @@ A request to a generative model goes through the generation pre-flight first
 
 - A new dependency is recorded in the spec or a decision record before it is added: what it is, why it is preferred, its licence and its risk.
 
-- Every function and feature is covered by tests: 100% coverage of the code that ships, enforced by a coverage check in the project's gate and never lowered to pass. Where a project is below it, the gap is ROADMAP debt with the measured figure.
+- Every function and feature is covered by tests: 100% coverage of the code that ships, enforced by a coverage check in the project's gate and never lowered to pass. Where a project is below it, closing the gap is the next ROADMAP item, with the measured figure.
 
 - A source file stays under 300 lines and a test file under 1,500, enforced by lint (`max-lines`); split a longer one first. Generated files are exempt.
 
