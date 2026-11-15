@@ -21,7 +21,7 @@ Lower layers never override higher layers.
 
 ## 1. Status Header Convention
 
-Every doc (except `README.md` and in-flight `_MIGRATION_MAP.md`) starts with the house frontmatter:
+Every doc, `README.md` included (the structure gate requires it; only an in-flight `_MIGRATION_MAP.md` is exempt), starts with the house frontmatter:
 
 ```yaml
 ---
