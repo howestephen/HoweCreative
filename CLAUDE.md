@@ -199,10 +199,9 @@ product-platform rule (Cloudflare and Neon) does not apply, and
   branch. Retire merged or superseded branches immediately; tag anything worth
   keeping instead of leaving a branch.
 - Exception, 13 November 2026, until Stephen decides the redesign direction:
-  `fix/video-captions` waits for his proofread, and two concept branches
-  stay local only, never pushed: `claude/showreel-redesign` (rejected
-  11 November) and `claude/brief-machine` (the paused blank-page concepts).
-  Retiring or tagging them is his call.
+  `fix/video-captions` waits for his proofread, and one concept branch
+  stays local only, never pushed: `claude/showreel-redesign` (rejected
+  11 November). Retiring or tagging it is his call.
 - Only `main` is live. `codex/creative-technologist-portfolio` is kept for
   further work but not deployed: the `howecreative-particle` Vercel project is
   disconnected from Git (2 November 2026), and main does not route any path to
