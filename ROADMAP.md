@@ -1,7 +1,7 @@
 ---
 status: active
 author: stephen+claude
-updated: 2026-11-15
+updated: 2026-11-16
 generated_by: claude
 generated_at: 2026-11-11T21:30Z
 generated_from: conversation
@@ -105,8 +105,9 @@ a82c9a8; merged to main on 13 November 2026 with Stephen's approval
 - [ ] Open from before: CI runtime headroom and hosted acceptance are not
   recorded; Codex and Cursor wiring and which agent-host events fire are
   unverified.
-- Merged with main on 13 November 2026: `claude/brief-machine`,
-  `claude/showreel-redesign` (local only) and `fix/video-captions`. Not
+- Merged with main on 13 November 2026: `claude/showreel-redesign` (local
+  only) and `fix/video-captions`. `claude/brief-machine` was deleted on
+  16 November at Stephen's request. Not
   merged: `codex/creative-technologist-portfolio`, a separate site (40
   conflicts); it waits for Stephen's redesign decision.
 
@@ -119,8 +120,8 @@ On `main`, then carried by hand onto `codex/creative-technologist-portfolio`
 and `.claude/settings.json` are current, CLAUDE.md and CONVENTIONS.md carry
 the kit's text with the project's own rules kept under headed sections.
 
-- Still to merge main for this: `fix/video-captions`; `claude/brief-machine`
-  and `claude/showreel-redesign` (local only).
+- Still to merge main for this: `fix/video-captions` and
+  `claude/showreel-redesign` (local only).
 
 ## Goal
 
