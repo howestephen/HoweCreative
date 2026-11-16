@@ -1,9 +1,7 @@
 ---
 status: active
 author: stephen+claude
-updated: 2026-11-15
-word_budget_override: 6500
-word_budget_reason: the redesign branch keeps its full media and audit history; trim only with Stephen's approval
+updated: 2026-11-16
 ---
 
 # ROADMAP
