@@ -8,7 +8,7 @@ import earlierWork from "../data/earlier-work.json";
 import { imageVariants, variantUrl } from "../lib/responsive-image";
 import { portfolioProjects } from "../data/portfolio";
 import { WorkIndex } from "../concept/WorkIndex";
-import { Archive, eraSpan } from "./Archive";
+import { Archive } from "./Archive";
 
 function renderAt(url: string) {
   const router = createMemoryRouter(
@@ -22,19 +22,7 @@ function renderAt(url: string) {
   return router;
 }
 
-describe("eraSpan", () => {
-  it("spans the earliest and latest years across single years and ranges", () => {
-    expect(eraSpan(["2016 - 2018", "2025", "2005 - 2007"])).toEqual({ from: 2005, to: 2025 });
-  });
-});
-
 describe("Archive", () => {
-  it("heads Earlier Work with the span its entries cover", () => {
-    renderAt("/archive");
-    const { from, to } = eraSpan(earlierWork.map((entry) => entry.era));
-    expect(screen.getByText(`${from} to ${to}`)).toBeInTheDocument();
-  });
-
   it("lists every current study and every earlier project", () => {
     renderAt("/archive");
     for (const project of portfolioProjects) expect(screen.getByRole("heading", { name: project.title })).toBeInTheDocument();

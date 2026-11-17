@@ -102,6 +102,10 @@ with 4x-UltraSharp; old live-action films were restored conservatively
   needs project facts from Stephen before copy is written. Resolved as a
   Logo Design entry in Earlier Work (StreAMM, xTrend and Crypto Labz marks,
   rendered from the original design files), 17 November 2026.
+- [x] Rollback (17 November 2026): the archive content changes of that day
+  were published without Stephen's review; the site content returns to its
+  earlier state. Changes are rebuilt from his sorted folders on a branch and
+  reach main only after he reviews a preview and approves.
 - [x] Correction (17 November 2026): Stephen's sorted Portfolio Assets
   folders are the source; other drives only supply supporting assets, and
   only final designs he made. Kaleio (video only) and Early Years (assets

@@ -1,92 +1,5 @@
 [
   {
-    "slug": "logo-design",
-    "title": "Logo Design",
-    "era": "2022 - 2024",
-    "disciplines": "Logo design / Brand identity",
-    "summary": "Final logos and 3D renders for UNCX partner brands: xTrend, Crypto Labz, and StreAMM, a concept that did not launch.",
-    "credit": "Logo and identity design by Stephen Howe.",
-    "media": [
-      {
-        "type": "image",
-        "src": "/earlier-work/logo-design/streamm-3d-button.webp",
-        "alt": "StreAMM: 3D logo button"
-      },
-      {
-        "type": "image",
-        "src": "/earlier-work/logo-design/streamm-3d-hexagon.webp",
-        "alt": "StreAMM: 3D hexagon logo"
-      },
-      {
-        "type": "image",
-        "src": "/earlier-work/logo-design/streamm-3d-mark.webp",
-        "alt": "StreAMM: 3D mark"
-      },
-      {
-        "type": "image",
-        "src": "/earlier-work/logo-design/streamm-logo.webp",
-        "alt": "StreAMM: final stacked logo"
-      },
-      {
-        "type": "image",
-        "src": "/earlier-work/logo-design/xtrend-logo.webp",
-        "alt": "xTrend: final logo"
-      },
-      {
-        "type": "image",
-        "src": "/earlier-work/logo-design/xtrend-3d-colour.webp",
-        "alt": "xTrend: 3D logomark"
-      },
-      {
-        "type": "image",
-        "src": "/earlier-work/logo-design/xtrend-3d-studio.webp",
-        "alt": "xTrend: 3D logomark, studio render"
-      },
-      {
-        "type": "image",
-        "src": "/earlier-work/logo-design/crypto-labz-horizontal.webp",
-        "alt": "Crypto Labz: horizontal logo"
-      },
-      {
-        "type": "image",
-        "src": "/earlier-work/logo-design/crypto-labz-stacked.webp",
-        "alt": "Crypto Labz: stacked logo"
-      },
-      {
-        "type": "image",
-        "src": "/earlier-work/logo-design/crypto-labz-icon.webp",
-        "alt": "Crypto Labz: icon"
-      }
-    ],
-    "cover": "/earlier-work/logo-design/streamm-3d-button.webp"
-  },
-  {
-    "slug": "switch-studios",
-    "title": "Switch Studios",
-    "era": "2018 - 2021",
-    "disciplines": "Game art / Motion / 3D",
-    "summary": "Designer in a casino studio's Blackjack product team: launch promos, print and store assets, table felts and icons across several products in concurrent production.",
-    "credit": "High-level art direction by the studio's art lead. Promos shown from their public releases.",
-    "media": [
-      {
-        "type": "image",
-        "src": "/earlier-work/switch-studios/vegas-single-deck-print.webp",
-        "alt": "Vegas Single Deck Blackjack print asset"
-      },
-      {
-        "type": "image",
-        "src": "/earlier-work/switch-studios/blackjack-suite-felts.webp",
-        "alt": "Blackjack suite: six table felts and variant logos"
-      },
-      {
-        "type": "image",
-        "src": "/earlier-work/switch-studios/european-blackjack-icon.webp",
-        "alt": "European Blackjack game icon"
-      }
-    ],
-    "cover": "/earlier-work/switch-studios/vegas-single-deck-print.webp"
-  },
-  {
     "slug": "chalet-chardons",
     "title": "Chalet Chardons",
     "era": "2017",
@@ -104,21 +17,6 @@
         "type": "image",
         "src": "/earlier-work/chalet-chardons/website.webp",
         "alt": "Archived Chalet Chardons website"
-      },
-      {
-        "type": "image",
-        "src": "/earlier-work/chalet-chardons/course-day-menu.webp",
-        "alt": "Training course: the day's menu"
-      },
-      {
-        "type": "image",
-        "src": "/earlier-work/chalet-chardons/course-schedule.webp",
-        "alt": "Training course: the daily schedule"
-      },
-      {
-        "type": "image",
-        "src": "/earlier-work/chalet-chardons/course-lesson.webp",
-        "alt": "Training course: a lesson page"
       }
     ],
     "cover": "/earlier-work/chalet-chardons/chef-training-poster.jpg"
@@ -161,16 +59,6 @@
         "type": "image",
         "src": "/earlier-work/qtac/payroll.webp",
         "alt": "Qtac payroll product page"
-      },
-      {
-        "type": "image",
-        "src": "/earlier-work/qtac/redesign-before.webp",
-        "alt": "Qtac website before the redesign, April 2015"
-      },
-      {
-        "type": "image",
-        "src": "/earlier-work/qtac/redesign-after.webp",
-        "alt": "Qtac website after the redesign, May 2015"
       }
     ],
     "cover": "/earlier-work/qtac/homepage.webp"
@@ -236,166 +124,26 @@
     "media": [
       {
         "type": "image",
-        "src": "/earlier-work/hot-biscuit/turinbrakesgig-poster-a.webp",
-        "alt": "Turin Brakes at St Mary's Church"
+        "src": "/earlier-work/hot-biscuit/turin-brakes.webp",
+        "alt": "Turin Brakes concert poster"
       },
       {
         "type": "image",
-        "src": "/earlier-work/hot-biscuit/sidewinder-2011-reopening.webp",
-        "alt": "Sidewinder relaunch with Turin Brakes"
+        "src": "/earlier-work/hot-biscuit/sidewinder-listings.webp",
+        "alt": "Sidewinder December event listings"
       },
       {
         "type": "image",
-        "src": "/earlier-work/hot-biscuit/xuma-sevendials.webp",
-        "alt": "Seven Dials of Soul at Xuma"
+        "src": "/earlier-work/hot-biscuit/xuma-listings.webp",
+        "alt": "Xuma August event listings"
       },
       {
         "type": "image",
-        "src": "/earlier-work/hot-biscuit/fip-poster-web.webp",
-        "alt": "FIP DJs from Paris at Sidewinder and Fortune of War"
-      },
-      {
-        "type": "image",
-        "src": "/earlier-work/hot-biscuit/bbe-poster.webp",
-        "alt": "BBE Records night"
-      },
-      {
-        "type": "image",
-        "src": "/earlier-work/hot-biscuit/stacwahwah-final.webp",
-        "alt": "Wah Wah 45s label showcase"
-      },
-      {
-        "type": "image",
-        "src": "/earlier-work/hot-biscuit/happy-mondays.webp",
-        "alt": "Happy Mondays offers"
-      },
-      {
-        "type": "image",
-        "src": "/earlier-work/hot-biscuit/hot-biscuit-fridays.webp",
-        "alt": "Hot Biscuit Fridays"
-      },
-      {
-        "type": "image",
-        "src": "/earlier-work/hot-biscuit/ice-cream-beats-web.webp",
-        "alt": "Ice Cream Beats launch"
-      },
-      {
-        "type": "image",
-        "src": "/earlier-work/hot-biscuit/jazzman-poster-rough.webp",
-        "alt": "Jazzman at Fortune of War"
-      },
-      {
-        "type": "image",
-        "src": "/earlier-work/hot-biscuit/halloween-final-2.webp",
-        "alt": "Halloween at Sidewinder"
-      },
-      {
-        "type": "image",
-        "src": "/earlier-work/hot-biscuit/retro-games-night.webp",
-        "alt": "Old school games night"
-      },
-      {
-        "type": "image",
-        "src": "/earlier-work/hot-biscuit/quiz-night-flyer.webp",
-        "alt": "Quiz night at Xuma"
-      },
-      {
-        "type": "image",
-        "src": "/earlier-work/hot-biscuit/st-patricks-day-web.webp",
-        "alt": "St Patrick's Day celebration"
-      },
-      {
-        "type": "image",
-        "src": "/earlier-work/hot-biscuit/mothers-day-poster-web.webp",
-        "alt": "Mother's Day Sunday roast"
-      },
-      {
-        "type": "image",
-        "src": "/earlier-work/hot-biscuit/nye-poster-web.webp",
-        "alt": "New Year's Eve residents party"
-      },
-      {
-        "type": "image",
-        "src": "/earlier-work/hot-biscuit/derriere.webp",
-        "alt": "Derriere live night"
-      },
-      {
-        "type": "image",
-        "src": "/earlier-work/hot-biscuit/sidewinder-openmic.webp",
-        "alt": "Open mic nights illustration"
-      },
-      {
-        "type": "image",
-        "src": "/earlier-work/hot-biscuit/open-mic-web.webp",
-        "alt": "Open mic nights poster"
-      },
-      {
-        "type": "image",
-        "src": "/earlier-work/hot-biscuit/pintsizedirtypint.webp",
-        "alt": "Art Noise: Pint Size, the dirty pint"
-      },
-      {
-        "type": "image",
-        "src": "/earlier-work/hot-biscuit/seance-flyer-april-2012-rough.webp",
-        "alt": "The Seance, April 2012"
-      },
-      {
-        "type": "image",
-        "src": "/earlier-work/hot-biscuit/spotify-competition.webp",
-        "alt": "Spotify Saturdays competition"
-      },
-      {
-        "type": "image",
-        "src": "/earlier-work/hot-biscuit/weekly-events.webp",
-        "alt": "Weekly events"
-      },
-      {
-        "type": "image",
-        "src": "/earlier-work/hot-biscuit/sidewinder-xmas-opening-times.webp",
-        "alt": "Festive opening times"
-      },
-      {
-        "type": "image",
-        "src": "/earlier-work/hot-biscuit/sidewinder-2011-listings-july.webp",
-        "alt": "Sidewinder July listings"
-      },
-      {
-        "type": "image",
-        "src": "/earlier-work/hot-biscuit/sidewinder-2011-listings-september-web.webp",
-        "alt": "Sidewinder September listings"
-      },
-      {
-        "type": "image",
-        "src": "/earlier-work/hot-biscuit/sidewinder-october-listings-web.webp",
-        "alt": "Sidewinder October listings"
-      },
-      {
-        "type": "image",
-        "src": "/earlier-work/hot-biscuit/sidewinder-november-listings.webp",
-        "alt": "Sidewinder November listings"
-      },
-      {
-        "type": "image",
-        "src": "/earlier-work/hot-biscuit/sidewinder-december-listings2.webp",
-        "alt": "Sidewinder December listings"
-      },
-      {
-        "type": "image",
-        "src": "/earlier-work/hot-biscuit/sidewinder-january-listings.webp",
-        "alt": "Sidewinder January listings"
-      },
-      {
-        "type": "image",
-        "src": "/earlier-work/hot-biscuit/xuma-listings-july-web.webp",
-        "alt": "Xuma July listings"
-      },
-      {
-        "type": "image",
-        "src": "/earlier-work/hot-biscuit/xuma-listings-august.webp",
-        "alt": "Xuma August listings"
+        "src": "/earlier-work/hot-biscuit/sidewinder-flyer.webp",
+        "alt": "Sidewinder promotional flyer"
       }
     ],
-    "cover": "/earlier-work/hot-biscuit/turinbrakesgig-poster-a.webp"
+    "cover": "/earlier-work/hot-biscuit/turin-brakes.webp"
   },
   {
     "slug": "412-promotions",
@@ -412,11 +160,6 @@
       },
       {
         "type": "image",
-        "src": "/earlier-work/412-promotions/hope-and-glory-front.webp",
-        "alt": "Hope and Glory poster, front"
-      },
-      {
-        "type": "image",
         "src": "/earlier-work/412-promotions/hope-and-glory.webp",
         "alt": "Hope and Glory flyer, reverse"
       },
@@ -429,11 +172,6 @@
         "type": "image",
         "src": "/earlier-work/412-promotions/kung-fu.webp",
         "alt": "Kung Fu vs 412 poster"
-      },
-      {
-        "type": "image",
-        "src": "/earlier-work/412-promotions/shop-homepage.webp",
-        "alt": "412 online shop homepage"
       }
     ],
     "cover": "/earlier-work/412-promotions/play-and-display.webp"
