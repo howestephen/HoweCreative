@@ -162,6 +162,21 @@
             "type": "image",
             "src": "/case-studies/quiver/launch-control.webp",
             "alt": "Quiver film still: launch-control message and art direction"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/quiver/ident-arrow-impact.webp",
+            "alt": "Quiver ident still: the arrow strikes the guild mark"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/quiver/ident-full-draw.webp",
+            "alt": "Quiver ident still: the archer at full draw before the mark"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/quiver/glowing-eye.webp",
+            "alt": "Quiver film still: the glowing eye under the hood"
           }
         ]
       },
@@ -312,6 +327,31 @@
             "type": "image",
             "src": "/case-studies/solana-diary/liquidity_flows_7d__2026-06-16__id7258__render.webp",
             "alt": "Liquidity flows 7d - rendered data card"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/solana-diary/logo-new.webp",
+            "alt": "Solana Diary logo: open-book icon and wordmark"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/solana-diary/logo-3d-neon.webp",
+            "alt": "Solana Diary 3D neon logo"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/solana-diary/x-profile-mockup.webp",
+            "alt": "X profile mockup with the Solana Diary logomark"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/solana-diary/top-trading-apps-chart.webp",
+            "alt": "Data card: top trading apps by fees, as a 3D bar chart"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/solana-diary/top-dex-aggregators-chart.webp",
+            "alt": "Data card: top DEX aggregators on Solana, as a 3D bar chart"
           }
         ],
         "gradient": "from-[#8b0020] to-[#ff003c]",
@@ -441,7 +481,7 @@
         "slug": "uncx-rebrand",
         "title": "UNCX Company Rebrand",
         "category": "Brand System / Visual Infrastructure",
-        "year": "2022-2024",
+        "year": "2022-2025",
         "status": "Complete",
         "shortDescription": "The rebrand of Unicrypt Network into UNCX Network: a logo, brand, marketing and website rebuild in 2022, then a more modern brand, website and Academy in 2024, directed by me with an outside studio and finished in-house.",
         "fullDescription": "The rebrand of Unicrypt Network into UNCX Network, in two phases. In 2022 I rebuilt the logo, brand, marketing and website myself; in 2024 an outside studio worked from my direction on a more modern system, and I completed it in-house.",
@@ -458,6 +498,51 @@
         ],
         "image": "/case-studies/uncx-rebrand/card.webp?v=7838be0d",
         "media": [
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-rebrand/2022-mark-exploration.webp",
+            "alt": "2022: unicorn and wing mark exploration sheet"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-rebrand/2022-final-arrangements.webp",
+            "alt": "2022: the final logo arrangements"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-rebrand/2022-homepage-hero.webp",
+            "alt": "2022: the redesigned homepage hero"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-rebrand/2024-moodboard.webp",
+            "alt": "2024: moodboard of iridescent metal and glass refraction"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-rebrand/2024-colour-concepts.webp",
+            "alt": "2024: colour concepts"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-rebrand/2024-type-concepts.webp",
+            "alt": "2024: type concepts"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-rebrand/2024-homepage-concept-hero.webp",
+            "alt": "2024: homepage concept hero"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-rebrand/2024-locker-banner.webp",
+            "alt": "2024: New Locker UI launch banner"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-rebrand/2025-homepage-hero.webp",
+            "alt": "2025: the live homepage hero"
+          },
           {
             "type": "image",
             "src": "/case-studies/uncx-rebrand/uncx-logotype.webp",
@@ -500,18 +585,8 @@
           },
           {
             "type": "image",
-            "src": "/case-studies/uncx-rebrand/website/launchpad-section-2.webp",
-            "alt": "Website launchpad page (section)"
-          },
-          {
-            "type": "image",
             "src": "/case-studies/uncx-rebrand/website/token-vesting.webp",
             "alt": "Website token vesting page"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-rebrand/website/token-vesting-section-2.webp",
-            "alt": "Website token vesting page (section)"
           },
           {
             "type": "video",
@@ -566,23 +641,8 @@
           },
           {
             "type": "image",
-            "src": "/case-studies/uncx-rebrand/website/homepage-section-2.webp",
-            "alt": "Website homepage: the UNCX Launchpad section"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-rebrand/website/homepage-section-3.webp",
-            "alt": "Website homepage: the Token Minter section"
-          },
-          {
-            "type": "image",
             "src": "/case-studies/uncx-rebrand/website/token-minter.webp",
             "alt": "Website token minter page"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-rebrand/website/token-minter-section-2.webp",
-            "alt": "Website token minter page (section)"
           },
           {
             "type": "image",
@@ -591,18 +651,8 @@
           },
           {
             "type": "image",
-            "src": "/case-studies/uncx-rebrand/website/network-section-2.webp",
-            "alt": "Website network page (section)"
-          },
-          {
-            "type": "image",
             "src": "/case-studies/uncx-rebrand/website/staking-farming.webp",
             "alt": "Website staking & farming page"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-rebrand/website/staking-farming-section-2.webp",
-            "alt": "Website staking & farming page (section)"
           },
           {
             "type": "image",
@@ -611,28 +661,13 @@
           },
           {
             "type": "image",
-            "src": "/case-studies/uncx-rebrand/website/team-section-2.webp",
-            "alt": "Website team page (section)"
-          },
-          {
-            "type": "image",
             "src": "/case-studies/uncx-rebrand/website/blog.webp",
             "alt": "Website blog article page"
           },
           {
             "type": "image",
-            "src": "/case-studies/uncx-rebrand/website/blog-page.webp",
-            "alt": "Website blog listing"
-          },
-          {
-            "type": "image",
             "src": "/case-studies/uncx-rebrand/website/uncx-token.webp",
             "alt": "Website UNCX token page"
-          },
-          {
-            "type": "image",
-            "src": "/case-studies/uncx-rebrand/website/uncx-token-section-2.webp",
-            "alt": "Website UNCX token page (section)"
           }
         ],
         "gradient": "from-[#ffffff] to-[#780015]",
@@ -811,7 +846,7 @@
         "slug": "uncx-video-system",
         "title": "UNCX Video & 3D System",
         "category": "Media System / Motion Pipeline",
-        "year": "2023",
+        "year": "2022-2025",
         "status": "Live",
         "shortDescription": "End-to-end video production pipeline spanning Cinema 4D, After Effects, and Redshift - built for repeatable, high-frequency output.",
         "fullDescription": "A modular video production system for UNCX Network, built so launches, explainers, tutorials and partner content could ship from one asset library, and now being rebuilt as an automated pipeline in code.",
@@ -826,6 +861,116 @@
         ],
         "image": "/case-studies/uncx-video-system/card.webp",
         "media": [
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-video-system/glass-3d-cluster.webp",
+            "alt": "Glass 3D asset cluster: ribbed cylinder, ring, shard and coil in iridescent light"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-video-system/product-token-minter.webp",
+            "alt": "Product illustration for the token minter: stacked glass discs"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-video-system/product-ilo-launchpad.webp",
+            "alt": "Product illustration for the launchpad: a ribbed glass block"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-video-system/product-lp-vesting.webp",
+            "alt": "Product illustration for LP and token vesting: interlocking glass forms"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-video-system/product-staking-farming.webp",
+            "alt": "Product illustration for staking and farming: a twisted crystal horn"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-video-system/product-token-ecosystem.webp",
+            "alt": "Product illustration for the token ecosystem: a split glass ring"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-video-system/asset-solana-lock.webp",
+            "alt": "Asset library: a glass padlock holding the UNCX mark and coins"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-video-system/asset-eth-lock.webp",
+            "alt": "Asset library: a glass padlock filled with green coins"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-video-system/asset-code-lock.webp",
+            "alt": "Asset library: a glass padlock with code brackets"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-video-system/asset-desci.webp",
+            "alt": "Asset library: a DeSci scene with X-ray, microscope and flasks"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-video-system/asset-liquidity-pool.webp",
+            "alt": "Asset library: a liquidity pool of stablecoins and Ethereum"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-video-system/asset-airdrop.webp",
+            "alt": "Asset library: a glass cube parachuting a UNCX coin"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-video-system/icon-lock.webp",
+            "alt": "Print-resolution icon set: padlock with key"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-video-system/icon-services.webp",
+            "alt": "Print-resolution icon set: services scene"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-video-system/icon-staking.webp",
+            "alt": "Print-resolution icon set: a staking plant growing a coin"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-video-system/icon-vesting.webp",
+            "alt": "Print-resolution icon set: a vesting wallet with shield"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-video-system/icon-minting.webp",
+            "alt": "Print-resolution icon set: the minting machine"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-video-system/evolution-lock-2022.webp",
+            "alt": "Evolution, 2022: the first coin-filled glass padlock"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-video-system/evolution-lock-v2.webp",
+            "alt": "Evolution: the padlock rebuilt with the unicorn plate"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-video-system/evolution-minter-2022.webp",
+            "alt": "Evolution, 2022: the first token minting machine"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-video-system/erc404-coin.webp",
+            "alt": "ERC404 coin with a glowing rim"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-video-system/photoreal-lock.webp",
+            "alt": "Photoreal padlock and key on a pile of coins"
+          },
           {
             "type": "image",
             "src": "/case-studies/uncx-video-system/render-chain-lock-templates.webp",
@@ -1117,6 +1262,21 @@
             "src": "/case-studies/uncx-academy/tutorial-lp-locking.mp4",
             "alt": "LP Locking tutorial",
             "poster": "/case-studies/uncx-academy/tutorial-lp-locking.poster.jpg"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-academy/brand-spiral.webp",
+            "alt": "Academy brand artwork: a glass spiral"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-academy/brand-about-hero.webp",
+            "alt": "Academy brand artwork: a rippled glass sculpture"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-academy/brand-partners.webp",
+            "alt": "Academy brand artwork: a glass cube in a chrome frame"
           }
         ],
         "gradient": "from-[#ffa2b5] to-[#520012]",
@@ -1369,6 +1529,21 @@
             "type": "image",
             "src": "/case-studies/uncx-app-concepts/tg-apebot-flow.webp",
             "alt": "Telegram apebot flow"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-app-concepts/live-solana-locks.webp",
+            "alt": "Shipped: the Solana locks explore page"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-app-concepts/live-solana-vesting.webp",
+            "alt": "Shipped: the Solana vesting page"
+          },
+          {
+            "type": "image",
+            "src": "/case-studies/uncx-app-concepts/live-stealth-launch.webp",
+            "alt": "Shipped: the stealth launch explorer"
           }
         ],
         "gradient": "from-[#8b0020] to-[#ff003c]",

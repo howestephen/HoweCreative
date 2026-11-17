@@ -1,5 +1,26 @@
 [
   {
+    "slug": "kaleio",
+    "title": "Kaleio",
+    "era": "2025",
+    "disciplines": "Brand / 3D / Motion",
+    "summary": "A logomark, refractive 3D diamond assets and launch animation for a diamond-backed lending platform.",
+    "credit": "Logomark, 3D and motion by Stephen Howe.",
+    "media": [
+      {
+        "type": "image",
+        "src": "/earlier-work/kaleio/crystal-star.webp",
+        "alt": "Kaleio crystal star render"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/kaleio/logomark.webp",
+        "alt": "Kaleio logomark"
+      }
+    ],
+    "cover": "/earlier-work/kaleio/crystal-star.webp"
+  },
+  {
     "slug": "chalet-chardons",
     "title": "Chalet Chardons",
     "era": "2017",
@@ -17,25 +38,50 @@
         "type": "image",
         "src": "/earlier-work/chalet-chardons/website.webp",
         "alt": "Archived Chalet Chardons website"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/chalet-chardons/course-day-menu.webp",
+        "alt": "Training course: the day's menu"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/chalet-chardons/course-schedule.webp",
+        "alt": "Training course: the daily schedule"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/chalet-chardons/course-lesson.webp",
+        "alt": "Training course: a lesson page"
       }
     ],
     "cover": "/earlier-work/chalet-chardons/chef-training-poster.jpg"
   },
   {
-    "slug": "book-your-wellness",
-    "title": "Book Your Wellness",
-    "era": "2016 - 2018",
-    "disciplines": "Web / User experience / Visual design",
-    "summary": "Interface and page-layout work for a wellness marketplace, alongside ongoing web management and user-experience improvements for international leisure clients.",
-    "credit": "Freelance interface and graphic design. Shown as historical project material.",
+    "slug": "switch-studios",
+    "title": "Switch Studios",
+    "era": "2018 - 2021",
+    "disciplines": "Game art / Motion / 3D",
+    "summary": "Designer in a casino studio's Blackjack product team: launch promos, print and store assets, table felts and icons across several products in concurrent production.",
+    "credit": "High-level art direction by the studio's art lead. Promos shown from their public releases.",
     "media": [
       {
         "type": "image",
-        "src": "/earlier-work/book-your-wellness/signup-page.webp",
-        "alt": "Book Your Wellness sign-up page design"
+        "src": "/earlier-work/switch-studios/vegas-single-deck-print.webp",
+        "alt": "Vegas Single Deck Blackjack print asset"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/switch-studios/blackjack-suite-felts.webp",
+        "alt": "Blackjack suite: six table felts and variant logos"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/switch-studios/european-blackjack-icon.webp",
+        "alt": "European Blackjack game icon"
       }
     ],
-    "cover": "/earlier-work/book-your-wellness/signup-page.webp"
+    "cover": "/earlier-work/switch-studios/vegas-single-deck-print.webp"
   },
   {
     "slug": "qtac",
@@ -57,8 +103,13 @@
       },
       {
         "type": "image",
-        "src": "/earlier-work/qtac/payroll.webp",
-        "alt": "Qtac payroll product page"
+        "src": "/earlier-work/qtac/redesign-before.webp",
+        "alt": "Qtac website before the redesign, April 2015"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/qtac/redesign-after.webp",
+        "alt": "Qtac website after the redesign, May 2015"
       }
     ],
     "cover": "/earlier-work/qtac/homepage.webp"
@@ -78,28 +129,13 @@
       },
       {
         "type": "image",
-        "src": "/earlier-work/burger-theory/about.webp",
-        "alt": "Burger Theory website: about"
-      },
-      {
-        "type": "image",
         "src": "/earlier-work/burger-theory/menu.webp",
         "alt": "Burger Theory website: menu"
       },
       {
         "type": "image",
-        "src": "/earlier-work/burger-theory/locations.webp",
-        "alt": "Burger Theory website: locations"
-      },
-      {
-        "type": "image",
         "src": "/earlier-work/burger-theory/booking.webp",
         "alt": "Burger Theory website: booking"
-      },
-      {
-        "type": "image",
-        "src": "/earlier-work/burger-theory/events.webp",
-        "alt": "Burger Theory website: events"
       },
       {
         "type": "image",
@@ -124,26 +160,31 @@
     "media": [
       {
         "type": "image",
+        "src": "/earlier-work/hot-biscuit/sidewinder-reopening.webp",
+        "alt": "Sidewinder 2011 reopening poster"
+      },
+      {
+        "type": "image",
         "src": "/earlier-work/hot-biscuit/turin-brakes.webp",
         "alt": "Turin Brakes concert poster"
       },
       {
         "type": "image",
+        "src": "/earlier-work/hot-biscuit/xuma-seven-dials.webp",
+        "alt": "Seven Dials of Soul poster for Xuma"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/hot-biscuit/fip-poster.webp",
+        "alt": "FIP night poster"
+      },
+      {
+        "type": "image",
         "src": "/earlier-work/hot-biscuit/sidewinder-listings.webp",
         "alt": "Sidewinder December event listings"
-      },
-      {
-        "type": "image",
-        "src": "/earlier-work/hot-biscuit/xuma-listings.webp",
-        "alt": "Xuma August event listings"
-      },
-      {
-        "type": "image",
-        "src": "/earlier-work/hot-biscuit/sidewinder-flyer.webp",
-        "alt": "Sidewinder promotional flyer"
       }
     ],
-    "cover": "/earlier-work/hot-biscuit/turin-brakes.webp"
+    "cover": "/earlier-work/hot-biscuit/sidewinder-reopening.webp"
   },
   {
     "slug": "412-promotions",
@@ -160,8 +201,8 @@
       },
       {
         "type": "image",
-        "src": "/earlier-work/412-promotions/hope-and-glory.webp",
-        "alt": "Hope and Glory flyer, reverse"
+        "src": "/earlier-work/412-promotions/hope-and-glory-front.webp",
+        "alt": "Hope and Glory poster, front"
       },
       {
         "type": "image",
@@ -172,8 +213,34 @@
         "type": "image",
         "src": "/earlier-work/412-promotions/kung-fu.webp",
         "alt": "Kung Fu vs 412 poster"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/412-promotions/shop-homepage.webp",
+        "alt": "412 online shop homepage"
       }
     ],
     "cover": "/earlier-work/412-promotions/play-and-display.webp"
+  },
+  {
+    "slug": "early-years",
+    "title": "Early Years",
+    "era": "2005 - 2007",
+    "disciplines": "Web design / Graphics",
+    "summary": "University web design alongside a first web role at Good Salon Guide, building and populating client sites on a bespoke platform.",
+    "credit": "University coursework and early client web work by Stephen Howe, shown as made.",
+    "media": [
+      {
+        "type": "image",
+        "src": "/earlier-work/early-years/recycle-your-vinyl.webp",
+        "alt": "Recycle Your Vinyl site design, 2005"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/early-years/good-barbers-guide.webp",
+        "alt": "Good Barbers Guide barber finder page, 2006"
+      }
+    ],
+    "cover": "/earlier-work/early-years/recycle-your-vinyl.webp"
   }
 ]
