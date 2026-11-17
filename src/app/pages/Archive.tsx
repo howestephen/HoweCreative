@@ -34,6 +34,15 @@ type Viewer = { title: string; images: ProjectMediaItem[]; index: number } | nul
 
 const eyebrow = "label-mono";
 
+// The earlier-work span, read from each entry's era ("2016 - 2018", "2025"),
+// so adding an entry never leaves the heading out of date.
+export function eraSpan(eras: string[]): { from: number; to: number } {
+  const years = eras.flatMap((era) => (era.match(/\d{4}/g) ?? []).map(Number));
+  return { from: Math.min(...years), to: Math.max(...years) };
+}
+
+const EARLIER_SPAN = eraSpan(earlierWork.map((entry) => entry.era));
+
 function Thumbs({ title, images, onOpen }: { title: string; images: ProjectMediaItem[]; onOpen: (index: number) => void }) {
   return (
     <div className="grid grid-cols-3 content-start items-start gap-1.5 self-start sm:grid-cols-4 lg:grid-cols-6">
@@ -94,7 +103,7 @@ export function Archive() {
   usePageMeta({
     title: "Work archive - Stephen Howe",
     description:
-      "The full archive has every project in one index, with earlier work from 2009 and its original credits.",
+      `The full archive has every project in one index, with earlier work from ${EARLIER_SPAN.from} and its original credits.`,
     path: "/archive",
   });
 
@@ -200,10 +209,12 @@ export function Archive() {
             <h2 id="earlier-title" className="text-3xl md:text-4xl">
               Earlier work
             </h2>
-            <span className={`${eyebrow} text-muted-foreground`}>2009 to 2018</span>
+            <span className={`${eyebrow} text-muted-foreground`}>
+              {EARLIER_SPAN.from} to {EARLIER_SPAN.to}
+            </span>
           </div>
           <p className="mb-8 max-w-xl text-sm leading-relaxed text-muted-foreground">
-            Music, culture, hospitality and the early web, shown with its original context and credits.
+            Music, culture, games, brand marks and the early web, shown with its original context and credits.
           </p>
           {earlierWork.map((entry) => {
             const media = entry.media as ProjectMediaItem[];
