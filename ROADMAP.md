@@ -58,14 +58,19 @@ Open:
   locally, unpushed, on `codex/creative-technologist-portfolio`.
 - [S] Decide the future of `codex/creative-technologist-portfolio`: retire,
   tag or keep it (its agent guidance now matches main's).
-- [S] Review the archive review boards and approve or reject the picks
+- [x] Review the archive review boards and approve or reject the picks
   (Archive review below); nothing enters `public/` or the content files first.
-- [S] Confirm rights before any of these ship: Switch Studios titles (public
+  Approved 17 November 2026.
+- [x] Confirm rights before any of these ship: Switch Studios titles (public
   release), third-party marks in UNCX launch films, and authorship of the
   Hot Biscuit posters filed under another designer's folder and the Kaleio
-  and Noor marks.
-- [S] Re-export the 4K UNCX ident from its project without the upscaler
-  watermark; the watermarked copy is held back from the finals.
+  and Noor marks. Settled 17 November 2026 (Archive review below).
+- [x] Re-export the 4K UNCX ident from its project without the upscaler
+  watermark; the watermarked copy is held back from the finals. Done instead
+  by a clean 4K upscale of the 1080p source, 17 November 2026.
+- [S] Approve a Cloudflare R2 allowance for the archive films (expected
+  inside R2's free tier), so the films and the existing heavy MP4s move to
+  object storage (Archive review below).
 
 ## Archive review (17 November 2026)
 
@@ -79,13 +84,24 @@ four still-based showreel concept cuts. Stills under 2560 px were upscaled
 with 4x-UltraSharp; old live-action films were restored conservatively
 (deinterlace, bars cropped, Lanczos scaling, mild levels), never with a GAN.
 
-- Next: Stephen approves picks; then the approved set replaces and extends
-  the UNCX video set, the rebrand (as 2022, 2024 and 2025 chapters), the 3D
-  system, Academy, Quiver and Solana Diary studies, an optional partner-brand
-  study, and the Earlier Work entries (Book Your Wellness cut; Kaleio, Switch
-  Studios, independent products and an early-years row proposed).
+- [x] Stephen approved the picks (17 November) and settled authorship:
+  Switch Studios promos are public releases, the Hot Biscuit posters are his
+  own, Kaleio is his, Noor and another designer's posters are excluded, and
+  partner-brand films are left out. A clean 4K UNCX ident replaces the
+  watermarked one.
+- [x] Stills shipped: the UNCX studies (3D system, rebrand chapters for 2022,
+  2024 and 2025, Academy, app concepts, Quiver, Solana Diary) and Earlier Work
+  (Kaleio, Switch Studios and an early-years row added; 412, Hot Biscuit,
+  Chalet Chardons and Qtac strengthened; Burger Theory trimmed; Book Your
+  Wellness cut). Retired images are in `assets-archive/main-retired-2026-11-17/`.
+- [ ] Films: the UNCX video set (20 films), Academy, Quiver, Kaleio,
+  Switch Studios and restored early films. Heavy media cannot ship inside a
+  deployment (no file over 5 MB under `public/`), so they wait for the R2
+  allowance above; the 19 existing heavy MP4s move in the same step.
+- [ ] Partner-brand study (StreAMM 3D logos and logo design, Sapien, xTrend):
+  needs project facts from Stephen before copy is written.
 - Constraint: Inferior Earth Productions work stays off the site and reel
-  (contractual restriction); Switch Studios items need the rights check above.
+  (contractual restriction).
 
 ## Accessibility and layout refinements (2026-10-13)
 
