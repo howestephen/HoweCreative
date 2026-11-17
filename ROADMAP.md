@@ -98,8 +98,15 @@ with 4x-UltraSharp; old live-action films were restored conservatively
   Switch Studios and restored early films. Heavy media cannot ship inside a
   deployment (no file over 5 MB under `public/`), so they wait for the R2
   allowance above; the 19 existing heavy MP4s move in the same step.
-- [ ] Partner-brand study (StreAMM 3D logos and logo design, Sapien, xTrend):
-  needs project facts from Stephen before copy is written.
+- [x] Partner-brand study (StreAMM 3D logos and logo design, Sapien, xTrend):
+  needs project facts from Stephen before copy is written. Resolved as a
+  Logo Design entry in Earlier Work (StreAMM, xTrend and Crypto Labz marks,
+  rendered from the original design files), 17 November 2026.
+- [x] Earlier Work is the full archive and keeps earnest older pieces
+  (Stephen, 17 November 2026): Book Your Wellness is back with its logo,
+  holding page and a sign-up banner, and the trimmed 412, Hot Biscuit, Qtac
+  and Burger Theory pieces are restored. Entries run newest first and the
+  heading reads its span from the entries.
 - Constraint: Inferior Earth Productions work stays off the site and reel
   (contractual restriction).
 

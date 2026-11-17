@@ -21,6 +21,93 @@
     "cover": "/earlier-work/kaleio/crystal-star.webp"
   },
   {
+    "slug": "logo-design",
+    "title": "Logo Design",
+    "era": "2022 - 2024",
+    "disciplines": "Logo design / Brand identity",
+    "summary": "Marks and identity systems for UNCX partner brands: concepting, refinement and final logo sets for xTrend and Crypto Labz, and StreAMM, a concept that did not launch.",
+    "credit": "Logo and identity design by Stephen Howe.",
+    "media": [
+      {
+        "type": "image",
+        "src": "/earlier-work/logo-design/streamm-initial-concepting.webp",
+        "alt": "StreAMM: initial mark concepting"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/logo-design/streamm-mark-refinement.webp",
+        "alt": "StreAMM: mark refinement"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/logo-design/streamm-horizontal-logos.webp",
+        "alt": "StreAMM: horizontal logo set"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/logo-design/streamm-stacked-logo.webp",
+        "alt": "StreAMM: stacked logo"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/logo-design/xtrend-mark-concepts.webp",
+        "alt": "xTrend: mark concepts"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/logo-design/xtrend-logo.webp",
+        "alt": "xTrend: final logo"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/logo-design/xtrend-brand-concept.webp",
+        "alt": "xTrend: brand concept for social banners"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/logo-design/crypto-labz-brand-image.webp",
+        "alt": "Crypto Labz: brand image"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/logo-design/crypto-labz-stacked-logo.webp",
+        "alt": "Crypto Labz: stacked logo"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/logo-design/crypto-labz-font-selection.webp",
+        "alt": "Crypto Labz: font selection"
+      }
+    ],
+    "cover": "/earlier-work/logo-design/streamm-stacked-logo.webp"
+  },
+  {
+    "slug": "switch-studios",
+    "title": "Switch Studios",
+    "era": "2018 - 2021",
+    "disciplines": "Game art / Motion / 3D",
+    "summary": "Designer in a casino studio's Blackjack product team: launch promos, print and store assets, table felts and icons across several products in concurrent production.",
+    "credit": "High-level art direction by the studio's art lead. Promos shown from their public releases.",
+    "media": [
+      {
+        "type": "image",
+        "src": "/earlier-work/switch-studios/vegas-single-deck-print.webp",
+        "alt": "Vegas Single Deck Blackjack print asset"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/switch-studios/blackjack-suite-felts.webp",
+        "alt": "Blackjack suite: six table felts and variant logos"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/switch-studios/european-blackjack-icon.webp",
+        "alt": "European Blackjack game icon"
+      }
+    ],
+    "cover": "/earlier-work/switch-studios/vegas-single-deck-print.webp"
+  },
+  {
     "slug": "chalet-chardons",
     "title": "Chalet Chardons",
     "era": "2017",
@@ -58,30 +145,35 @@
     "cover": "/earlier-work/chalet-chardons/chef-training-poster.jpg"
   },
   {
-    "slug": "switch-studios",
-    "title": "Switch Studios",
-    "era": "2018 - 2021",
-    "disciplines": "Game art / Motion / 3D",
-    "summary": "Designer in a casino studio's Blackjack product team: launch promos, print and store assets, table felts and icons across several products in concurrent production.",
-    "credit": "High-level art direction by the studio's art lead. Promos shown from their public releases.",
+    "slug": "book-your-wellness",
+    "title": "Book Your Wellness",
+    "era": "2016 - 2018",
+    "disciplines": "Web / User experience / Visual design",
+    "summary": "Interface and page-layout work for a wellness marketplace, alongside ongoing web management and user-experience improvements for international leisure clients.",
+    "credit": "Freelance interface and graphic design. Shown as historical project material.",
     "media": [
       {
         "type": "image",
-        "src": "/earlier-work/switch-studios/vegas-single-deck-print.webp",
-        "alt": "Vegas Single Deck Blackjack print asset"
+        "src": "/earlier-work/book-your-wellness/signup-page.webp",
+        "alt": "Book Your Wellness sign-up page design"
       },
       {
         "type": "image",
-        "src": "/earlier-work/switch-studios/blackjack-suite-felts.webp",
-        "alt": "Blackjack suite: six table felts and variant logos"
+        "src": "/earlier-work/book-your-wellness/logo.webp",
+        "alt": "Book Your Wellness logo"
       },
       {
         "type": "image",
-        "src": "/earlier-work/switch-studios/european-blackjack-icon.webp",
-        "alt": "European Blackjack game icon"
+        "src": "/earlier-work/book-your-wellness/holding-page.webp",
+        "alt": "Book Your Wellness holding page"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/book-your-wellness/signup-banner-2018.webp",
+        "alt": "Sign-up promotion banner, October 2018"
       }
     ],
-    "cover": "/earlier-work/switch-studios/vegas-single-deck-print.webp"
+    "cover": "/earlier-work/book-your-wellness/signup-page.webp"
   },
   {
     "slug": "qtac",
@@ -100,6 +192,11 @@
         "type": "image",
         "src": "/earlier-work/qtac/accountants.webp",
         "alt": "Qtac accountants page"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/qtac/payroll.webp",
+        "alt": "Qtac payroll product page"
       },
       {
         "type": "image",
@@ -129,13 +226,28 @@
       },
       {
         "type": "image",
+        "src": "/earlier-work/burger-theory/about.webp",
+        "alt": "Burger Theory website: about"
+      },
+      {
+        "type": "image",
         "src": "/earlier-work/burger-theory/menu.webp",
         "alt": "Burger Theory website: menu"
       },
       {
         "type": "image",
+        "src": "/earlier-work/burger-theory/locations.webp",
+        "alt": "Burger Theory website: locations"
+      },
+      {
+        "type": "image",
         "src": "/earlier-work/burger-theory/booking.webp",
         "alt": "Burger Theory website: booking"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/burger-theory/events.webp",
+        "alt": "Burger Theory website: events"
       },
       {
         "type": "image",
@@ -182,6 +294,16 @@
         "type": "image",
         "src": "/earlier-work/hot-biscuit/sidewinder-listings.webp",
         "alt": "Sidewinder December event listings"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/hot-biscuit/xuma-listings.webp",
+        "alt": "Xuma August event listings"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/hot-biscuit/sidewinder-flyer.webp",
+        "alt": "Sidewinder promotional flyer"
       }
     ],
     "cover": "/earlier-work/hot-biscuit/sidewinder-reopening.webp"
@@ -203,6 +325,11 @@
         "type": "image",
         "src": "/earlier-work/412-promotions/hope-and-glory-front.webp",
         "alt": "Hope and Glory poster, front"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/412-promotions/hope-and-glory.webp",
+        "alt": "Hope and Glory flyer, reverse"
       },
       {
         "type": "image",
