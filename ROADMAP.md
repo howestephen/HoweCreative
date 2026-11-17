@@ -1,7 +1,7 @@
 ---
 status: active
 author: stephen+claude
-updated: 2026-11-16
+updated: 2026-11-17
 generated_by: claude
 generated_at: 2026-11-11T21:30Z
 generated_from: conversation
@@ -58,6 +58,34 @@ Open:
   locally, unpushed, on `codex/creative-technologist-portfolio`.
 - [S] Decide the future of `codex/creative-technologist-portfolio`: retire,
   tag or keep it (its agent guidance now matches main's).
+- [S] Review the archive review boards and approve or reject the picks
+  (Archive review below); nothing enters `public/` or the content files first.
+- [S] Confirm rights before any of these ship: Switch Studios titles (public
+  release), third-party marks in UNCX launch films, and authorship of the
+  Hot Biscuit posters filed under another designer's folder and the Kaleio
+  and Noor marks.
+- [S] Re-export the 4K UNCX ident from its project without the upscaler
+  watermark; the watermarked copy is held back from the finals.
+
+## Archive review (17 November 2026)
+
+The full work archive (four sources, about 68,000 files) was catalogued, contact
+sheeted and tagged, then given two independent taste reviews (UNCX era and
+earlier work). Outcome, all local and git-ignored under `assets-archive/`:
+133 final candidate assets (74 UNCX, 24 UNCX partner brands, 35 earlier work),
+website-ready copies in `assets-archive/web-candidates-2026-11/` (WebP at a
+2560 px long edge, H.264 at 1920 or 1080 square, no audio), review boards and
+four still-based showreel concept cuts. Stills under 2560 px were upscaled
+with 4x-UltraSharp; old live-action films were restored conservatively
+(deinterlace, bars cropped, Lanczos scaling, mild levels), never with a GAN.
+
+- Next: Stephen approves picks; then the approved set replaces and extends
+  the UNCX video set, the rebrand (as 2022, 2024 and 2025 chapters), the 3D
+  system, Academy, Quiver and Solana Diary studies, an optional partner-brand
+  study, and the Earlier Work entries (Book Your Wellness cut; Kaleio, Switch
+  Studios, independent products and an early-years row proposed).
+- Constraint: Inferior Earth Productions work stays off the site and reel
+  (contractual restriction); Switch Studios items need the rights check above.
 
 ## Accessibility and layout refinements (2026-10-13)
 
