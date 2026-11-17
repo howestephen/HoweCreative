@@ -1,57 +1,31 @@
 [
   {
-    "slug": "kaleio",
-    "title": "Kaleio",
-    "era": "2025",
-    "disciplines": "Brand / 3D / Motion",
-    "summary": "A logomark, refractive 3D diamond assets and launch animation for a diamond-backed lending platform.",
-    "credit": "Logomark, 3D and motion by Stephen Howe.",
-    "media": [
-      {
-        "type": "image",
-        "src": "/earlier-work/kaleio/crystal-star.webp",
-        "alt": "Kaleio crystal star render"
-      },
-      {
-        "type": "image",
-        "src": "/earlier-work/kaleio/logomark.webp",
-        "alt": "Kaleio logomark"
-      }
-    ],
-    "cover": "/earlier-work/kaleio/crystal-star.webp"
-  },
-  {
     "slug": "logo-design",
     "title": "Logo Design",
     "era": "2022 - 2024",
     "disciplines": "Logo design / Brand identity",
-    "summary": "Marks and identity systems for UNCX partner brands: concepting, refinement and final logo sets for xTrend and Crypto Labz, and StreAMM, a concept that did not launch.",
+    "summary": "Final logos and 3D renders for UNCX partner brands: xTrend, Crypto Labz, and StreAMM, a concept that did not launch.",
     "credit": "Logo and identity design by Stephen Howe.",
     "media": [
       {
         "type": "image",
-        "src": "/earlier-work/logo-design/streamm-initial-concepting.webp",
-        "alt": "StreAMM: initial mark concepting"
+        "src": "/earlier-work/logo-design/streamm-3d-button.webp",
+        "alt": "StreAMM: 3D logo button"
       },
       {
         "type": "image",
-        "src": "/earlier-work/logo-design/streamm-mark-refinement.webp",
-        "alt": "StreAMM: mark refinement"
+        "src": "/earlier-work/logo-design/streamm-3d-hexagon.webp",
+        "alt": "StreAMM: 3D hexagon logo"
       },
       {
         "type": "image",
-        "src": "/earlier-work/logo-design/streamm-horizontal-logos.webp",
-        "alt": "StreAMM: horizontal logo set"
+        "src": "/earlier-work/logo-design/streamm-3d-mark.webp",
+        "alt": "StreAMM: 3D mark"
       },
       {
         "type": "image",
-        "src": "/earlier-work/logo-design/streamm-stacked-logo.webp",
-        "alt": "StreAMM: stacked logo"
-      },
-      {
-        "type": "image",
-        "src": "/earlier-work/logo-design/xtrend-mark-concepts.webp",
-        "alt": "xTrend: mark concepts"
+        "src": "/earlier-work/logo-design/streamm-logo.webp",
+        "alt": "StreAMM: final stacked logo"
       },
       {
         "type": "image",
@@ -60,26 +34,31 @@
       },
       {
         "type": "image",
-        "src": "/earlier-work/logo-design/xtrend-brand-concept.webp",
-        "alt": "xTrend: brand concept for social banners"
+        "src": "/earlier-work/logo-design/xtrend-3d-colour.webp",
+        "alt": "xTrend: 3D logomark"
       },
       {
         "type": "image",
-        "src": "/earlier-work/logo-design/crypto-labz-brand-image.webp",
-        "alt": "Crypto Labz: brand image"
+        "src": "/earlier-work/logo-design/xtrend-3d-studio.webp",
+        "alt": "xTrend: 3D logomark, studio render"
       },
       {
         "type": "image",
-        "src": "/earlier-work/logo-design/crypto-labz-stacked-logo.webp",
+        "src": "/earlier-work/logo-design/crypto-labz-horizontal.webp",
+        "alt": "Crypto Labz: horizontal logo"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/logo-design/crypto-labz-stacked.webp",
         "alt": "Crypto Labz: stacked logo"
       },
       {
         "type": "image",
-        "src": "/earlier-work/logo-design/crypto-labz-font-selection.webp",
-        "alt": "Crypto Labz: font selection"
+        "src": "/earlier-work/logo-design/crypto-labz-icon.webp",
+        "alt": "Crypto Labz: icon"
       }
     ],
-    "cover": "/earlier-work/logo-design/streamm-stacked-logo.webp"
+    "cover": "/earlier-work/logo-design/streamm-3d-button.webp"
   },
   {
     "slug": "switch-studios",
@@ -156,21 +135,6 @@
         "type": "image",
         "src": "/earlier-work/book-your-wellness/signup-page.webp",
         "alt": "Book Your Wellness sign-up page design"
-      },
-      {
-        "type": "image",
-        "src": "/earlier-work/book-your-wellness/logo.webp",
-        "alt": "Book Your Wellness logo"
-      },
-      {
-        "type": "image",
-        "src": "/earlier-work/book-your-wellness/holding-page.webp",
-        "alt": "Book Your Wellness holding page"
-      },
-      {
-        "type": "image",
-        "src": "/earlier-work/book-your-wellness/signup-banner-2018.webp",
-        "alt": "Sign-up promotion banner, October 2018"
       }
     ],
     "cover": "/earlier-work/book-your-wellness/signup-page.webp"
@@ -272,41 +236,166 @@
     "media": [
       {
         "type": "image",
-        "src": "/earlier-work/hot-biscuit/sidewinder-reopening.webp",
-        "alt": "Sidewinder 2011 reopening poster"
+        "src": "/earlier-work/hot-biscuit/turinbrakesgig-poster-a.webp",
+        "alt": "Turin Brakes at St Mary's Church"
       },
       {
         "type": "image",
-        "src": "/earlier-work/hot-biscuit/turin-brakes.webp",
-        "alt": "Turin Brakes concert poster"
+        "src": "/earlier-work/hot-biscuit/sidewinder-2011-reopening.webp",
+        "alt": "Sidewinder relaunch with Turin Brakes"
       },
       {
         "type": "image",
-        "src": "/earlier-work/hot-biscuit/xuma-seven-dials.webp",
-        "alt": "Seven Dials of Soul poster for Xuma"
+        "src": "/earlier-work/hot-biscuit/xuma-sevendials.webp",
+        "alt": "Seven Dials of Soul at Xuma"
       },
       {
         "type": "image",
-        "src": "/earlier-work/hot-biscuit/fip-poster.webp",
-        "alt": "FIP night poster"
+        "src": "/earlier-work/hot-biscuit/fip-poster-web.webp",
+        "alt": "FIP DJs from Paris at Sidewinder and Fortune of War"
       },
       {
         "type": "image",
-        "src": "/earlier-work/hot-biscuit/sidewinder-listings.webp",
-        "alt": "Sidewinder December event listings"
+        "src": "/earlier-work/hot-biscuit/bbe-poster.webp",
+        "alt": "BBE Records night"
       },
       {
         "type": "image",
-        "src": "/earlier-work/hot-biscuit/xuma-listings.webp",
-        "alt": "Xuma August event listings"
+        "src": "/earlier-work/hot-biscuit/stacwahwah-final.webp",
+        "alt": "Wah Wah 45s label showcase"
       },
       {
         "type": "image",
-        "src": "/earlier-work/hot-biscuit/sidewinder-flyer.webp",
-        "alt": "Sidewinder promotional flyer"
+        "src": "/earlier-work/hot-biscuit/happy-mondays.webp",
+        "alt": "Happy Mondays offers"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/hot-biscuit/hot-biscuit-fridays.webp",
+        "alt": "Hot Biscuit Fridays"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/hot-biscuit/ice-cream-beats-web.webp",
+        "alt": "Ice Cream Beats launch"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/hot-biscuit/jazzman-poster-rough.webp",
+        "alt": "Jazzman at Fortune of War"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/hot-biscuit/halloween-final-2.webp",
+        "alt": "Halloween at Sidewinder"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/hot-biscuit/retro-games-night.webp",
+        "alt": "Old school games night"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/hot-biscuit/quiz-night-flyer.webp",
+        "alt": "Quiz night at Xuma"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/hot-biscuit/st-patricks-day-web.webp",
+        "alt": "St Patrick's Day celebration"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/hot-biscuit/mothers-day-poster-web.webp",
+        "alt": "Mother's Day Sunday roast"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/hot-biscuit/nye-poster-web.webp",
+        "alt": "New Year's Eve residents party"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/hot-biscuit/derriere.webp",
+        "alt": "Derriere live night"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/hot-biscuit/sidewinder-openmic.webp",
+        "alt": "Open mic nights illustration"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/hot-biscuit/open-mic-web.webp",
+        "alt": "Open mic nights poster"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/hot-biscuit/pintsizedirtypint.webp",
+        "alt": "Art Noise: Pint Size, the dirty pint"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/hot-biscuit/seance-flyer-april-2012-rough.webp",
+        "alt": "The Seance, April 2012"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/hot-biscuit/spotify-competition.webp",
+        "alt": "Spotify Saturdays competition"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/hot-biscuit/weekly-events.webp",
+        "alt": "Weekly events"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/hot-biscuit/sidewinder-xmas-opening-times.webp",
+        "alt": "Festive opening times"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/hot-biscuit/sidewinder-2011-listings-july.webp",
+        "alt": "Sidewinder July listings"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/hot-biscuit/sidewinder-2011-listings-september-web.webp",
+        "alt": "Sidewinder September listings"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/hot-biscuit/sidewinder-october-listings-web.webp",
+        "alt": "Sidewinder October listings"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/hot-biscuit/sidewinder-november-listings.webp",
+        "alt": "Sidewinder November listings"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/hot-biscuit/sidewinder-december-listings2.webp",
+        "alt": "Sidewinder December listings"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/hot-biscuit/sidewinder-january-listings.webp",
+        "alt": "Sidewinder January listings"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/hot-biscuit/xuma-listings-july-web.webp",
+        "alt": "Xuma July listings"
+      },
+      {
+        "type": "image",
+        "src": "/earlier-work/hot-biscuit/xuma-listings-august.webp",
+        "alt": "Xuma August listings"
       }
     ],
-    "cover": "/earlier-work/hot-biscuit/sidewinder-reopening.webp"
+    "cover": "/earlier-work/hot-biscuit/turinbrakesgig-poster-a.webp"
   },
   {
     "slug": "412-promotions",
@@ -348,26 +437,5 @@
       }
     ],
     "cover": "/earlier-work/412-promotions/play-and-display.webp"
-  },
-  {
-    "slug": "early-years",
-    "title": "Early Years",
-    "era": "2005 - 2007",
-    "disciplines": "Web design / Graphics",
-    "summary": "University web design alongside a first web role at Good Salon Guide, building and populating client sites on a bespoke platform.",
-    "credit": "University coursework and early client web work by Stephen Howe, shown as made.",
-    "media": [
-      {
-        "type": "image",
-        "src": "/earlier-work/early-years/recycle-your-vinyl.webp",
-        "alt": "Recycle Your Vinyl site design, 2005"
-      },
-      {
-        "type": "image",
-        "src": "/earlier-work/early-years/good-barbers-guide.webp",
-        "alt": "Good Barbers Guide barber finder page, 2006"
-      }
-    ],
-    "cover": "/earlier-work/early-years/recycle-your-vinyl.webp"
   }
 ]

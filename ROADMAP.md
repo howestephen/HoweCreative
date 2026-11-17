@@ -102,6 +102,15 @@ with 4x-UltraSharp; old live-action films were restored conservatively
   needs project facts from Stephen before copy is written. Resolved as a
   Logo Design entry in Earlier Work (StreAMM, xTrend and Crypto Labz marks,
   rendered from the original design files), 17 November 2026.
+- [x] Correction (17 November 2026): Stephen's sorted Portfolio Assets
+  folders are the source; other drives only supply supporting assets, and
+  only final designs he made. Kaleio (video only) and Early Years (assets
+  not his) wait for their videos; Book Your Wellness returns to its page
+  until its videos ship; Logo Design shows final logos and his 3D renders;
+  Hot Biscuit shows the posters from his sorted folder.
+- [ ] Videos from the sorted folders (UNCX, Quiver, Sapien, Book Your
+  Wellness, Chalet Chardons, Tombland, travel blog, Kaleio, university and
+  Hot Biscuit films) go on the site once object storage is approved.
 - [x] Earlier Work is the full archive and keeps earnest older pieces
   (Stephen, 17 November 2026): Book Your Wellness is back with its logo,
   holding page and a sign-up banner, and the trimmed 412, Hot Biscuit, Qtac
